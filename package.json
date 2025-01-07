@@ -1,0 +1,13 @@
+{
+  "name": "skyned",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy:test": "pnpm run --filter functions deploy:test",
+    "build:packages": "pnpm run --filter '@skyned/*' build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

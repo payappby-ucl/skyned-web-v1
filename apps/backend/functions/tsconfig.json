@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "outDir": "lib",
+    "skipLibCheck": true
+    // "esModuleInterop": true,
+    // "noImplicitReturns": true,
+    // "noUnusedLocals": true,
+    // "sourceMap": true,
+    // "strict": true,
+    // "target": "es2017"
+  },
+  // "compileOnSave": true,
+  "include": ["src"]
+}
