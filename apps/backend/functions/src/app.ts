@@ -5,12 +5,18 @@ import SkynedRegistry from "./registry";
 import { RegistryKeysEnum } from "./enum";
 import helmet from "helmet";
 import { BinderMiddleware } from "./middleware";
+import { exceptionController, IExceptionController } from "./controllers";
 
+interface Dependencies {
+  exceptionController: IExceptionController;
+}
 class App implements IApp {
   private static instance: IApp | null = null;
   private app = express();
 
-  private constructor() {
+  private constructor(
+    private readonly exceptionController: IExceptionController,
+  ) {
     this.app.use(cors());
     this.app.use(helmet());
     this.app.disable("x-powered-by");
@@ -23,10 +29,14 @@ class App implements IApp {
     this.app.get("/", (req, res) => {
       res.send("Working Skyned");
     });
+
+    this.app.use("*", this.exceptionController.handle404);
+    this.app.use(this.exceptionController.handleAllPossibleErrors);
   }
-  static getInstance() {
+  static getInstance(dependencies: Dependencies) {
     if (!App.instance) {
-      App.instance = new App();
+      const { exceptionController } = dependencies;
+      App.instance = new App(exceptionController);
     }
 
     return App.instance;
@@ -35,7 +45,8 @@ class App implements IApp {
   getApp: IApp["getApp"] = () => this.app;
 }
 
-export const app = SkynedRegistry.getSingleton(
-  RegistryKeysEnum.APP,
-  App.getInstance,
+export const app = SkynedRegistry.getSingleton(RegistryKeysEnum.APP, () =>
+  App.getInstance({
+    exceptionController,
+  }),
 );

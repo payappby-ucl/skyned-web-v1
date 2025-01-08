@@ -11,7 +11,7 @@ export interface ISuccessResponse<T> extends IResponse<T> {
   success: true;
 }
 
-export interface IFailedResponse extends IResponse<IMessageResponse> {
+export interface IFailedResponse extends IResponse<null>, IMessageResponse {
   success: false;
 }
 

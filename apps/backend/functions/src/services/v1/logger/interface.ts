@@ -1,4 +1,4 @@
-import { Exception } from "../../lib";
+import { Exception } from "../../../lib";
 
 export interface ILoggerService {
   log(data: Exception): void;

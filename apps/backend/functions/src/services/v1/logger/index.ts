@@ -1,7 +1,6 @@
 import { logger } from "firebase-functions";
 import { ILoggerService } from "./interface";
-import { SkynedUtils } from "../../lib";
-export * from "./interface";
+import { SkynedUtils } from "../../../lib";
 
 export class LoggerService implements ILoggerService {
   private static instance: ILoggerService | null = null;

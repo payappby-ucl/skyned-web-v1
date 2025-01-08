@@ -27,7 +27,8 @@ export function _failed(
   this.status(statusCode).json({
     statusCode,
     success: false,
-    data,
+    data: null,
+    ...data,
   });
 }
 
