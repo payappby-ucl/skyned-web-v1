@@ -3,4 +3,7 @@ export enum RegistryKeysEnum {
 
   //* Middlewares
   REQUEST_VALIDATION = "RequestValidationMiddleware",
+
+  // * Services
+  LOGGER = "LoggerService",
 }
