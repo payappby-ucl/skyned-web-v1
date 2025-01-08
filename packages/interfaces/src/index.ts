@@ -1,3 +1,1 @@
-export interface User {
-  username: string;
-}
+export * from "./response";

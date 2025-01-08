@@ -6,7 +6,7 @@
   "scripts": {
     "deploy:backend:test": "pnpm run build:packages && pnpm run --filter functions deploy:test",
     "test:backend": "pnpm run build:packages && pnpm run --filter functions test",
-    "build:packages": "pnpm run --filter '@skyned/*' build"
+    "build:packages": "pnpm run --filter '@skyned/*' build && pnpm install"
   },
   "keywords": [],
   "author": "",
