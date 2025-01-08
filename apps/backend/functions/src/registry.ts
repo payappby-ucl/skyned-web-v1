@@ -1,12 +1,12 @@
-import { SINGLETON_NAMES } from "./lib";
+import { RegistryKeysEnum } from "./enum";
 
 class SkynedRegistry {
-  private static instance: Map<typeof SINGLETON_NAMES, any> = new Map();
+  private static instance: Map<RegistryKeysEnum, any> = new Map();
   private constructor() {
     // * Private
   }
 
-  static getSingleton<T>(name: typeof SINGLETON_NAMES, factory: () => T): T {
+  static getSingleton<T>(name: RegistryKeysEnum, factory: () => T): T {
     if (!this.instance.get(name)) {
       this.instance.set(name, factory());
     }

@@ -2,6 +2,7 @@ import { IApp } from "./interface";
 import express from "express";
 import cors from "cors";
 import SkynedRegistry from "./registry";
+import { RegistryKeysEnum } from "./enum";
 
 class App implements IApp {
   private static instance: IApp | null = null;
@@ -23,4 +24,7 @@ class App implements IApp {
   getApp: IApp["getApp"] = () => this.app;
 }
 
-export const app = SkynedRegistry.getSingleton("App", App.getInstance);
+export const app = SkynedRegistry.getSingleton(
+  RegistryKeysEnum.APP,
+  App.getInstance,
+);

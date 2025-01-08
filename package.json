@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy:test": "pnpm run --filter functions deploy:test",
+    "deploy:backend:test": "pnpm run build:packages && pnpm run --filter functions deploy:test",
+    "test:backend": "pnpm run build:packages && pnpm run --filter functions test",
     "build:packages": "pnpm run --filter '@skyned/*' build"
   },
   "keywords": [],
