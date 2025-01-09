@@ -1,9 +1,12 @@
 import express from "express";
+import swaggerUI from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
 import SkynedRegistry from "../registry";
 import { RegistryKeysEnum } from "../enum";
 import { IRouter } from "../interface";
 import { healthRouter } from "./health";
 import { apiRouter } from "./api";
+import definition from "../swagger";
 
 interface Dependencies {
   apiRouter: IRouter;
@@ -20,6 +23,18 @@ export class BaseRouter implements IRouter {
 
     this.router.use("/health", healthRouter.router);
     this.router.use("/api", apiRouter.router);
+
+    // * API Documentation Route
+    this.router.use("/api-docs", swaggerUI.serve);
+    this.router.get(
+      "/api-docs",
+      swaggerUI.setup(
+        swaggerJSDoc({
+          definition,
+          apis: ["src/swagger/**/*.yaml"],
+        }),
+      ),
+    );
   }
 
   static factory(dependencies: Dependencies) {

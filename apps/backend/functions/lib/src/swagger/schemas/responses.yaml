@@ -1,0 +1,24 @@
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          minimum: 100
+          maximum: 599
+        success:
+          type: boolean
+          example: true
+    FailedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          minimum: 100
+          maximum: 599
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string

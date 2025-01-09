@@ -1,0 +1,3 @@
+#!/bin/bash
+cp -R src/swagger/ lib/src/swagger/
+rm lib/src/swagger/index.ts
