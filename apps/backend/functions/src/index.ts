@@ -1,3 +1,4 @@
+import "dotenv";
 import * as admin from "firebase-admin";
 import { onRequest } from "firebase-functions/https";
 import { app } from "./app";
