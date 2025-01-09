@@ -4,6 +4,10 @@ export enum RegistryKeysEnum {
   //* Middlewares
   REQUEST_VALIDATION = "RequestValidationMiddleware",
 
+  // * Routers
+  API_ROUTER = "ApiRouter",
+  V1_ROUTER = "V1Router",
+
   // * Controllers
   EXCEPTION = "ExceptionController",
 

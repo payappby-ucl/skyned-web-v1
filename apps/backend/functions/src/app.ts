@@ -1,21 +1,24 @@
-import { IApp } from "./interface";
+import { IApp, IRouter } from "./interface";
 import express from "express";
 import cors from "cors";
 import SkynedRegistry from "./registry";
 import { RegistryKeysEnum } from "./enum";
 import helmet from "helmet";
 import { BinderMiddleware } from "./middleware";
+import { apiRouter } from "./routers";
 import { exceptionController, IExceptionController } from "./controllers";
 
 interface Dependencies {
   exceptionController: IExceptionController;
+  apiRouter: IRouter;
 }
 class App implements IApp {
   private static instance: IApp | null = null;
   private app = express();
 
   private constructor(
-    private readonly exceptionController: IExceptionController,
+    exceptionController: IExceptionController,
+    apiRouter: IRouter,
   ) {
     this.app.use(cors());
     this.app.use(helmet());
@@ -30,13 +33,14 @@ class App implements IApp {
       res.send("Working Skyned");
     });
 
-    this.app.use("*", this.exceptionController.handle404);
-    this.app.use(this.exceptionController.handleAllPossibleErrors);
+    this.app.use("/api", apiRouter.router);
+    this.app.use("*", exceptionController.handle404);
+    this.app.use(exceptionController.handleAllPossibleErrors);
   }
   static getInstance(dependencies: Dependencies) {
     if (!App.instance) {
-      const { exceptionController } = dependencies;
-      App.instance = new App(exceptionController);
+      const { exceptionController, apiRouter } = dependencies;
+      App.instance = new App(exceptionController, apiRouter);
     }
 
     return App.instance;
@@ -48,5 +52,6 @@ class App implements IApp {
 export const app = SkynedRegistry.getSingleton(RegistryKeysEnum.APP, () =>
   App.getInstance({
     exceptionController,
+    apiRouter,
   }),
 );
