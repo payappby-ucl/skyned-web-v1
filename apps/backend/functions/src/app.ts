@@ -5,12 +5,12 @@ import SkynedRegistry from "./registry";
 import { RegistryKeysEnum } from "./enum";
 import helmet from "helmet";
 import { BinderMiddleware } from "./middleware";
-import { apiRouter } from "./routers";
+import { baseRouter } from "./routers";
 import { exceptionController, IExceptionController } from "./controllers";
 
 interface Dependencies {
   exceptionController: IExceptionController;
-  apiRouter: IRouter;
+  baseRouter: IRouter;
 }
 class App implements IApp {
   private static instance: IApp | null = null;
@@ -18,7 +18,7 @@ class App implements IApp {
 
   private constructor(
     exceptionController: IExceptionController,
-    apiRouter: IRouter,
+    baseRouter: IRouter,
   ) {
     this.app.use(cors());
     this.app.use(helmet());
@@ -29,18 +29,17 @@ class App implements IApp {
     // * Response Binder
     this.app.use(BinderMiddleware.responseBinder);
 
-    this.app.get("/", (req, res) => {
-      res.send("Working Skyned");
-    });
+    // * Router
+    this.app.use("/", baseRouter.router);
 
-    this.app.use("/api", apiRouter.router);
-    this.app.use("*", exceptionController.handle404);
+    // * Exceptions
+    this.app.use(exceptionController.handle404);
     this.app.use(exceptionController.handleAllPossibleErrors);
   }
   static getInstance(dependencies: Dependencies) {
     if (!App.instance) {
-      const { exceptionController, apiRouter } = dependencies;
-      App.instance = new App(exceptionController, apiRouter);
+      const { exceptionController, baseRouter } = dependencies;
+      App.instance = new App(exceptionController, baseRouter);
     }
 
     return App.instance;
@@ -52,6 +51,6 @@ class App implements IApp {
 export const app = SkynedRegistry.getSingleton(RegistryKeysEnum.APP, () =>
   App.getInstance({
     exceptionController,
-    apiRouter,
+    baseRouter,
   }),
 );

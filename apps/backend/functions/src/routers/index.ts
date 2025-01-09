@@ -1,31 +1,38 @@
 import express from "express";
-import { IRouter } from "../interface";
 import SkynedRegistry from "../registry";
 import { RegistryKeysEnum } from "../enum";
-import { v1Router } from "./v1";
+import { IRouter } from "../interface";
+import { healthRouter } from "./health";
+import { apiRouter } from "./api";
 
 interface Dependencies {
-  v1Router: IRouter;
+  apiRouter: IRouter;
+  healthRouter: IRouter;
 }
-export class ApiRouter implements IRouter {
+export class BaseRouter implements IRouter {
   private static instance: IRouter | null = null;
   router = express.Router();
 
-  private constructor(v1Router: IRouter) {
-    this.router.use("/v1", v1Router.router);
+  private constructor(apiRouter: IRouter, healthRouter: IRouter) {
+    this.router.get("", (req, res) => {
+      res.send("Welcome to Skyned Consults.");
+    });
+
+    this.router.use("/health", healthRouter.router);
+    this.router.use("/api", apiRouter.router);
   }
 
   static factory(dependencies: Dependencies) {
-    if (!ApiRouter.instance) {
-      const { v1Router } = dependencies;
-      ApiRouter.instance = new ApiRouter(v1Router);
+    if (!BaseRouter.instance) {
+      const { apiRouter, healthRouter } = dependencies;
+      BaseRouter.instance = new BaseRouter(apiRouter, healthRouter);
     }
 
-    return ApiRouter.instance;
+    return BaseRouter.instance;
   }
 }
 
-export const apiRouter = SkynedRegistry.getSingleton(
-  RegistryKeysEnum.API_ROUTER,
-  () => ApiRouter.factory({ v1Router }),
+export const baseRouter = SkynedRegistry.getSingleton(
+  RegistryKeysEnum.BASE_ROUTER,
+  () => BaseRouter.factory({ apiRouter, healthRouter }),
 );

@@ -10,7 +10,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "jest",
-    "deploy:test": "pnpm run test && firebase use test && pnpm run deploy"
+    "deploy:test": "pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy"
   },
   "engines": {
     "node": "22"
@@ -40,5 +40,6 @@
     "ts-jest": "^29.2.5",
     "typescript": "^4.9.0"
   },
-  "private": true
+  "private": true,
+  "version": "0.0.1-2"
 }

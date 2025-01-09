@@ -1,7 +1,7 @@
 import express from "express";
-import { IRouter } from "../../interface";
-import SkynedRegistry from "../../registry";
-import { RegistryKeysEnum } from "../../enum";
+import { IRouter } from "../../../interface";
+import SkynedRegistry from "../../../registry";
+import { RegistryKeysEnum } from "../../../enum";
 
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;

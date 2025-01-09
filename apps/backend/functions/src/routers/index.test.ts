@@ -1,7 +1,7 @@
-import { ApiRouter, apiRouter } from ".";
+import { BaseRouter, baseRouter } from ".";
 
-describe("API Router", () => {
-  test("should be an instance of ApiRouter", () => {
-    expect(apiRouter).toBeInstanceOf(ApiRouter);
+describe("Base Router", () => {
+  test("should be an instance of BaseRouter", () => {
+    expect(baseRouter).toBeInstanceOf(BaseRouter);
   });
 });
