@@ -7,6 +7,7 @@ describe("SkynedUtils", () => {
   describe("createException", () => {
     const message = "Working";
     const error = SkynedUtils.createException(StatusCodes.OK, message);
+
     test("should have a status code key", () => {
       const objectKeys = Object.keys(error);
       expect(objectKeys).toContain("statusCode");

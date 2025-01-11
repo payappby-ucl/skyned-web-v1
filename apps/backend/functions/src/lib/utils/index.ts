@@ -9,7 +9,7 @@ export class SkynedUtils {
   static createException(statusCode: StatusCodes, message?: string) {
     if (!statusCode) {
       throw new Exception(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Status code is not defined.",
       );
     }
@@ -19,14 +19,14 @@ export class SkynedUtils {
   static pick<T extends object, Key extends keyof T>(data: T, values: Key[]) {
     if (!data || !values) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Cannot receive undefined as parameters.",
       );
     }
 
     if (!values.length) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Filter array cannot be empty.",
       );
     }
@@ -34,7 +34,7 @@ export class SkynedUtils {
     const entries = Object.entries(data) as [Key, T[Key]][];
     if (!entries.length) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Data must have at least one field",
       );
     }
@@ -50,14 +50,14 @@ export class SkynedUtils {
   ) {
     if (!data || !values) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Cannot receive undefined as parameters.",
       );
     }
 
     if (!values.length) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Filter array cannot be empty.",
       );
     }
@@ -65,7 +65,7 @@ export class SkynedUtils {
     const entries = Object.entries(data) as [Key, T[Key]][];
     if (!entries.length) {
       throw SkynedUtils.createException(
-        StatusCodes.BAD_REQUEST,
+        StatusCodes.INTERNAL_SERVER_ERROR,
         "Data must have at least one field",
       );
     }
