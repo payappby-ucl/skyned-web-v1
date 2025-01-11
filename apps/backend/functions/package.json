@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1-9",
+  "version": "0.0.1-11",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc && ./cp-yaml",
@@ -11,7 +11,8 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "jest",
-    "deploy:test": "pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy"
+    "rm:lib": "rm -r lib",
+    "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy"
   },
   "engines": {
     "node": "22"
