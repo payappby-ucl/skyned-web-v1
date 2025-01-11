@@ -60,6 +60,10 @@ export class ExceptionController implements IExceptionController {
       newError.stack = error.stack;
 
       this.loggerService.error(newError);
+      this.loggerService.log({
+        ...newError,
+        message: newError.message,
+      });
       newError.message =
         "Oops something went wrong on the server, please try again or contact admin.";
 

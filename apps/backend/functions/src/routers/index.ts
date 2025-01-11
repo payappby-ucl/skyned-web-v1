@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import SkynedRegistry from "../registry";
@@ -34,6 +35,13 @@ export class BaseRouter implements IRouter {
           apis: ["src/swagger/**/*.yaml"],
         }),
       ),
+    );
+
+    // * Test Coverage Report
+    // this.router.use("/coverage", express.static())
+    this.router.use(
+      "/coverage",
+      express.static(path.resolve(__dirname, "../../public/coverage")),
     );
   }
 

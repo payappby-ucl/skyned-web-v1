@@ -1,3 +1,5 @@
 #!/bin/bash
 cp -R src/swagger/ lib/src/swagger/
 rm lib/src/swagger/index.ts
+mkdir -p lib/public
+cp -R coverage/ lib/public/coverage/

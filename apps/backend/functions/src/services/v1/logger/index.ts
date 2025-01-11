@@ -1,6 +1,7 @@
+/* eslint-disable operator-linebreak */
 import { logger } from "firebase-functions";
 import { ILoggerService } from "./interface";
-import { SkynedUtils } from "../../../lib";
+import { Exception } from "../../../lib";
 
 export class LoggerService implements ILoggerService {
   private static instance: ILoggerService | null = null;
@@ -17,24 +18,30 @@ export class LoggerService implements ILoggerService {
   }
 
   log: ILoggerService["log"] = (data) => {
-    this.logger.log(SkynedUtils.pick(data, ["message", "stack", "statusCode"]));
+    this.logger.log(
+      data instanceof Exception
+        ? Object.entries(data).map(([, value]) => value)
+        : data,
+    );
   };
 
   error: ILoggerService["error"] = (error) => {
-    this.logger.error(
-      SkynedUtils.pick(error, ["message", "stack", "statusCode"]),
-    );
+    this.logger.error(Object.entries(error).map(([, value]) => value));
   };
 
   info: ILoggerService["info"] = (data) => {
     this.logger.info(
-      SkynedUtils.pick(data, ["message", "stack", "statusCode"]),
+      data instanceof Exception
+        ? Object.entries(data).map(([, value]) => value)
+        : data,
     );
   };
 
   warn: ILoggerService["warn"] = (data) => {
     this.logger.warn(
-      SkynedUtils.pick(data, ["message", "stack", "statusCode"]),
+      data instanceof Exception
+        ? Object.entries(data).map(([, value]) => value)
+        : data,
     );
   };
 }
