@@ -8,7 +8,7 @@ export class V1Router implements IRouter {
   router = express.Router();
 
   private constructor() {
-    // * Private
+    //  * Private
   }
 
   static factory() {

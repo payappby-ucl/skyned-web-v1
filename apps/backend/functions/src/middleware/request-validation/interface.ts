@@ -1,7 +1,7 @@
-import { AnyZodObject } from "zod";
+import { ZodType } from "zod";
 
 export interface IValidationData {
-  body?: AnyZodObject;
-  query?: AnyZodObject;
-  params?: AnyZodObject;
+  body?: ZodType;
+  query?: ZodType;
+  params?: ZodType;
 }
