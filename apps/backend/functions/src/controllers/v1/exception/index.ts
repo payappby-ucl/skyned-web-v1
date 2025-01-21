@@ -1,9 +1,13 @@
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { Exception, SkynedUtils } from "../../../lib";
-import { ILoggerService } from "../../../services";
+import { ILoggerService, loggerService } from "../../../services";
 import { IExceptionController } from "./interface";
 import { ZodError } from "zod";
+import { RegistryKeysEnum } from "../../../enum";
+import SkynedRegistry from "../../../registry";
+
+export * from "./interface";
 
 interface Dependencies {
   loggerService: ILoggerService;
@@ -72,3 +76,8 @@ export class ExceptionController implements IExceptionController {
       });
     };
 }
+
+export const exceptionController = SkynedRegistry.getSingleton(
+  RegistryKeysEnum.EXCEPTION,
+  () => ExceptionController.factory({ loggerService }),
+);

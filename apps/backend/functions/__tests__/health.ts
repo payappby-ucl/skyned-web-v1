@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 import { env } from "../src/env";
 import { app } from "../src/app";
-import { responseBody } from "./constants";
+import { responseBody } from "./helpers/constants";
 
 describe("Health Check API", () => {
   const baseUrl = `${env.domains.baseUrl}/health`;

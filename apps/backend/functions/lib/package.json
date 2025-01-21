@@ -1,6 +1,6 @@
 {
     "name": "functions",
-    "version": "0.0.1-29",
+    "version": "0.0.1-30",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
         "build": "tsc && ./cp-yaml",
