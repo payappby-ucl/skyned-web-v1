@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
-import { env } from "../src/env";
+import { env } from "../src/config";
 import { app } from "../src/app";
 import { responseBody } from "./helpers/constants";
 
