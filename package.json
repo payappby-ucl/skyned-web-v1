@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "deploy:backend:test": "pnpm run build:packages && pnpm run --filter functions deploy:test",
-    "test:backend": "pnpm run build:packages && pnpm run --filter functions test",
-    "build:packages": "pnpm run --filter '@skyned/*' build && pnpm install",
-    "frontend:dev": "pnpm run  --filter '@skyned/frontend' dev",
-    "admin:dev": "pnpm run  --filter '@skyned/admin' dev"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nx": "20.3.2"
+  }
 }
