@@ -1,0 +1,19 @@
+runConfig:
+  cpu: 3
+  memoryMiB: 1024
+  maxInstances: 4
+  minInstances: 0
+  concurrency: 100
+
+env:
+  - variable: BASE_URL
+    value: https://api-dxmhb5dscq-uc.a.run.app
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: API_URL
+    value: https://api-dxmhb5dscq-uc.a.run.app/api
+    availability:
+      - BUILD
+      - RUNTIME
