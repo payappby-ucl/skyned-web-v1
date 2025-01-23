@@ -10,6 +10,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          DEFAULT: "var(--brand-primary)",
+          secondary: "var(--brand-secondary)",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
