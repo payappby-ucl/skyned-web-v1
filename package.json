@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "pnpm --filter '@skyned/frontend' build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
