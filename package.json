@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm --filter '@skyned/frontend' --filter '@skyned/admin' build",
-    "start": "pnpm --filter '@skyned/frontend' --filter '@skyned/admin' start"
+    "start": "pnpm --filter '@skyned/frontend' start"
   },
   "keywords": [],
   "author": "",
