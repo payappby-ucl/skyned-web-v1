@@ -6,14 +6,20 @@ runConfig:
   concurrency: 100
 
 env:
-  - variable: BASE_URL
+  - variable: NEXT_PUBLIC_BASE_URL
     value: https://api-dxmhb5dscq-uc.a.run.app
     availability:
       - BUILD
       - RUNTIME
 
-  - variable: API_URL
+  - variable: NEXT_PUBLIC_API_URL
     value: https://api-dxmhb5dscq-uc.a.run.app/api
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: PROJECT_NAME
+    value: "@skyned/admin"
     availability:
       - BUILD
       - RUNTIME

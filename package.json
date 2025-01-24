@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm --filter '@skyned/frontend' --filter '@skyned/admin' build",
-    "start": "pnpm --filter '@skyned/frontend' start"
+    "build": "pnpm --filter $PROJECT_NAME build",
+    "start": "pnpm --filter $PROJECT_NAME start"
   },
   "keywords": [],
   "author": "",
