@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@skyned/interfaces": "workspace:*",
     "@radix-ui/react-slot": "^1.1.1",
     "@workspace/ui": "workspace:*",
     "lucide-react": "^0.473.0",
