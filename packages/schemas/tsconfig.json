@@ -1,3 +1,12 @@
 {
-  "extends": "../interfaces/tsconfig.json"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@skyned/schemas": ["./src/*"]
+    }
+  }
 }

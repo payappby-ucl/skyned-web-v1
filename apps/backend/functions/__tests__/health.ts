@@ -1,34 +1,19 @@
 /* eslint-disable max-len */
-import * as admin from "firebase-admin";
+
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 import { responseBody } from "./helpers/constants";
 import { app } from "../src/app";
-import {
-  FIRESTORE_EMULATOR_HOST,
-  FIREBASE_STORAGE_EMULATOR_HOST,
-} from "../src/lib";
-import serviceAccount from "../src/test-service-account.json";
-import { getFirestore } from "firebase-admin/firestore";
+import { clearAllFirestoreData, initializeFirebase } from "./helpers/firebase";
 
 describe("Health Check API", () => {
   describe("GET - /health", () => {
     beforeAll(() => {
-      admin.initializeApp({
-        credential: admin.credential.cert(
-          serviceAccount as admin.ServiceAccount,
-        ),
-        storageBucket: "skyned-test-31a2e.firebasestorage.app",
-        projectId: "skyned-test-31a2e",
-      });
-
-      process.env.FIRESTORE_EMULATOR_HOST = FIRESTORE_EMULATOR_HOST;
-      process.env.FIREBASE_STORAGE_EMULATOR_HOST =
-        FIREBASE_STORAGE_EMULATOR_HOST;
+      initializeFirebase();
     });
 
     afterAll(async () => {
-      await getFirestore().recursiveDelete(getFirestore().collection("test"));
+      await clearAllFirestoreData();
     });
 
     test(`should respond with JSON and status code of ${StatusCodes.OK} status code`, async () => {

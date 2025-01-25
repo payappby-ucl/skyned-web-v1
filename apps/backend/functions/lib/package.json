@@ -1,6 +1,6 @@
 {
     "name": "functions",
-    "version": "0.0.1-31",
+    "version": "0.0.1-35",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
         "build": "tsc && ./cp-yaml",
@@ -16,7 +16,7 @@
         "test:db:stop": "docker compose down",
         "test:migrate": "pnpm dlx prisma migrate dev",
         "rm:lib": "rm -rf lib",
-        "test": "pnpm run rm:lib && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && jest && pnpm run test:db:stop",
+        "test": "cat .env.test > .env && pnpm run rm:lib && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && jest && pnpm run test:db:stop",
         "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy",
         "deploy:dev": "pnpm run deploy:test && cat .env.dev > .env && firebase use dev && pnpm run deploy"
     },
@@ -25,7 +25,7 @@
     },
     "main": "lib/src/index.js",
     "dependencies": {
-        "@firebase/testing": "^0.20.11",
+        "@workspace/firebase": "file:../../../packages/firebase",
         "@prisma/client": "^6.2.1",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
@@ -39,7 +39,8 @@
         "zod": "^3.24.1"
     },
     "devDependencies": {
-        "@skyned/interfaces": "file:../../../packages/interfaces/dist",
+        "@skyned/interfaces": "file:../../../packages/interfaces",
+        "@firebase/testing": "^0.20.11",
         "@types/cors": "^2.8.17",
         "@types/express": "4.17.21",
         "@types/jest": "^29.5.14",

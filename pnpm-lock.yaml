@@ -60,12 +60,12 @@ importers:
 
   apps/backend/functions:
     dependencies:
-      '@firebase/testing':
-        specifier: ^0.20.11
-        version: 0.20.11
       '@prisma/client':
         specifier: ^6.2.1
         version: 6.2.1(prisma@6.2.1)
+      '@workspace/firebase':
+        specifier: file:../../../packages/firebase
+        version: link:../../../packages/firebase
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -97,9 +97,12 @@ importers:
         specifier: ^3.24.1
         version: 3.24.1
     devDependencies:
+      '@firebase/testing':
+        specifier: ^0.20.11
+        version: 0.20.11
       '@skyned/interfaces':
-        specifier: file:../../../packages/interfaces/dist
-        version: dist@file:packages/interfaces/dist
+        specifier: file:../../../packages/interfaces
+        version: link:../../../packages/interfaces
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.17
@@ -204,6 +207,12 @@ importers:
         specifier: ^5
         version: 5.7.3
 
+  packages/firebase:
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.7.3
+
   packages/interfaces:
     dependencies:
       http-status-codes:
@@ -211,10 +220,14 @@ importers:
         version: 2.3.0
     devDependencies:
       typescript:
-        specifier: ^4.9.0
-        version: 4.9.5
+        specifier: ^5.6.3
+        version: 5.7.3
 
-  packages/schemas: {}
+  packages/schemas:
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.7.3
 
   packages/ui:
     dependencies:
@@ -1932,9 +1945,6 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
-
-  dist@file:packages/interfaces/dist:
-    resolution: {directory: packages/interfaces/dist, type: directory}
 
   dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
@@ -6341,8 +6351,6 @@ snapshots:
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
-
-  dist@file:packages/interfaces/dist: {}
 
   dlv@1.1.3: {}
 
