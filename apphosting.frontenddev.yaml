@@ -16,6 +16,7 @@ env:
     value: https://skyned-frontend--skyned-test-31a2e.us-central1.hosted.app/api
     availability:
       - RUNTIME
+      - BUILD
 
   - variable: API_URL
     value: https://api-dxmhb5dscq-uc.a.run.app/api
