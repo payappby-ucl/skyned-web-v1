@@ -1,5 +1,4 @@
 import { firebaseServer } from "@/firebase/server";
-import { ISuccessResponse } from "@skyned/utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {

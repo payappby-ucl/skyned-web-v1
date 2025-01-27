@@ -1,5 +1,7 @@
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/items`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/items`, {
+    cache: "no-store",
+  });
   const data = await res.json();
 
   console.log(data);
