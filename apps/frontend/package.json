@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@skyned/interfaces": "workspace:*",
     "@radix-ui/react-slot": "^1.1.1",
+    "@skyned/utils": "workspace:*",
+    "@workspace/firebase": "workspace:*",
     "@workspace/ui": "workspace:*",
+    "axios": "^1.7.9",
+    "firebase": "^11.2.0",
+    "firebase-admin": "^12.6.0",
     "lucide-react": "^0.473.0",
     "next": "15.1.6",
     "react": "^19.0.0",

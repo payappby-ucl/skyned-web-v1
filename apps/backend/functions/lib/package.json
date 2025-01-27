@@ -1,6 +1,6 @@
 {
     "name": "functions",
-    "version": "0.0.1-40",
+    "version": "0.0.1-47",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
         "build": "tsc && ./cp-yaml",
@@ -25,13 +25,13 @@
     },
     "main": "lib/src/index.js",
     "dependencies": {
-        "@workspace/firebase": "file:../../../packages/firebase",
         "@prisma/client": "^6.2.1",
+        "@workspace/firebase": "file:../../../packages/firebase",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
         "express": "^4.21.2",
         "firebase-admin": "^12.6.0",
-        "firebase-functions": "^6.0.1",
+        "firebase-functions": "^6.3.0",
         "helmet": "^8.0.0",
         "http-status-codes": "^2.3.0",
         "swagger-jsdoc": "^6.2.8",
@@ -39,8 +39,8 @@
         "zod": "^3.24.1"
     },
     "devDependencies": {
-        "@skyned/interfaces": "file:../../../packages/interfaces",
         "@firebase/testing": "^0.20.11",
+        "@skyned/utils": "file:../../../packages/utils",
         "@types/cors": "^2.8.17",
         "@types/express": "4.17.21",
         "@types/jest": "^29.5.14",

@@ -1,20 +1,13 @@
-import { IFailedResponse } from "@skyned/interfaces";
+export default async function Home() {
+  const res = await fetch("http://localhost:3000/api/items");
+  const data = await res.json();
 
-export default function Home() {
-  const res: IFailedResponse = {
-    statusCode: 400,
-    message: "Error",
-    success: false,
-    data: null,
-  };
-
-  console.log(res);
+  console.log(data);
 
   return (
     <div className="flex items-center justify-center min-h-svh">
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold header">Main Frontend</h1>
-        <p>{process.env.NEXT_PUBLIC_API_URL}</p>
+        <h1 className="text-2xl font-bold header">{data.name}</h1>
       </div>
     </div>
   );
