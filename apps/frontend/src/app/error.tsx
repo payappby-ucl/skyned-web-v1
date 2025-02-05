@@ -1,8 +1,31 @@
-"use client";
-export function Error() {
+"use client"; // Error boundaries must be Client Components
+
+import { Exception } from "@workspace/utils/lib";
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Exception & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.log(error);
+  }, [error]);
+
   return (
     <div>
-      <p>Error</p>
+      <h2>{error.message}</h2>
+      <button
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
     </div>
   );
 }

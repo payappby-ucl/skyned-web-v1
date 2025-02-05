@@ -1,10 +1,9 @@
 "use client";
 
-import { firebaseClient } from "@/firebase";
+import { firebaseClient } from "@/firebase/client";
 import { Auth } from "@/interfaces";
 import { AuthActionsEnum } from "@workspace/ui/enums";
 import useAuthReducer from "@workspace/ui/hooks/reducers/auth-reducer";
-import { onAuthStateChanged } from "firebase/auth";
 import React, {
   createContext,
   PropsWithChildren,

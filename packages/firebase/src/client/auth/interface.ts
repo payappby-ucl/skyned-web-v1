@@ -1,5 +1,5 @@
 import { Auth, User } from "firebase/auth";
-import { SignInProviderEnum } from "@skyned/utils";
+import { SignInProviderEnum } from "@workspace/utils/enums";
 
 export interface IFirebaseClientAuth {
   auth: Auth;

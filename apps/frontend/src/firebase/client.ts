@@ -16,11 +16,10 @@ let auth: Auth | null;
 const apps = getApps();
 if (apps.length) {
   auth = getAuth(apps[0]);
-  connectToAuthEmulator(auth);
 } else {
   const app = initializeApp(env.firebaseConfig);
   auth = getAuth(app);
-  connectToAuthEmulator(auth);
 }
 
+connectToAuthEmulator(auth);
 export const firebaseClient = FirebaseClient.factory(auth);

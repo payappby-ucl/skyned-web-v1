@@ -5,7 +5,7 @@ import {
   IFailedResponse,
   IMessageResponse,
   ISuccessResponse,
-} from "@skyned/utils";
+} from "@workspace/utils";
 
 export function _success<T>(
   this: Response<ISuccessResponse<T>>,

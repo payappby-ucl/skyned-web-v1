@@ -7,7 +7,6 @@ import {
 } from "../lib";
 import serviceAccount from "../../test-service-account.json";
 import { IFirebaseServer } from "./interface";
-import { httpClientV1 } from "./http";
 
 export * from "./interface";
 export class FirebaseServer implements IFirebaseServer {
@@ -41,8 +40,4 @@ export class FirebaseServer implements IFirebaseServer {
 
     return FirebaseServer.instance;
   }
-
-  httpClient = {
-    v1: httpClientV1,
-  };
 }

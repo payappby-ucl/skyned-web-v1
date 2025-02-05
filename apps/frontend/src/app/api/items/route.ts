@@ -1,17 +1,23 @@
-import { firebaseServer } from "@/firebase/server";
+import { brandApi } from "@/lib";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const { data } = await firebaseServer.httpClient.v1.get<{ name: string }>(
+    const { data } = await brandApi.httpClient.axios.v1.get<{ name: string }>(
       "/test",
     );
 
-    console.log(data);
-
-    return NextResponse.json(data, { status: 200 });
+    return NextResponse.json(
+      {
+        data,
+      },
+      { status: 200 },
+    );
   } catch (error: any) {
-    console.log(error.config);
-    return new NextResponse("Internal Error", { status: 500 });
+    let { statusCode, message } = brandApi.error.handleError(error);
+    if (statusCode === 500) {
+      message = "Unexpected error occurred";
+    }
+    return new NextResponse(message, { status: statusCode });
   }
 }

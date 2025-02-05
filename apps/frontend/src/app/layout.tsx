@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "@workspace/ui/globals.css";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import Nav from "@/components/nav";
+import { Toaster } from "@workspace/ui/components/sonner";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-grotesque",
@@ -35,6 +36,7 @@ export default function RootLayout({
           <Nav />
           {children}
         </AuthProvider>
+        <Toaster richColors closeButton />
       </body>
     </html>
   );

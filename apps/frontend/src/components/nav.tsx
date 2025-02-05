@@ -2,8 +2,8 @@
 
 import { useCallback } from "react";
 import { useAuth } from "./providers/auth-provider";
-import { firebaseClient } from "@/firebase";
-import { SignInProviderEnum } from "@skyned/utils";
+import { firebaseClient } from "@/firebase/client";
+import { SignInProviderEnum } from "@workspace/utils/enums";
 
 const Nav: React.FC = () => {
   const [auth] = useAuth();

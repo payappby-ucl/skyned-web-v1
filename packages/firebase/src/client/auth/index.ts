@@ -2,12 +2,11 @@ import {
   Auth,
   onAuthStateChanged,
   signInWithPopup,
-  AuthProvider,
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
 import { IFirebaseClientAuth } from "./interface";
-import { SignInProviderEnum } from "@skyned/utils";
+import { SignInProviderEnum } from "@workspace/utils/enums";
 
 export * from "./interface";
 export class FirebaseClientAuth implements IFirebaseClientAuth {

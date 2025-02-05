@@ -1,15 +1,18 @@
-export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/items`, {
-    cache: "no-store",
-  });
-  const data = await res.json();
+import Test from "@/components/test";
+import { brandApi } from "@/lib";
 
-  console.log(data);
+export default async function Home() {
+  const {
+    data: { name },
+  } = await brandApi.httpClient.fetch.v1.get<{ name: string }>("/api/items");
+
+  if (!name) return null;
 
   return (
     <div className="flex items-center justify-center min-h-svh">
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold header">{data.name}</h1>
+        <h1 className="text-2xl font-bold header">{name}</h1>
+        <Test />
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "paths": {
-      "@skyned/interfaces": ["./src/*"]
-    }
-  }
+    "baseUrl": "."
+  },
+  "include": ["."],
+  "exclude": ["node_modules"]
 }
