@@ -1,0 +1,97 @@
+Student Signup Details
+When a student is signing up on the portal, they should provide the following details:
+1. Personal Information:
+    * Full Name
+    * Email Address
+    * Phone Number
+After sign up, we can have a profile completion page to fill in the information below
+    * Date of Birth
+    * Gender
+    * Nationality
+    * Country of Residence
+1. Educational Background:
+    * Highest Level of Education Attained
+    * Name of Last Institution Attended
+    * Year of Graduation
+    * CGPA / Grade
+    * Field of Study
+2. Study Preferences:
+    * Desired Country of Study (UK, Canada, USA, Ireland)
+    * Preferred Program of Study
+    * Degree Level (Undergraduate, Postgraduate, Diploma, Certificate)
+    * Preferred Intake (Spring, Fall, Winter)
+    * Budget Range for Tuition Fees
+3. Work Experience (Optional):
+    * Number of Years of Work Experience
+    * Industry / Sector
+    * Current Job Title
+4. Additional Details:
+    * Scholarship Interest
+    * Immigration Assistance Required? (Yes/No)
+    * Accommodation Assistance Required? (Yes/No)
+    * How did you hear about us? (Referral, Social Media, Website, Ad)
+
+Sub-Admin Creation Details
+Each sub-admin will have different roles, so their sign-up details will be tailored to their function.
+1. Personal Information:
+    * Full Name
+    * Email Address
+    * Phone Number
+2. Account Credentials:
+    * Username
+    * Password
+    * Assigned Role ( Admissions Officer, Content Manager, Communications Lead.)
+    * Department (Marketing, Technical, Customer Support, Admissions.)
+3. Permissions & Access Control:
+    * This will define which sections of the portal the sub-admin has access to ( User Management, Content Management, Search Engine Updates, Student Inquiries)
+4. Activity Logs & Responsibilities:
+    * Tracking their updates and changes to the system for accountability.
+
+Program Page Information
+Each program page should display:
+1. Program Details:
+    * Program Name
+    * Degree Type (Bachelor’s, Master’s, Diploma, Certificate)
+    * Field of Study
+    * Program Duration
+2. Admission Requirements:
+    * Minimum CGPA / Grade Requirement
+    * English Language Proficiency Requirements (IELTS, TOEFL, Duolingo)
+    * Prerequisite Courses
+3. Tuition & Fees:
+    * Total Tuition Fees
+    * Tuition Deposit Requirement
+    * Payment Plan Options (If available)
+4. Application Process:
+    * Required Documents (Passport, Transcript, Reference Letter, SOP)
+    * Application Deadline
+    * How to Apply (Direct link to apply or contact an advisor)
+5. Scholarship & Financial Aid Options:
+    * Available Scholarships
+    * Eligibility Criteria
+    * How to Apply for Scholarships
+6. Post-Graduation Opportunities:
+    * Career Pathways
+    * Internship & Work Placement Options
+    * Visa Post-Study Work Options
+
+School Page Information
+Each school page should display:
+1. Basic Information:
+    * University / College Name
+    * Location (City, Country)
+    * University Type (Public, Private)
+2. Programs Offered:
+    * List of Available Programs
+    * Link to Each Program Page
+3. Tuition Fees & Financial Aid:
+    * Average Tuition Fees
+    * Available Scholarships
+4. Campus Facilities:
+    * Accommodation Options
+    * Student Support Services
+    * Library, Labs, Sports Facilities
+5. Application & Admission Process:
+    * Required Documents
+    * Admission Deadlines
+    * Contact Information for Admissions

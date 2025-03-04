@@ -1,0 +1,60 @@
+Project Skyned {
+    database_type: 'PostgresQL'
+    Note: 'Educational'
+}
+
+// * School Schema
+enum institution_type {
+    university
+    college
+}
+
+enum ownership_type {
+    private
+    public
+}
+
+enum currency {
+    usd
+    cad
+    aud
+    ngn
+    eur
+}
+
+// TODO: Remember to add created_by_id
+Table schools {
+    id integer [increment]
+    school_id varchar [pk]
+    name varchar(255) [not null]
+    institution_type institution_type
+    ownership_type ownership_type
+    city varchar(255) [not null]
+    state varchar(3) [not null]
+    country varchar(3) [not null]
+    currency currency // * Is currency supposed to be on the schools level? - Is there a possibility of a school using more than one currency?
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Facilities
+// TODO: Remember to add created_by_id
+Table school_facilities {
+    id integer [pk, increment]
+    name varchar(255) [not null, unique]
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Activity Logs
+// TODO: Complete this
+Table activity_logs {
+    id integer [pk, increment]
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Relationship References
+Ref: school_facilities: schools.school_id <> school_facilities.id

@@ -6,7 +6,10 @@ import React from "react";
 
 const Test: React.FC = () => {
   return (
-    <Button onClick={() => brandApi.toast.success("Skyned Public Page")}>
+    <Button
+      className="bg-brand"
+      onClick={() => brandApi.toast.success("Skyned Public Page")}
+    >
       Click Me
     </Button>
   );
