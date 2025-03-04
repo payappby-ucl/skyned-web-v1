@@ -3,6 +3,38 @@ Project Skyned {
     Note: 'Educational'
 }
 
+enum gender {
+    male
+    female
+    others
+}
+
+// * Student Schema
+Table students {
+    id integer [increment]
+    student_id varchar [pk]
+    first_name varchar(256)
+    middle_name varchar(256) [null]
+    last_name varchar(256)
+    account_suspended bool [default: false]
+    country_of_residence varchar(3)
+    nationality varchar(3)
+    gender Gender
+    date_of_birth timestamp
+
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+Table study_preferences {
+     id integer [pk]
+
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
 // * School Schema
 enum institution_type {
     university
