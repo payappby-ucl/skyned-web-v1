@@ -10,13 +10,13 @@
     "start": "npm run shell",
     "deploy": "firebase deploy",
     "logs": "firebase functions:log",
-    "start:emulators": "cat .env.test > .env && firebase emulators:start",
+    "start:emulators": "cat .env.test > .env && pnpm run rm:lib && pnpm run build && firebase emulators:start",
     "generate": "pnpm dlx prisma generate",
     "test:db:start": "docker compose up -d",
     "test:db:stop": "docker compose down",
     "test:migrate": "pnpm dlx prisma migrate dev",
     "rm:lib": "rm -rf lib",
-    "test": "cat .env.test > .env && pnpm run rm:lib && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && jest && pnpm run test:db:stop",
+    "test": "cat .env.test > .env && pnpm --filter '@workspace/*' run build && pnpm run rm:lib && pnpm run build && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && jest && pnpm run test:db:stop",
     "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy",
     "deploy:dev": "pnpm run deploy:test && cat .env.dev > .env && firebase use dev && pnpm run deploy"
   },
@@ -27,6 +27,7 @@
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "@workspace/firebase": "file:../../../packages/firebase",
+    "@workspace/shared": "file:../../../packages/shared",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -40,7 +41,6 @@
   },
   "devDependencies": {
     "@firebase/testing": "^0.20.11",
-    "@workspace/utils": "file:../../../packages/utils",
     "@types/cors": "^2.8.17",
     "@types/express": "4.17.21",
     "@types/jest": "^29.5.14",

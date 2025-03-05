@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { IFirebaseClientAuth } from "./interface";
-import { SignInProviderEnum } from "@workspace/utils/enums";
+import { SignInProviderEnum } from "@workspace/shared";
 
 export * from "./interface";
 export class FirebaseClientAuth implements IFirebaseClientAuth {

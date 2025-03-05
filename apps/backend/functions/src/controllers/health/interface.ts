@@ -1,4 +1,4 @@
-import { IMessageResponse, ISuccessResponse } from "@skyned/utils";
+import { IMessageResponse, ISuccessResponse } from "@workspace/shared";
 import { RequestHandler } from "express";
 
 export interface IHealthController {

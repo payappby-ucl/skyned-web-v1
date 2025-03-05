@@ -45,9 +45,8 @@ export class BaseRouter implements IRouter {
     );
   }
 
-  static factory(dependencies: Dependencies) {
+  static factory({ apiRouter, healthRouter }: Dependencies) {
     if (!BaseRouter.instance) {
-      const { apiRouter, healthRouter } = dependencies;
       BaseRouter.instance = new BaseRouter(apiRouter, healthRouter);
     }
 

@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cat .env.dev > .env.local && next dev --turbopack",
-    "build": "next build",
+    "dev": "pnpm --filter '@workspace/*' run build && cat .env.dev > .env.local && next dev --turbopack",
+    "build": "pnpm --filter '@workspace/*' run build && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
-    "@workspace/utils": "workspace:*",
     "@workspace/firebase": "workspace:*",
+    "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
     "axios": "^1.7.9",
     "firebase": "^11.2.0",
     "firebase-admin": "^12.6.0",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

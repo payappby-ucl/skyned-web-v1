@@ -23,8 +23,9 @@ describe("Base API", () => {
         ...responseBody,
         statusCode: StatusCodes.NOT_FOUND,
         success: false,
-        data: null,
-        message: "Sorry we could not find the resource you're looking for",
+        data: {
+          message: "Sorry we could not find the resource you're looking for",
+        },
       });
     });
   });

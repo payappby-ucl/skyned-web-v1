@@ -5,7 +5,7 @@ import {
   FIREBASE_STORAGE_EMULATOR_HOST,
   FIRESTORE_EMULATOR_HOST,
 } from "../lib";
-import serviceAccount from "../../test-service-account.json";
+import serviceAccount from "../test-service-account.json";
 import { IFirebaseServer } from "./interface";
 
 export * from "./interface";

@@ -5,7 +5,7 @@ import {
   IFailedResponse,
   IMessageResponse,
   ISuccessResponse,
-} from "@workspace/utils";
+} from "@workspace/shared";
 
 export function _success<T>(
   this: Response<ISuccessResponse<T>>,
@@ -27,8 +27,7 @@ export function _failed(
   this.status(statusCode).json({
     statusCode,
     success: false,
-    data: null,
-    ...data,
+    data,
   });
 }
 

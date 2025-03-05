@@ -1,3 +1,3 @@
-import { BrandApi } from "@workspace/utils/api";
+import { BrandApi } from "@workspace/shared";
 
 export const brandApi = BrandApi.factory();

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@workspace/typescript-config": "workspace:*",
     "nx": "20.3.2"
   }
 }

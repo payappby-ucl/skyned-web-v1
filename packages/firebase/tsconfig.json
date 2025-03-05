@@ -4,11 +4,10 @@
     "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
-    // "paths": {
-    //   "@workspace/firebase/*": ["./src/*"]
-    // }
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "declaration": true
   },
-  "include": ["."],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

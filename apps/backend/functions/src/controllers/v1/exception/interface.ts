@@ -1,4 +1,4 @@
-import { IFailedResponse } from "@skyned/utils";
+import { IFailedResponse } from "@workspace/shared";
 import { ErrorRequestHandler, RequestHandler } from "express";
 
 export interface IExceptionController {

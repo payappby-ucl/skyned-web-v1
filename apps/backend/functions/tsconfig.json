@@ -1,18 +1,18 @@
 {
-  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "module": "NodeNext",
+    "esModuleInterop": true,
     "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "outDir": "lib",
-    "skipLibCheck": true,
-    "resolveJsonModule": true
-    // "esModuleInterop": true,
-    // "noImplicitReturns": true,
-    // "noUnusedLocals": true,
-    // "sourceMap": true,
-    // "strict": true,
-    // "target": "es2017"
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "skipLibCheck": true
   },
-  // "compileOnSave": true,
+  "compileOnSave": true,
   "include": ["src", "jest.config.js", "__tests__"]
 }

@@ -3,7 +3,7 @@
 import { useCallback } from "react";
 import { useAuth } from "./providers/auth-provider";
 import { firebaseClient } from "@/firebase/client";
-import { SignInProviderEnum } from "@workspace/utils/enums";
+import { SignInProviderEnum } from "@workspace/shared";
 
 const Nav: React.FC = () => {
   const [auth] = useAuth();

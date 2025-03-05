@@ -1,6 +1,9 @@
 export enum RegistryKeysEnum {
   APP = "App",
 
+  // * Infrastructure
+  LOGGER = "Logger",
+
   //* Middlewares
   REQUEST_VALIDATION = "RequestValidationMiddleware",
 
@@ -11,9 +14,8 @@ export enum RegistryKeysEnum {
   V1_ROUTER = "V1Router",
 
   // * Controllers
-  EXCEPTION = "ExceptionController",
+  EXCEPTION_CONTROLLER = "ExceptionController",
   HEALTH_CONTROLLER = "HealthController",
 
   // * Services
-  LOGGER = "LoggerService",
 }

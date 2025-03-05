@@ -1,26 +1,25 @@
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
-import { Exception, SkynedUtils } from "../../../lib";
-import { ILoggerService, loggerService } from "../../../services";
+import { Exception } from "../../../lib";
 import { IExceptionController } from "./interface";
 import { ZodError } from "zod";
 import { RegistryKeysEnum } from "../../../enum";
 import SkynedRegistry from "../../../registry";
+import { ILogger, logger } from "../../../infrastructure";
+import { SkynedUtils } from "../../../utils";
 
 export * from "./interface";
 
 interface Dependencies {
-  loggerService: ILoggerService;
+  logger: ILogger;
 }
 
 export class ExceptionController implements IExceptionController {
   private static instance: IExceptionController | null = null;
-  private constructor(private readonly loggerService: ILoggerService) {}
-  static factory(dependencies: Dependencies) {
+  private constructor(private readonly logger: ILogger) {}
+  static factory({ logger }: Dependencies) {
     if (!ExceptionController.instance) {
-      const { loggerService } = dependencies;
-
-      ExceptionController.instance = new ExceptionController(loggerService);
+      ExceptionController.instance = new ExceptionController(logger);
     }
 
     return ExceptionController.instance;
@@ -46,7 +45,7 @@ export class ExceptionController implements IExceptionController {
 
       if (error instanceof Exception) {
         if (error.statusCode >= StatusCodes.INTERNAL_SERVER_ERROR) {
-          this.loggerService.error(error);
+          this.logger.error(error);
           error.message =
             "Oops something went wrong on the server, please try again or contact admin.";
         }
@@ -63,8 +62,8 @@ export class ExceptionController implements IExceptionController {
       );
       newError.stack = error.stack;
 
-      this.loggerService.error(newError);
-      this.loggerService.log({
+      this.logger.error(newError);
+      this.logger.log({
         ...newError,
         message: newError.message,
       });
@@ -78,6 +77,6 @@ export class ExceptionController implements IExceptionController {
 }
 
 export const exceptionController = SkynedRegistry.getSingleton(
-  RegistryKeysEnum.EXCEPTION,
-  () => ExceptionController.factory({ loggerService }),
+  RegistryKeysEnum.EXCEPTION_CONTROLLER,
+  () => ExceptionController.factory({ logger }),
 );
