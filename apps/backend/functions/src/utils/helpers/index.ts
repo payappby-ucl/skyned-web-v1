@@ -1,4 +1,5 @@
 import { StatusCodes } from "http-status-codes";
+import * as admin from "firebase-admin";
 import { Exception } from "../../lib";
 
 export class SkynedUtils {
@@ -73,5 +74,11 @@ export class SkynedUtils {
     const filteredEntries = entries.filter(([key]) => !values.includes(key));
 
     return Object.fromEntries(filteredEntries) as unknown as Omit<T, Key>;
+  }
+
+  static initializeFirebaseApp() {
+    if (!admin.apps.length) {
+      admin.initializeApp();
+    }
   }
 }

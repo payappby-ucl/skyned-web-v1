@@ -3,6 +3,7 @@ export enum RegistryKeysEnum {
 
   // * Infrastructure
   LOGGER = "Logger",
+  EMAIL = "Email",
 
   //* Middlewares
   REQUEST_VALIDATION = "RequestValidationMiddleware",
@@ -18,4 +19,5 @@ export enum RegistryKeysEnum {
   HEALTH_CONTROLLER = "HealthController",
 
   // * Services
+  EMAIL_SERVICE = "EmailService",
 }
