@@ -4,5 +4,4 @@ node_modules
 
 .nx/cache
 .nx/workspace-data
-test-service-account.json
 key.json
