@@ -14,16 +14,16 @@ export class V1Router implements IRouter {
   private constructor(emailService: IEmailService) {
     this.router.route("/test").get(async (req, res, next) => {
       try {
-        await emailService.send({
-          to: ["bobslegend795@gmail.com"],
-          subject: "Test Subject",
-          template: {
-            type: "verify",
-            data: {
-              tokenId: "22334",
-            },
-          },
-        });
+        // await emailService.send({
+        //   to: ["bobslegend795@gmail.com"],
+        //   subject: "Test Subject",
+        //   template: {
+        //     type: "verify",
+        //     data: {
+        //       tokenId: "22334",
+        //     },
+        //   },
+        // });
 
         res.json({ name: "Alabi Emmanuel" });
       } catch (error) {

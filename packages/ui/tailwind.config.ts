@@ -8,12 +8,32 @@ export default {
     "../../packages/ui/src/components/**/*.{ts,tsx}",
   ],
   theme: {
+    fontSize: {
+      xs: "0.625rem",
+      sm: "0.75rem",
+      md: "0.875rem",
+      lg: "1rem",
+      xl: "1.125rem",
+    },
     extend: {
       colors: {
         brand: {
           DEFAULT: "var(--brand-primary)",
-          secondary: "var(--brand-secondary)",
+          900: "#0039B3",
+          800: "#003BE6",
+          700: "#0046FF",
+          600: "#0061FF",
+          500: "#008BFF",
+          400: "#26B6FF",
+          300: "#6BD2FF",
+          200: "#A7E1FF",
+          100: "#CEEDFF",
+          50: "#E9F7FF",
+          secondary: {
+            DEFAULT: "var(--brand-secondary)",
+          },
         },
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
