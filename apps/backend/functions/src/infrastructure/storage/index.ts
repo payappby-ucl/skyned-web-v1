@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
 import { getStorage, getDownloadURL } from "firebase-admin/storage";
 import mime from "mime";
@@ -7,18 +8,18 @@ import { SkynedUtils } from "../../utils";
 import { IStorage } from "./interface";
 import { StatusCodes } from "http-status-codes";
 import { env } from "../../config";
-import { initializeFirebase } from "../../../__tests__/helpers/firebase";
 
 export * from "./interface";
 
-if (env.environment === "test") {
-  initializeFirebase();
-} else {
-  SkynedUtils.initializeFirebaseApp();
-}
+SkynedUtils.initializeFirebaseApp();
+
 class Storage implements IStorage {
   private static instance: IStorage | null = null;
-  private bucket = getStorage().bucket();
+  private readonly storage = getStorage();
+  private bucket =
+    env.environment === "test"
+      ? this.storage.bucket("skyned-test-31a2e.firebasestorage.app")
+      : this.storage.bucket();
 
   private constructor() {
     // * Private

@@ -5,9 +5,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": "./src",
-    "outDir": "./dist",
-    "declaration": true
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["./src/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

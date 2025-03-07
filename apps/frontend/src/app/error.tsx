@@ -1,6 +1,6 @@
 "use client"; // Error boundaries must be Client Components
 
-import { Exception } from "@workspace/utils/lib";
+import { Exception } from "@workspace/shared";
 import { useEffect } from "react";
 
 export default function Error({

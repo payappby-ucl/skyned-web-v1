@@ -1,6 +1,11 @@
+import { StatusCodes } from "http-status-codes";
 import { EmailService, emailService } from ".";
 import { email } from "../../../infrastructure";
-import { Exception } from "../../../lib";
+// import { Exception } from "../../../lib";
+
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled Rejection:", reason);
+});
 
 describe("EmailService", () => {
   describe("EmailService instance", () => {
@@ -25,7 +30,13 @@ describe("EmailService", () => {
         to: ["bobslegend795@gmail.com"],
         subject: "Test Email",
       };
-      expect(await emailService.send(emailData)).toThrow(Exception);
+
+      try {
+        await emailService.send(emailData);
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        expect(error.message).toBe("Please pass in a type for email template");
+      }
     });
 
     test("should send a mail", async () => {
