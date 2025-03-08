@@ -2,6 +2,7 @@ import { Auth } from "firebase/auth";
 import { IFirebaseClient } from "./interface";
 import { FirebaseClientAuth, IFirebaseClientAuth } from "./auth";
 
+export * from "./interface";
 export class FirebaseClient implements IFirebaseClient {
   private static instance: IFirebaseClient | null = null;
   auth: IFirebaseClientAuth;

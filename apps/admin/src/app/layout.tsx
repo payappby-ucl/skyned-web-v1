@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Poppins } from "next/font/google";
 import "@workspace/ui/globals.css";
+import { ThemeProviders } from "../components/providers/theme-provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -26,9 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
+        <ThemeProviders>
         {children}
+        </ThemeProviders>
       </body>
     </html>
   );

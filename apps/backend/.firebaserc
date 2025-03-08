@@ -1,6 +1,6 @@
 {
   "projects": {
     "test": "skyned-test-31a2e",
-    "default": "skyned-test-31a2e"
+    "dev": "skyned-test-31a2e"
   }
 }

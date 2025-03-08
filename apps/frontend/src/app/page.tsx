@@ -1,5 +1,5 @@
-import Test from "@/components/test";
-import { brandApi } from "@/lib";
+import Test from "@/src/components/test";
+import { brandApi } from "@/src/lib";
 
 export default async function Home() {
   let name = null;
@@ -16,7 +16,7 @@ export default async function Home() {
   if (!name) return null;
 
   return (
-    <div className="flex items-center justify-center min-h-svh">
+    <div className="flex min-h-svh items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-brand">{name}</h1>
         <h1>Study Abroad H1</h1>
@@ -31,7 +31,7 @@ export default async function Home() {
         <h5>Your sure route to Study Abroad h5</h5>
         <h6>Study Abroad h6</h6>
         <h6>Your sure route to Study Abroad h6</h6>
-        <p>This is a paragraph</p>
+        <p className="text-brand">This is a paragraph</p>
         <Test />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { brandApi } from "@/lib";
+import { brandApi } from "@/src/lib";
 import { NextResponse } from "next/server";
 
 export async function GET() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { brandApi } from "@/lib";
+import { brandApi } from "@/src/lib";
 import { Button } from "@workspace/ui/components/button";
 import React from "react";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { env } from "@/config";
+import { env } from "@/src/config";
 import { getApps, initializeApp } from "firebase/app";
 import { Auth, connectAuthEmulator, getAuth } from "firebase/auth";
 import { FIREBASE_AUTH_EMULATOR_HOST } from "@workspace/firebase/lib";

@@ -1,7 +1,8 @@
 "use client";
 
-import { firebaseClient } from "@/firebase/client";
-import { Auth } from "@/interfaces";
+
+import { firebaseClient } from "@/src/firebase/client";
+import { Auth } from "@/src/interfaces";
 import { AuthActionsEnum } from "@workspace/ui/enums";
 import useAuthReducer from "@workspace/ui/hooks/reducers/auth-reducer";
 import React, {
