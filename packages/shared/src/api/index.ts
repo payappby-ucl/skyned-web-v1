@@ -1,8 +1,8 @@
-import { toast } from "sonner";
 import { HTTPClientV1 } from "./http";
 import { IBrandApi } from "./interface";
 import { BrandError } from "./error";
 import { Utils } from "./utils";
+const { toast } = require("@workspace/ui/lib/sonner");
 
 export class BrandApi implements IBrandApi {
   private static instance: IBrandApi | null = null;

@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+declare const toast: any;
 import { IError } from "./error";
 import { IHTTPClient } from "./http/interface";
 import { IUtils } from "./utils";
@@ -8,3 +8,4 @@ export interface IBrandApi {
     error: IError;
     utils: IUtils;
 }
+export {};

@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+const { toast } = require("@workspace/ui/lib/sonner");
 import { IError } from "./error";
 import { IHTTPClient } from "./http/interface";
 import { IUtils } from "./utils";
