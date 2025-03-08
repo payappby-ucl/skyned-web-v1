@@ -7,8 +7,8 @@ import React from "react";
 const Test: React.FC = () => {
   return (
     <Button
+      variant="brand"
       onClick={() => {
-        console.log("clicked");
         brandApi.toast.success("Skyned Public Page");
       }}
     >

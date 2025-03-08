@@ -217,8 +217,3 @@ p,
 button {
   font-family: var(--font-manrope);
 }
-
-button {
-  font-weight: bold;
-  font-size: 1.0625rem;
-}
