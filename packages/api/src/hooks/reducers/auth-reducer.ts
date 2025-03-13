@@ -1,4 +1,4 @@
-import { IActionType } from "interfaces";
+import { IActionType } from "../../interfaces";
 import { useReducer } from "react";
 
 function authReducer<T>(state: T, action: IActionType<T>): T {
