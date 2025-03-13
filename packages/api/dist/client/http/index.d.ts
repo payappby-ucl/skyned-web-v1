@@ -3,6 +3,7 @@ import { IBrandClientApi } from "../interface";
 export declare class ClientHttp extends HTTPClient implements IHTTPClient {
     private readonly auth;
     private readonly environment?;
-    constructor(auth: IBrandClientApi["auth"], environment?: string);
+    constructor(auth: IBrandClientApi["auth"], environment?: string | undefined);
     setAuthHeader: IHTTPClient["setAuthHeader"];
+    clearTokenCookie: IHTTPClient["clearTokenCookie"];
 }

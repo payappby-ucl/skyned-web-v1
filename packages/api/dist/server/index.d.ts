@@ -10,7 +10,7 @@ export declare class BrandServerApi implements IBrandServerApi {
     private readonly serverBaseUrl;
     private readonly cookies;
     private static instance;
+    httpClient: IBrandServerApi["httpClient"];
     private constructor();
     static factory({ serverBaseUrl, cookies }: Dependencies): IBrandServerApi;
-    httpClient: IBrandServerApi["httpClient"];
 }

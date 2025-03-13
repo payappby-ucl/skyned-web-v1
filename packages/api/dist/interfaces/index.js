@@ -14,24 +14,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BrandServerApi = void 0;
-const http_1 = require("./http");
-__exportStar(require("./interface"), exports);
-class BrandServerApi {
-    serverBaseUrl;
-    cookies;
-    static instance = null;
-    httpClient;
-    constructor(serverBaseUrl, cookies) {
-        this.serverBaseUrl = serverBaseUrl;
-        this.cookies = cookies;
-        this.httpClient = new http_1.ServerHttpClient(this.cookies, this.serverBaseUrl);
-    }
-    static factory({ serverBaseUrl, cookies }) {
-        if (!BrandServerApi.instance) {
-            BrandServerApi.instance = new BrandServerApi(serverBaseUrl, cookies);
-        }
-        return BrandServerApi.instance;
-    }
-}
-exports.BrandServerApi = BrandServerApi;
+__exportStar(require("./auth"), exports);

@@ -2,14 +2,14 @@
 
 import { useCallback } from "react";
 import { useAuth } from "./providers/auth-provider";
-import { firebaseClient } from "@/src/firebase/client";
-import { SignInProviderEnum } from "@workspace/shared";
+import { brandClientApi } from "../lib/client";
+import { SignInProviderEnum } from "@workspace/api/enums";
 
 const Nav: React.FC = () => {
   const [auth] = useAuth();
   const signInWithGoogle = useCallback(async () => {
     try {
-      await firebaseClient.auth.signInWithProvider(SignInProviderEnum.google);
+      await brandClientApi.auth.signInWithProvider(SignInProviderEnum.google);
     } catch (error) {
       console.log(error);
     }
@@ -17,7 +17,7 @@ const Nav: React.FC = () => {
 
   const logout = useCallback(async () => {
     try {
-      await firebaseClient.auth.logout();
+      await brandClientApi.auth.logout();
     } catch (error) {
       console.log(error);
     }

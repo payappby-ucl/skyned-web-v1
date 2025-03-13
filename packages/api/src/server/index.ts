@@ -1,6 +1,6 @@
+import { ServerHttpClient } from "./http";
 import { IBrandServerApi } from "./interface";
 import { cookies } from "next/headers";
-import { HttpClient } from "./http";
 
 export * from "./interface";
 
@@ -12,12 +12,13 @@ interface Dependencies {
 }
 export class BrandServerApi implements IBrandServerApi {
   private static instance: IBrandServerApi | null = null;
+  httpClient: IBrandServerApi["httpClient"];
 
   private constructor(
     private readonly serverBaseUrl: string,
     private readonly cookies: CookieType,
   ) {
-    this.httpClient = new HttpClient(this.cookies, this.serverBaseUrl);
+    this.httpClient = new ServerHttpClient(this.cookies, this.serverBaseUrl);
   }
 
   static factory({ serverBaseUrl, cookies }: Dependencies) {
@@ -27,6 +28,4 @@ export class BrandServerApi implements IBrandServerApi {
 
     return BrandServerApi.instance;
   }
-
-  httpClient: IBrandServerApi["httpClient"];
 }

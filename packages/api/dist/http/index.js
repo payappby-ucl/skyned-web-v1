@@ -18,6 +18,7 @@ exports.HTTPClient = void 0;
 __exportStar(require("./interface"), exports);
 class HTTPClient {
     baseUrl;
+    tokenCookieName = "token";
     constructor(baseUrl = "") {
         this.baseUrl = baseUrl;
     }

@@ -1,4 +1,4 @@
-import { SignInProviderEnum } from "enums/providers";
+import { SignInProviderEnum } from "../../enums/providers";
 import { Auth, User } from "firebase/auth";
 
 export interface IAuth {

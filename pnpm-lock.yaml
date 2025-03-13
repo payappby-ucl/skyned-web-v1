@@ -269,6 +269,9 @@ importers:
       next:
         specifier: ^15.2.2
         version: 15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.0.0
       sonner:
         specifier: ^1.7.4
         version: 1.7.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -276,6 +279,9 @@ importers:
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
+      '@types/react':
+        specifier: ^19
+        version: 19.0.10
       typescript:
         specifier: ^5.6.3
         version: 5.7.3
@@ -357,9 +363,6 @@ importers:
       next-themes:
         specifier: ^0.4.4
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
@@ -397,9 +400,6 @@ importers:
       '@workspace/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@workspace/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config

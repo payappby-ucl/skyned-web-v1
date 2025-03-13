@@ -1,10 +1,9 @@
 "use client";
 
-
-import { firebaseClient } from "@/src/firebase/client";
 import { Auth } from "@/src/interfaces";
-import { AuthActionsEnum } from "@workspace/ui/enums";
-import useAuthReducer from "@workspace/ui/hooks/reducers/auth-reducer";
+import { brandClientApi } from "@/src/lib/client";
+import { useAuthReducer } from "@workspace/api/hooks";
+import { IActionType } from "@workspace/api/interfaces";
 import React, {
   createContext,
   PropsWithChildren,
@@ -17,16 +16,30 @@ const AuthContext = createContext<ReturnType<
 > | null>(null);
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useAuthReducer<Auth>({ currentUser: null });
+  const [state, dispatch] = useAuthReducer<Auth>({
+    currentUser: null,
+    loaded: false,
+  }) as [Auth, React.ActionDispatch<[action: IActionType<Auth>]>];
 
   useEffect(() => {
-    firebaseClient.auth.listenForAuthStateChange((user) => {
-      dispatch({
-        type: AuthActionsEnum.loaded,
-        payload: {
-          currentUser: user,
-        },
-      });
+    brandClientApi.auth.handleStateChange(async (user) => {
+      if (user) {
+        dispatch({
+          type: "loaded",
+          payload: {
+            currentUser: null,
+            loaded: true,
+          },
+        });
+      } else {
+        dispatch({
+          type: "loaded",
+          payload: {
+            currentUser: null,
+            loaded: true,
+          },
+        });
+      }
     });
   }, []);
 

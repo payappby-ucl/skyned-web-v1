@@ -14,6 +14,7 @@ export interface IFailedResponse extends IResponse {
 }
 export interface IHTTPClient {
     setAuthHeader(headers: Headers): Promise<void>;
+    clearTokenCookie(): Promise<void>;
     request<T>(url: string, method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", options?: RequestInit): Promise<ISuccessResponse<T>>;
 }
 export {};

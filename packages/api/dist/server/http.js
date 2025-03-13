@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpClient = void 0;
+exports.ServerHttpClient = void 0;
 const http_1 = require("../http");
-class HttpClient extends http_1.HTTPClient {
+class ServerHttpClient extends http_1.HTTPClient {
     cookies;
     constructor(cookies, serverBaseUrl) {
         super(`${serverBaseUrl}/api/v1`);
@@ -10,12 +10,18 @@ class HttpClient extends http_1.HTTPClient {
     }
     setAuthHeader = async (headers) => {
         const cookieStore = await this.cookies();
-        if (cookieStore.has("token")) {
-            const tokenCookie = cookieStore.get("token");
+        if (cookieStore.has(this.tokenCookieName)) {
+            const tokenCookie = cookieStore.get(this.tokenCookieName);
             if (tokenCookie) {
                 headers.append("authorization", tokenCookie.value);
             }
         }
     };
+    clearTokenCookie = async () => {
+        const cookieStore = await this.cookies();
+        if (cookieStore.has(this.tokenCookieName)) {
+            cookieStore.delete(this.tokenCookieName);
+        }
+    };
 }
-exports.HttpClient = HttpClient;
+exports.ServerHttpClient = ServerHttpClient;

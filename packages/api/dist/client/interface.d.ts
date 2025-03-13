@@ -1,4 +1,4 @@
-import { IHTTPClient } from "http/interface";
+import { IHTTPClient } from "../http";
 import { IAuth } from "./auth";
 import { IUtils } from "./utils";
 export interface IBrandClientApi {

@@ -2,9 +2,11 @@ import { IFailedResponse, IHTTPClient, ISuccessResponse } from "./interface";
 
 export * from "./interface";
 abstract class HTTPClient implements IHTTPClient {
+  protected tokenCookieName = "token";
   constructor(private readonly baseUrl: string = "") {}
 
   abstract setAuthHeader: IHTTPClient["setAuthHeader"];
+  abstract clearTokenCookie: IHTTPClient["clearTokenCookie"];
 
   async request<T>(
     url: string,

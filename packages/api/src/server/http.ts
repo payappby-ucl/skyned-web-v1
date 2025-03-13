@@ -1,7 +1,7 @@
-import { CookieType } from "server";
+import { CookieType } from ".";
 import { HTTPClient, IHTTPClient } from "../http";
 
-export class HttpClient extends HTTPClient implements IHTTPClient {
+export class ServerHttpClient extends HTTPClient implements IHTTPClient {
   constructor(
     private readonly cookies: CookieType,
     serverBaseUrl: string,
@@ -11,11 +11,18 @@ export class HttpClient extends HTTPClient implements IHTTPClient {
 
   setAuthHeader: IHTTPClient["setAuthHeader"] = async (headers) => {
     const cookieStore = await this.cookies();
-    if (cookieStore.has("token")) {
-      const tokenCookie = cookieStore.get("token");
+    if (cookieStore.has(this.tokenCookieName)) {
+      const tokenCookie = cookieStore.get(this.tokenCookieName);
       if (tokenCookie) {
         headers.append("authorization", tokenCookie.value);
       }
+    }
+  };
+
+  clearTokenCookie: IHTTPClient["clearTokenCookie"] = async () => {
+    const cookieStore = await this.cookies();
+    if (cookieStore.has(this.tokenCookieName)) {
+      cookieStore.delete(this.tokenCookieName);
     }
   };
 }

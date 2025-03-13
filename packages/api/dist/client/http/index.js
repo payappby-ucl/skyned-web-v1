@@ -18,11 +18,16 @@ class ClientHttp extends http_1.HTTPClient {
     setAuthHeader = async (header) => {
         const token = await this.auth.getIdToken();
         if (token) {
-            js_cookie_1.default.set("token", token, {
+            js_cookie_1.default.set(this.tokenCookieName, token, {
                 secure: this.environment === "development" ? false : true,
                 httpOnly: true,
             });
             header.append("authorization", `bearer ${token}`);
+        }
+    };
+    clearTokenCookie = async () => {
+        if (js_cookie_1.default.get(this.tokenCookieName)) {
+            js_cookie_1.default.remove(this.tokenCookieName);
         }
     };
 }
