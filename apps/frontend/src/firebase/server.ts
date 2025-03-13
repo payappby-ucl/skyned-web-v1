@@ -1,2 +1,2 @@
-import { FirebaseServer } from "@workspace/firebase/server";
+import { FirebaseServer } from "@workspace/api/server";
 export const firebaseServer = FirebaseServer.factory();

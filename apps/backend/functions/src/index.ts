@@ -1,4 +1,3 @@
-import "dotenv";
 import { onRequest } from "firebase-functions/https";
 import { app } from "./app";
 import { SkynedUtils } from "./utils";

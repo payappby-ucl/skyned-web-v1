@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
 
-import { initializeFirebase } from "../../../../__tests__/helpers/firebase";
+// import { initializeFirebase } from "../../../../__tests__/helpers/firebase";
 import { StorageService, storageService } from ".";
 import { storage } from "../../../infrastructure";
 import { Exception } from "../../../lib";
 import { StatusCodes } from "http-status-codes";
 
-beforeAll(() => {
-  initializeFirebase();
-});
+// beforeAll(() => {
+//   initializeFirebase();
+// });
 
 describe("StorageService", () => {
   describe("storageService instance", () => {

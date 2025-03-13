@@ -1,22 +1,23 @@
 {
     "name": "functions",
-    "version": "0.0.1-48",
+    "version": "0.0.1-51",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
-        "build": "tsc && ./cp-yaml",
+        "build": "pnpm run cp:local && tsc && ./cp-yaml",
         "build:watch": "tsc --watch",
         "serve": "npm run build && firebase emulators:start --only functions",
         "shell": "npm run build && firebase functions:shell",
         "start": "npm run shell",
         "deploy": "firebase deploy",
         "logs": "firebase functions:log",
-        "start:emulators": "cat .env.test > .env && pnpm --filter '@workspace/*' run build && pnpm run rm:lib && pnpm run build && firebase emulators:start",
+        "start:emulators": "cat .env.test > .env && pnpm run rm:lib && pnpm run build && firebase emulators:start",
         "generate": "pnpm dlx prisma generate",
         "test:db:start": "docker compose up -d",
         "test:db:stop": "docker compose down",
         "test:migrate": "pnpm dlx prisma migrate dev",
         "rm:lib": "rm -rf lib",
-        "test": "cat .env.test > .env && pnpm --filter '@workspace/*' run build && pnpm run rm:lib && pnpm run build && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
+        "cp:local": "rm -rf shared && pnpm --filter '@workspace/*' run build && ./cp-local",
+        "test": "cat .env.test > .env && pnpm run rm:lib && pnpm run build && pnpm run test:db:start && pnpm run test:migrate && pnpm run generate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
         "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy",
         "deploy:dev": "pnpm run deploy:test && cat .env.dev > .env && firebase use dev && pnpm run deploy"
     },
@@ -28,8 +29,7 @@
         "@prisma/client": "^6.2.1",
         "@react-email/components": "^0.0.33",
         "@react-email/render": "^1.0.5",
-        "@workspace/firebase": "file:../../../packages/firebase",
-        "@workspace/shared": "file:../../../packages/shared",
+        "@workspace/shared": "file:shared",
         "cors": "^2.8.5",
         "data-urls": "^5.0.0",
         "dotenv": "^16.4.7",
@@ -43,7 +43,7 @@
         "react": "^19.0.0",
         "swagger-jsdoc": "^6.2.8",
         "swagger-ui-express": "^5.0.1",
-        "zod": "^3.24.1"
+        "zod": "^3.24.2"
     },
     "devDependencies": {
         "@firebase/testing": "^0.20.11",
@@ -67,7 +67,7 @@
         "prisma": "^6.2.1",
         "supertest": "^7.0.0",
         "ts-jest": "^29.2.5",
-        "typescript": "^4.9.0"
+        "typescript": "5.7.3"
     },
     "private": true
 }

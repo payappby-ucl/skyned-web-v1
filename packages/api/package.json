@@ -1,0 +1,27 @@
+{
+  "name": "@workspace/api",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "firebase": "^11.2.0",
+    "js-cookie": "^3.0.5",
+    "next": "^15.2.2",
+    "sonner": "^1.7.4"
+  },
+  "exports": {
+    "./server": "./src/server/index.ts",
+    "./client": "./src/client/index.ts",
+    "./lib": "./src/lib/index.ts",
+    "./serviceAccount": "./src/test-service-account.json"
+  }
+}

@@ -23,6 +23,7 @@ module.exports = {
     "/lib/**/*", // Ignore built files.
     "/generated/**/*", // Ignore generated files.
     "coverage/**/*",
+    "/shared",
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {

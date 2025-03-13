@@ -4,7 +4,7 @@ module.exports = {
   transform: {
     "^.+.tsx?$": ["ts-jest", {}],
   },
-  testPathIgnorePatterns: ["./__tests__/helpers", "./lib/__tests__/helpers"],
+  testPathIgnorePatterns: ["./__tests__/helpers", "./lib"],
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "json", "lcov", "text", "html"],

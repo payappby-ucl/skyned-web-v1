@@ -1,10 +1,10 @@
 "use client";
 
 import { env } from "@/src/config";
-import { getApps, initializeApp } from "firebase/app";
+import { getApps, initializeApp, getApp } from "firebase/app";
 import { Auth, connectAuthEmulator, getAuth } from "firebase/auth";
-import { FIREBASE_AUTH_EMULATOR_HOST } from "@workspace/firebase/lib";
-import { FirebaseClient } from "@workspace/firebase/client";
+import { FIREBASE_AUTH_EMULATOR_HOST } from "@workspace/api/lib";
+import { FirebaseClient } from "@workspace/api/client";
 
 function connectToAuthEmulator(auth: Auth) {
   if (env.appEnv) {
@@ -12,14 +12,15 @@ function connectToAuthEmulator(auth: Auth) {
   }
 }
 
-let auth: Auth | null;
+let app: ReturnType<typeof initializeApp>;
 const apps = getApps();
 if (apps.length) {
-  auth = getAuth(apps[0]);
+  app = getApp();
 } else {
-  const app = initializeApp(env.firebaseConfig);
-  auth = getAuth(app);
+  app = initializeApp(env.client.firebaseConfig);
 }
+
+const auth = getAuth(app);
 
 connectToAuthEmulator(auth);
 export const firebaseClient = FirebaseClient.factory(auth);

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@workspace/firebase": "workspace:*",
+    "@workspace/api": "workspace:*",
     "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
     "axios": "^1.7.9",
