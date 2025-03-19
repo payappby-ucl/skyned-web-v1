@@ -1,4 +1,6 @@
+/** Storage infrastructure interface */
 export interface IStorage {
+  /** creates / stores file to cloud storage */
   put(data: {
     buffer: Buffer;
     path: string;
@@ -13,5 +15,6 @@ export interface IStorage {
     mimeType: string;
   }>;
 
+  /** Deletes a file from cloud storage */
   delete(path: string): Promise<void>;
 }

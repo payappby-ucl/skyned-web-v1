@@ -13,6 +13,12 @@ export * from "./interface";
 
 SkynedUtils.initializeFirebaseApp();
 
+/**
+ * Concrete implementation for storage using GCP cloud storage
+ *
+ * @class
+ */
+
 class Storage implements IStorage {
   private static instance: IStorage | null = null;
   private readonly storage = getStorage();
@@ -24,6 +30,8 @@ class Storage implements IStorage {
   private constructor() {
     // * Private
   }
+
+  /** Creates the storage instance */
 
   static factory() {
     if (!Storage.instance) {
@@ -62,6 +70,9 @@ class Storage implements IStorage {
     return exists;
   }
 
+  /**
+   * Creates or stores the object in cloud storage
+   */
   put: IStorage["put"] = async ({ buffer, path, mimeType, metadata = {} }) => {
     if (!buffer) {
       throw SkynedUtils.createException(
@@ -108,6 +119,8 @@ class Storage implements IStorage {
     };
   };
 
+  /** Deletes the object from cloud storage */
+
   delete: IStorage["delete"] = async (path) => {
     if (!path) {
       throw SkynedUtils.createException(
@@ -123,6 +136,7 @@ class Storage implements IStorage {
   };
 }
 
+/** Storage instance */
 export const storage = SkynedRegistry.getSingleton(
   RegistryKeysEnum.STORAGE,
   Storage.factory,

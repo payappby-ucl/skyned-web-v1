@@ -10,19 +10,43 @@ import { IStorageService } from "./interface";
 
 export * from "./interface";
 
-interface Dependencies {
+/** Required dependencies for the instantiation of storage service class */
+export interface StorageServiceDependencies {
+  /** Storage infrastructure responsible for storing the object */
   storage: IStorage;
 }
+
+/**
+ * Represents the storage service
+ *
+ * @class
+ */
+
 export class StorageService implements IStorageService {
   private static instance: IStorageService | null = null;
   private constructor(private readonly storage: IStorage) {}
-  static factory({ storage }: Dependencies) {
+
+  /**
+   * For creating storage service instance
+   */
+
+  static factory({ storage }: StorageServiceDependencies) {
     if (!StorageService.instance) {
       StorageService.instance = new StorageService(storage);
     }
 
     return StorageService.instance;
   }
+
+  /**
+   * Gets a file extension from the file mime type
+   *
+   * @example
+   * The return value will be jpeg
+   * ```ts
+   * getFileExtensionFromMimeType("image/jpeg");
+   * ```
+   */
 
   getFileExtensionFromMimeType: IStorageService["getFileExtensionFromMimeType"] =
     (mimeType) => {
@@ -34,6 +58,16 @@ export class StorageService implements IStorageService {
       }
       return mime.getExtension(mimeType);
     };
+
+  /**
+   * Gets a mime type from the file extension
+   *
+   * @example
+   * The return value will be image/jpeg
+   * ```ts
+   * getMimeTypeFromExtension("jpeg");
+   * ```
+   */
 
   getMimeTypeFromExtension: IStorageService["getMimeTypeFromExtension"] = (
     fileExtension,
@@ -47,6 +81,10 @@ export class StorageService implements IStorageService {
 
     return mime.getType(fileExtension);
   };
+
+  /**
+   * Transforms a data uri to the acceptable format for the storage infrastructure
+   */
 
   transformDataUriToAcceptedFormatForStorage: IStorageService["transformDataUriToAcceptedFormatForStorage"] =
     (dataUri) => {
@@ -67,6 +105,10 @@ export class StorageService implements IStorageService {
         body: Buffer.from(parsedData.body.buffer),
       };
     };
+
+  /**
+   * Performs checks, validate inputs and format necessary data before calling the storage infrastructure
+   */
 
   saveObject: IStorageService["saveObject"] = async (dataUri, path) => {
     if (!path) {
@@ -104,6 +146,8 @@ export class StorageService implements IStorageService {
     return savedObjectResponse;
   };
 
+  /** Communicates with the storage infrastructure for deletion of an object */
+
   deleteObject: IStorageService["deleteObject"] = async (path) => {
     if (!path) {
       throw SkynedUtils.createException(
@@ -116,6 +160,7 @@ export class StorageService implements IStorageService {
   };
 }
 
+/** Storage service instance */
 export const storageService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.STORAGE_SERVICE,
   () =>

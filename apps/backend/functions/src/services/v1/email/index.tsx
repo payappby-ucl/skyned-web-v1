@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { email, IEmail } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
@@ -9,13 +10,30 @@ import { RegistryKeysEnum } from "../../../enum";
 
 export * from "./interface";
 
-interface Dependencies {
+/** Dependencies needed to instantiate {@link EmailService} */
+
+export interface EmailServiceDependencies {
   emailServer: IEmail;
 }
+
+/**
+ * Email Service Class
+ *
+ * @class
+ */
+
 export class EmailService implements IEmailService {
   private static instance: IEmailService | null = null;
   private constructor(private emailServer: IEmail) {}
-  static factory({ emailServer }: Dependencies) {
+
+  /**
+   * Instantiate the email service
+   *
+   * @param {Dependencies} dependencies
+   * @returns The Email Service instance
+   */
+
+  static factory({ emailServer }: EmailServiceDependencies) {
     if (!EmailService.instance) {
       EmailService.instance = new EmailService(emailServer);
     }
@@ -38,6 +56,10 @@ export class EmailService implements IEmailService {
     }
   }
 
+  /**
+   * Selects email templates and format data needed before sending to the email infrastructure responsible for sending mails
+   */
+
   send: IEmailService["send"] = async (data) => {
     const { template, ...rest } = data;
     const html = await this.getTemplate(template);
@@ -48,6 +70,9 @@ export class EmailService implements IEmailService {
   };
 }
 
+/**
+ * Initializes the email service
+ */
 export const emailService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.EMAIL_SERVICE,
   () =>

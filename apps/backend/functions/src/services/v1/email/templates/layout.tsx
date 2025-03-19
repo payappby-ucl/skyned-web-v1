@@ -1,9 +1,19 @@
 import React, { PropsWithChildren } from "react";
 import { Html, Head, Tailwind, Font } from "@react-email/components";
 
+/** All properties needed to display template */
 interface Props {
+  /** Document title */
   title: string;
 }
+
+/**
+ * The email template layout
+ *
+ * @param {Props} props - React properties
+ * @returns React Component
+ */
+
 const Layout: React.FC<PropsWithChildren<Props>> = ({ children, title }) => {
   return (
     <Html lang="en">

@@ -1,10 +1,21 @@
 import { RequestHandler } from "express";
 import { IValidationData } from "./interface";
 
+export * from "./interface";
+
+/**
+ * Concrete implementation for request validation middleware
+ *
+ * @class
+ */
 export class RequestValidationMiddleware {
   private constructor() {
     // * Private
   }
+
+  /**
+   * Validates the request
+   */
 
   static validate(data: IValidationData): RequestHandler {
     return async (req, res, next) => {

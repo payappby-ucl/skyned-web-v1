@@ -10,20 +10,35 @@ import { SkynedUtils } from "../../../utils";
 
 export * from "./interface";
 
-interface Dependencies {
+/** All instances require for the instantiation of the exception controller */
+export interface ExceptionControllerDependencies {
+  /** For logging */
   logger: ILogger;
 }
+
+/**
+ * Exception controller concrete implementation
+ *
+ * @class
+ */
 
 export class ExceptionController implements IExceptionController {
   private static instance: IExceptionController | null = null;
   private constructor(private readonly logger: ILogger) {}
-  static factory({ logger }: Dependencies) {
+
+  /**
+   * Factory method to instantiate Exception controller
+   */
+
+  static factory({ logger }: ExceptionControllerDependencies) {
     if (!ExceptionController.instance) {
       ExceptionController.instance = new ExceptionController(logger);
     }
 
     return ExceptionController.instance;
   }
+
+  /** Handle 404 routes */
 
   handle404: IExceptionController["handle404"] = async (req, res, next) => {
     next(
@@ -33,6 +48,8 @@ export class ExceptionController implements IExceptionController {
       ),
     );
   };
+
+  /** Handles other errors */
 
   handleAllPossibleErrors: IExceptionController["handleAllPossibleErrors"] =
     async (error, req, res, next) => {
@@ -76,6 +93,7 @@ export class ExceptionController implements IExceptionController {
     };
 }
 
+/** Exception controller instance */
 export const exceptionController = SkynedRegistry.getSingleton(
   RegistryKeysEnum.EXCEPTION_CONTROLLER,
   () => ExceptionController.factory({ logger }),

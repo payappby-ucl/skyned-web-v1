@@ -1,3 +1,7 @@
+/**
+ * @author Beantech Designs <info@beantech.co>
+ */
+
 import { onRequest } from "firebase-functions/https";
 import { app } from "./app";
 import { SkynedUtils } from "./utils";

@@ -9,12 +9,27 @@ import { healthRouter } from "./health";
 import { apiRouter } from "./api";
 import definition from "../swagger";
 
-interface Dependencies {
+/**
+ * Represents the all dependencies for creating the base router
+ */
+export interface Dependencies {
+  /** API Base Router */
   apiRouter: IRouter;
+
+  /** Health Base Router */
   healthRouter: IRouter;
 }
+
+/**
+ * Represents the Base Router
+ * @class
+ */
 export class BaseRouter implements IRouter {
   private static instance: IRouter | null = null;
+
+  /**
+   * Represents the base router
+   */
   router = express.Router();
 
   private constructor(apiRouter: IRouter, healthRouter: IRouter) {
@@ -38,12 +53,24 @@ export class BaseRouter implements IRouter {
     );
 
     // * Test Coverage Report
-    // this.router.use("/coverage", express.static())
     this.router.use(
       "/coverage",
       express.static(path.resolve(__dirname, "../../public/coverage")),
     );
+
+    // * Code Documentation
+    this.router.use(
+      "/code-docs",
+      express.static(path.resolve(__dirname, "../../public/doc")),
+    );
   }
+
+  /**
+   * Creates base router instance
+   *
+   * @param {Dependencies} dependencies
+   * @returns {IRouter} The base router instance
+   */
 
   static factory({ apiRouter, healthRouter }: Dependencies) {
     if (!BaseRouter.instance) {
@@ -54,6 +81,7 @@ export class BaseRouter implements IRouter {
   }
 }
 
+/** Creates/Gets the base router instance */
 export const baseRouter = SkynedRegistry.getSingleton(
   RegistryKeysEnum.BASE_ROUTER,
   () => BaseRouter.factory({ apiRouter, healthRouter }),

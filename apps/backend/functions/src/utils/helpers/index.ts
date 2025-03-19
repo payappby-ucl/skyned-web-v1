@@ -1,11 +1,25 @@
+/* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import * as admin from "firebase-admin";
 import { Exception } from "../../lib";
 
+/**
+ * Utility Class
+ *
+ * @class
+ */
 export class SkynedUtils {
   private constructor() {
     // * Private
   }
+
+  /**
+   * Creates a custom exception/error type used across all parts of the app
+   *
+   * @param {StatusCodes} statusCode - The HTTP status codes representing the error
+   * @param {string} message - The error message
+   * @returns {Exception} The Error instance
+   */
 
   static createException(statusCode: StatusCodes, message?: string) {
     if (!statusCode) {
@@ -16,6 +30,15 @@ export class SkynedUtils {
     }
     return new Exception(statusCode, message);
   }
+
+  /**
+   * Filters an return object containing keys found in provided values array
+   *
+   * @template T
+   * @param {T} data - The object to filter
+   * @param {string[]} values - Array containing all keys to select from the data
+   * @returns {Object} Object containing the selected values
+   */
 
   static pick<T extends object, Key extends keyof T>(data: T, values: Key[]) {
     if (!data || !values) {
@@ -44,6 +67,15 @@ export class SkynedUtils {
 
     return Object.fromEntries(filteredEntries) as Pick<T, Key>;
   }
+
+  /**
+   * Filters an return object omitting keys found in provided values array
+   *
+   * @template T
+   * @param {T} data - The object to filter
+   * @param {string[]} values - Array containing all keys to omit from the data
+   * @returns {Object} Object containing the values with omitted selections
+   */
 
   static exclude<T extends object, Key extends keyof T>(
     data: T,
@@ -76,6 +108,9 @@ export class SkynedUtils {
     return Object.fromEntries(filteredEntries) as unknown as Omit<T, Key>;
   }
 
+  /**
+   * Initializes the Firebase app on the admin
+   */
   static initializeFirebaseApp() {
     if (!admin.apps.length) {
       admin.initializeApp();

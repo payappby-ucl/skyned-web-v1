@@ -1,6 +1,7 @@
 import { _failed, _success } from "./middleware";
 
 declare global {
+  /** @namespace */
   namespace Express {
     interface Response {
       _success: typeof _success;

@@ -1,5 +1,6 @@
 import { Exception } from "../../lib";
 
+/** Logger interface */
 export interface ILogger {
   log(data: Exception | string[]): void;
   error(error: Exception): void;

@@ -4,18 +4,36 @@ import SkynedRegistry from "../../registry";
 import { IRouter } from "../../interface";
 import { IHealthController, healthController } from "../../controllers";
 
-interface Dependencies {
+/**
+ * Represent a dependencies needed to create the health router
+ */
+export interface HealthRouterDependencies {
+  /** Handles health check */
   healthController: IHealthController;
 }
+
+/**
+ * Represents health router
+ *
+ * @class
+ */
 export class HealthRouter implements IRouter {
   private static instance: IRouter | null = null;
+
+  /**
+   * The Router
+   */
   router = express.Router();
 
   private constructor(healthController: IHealthController) {
     this.router.route("/").get(healthController.isHealthy);
   }
 
-  static factory(dependencies: Dependencies) {
+  /**
+   * Creates the health router instance
+   */
+
+  static factory(dependencies: HealthRouterDependencies) {
     if (!HealthRouter.instance) {
       const { healthController } = dependencies;
       HealthRouter.instance = new HealthRouter(healthController);
@@ -25,6 +43,7 @@ export class HealthRouter implements IRouter {
   }
 }
 
+/** Creates/Gets the health router instance */
 export const healthRouter = SkynedRegistry.getSingleton(
   RegistryKeysEnum.HEALTH_ROUTER,
   () => HealthRouter.factory({ healthController }),

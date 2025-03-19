@@ -6,12 +6,22 @@ import SkynedRegistry from "../../registry";
 import { RegistryKeysEnum } from "../../enum";
 
 export * from "./interface";
+
+/**
+ * Represents concrete logger class
+ *
+ * @class
+ */
+
 export class Logger implements ILogger {
   private static instance: ILogger | null = null;
   private logger = FBLogger;
   private constructor() {
     // * Private
   }
+
+  /** Creates the logger instance */
+
   static factory() {
     if (!Logger.instance) {
       Logger.instance = new Logger();
@@ -19,6 +29,8 @@ export class Logger implements ILogger {
 
     return Logger.instance;
   }
+
+  /** logs */
 
   log: ILogger["log"] = (data) => {
     this.logger.log(
@@ -28,9 +40,13 @@ export class Logger implements ILogger {
     );
   };
 
+  /** logs error */
+
   error: ILogger["error"] = (error) => {
     this.logger.error(Object.entries(error).map(([, value]) => value));
   };
+
+  /** Info logs */
 
   info: ILogger["info"] = (data) => {
     this.logger.info(
@@ -39,6 +55,8 @@ export class Logger implements ILogger {
         : data,
     );
   };
+
+  /** Warning logs */
 
   warn: ILogger["warn"] = (data) => {
     this.logger.warn(
@@ -49,6 +67,7 @@ export class Logger implements ILogger {
   };
 }
 
+/** Logger instance */
 export const logger = SkynedRegistry.getSingleton(
   RegistryKeysEnum.LOGGER,
   Logger.factory,

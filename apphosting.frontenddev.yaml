@@ -53,6 +53,7 @@ env:
     availability:
       - BUILD
       - RUNTIME
+
   - variable: NEXT_PUBLIC_APP_ID
     value: 1:554146787843:web:684df2d0e6902c6198d436
     availability:

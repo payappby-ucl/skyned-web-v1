@@ -7,11 +7,22 @@ import { SkynedUtils } from "../../utils";
 import { IEmail } from "./interface";
 
 export * from "./interface";
+
+/**
+ * Infrastructure setup for sending email
+ *
+ * @class
+ */
+
 class Email implements IEmail {
   private static instance: IEmail | null = null;
   private constructor() {
     // * Private
   }
+
+  /**
+   * Matehod to create the email infrastructure instance
+   */
 
   static factory() {
     if (!Email.instance) {
@@ -41,6 +52,10 @@ class Email implements IEmail {
       },
     });
   }
+
+  /**
+   * Method to send the email
+   */
 
   send: IEmail["send"] = async (data) => {
     if (!data || !Object.keys(data).length) {
@@ -72,6 +87,7 @@ class Email implements IEmail {
   };
 }
 
+/** Email infrastructure instance */
 export const email = SkynedRegistry.getSingleton(
   RegistryKeysEnum.EMAIL,
   Email.factory,
