@@ -1,4 +1,4 @@
-import { IStorage } from "../../../infrastructure";
+import { IStorage } from "../infrastructure";
 
 /** Storage service interface */
 export interface IStorageService {

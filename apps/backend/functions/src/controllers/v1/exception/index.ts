@@ -1,14 +1,12 @@
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { Exception } from "../../../lib";
-import { IExceptionController } from "./interface";
+import { IExceptionController, ILogger } from "../../../interfaces";
 import { ZodError } from "zod";
 import { RegistryKeysEnum } from "../../../enum";
 import SkynedRegistry from "../../../registry";
-import { ILogger, logger } from "../../../infrastructure";
+import { logger } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
-
-export * from "./interface";
 
 /** All instances require for the instantiation of the exception controller */
 export interface ExceptionControllerDependencies {

@@ -5,11 +5,9 @@ import mime from "mime";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
 import { SkynedUtils } from "../../utils";
-import { IStorage } from "./interface";
+import { IStorage } from "../../interfaces";
 import { StatusCodes } from "http-status-codes";
 import { env } from "../../config";
-
-export * from "./interface";
 
 SkynedUtils.initializeFirebaseApp();
 

@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import { IApp, IRouter } from "./interface";
 import express from "express";
 import cors from "cors";
 import SkynedRegistry from "./registry";
@@ -7,7 +6,8 @@ import { RegistryKeysEnum } from "./enum";
 import helmet from "helmet";
 import { BinderMiddleware } from "./middleware";
 import { baseRouter } from "./routers";
-import { exceptionController, IExceptionController } from "./controllers";
+import { exceptionController } from "./controllers";
+import { IApp, IExceptionController, IRouter } from "./interfaces";
 
 /**
  * Represents all instances the app class depends on for initialization

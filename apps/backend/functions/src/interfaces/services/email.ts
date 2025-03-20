@@ -1,4 +1,4 @@
-import { IEmail } from "../../../infrastructure";
+import { IEmail } from "../infrastructure";
 
 /**
  * Interface for email verification template

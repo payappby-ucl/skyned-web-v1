@@ -4,9 +4,7 @@ import * as key from "./key.json";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
 import { SkynedUtils } from "../../utils";
-import { IEmail } from "./interface";
-
-export * from "./interface";
+import { IEmail } from "../../interfaces";
 
 /**
  * Infrastructure setup for sending email

@@ -1,9 +1,7 @@
 import { StatusCodes } from "http-status-codes";
-import { IHealthController } from "./interface";
+import { IHealthController } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { RegistryKeysEnum } from "../../enum";
-
-export * from "./interface";
 
 /**
  * Represents Health Controller

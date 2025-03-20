@@ -1,11 +1,9 @@
 /* eslint-disable operator-linebreak */
 import { logger as FBLogger } from "firebase-functions";
-import { ILogger } from "./interface";
+import { ILogger } from "../../interfaces";
 import { Exception } from "../../lib";
 import SkynedRegistry from "../../registry";
 import { RegistryKeysEnum } from "../../enum";
-
-export * from "./interface";
 
 /**
  * Represents concrete logger class

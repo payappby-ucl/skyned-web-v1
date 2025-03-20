@@ -2,7 +2,7 @@ import express from "express";
 import { v1Router } from "./v1";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
-import { IRouter } from "../../interface";
+import { IRouter } from "../../interfaces";
 
 /**
  * Dependencies required for API Router instance

@@ -1,5 +1,5 @@
 import express from "express";
-import { IRouter } from "../../../interface";
+import { IRouter } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
 

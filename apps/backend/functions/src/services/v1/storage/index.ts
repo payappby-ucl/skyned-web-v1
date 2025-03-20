@@ -3,12 +3,13 @@ import { StatusCodes } from "http-status-codes";
 import parseDataURL from "data-urls";
 import mime from "mime";
 import { RegistryKeysEnum } from "../../../enum";
-import { IStorage, storage } from "../../../infrastructure";
+import { storage } from "../../../infrastructure";
 import SkynedRegistry from "../../../registry";
 import { SkynedUtils } from "../../../utils";
-import { IStorageService } from "./interface";
+import { IStorageService } from "../../../interfaces/services/storage";
+import { IStorage } from "../../../interfaces/infrastructure";
 
-export * from "./interface";
+export * from "../../../interfaces/services/storage";
 
 /** Required dependencies for the instantiation of storage service class */
 export interface StorageServiceDependencies {

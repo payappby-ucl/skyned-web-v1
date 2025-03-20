@@ -1,7 +1,6 @@
 /**
  * Unique keys for every class instances
  * @readonly
- * @enum {string}
  */
 export enum RegistryKeysEnum {
   /** The App */
@@ -14,6 +13,8 @@ export enum RegistryKeysEnum {
   EMAIL = "Email",
   /** Storage infrastructure */
   STORAGE = "Storage",
+  /** Auth infrastructure */
+  AUTH = "AUTH",
 
   //* Middlewares
   /** Request validation middleware */

@@ -4,7 +4,7 @@ import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import SkynedRegistry from "../registry";
 import { RegistryKeysEnum } from "../enum";
-import { IRouter } from "../interface";
+import { IRouter } from "../interfaces";
 import { healthRouter } from "./health";
 import { apiRouter } from "./api";
 import definition from "../swagger";

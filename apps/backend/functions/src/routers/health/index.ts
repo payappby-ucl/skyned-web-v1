@@ -1,8 +1,8 @@
 import express from "express";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
-import { IRouter } from "../../interface";
-import { IHealthController, healthController } from "../../controllers";
+import { IHealthController, IRouter } from "../../interfaces";
+import { healthController } from "../../controllers";
 
 /**
  * Represent a dependencies needed to create the health router
