@@ -50,7 +50,7 @@ export class ValidationUtility implements IValidationUtility {
   };
 
   validateTokenId: IValidationUtility["validateTokenId"] = (tokenId) => {
-    if (!tokenId.trim() || typeof tokenId !== "string") {
+    if (!tokenId || tokenId === "" || typeof tokenId !== "string") {
       throw SkynedUtils.createException(
         StatusCodes.INTERNAL_SERVER_ERROR,
         "tokenId is undefined or not a string",

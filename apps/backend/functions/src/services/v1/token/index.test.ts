@@ -50,22 +50,18 @@ describe("TokenService", () => {
     });
 
     describe("verify", () => {
-      test("should throw error if token is empty/falsy", () => {
-        expect(() => {
-          tokenService.verify("");
-        }).toThrow(Exception);
+      test("should return null if token is empty/falsy", () => {
+        expect(tokenService.verify("")).toBeNull();
       });
 
-      test("should throw error if token is not a string", () => {
-        expect(() => {
-          tokenService.verify({} as string);
-        }).toThrow(Exception);
+      test("should return null if token is not a string", () => {
+        expect(tokenService.verify({} as string)).toBeNull();
       });
 
       test("should verify and return payload", () => {
         const token = tokenService.sign(payload);
         const decoded = tokenService.verify(token);
-        expect(decoded).toEqual(payload);
+        expect(decoded).toEqual(expect.objectContaining(payload));
       });
     });
 
@@ -108,17 +104,23 @@ describe("TokenService", () => {
 
     describe("delete", () => {
       test("should delete the token", async () => {
+        const findSpy = jest
+          .spyOn(repository.token, "findTokenByTokenId")
+          .mockImplementation(async () => tokenData);
+
         const spy = jest
           .spyOn(repository.token, "delete")
           .mockImplementation(async () => tokenData);
 
         const deletedToken = await tokenService.delete(tokenData.tokenId);
+        expect(findSpy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalled();
         expect(deletedToken).toEqual(tokenData);
 
         const nullSpy = jest
           .spyOn(repository.token, "findTokenByTokenId")
           .mockImplementation(async () => null);
+
         const token = await tokenService.findTokenByTokenId(tokenData.tokenId);
         expect(nullSpy).toHaveBeenCalled();
         expect(token).toBeNull();

@@ -9,4 +9,4 @@ typings/
 node_modules/
 *.local
 
-src/test-service-account.json
+test-service-account.json

@@ -5,6 +5,8 @@ import SkynedRegistry from "../../registry";
 import { SkynedUtils, validationUtility } from "../../utils";
 import { StatusCodes } from "http-status-codes";
 
+SkynedUtils.initializeFirebaseApp();
+
 /** Required dependencies to create Auth instance */
 export interface AuthDependencies {
   /** for validating data */

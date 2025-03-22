@@ -85,7 +85,7 @@ export class AuthController implements IAuthController {
         const emailAlreadyExist = await this.auth.exists(email);
         if (emailAlreadyExist) {
           throw SkynedUtils.createException(
-            StatusCodes.BAD_REQUEST,
+            StatusCodes.CONFLICT,
             `${email} already belongs to an existing user`,
           );
         }

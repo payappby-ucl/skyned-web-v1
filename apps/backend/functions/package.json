@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1-52",
+  "version": "0.0.1-55",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "pnpm run cp:local && tsc && ./cp-yaml && typedoc",
@@ -68,7 +68,7 @@
     "firebase-functions-test": "^3.4.1",
     "jest": "^29.7.0",
     "prisma": "^6.5.0",
-    "supertest": "^7.0.0",
+    "supertest": "^7.1.0",
     "ts-jest": "^29.2.6",
     "typedoc": "^0.28.0",
     "typescript": "5.7.3"

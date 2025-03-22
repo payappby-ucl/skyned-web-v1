@@ -7,7 +7,6 @@ import SkynedRegistry from "../../registry";
 import { SkynedUtils } from "../../utils";
 import { IStorage } from "../../interfaces";
 import { StatusCodes } from "http-status-codes";
-import { env } from "../../config";
 
 SkynedUtils.initializeFirebaseApp();
 
@@ -20,10 +19,7 @@ SkynedUtils.initializeFirebaseApp();
 class Storage implements IStorage {
   private static instance: IStorage | null = null;
   private readonly storage = getStorage();
-  private bucket =
-    env.environment === "test"
-      ? this.storage.bucket("skyned-test-31a2e.firebasestorage.app")
-      : this.storage.bucket();
+  private bucket = this.storage.bucket();
 
   private constructor() {
     // * Private

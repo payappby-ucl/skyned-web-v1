@@ -126,7 +126,7 @@ describe("idGeneratorService", () => {
       });
 
       test("should be all alphanumeric", () => {
-        expect(random).toMatch(/^1Acu+$/g);
+        expect(random).toMatch(/^[1Acu]+$/g);
       });
     });
 

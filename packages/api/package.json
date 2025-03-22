@@ -26,7 +26,6 @@
     "./hooks": "./src/hooks/index.ts",
     "./interfaces": "./src/interfaces/index.ts",
     "./enums": "./src/enums/index.ts",
-    "./lib": "./src/lib/index.ts",
-    "./serviceAccount": "./src/test-service-account.json"
+    "./lib": "./src/lib/index.ts"
   }
 }

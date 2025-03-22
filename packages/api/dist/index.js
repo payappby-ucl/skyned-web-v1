@@ -13,13 +13,9 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.serviceAccount = void 0;
-const test_service_account_json_1 = __importDefault(require("./test-service-account.json"));
-exports.serviceAccount = test_service_account_json_1.default;
+// import serviceAccount from "./test-service-account.json";
 __exportStar(require("./lib"), exports);
 __exportStar(require("./server"), exports);
 __exportStar(require("./client"), exports);
+// export { serviceAccount };

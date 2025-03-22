@@ -2,6 +2,8 @@
 import { StatusCodes } from "http-status-codes";
 import * as admin from "firebase-admin";
 import { Exception } from "../../lib";
+import { env } from "../../config";
+import { applicationDefault } from "firebase-admin/app";
 
 /**
  * Utility Class
@@ -105,7 +107,17 @@ export class SkynedUtils {
    */
   static initializeFirebaseApp() {
     if (!admin.apps.length) {
-      admin.initializeApp();
+      if (env.environment === "test") {
+        admin.initializeApp({
+          credential: applicationDefault(),
+          projectId: "skyned-test-31a2e",
+          storageBucket: "skyned-test-31a2e.firebasestorage.app",
+        });
+        process.env.FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:4000/auth";
+        process.env.FIREBASE_STORAGE_EMULATOR_HOST = "127.0.0.1:4000/storage";
+      } else {
+        admin.initializeApp();
+      }
     }
   }
 }

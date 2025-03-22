@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { EmailService, emailService } from ".";
 import { email } from "../../../infrastructure";
+import { env } from "../../../config";
 // import { Exception } from "../../../lib";
 
 process.on("unhandledRejection", (reason) => {
@@ -21,6 +22,9 @@ describe("EmailService", () => {
 
     test("should throw an error if an invalid template is passed", async () => {
       const emailData: Parameters<(typeof emailService)["send"]>["0"] = {
+        from: {
+          email: env.emails.test,
+        },
         template: {
           type: "none" as any,
           data: {
@@ -41,6 +45,9 @@ describe("EmailService", () => {
 
     test("should send a mail", async () => {
       const emailData: Parameters<(typeof emailService)["send"]>["0"] = {
+        from: {
+          email: env.emails.test,
+        },
         template: {
           type: "verify",
           data: {
