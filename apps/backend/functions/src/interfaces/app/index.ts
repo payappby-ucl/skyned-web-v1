@@ -17,3 +17,5 @@ export interface IRouter {
   /** The router instance */
   router: Router;
 }
+
+export * from "./token";

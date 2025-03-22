@@ -6,10 +6,7 @@ import { RegistryKeysEnum } from "../../../enum";
 import { storage } from "../../../infrastructure";
 import SkynedRegistry from "../../../registry";
 import { SkynedUtils } from "../../../utils";
-import { IStorageService } from "../../../interfaces/services/storage";
-import { IStorage } from "../../../interfaces/infrastructure";
-
-export * from "../../../interfaces/services/storage";
+import { IStorage, IStorageService } from "../../../interfaces";
 
 /** Required dependencies for the instantiation of storage service class */
 export interface StorageServiceDependencies {
@@ -22,7 +19,6 @@ export interface StorageServiceDependencies {
  *
  * @class
  */
-
 export class StorageService implements IStorageService {
   private static instance: IStorageService | null = null;
   private constructor(private readonly storage: IStorage) {}

@@ -1,11 +1,18 @@
+/* eslint-disable operator-linebreak */
 import { StatusCodes } from "http-status-codes";
 import nodemailer from "nodemailer";
 import * as key from "./key.json";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
-import { SkynedUtils } from "../../utils";
-import { IEmail } from "../../interfaces";
+import { SkynedUtils, validationUtility } from "../../utils";
+import { IEmail, IValidationUtility } from "../../interfaces";
+import { env } from "../../config";
 
+/** Dependencies needed to create email infrastructure instance */
+export interface EmailDependencies {
+  /** for input validation */
+  validationUtility: IValidationUtility;
+}
 /**
  * Infrastructure setup for sending email
  *
@@ -14,29 +21,26 @@ import { IEmail } from "../../interfaces";
 
 class Email implements IEmail {
   private static instance: IEmail | null = null;
-  private constructor() {
-    // * Private
-  }
+  private constructor(private readonly validationUtility: IValidationUtility) {}
 
   /**
-   * Matehod to create the email infrastructure instance
+   * Method to create the email infrastructure instance
    */
 
-  static factory() {
+  static factory({ validationUtility }: EmailDependencies) {
     if (!Email.instance) {
-      Email.instance = new Email();
+      Email.instance = new Email(validationUtility);
     }
 
     return Email.instance;
   }
 
   private createTransporter(sendingEmail: string) {
-    if (!sendingEmail) {
-      throw SkynedUtils.createException(
-        StatusCodes.INTERNAL_SERVER_ERROR,
-        "Sending email is undefined for creating transporter",
-      );
-    }
+    this.validationUtility.validateEmail({
+      email: sendingEmail,
+      message:
+        "Sending email is undefined or not valid for creating transporter",
+    });
 
     return nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -63,9 +67,12 @@ class Email implements IEmail {
       );
     }
 
-    const email = "admissions@skynedconsults.com";
+    const senderEmail = env.environment ? env.emails.test : data.from.email;
+    const sender = env.environment
+      ? `Skyned Consults Test Account <${senderEmail}>`
+      : `${data.from.name || "Skyned Consults"} <${data.from.email}>`;
 
-    const transporter = this.createTransporter(email);
+    const transporter = this.createTransporter(senderEmail);
     const isTransporterVerified = await transporter.verify();
     if (!isTransporterVerified) {
       throw SkynedUtils.createException(
@@ -76,7 +83,7 @@ class Email implements IEmail {
 
     const { to, subject, html, attachments } = data;
     await transporter.sendMail({
-      from: `Skyned Consults <${email}>`,
+      from: sender,
       to,
       subject,
       html,
@@ -86,7 +93,8 @@ class Email implements IEmail {
 }
 
 /** Email infrastructure instance */
-export const email = SkynedRegistry.getSingleton(
-  RegistryKeysEnum.EMAIL,
-  Email.factory,
+export const email = SkynedRegistry.getSingleton(RegistryKeysEnum.EMAIL, () =>
+  Email.factory({
+    validationUtility,
+  }),
 );

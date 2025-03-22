@@ -2,14 +2,11 @@
 import { StatusCodes } from "http-status-codes";
 import { email } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
-import { IEmailService } from "../../../interfaces/services/email";
 import { render } from "@react-email/components";
 import VerifyEmail from "./templates/verify-email";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
-import { IEmail } from "../../../interfaces";
-
-export * from "../../../interfaces/services/email";
+import { IEmail, IEmailService } from "../../../interfaces";
 
 /** Dependencies needed to instantiate {@link EmailService} */
 

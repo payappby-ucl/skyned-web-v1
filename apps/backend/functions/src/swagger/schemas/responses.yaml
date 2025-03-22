@@ -1,5 +1,12 @@
 components:
   schemas:
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
     SuccessResponse:
       type: object
       properties:
@@ -10,6 +17,9 @@ components:
         success:
           type: boolean
           example: true
+      required:
+        - statusCode
+        - success
     FailedResponse:
       type: object
       properties:
@@ -20,5 +30,9 @@ components:
         success:
           type: boolean
           example: false
-        message:
-          type: string
+        data:
+          $ref: "#/components/schemas/MessageResponse"
+      required:
+        - statusCode
+        - success
+        - data

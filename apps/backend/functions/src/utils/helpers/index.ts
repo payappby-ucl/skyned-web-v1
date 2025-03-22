@@ -15,10 +15,6 @@ export class SkynedUtils {
 
   /**
    * Creates a custom exception/error type used across all parts of the app
-   *
-   * @param {StatusCodes} statusCode - The HTTP status codes representing the error
-   * @param {string} message - The error message
-   * @returns {Exception} The Error instance
    */
 
   static createException(statusCode: StatusCodes, message?: string) {
@@ -36,8 +32,6 @@ export class SkynedUtils {
    *
    * @template T
    * @param {T} data - The object to filter
-   * @param {string[]} values - Array containing all keys to select from the data
-   * @returns {Object} Object containing the selected values
    */
 
   static pick<T extends object, Key extends keyof T>(data: T, values: Key[]) {
@@ -73,8 +67,6 @@ export class SkynedUtils {
    *
    * @template T
    * @param {T} data - The object to filter
-   * @param {string[]} values - Array containing all keys to omit from the data
-   * @returns {Object} Object containing the values with omitted selections
    */
 
   static exclude<T extends object, Key extends keyof T>(

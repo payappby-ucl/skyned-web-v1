@@ -2,7 +2,13 @@ import express from "express";
 import { IRouter } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
+import { authRouter } from "./auth";
 
+/** Dependencies required to create v1 router */
+export interface V1RouterDependencies {
+  /** Router handling authentication */
+  authRouter: IRouter;
+}
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;
 
@@ -11,17 +17,17 @@ export class V1Router implements IRouter {
    */
   router = express.Router();
 
-  private constructor() {
-    // * Private constructor
+  private constructor(authRouter: IRouter) {
+    this.router.use("/auth", authRouter.router);
   }
 
   /**
    * Creates version one router instance
    */
 
-  static factory() {
+  static factory({ authRouter }: V1RouterDependencies) {
     if (!V1Router.instance) {
-      V1Router.instance = new V1Router();
+      V1Router.instance = new V1Router(authRouter);
     }
 
     return V1Router.instance;
@@ -31,5 +37,5 @@ export class V1Router implements IRouter {
 /** The Version one router instance */
 export const v1Router = SkynedRegistry.getSingleton(
   RegistryKeysEnum.V1_ROUTER,
-  () => V1Router.factory(),
+  () => V1Router.factory({ authRouter }),
 );

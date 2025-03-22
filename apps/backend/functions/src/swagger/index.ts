@@ -44,7 +44,12 @@ const definition: swaggerJsDoc.Options["swaggerDefinition"] = {
   ],
 
   /** Tags for grouping documentation */
-  tags: [],
+  tags: [
+    {
+      name: "Auth",
+      description: "Routes handling authentication for users",
+    },
+  ],
 };
 
 export default definition;

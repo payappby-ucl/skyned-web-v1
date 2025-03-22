@@ -2,6 +2,11 @@ import { SendMailOptions } from "nodemailer";
 
 /** Template for sending email */
 export interface IEmailTemplate {
+  /** Account sending the mail */
+  from: {
+    email: string;
+    name?: string;
+  };
   /** Who the email is sent to */
   to: string[];
   /** The subject of the email */
