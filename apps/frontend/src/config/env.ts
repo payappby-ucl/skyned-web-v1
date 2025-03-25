@@ -14,4 +14,27 @@ export const env = {
   server: {
     baseUrl: process.env.API_URL as string,
   },
+  socials: {
+    twitter: {
+      handle: process.env.NEXT_PUBLIC_TWITTER_HANDLE as string,
+      id: process.env.NEXT_PUBLIC_TWITTER_ID as string,
+    },
+    instagram: {
+      handle: process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE as string,
+    },
+    tiktok: {
+      handle: process.env.NEXT_PUBLIC_TIKTOK_HANDLE as string,
+    },
+    facebook: {
+      handle: process.env.NEXT_PUBLIC_FACEBOOK_HANDLE as string,
+    },
+    linkedin: {
+      handle: process.env.NEXT_PUBLIC_LINKEDIN_HANDLE as string,
+    },
+  },
+  seo: {
+    googleTagManagerId: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID,
+    googleSiteVerificationId:
+      process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_SITE_ID,
+  },
 };
