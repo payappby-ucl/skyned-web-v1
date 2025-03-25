@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "defaultProject": "@skyned/frontend",
+  "defaultProject": "$PROJECT_NAME",
   "targetDefaults": {
     "build": {
       "executor": "nx:run-commands",
