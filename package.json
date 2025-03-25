@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm --filter $PROJECT_NAME build",
-    "start": "pnpm --filter $PROJECT_NAME start"
+    "start": "pnpm --filter $PROJECT_NAME start",
+    "nx:show": "nx show projects"
   },
   "keywords": [],
   "author": "",
@@ -13,9 +14,7 @@
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
-    "nx": "20.3.2",
     "prettier": "^3.5.1",
-    "turbo": "^2.4.2",
     "typescript": "5.7.3"
   },
   "packageManager": "pnpm@10.6.5",
