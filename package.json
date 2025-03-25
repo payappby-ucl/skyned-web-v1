@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "pnpm --filter $PROJECT_NAME build",
-    "start": "pnpm --filter $PROJECT_NAME start",
-    "nx:show": "nx show projects"
+    "start": "pnpm --filter $PROJECT_NAME start"
   },
+  "nx": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
