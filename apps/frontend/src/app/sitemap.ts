@@ -5,8 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: env.client.baseUrl,
-      lastModified: new Date("25/03/2025"),
-      changeFrequency: "yearly",
+      lastModified: new Date("2025-03-25"),
+      changeFrequency: "daily",
       priority: 1,
     },
   ];
