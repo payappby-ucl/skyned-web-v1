@@ -10,6 +10,7 @@ import { ThemeProviders } from "../components/providers/theme-provider";
 import { sharedMetadata } from "../utils";
 import { env } from "../config";
 import Script from "next/script";
+import Footer from "../components/footer/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -50,34 +51,31 @@ const baseJSONLD: Graph = {
   "@graph": [
     {
       "@type": "Organization",
-      name: "Skyned Consults Corporation",
+      name: env.organization.name,
       url: env.client.baseUrl,
       logo: `${env.client.baseUrl}/assets/images/brand/logo.png`,
       description:
         "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
-      email: "secretariat(at)google.org",
+      email: env.organization.email,
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Ontario",
-        addressRegion: "CA",
-        postalCode: "N2M 0B5",
-        streetAddress: "403 Westwood Drive, Kitchener",
+        addressLocality: env.organization.addressLocality,
+        addressRegion: env.organization.addressRegion,
+        postalCode: env.organization.postalCode,
+        streetAddress: env.organization.streetAddress,
       },
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+1 (226) 773 3101",
+        telephone: env.organization.telephone,
         contactType: "Customer Support",
         availableLanguage: "English",
-        email: "",
+        email: env.organization.email,
         hoursAvailable: {
           "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "17:00",
+          ...env.organization.hoursAvailable,
         },
       },
-      keywords:
-        "Skyned Consults, Skyned educational consults, Study Abroad Consultants, Study Visa Assistance, Study in Canada, Study in the UK, Study in Australia, Study in the USA, International Student Services, Study Abroad, Student Visa, Student Visa Consultants, Education Consultancy Services, University Admission Assistance, Scholarships for International Students, Study and Work Abroad",
+      keywords: env.organization.keywords,
       sameAs: [
         env.socials.facebook.handle,
         env.socials.instagram.handle,
@@ -88,7 +86,7 @@ const baseJSONLD: Graph = {
     },
     {
       "@type": "WebSite",
-      name: "Skyned Consults Corporation",
+      name: env.organization.name,
       url: env.client.baseUrl,
       // potentialAction: {
       //   "@type": "SearchAction",
@@ -113,7 +111,8 @@ export default function RootLayout({
         <ThemeProviders>
           <AuthProvider>
             <Nav />
-            {children}
+            <main>{children}</main>
+            <Footer />
           </AuthProvider>
           <Toaster richColors closeButton />
         </ThemeProviders>

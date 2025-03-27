@@ -1,5 +1,31 @@
+import { DayOfWeek } from "schema-dts";
+
 export const env = {
   appEnv: process.env.NEXT_PUBLIC_APP_ENV as string,
+  organization: {
+    name: "Skyned Consults Corporation",
+    email: "info@skynedconsults.com",
+    telephone: "+1 (226) 773 3101",
+    addressLocality: "Ontario",
+    addressRegion: "CA",
+    postalCode: "N2M 0B5",
+    streetAddress: "403 Westwood Drive, Kitchener",
+    keywords:
+      "Skyned Consults, Skyned educational consults, Study Abroad Consultants, Study Visa Assistance, Study in Canada, Study in the UK, Study in Australia, Study in the USA, International Student Services, Study Abroad, Student Visa, Student Visa Consultants, Education Consultancy Services, University Admission Assistance, Scholarships for International Students, Study and Work Abroad",
+    description:
+      "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
+    hoursAvailable: {
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+      ] as DayOfWeek[],
+      opens: "09:00",
+      closes: "17:00",
+    },
+  },
   client: {
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL as string,
     firebaseConfig: {

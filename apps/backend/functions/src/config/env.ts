@@ -16,11 +16,13 @@ export const env = {
   },
   /** Emails used for sending */
   emails: {
-    test: "test@skynedconsults.com",
-    admin: "admin@skynedconsults.com",
-    support: "support@skynedconsults.com",
+    test: "tobi@skynedconsults.com",
+    account: "account@skynedconsults.com",
     admissions: "admissions@skynedconsults.com",
-    notifications: "notifications@skynedconsults.com",
-    noreply: "noreply@skynedconsults.com",
+    info: "info@skynedconsults.com",
+    application: "applications@skynedconsults.com",
+    marketing: "marketing@skynedconsults.com",
+    noreply: "no-reply@skynedconsults.com",
+    complaints: "complaints@skynedconsults.com",
   },
 };

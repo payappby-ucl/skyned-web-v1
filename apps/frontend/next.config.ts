@@ -4,7 +4,7 @@ import { env } from "./src/config";
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   images: {
-    domains: [env.client.baseUrl],
+    domains: [env.client.baseUrl, "firebasestorage.googleapis.com"],
   },
 };
 

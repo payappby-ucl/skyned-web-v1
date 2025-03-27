@@ -13,7 +13,7 @@ class ServerHttpClient extends http_1.HTTPClient {
         if (cookieStore.has(this.tokenCookieName)) {
             const tokenCookie = cookieStore.get(this.tokenCookieName);
             if (tokenCookie) {
-                headers.append("authorization", tokenCookie.value);
+                headers.append("authorization", `bearer ${tokenCookie.value}`);
             }
         }
     };

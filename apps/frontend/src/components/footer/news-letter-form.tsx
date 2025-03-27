@@ -1,0 +1,62 @@
+"use client";
+
+import { useForm, zodResolver } from "@workspace/ui/lib/utils";
+import React, { useCallback } from "react";
+import { NewsLetterFormSchema } from "./schema";
+import { brandClientApi } from "@/src/lib/client";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  Form,
+} from "@workspace/ui/components/form";
+import { Input } from "@workspace/ui/components/input";
+import { Button } from "@workspace/ui/components/button";
+
+const NewsLetterForm: React.FC = () => {
+  const form = useForm<NewsLetterFormSchema>({
+    resolver: zodResolver(NewsLetterFormSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit = useCallback(async (values: NewsLetterFormSchema) => {
+    try {
+    } catch (error) {
+      brandClientApi.utils.alertError(error);
+    }
+  }, []);
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-background dark:bg-foreground flex items-center gap-2 self-center rounded-md p-2 lg:col-start-3"
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="flex-1 border-0 shadow-none">
+              <FormControl>
+                <Input
+                  onChange={field.onChange}
+                  value={field.value}
+                  aria-label="Email Address"
+                  className="text-foreground dark:text-background border-0 shadow-none"
+                  placeholder="Email Address"
+                />
+              </FormControl>
+              <FormMessage className="text-xs" />
+            </FormItem>
+          )}
+        />
+
+        <Button variant="brand">Subscribe</Button>
+      </form>
+    </Form>
+  );
+};
+export default NewsLetterForm;

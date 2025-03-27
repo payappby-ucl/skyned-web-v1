@@ -3,26 +3,9 @@ import { env } from "../config";
 
 export const sharedMetadata: Metadata = {
   generator: "Next.js",
-  applicationName: "Skyned Consults",
+  applicationName: env.organization.name,
   referrer: "strict-origin-when-cross-origin",
-  keywords: [
-    "Skyned Consults",
-    "Skyned educational consults",
-    "Study Abroad Consultants",
-    "Study Visa Assistance",
-    "Study in Canada",
-    "Study in the UK",
-    "Study in Australia",
-    "Study in the USA",
-    "International Student Services",
-    "Study Abroad",
-    "Student Visa",
-    " Student Visa Consultants",
-    "Education Consultancy Services",
-    "University Admission Assistance",
-    "Scholarships for International Students",
-    "Study and Work Abroad",
-  ],
+  keywords: env.organization.keywords.split(","),
   formatDetection: {
     email: false,
     address: false,
@@ -30,11 +13,10 @@ export const sharedMetadata: Metadata = {
   },
   metadataBase: new URL(env.client.baseUrl),
   openGraph: {
-    title: "Skyned Consults",
-    description:
-      "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
+    title: env.organization.name,
+    description: env.organization.description,
     url: env.client.baseUrl,
-    siteName: "Skyned Consults",
+    siteName: env.organization.name,
     locale: "en_US",
     type: "website",
     images: [
@@ -42,22 +24,21 @@ export const sharedMetadata: Metadata = {
         url: `${env.client.baseUrl}/assets/images/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Skyned Consults - International Study Application Support",
+        alt: `${env.organization.name} - International Study Application Support`,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Skyned Consults",
-    description:
-      "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
+    title: env.organization.name,
+    description: env.organization.description,
     siteId: env.socials.twitter.id,
     creator: env.socials.twitter.handle,
     creatorId: env.socials.twitter.id,
     site: env.socials.twitter.handle,
     images: {
       url: `${env.client.baseUrl}/assets/images/opengraph-image.png`,
-      alt: "Skyned Consults Logo",
+      alt: `${env.organization.name} Logo`,
     },
   },
   robots: {
@@ -98,7 +79,7 @@ export const sharedMetadata: Metadata = {
   },
   verification: {
     google: env.seo.googleSiteVerificationId,
-    me: ["info@skynedconsults.com"],
+    me: [env.organization.email],
   },
   category: "Educational",
 };
