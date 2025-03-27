@@ -220,3 +220,7 @@ a,
 input {
   font-family: var(--font-manrope);
 }
+
+main section {
+  @apply p-20;
+}

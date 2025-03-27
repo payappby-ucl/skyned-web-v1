@@ -48,7 +48,7 @@ const HeroSearch: React.FC = () => {
                       onChange={field.onChange}
                       value={field.value}
                       aria-label="What would you like to study?"
-                      className="placeholder:text-brand-50/65 w-full border-0"
+                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent focus:!ring-0"
                     />
                   </FormControl>
                 </FormItem>
@@ -66,7 +66,7 @@ const HeroSearch: React.FC = () => {
                       onChange={field.onChange}
                       value={field.value}
                       aria-label="Where would you like to study?"
-                      className="placeholder:text-brand-50/65 w-full border-0"
+                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent focus:!ring-0"
                     />
                   </FormControl>
                 </FormItem>

@@ -1,10 +1,35 @@
-import { env } from "./src/config";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   images: {
-    domains: [env.client.baseUrl, "firebasestorage.googleapis.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cibc.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.mpowerfinancing.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.passage.com",
+        pathname: "**",
+      },
+      // TODO: Remove when dynamic images are fetched
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+        pathname: "**",
+      },
+    ],
   },
 };
 

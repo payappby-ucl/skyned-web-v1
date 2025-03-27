@@ -4,7 +4,7 @@ import HeroSearch from "./search";
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="text-background dark:text-foreground flex min-h-[calc(100vh-61.0938px)] flex-col items-center justify-center bg-gradient-to-b from-[#3477FE] via-[#013191] to-[#002369]">
+    <section className="text-background dark:text-foreground flex min-h-[calc(100vh-61.0938px)] flex-col items-center justify-center bg-gradient-to-b from-[#3477FE] via-[#013191] to-[#002369]">
       <div className="container mx-auto flex flex-col items-center gap-10">
         <div>
           <p className="bg-brand-50/10 mx-auto flex w-fit items-center gap-2 rounded-md p-1 text-xs">
@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
         </p>
         <HeroSearch />
       </div>
-    </div>
+    </section>
   );
 };
 export default HeroSection;

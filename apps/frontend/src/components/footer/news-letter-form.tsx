@@ -45,7 +45,7 @@ const NewsLetterForm: React.FC = () => {
                   onChange={field.onChange}
                   value={field.value}
                   aria-label="Email Address"
-                  className="text-foreground dark:text-background border-0 shadow-none"
+                  className="text-foreground dark:text-background border-0 !bg-transparent shadow-none focus:!ring-0"
                   placeholder="Email Address"
                 />
               </FormControl>

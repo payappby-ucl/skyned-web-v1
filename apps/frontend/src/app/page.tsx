@@ -2,6 +2,12 @@ import { WithContext, WebPage } from "schema-dts";
 import { env } from "../config";
 import Script from "next/script";
 import HeroSection from "./_components/hero";
+import Partners from "./_components/partners";
+import CountryOfChoice from "./_components/country";
+import Personality from "./_components/personality";
+import Products from "./_components/products";
+import BlogPosts from "./_components/blog";
+import Testimonials from "./_components/testimonials";
 
 const homePageJsonLd: WithContext<WebPage> = {
   "@context": "https://schema.org",
@@ -29,14 +35,19 @@ const homePageJsonLd: WithContext<WebPage> = {
 
 export default async function Home() {
   return (
-    <section>
+    <div>
       <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
       />
 
       <HeroSection />
-      <div className="h-20"></div>
-    </section>
+      <Partners />
+      <CountryOfChoice />
+      <Personality />
+      <Products />
+      <BlogPosts />
+      <Testimonials />
+    </div>
   );
 }
