@@ -40,9 +40,9 @@ const testimonials = [
 const Testimonials: React.FC = () => {
   return (
     <section className="bg-foreground text-background space-y-5">
-      <div className="flex items-center justify-between">
-        <h2 className="flex-1">Our clients testimonials</h2>
-        <p className="flex-1">
+      <div className="space-y-2 text-center md:flex md:items-center md:justify-between md:space-y-0 md:text-left">
+        <h2 className="md:flex-1">Our clients testimonials</h2>
+        <p className="md:flex-1">
           Lorem ipsum dolor sit amet consectetur. Ornare lacus quis tempus massa
           dignissim quisque. Sagittis fusce vestibu.
         </p>
@@ -54,11 +54,11 @@ const Testimonials: React.FC = () => {
               ({ comment, firstName, lastName, imageUrl, title }, i) => (
                 <CarouselItem
                   key={`${firstName}${lastName}_${i}_comment`}
-                  className="basis-2/3"
+                  className="md:basis-2/3"
                 >
                   <Card className="bg-foreground border-brand-50/20">
                     <CardContent>
-                      <div className="text-background grid grid-cols-2 gap-4">
+                      <div className="text-background grid grid-cols-1 gap-4 md:grid-cols-2">
                         <Image
                           src={imageUrl}
                           alt={`${firstName}${lastName}'s image'`}
@@ -66,7 +66,7 @@ const Testimonials: React.FC = () => {
                           height={80}
                           className="h-[250px] w-full rounded-md object-cover"
                         />
-                        <div className="flex flex-col justify-between">
+                        <div className="flex flex-col justify-between space-y-4 md:space-y-0">
                           <p className="text-lg">{comment}</p>
                           <div>
                             <p className="text-sm font-bold">
