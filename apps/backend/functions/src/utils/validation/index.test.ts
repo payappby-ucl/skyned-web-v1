@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
+import { CommonSchema } from "@workspace/shared";
 import { ValidationUtility, validationUtility } from ".";
 import { Exception } from "../../lib";
 
@@ -11,30 +12,50 @@ describe("ValidationUtility", () => {
   });
 
   describe("Methods", () => {
-    describe("validateEmail", () => {
-      test("should throw Exception if no email is inputted", () => {
+    describe("validateInput", () => {
+      const schema = CommonSchema.pick({ email: true });
+
+      test("should throw Exception if invalid input is passed", () => {
         expect(() => {
-          validationUtility.validateEmail({ email: "" });
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "",
+            },
+          });
         }).toThrow(Exception);
       });
 
       test("should throw error if an invalid email is inputted", () => {
         expect(() => {
-          validationUtility.validateEmail({ email: "bobslegend795" });
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend795",
+            },
+          });
         }).toThrow(Exception);
       });
 
       test(`should throw exception with status code ${StatusCodes.INTERNAL_SERVER_ERROR} when no errorType or 'server' errorType is passed`, () => {
         try {
-          validationUtility.validateEmail({ email: "bobslegend795" });
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend795",
+            },
+          });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
         }
 
         try {
-          validationUtility.validateEmail({
-            email: "bobslegend79",
-            errorType: "server",
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend79",
+              errorType: "server",
+            },
           });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
@@ -43,9 +64,12 @@ describe("ValidationUtility", () => {
 
       test(`should throw exception with status code ${StatusCodes.BAD_REQUEST} when 'client' errorType is passed`, () => {
         try {
-          validationUtility.validateEmail({
-            email: "bobslegend795",
-            errorType: "client",
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend795",
+              errorType: "client",
+            },
           });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.BAD_REQUEST);
@@ -54,10 +78,13 @@ describe("ValidationUtility", () => {
 
       test("should throw exception with with custom error message", () => {
         try {
-          validationUtility.validateEmail({
-            email: "bobslegend795",
-            errorType: "client",
-            message: "Invalid Input",
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend795",
+              errorType: "client",
+              message: "Invalid Input",
+            },
           });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.BAD_REQUEST);
@@ -66,23 +93,23 @@ describe("ValidationUtility", () => {
       });
 
       test("should pass", () => {
+        const { email } = validationUtility.validateInput({
+          schema,
+          inputData: {
+            email: "Bobslegend795@gmail.com",
+          },
+        });
+
+        expect(email).toBe("bobslegend795@gmail.com");
+
         expect(() => {
-          validationUtility.validateEmail({ email: "bobslegend795@gmail.com" });
+          validationUtility.validateInput({
+            schema,
+            inputData: {
+              email: "bobslegend795@gmail.com",
+            },
+          });
         }).not.toThrow();
-      });
-    });
-
-    describe("validateTokenId", () => {
-      test("should throw Exception if tokenId is falsy", () => {
-        expect(() => {
-          validationUtility.validateTokenId("");
-        }).toThrow(Exception);
-      });
-
-      test("should throw error if tokenId is not a string", () => {
-        expect(() => {
-          validationUtility.validateTokenId({} as unknown as string);
-        }).toThrow(Exception);
       });
     });
   });

@@ -1,13 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterSchema = void 0;
-const zod_1 = require("zod");
+const common_1 = require("./common");
 /** Schema for user registration */
-exports.RegisterSchema = zod_1.z.object({
-    email: zod_1.z
-        .string()
-        .trim()
-        .toLowerCase()
-        .email("Enter a valid email address")
-        .nonempty("Required"),
+exports.RegisterSchema = common_1.CommonSchema.pick({
+    email: true,
 });

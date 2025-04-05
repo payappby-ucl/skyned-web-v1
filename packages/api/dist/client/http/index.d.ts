@@ -6,4 +6,5 @@ export declare class ClientHttp extends HTTPClient implements IHTTPClient {
     constructor(auth: IBrandClientApi["auth"], environment?: string | undefined);
     setAuthHeader: IHTTPClient["setAuthHeader"];
     clearTokenCookie: IHTTPClient["clearTokenCookie"];
+    setTokenCookie: IHTTPClient["setTokenCookie"];
 }

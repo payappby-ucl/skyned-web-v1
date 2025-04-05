@@ -8,7 +8,7 @@ interface Props {
 
 const VerifyEmail: React.FC<Props> = ({ tokenId }) => {
   return (
-    <Layout title="Verify Email">
+    <Layout title="Verify Email" preview="Verify your email address">
       <Container>
         <Section>
           <Text className="text-xl font-bold"> Hi, </Text>

@@ -24,7 +24,7 @@ class HTTPClient {
     }
     async request(url, method, options) {
         try {
-            const headers = new Headers();
+            const headers = new Headers(options?.headers);
             this.setAuthHeader(headers);
             if (!["GET", "DELETE"].includes(method)) {
                 headers.append("Content-Type", "application/json");

@@ -1,47 +1,61 @@
+import {
+  Body,
+  Container,
+  Head,
+  Html,
+  Preview,
+  Section,
+  Tailwind,
+} from "@react-email/components";
 import React, { PropsWithChildren } from "react";
-import { Html, Head, Tailwind, Font } from "@react-email/components";
+import { Footer } from "./footer";
+import { Header } from "./header";
 
-/** All properties needed to display template */
+/** Represents Props needed to properly display the Layout component */
 interface Props {
-  /** Document title */
+  /** Page Title */
   title: string;
+
+  /** Email preview text */
+  preview: string;
 }
 
-/**
- * The email template layout
- *
- * @param {Props} props - React properties
- * @returns React Component
- */
+/** Style for the Container component */
+const container = {
+  border: "1px solid #e2e8f0",
+};
 
-const Layout: React.FC<PropsWithChildren<Props>> = ({ children, title }) => {
+/** Layout Component */
+
+const Layout: React.FC<PropsWithChildren<Props>> = ({
+  title,
+  preview,
+  children,
+}) => {
   return (
-    <Html lang="en">
+    <Html lang="en" dir="ltr">
       <Head>
         <title>{title}</title>
-        <Font
-          fontFamily="Roboto"
-          fallbackFontFamily="Verdana"
-          webFont={{
-            url: "https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2",
-            format: "woff2",
-          }}
-          fontWeight={400}
-          fontStyle="normal"
-        />
       </Head>
+      <Preview>{preview}</Preview>
       <Tailwind
         config={{
           theme: {
             extend: {
               colors: {
-                brand: "#007291",
+                brand: "#002369",
               },
             },
           },
         }}
       >
-        {children}
+        <Body className="bg-white text-[#020618] font-sans">
+          <Container className="rounded-md" style={container}>
+            <Header />
+            <Section className="px-4">{children}</Section>
+            <Footer />
+          </Container>
+        </Body>
       </Tailwind>
     </Html>
   );

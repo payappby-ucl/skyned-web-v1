@@ -7,6 +7,8 @@ import SkynedRegistry from "../../registry";
 import { SkynedUtils, validationUtility } from "../../utils";
 import { IEmail, IValidationUtility } from "../../interfaces";
 import { env } from "../../config";
+import { CommonSchema } from "@workspace/shared";
+import { emailTemplateSchema } from "./schema";
 
 /** Dependencies needed to create email infrastructure instance */
 export interface EmailDependencies {
@@ -36,10 +38,13 @@ class Email implements IEmail {
   }
 
   private createTransporter(sendingEmail: string) {
-    this.validationUtility.validateEmail({
-      email: sendingEmail,
-      message:
-        "Sending email is undefined or not valid for creating transporter",
+    const { email } = this.validationUtility.validateInput({
+      schema: CommonSchema.pick({ email: true }),
+      inputData: {
+        email: sendingEmail,
+        message:
+          "Sending email is undefined or not valid for creating transporter",
+      },
     });
 
     return nodemailer.createTransport({
@@ -48,7 +53,7 @@ class Email implements IEmail {
       secure: true,
       auth: {
         type: "OAuth2",
-        user: sendingEmail,
+        user: email,
         serviceClient: key.client_id,
         privateKey: key.private_key,
       },
@@ -60,12 +65,11 @@ class Email implements IEmail {
    */
 
   send: IEmail["send"] = async (data) => {
-    if (!data || !Object.keys(data).length) {
-      throw SkynedUtils.createException(
-        StatusCodes.INTERNAL_SERVER_ERROR,
-        "Invalid data format for sending email",
-      );
-    }
+    data = this.validationUtility.validateInput({
+      schema: emailTemplateSchema,
+      inputData: data,
+      message: "Invalid data format for sending email",
+    });
 
     const senderEmail = env.environment ? env.emails.test : data.from.email;
     const sender = env.environment

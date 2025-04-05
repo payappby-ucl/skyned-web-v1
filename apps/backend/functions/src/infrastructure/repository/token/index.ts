@@ -2,8 +2,10 @@ import { StatusCodes } from "http-status-codes";
 import { IRepository, IValidationUtility } from "../../../interfaces";
 import { SkynedUtils } from "../../../utils";
 import { ITokenRepository } from "./interface";
+import { tokenSchema } from "./schema";
 
 export * from "./interface";
+export * from "./schema";
 
 /**
  * Concrete implementation of ITokenRepository
@@ -20,6 +22,13 @@ export class TokenRepository implements ITokenRepository {
   /** Create a token in the database */
 
   create: ITokenRepository["create"] = async (data) => {
+    data = this.validationUtility.validateInput({
+      schema: tokenSchema.omit({
+        tokenId: true,
+      }),
+      inputData: data,
+    });
+
     const token = await this.db.token.create({
       data,
     });
@@ -32,10 +41,16 @@ export class TokenRepository implements ITokenRepository {
   findTokenByTokenId: ITokenRepository["findTokenByTokenId"] = async (
     tokenId,
   ) => {
-    this.validationUtility.validateTokenId(tokenId);
+    const data = this.validationUtility.validateInput({
+      schema: tokenSchema.pick({
+        tokenId: true,
+      }),
+      inputData: { tokenId },
+    });
+
     const token = await this.db.token.findUnique({
       where: {
-        tokenId,
+        tokenId: data.tokenId,
       },
     });
 
@@ -45,9 +60,14 @@ export class TokenRepository implements ITokenRepository {
   /** deletes a token */
 
   delete: ITokenRepository["delete"] = async (tokenId) => {
-    this.validationUtility.validateTokenId(tokenId);
+    const data = this.validationUtility.validateInput({
+      schema: tokenSchema.pick({
+        tokenId: true,
+      }),
+      inputData: { tokenId },
+    });
 
-    const token = await this.findTokenByTokenId(tokenId);
+    const token = await this.findTokenByTokenId(data.tokenId);
     if (!token) {
       throw SkynedUtils.createException(
         StatusCodes.INTERNAL_SERVER_ERROR,

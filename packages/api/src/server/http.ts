@@ -25,4 +25,12 @@ export class ServerHttpClient extends HTTPClient implements IHTTPClient {
       cookieStore.delete(this.tokenCookieName);
     }
   };
+
+  setTokenCookie: IHTTPClient["setTokenCookie"] = async (token) => {
+    const cookieStore = await this.cookies();
+    cookieStore.set(this.tokenCookieName, token, {
+      httpOnly: true,
+      secure: true,
+    });
+  };
 }

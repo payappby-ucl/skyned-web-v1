@@ -18,10 +18,7 @@ class ClientHttp extends http_1.HTTPClient {
     setAuthHeader = async (header) => {
         const token = await this.auth.getIdToken();
         if (token) {
-            js_cookie_1.default.set(this.tokenCookieName, token, {
-                secure: this.environment === "development" ? false : true,
-                httpOnly: true,
-            });
+            await this.setTokenCookie(token);
             header.append("authorization", `bearer ${token}`);
         }
     };
@@ -29,6 +26,12 @@ class ClientHttp extends http_1.HTTPClient {
         if (js_cookie_1.default.get(this.tokenCookieName)) {
             js_cookie_1.default.remove(this.tokenCookieName);
         }
+    };
+    setTokenCookie = async (token) => {
+        js_cookie_1.default.set(this.tokenCookieName, token, {
+            secure: this.environment === "development" ? false : true,
+            httpOnly: true,
+        });
     };
 }
 exports.ClientHttp = ClientHttp;

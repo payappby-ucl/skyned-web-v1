@@ -17,6 +17,10 @@ export enum RegistryKeysEnum {
   AUTH = "Auth",
   /** Database */
   REPOSITORY = "Repository",
+  /** Marketing */
+  MARKETING = "Marketing",
+  /** Events Emitter */
+  EVENTS = "EVENTS",
 
   //* Middlewares
   /** Request validation middleware */

@@ -22,6 +22,17 @@ describe("TokenRepository", () => {
     let tokenId: string;
 
     describe("create", () => {
+      test("should throw error if input is invalid", async () => {
+        try {
+          await repository.token.create({
+            ...tokenData,
+            type: "Hello" as any,
+          });
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
       test("should create a token", async () => {
         const token = await repository.token.create(tokenData);
         tokenId = token.tokenId;

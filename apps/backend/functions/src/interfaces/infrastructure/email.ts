@@ -1,5 +1,3 @@
-import { SendMailOptions } from "nodemailer";
-
 /** Template for sending email */
 export interface IEmailTemplate {
   /** Account sending the mail */
@@ -14,7 +12,16 @@ export interface IEmailTemplate {
   /** The email content */
   html: string;
   /** Any attachments */
-  attachments?: SendMailOptions["attachments"];
+  attachments?: {
+    /** File name including file extension eg (invoice.pdf) */
+    filename: string;
+    /** Base64 string */
+    content: string;
+    /** Content type should always be "text/plain" */
+    contentType: "text/plain";
+    /** Encoding should always be base64 */
+    encoding: "base64";
+  }[];
 }
 
 /** Email infrastructure interface */

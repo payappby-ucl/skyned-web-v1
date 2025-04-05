@@ -7,6 +7,7 @@ abstract class HTTPClient implements IHTTPClient {
 
   abstract setAuthHeader: IHTTPClient["setAuthHeader"];
   abstract clearTokenCookie: IHTTPClient["clearTokenCookie"];
+  abstract setTokenCookie: IHTTPClient["setTokenCookie"];
 
   async request<T>(
     url: string,
@@ -14,7 +15,7 @@ abstract class HTTPClient implements IHTTPClient {
     options?: RequestInit,
   ): Promise<ISuccessResponse<T>> {
     try {
-      const headers = new Headers();
+      const headers = new Headers(options?.headers);
       this.setAuthHeader(headers);
       if (!["GET", "DELETE"].includes(method)) {
         headers.append("Content-Type", "application/json");

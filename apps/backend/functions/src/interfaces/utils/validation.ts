@@ -1,9 +1,12 @@
+import { ZodType } from "zod";
+
+/** Represents Validation utility */
 export interface IValidationUtility {
-  validateEmail(data: {
-    email: string;
+  /** Validates an input */
+  validateInput<T>(data: {
+    schema: ZodType;
+    inputData: T;
     errorType?: "server" | "client";
     message?: string;
-  }): void;
-
-  validateTokenId(tokenId: string): void;
+  }): T;
 }

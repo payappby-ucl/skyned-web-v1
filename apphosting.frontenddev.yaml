@@ -94,7 +94,7 @@ env:
 
   # * TAGS AND VERIFICATION
   - variable: NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
-    value: GTM-PXR54N7B
+    value: GTM-N4TF5DKC
     availability:
       - BUILD
       - RUNTIME

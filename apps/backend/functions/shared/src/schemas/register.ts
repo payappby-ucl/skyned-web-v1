@@ -1,13 +1,9 @@
 import { z } from "zod";
+import { CommonSchema } from "./common";
 
 /** Schema for user registration */
-export const RegisterSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .email("Enter a valid email address")
-    .nonempty("Required"),
+export const RegisterSchema = CommonSchema.pick({
+  email: true,
 });
 
 /** Schema type */

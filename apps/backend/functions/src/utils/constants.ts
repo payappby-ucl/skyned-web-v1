@@ -8,3 +8,9 @@ export const PROHIBITED_USER_EMAIL_DOMAINS = [
 
 /** Allowed time in minute, a generated token should be valid */
 export const TOKEN_EXPIRY_IN_MINUTE = 10; // 10 Minute
+
+/** Default rate limit time in minute */
+export const DEFAULT_RATE_LIMIT_MINUTE = 15;
+
+/** Default requests per default rate limit minute */
+export const REQUESTS_PER_DEFAULT_RATE_LIMIT_MINUTE = 5;

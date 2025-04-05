@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import { TokenService, tokenService } from ".";
 import { repository } from "../../../infrastructure";
 import { IToken } from "../../../interfaces";
@@ -66,6 +67,17 @@ describe("TokenService", () => {
     });
 
     describe("createToken", () => {
+      test("should throw error if input is invalid", async () => {
+        try {
+          await tokenService.createToken({
+            ...tokenData,
+            type: "Hello" as any,
+          });
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
       test("should create a token", async () => {
         const spy = jest
           .spyOn(repository.token, "create")
@@ -81,6 +93,22 @@ describe("TokenService", () => {
     });
 
     describe("findTokenByTokenId", () => {
+      test("should throw error if token id is falsy", async () => {
+        try {
+          await tokenService.findTokenByTokenId("");
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should throw error if token id is not a string", async () => {
+        try {
+          await tokenService.findTokenByTokenId({} as string);
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
       test("should find the token", async () => {
         const spy = jest
           .spyOn(repository.token, "findTokenByTokenId")

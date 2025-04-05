@@ -13,7 +13,7 @@ import {
   validationUtility,
 } from "../../../utils";
 import { StatusCodes } from "http-status-codes";
-import { repository } from "../../../infrastructure";
+import { repository, tokenSchema } from "../../../infrastructure";
 
 export interface TokenServiceDependencies {
   repository: IRepository;
@@ -80,19 +80,34 @@ export class TokenService implements ITokenService {
   }
 
   createToken: ITokenService["createToken"] = async (data) => {
+    data = this.validationUtility.validateInput({
+      schema: tokenSchema.omit({ tokenId: true }),
+      inputData: data,
+    });
     const token = await this.repository.token.create(data);
     return token;
   };
 
   findTokenByTokenId: ITokenService["findTokenByTokenId"] = async (tokenId) => {
-    this.validationUtility.validateTokenId(tokenId);
-    const token = await this.repository.token.findTokenByTokenId(tokenId);
+    const data = this.validationUtility.validateInput({
+      schema: tokenSchema.pick({
+        tokenId: true,
+      }),
+      inputData: { tokenId },
+    });
+    const token = await this.repository.token.findTokenByTokenId(data.tokenId);
     return token;
   };
 
   delete: ITokenService["delete"] = async (tokenId) => {
-    this.validationUtility.validateTokenId(tokenId);
-    const token = await this.repository.token.findTokenByTokenId(tokenId);
+    const data = this.validationUtility.validateInput({
+      schema: tokenSchema.pick({
+        tokenId: true,
+      }),
+      inputData: { tokenId },
+    });
+
+    const token = await this.repository.token.findTokenByTokenId(data.tokenId);
     if (!token) {
       throw SkynedUtils.createException(
         StatusCodes.INTERNAL_SERVER_ERROR,

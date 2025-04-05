@@ -5,4 +5,5 @@ export declare class ServerHttpClient extends HTTPClient implements IHTTPClient 
     constructor(cookies: CookieType, serverBaseUrl: string);
     setAuthHeader: IHTTPClient["setAuthHeader"];
     clearTokenCookie: IHTTPClient["clearTokenCookie"];
+    setTokenCookie: IHTTPClient["setTokenCookie"];
 }
