@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope, Poppins } from "next/font/google";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { Graph } from "schema-dts";
 import "@workspace/ui/globals.css";
 import { AuthProvider } from "@/src/components/providers/auth-provider";
@@ -11,6 +10,9 @@ import { sharedMetadata } from "../utils";
 import { env } from "../config";
 import Script from "next/script";
 import Footer from "../components/footer/footer";
+import { CookieContextProvider } from "../components/providers/cookie-consent";
+import Analytics from "./_components/analytics";
+import CookieBanner from "./_components/cookie/cookie-banner";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -104,19 +106,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {env.seo.googleTagManagerId ? (
-        <GoogleTagManager gtmId={env.seo.googleTagManagerId} />
-      ) : null}
-      <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
-        <ThemeProviders>
-          <AuthProvider>
-            <Nav />
-            <main>{children}</main>
-            <Footer />
-          </AuthProvider>
-          <Toaster richColors closeButton />
-        </ThemeProviders>
-      </body>
+      <CookieContextProvider>
+        <Analytics />
+        <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
+          <ThemeProviders>
+            <AuthProvider>
+              <Nav />
+              <main>{children}</main>
+              <Footer />
+            </AuthProvider>
+            <Toaster richColors closeButton />
+            <CookieBanner />
+          </ThemeProviders>
+        </body>
+      </CookieContextProvider>
 
       {/* JSON-LD */}
       <Script
