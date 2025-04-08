@@ -36,7 +36,7 @@ const BlogPost: React.FC<Props> = ({
         alt={`${title} blog post image`}
         width={100}
         height={80}
-        className="w-full rounded-md"
+        className="w-full rounded-t-md"
       />
       <div className="bg-background space-y-2 rounded-b-lg p-4">
         <h3 className="mt-2 !text-lg">{title}</h3>

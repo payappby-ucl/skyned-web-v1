@@ -34,13 +34,13 @@ export const metadata: Metadata = {
   },
   description:
     "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
-  alternates: {
-    canonical: "/",
-    // languages: {
-    //   "en-US": "/en-US",
-    //   "de-DE": "/de-DE",
-    // },
-  },
+  // alternates: {
+  //   canonical: "/",
+  // languages: {
+  //   "en-US": "/en-US",
+  //   "de-DE": "/de-DE",
+  // },
+  // },
 
   // authors: [{ name: "Seb" }, { name: "Josh", url: "https://nextjs.org" }],
   // creator: "Jiachi Liu",

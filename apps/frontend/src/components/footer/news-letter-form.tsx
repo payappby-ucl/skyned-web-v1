@@ -33,7 +33,7 @@ const NewsLetterForm: React.FC = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-background dark:bg-foreground flex items-center gap-2 self-center rounded-md p-2 lg:col-start-3"
+        className="bg-background dark:bg-foreground border-brand/10 flex items-center gap-2 self-center rounded-full border p-1 lg:col-start-3"
       >
         <FormField
           control={form.control}
@@ -54,7 +54,9 @@ const NewsLetterForm: React.FC = () => {
           )}
         />
 
-        <Button variant="brand">Subscribe</Button>
+        <Button variant="brand" className="rounded-full">
+          Subscribe
+        </Button>
       </form>
     </Form>
   );

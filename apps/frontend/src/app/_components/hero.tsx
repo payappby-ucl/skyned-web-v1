@@ -5,18 +5,13 @@ import HeroSearch from "./search";
 const HeroSection: React.FC = () => {
   return (
     <section className="text-background dark:text-foreground flex min-h-[calc(100vh-61.0938px)] flex-col items-center justify-center bg-gradient-to-b from-[#3477FE] via-[#013191] to-[#002369]">
-      <div className="container mx-auto flex flex-col items-center gap-10">
+      <header className="container mx-auto flex flex-col items-center gap-10">
         <div>
           <p className="bg-brand-50/10 mx-auto flex w-fit items-center gap-2 rounded-md p-1 text-xs">
             <Sparkles size={10} className="font-bold" /> Find Your Program |
             Country
           </p>
-          <h1
-            className="max-w-3xl text-center"
-            style={{
-              fontSize: "70px",
-            }}
-          >
+          <h1 className="max-w-3xl text-center md:!text-[70px]">
             Achieve Your <span className="text-brand-400">Dreams</span> of
             Moving <span className="text-brand-400">Abroad</span>.
           </h1>
@@ -27,7 +22,7 @@ const HeroSection: React.FC = () => {
           certificates and masters programs
         </p>
         <HeroSearch />
-      </div>
+      </header>
     </section>
   );
 };

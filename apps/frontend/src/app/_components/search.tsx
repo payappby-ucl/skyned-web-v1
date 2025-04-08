@@ -30,25 +30,25 @@ const HeroSearch: React.FC = () => {
   }, []);
 
   return (
-    <search className="bg-brand-400/10 w-xl rounded-full px-3">
+    <search className="bg-brand-400/10 w-full max-w-xl rounded-sm px-3 py-5 md:rounded-full md:px-3 md:py-0">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex items-center gap-1 py-2"
+          className="flex flex-col items-center gap-5 py-2 md:flex-row md:gap-1"
         >
-          <div className="divide-brand-50/20 grid flex-1 grid-cols-2 gap-2 divide-x">
+          <div className="divide-brand-50/20 grid w-full flex-1 grid-cols-1 gap-5 md:grid-cols-2 md:gap-2 md:!divide-x">
             <FormField
               control={form.control}
               name="course"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:rounded-0 border-brand-50/10 rounded-full border p-2 md:rounded-none md:border-0 md:p-0">
                   <FormControl>
                     <Input
                       placeholder="What would you like to study?"
                       onChange={field.onChange}
                       value={field.value}
                       aria-label="What would you like to study?"
-                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent focus:!ring-0"
+                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent text-center focus:!ring-0 md:text-left"
                     />
                   </FormControl>
                 </FormItem>
@@ -59,21 +59,24 @@ const HeroSearch: React.FC = () => {
               control={form.control}
               name="country"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="md:rounded-0 border-brand-50/10 rounded-full border p-2 md:border-0 md:p-0">
                   <FormControl>
                     <Input
                       placeholder="Where would you like to study?"
                       onChange={field.onChange}
                       value={field.value}
                       aria-label="Where would you like to study?"
-                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent focus:!ring-0"
+                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent text-center focus:!ring-0 md:text-left"
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
           </div>
-          <Button variant="brand" className="rounded-full px-10">
+          <Button
+            variant="brand"
+            className="w-full rounded-full px-10 md:w-fit"
+          >
             Search
           </Button>
         </form>

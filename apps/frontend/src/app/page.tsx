@@ -8,12 +8,18 @@ import Personality from "./_components/personality";
 import Products from "./_components/products";
 import BlogPosts from "./_components/blog";
 import Testimonials from "./_components/testimonials";
+import { Metadata } from "next";
+import { sharedMetadata } from "../utils";
+
+const title = "Achieve Your Dreams of Moving Abroad.";
+const description =
+  "We offer free and seamless international study application support into bachelors, postgraduate diploma, postbaccalaureate, graduate certificates and masters programs";
 
 const homePageJsonLd: WithContext<WebPage> = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Landing Page Title",
-  description: "Detailed description of your landing page",
+  name: title,
+  description,
   mainEntity: {
     "@type": "WebPageElement",
     mainEntityOfPage: env.client.baseUrl,
@@ -30,6 +36,15 @@ const homePageJsonLd: WithContext<WebPage> = {
       "@type": "ImageObject",
       url: `${env.client.baseUrl}/assets/images/brand/logo.png`,
     },
+  },
+};
+
+export const metadata: Metadata = {
+  ...sharedMetadata,
+  title,
+  description,
+  alternates: {
+    canonical: "/",
   },
 };
 

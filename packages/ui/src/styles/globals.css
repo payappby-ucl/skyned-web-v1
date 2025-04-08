@@ -221,6 +221,7 @@ input {
   font-family: var(--font-manrope);
 }
 
-main section {
-  @apply p-20;
+main section,
+body > footer {
+  @apply py-20 px-5 md:px-20;
 }
