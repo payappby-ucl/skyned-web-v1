@@ -6,6 +6,7 @@ import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import Image from "next/image";
 import Socials from "./socials";
+import Accreditation from "./accreditation";
 
 const Footer: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ const Footer: React.FC = () => {
           </div>
           <FooterNav />
         </div>
+        <Accreditation />
         <CopyRight />
       </div>
     </footer>
