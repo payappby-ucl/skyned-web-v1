@@ -9,7 +9,7 @@ import Products from "./_components/products";
 import BlogPosts from "./_components/blog";
 import Testimonials from "./_components/testimonials";
 import { Metadata } from "next";
-import { sharedMetadata } from "../utils";
+import { organization, sharedMetadata } from "../utils";
 
 const title = "Achieve Your Dreams of Moving Abroad.";
 const description =
@@ -29,14 +29,7 @@ const homePageJsonLd: WithContext<WebPage> = {
     "@type": "Organization",
     name: env.organization.name,
   },
-  publisher: {
-    "@type": "Organization",
-    name: env.organization.name,
-    logo: {
-      "@type": "ImageObject",
-      url: `${env.client.baseUrl}/assets/images/brand/logo.png`,
-    },
-  },
+  publisher: organization,
 };
 
 export const metadata: Metadata = {
@@ -50,7 +43,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <div>
+    <>
       <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
@@ -63,6 +56,6 @@ export default async function Home() {
       <Products />
       <BlogPosts />
       <Testimonials />
-    </div>
+    </>
   );
 }

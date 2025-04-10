@@ -6,7 +6,7 @@ import { AuthProvider } from "@/src/components/providers/auth-provider";
 import Nav from "@/src/components/nav";
 import { Toaster } from "@workspace/ui/components/sonner";
 import { ThemeProviders } from "../components/providers/theme-provider";
-import { sharedMetadata } from "../utils";
+import { organization, sharedMetadata } from "../utils";
 import { env } from "../config";
 import Script from "next/script";
 import Footer from "../components/footer/footer";
@@ -51,41 +51,7 @@ export const metadata: Metadata = {
 const baseJSONLD: Graph = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      name: env.organization.name,
-      url: env.client.baseUrl,
-      logo: `${env.client.baseUrl}/assets/images/brand/logo.png`,
-      description:
-        "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
-      email: env.organization.email,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: env.organization.addressLocality,
-        addressRegion: env.organization.addressRegion,
-        postalCode: env.organization.postalCode,
-        streetAddress: env.organization.streetAddress,
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: env.organization.telephone,
-        contactType: "Customer Support",
-        availableLanguage: "English",
-        email: env.organization.email,
-        hoursAvailable: {
-          "@type": "OpeningHoursSpecification",
-          ...env.organization.hoursAvailable,
-        },
-      },
-      keywords: env.organization.keywords,
-      sameAs: [
-        env.socials.facebook.handle,
-        env.socials.instagram.handle,
-        env.socials.linkedin.handle,
-        env.socials.tiktok.handle,
-        env.socials.twitter.handle,
-      ],
-    },
+    organization,
     {
       "@type": "WebSite",
       name: env.organization.name,
