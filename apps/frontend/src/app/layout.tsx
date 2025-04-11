@@ -47,29 +47,29 @@ export const metadata: Metadata = {
   // publisher: "Sebastian Markbåge",
 };
 
-// ? Organization and website JSON-LD
-const baseJSONLD: Graph = {
-  "@context": "https://schema.org",
-  "@graph": [
-    organization,
-    {
-      "@type": "WebSite",
-      name: env.organization.name,
-      url: env.client.baseUrl,
-      // potentialAction: {
-      //   "@type": "SearchAction",
-      //   target: "https://yourwebsite.com/search?q={search_term_string}",
-      //   "query-input": "required name=search_term_string",
-      // },
-    },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // ? Organization and website JSON-LD
+  const baseJSONLD: Graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organization,
+      {
+        "@type": "WebSite",
+        name: env.organization.name,
+        url: env.client.baseUrl,
+        // potentialAction: {
+        //   "@type": "SearchAction",
+        //   target: "https://yourwebsite.com/search?q={search_term_string}",
+        //   "query-input": "required name=search_term_string",
+        // },
+      },
+    ],
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <CookieContextProvider>

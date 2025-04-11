@@ -217,11 +217,17 @@ h6 {
 p,
 button,
 a,
-input {
+input,
+textarea {
   font-family: var(--font-manrope);
 }
 
 main section,
 body > footer {
   @apply py-20 px-5 md:px-20;
+}
+
+input,
+textarea {
+  @apply !text-sm;
 }

@@ -15,23 +15,6 @@ const title = "Achieve Your Dreams of Moving Abroad.";
 const description =
   "We offer free and seamless international study application support into bachelors, postgraduate diploma, postbaccalaureate, graduate certificates and masters programs";
 
-const homePageJsonLd: WithContext<WebPage> = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: title,
-  description,
-  mainEntity: {
-    "@type": "WebPageElement",
-    mainEntityOfPage: env.client.baseUrl,
-    keywords: env.organization.keywords,
-  },
-  author: {
-    "@type": "Organization",
-    name: env.organization.name,
-  },
-  publisher: organization,
-};
-
 export const metadata: Metadata = {
   ...sharedMetadata,
   title,
@@ -42,6 +25,24 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const homePageJsonLd: WithContext<WebPage> = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${env.client.baseUrl}`,
+    mainEntity: {
+      "@type": "WebPageElement",
+      mainEntityOfPage: env.client.baseUrl,
+      keywords: env.organization.keywords,
+    },
+    author: {
+      "@type": "Organization",
+      name: env.organization.name,
+    },
+    publisher: organization,
+  };
+
   return (
     <>
       <Script
