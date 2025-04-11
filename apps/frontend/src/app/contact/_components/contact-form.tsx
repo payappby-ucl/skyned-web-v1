@@ -89,6 +89,7 @@ const ContactUsForm: React.FC = () => {
                 <PhoneInput
                   placeholder="Enter your phone number"
                   id="phoneNumber"
+                  defaultcountry="NG"
                   {...field}
                 />
               </FormControl>

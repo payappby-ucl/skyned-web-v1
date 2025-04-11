@@ -6,9 +6,10 @@ import { Input } from "./input";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "./select";
 
 function PhoneInput(
-  props: React.ComponentProps<"input"> & { defaultCountry?: string },
+  props: React.ComponentProps<"input"> & { defaultcountry?: string },
 ) {
-  const { value, defaultCountry } = props;
+  const { value, defaultcountry } = props;
+
   const countries = React.useMemo(() => Country.getAllCountries(), []);
 
   const [selectedCountry, setSelectedCountry] = React.useState<{
@@ -17,9 +18,7 @@ function PhoneInput(
     name: string | undefined;
     phonecode: string | undefined;
   } | null>(() => {
-    const country =
-      countries.find((c) => c.isoCode === defaultCountry || "NG") ||
-      Country.getCountryByCode("NG");
+    const country = Country.getCountryByCode(defaultcountry || "NG");
 
     return {
       isoCode: country?.isoCode,
