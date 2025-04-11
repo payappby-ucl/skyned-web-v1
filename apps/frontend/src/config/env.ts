@@ -63,4 +63,7 @@ export const env = {
     googleSiteVerificationId:
       process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_SITE_ID,
   },
+  map: {
+    googleMapsBaseUrl: "https://www.google.com/maps?q=",
+  },
 };

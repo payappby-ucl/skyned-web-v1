@@ -3,8 +3,9 @@ import { organization, sharedMetadata } from "@/src/utils";
 import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { Metadata } from "next";
 import Script from "next/script";
-import { WithContext, ContactPage } from "schema-dts";
+import { WithContext, ContactPage, WebPage } from "schema-dts";
 import ContactUsForm from "./_components/contact-form";
+import Offices from "./_components/offices/offices";
 
 const title = "Get in Touch with Us";
 const description = "We'd love to talk to you.";
@@ -26,7 +27,52 @@ const contacts = [
     title: "Headquarters",
     description: `${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`,
     Icon: MapPinIcon,
-    href: `https://www.google.com/maps?q=${encodeURI(`${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`)}`,
+    href: `${env.map.googleMapsBaseUrl}${encodeURI(`${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`)}`,
+  },
+];
+
+const addresses = [
+  {
+    location: "Lagos Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Abuja Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Lagos Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Port Harcourt Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Canada Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Kenya Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+  },
+  {
+    location: "Ghana Office",
+    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
   },
 ];
 
@@ -40,13 +86,25 @@ export const metadata: Metadata = {
 };
 
 export default function Contact() {
-  const jsonLd: WithContext<ContactPage> = {
+  const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
+    "@type": "WebPage",
     name: title,
     description,
     url: `${env.client.baseUrl}/contact`,
     reviewedBy: organization,
+    mainEntity: {
+      "@type": "ContactPage",
+      mainEntity: addresses.map((address) => ({
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: address.addressLocality,
+          addressRegion: address.addressRegion,
+          streetAddress: address.streetAddress,
+        },
+      })),
+    },
   };
 
   return (
@@ -91,6 +149,7 @@ export default function Contact() {
         </div>
         <ContactUsForm />
       </section>
+      <Offices offices={addresses} />
     </>
   );
 }
