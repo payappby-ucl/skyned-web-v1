@@ -2,8 +2,8 @@
 import * as React from "react";
 import { Country } from "country-state-city";
 import { AsYouType } from "libphonenumber-js";
-import { Input } from "./input.js";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "./select.js";
+import { Input } from "./input";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "./select";
 
 function PhoneInput(
   props: React.ComponentProps<"input"> & { defaultCountry?: string },
