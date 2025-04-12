@@ -1,13 +1,9 @@
 import React from "react";
 import Office from "./office";
+import { addresses } from "@/src/utils";
 
 interface Props {
-  offices: {
-    location: string;
-    streetAddress: string;
-    addressLocality: string;
-    addressRegion: string;
-  }[];
+  offices: typeof addresses;
 }
 
 const Offices: React.FC<Props> = ({ offices }) => {
