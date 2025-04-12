@@ -1,13 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import MemberDetails from "./member-details";
+import { teams } from "@/src/utils";
 
-const TeamMember: React.FC<{
-  firstName: string;
-  lastName: string;
-  imageUrl: string;
-  title: string;
-}> = (props) => {
+const TeamMember: React.FC<(typeof teams)[0]> = (props) => {
   const { firstName, lastName, imageUrl, title } = props;
   return (
     <div className="relative overflow-hidden bg-transparent">

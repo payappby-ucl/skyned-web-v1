@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import australiaImage from "../../../public/assets/images/countries/australia.jpeg";
-import canadaImage from "../../../public/assets/images/countries/canada.jpg";
-import unitedKingdomImage from "../../../public/assets/images/countries/united_kingdom.jpeg";
-import unitedStatesImage from "../../../public/assets/images/countries/united_states.jpeg";
+import australiaImage from "../../public/assets/images/countries/australia.jpeg";
+import canadaImage from "../../public/assets/images/countries/canada.jpg";
+import unitedKingdomImage from "../../public/assets/images/countries/united_kingdom.jpeg";
+import unitedStatesImage from "../../public/assets/images/countries/united_states.jpeg";
 
 const countries = [
   {

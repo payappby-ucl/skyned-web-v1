@@ -4,14 +4,10 @@ import {
   AvatarImage,
 } from "@workspace/ui/components/avatar";
 import TeamMember from "./team-member";
+import { teams } from "@/src/utils";
 
 interface Props {
-  teams: {
-    firstName: string;
-    lastName: string;
-    imageUrl: string;
-    title: string;
-  }[];
+  teams: typeof teams;
 }
 export default async function OurTeam({ teams }: Props) {
   const top = Array.of(teams[0], teams[1], teams[2]) as typeof teams;

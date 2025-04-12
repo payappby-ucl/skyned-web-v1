@@ -3,7 +3,7 @@ import { env } from "../config";
 import Script from "next/script";
 import HeroSection from "./_components/hero";
 import Partners from "./_components/partners";
-import CountryOfChoice from "./_components/country";
+import CountryOfChoice from "../components/country";
 import Personality from "./_components/personality";
 import Products from "./_components/products";
 import BlogPosts from "./_components/blog";

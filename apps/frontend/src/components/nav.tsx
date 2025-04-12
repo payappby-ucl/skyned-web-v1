@@ -35,7 +35,7 @@ const MobileNav: React.FC = () => {
 const Nav: React.FC = () => {
   return (
     <header>
-      <div className="container mx-auto">
+      <div className="container mx-auto md:px-20">
         <NavigationMenu className="!max-w-full items-center justify-between">
           <NavigationMenuList className="py-4">
             <NavigationMenuItem>

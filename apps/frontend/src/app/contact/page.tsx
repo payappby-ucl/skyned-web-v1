@@ -1,80 +1,16 @@
 import { env } from "@/src/config";
 import { organization, sharedMetadata } from "@/src/utils";
-import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { Metadata } from "next";
 import Script from "next/script";
-import { WithContext, ContactPage, WebPage } from "schema-dts";
+import { WithContext, WebPage } from "schema-dts";
 import ContactUsForm from "./_components/contact-form";
 import Offices from "./_components/offices/offices";
+import FAQs from "./_components/faq/faqs";
+import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
+import { addresses, contacts } from "@/src/utils";
 
 const title = "Get in Touch with Us";
 const description = "We'd love to talk to you.";
-
-const contacts = [
-  {
-    title: "Have any questions?",
-    description: env.organization.telephone,
-    Icon: PhoneIcon,
-    href: `tel:${env.organization.telephone}`,
-  },
-  {
-    title: "Write to us.",
-    description: env.organization.email,
-    Icon: MailIcon,
-    href: `mailto:${env.organization.email}`,
-  },
-  {
-    title: "Headquarters",
-    description: `${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`,
-    Icon: MapPinIcon,
-    href: `${env.map.googleMapsBaseUrl}${encodeURI(`${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`)}`,
-  },
-];
-
-const addresses = [
-  {
-    location: "Lagos Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Abuja Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Lagos Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Port Harcourt Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Canada Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Kenya Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-  {
-    location: "Ghana Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-  },
-];
 
 export const metadata: Metadata = {
   ...sharedMetadata,
@@ -93,7 +29,7 @@ export default function Contact() {
     description,
     url: `${env.client.baseUrl}/contact`,
     reviewedBy: organization,
-    mainEntity: {
+    mainEntityOfPage: {
       "@type": "ContactPage",
       mainEntity: addresses.map((address) => ({
         "@type": "Place",
@@ -142,6 +78,7 @@ export default function Contact() {
           ))}
         </div>
       </section>
+      <CustomBreadCrumb className="bg-accent/50 border-b" />
       <section className="bg-accent/50 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="space-y-1">
           <h2>Let's Work Together</h2>
@@ -150,6 +87,7 @@ export default function Contact() {
         <ContactUsForm />
       </section>
       <Offices offices={addresses} />
+      <FAQs />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { teams } from "@/src/utils";
 import {
   Avatar,
   AvatarFallback,
@@ -15,13 +16,7 @@ import {
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 
-interface Props {
-  firstName: string;
-  lastName: string;
-  imageUrl: string;
-  title: string;
-}
-const MemberDetails: React.FC<Props> = ({
+const MemberDetails: React.FC<(typeof teams)[0]> = ({
   firstName,
   lastName,
   imageUrl,

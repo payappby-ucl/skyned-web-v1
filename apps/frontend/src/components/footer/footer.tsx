@@ -30,10 +30,13 @@ const Footer: React.FC = () => {
               <Socials />
             </div>
             <Button
-              className="bg-background dark:bg-foreground text-brand hover:bg-brand-50 px-15 mt-auto hidden w-full md:block"
+              className="bg-background dark:bg-foreground text-brand hover:bg-brand-50 px-15 mt-auto hidden w-full md:flex"
               aria-label="Book a consultation"
+              asChild
             >
-              Book consultation
+              <Link href="/consultation" aria-label="Book Consultation">
+                Book consultation
+              </Link>
             </Button>
           </div>
           <FooterNav />
