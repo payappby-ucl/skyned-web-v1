@@ -13,6 +13,7 @@ import Footer from "../components/footer/footer";
 import { CookieContextProvider } from "../components/providers/cookie-consent";
 import Analytics from "./_components/analytics";
 import CookieBanner from "./_components/cookie/cookie-banner";
+// import WhatsAppWidget from "../components/chats/whatsapp";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -84,6 +85,7 @@ export default function RootLayout({
             <Toaster richColors closeButton />
             <CookieBanner />
           </ThemeProviders>
+          {/* <WhatsAppWidget /> */}
         </body>
       </CookieContextProvider>
 

@@ -3,11 +3,73 @@ Project Skyned {
     Note: 'Educational'
 }
 
-enum gender {
-    male
-    female
-    others
+enum Department {
+    Executive
+    Marketing
+    Admissions
+    "Human Resource"
+    Communications
+    Technical
+    "Quality Assurance"
 }
+
+enum Gender {
+    Male
+    Female
+    Others
+}
+
+// * Admin
+Table admins {
+    id integer [increment]
+    admin_id varchar [pk]
+    email varchar(256) [unique]
+    first_name varchar(256)
+    middle_name varchar(256) [null]
+    last_name varchar(256)
+    account_suspended bool [default: false]
+    country_of_residence varchar(3)
+    nationality varchar(3)
+    gender Gender
+
+    created_by_id varchar [ref: - admins.admin_id]
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Department
+Table departments {
+    id integer [increment, pk]
+    name Department [unique]
+    lead_id varchar [ref: - admins.admin_id]
+
+    indexes {
+        name
+    }
+}
+
+// * Team
+Table teams {
+    id integer [pk, increment]
+    name varchar(256)
+    department_id integer [ref: > departments.id]
+    lead_id varchar [ref: - admins.admin_id]
+
+    indexes {
+      name
+    }
+}
+
+
+
+
+
+
+
+
+
+// ----------------- END
 
 // * Student Schema
 Table students {

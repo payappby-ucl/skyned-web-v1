@@ -18,7 +18,7 @@ export const contacts = [
     title: "Headquarters",
     description: `${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`,
     Icon: MapPinIcon,
-    href: `${env.map.googleMapsBaseUrl}${encodeURI(`${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`)}`,
+    href: `${env.map.googleMapsBaseUrl}${encodeURIComponent(`${env.organization.streetAddress} ${env.organization.addressLocality}, ${env.organization.addressRegion}`)}`,
   },
 ];
 

@@ -1,7 +1,11 @@
 /* eslint-disable max-len */
-import { Prisma, PrismaClient } from "@prisma/client";
-import { DefaultArgs } from "@prisma/client/runtime/library";
+
 import { ITokenRepository } from "../../../infrastructure";
+import {
+  Prisma,
+  PrismaClient,
+} from "../../../infrastructure/repository/prisma-client";
+import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/runtime/library";
 
 /** Database interface representation */
 export interface IRepository {

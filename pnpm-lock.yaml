@@ -9261,7 +9261,9 @@ snapshots:
 
   '@workspace/shared@file:apps/backend/functions/shared':
     dependencies:
+      country-state-city: 3.2.1
       http-status-codes: 2.3.0
+      libphonenumber-js: 1.12.6
       zod: 3.24.2
 
   '@yarnpkg/lockfile@1.1.0': {}

@@ -36,7 +36,9 @@ export class Marketing implements IMarketing {
   }
 
   /** Creates a contact on the system io dashboard for marketing/campaigns */
-  createContact: IMarketing["createContact"] = async () => {};
+  createContact: IMarketing["createContact"] = async () => {
+    return { contactId: "heklo" };
+  };
 
   /** Adds a contact to a specific audience for marketing */
 

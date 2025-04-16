@@ -2,6 +2,7 @@ import { z } from "zod";
 /** Schema for user registration */
 export declare const RegisterSchema: z.ZodObject<Pick<{
     email: z.ZodString;
+    phoneNumber: z.ZodEffects<z.ZodString, string, string>;
 }, "email">, "strip", z.ZodTypeAny, {
     email: string;
 }, {

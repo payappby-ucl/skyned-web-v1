@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/infrastructure/repository/prisma-client"
 }
 
 datasource db {
@@ -14,48 +15,58 @@ datasource db {
 }
 
 // * ENUMS
+enum DepartmentName {
+  Executive
+  Marketing
+  Admissions
+  Communications
+  Technical
+  Human_Resource
+  Quality_Assurance
+}
+
 enum Gender {
-  male
-  female
-  others
-}
-
-enum InstitutionType {
-  university
-  college
-}
-
-enum OwnershipType {
-  private
-  public
-}
-
-enum Currency {
-  USD
-  CAD
-  AUD
-  NGN
-  EUR
-}
-
-enum DegreeLevel {
-  undergraduate
-  postgraduate
-  masters
-  diploma
-  certificate
-}
-
-enum Intakes {
-  winter
-  fall
-  spring
+  Male
+  Female
+  Others
 }
 
 enum TokenType {
   verify
   reset
 }
+
+// enum InstitutionType {
+//   university
+//   college
+// }
+
+// enum OwnershipType {
+//   private
+//   public
+// }
+
+// enum Currency {
+//   USD
+//   CAD
+//   AUD
+//   NGN
+//   EUR
+// }
+
+// enum DegreeLevel {
+//   undergraduate
+//   postgraduate
+//   masters
+//   diploma
+//   certificate
+// }
+
+// enum Intakes {
+//   winter
+//   fall
+//   spring
+// }
 
 model Token {
   id        Int       @default(autoincrement())
@@ -68,6 +79,73 @@ model Token {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("tokens")
+}
+
+model Admin {
+  id                 Int     @default(autoincrement())
+  adminId            String  @id @unique @map("admin_id") @db.VarChar(256)
+  email              String  @unique
+  firstName          String  @map("first_name") @db.VarChar(50)
+  lastName           String  @map("last_name") @db.VarChar(50)
+  middleName         String? @map("middle_name") @db.VarChar(50)
+  gender             Gender
+  accountSuspended   Boolean @default(false) @map("account_suspended")
+  nationality        String  @db.VarChar(3)
+  countryOfResidence String  @map("country_of_residence") @db.VarChar(3)
+  about              String? @db.Text
+  primaryImage       Json    @map("primary_image")
+  secondaryImage     Json?   @map("secondary_image")
+  jobTitle           String  @map("job_title")
+
+  createdById String? @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin?  @relation("adminCreatedBy", fields: [createdById], references: [adminId])
+  created     Admin[] @relation("adminCreatedBy")
+
+  departments        Department[] @relation("membership")
+  departmentsLeading Department[] @relation("departmentLead")
+
+  teams        Team[] @relation("membership")
+  teamsLeading Team[] @relation("teamLead")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model Department {
+  id   Int            @id @default(autoincrement())
+  name DepartmentName @unique
+
+  leadId String? @map("lead_id") @db.VarChar(256)
+  lead   Admin?  @relation("departmentLead", fields: [leadId], references: [adminId])
+
+  members Admin[] @relation("membership")
+  teams   Team[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("departments")
+}
+
+model Team {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(256)
+
+  leadId String? @map("lead_id") @db.VarChar(256)
+  lead   Admin?  @relation("teamLead", fields: [leadId], references: [adminId])
+
+  departmentId Int        @map("department_id")
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  members Admin[] @relation("membership")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([departmentId, name])
+  @@map("teams")
 }
 
 // model Student {
