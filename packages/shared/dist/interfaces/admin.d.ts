@@ -1,7 +1,7 @@
-import { Gender } from "enums/gender";
 import { IObject, ITimestamps } from "./utils";
 import { IDepartment } from "./department";
 import { ITeam } from "./team";
+import { Gender } from "../types";
 export interface IAdmin extends ITimestamps {
     id: number;
     adminId: string;

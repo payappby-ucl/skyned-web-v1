@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/infrastructure/repository/prisma-client"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output        = "../src/infrastructure/repository/prisma-client"
 }
 
 datasource db {
@@ -95,17 +96,25 @@ model Admin {
   about              String? @db.Text
   primaryImage       Json    @map("primary_image")
   secondaryImage     Json?   @map("secondary_image")
+  socials            Json?
+  phoneNumber        Json?   @map("phone_number")
   jobTitle           String  @map("job_title")
 
+  // * Admin Creation
   createdById String? @map("created_by_id") @db.VarChar(256)
   createdBy   Admin?  @relation("adminCreatedBy", fields: [createdById], references: [adminId])
   created     Admin[] @relation("adminCreatedBy")
 
-  departments        Department[] @relation("membership")
+  // * Department membership and Departments leading
+  departments        Department[]
   departmentsLeading Department[] @relation("departmentLead")
 
-  teams        Team[] @relation("membership")
+  // * Team membership and Teams leading
+  teams        Team[]
   teamsLeading Team[] @relation("teamLead")
+
+  // * FAQs created
+  faqsCreated Faq[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -120,7 +129,7 @@ model Department {
   leadId String? @map("lead_id") @db.VarChar(256)
   lead   Admin?  @relation("departmentLead", fields: [leadId], references: [adminId])
 
-  members Admin[] @relation("membership")
+  members Admin[]
   teams   Team[]
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -139,13 +148,29 @@ model Team {
   departmentId Int        @map("department_id")
   department   Department @relation(fields: [departmentId], references: [id])
 
-  members Admin[] @relation("membership")
+  members Admin[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@unique([departmentId, name])
   @@map("teams")
+}
+
+// * FAQ
+model Faq {
+  id Int @id @default(autoincrement())
+
+  question String
+  answer   String @db.Text
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("faqs")
 }
 
 // model Student {
@@ -295,17 +320,4 @@ model Team {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
 //   @@map("activity_logs")
-// }
-
-// // * FAQ
-// model Faq {
-//   id Int @id @default(autoincrement())
-
-//   question String
-//   answer   String @db.Text
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("faqs")
 // }

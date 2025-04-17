@@ -19,9 +19,9 @@ export type PermissionType = {
         action: "create" | "read" | "update" | "delete";
     };
 };
-export type PermissionCheckSingleResource<Key extends keyof PermissionType> = boolean | ((claim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);
-export type PermissionCheckListResource = boolean | ((claim: AuthClaim) => boolean);
-export type PermissionCheckCreateResource<Key extends keyof PermissionType> = boolean | ((claim: AuthClaim, data: PermissionType[Key]["createDataType"]) => boolean);
+export type PermissionCheckSingleResource<Key extends keyof PermissionType> = boolean | ((authClaim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);
+export type PermissionCheckListResource = boolean | ((authClaim: AuthClaim) => boolean);
+export type PermissionCheckCreateResource<Key extends keyof PermissionType> = boolean | ((authClaim: AuthClaim, data: PermissionType[Key]["createDataType"]) => boolean);
 export type AccessControlType = Partial<{
     [Res in ResourceType]: {
         [Act in PermissionType[Res]["action"]]: Act extends "list" ? PermissionCheckListResource : Act extends "create" ? PermissionCheckCreateResource<Res> : PermissionCheckSingleResource<Res>;

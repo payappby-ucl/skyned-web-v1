@@ -2,8 +2,7 @@ import { CommonSchema } from "@workspace/shared";
 import { z } from "zod";
 
 export const emailTemplateSchema = z.object({
-  from: z.object({
-    email: CommonSchema.pick({ email: true }),
+  from: CommonSchema.pick({ email: true }).extend({
     name: z.string().trim().optional(),
   }),
   to: z.array(z.string().trim()).min(1, "At least one email address is needed"),

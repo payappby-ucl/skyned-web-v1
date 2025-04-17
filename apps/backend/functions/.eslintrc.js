@@ -24,6 +24,7 @@ module.exports = {
     "/generated/**/*", // Ignore generated files.
     "coverage/**/*",
     "/shared",
+    "/src/infrastructure/repository/prisma-client",
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {

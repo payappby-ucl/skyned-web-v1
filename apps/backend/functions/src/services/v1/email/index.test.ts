@@ -23,7 +23,7 @@ describe("EmailService", () => {
     test("should throw an error if an invalid template is passed", async () => {
       const emailData: Parameters<(typeof emailService)["send"]>["0"] = {
         from: {
-          email: env.emails.test,
+          email: env.emails.account,
         },
         template: {
           type: "none" as any,
@@ -46,7 +46,7 @@ describe("EmailService", () => {
     test("should send a mail", async () => {
       const emailData: Parameters<(typeof emailService)["send"]>["0"] = {
         from: {
-          email: env.emails.test,
+          email: env.emails.account,
         },
         template: {
           type: "verify",

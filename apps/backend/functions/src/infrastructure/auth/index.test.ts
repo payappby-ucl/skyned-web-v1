@@ -126,5 +126,63 @@ describe("Auth Infrastructure", () => {
         expect(exists).toBeTruthy();
       });
     });
+
+    describe("createAuth", () => {
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+      const record = {
+        email: "bobslegend795@gmail.com",
+        password: "12345678",
+      };
+
+      test("should throw error if invalid input is passed", async () => {
+        try {
+          await auth.createAuth(
+            {
+              email: "bobslegend795@gmail.com",
+              password: "123",
+            },
+            "admin",
+          );
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should throw error if invalid claim is passed", async () => {
+        try {
+          await auth.createAuth(
+            {
+              email: "bobslegend795@gmail.com",
+              password: "123ahjdjd34",
+            },
+            "partner" as any,
+          );
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const spy = jest.spyOn(getAuth(), "createUser").mockImplementation(
+          async () =>
+            ({
+              uid: "12345678",
+              email: record.email,
+            }) as UserRecord,
+        );
+
+        const setCustomClaimSpy = jest
+          .spyOn(getAuth(), "setCustomUserClaims")
+          .mockImplementation();
+
+        const userId = await auth.createAuth(record, "admin");
+        expect(spy).toHaveBeenCalled();
+        expect(setCustomClaimSpy).toHaveBeenCalled();
+        expect(userId).toBe("12345678");
+      });
+    });
   });
 });

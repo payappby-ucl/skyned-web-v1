@@ -16,6 +16,15 @@ export class SkynedUtils {
   }
 
   /**
+   * Get the environment in which the code is runing
+   */
+
+  static isEnvironment(environmentNames: ("test" | "dev")[]) {
+    if (environmentNames.includes(env.environment as any)) return true;
+    return false;
+  }
+
+  /**
    * Creates a custom exception/error type used across all parts of the app
    */
 
@@ -107,14 +116,12 @@ export class SkynedUtils {
    */
   static initializeFirebaseApp() {
     if (!admin.apps.length) {
-      if (env.environment === "test") {
+      if (env.environment === "test" || process.env.LOCAL === "local") {
         admin.initializeApp({
           credential: applicationDefault(),
           projectId: "skyned-test-31a2e",
           storageBucket: "skyned-test-31a2e.firebasestorage.app",
         });
-        process.env.FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:4000/auth";
-        process.env.FIREBASE_STORAGE_EMULATOR_HOST = "127.0.0.1:4000/storage";
       } else {
         admin.initializeApp();
       }

@@ -6,6 +6,7 @@ module.exports = {
   },
   testPathIgnorePatterns: ["./__tests__/helpers", "./lib"],
   collectCoverage: true,
+  coveragePathIgnorePatterns: ["./src/infrastructure/repository/prisma-client"],
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "json", "lcov", "text", "html"],
   coverageProvider: "v8",

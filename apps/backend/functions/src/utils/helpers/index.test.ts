@@ -108,4 +108,16 @@ describe("SkynedUtils", () => {
       expect((pickedData as typeof data).firstName).toBe(undefined);
     });
   });
+
+  describe("isEnvironment", () => {
+    test("should return false if passed dev", () => {
+      const isDev = SkynedUtils.isEnvironment(["dev"]);
+      expect(isDev).toBe(false);
+    });
+
+    test("should return false if passed test", () => {
+      const isTest = SkynedUtils.isEnvironment(["test"]);
+      expect(isTest).toBe(true);
+    });
+  });
 });

@@ -141,6 +141,8 @@ exports.Prisma.AdminScalarFieldEnum = {
   about: 'about',
   primaryImage: 'primaryImage',
   secondaryImage: 'secondaryImage',
+  socials: 'socials',
+  phoneNumber: 'phoneNumber',
   jobTitle: 'jobTitle',
   createdById: 'createdById',
   createdAt: 'createdAt',
@@ -160,6 +162,15 @@ exports.Prisma.TeamScalarFieldEnum = {
   name: 'name',
   leadId: 'leadId',
   departmentId: 'departmentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FaqScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  answer: 'answer',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -218,7 +229,8 @@ exports.Prisma.ModelName = {
   Token: 'Token',
   Admin: 'Admin',
   Department: 'Department',
-  Team: 'Team'
+  Team: 'Team',
+  Faq: 'Faq'
 };
 
 /**

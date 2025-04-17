@@ -3,15 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.departmentPolicies = void 0;
 exports.departmentPolicies = {
     departments: {
-        list({ claim, user }) {
+        list(authClaim) {
+            if (!authClaim)
+                return false;
+            const { claim, user } = authClaim;
             if (claim === "student")
                 return false;
             return true;
         },
-        read({ claim, user }, data) {
+        read(authClaim, data) {
             return true;
         },
-        create({ claim, user }, data) {
+        create(authClaim, data) {
             return true;
         },
     },

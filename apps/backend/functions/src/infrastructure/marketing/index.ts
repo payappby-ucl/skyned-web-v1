@@ -6,7 +6,8 @@ import { env } from "../../config";
 import { AddContactToAudienceInputSchema } from "./schema";
 import { validationUtility } from "../../utils";
 
-interface MarketingDependencies {
+/** Represents properties needed to instantiate IMarketing concrete class */
+export interface MarketingDependencies {
   validationUtility: IValidationUtility;
 }
 

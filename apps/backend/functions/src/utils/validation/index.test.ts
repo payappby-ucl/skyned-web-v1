@@ -68,8 +68,8 @@ describe("ValidationUtility", () => {
             schema,
             inputData: {
               email: "bobslegend795",
-              errorType: "client",
             },
+            errorType: "client",
           });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.BAD_REQUEST);
@@ -82,9 +82,9 @@ describe("ValidationUtility", () => {
             schema,
             inputData: {
               email: "bobslegend795",
-              errorType: "client",
-              message: "Invalid Input",
             },
+            errorType: "client",
+            message: "Invalid Input",
           });
         } catch (error: any) {
           expect(error.statusCode).toEqual(StatusCodes.BAD_REQUEST);

@@ -25,16 +25,16 @@ export type PermissionType = {
 
 export type PermissionCheckSingleResource<Key extends keyof PermissionType> =
   | boolean
-  | ((claim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);
+  | ((authClaim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);
 
 export type PermissionCheckListResource =
   | boolean
-  | ((claim: AuthClaim) => boolean);
+  | ((authClaim: AuthClaim) => boolean);
 
 export type PermissionCheckCreateResource<Key extends keyof PermissionType> =
   | boolean
   | ((
-      claim: AuthClaim,
+      authClaim: AuthClaim,
       data: PermissionType[Key]["createDataType"],
     ) => boolean);
 

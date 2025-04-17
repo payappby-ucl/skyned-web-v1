@@ -3,10 +3,12 @@ import { StatusCodes } from "http-status-codes";
 import { email } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
 import { render } from "@react-email/components";
-import VerifyEmail from "./templates/verify-email";
+import { AdminAccountCreation, VerifyEmail } from "./templates";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
 import { IEmail, IEmailService } from "../../../interfaces";
+
+export * from "./templates";
 
 /** Dependencies needed to instantiate {@link EmailService} */
 
@@ -46,6 +48,8 @@ export class EmailService implements IEmailService {
     switch (type) {
       case "verify":
         return await render(<VerifyEmail {...data} />);
+      case "create-admin-account":
+        return await render(<AdminAccountCreation {...data} />);
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,

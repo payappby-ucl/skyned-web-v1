@@ -10,5 +10,7 @@ export interface AdminClaim {
 }
 export interface IAccessControl {
     role(claims: AuthClaim["claim"][], authClaim: AuthClaim): boolean;
-    attribute<Res extends ResourceType, Act extends PermissionType[Res]["action"]>(claim: AuthClaim, resourceName: Res, action: Act, data: Act extends "list" ? undefined : Act extends "create" ? PermissionType[Res]["createDataType"] : PermissionType[Res]["dataType"]): boolean;
+    attribute<Res extends ResourceType, Act extends PermissionType[Res]["action"]>(auth: AuthClaim, resourceName: Res, action: Act, ...args: Act extends "list" ? [] : [
+        data: Act extends "create" ? PermissionType[Res]["createDataType"] : PermissionType[Res]["dataType"]
+    ]): boolean;
 }

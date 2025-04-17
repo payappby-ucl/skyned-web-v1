@@ -11,7 +11,7 @@ export * from "./interfaces";
 export * from "./types";
 export * from "./policies";
 
-class AccessControl implements IAccessControl {
+export class AccessControl implements IAccessControl {
   private static instance: IAccessControl | null = null;
   private policies = policies;
 

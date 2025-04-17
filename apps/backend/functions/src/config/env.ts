@@ -18,14 +18,13 @@ export const env = {
   },
   /** Emails used for sending */
   emails: {
-    test: "tobi@skynedconsults.com",
-    account: "account@skynedconsults.com",
-    admissions: "admissions@skynedconsults.com",
-    info: "info@skynedconsults.com",
-    application: "applications@skynedconsults.com",
-    marketing: "marketing@skynedconsults.com",
-    noreply: "no-reply@skynedconsults.com",
-    complaints: "complaints@skynedconsults.com",
+    account: process.env.ACCOUNT_EMAIL as string,
+    admissions: process.env.ADMISSIONS_EMAIL as string,
+    info: process.env.INFO_EMAIL as string,
+    application: process.env.APPLICATION_EMAIL as string,
+    marketing: process.env.MARKETING_EMAIL as string,
+    noreply: process.env.NOREPLY_EMAIL as string,
+    complaints: process.env.COMPLAINTS_EMAIL as string,
   },
   marketing: {
     systemIo: {

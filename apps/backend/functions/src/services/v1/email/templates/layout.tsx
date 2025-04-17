@@ -12,7 +12,7 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 
 /** Represents Props needed to properly display the Layout component */
-interface Props {
+export interface LayoutProps {
   /** Page Title */
   title: string;
 
@@ -27,7 +27,7 @@ const container = {
 
 /** Layout Component */
 
-const Layout: React.FC<PropsWithChildren<Props>> = ({
+export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   title,
   preview,
   children,
@@ -60,5 +60,3 @@ const Layout: React.FC<PropsWithChildren<Props>> = ({
     </Html>
   );
 };
-
-export default Layout;

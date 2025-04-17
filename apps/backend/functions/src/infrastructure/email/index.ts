@@ -4,7 +4,11 @@ import nodemailer from "nodemailer";
 import * as key from "./key.json";
 import { RegistryKeysEnum } from "../../enum";
 import SkynedRegistry from "../../registry";
-import { SkynedUtils, validationUtility } from "../../utils";
+import {
+  PROHIBITED_USER_EMAIL_DOMAINS,
+  SkynedUtils,
+  validationUtility,
+} from "../../utils";
 import { IEmail, IValidationUtility } from "../../interfaces";
 import { env } from "../../config";
 import { CommonSchema } from "@workspace/shared";
@@ -71,7 +75,7 @@ class Email implements IEmail {
       message: "Invalid data format for sending email",
     });
 
-    const senderEmail = env.environment ? env.emails.test : data.from.email;
+    const senderEmail = data.from.email;
     const sender = env.environment
       ? `Skyned Consults Test Account <${senderEmail}>`
       : `${data.from.name || "Skyned Consults"} <${data.from.email}>`;
@@ -88,7 +92,15 @@ class Email implements IEmail {
     const { to, subject, html, attachments } = data;
     await transporter.sendMail({
       from: sender,
-      to,
+      to: SkynedUtils.isEnvironment(["dev", "test"])
+        ? to.map((email) =>
+            PROHIBITED_USER_EMAIL_DOMAINS.some((emailDomain) =>
+              email.endsWith(emailDomain),
+            )
+              ? env.emails.account
+              : email,
+          )
+        : to,
       subject,
       html,
       attachments: attachments?.length ? attachments : undefined,

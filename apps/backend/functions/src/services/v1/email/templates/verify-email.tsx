@@ -1,12 +1,13 @@
 import React from "react";
 import { Container, Section, Text } from "@react-email/components";
-import Layout from "./layout";
+import { Layout } from "./layout";
 
-interface Props {
+/** Properties needed for VerifyEmail Component */
+export interface VerifyEmailProps {
   tokenId: string;
 }
 
-const VerifyEmail: React.FC<Props> = ({ tokenId }) => {
+export const VerifyEmail: React.FC<VerifyEmailProps> = ({ tokenId }) => {
   return (
     <Layout title="Verify Email" preview="Verify your email address">
       <Container>
@@ -17,5 +18,3 @@ const VerifyEmail: React.FC<Props> = ({ tokenId }) => {
     </Layout>
   );
 };
-
-export default VerifyEmail;

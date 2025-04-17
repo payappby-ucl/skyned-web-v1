@@ -1,4 +1,3 @@
-import { IAdmin, IDepartment } from "interfaces";
 import { IAccessControl } from "./interfaces";
 import { policies } from "./policies";
 import {
@@ -12,23 +11,35 @@ export * from "./interfaces";
 export * from "./types";
 export * from "./policies";
 
-class AccessControl implements IAccessControl {
+export class AccessControl implements IAccessControl {
+  private static instance: IAccessControl | null = null;
   private policies = policies;
+
+  private constructor() {}
+
+  static factory() {
+    if (!AccessControl.instance) {
+      AccessControl.instance = new AccessControl();
+    }
+
+    return AccessControl.instance;
+  }
 
   role: IAccessControl["role"] = (claims, authClaim) => {
     return claims.includes(authClaim.claim);
   };
 
   attribute: IAccessControl["attribute"] = (
-    claim,
+    auth,
     resourceName,
     action,
-    data,
+    ...args
   ) => {
+    const data = args[0];
     if (
       !resourceName ||
       !action ||
-      !claim ||
+      !auth ||
       (!["list"].includes(action) && !data)
     ) {
       return false;
@@ -45,12 +56,12 @@ class AccessControl implements IAccessControl {
           PermissionCheckCreateResource<typeof resourceName>,
           Function
         >
-      )(claim, data as PermissionType[typeof resourceName]["createDataType"]);
+      )(auth, data as PermissionType[typeof resourceName]["createDataType"]);
     }
 
     if (action === "list") {
       return (actionPolicy as Extract<PermissionCheckListResource, Function>)(
-        claim,
+        auth,
       );
     }
 
@@ -59,16 +70,8 @@ class AccessControl implements IAccessControl {
         PermissionCheckSingleResource<typeof resourceName>,
         Function
       >
-    )(claim, data as PermissionType[typeof resourceName]["dataType"]);
+    )(auth, data as PermissionType[typeof resourceName]["dataType"]);
   };
 }
 
-const accessControl = new AccessControl();
-console.log(
-  accessControl.attribute(
-    { claim: "student", user: {} as any },
-    "departments",
-    "list",
-    undefined,
-  ),
-);
+export const accessControl = AccessControl.factory();

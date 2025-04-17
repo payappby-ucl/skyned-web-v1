@@ -5,6 +5,7 @@ import SkynedRegistry from "../../registry";
 import { SkynedUtils, validationUtility } from "../../utils";
 import { StatusCodes } from "http-status-codes";
 import { RegisterSchema } from "@workspace/shared";
+import { AuthCreationSchema } from "./schema";
 
 SkynedUtils.initializeFirebaseApp();
 
@@ -66,6 +67,10 @@ export class Auth implements IAuth {
     }
   };
 
+  /**
+   * Checks if a user auth already exist
+   */
+
   exists: IAuth["exists"] = async (email) => {
     this.validationUtility.validateInput({
       schema: RegisterSchema,
@@ -77,6 +82,27 @@ export class Auth implements IAuth {
     const userAuth = await this.findUserByEmail(email);
     if (!userAuth) return false;
     return true;
+  };
+
+  /**
+   * Creates user auth
+   */
+
+  createAuth: IAuth["createAuth"] = async (data, claim) => {
+    this.validationUtility.validateInput({
+      schema: AuthCreationSchema,
+      inputData: {
+        ...data,
+        claim,
+      },
+    });
+
+    const userAuth = await this.auth.createUser({
+      ...data,
+    });
+
+    await this.auth.setCustomUserClaims(userAuth.uid, { role: claim });
+    return userAuth.uid;
   };
 }
 

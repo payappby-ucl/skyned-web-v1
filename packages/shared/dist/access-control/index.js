@@ -14,19 +14,29 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.accessControl = exports.AccessControl = void 0;
 const policies_1 = require("./policies");
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./types"), exports);
 __exportStar(require("./policies"), exports);
 class AccessControl {
+    static instance = null;
     policies = policies_1.policies;
+    constructor() { }
+    static factory() {
+        if (!AccessControl.instance) {
+            AccessControl.instance = new AccessControl();
+        }
+        return AccessControl.instance;
+    }
     role = (claims, authClaim) => {
         return claims.includes(authClaim.claim);
     };
-    attribute = (claim, resourceName, action, data) => {
+    attribute = (auth, resourceName, action, ...args) => {
+        const data = args[0];
         if (!resourceName ||
             !action ||
-            !claim ||
+            !auth ||
             (!["list"].includes(action) && !data)) {
             return false;
         }
@@ -36,13 +46,13 @@ class AccessControl {
         if (typeof actionPolicy === "boolean")
             return actionPolicy;
         if (action === "create") {
-            return actionPolicy(claim, data);
+            return actionPolicy(auth, data);
         }
         if (action === "list") {
-            return actionPolicy(claim);
+            return actionPolicy(auth);
         }
-        return actionPolicy(claim, data);
+        return actionPolicy(auth, data);
     };
 }
-const accessControl = new AccessControl();
-console.log(accessControl.attribute({ claim: "student", user: {} }, "departments", "list", undefined));
+exports.AccessControl = AccessControl;
+exports.accessControl = AccessControl.factory();

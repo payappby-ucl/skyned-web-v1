@@ -3,7 +3,7 @@
     "version": "0.0.1-55",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
-        "build": "pnpm run cp:local && tsc && ./cp-yaml && typedoc",
+        "build": "pnpm run cp:local && pnpm run generate && tsc && ./cp-yaml && typedoc",
         "build:watch": "tsc --watch",
         "serve": "npm run build && firebase emulators:start --only functions",
         "shell": "npm run build && firebase functions:shell",
@@ -14,12 +14,13 @@
         "generate": "pnpm dlx prisma generate",
         "test:db:start": "docker compose up -d",
         "test:db:stop": "docker compose down",
-        "test:migrate": "pnpm run test:db:start && pnpm dlx prisma migrate dev && pnpm run generate",
+        "test:migrate": "pnpm run test:db:start && pnpm dlx prisma migrate dev && pnpm run seed",
         "rm:lib": "rm -rf lib",
         "cp:local": "rm -rf shared && pnpm --filter '@workspace/*' run build && ./cp-local",
+        "seed": "pnpm dlx prisma db seed",
         "test": "cat .env.test > .env && pnpm run rm:lib && pnpm run build && pnpm run test:migrate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
-        "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test && firebase use test && pnpm run deploy",
-        "deploy:dev": "pnpm run test && cat .env.dev > .env && firebase use dev && pnpm dlx prisma db push && pnpm run deploy"
+        "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test",
+        "deploy:dev": "pnpm run test && cat .env.dev > .env && firebase use dev && pnpm dlx prisma db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/test-service-account.json LOCAL=local pnpm run seed && pnpm run deploy"
     },
     "engines": {
         "node": "22"
@@ -75,5 +76,8 @@
         "typedoc": "^0.28.0",
         "typescript": "5.7.3"
     },
-    "private": true
+    "private": true,
+    "prisma": {
+        "seed": "ts-node ./src/seed/index.ts"
+    }
 }

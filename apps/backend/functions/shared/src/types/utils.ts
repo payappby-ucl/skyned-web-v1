@@ -1,4 +1,5 @@
 import { IAdmin } from "interfaces";
+import { department, gender } from "../utils/constants";
 
 export type ProfileType = Pick<
   IAdmin,
@@ -11,3 +12,6 @@ export type ProfileType = Pick<
   | "primaryImage"
   | "nationality"
 >;
+
+export type Gender = (typeof gender)[keyof typeof gender];
+export type Department = (typeof department)[keyof typeof department];

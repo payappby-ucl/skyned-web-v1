@@ -1,3 +1,4 @@
+import { AdminAccountCreationEmailProps } from "../../services";
 import { IEmail } from "../infrastructure";
 
 /**
@@ -10,7 +11,16 @@ export interface IVerifyEmail {
   };
 }
 
-type TemplateDataType = IVerifyEmail;
+/**
+ * Interface for create admin account email template
+ */
+export interface IAdminAccountCreationEmailProps {
+  type: "create-admin-account";
+  data: AdminAccountCreationEmailProps;
+}
+
+/** Represents email template type */
+export type TemplateDataType = IVerifyEmail | IAdminAccountCreationEmailProps;
 
 /**
  * Email Service interface
