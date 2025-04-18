@@ -9,7 +9,8 @@ const NewsLetter: React.FC = () => {
           Subscribe to our Newsletter
         </h2>
         <p className="text-sm">
-          Stay updated with our latest news and special offers
+          Ready to study abroad? Get the latest tips, scholarships, and insider
+          info, straight to your inbox
         </p>
       </div>
       <NewsLetterForm />

@@ -62,10 +62,10 @@ const HeroSearch: React.FC = () => {
                 <FormItem className="md:rounded-0 border-brand-50/10 rounded-full border p-2 md:border-0 md:p-0">
                   <FormControl>
                     <Input
-                      placeholder="Where would you like to study?"
+                      placeholder="Country"
                       onChange={field.onChange}
                       value={field.value}
-                      aria-label="Where would you like to study?"
+                      aria-label="Country"
                       className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent text-center focus:!ring-0 md:text-left"
                     />
                   </FormControl>

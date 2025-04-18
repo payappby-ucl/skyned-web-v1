@@ -57,6 +57,26 @@ const Nav: React.FC = () => {
           </NavigationMenuList>
           <NavigationMenuList className="hidden lg:flex lg:flex-1">
             <NavigationMenuItem>
+              <NavigationMenuTrigger>Apply</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <NavigationMenuLink>Link</NavigationMenuLink>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/country-of-choice" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "hover:bg-transparent",
+                  )}
+                >
+                  Country of choice
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
               <Link href="/information-hub" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={cn(
@@ -65,48 +85,6 @@ const Nav: React.FC = () => {
                   )}
                 >
                   Information Hub
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Apply</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/village" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  Village
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>School</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="w-max">
-                  <li>
-                    <NavigationMenuLink>School page</NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  Contact Us
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -123,6 +101,19 @@ const Nav: React.FC = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "hover:bg-transparent",
+                  )}
+                >
+                  Contact Us
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
           <div className="hidden items-center gap-4 lg:flex">
             <search>
@@ -130,12 +121,12 @@ const Nav: React.FC = () => {
                 <SearchIcon />
               </Button>
             </search>
-            <Button asChild variant="brand" className="rounded-full">
+            <Button asChild variant="brand" className="rounded-full text-sm">
               <Link
                 href="/consultation"
                 aria-label="Link to Book a Consultation Page"
               >
-                Book Consultation
+                Speak with an Expert
               </Link>
             </Button>
           </div>

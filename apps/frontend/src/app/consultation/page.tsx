@@ -8,9 +8,9 @@ import Link from "next/link";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 
-const title = "Book Consultation";
+const title = "Book an Appointment With a Study Abroad Rep";
 const description =
-  "Welcome to Skyned Consults! Choose the appointment type that suits your needs and schedule a session with our experts.";
+  "Meet in person or virtually, choose what works best for you.";
 
 export const metadata: Metadata = {
   ...sharedMetadata,
@@ -23,38 +23,39 @@ export const metadata: Metadata = {
 
 const consultations = [
   {
-    title: "Physical Consultation",
-    subtitle: "Meet an Admission Coordinator in Person",
+    title: "Physical Consultations",
+    subtitle: "Visit us in person, let's talk face-to-face.",
     description:
-      "Meet our Admission Coordinators at any of our offices for a one-on-one consultation. Locations: Lagos Office, Abuja Office, Port Harcourt Office",
+      "Prefer speaking with someone in person? Book a free consultation at any of our offices in Lagos, Abuja, or Port Harcourt.",
     link: {
       href: "/consultation/physical-consultation",
-      buttonText: "Book a Physical Appointment",
+      buttonText: "Book a Visit",
     },
   },
   {
-    title: "Virtual Booking",
-    subtitle: "Speak to an Admission Coordinator Online",
-    description: "Available via:  Google Meet",
+    title: "Virtual Consultations",
+    subtitle: "Speak With Us From Anywhere",
+    description:
+      "Can't make it to our office? Let's meet online. It's personal, stress-free, and done on your schedule.",
     link: {
       href: "https://tr.ee/VhlLhimKyd",
-      buttonText: "Book a Virtual Appointment",
+      buttonText: "Book a Virtual Call",
     },
   },
   {
-    title: "Visa Consultation",
-    subtitle: "Speak with Immigration Officers & Lawyers",
+    title: "Visa Consultations",
+    subtitle: "Let's make the visa process simpler",
     description:
-      "Get expert advice on visa applications, immigration policies, and travel documentation. Consult with: Visa Immigration Officers, Legal Experts",
+      "Whether it's your first application or you've faced a rejection, we'll guide you.",
     link: {
       href: "/consultation/visa-consultation",
-      buttonText: "Book a Visa Consultation",
+      buttonText: "Start Your Visa Session",
     },
   },
   {
-    title: "Rescheduling & Cancellations",
+    title: "Need to Reschedule or Cancel?",
     description:
-      "If you need to reschedule or cancel your appointment, please use the link in your confirmation email or contact our support team at support@skynedconsults.com or call us at +234 XXX XXXX XXXX.",
+      "If you can't make your appointment, you can easily reschedule or cancel it ahead of time. We'd love to still help you. if you need help with this, send an email to richard@skynedconsults.com or call +234 913 360 6384",
   },
 ];
 
@@ -79,7 +80,7 @@ export default function Consultation() {
       />
 
       <section className="text-background dark:text-foreground space-y-4 bg-gray-700 bg-[url(/assets/images/consultation.jpg)] bg-cover bg-center bg-no-repeat text-center bg-blend-multiply">
-        <h1>{title}</h1>
+        <h1 className="mx-auto max-w-xl">{title}</h1>
         <p className="mx-auto max-w-lg">{description}</p>
       </section>
       <CustomBreadCrumb className="bg-accent border-b" />

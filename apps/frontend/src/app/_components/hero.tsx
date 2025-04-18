@@ -12,14 +12,13 @@ const HeroSection: React.FC = () => {
             Country
           </p>
           <h1 className="max-w-3xl text-center md:!text-[70px]">
-            Achieve Your <span className="text-brand-400">Dreams</span> of
-            Moving <span className="text-brand-400">Abroad</span>.
+            Your Next Big Move. Apply to Study Abroad
           </h1>
         </div>
         <p className="max-w-3xl text-center">
-          We offer free and seamless international study application support
-          into bachelors, postgraduate diploma, postbaccalaureate, graduate
-          certificates and masters programs
+          We've guided 1000+ students who wanted more, more opportunities, more
+          future. Get free, transparent support for undergraduate, PGD, and
+          master's applications to the right international schools.
         </p>
         <HeroSearch />
       </header>
