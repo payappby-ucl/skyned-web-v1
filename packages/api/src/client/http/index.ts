@@ -26,9 +26,18 @@ export class ClientHttp extends HTTPClient implements IHTTPClient {
   };
 
   setTokenCookie: IHTTPClient["setTokenCookie"] = async (token) => {
+    console.log("Setting cookies");
     Cookies.set(this.tokenCookieName, token, {
-      secure: this.environment === "development" ? false : true,
-      httpOnly: true,
+      secure: true,
+      // httpOnly: true,
+      // expires: 7,
     });
+
+    console.log(Cookies.get(this.tokenCookieName));
+  };
+
+  getTokenCookie: IHTTPClient["getTokenCookie"] = async () => {
+    const token = await this.auth.getIdToken();
+    return token;
   };
 }

@@ -2,6 +2,9 @@
 import { getAuth, UserRecord } from "firebase-admin/auth";
 import { Auth, auth } from ".";
 import { StatusCodes } from "http-status-codes";
+import { admin } from "../../data";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { clientAuth } from "../../../__tests__/helpers/constants";
 
 describe("Auth Infrastructure", () => {
   describe("Instance", () => {
@@ -11,9 +14,16 @@ describe("Auth Infrastructure", () => {
   });
 
   describe("Methods", () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
     describe("findUserByEmail", () => {
-      afterEach(() => {
+      beforeEach(() => {
         jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.clearAllMocks();
       });
 
       const record = {
@@ -70,7 +80,11 @@ describe("Auth Infrastructure", () => {
     });
 
     describe("exists", () => {
-      afterEach(() => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
         jest.clearAllMocks();
       });
 
@@ -128,7 +142,11 @@ describe("Auth Infrastructure", () => {
     });
 
     describe("createAuth", () => {
-      afterEach(() => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
         jest.clearAllMocks();
       });
 
@@ -182,6 +200,45 @@ describe("Auth Infrastructure", () => {
         expect(spy).toHaveBeenCalled();
         expect(setCustomClaimSpy).toHaveBeenCalled();
         expect(userId).toBe("12345678");
+      });
+    });
+
+    describe("verifyIdToken", () => {
+      beforeAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await auth.verifyIdToken({ token: {} as any });
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should be null if non existing userid is passed", async () => {
+        const authUser = await auth.verifyIdToken({
+          token: "yrrhfffkvkvkkvvnvnn",
+        });
+
+        expect(authUser).toBeNull();
+      });
+
+      test("should return a token", async () => {
+        const { user } = await signInWithEmailAndPassword(
+          clientAuth,
+          admin.email,
+          "12345678",
+        );
+
+        const token = await user.getIdToken();
+
+        const authUser = await auth.verifyIdToken({
+          token: token || "",
+        });
+        expect(authUser).not.toBeNull();
+        expect(authUser?.claim).toBe("admin");
+        expect(authUser?.id).toBe(user.uid);
       });
     });
   });

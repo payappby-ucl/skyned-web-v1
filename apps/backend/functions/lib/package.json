@@ -3,7 +3,7 @@
     "version": "0.0.1-55",
     "scripts": {
         "lint": "eslint --ext .js,.ts .",
-        "build": "pnpm run cp:local && pnpm run generate && tsc && ./cp-yaml && typedoc",
+        "build": "pnpm run cp:local && pnpm i && pnpm run generate && tsc && ./cp-yaml && typedoc",
         "build:watch": "tsc --watch",
         "serve": "npm run build && firebase emulators:start --only functions",
         "shell": "npm run build && firebase functions:shell",
@@ -18,7 +18,7 @@
         "rm:lib": "rm -rf lib",
         "cp:local": "rm -rf shared && pnpm --filter '@workspace/*' run build && ./cp-local",
         "seed": "pnpm dlx prisma db seed",
-        "test": "cat .env.test > .env && pnpm run rm:lib && pnpm run build && pnpm run test:migrate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
+        "test": "cat .env.test > .env && pnpm run test:migrate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
         "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test",
         "deploy:dev": "pnpm run test && cat .env.dev > .env && firebase use dev && pnpm dlx prisma db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/test-service-account.json LOCAL=local pnpm run seed && pnpm run deploy"
     },
@@ -68,6 +68,7 @@
         "eslint": "^8.57.1",
         "eslint-config-google": "^0.14.0",
         "eslint-plugin-import": "^2.31.0",
+        "firebase": "^11.2.0",
         "firebase-functions-test": "^3.4.1",
         "jest": "^29.7.0",
         "prisma": "^6.5.0",

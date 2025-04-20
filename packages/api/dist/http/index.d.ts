@@ -7,6 +7,7 @@ declare abstract class HTTPClient implements IHTTPClient {
     abstract setAuthHeader: IHTTPClient["setAuthHeader"];
     abstract clearTokenCookie: IHTTPClient["clearTokenCookie"];
     abstract setTokenCookie: IHTTPClient["setTokenCookie"];
+    abstract getTokenCookie: IHTTPClient["getTokenCookie"];
     request<T>(url: string, method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", options?: RequestInit): Promise<ISuccessResponse<T>>;
 }
 export { HTTPClient };

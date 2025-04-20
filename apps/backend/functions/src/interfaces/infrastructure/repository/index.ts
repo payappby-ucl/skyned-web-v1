@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { ITokenRepository } from "../../../infrastructure";
+import { IAdminRepository, ITokenRepository } from "../../../infrastructure";
 import {
   Prisma,
   PrismaClient,
@@ -12,4 +12,5 @@ export interface IRepository {
   /** DB - This is in a case i need to use transactions - Tightly coupled to prisma and postgres DB */
   db: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>;
   token: ITokenRepository;
+  admin: IAdminRepository;
 }

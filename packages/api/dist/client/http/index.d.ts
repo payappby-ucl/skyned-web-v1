@@ -7,4 +7,5 @@ export declare class ClientHttp extends HTTPClient implements IHTTPClient {
     setAuthHeader: IHTTPClient["setAuthHeader"];
     clearTokenCookie: IHTTPClient["clearTokenCookie"];
     setTokenCookie: IHTTPClient["setTokenCookie"];
+    getTokenCookie: IHTTPClient["getTokenCookie"];
 }

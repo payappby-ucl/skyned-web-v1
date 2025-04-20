@@ -28,10 +28,17 @@ class ClientHttp extends http_1.HTTPClient {
         }
     };
     setTokenCookie = async (token) => {
+        console.log("Setting cookies");
         js_cookie_1.default.set(this.tokenCookieName, token, {
-            secure: this.environment === "development" ? false : true,
-            httpOnly: true,
+            secure: true,
+            // httpOnly: true,
+            // expires: 7,
         });
+        console.log(js_cookie_1.default.get(this.tokenCookieName));
+    };
+    getTokenCookie = async () => {
+        const token = await this.auth.getIdToken();
+        return token;
     };
 }
 exports.ClientHttp = ClientHttp;

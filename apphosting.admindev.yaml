@@ -12,12 +12,6 @@ env:
       - BUILD
       - RUNTIME
 
-  - variable: NEXT_PUBLIC_API_URL
-    value: https://api-dxmhb5dscq-uc.a.run.app/api
-    availability:
-      - BUILD
-      - RUNTIME
-
   - variable: PROJECT_NAME
     value: "@skyned/admin"
     availability:

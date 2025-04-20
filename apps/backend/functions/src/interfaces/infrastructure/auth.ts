@@ -1,4 +1,5 @@
 import { AuthClaim } from "@workspace/shared";
+import { TokenVerifySchema } from "../../infrastructure";
 
 /** Auth Infrastructure interfaces */
 export interface IAuth {
@@ -11,4 +12,8 @@ export interface IAuth {
     },
     claim: AuthClaim["claim"],
   ): Promise<string>;
+
+  verifyIdToken(
+    data: TokenVerifySchema,
+  ): Promise<{ id: string; claim: AuthClaim["claim"] } | null>;
 }

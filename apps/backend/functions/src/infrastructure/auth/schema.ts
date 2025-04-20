@@ -13,3 +13,8 @@ export const AuthCreationSchema = CommonSchema.pick({
     claim: z.enum(["admin", "student"]),
   });
 export type AuthCreationSchema = z.infer<typeof AuthCreationSchema>;
+
+export const TokenVerifySchema = z.object({
+  token: z.string().trim().nonempty("Required"),
+});
+export type TokenVerifySchema = z.infer<typeof TokenVerifySchema>;

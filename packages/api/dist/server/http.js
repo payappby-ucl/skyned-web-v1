@@ -26,9 +26,19 @@ class ServerHttpClient extends http_1.HTTPClient {
     setTokenCookie = async (token) => {
         const cookieStore = await this.cookies();
         cookieStore.set(this.tokenCookieName, token, {
-            httpOnly: true,
+            // httpOnly: true,
             secure: true,
         });
+    };
+    getTokenCookie = async () => {
+        const cookieStore = await this.cookies();
+        if (cookieStore.has(this.tokenCookieName)) {
+            const tokenCookie = cookieStore.get(this.tokenCookieName);
+            if (tokenCookie) {
+                return tokenCookie.value;
+            }
+        }
+        return null;
     };
 }
 exports.ServerHttpClient = ServerHttpClient;

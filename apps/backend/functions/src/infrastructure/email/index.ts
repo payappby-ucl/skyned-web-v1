@@ -89,7 +89,8 @@ class Email implements IEmail {
       );
     }
 
-    const { to, subject, html, attachments } = data;
+    let { to, subject, html, attachments } = data;
+    to = [...new Set(to)];
     await transporter.sendMail({
       from: sender,
       to: SkynedUtils.isEnvironment(["dev", "test"])

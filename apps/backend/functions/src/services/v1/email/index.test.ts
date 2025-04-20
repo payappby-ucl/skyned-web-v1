@@ -16,8 +16,12 @@ describe("EmailService", () => {
   });
 
   describe("Send Mail", () => {
-    afterEach(() => {
+    beforeEach(() => {
       jest.resetAllMocks();
+    });
+
+    afterAll(() => {
+      jest.clearAllMocks();
     });
 
     test("should throw an error if an invalid template is passed", async () => {

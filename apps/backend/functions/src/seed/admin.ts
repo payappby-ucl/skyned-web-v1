@@ -1,23 +1,14 @@
-import { department, gender } from "@workspace/shared";
+/* eslint-disable operator-linebreak */
+import { department } from "@workspace/shared";
 import { auth } from "../infrastructure";
 import { Client } from "../infrastructure/repository/prisma";
-import { emailService, idGeneratorService, storageService } from "../services";
+import { emailService, storageService } from "../services";
 import { primaryImageDataUri } from "./image";
 import { env } from "../config";
 import { SkynedUtils } from "../utils";
+import { admin, adminPassword } from "../data";
 
 SkynedUtils.initializeFirebaseApp();
-
-const password = idGeneratorService.id(10);
-const admin = {
-  email: "admin@skynedconsults.com",
-  firstName: "Chinedu",
-  lastName: "Okoronkwo",
-  gender: gender.Male,
-  nationality: "NG",
-  countryOfResidence: "CA",
-  jobTitle: "CEO/CO-founder",
-};
 
 export class AdminSeed extends Client {
   constructor() {
@@ -32,7 +23,7 @@ export class AdminSeed extends Client {
         console.log("Admin does not exist...");
         console.log("Creating Admin Auth on firebase...");
         const adminId = await auth.createAuth(
-          { email: admin.email, password },
+          { email: admin.email, password: adminPassword },
           "admin",
         );
         console.log("Admin Auth created");
@@ -119,7 +110,7 @@ export class AdminSeed extends Client {
               type: "create-admin-account",
               data: {
                 ...SkynedUtils.pick(admin, ["firstName", "lastName", "email"]),
-                password,
+                password: adminPassword,
                 image: primaryImage,
               },
             },

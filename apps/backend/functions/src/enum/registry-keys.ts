@@ -25,6 +25,7 @@ export enum RegistryKeysEnum {
   //* Middlewares
   /** Request validation middleware */
   REQUEST_VALIDATION = "RequestValidationMiddleware",
+  AUTH_MIDDLEWARE = "AuthMiddleware",
 
   // * Routers
   /** Base Router */
@@ -37,6 +38,8 @@ export enum RegistryKeysEnum {
   V1_ROUTER = "V1Router",
   /** Auth Router */
   AUTH_ROUTER = "AuthRouter",
+  /** Auth Router */
+  ADMIN_ROUTER = "AdminRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -45,6 +48,8 @@ export enum RegistryKeysEnum {
   HEALTH_CONTROLLER = "HealthController",
   /** Auth Controller */
   AUTH_CONTROLLER = "AuthController",
+  /** Admin Controller */
+  ADMIN_CONTROLLER = "AdminController",
 
   // * Services
   /** Email Service */
@@ -55,6 +60,8 @@ export enum RegistryKeysEnum {
   ID_GENERATOR_SERVICE = "IdGeneratorService",
   /** Token Service */
   TOKEN_SERVICE = "TokenService",
+  /** Admin Service */
+  ADMIN_SERVICE = "AdminService",
 
   // * Utilities
   /** Handles internal validations */

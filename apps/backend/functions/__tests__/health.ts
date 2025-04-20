@@ -7,8 +7,8 @@ import { app } from "../src/app";
 
 describe("Health Check API", () => {
   describe("GET - /health", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
+    beforeEach(() => {
+      jest.clearAllMocks();
     });
 
     test(`should respond with JSON and status code of ${StatusCodes.OK} status code`, async () => {

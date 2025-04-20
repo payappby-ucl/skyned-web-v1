@@ -13,10 +13,6 @@ describe("TokenService", () => {
   });
 
   describe("Methods", () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
     const payload = {
       email: "bobslegend795@gmail.com",
     };
@@ -32,6 +28,9 @@ describe("TokenService", () => {
     };
 
     describe("sign", () => {
+      beforeAll(() => {
+        jest.clearAllMocks();
+      });
       test("should throw error if payload is empty", () => {
         expect(() => {
           tokenService.sign({});
@@ -51,6 +50,10 @@ describe("TokenService", () => {
     });
 
     describe("verify", () => {
+      beforeAll(() => {
+        jest.clearAllMocks();
+      });
+
       test("should return null if token is empty/falsy", () => {
         expect(tokenService.verify("")).toBeNull();
       });
@@ -67,6 +70,14 @@ describe("TokenService", () => {
     });
 
     describe("createToken", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.clearAllMocks();
+      });
+
       test("should throw error if input is invalid", async () => {
         try {
           await tokenService.createToken({
@@ -93,6 +104,14 @@ describe("TokenService", () => {
     });
 
     describe("findTokenByTokenId", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.clearAllMocks();
+      });
+
       test("should throw error if token id is falsy", async () => {
         try {
           await tokenService.findTokenByTokenId("");
@@ -131,6 +150,14 @@ describe("TokenService", () => {
     });
 
     describe("delete", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.clearAllMocks();
+      });
+
       test("should delete the token", async () => {
         const findSpy = jest
           .spyOn(repository.token, "findTokenByTokenId")

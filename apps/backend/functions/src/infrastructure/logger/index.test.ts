@@ -11,8 +11,12 @@ describe("Logger Infrastructure", () => {
   });
 
   describe("logger methods", () => {
-    afterEach(() => {
+    beforeEach(() => {
       jest.resetAllMocks();
+    });
+
+    afterAll(() => {
+      jest.clearAllMocks();
     });
 
     test("should call the log method", () => {

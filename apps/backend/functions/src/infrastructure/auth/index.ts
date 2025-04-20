@@ -4,8 +4,10 @@ import { IAuth, IValidationUtility } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { SkynedUtils, validationUtility } from "../../utils";
 import { StatusCodes } from "http-status-codes";
-import { RegisterSchema } from "@workspace/shared";
-import { AuthCreationSchema } from "./schema";
+import { AuthClaim, RegisterSchema } from "@workspace/shared";
+import { AuthCreationSchema, TokenVerifySchema } from "./schema";
+
+export * from "./schema";
 
 SkynedUtils.initializeFirebaseApp();
 
@@ -97,12 +99,58 @@ export class Auth implements IAuth {
       },
     });
 
-    const userAuth = await this.auth.createUser({
-      ...data,
-    });
+    let userAuth: Awaited<ReturnType<typeof this.auth.createUser>> | null =
+      null;
+
+    try {
+      userAuth = await this.auth.createUser({
+        ...data,
+      });
+    } catch (error: any) {
+      throw SkynedUtils.createException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        error.message,
+      );
+    }
 
     await this.auth.setCustomUserClaims(userAuth.uid, { role: claim });
     return userAuth.uid;
+  };
+
+  /**
+   * Verify user token
+   */
+
+  verifyIdToken: IAuth["verifyIdToken"] = async (data) => {
+    try {
+      this.validationUtility.validateInput({
+        schema: TokenVerifySchema,
+        inputData: data,
+      });
+
+      let user: Awaited<ReturnType<typeof this.auth.getUser>> | null;
+      try {
+        const { uid } = await this.auth.verifyIdToken(data.token);
+        user = await this.auth.getUser(uid);
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+
+      const { uid: id, customClaims } = user;
+      if (!customClaims) {
+        return null;
+      }
+
+      const role = customClaims.role as AuthClaim["claim"];
+      if (!role) return null;
+      return {
+        id,
+        claim: role,
+      };
+    } catch (error) {
+      return null;
+    }
   };
 }
 

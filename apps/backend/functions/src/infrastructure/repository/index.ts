@@ -2,10 +2,12 @@ import { RegistryKeysEnum } from "../../enum";
 import { IRepository, IValidationUtility } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { validationUtility } from "../../utils";
+import { AdminRepository } from "./admin";
 import { Client } from "./prisma";
 import { TokenRepository } from "./token";
 
 export * from "./token";
+export * from "./admin";
 
 export interface RepositoryDependencies {
   validationUtility: IValidationUtility;
@@ -34,6 +36,7 @@ export class Repository extends Client implements IRepository {
 
   /** TokenRepository instance */
   token = new TokenRepository(this.db, this.validationUtility);
+  admin = new AdminRepository(this.db, this.validationUtility);
 }
 
 export const repository = SkynedRegistry.getSingleton(
