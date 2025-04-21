@@ -7,9 +7,14 @@ runConfig:
 
 env:
   - variable: NEXT_PUBLIC_BASE_URL
+    value: https://skyned-admin--skyned-test-31a2e.us-central1.hosted.app
+    availability:
+      - RUNTIME
+      - BUILD
+
+  - variable: API_URL
     value: https://api-dxmhb5dscq-uc.a.run.app
     availability:
-      - BUILD
       - RUNTIME
 
   - variable: PROJECT_NAME

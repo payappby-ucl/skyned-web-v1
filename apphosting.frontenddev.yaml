@@ -19,7 +19,7 @@ env:
       - BUILD
 
   - variable: API_URL
-    value: https://api-dxmhb5dscq-uc.a.run.app/api
+    value: https://api-dxmhb5dscq-uc.a.run.app
     availability:
       - RUNTIME
 
