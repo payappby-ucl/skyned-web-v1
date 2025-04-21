@@ -1,4 +1,4 @@
-import { COOKIE_EXPIRATION } from "lib";
+import { COOKIE_EXPIRATION } from "../lib";
 import { CookieType } from ".";
 import { HTTPClient, IHTTPClient } from "../http";
 

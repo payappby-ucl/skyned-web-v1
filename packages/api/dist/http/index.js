@@ -15,7 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HTTPClient = void 0;
-const lib_1 = require("lib");
+const lib_1 = require("../lib");
 __exportStar(require("./interface"), exports);
 class HTTPClient {
     baseUrl;

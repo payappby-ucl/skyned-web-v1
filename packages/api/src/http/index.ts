@@ -1,4 +1,4 @@
-import { TOKEN_COOKIE_NAME } from "lib";
+import { TOKEN_COOKIE_NAME } from "../lib";
 import { IFailedResponse, IHTTPClient, ISuccessResponse } from "./interface";
 
 export * from "./interface";

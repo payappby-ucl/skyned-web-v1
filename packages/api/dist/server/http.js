@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServerHttpClient = void 0;
-const lib_1 = require("lib");
+const lib_1 = require("../lib");
 const http_1 = require("../http");
 class ServerHttpClient extends http_1.HTTPClient {
     cookies;

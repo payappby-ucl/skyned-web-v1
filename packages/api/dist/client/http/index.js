@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientHttp = void 0;
-const lib_1 = require("lib");
+const lib_1 = require("../../lib");
 const http_1 = require("../../http");
 const js_cookie_1 = __importDefault(require("js-cookie"));
 class ClientHttp extends http_1.HTTPClient {

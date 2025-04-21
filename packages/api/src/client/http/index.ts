@@ -1,5 +1,5 @@
 "use client";
-import { AUTH_TIME_STORAGE_NAME, COOKIE_EXPIRATION } from "lib";
+import { AUTH_TIME_STORAGE_NAME, COOKIE_EXPIRATION } from "../../lib";
 import { HTTPClient, IHTTPClient } from "../../http";
 import { IBrandClientApi } from "../interface";
 import Cookies from "js-cookie";
