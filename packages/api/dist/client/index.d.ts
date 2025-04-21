@@ -3,6 +3,7 @@ import { IBrandClientApi } from "./interface";
 import { IAuth } from "./auth";
 import { IUtils, ToastType } from "./utils";
 import { IHTTPClient } from "../http";
+import { Storage } from "./storage";
 export * from "./interface";
 interface Dependencies {
     auth: FirebaseAuth;
@@ -11,6 +12,7 @@ interface Dependencies {
 }
 export declare class BrandClientApi implements IBrandClientApi {
     private static instance;
+    storage: Storage;
     auth: IAuth;
     utils: IUtils;
     httpClient: IHTTPClient;

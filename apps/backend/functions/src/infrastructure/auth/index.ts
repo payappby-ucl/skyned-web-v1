@@ -133,7 +133,6 @@ export class Auth implements IAuth {
         const { uid } = await this.auth.verifyIdToken(data.token);
         user = await this.auth.getUser(uid);
       } catch (error) {
-        console.log(error);
         return null;
       }
 

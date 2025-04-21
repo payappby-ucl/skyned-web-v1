@@ -98,7 +98,7 @@ export class AuthMiddleware implements IAuthMiddleware {
       }
 
       if (!roles.some((role) => !!skynedAuth[role])) {
-        throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
+        throw SkynedUtils.createException(StatusCodes.FORBIDDEN);
       }
 
       next();

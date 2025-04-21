@@ -18,16 +18,18 @@ exports.BrandClientApi = void 0;
 const auth_1 = require("./auth");
 const utils_1 = require("./utils");
 const http_1 = require("./http");
+const storage_1 = require("./storage");
 __exportStar(require("./interface"), exports);
 class BrandClientApi {
     static instance = null;
+    storage = new storage_1.Storage();
     auth;
     utils;
     httpClient;
     constructor(auth, toast, environment) {
         this.auth = new auth_1.Auth(auth);
         this.utils = new utils_1.Utils(toast);
-        this.httpClient = new http_1.ClientHttp(this.auth, environment);
+        this.httpClient = new http_1.ClientHttp(this.auth, this.storage, environment);
     }
     static factory({ auth, toast, environment }) {
         if (!BrandClientApi.instance) {

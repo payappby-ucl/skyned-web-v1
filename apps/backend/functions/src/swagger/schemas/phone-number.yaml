@@ -1,0 +1,18 @@
+components:
+  schemas:
+    phoneNumber:
+      type: object
+      properties:
+        number:
+          type: string
+        countryCallingCode:
+          type: string
+        nationalNumber:
+          type: string
+        country:
+          type: string
+          nullable: true
+      required:
+        - number
+        - countryCallingCode
+        - nationalNumber

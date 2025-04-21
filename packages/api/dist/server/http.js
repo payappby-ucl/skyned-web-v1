@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServerHttpClient = void 0;
+const lib_1 = require("lib");
 const http_1 = require("../http");
 class ServerHttpClient extends http_1.HTTPClient {
     cookies;
@@ -28,6 +29,7 @@ class ServerHttpClient extends http_1.HTTPClient {
         cookieStore.set(this.tokenCookieName, token, {
             // httpOnly: true,
             secure: true,
+            expires: lib_1.COOKIE_EXPIRATION,
         });
     };
     getTokenCookie = async () => {

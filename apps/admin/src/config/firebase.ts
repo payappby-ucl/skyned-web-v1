@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { env } from "./env";
 
 let app: ReturnType<typeof initializeApp>;
@@ -10,5 +10,8 @@ if (getApps().length) {
 }
 
 const auth = getAuth(app);
+if(env.appEnv === "emulator") {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+}
 
 export { auth };

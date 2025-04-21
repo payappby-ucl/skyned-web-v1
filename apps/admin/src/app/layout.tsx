@@ -2,6 +2,7 @@ import { Manrope, Poppins } from "next/font/google";
 import "@workspace/ui/globals.css";
 import { ThemeProviders } from "../components/providers/theme-provider";
 import { AuthProvider } from "../components/providers/auth-provider";
+import { Toaster } from "@workspace/ui/components/sonner";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
         <ThemeProviders>
           <AuthProvider>{children}</AuthProvider>
+          <Toaster richColors closeButton />
         </ThemeProviders>
       </body>
     </html>

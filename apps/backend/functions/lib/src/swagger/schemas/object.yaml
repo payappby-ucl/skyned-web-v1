@@ -1,0 +1,16 @@
+components:
+  schemas:
+    Object:
+      type: object
+      properties:
+        mimeType:
+          type: string
+          example: image/png
+        path:
+          type: string
+        url:
+          type: string
+      required:
+        - mimeType
+        - path
+        - url

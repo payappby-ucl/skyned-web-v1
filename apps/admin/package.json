@@ -12,6 +12,7 @@
     "@workspace/api": "workspace:*",
     "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
+    "dayjs": "^1.11.13",
     "firebase": "^11.2.0",
     "lucide-react": "^0.475.0",
     "next": "^15.2.3",

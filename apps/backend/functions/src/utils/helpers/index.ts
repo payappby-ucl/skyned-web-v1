@@ -122,6 +122,11 @@ export class SkynedUtils {
           projectId: "skyned-test-31a2e",
           storageBucket: "skyned-test-31a2e.firebasestorage.app",
         });
+
+        if (env.environment === "test") {
+          process.env.FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:9099";
+          process.env.FIREBASE_STORAGE_EMULATOR_HOST = "127.0.0.1:9199";
+        }
       } else {
         admin.initializeApp();
       }

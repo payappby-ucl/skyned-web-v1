@@ -46,7 +46,7 @@ describe("Admin API", () => {
         success: true,
         data: expect.objectContaining({
           email: user.email,
-          adminId: user.uid
+          adminId: user.uid,
         }),
       });
     });

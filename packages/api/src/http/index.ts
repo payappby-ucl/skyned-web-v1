@@ -1,8 +1,9 @@
+import { TOKEN_COOKIE_NAME } from "lib";
 import { IFailedResponse, IHTTPClient, ISuccessResponse } from "./interface";
 
 export * from "./interface";
 abstract class HTTPClient implements IHTTPClient {
-  protected tokenCookieName = "_SKY_token";
+  protected tokenCookieName = TOKEN_COOKIE_NAME;
   constructor(private readonly baseUrl: string = "") {}
 
   abstract setAuthHeader: IHTTPClient["setAuthHeader"];
@@ -17,7 +18,7 @@ abstract class HTTPClient implements IHTTPClient {
   ): Promise<ISuccessResponse<T>> {
     try {
       const headers = new Headers(options?.headers);
-      this.setAuthHeader(headers);
+      await this.setAuthHeader(headers);
       if (!["GET", "DELETE"].includes(method)) {
         headers.append("Content-Type", "application/json");
       }

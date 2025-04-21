@@ -15,17 +15,18 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HTTPClient = void 0;
+const lib_1 = require("lib");
 __exportStar(require("./interface"), exports);
 class HTTPClient {
     baseUrl;
-    tokenCookieName = "_SKY_token";
+    tokenCookieName = lib_1.TOKEN_COOKIE_NAME;
     constructor(baseUrl = "") {
         this.baseUrl = baseUrl;
     }
     async request(url, method, options) {
         try {
             const headers = new Headers(options?.headers);
-            this.setAuthHeader(headers);
+            await this.setAuthHeader(headers);
             if (!["GET", "DELETE"].includes(method)) {
                 headers.append("Content-Type", "application/json");
             }

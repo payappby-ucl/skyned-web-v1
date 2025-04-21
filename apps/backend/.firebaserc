@@ -1,5 +1,6 @@
 {
   "projects": {
-    "dev": "skyned-test-31a2e"
+    "dev": "skyned-test-31a2e",
+    "test": "skyned-test-31a2e"
   }
 }

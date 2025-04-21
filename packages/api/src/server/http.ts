@@ -1,3 +1,4 @@
+import { COOKIE_EXPIRATION } from "lib";
 import { CookieType } from ".";
 import { HTTPClient, IHTTPClient } from "../http";
 
@@ -31,6 +32,7 @@ export class ServerHttpClient extends HTTPClient implements IHTTPClient {
     cookieStore.set(this.tokenCookieName, token, {
       // httpOnly: true,
       secure: true,
+      expires: COOKIE_EXPIRATION,
     });
   };
 

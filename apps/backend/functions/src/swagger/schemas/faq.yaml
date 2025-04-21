@@ -1,0 +1,23 @@
+components:
+  schemas:
+    Faq:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            question:
+              type: string
+            answer:
+              type: string
+            createdById:
+              type: string
+            createdBy:
+              $ref: "#/components/schemas/Admin"
+              nullable: true
+          required:
+            - id
+            - question
+            - answer
+            - createdById

@@ -4,6 +4,7 @@ import { Auth, IAuth } from "./auth";
 import { IUtils, ToastType, Utils } from "./utils";
 import { IHTTPClient } from "../http";
 import { ClientHttp } from "./http";
+import { Storage } from "./storage";
 
 export * from "./interface";
 interface Dependencies {
@@ -13,6 +14,7 @@ interface Dependencies {
 }
 export class BrandClientApi implements IBrandClientApi {
   private static instance: IBrandClientApi | null = null;
+  storage = new Storage();
   auth: IAuth;
   utils: IUtils;
   httpClient: IHTTPClient;
@@ -24,7 +26,7 @@ export class BrandClientApi implements IBrandClientApi {
   ) {
     this.auth = new Auth(auth);
     this.utils = new Utils(toast);
-    this.httpClient = new ClientHttp(this.auth, environment);
+    this.httpClient = new ClientHttp(this.auth, this.storage, environment);
   }
 
   static factory({ auth, toast, environment }: Dependencies) {

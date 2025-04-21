@@ -5,14 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientHttp = void 0;
+const lib_1 = require("lib");
 const http_1 = require("../../http");
 const js_cookie_1 = __importDefault(require("js-cookie"));
 class ClientHttp extends http_1.HTTPClient {
     auth;
+    storage;
     environment;
-    constructor(auth, environment) {
+    constructor(auth, storage, environment) {
         super("/api");
         this.auth = auth;
+        this.storage = storage;
         this.environment = environment;
     }
     setAuthHeader = async (header) => {
@@ -20,6 +23,7 @@ class ClientHttp extends http_1.HTTPClient {
         if (token) {
             await this.setTokenCookie(token);
             header.append("authorization", `bearer ${token}`);
+            this.storage.localStorage.setItem(lib_1.AUTH_TIME_STORAGE_NAME, new Date().toUTCString());
         }
     };
     clearTokenCookie = async () => {
@@ -28,16 +32,14 @@ class ClientHttp extends http_1.HTTPClient {
         }
     };
     setTokenCookie = async (token) => {
-        console.log("Setting cookies");
         js_cookie_1.default.set(this.tokenCookieName, token, {
             secure: true,
+            expires: lib_1.COOKIE_EXPIRATION,
             // httpOnly: true,
-            // expires: 7,
         });
-        console.log(js_cookie_1.default.get(this.tokenCookieName));
     };
     getTokenCookie = async () => {
-        const token = await this.auth.getIdToken();
+        const token = js_cookie_1.default.get(this.tokenCookieName) || null;
         return token;
     };
 }

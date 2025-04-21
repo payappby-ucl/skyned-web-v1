@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ThemeProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -11,8 +11,9 @@ export function ThemeProviders({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
       enableColorScheme
+      forcedTheme="light"
     >
       {children}
     </NextThemesProvider>
-  )
+  );
 }
