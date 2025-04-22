@@ -16,7 +16,7 @@ import {
   COOKIE_EXPIRATION,
   COOKIE_EXPIRATION_UNIT,
 } from "@workspace/api/lib";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface IAuth {
   user: IAdmin | null;
@@ -79,9 +79,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         const { data } = await brandClientApi.httpClient.request<IAdmin>(
           "/admin",
           "GET",
-          {
-            cache: "no-store",
-          },
         );
 
         setAuth({

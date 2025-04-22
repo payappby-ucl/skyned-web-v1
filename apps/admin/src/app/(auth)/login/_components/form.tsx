@@ -32,11 +32,6 @@ const LoginForm: React.FC = () => {
   const onSubmit = useCallback(async (data: AdminLoginSchema) => {
     try {
       await brandClientApi.auth.login(data.email, data.password);
-      const token = await brandClientApi.auth.getIdToken();
-      // if (token) {
-      //   await brandClientApi.httpClient.setTokenCookie(token);
-      //   router.replace("/");
-      // }
       router.replace("/");
     } catch (error) {
       brandClientApi.utils.alertError(error);
