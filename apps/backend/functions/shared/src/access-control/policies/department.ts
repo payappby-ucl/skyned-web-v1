@@ -1,12 +1,11 @@
-import { AccessControlType } from "access-control/types";
+import { AccessControlType } from "../../access-control/types";
 
 export const departmentPolicies: AccessControlType = {
   departments: {
     list(authClaim) {
       if (!authClaim) return false;
-
       const { claim, user } = authClaim;
-      if (claim === "student") return false;
+      if (claim !== "admin") return false;
 
       return true;
     },

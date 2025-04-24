@@ -181,6 +181,7 @@ model Inquiry {
   phoneNumber Json
   email       String
   message     String
+  subject     String
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

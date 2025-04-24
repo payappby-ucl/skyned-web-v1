@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 import { EventEmitter } from "node:events";
-import { IEvents, ILogger, IMarketing } from "../../interfaces";
+import { IEmailService, IEvents, ILogger, IMarketing } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { EventsEnum, RegistryKeysEnum } from "../../enum";
 import { logger, marketing } from "..";
 import { SkynedUtils } from "../../utils";
 import { StatusCodes } from "http-status-codes";
+import { emailService } from "../../services";
 
 /** Represents dependencies needed to instantiate Events class */
 export interface EventsDependencies {
@@ -13,6 +14,8 @@ export interface EventsDependencies {
   logger: ILogger;
   /** Marketing infrastructure */
   marketing: IMarketing;
+  /** email service */
+  emailService: IEmailService;
 }
 
 /**
@@ -26,17 +29,19 @@ export class Events extends EventEmitter implements IEvents {
   private constructor(
     private readonly logger: ILogger,
     private readonly marketing: IMarketing,
+    private readonly emailService: IEmailService,
   ) {
     super();
     this.on(
       EventsEnum.CREATE_MARKETING_CONTACT_EVENT,
       this.createContactForMarketing,
     );
+    this.on(EventsEnum.SEND_EMAIL_EVENT, this.sendMail);
   }
 
-  static factory({ logger, marketing }: EventsDependencies) {
+  static factory({ logger, marketing, emailService }: EventsDependencies) {
     if (!Events.instance) {
-      Events.instance = new Events(logger, marketing);
+      Events.instance = new Events(logger, marketing, emailService);
     }
     return Events.instance;
   }
@@ -74,6 +79,21 @@ export class Events extends EventEmitter implements IEvents {
       return customError;
     }
   };
+
+  /** Send email */
+
+  sendMail: IEvents["sendMail"] = async (data) => {
+    try {
+      await this.emailService.send(data);
+    } catch (error: any) {
+      const customError = SkynedUtils.createException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        error.message,
+      );
+
+      this.logger.error(customError);
+    }
+  };
 }
 
 /** Events instance */
@@ -81,5 +101,6 @@ export const events = SkynedRegistry.getSingleton(RegistryKeysEnum.EVENTS, () =>
   Events.factory({
     logger,
     marketing,
+    emailService,
   }),
 );

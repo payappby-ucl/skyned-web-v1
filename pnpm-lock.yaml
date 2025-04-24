@@ -129,6 +129,9 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
+      libphonenumber-js:
+        specifier: ^1.12.6
+        version: 1.12.6
       mime:
         specifier: 3.0.0
         version: 3.0.0

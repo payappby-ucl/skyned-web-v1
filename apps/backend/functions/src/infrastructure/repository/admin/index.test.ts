@@ -4,7 +4,7 @@ import { AdminRepository, repository } from "..";
 import { admin } from "../../../data";
 import { auth } from "../../auth";
 
-describe("Admin Infrastructure", () => {
+describe("AdminRepository", () => {
   describe("Instance", () => {
     test("should be instance of AdminRepository", () => {
       expect(repository.admin).toBeInstanceOf(AdminRepository);
@@ -31,20 +31,16 @@ describe("Admin Infrastructure", () => {
 
       test("should return an admin", async () => {
         const user = await auth.findUserByEmail(admin.email);
-        console.log(user);
         const adm = await repository.admin.findAdminByAdminId(user?.id || "");
-        console.log(adm);
         expect(adm).not.toBeNull();
       });
 
       test("should return an admin and array of departments", async () => {
         const user = await auth.findUserByEmail(admin.email);
-        console.log(user);
         const adm = await repository.admin.findAdminByAdminId(
           user?.id || "",
           "auth",
         );
-        console.log(adm);
         expect(adm).not.toBeNull();
         expect(adm?.departments?.length).toBe(1);
       });

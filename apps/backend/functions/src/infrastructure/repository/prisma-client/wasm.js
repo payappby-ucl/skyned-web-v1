@@ -181,6 +181,7 @@ exports.Prisma.InquiryScalarFieldEnum = {
   phoneNumber: 'phoneNumber',
   email: 'email',
   message: 'message',
+  subject: 'subject',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

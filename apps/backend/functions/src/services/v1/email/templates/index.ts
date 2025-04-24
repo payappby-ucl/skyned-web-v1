@@ -4,3 +4,4 @@ export * from "./layout";
 export * from "./regards";
 export * from "./admin-account-creation";
 export * from "./verify-email";
+export * from "./contact-us";

@@ -20,4 +20,13 @@ export interface IFailedResponse extends IResponse {
 }
 /** Server response type */
 export type ResponseType<T> = ISuccessResponse<T> | IFailedResponse;
+/** paginated response */
+export interface IPaginatedResponse<T> {
+    total: number;
+    perPage: number;
+    currentPage: number;
+    nextPage?: number;
+    prevPage?: number;
+    data: T[];
+}
 export {};

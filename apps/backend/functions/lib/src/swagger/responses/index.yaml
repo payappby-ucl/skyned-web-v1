@@ -30,6 +30,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/FailedResponse"
+    RateLimit:
+      description: This response has hit a rate limit
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FailedResponse"
     ServerError:
       description: Unexpected error
       content:

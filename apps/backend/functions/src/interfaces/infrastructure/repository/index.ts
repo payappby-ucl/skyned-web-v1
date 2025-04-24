@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
 import { IAdminRepository, ITokenRepository } from "../../../infrastructure";
+import { IInquiryRepository } from "../../../infrastructure/repository/inquiry";
 import {
   Prisma,
   PrismaClient,
@@ -13,4 +14,5 @@ export interface IRepository {
   db: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>;
   token: ITokenRepository;
   admin: IAdminRepository;
+  inquiry: IInquiryRepository;
 }

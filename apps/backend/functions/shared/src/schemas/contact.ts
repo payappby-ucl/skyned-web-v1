@@ -7,5 +7,6 @@ export const ContactUsSchema = CommonSchema.pick({
 }).extend({
   message: z.string().trim().nonempty("Required"),
   name: z.string().trim().nonempty("Required"),
+  subject: z.string().trim().nonempty("Required"),
 });
 export type ContactUsSchema = z.infer<typeof ContactUsSchema>;

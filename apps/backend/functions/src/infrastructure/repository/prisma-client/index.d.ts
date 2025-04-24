@@ -7484,6 +7484,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     message: string | null
+    subject: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7493,6 +7494,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     message: string | null
+    subject: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7503,6 +7505,7 @@ export namespace Prisma {
     phoneNumber: number
     email: number
     message: number
+    subject: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7522,6 +7525,7 @@ export namespace Prisma {
     name?: true
     email?: true
     message?: true
+    subject?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7531,6 +7535,7 @@ export namespace Prisma {
     name?: true
     email?: true
     message?: true
+    subject?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7541,6 +7546,7 @@ export namespace Prisma {
     phoneNumber?: true
     email?: true
     message?: true
+    subject?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7638,6 +7644,7 @@ export namespace Prisma {
     phoneNumber: JsonValue
     email: string
     message: string
+    subject: string
     createdAt: Date
     updatedAt: Date
     _count: InquiryCountAggregateOutputType | null
@@ -7667,6 +7674,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     email?: boolean
     message?: boolean
+    subject?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["inquiry"]>
@@ -7677,6 +7685,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     email?: boolean
     message?: boolean
+    subject?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["inquiry"]>
@@ -7687,6 +7696,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     email?: boolean
     message?: boolean
+    subject?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["inquiry"]>
@@ -7697,11 +7707,12 @@ export namespace Prisma {
     phoneNumber?: boolean
     email?: boolean
     message?: boolean
+    subject?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phoneNumber" | "email" | "message" | "createdAt" | "updatedAt", ExtArgs["result"]["inquiry"]>
+  export type InquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phoneNumber" | "email" | "message" | "subject" | "createdAt" | "updatedAt", ExtArgs["result"]["inquiry"]>
 
   export type $InquiryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Inquiry"
@@ -7712,6 +7723,7 @@ export namespace Prisma {
       phoneNumber: Prisma.JsonValue
       email: string
       message: string
+      subject: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["inquiry"]>
@@ -8142,6 +8154,7 @@ export namespace Prisma {
     readonly phoneNumber: FieldRef<"Inquiry", 'Json'>
     readonly email: FieldRef<"Inquiry", 'String'>
     readonly message: FieldRef<"Inquiry", 'String'>
+    readonly subject: FieldRef<"Inquiry", 'String'>
     readonly createdAt: FieldRef<"Inquiry", 'DateTime'>
     readonly updatedAt: FieldRef<"Inquiry", 'DateTime'>
   }
@@ -8603,6 +8616,7 @@ export namespace Prisma {
     phoneNumber: 'phoneNumber',
     email: 'email',
     message: 'message',
+    subject: 'subject',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -9197,6 +9211,7 @@ export namespace Prisma {
     phoneNumber?: JsonFilter<"Inquiry">
     email?: StringFilter<"Inquiry"> | string
     message?: StringFilter<"Inquiry"> | string
+    subject?: StringFilter<"Inquiry"> | string
     createdAt?: DateTimeFilter<"Inquiry"> | Date | string
     updatedAt?: DateTimeFilter<"Inquiry"> | Date | string
   }
@@ -9207,6 +9222,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     email?: SortOrder
     message?: SortOrder
+    subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9220,6 +9236,7 @@ export namespace Prisma {
     phoneNumber?: JsonFilter<"Inquiry">
     email?: StringFilter<"Inquiry"> | string
     message?: StringFilter<"Inquiry"> | string
+    subject?: StringFilter<"Inquiry"> | string
     createdAt?: DateTimeFilter<"Inquiry"> | Date | string
     updatedAt?: DateTimeFilter<"Inquiry"> | Date | string
   }, "id">
@@ -9230,6 +9247,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     email?: SortOrder
     message?: SortOrder
+    subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InquiryCountOrderByAggregateInput
@@ -9248,6 +9266,7 @@ export namespace Prisma {
     phoneNumber?: JsonWithAggregatesFilter<"Inquiry">
     email?: StringWithAggregatesFilter<"Inquiry"> | string
     message?: StringWithAggregatesFilter<"Inquiry"> | string
+    subject?: StringWithAggregatesFilter<"Inquiry"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Inquiry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Inquiry"> | Date | string
   }
@@ -9685,6 +9704,7 @@ export namespace Prisma {
     phoneNumber: JsonNullValueInput | InputJsonValue
     email: string
     message: string
+    subject: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9695,6 +9715,7 @@ export namespace Prisma {
     phoneNumber: JsonNullValueInput | InputJsonValue
     email: string
     message: string
+    subject: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9704,6 +9725,7 @@ export namespace Prisma {
     phoneNumber?: JsonNullValueInput | InputJsonValue
     email?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9714,6 +9736,7 @@ export namespace Prisma {
     phoneNumber?: JsonNullValueInput | InputJsonValue
     email?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9724,6 +9747,7 @@ export namespace Prisma {
     phoneNumber: JsonNullValueInput | InputJsonValue
     email: string
     message: string
+    subject: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9733,6 +9757,7 @@ export namespace Prisma {
     phoneNumber?: JsonNullValueInput | InputJsonValue
     email?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9743,6 +9768,7 @@ export namespace Prisma {
     phoneNumber?: JsonNullValueInput | InputJsonValue
     email?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10306,6 +10332,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     email?: SortOrder
     message?: SortOrder
+    subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10319,6 +10346,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     message?: SortOrder
+    subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10328,6 +10356,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     message?: SortOrder
+    subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

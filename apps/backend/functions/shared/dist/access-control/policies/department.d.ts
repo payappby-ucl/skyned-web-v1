@@ -1,2 +1,2 @@
-import { AccessControlType } from "access-control/types";
+import { AccessControlType } from "../../access-control/types";
 export declare const departmentPolicies: AccessControlType;

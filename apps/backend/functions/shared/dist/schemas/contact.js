@@ -9,4 +9,5 @@ exports.ContactUsSchema = common_1.CommonSchema.pick({
 }).extend({
     message: zod_1.z.string().trim().nonempty("Required"),
     name: zod_1.z.string().trim().nonempty("Required"),
+    subject: zod_1.z.string().trim().nonempty("Required"),
 });

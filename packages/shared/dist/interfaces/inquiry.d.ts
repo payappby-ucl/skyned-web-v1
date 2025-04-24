@@ -4,5 +4,6 @@ export interface IInquiry extends ITimestamps {
     name: string;
     email: string;
     message: string;
+    subject: string;
     phoneNumber: IPhoneNumber;
 }

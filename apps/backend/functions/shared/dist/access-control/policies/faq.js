@@ -8,21 +8,29 @@ exports.faqPolicies = {
             return true;
         },
         read(authClaim) {
+            if (!authClaim)
+                return false;
             if (authClaim.claim !== "admin")
                 return false;
             return true;
         },
         create(authClaim, data) {
+            if (!authClaim)
+                return false;
             if (authClaim.claim !== "admin")
                 return false;
             return (0, utils_1.isInDepartment)(authClaim.user, [utils_1.department.Executive]);
         },
         update(authClaim, data) {
+            if (!authClaim)
+                return false;
             if (authClaim.claim !== "admin")
                 return false;
             return (0, utils_1.isInDepartment)(authClaim.user, [utils_1.department.Executive]);
         },
         delete(authClaim, data) {
+            if (!authClaim)
+                return false;
             if (authClaim.claim !== "admin")
                 return false;
             return (0, utils_1.isInDepartment)(authClaim.user, [utils_1.department.Executive]);

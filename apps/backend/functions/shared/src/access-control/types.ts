@@ -15,7 +15,7 @@ export type PermissionType = {
   admins: {
     dataType: IAdmin;
     createDataType: "";
-    action: "create" | "read" | "update";
+    action: "list" | "create" | "read" | "update" | "delete";
   };
 
   departments: {
