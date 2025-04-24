@@ -19,3 +19,5 @@ __exportStar(require("./admin"), exports);
 __exportStar(require("./department"), exports);
 __exportStar(require("./team"), exports);
 __exportStar(require("./utils"), exports);
+__exportStar(require("./faq"), exports);
+__exportStar(require("./inquiry"), exports);

@@ -14,4 +14,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isInDepartment = void 0;
 __exportStar(require("./constants"), exports);
+const isInDepartment = (admin, departments) => {
+    return (admin.departments?.some((department) => departments.includes(department.name)) || false);
+};
+exports.isInDepartment = isInDepartment;

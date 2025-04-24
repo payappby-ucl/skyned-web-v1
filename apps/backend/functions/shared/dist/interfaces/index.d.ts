@@ -3,3 +3,5 @@ export * from "./admin";
 export * from "./department";
 export * from "./team";
 export * from "./utils";
+export * from "./faq";
+export * from "./inquiry";

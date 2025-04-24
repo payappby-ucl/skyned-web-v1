@@ -173,6 +173,21 @@ model Faq {
   @@map("faqs")
 }
 
+// * Inquiry
+model Inquiry {
+  id Int @id @default(autoincrement())
+
+  name        String
+  phoneNumber Json
+  email       String
+  message     String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("inquiries")
+}
+
 // model Student {
 //   id                 Int      @default(autoincrement())
 //   studentId          String   @id @map("student_id")
@@ -313,8 +328,8 @@ model Faq {
 //   admin   Admin  @relation(fields: [adminId], references: [adminId])
 
 //   resource      String
-//   previousState Json   @map("previous_state")
-//   updatedState  Json   @map("update_state")
+//   previousState Json?   @map("previous_state")
+//   currentState  Json   @map("current_state")
 
 //   createdAt DateTime @default(now()) @map("created_at")
 //   updatedAt DateTime @updatedAt @map("updated_at")

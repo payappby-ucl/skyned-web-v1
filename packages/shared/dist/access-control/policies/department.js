@@ -7,7 +7,7 @@ exports.departmentPolicies = {
             if (!authClaim)
                 return false;
             const { claim, user } = authClaim;
-            if (claim === "student")
+            if (claim !== "admin")
                 return false;
             return true;
         },

@@ -175,6 +175,16 @@ exports.Prisma.FaqScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InquiryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -230,7 +240,8 @@ exports.Prisma.ModelName = {
   Admin: 'Admin',
   Department: 'Department',
   Team: 'Team',
-  Faq: 'Faq'
+  Faq: 'Faq',
+  Inquiry: 'Inquiry'
 };
 
 /**

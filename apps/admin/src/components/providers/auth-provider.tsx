@@ -16,7 +16,7 @@ import {
   COOKIE_EXPIRATION,
   COOKIE_EXPIRATION_UNIT,
 } from "@workspace/api/lib";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface IAuth {
   user: IAdmin | null;

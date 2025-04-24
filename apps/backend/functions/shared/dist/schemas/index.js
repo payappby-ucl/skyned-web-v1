@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./common"), exports);
 __exportStar(require("./register"), exports);
 __exportStar(require("./contact"), exports);
+__exportStar(require("./faq"), exports);

@@ -1,25 +1,45 @@
-import { IAdmin, IDepartment, ITeam } from "../interfaces";
+import { ContactUsSchema, CreateFaqSchema } from "../schemas";
+import { IAdmin, IDepartment, IFaq, IInquiry, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 
 export type AuthClaim = AdminClaim | StudentClaim;
 
-export type ResourceType = "departments" | "teams" | "admins";
+export type ResourceType =
+  | "departments"
+  | "teams"
+  | "admins"
+  | "faqs"
+  | "inquiries";
 
 export type PermissionType = {
   admins: {
     dataType: IAdmin;
     createDataType: "";
-    action: "create" | "read" | "update";
+    action: "list" | "create" | "read" | "update" | "delete";
   };
+
   departments: {
     dataType: IDepartment;
     createDataType: "";
     action: "list" | "read" | "create";
   };
+
   teams: {
     dataType: ITeam;
     createDataType: "";
     action: "create" | "read" | "update" | "delete";
+  };
+
+  faqs: {
+    dataType: IFaq;
+    createDataType: CreateFaqSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  inquiries: {
+    dataType: IInquiry;
+    createDataType: ContactUsSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
   };
 };
 

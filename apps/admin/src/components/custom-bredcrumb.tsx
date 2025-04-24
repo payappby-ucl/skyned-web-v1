@@ -1,0 +1,94 @@
+"use client";
+
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@workspace/ui/components/breadcrumb";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@workspace/ui/components/dropdown-menu";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
+
+interface Props {
+  className?: string;
+}
+const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
+  const pathname = usePathname();
+  const links = pathname.split("/").map((v) => `/${v}`);
+  const [, second, ...others] = links;
+  const [last, ...middle] = others.reverse();
+
+  return (
+    <Breadcrumb className={`${className}`}>
+      <BreadcrumbList>
+        {second ? (
+          <>
+            <BreadcrumbItem>
+              <BreadcrumbLink className="capitalize" asChild>
+                <Link href={second || "/"}>
+                  {second.replace("/", "").replace("-", " ")}
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </>
+        ) : null}
+
+        {(middle?.reverse() || []).length ? (
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1">
+                  <BreadcrumbEllipsis className="h-4 w-4" />
+                  <span className="sr-only">Toggle menu</span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {middle?.map((link, i) => {
+                    const linkTitle = link.replace("/", "").replace("-", " ");
+
+                    return (
+                      <DropdownMenuItem key={link} asChild>
+                        <Link
+                          href={
+                            pathname.slice(0, pathname.indexOf(link || "")) +
+                            link
+                          }
+                          className="capitalize"
+                        >
+                          {linkTitle}
+                        </Link>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </BreadcrumbItem>
+          </>
+        ) : null}
+
+        {last ? (
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="capitalize">
+                {(last || second)?.replace("/", "").replace("-", " ")}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </>
+        ) : null}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
+export default CustomBreadCrumb;

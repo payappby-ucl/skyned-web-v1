@@ -1,6 +1,6 @@
 components:
   schemas:
-    phoneNumber:
+    PhoneNumber:
       type: object
       properties:
         number:
