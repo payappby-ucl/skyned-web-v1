@@ -1,6 +1,7 @@
 "use client";
 
 import { brandClientApi } from "@/src/lib/client";
+import { DEFAULT_PHONE_NUMBER_COUNTRY_CODE } from "@/src/utils";
 import { ContactUsSchema } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -16,6 +17,7 @@ import { PhoneInput } from "@workspace/ui/components/phone-input";
 import { Textarea } from "@workspace/ui/components/textarea";
 import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback } from "react";
+import { sendContactUsMessage } from "../_actions";
 
 const ContactUsForm: React.FC = () => {
   const form = useForm<ContactUsSchema>({
@@ -24,16 +26,16 @@ const ContactUsForm: React.FC = () => {
       email: "",
       name: "",
       message: "",
-      phoneNumber: "+234",
+      subject: "",
+      phoneNumber: DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
     },
   });
 
   const onSubmit = useCallback(async (data: ContactUsSchema) => {
     try {
-      console.log(data);
-      brandClientApi.utils.toast.info(
-        "This API is currently under construction. 🚧",
-      );
+      const {message} = await sendContactUsMessage(data);
+      brandClientApi.utils.toast.success(message);
+      form.reset()
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
@@ -79,24 +81,45 @@ const ContactUsForm: React.FC = () => {
           />
         </div>
 
-        <FormField
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="phoneNumber">Phone Number</FormLabel>
-              <FormControl>
-                <PhoneInput
-                  placeholder="Enter your phone number"
-                  id="phoneNumber"
-                  defaultcountry="NG"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="subject">Subject</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter a subject"
+                    id="subject"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="phoneNumber">Phone Number</FormLabel>
+                <FormControl>
+                  <PhoneInput
+                    placeholder="Enter your phone number"
+                    id="phoneNumber"
+                    defaultcountry="NG"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="message"
@@ -115,8 +138,8 @@ const ContactUsForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button variant="brand" className="ml-auto block">
-          Send Message
+        <Button variant="brand" className="ml-auto block" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? "Please wait..." : "Send Message"}
         </Button>
       </form>
     </Form>
