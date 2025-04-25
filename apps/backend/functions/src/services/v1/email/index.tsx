@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
-import { email } from "../../../infrastructure";
+
 import { SkynedUtils } from "../../../utils";
 import { render } from "@react-email/components";
 import { AdminAccountCreation, ContactUsEmail, VerifyEmail } from "./templates";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
 import { IEmail, IEmailService } from "../../../interfaces";
+import { email } from "../../../infrastructure/email";
 
 export * from "./templates";
 

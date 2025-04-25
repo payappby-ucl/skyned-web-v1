@@ -3,10 +3,11 @@ import { EventEmitter } from "node:events";
 import { IEmailService, IEvents, ILogger, IMarketing } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { EventsEnum, RegistryKeysEnum } from "../../enum";
-import { logger, marketing } from "..";
+import { emailService } from "../../services/v1/email";
 import { SkynedUtils } from "../../utils";
 import { StatusCodes } from "http-status-codes";
-import { emailService } from "../../services";
+import { logger } from "../logger";
+import { marketing } from "../marketing";
 
 /** Represents dependencies needed to instantiate Events class */
 export interface EventsDependencies {
@@ -32,6 +33,7 @@ export class Events extends EventEmitter implements IEvents {
     private readonly emailService: IEmailService,
   ) {
     super();
+
     this.on(
       EventsEnum.CREATE_MARKETING_CONTACT_EVENT,
       this.createContactForMarketing,
@@ -82,7 +84,9 @@ export class Events extends EventEmitter implements IEvents {
 
   /** Send email */
 
-  sendMail: IEvents["sendMail"] = async (data) => {
+  sendMail: IEvents["sendMail"] = async (
+    data: Parameters<IEvents["sendMail"]>["0"],
+  ) => {
     try {
       await this.emailService.send(data);
     } catch (error: any) {
@@ -95,7 +99,6 @@ export class Events extends EventEmitter implements IEvents {
     }
   };
 }
-
 /** Events instance */
 export const events = SkynedRegistry.getSingleton(RegistryKeysEnum.EVENTS, () =>
   Events.factory({

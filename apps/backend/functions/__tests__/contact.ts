@@ -15,6 +15,10 @@ describe("Contact API", () => {
       jest.resetAllMocks();
     });
 
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
+
     const testData = {
       name: "Alabi Emmanuel",
       email: "bobslegend795@gmail.com",

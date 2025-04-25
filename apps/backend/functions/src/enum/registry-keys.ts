@@ -20,7 +20,7 @@ export enum RegistryKeysEnum {
   /** Marketing */
   MARKETING = "Marketing",
   /** Events Emitter */
-  EVENTS = "EVENTS",
+  EVENTS = "Events",
 
   //* Middlewares
   /** Request validation middleware */
