@@ -20,16 +20,18 @@ __exportStar(require("./interface"), exports);
 class BrandServerApi {
     serverBaseUrl;
     cookies;
+    headers;
     static instance = null;
     httpClient;
-    constructor(serverBaseUrl, cookies) {
+    constructor(serverBaseUrl, cookies, headers) {
         this.serverBaseUrl = serverBaseUrl;
         this.cookies = cookies;
-        this.httpClient = new http_1.ServerHttpClient(this.cookies, this.serverBaseUrl);
+        this.headers = headers;
+        this.httpClient = new http_1.ServerHttpClient(this.cookies, this.headers, this.serverBaseUrl);
     }
-    static factory({ serverBaseUrl, cookies }) {
+    static factory({ serverBaseUrl, cookies, headers }) {
         if (!BrandServerApi.instance) {
-            BrandServerApi.instance = new BrandServerApi(serverBaseUrl, cookies);
+            BrandServerApi.instance = new BrandServerApi(serverBaseUrl, cookies, headers);
         }
         return BrandServerApi.instance;
     }

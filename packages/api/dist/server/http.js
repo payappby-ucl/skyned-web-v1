@@ -5,17 +5,25 @@ const lib_1 = require("../lib");
 const http_1 = require("../http");
 class ServerHttpClient extends http_1.HTTPClient {
     cookies;
-    constructor(cookies, serverBaseUrl) {
+    headers;
+    constructor(cookies, headers, serverBaseUrl) {
         super(`${serverBaseUrl}/api/v1`);
         this.cookies = cookies;
+        this.headers = headers;
     }
-    setAuthHeader = async (headers) => {
+    setAuthHeader = async (reqHeaders) => {
         const cookieStore = await this.cookies();
         if (cookieStore.has(this.tokenCookieName)) {
             const tokenCookie = cookieStore.get(this.tokenCookieName);
             if (tokenCookie) {
-                headers.append("authorization", `bearer ${tokenCookie.value}`);
+                reqHeaders.append("authorization", `bearer ${tokenCookie.value}`);
             }
+        }
+        // * Set x-forward header
+        const ip = (await this.headers()).get("x-forwarded-for");
+        console.log(ip, "IP Address");
+        if (ip) {
+            reqHeaders.append("x-forwarded-for", ip);
         }
     };
     clearTokenCookie = async () => {

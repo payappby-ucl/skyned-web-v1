@@ -1,14 +1,16 @@
 import { ServerHttpClient } from "./http";
 import { IBrandServerApi } from "./interface";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export * from "./interface";
 
 export type CookieType = typeof cookies;
+export type HeaderType = typeof headers;
 
 interface Dependencies {
   serverBaseUrl: string;
   cookies: CookieType;
+  headers: HeaderType;
 }
 export class BrandServerApi implements IBrandServerApi {
   private static instance: IBrandServerApi | null = null;
@@ -17,13 +19,22 @@ export class BrandServerApi implements IBrandServerApi {
   private constructor(
     private readonly serverBaseUrl: string,
     private readonly cookies: CookieType,
+    private readonly headers: HeaderType,
   ) {
-    this.httpClient = new ServerHttpClient(this.cookies, this.serverBaseUrl);
+    this.httpClient = new ServerHttpClient(
+      this.cookies,
+      this.headers,
+      this.serverBaseUrl,
+    );
   }
 
-  static factory({ serverBaseUrl, cookies }: Dependencies) {
+  static factory({ serverBaseUrl, cookies, headers }: Dependencies) {
     if (!BrandServerApi.instance) {
-      BrandServerApi.instance = new BrandServerApi(serverBaseUrl, cookies);
+      BrandServerApi.instance = new BrandServerApi(
+        serverBaseUrl,
+        cookies,
+        headers,
+      );
     }
 
     return BrandServerApi.instance;

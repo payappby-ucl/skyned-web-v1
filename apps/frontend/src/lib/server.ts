@@ -1,11 +1,11 @@
 import { BrandServerApi } from "@workspace/api/server";
 import { env } from "../config";
-import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { cookies, headers } from "next/headers";
 
 export const brandServerApi = BrandServerApi.factory({
   serverBaseUrl: env.server.baseUrl,
   cookies: cookies,
+  headers: headers,
 });
 
 export const getErrorResponse = (error: any) => {
@@ -14,8 +14,3 @@ export const getErrorResponse = (error: any) => {
     status: error.statusCode,
   });
 };
-
-export const setXForwardedForHeader = (request: Request | NextRequest) => ({
-  "X-Forwarded-For":
-    ((request.headers as any)["x-forwarded-for"] as string) || "unknown",
-});

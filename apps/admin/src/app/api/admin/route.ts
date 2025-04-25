@@ -1,20 +1,13 @@
-import {
-  brandServerApi,
-  getErrorResponse,
-  setXForwardedForHeader,
-} from "@/src/lib/server";
+import { brandServerApi, getErrorResponse } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
 import { IAdmin } from "@workspace/shared";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const response = await brandServerApi.httpClient.request<IAdmin>(
       "/admin/me",
       "GET",
       {
-        headers: {
-          ...setXForwardedForHeader(request),
-        },
         next: {
           tags: [serverCacheTags.auth],
         },
