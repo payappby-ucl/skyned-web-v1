@@ -1,3 +1,5 @@
+/** Email domains users are not supposed to use because it belongs to internal staff */
+export declare const PROHIBITED_USER_EMAIL_DOMAINS: string[];
 /** Gender */
 export declare const gender: {
     readonly Male: "Male";
