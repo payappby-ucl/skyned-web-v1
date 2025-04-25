@@ -27,7 +27,7 @@ export class ContactRouter implements IRouter {
     this.router.route("/").post(
       RateLimiterMiddleware.limit({
         minutes: 60,
-        requestPerMinutes: 1,
+        requestPerMinutes: 2,
       }),
       RequestValidationMiddleware.validate({
         body: ContactUsSchema,
