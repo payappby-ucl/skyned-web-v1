@@ -46,7 +46,9 @@ describe("Contact API", () => {
     });
 
     test("should pass", async () => {
-      jest.spyOn(events, "sendMail").mockImplementation();
+      const emailEmitterSpy = jest
+        .spyOn(events, "emitEvent")
+        .mockImplementation();
 
       const res = await request(server)
         .post("/api/v1/contact")
@@ -63,6 +65,8 @@ describe("Contact API", () => {
           message: expect.any(String),
         }),
       });
+
+      expect(emailEmitterSpy).toHaveBeenCalled();
     });
   });
 });
