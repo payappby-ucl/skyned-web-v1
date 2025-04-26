@@ -29,9 +29,9 @@ export interface ContactControllerDependencies {
 export class ContactController implements IContactController {
   private static instance: IContactController | null = null;
   private constructor(
-    private readonly phoneNumberService: IPhoneNumberService,
-    private readonly inquiryService: IInquiryService,
     private readonly event: IEvents,
+    private readonly inquiryService: IInquiryService,
+    private readonly phoneNumberService: IPhoneNumberService,
   ) {
     // * Private
   }
@@ -41,15 +41,15 @@ export class ContactController implements IContactController {
    */
 
   static factory({
-    phoneNumberService,
-    inquiryService,
     event,
+    inquiryService,
+    phoneNumberService,
   }: ContactControllerDependencies) {
     if (!ContactController.instance) {
       ContactController.instance = new ContactController(
-        phoneNumberService,
-        inquiryService,
         event,
+        inquiryService,
+        phoneNumberService,
       );
     }
 
@@ -106,8 +106,8 @@ export const contactController = SkynedRegistry.getSingleton(
   RegistryKeysEnum.CONTACT_CONTROLLER,
   () =>
     ContactController.factory({
-      phoneNumberService,
-      inquiryService,
       event: events,
+      inquiryService,
+      phoneNumberService,
     }),
 );

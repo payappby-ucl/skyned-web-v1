@@ -64,7 +64,7 @@ export class App implements IApp {
     this.app.use(cors());
     this.app.use(helmet());
     this.app.disable("x-powered-by");
-    this.app.set("trust proxy", 1);
+    this.app.set("trust proxy", 4);
     this.app.use(express.json());
 
     // * Response Binder

@@ -3,7 +3,7 @@ export declare const ContactUsSchema: z.ZodObject<z.objectUtil.extendShape<Pick<
     email: z.ZodString;
     phoneNumber: z.ZodEffects<z.ZodString, string, string>;
 }, "phoneNumber">, {
-    email: z.ZodEffects<z.ZodString, string, string>;
+    email: z.ZodString;
     message: z.ZodString;
     name: z.ZodString;
     subject: z.ZodString;

@@ -21,7 +21,6 @@ class ServerHttpClient extends http_1.HTTPClient {
         }
         // * Set x-forward header
         const ip = (await this.headers()).get("x-forwarded-for");
-        console.log(ip, "IP Address");
         if (ip) {
             reqHeaders.append("x-forwarded-for", ip);
         }

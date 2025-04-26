@@ -16,6 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BrandServerApi = void 0;
 const http_1 = require("./http");
+const utils_1 = require("./utils");
 __exportStar(require("./interface"), exports);
 class BrandServerApi {
     serverBaseUrl;
@@ -23,6 +24,7 @@ class BrandServerApi {
     headers;
     static instance = null;
     httpClient;
+    utils = new utils_1.ServerUtils();
     constructor(serverBaseUrl, cookies, headers) {
         this.serverBaseUrl = serverBaseUrl;
         this.cookies = cookies;

@@ -33,10 +33,10 @@ const ContactUsForm: React.FC = () => {
 
   const onSubmit = useCallback(async (data: ContactUsSchema) => {
     try {
-      const {message} = await sendContactUsMessage(data);
+      const { message } = await sendContactUsMessage(data);
       brandClientApi.utils.toast.success(message);
-      form.reset()
-    } catch (error) {
+      form.reset();
+    } catch (error: any) {
       brandClientApi.utils.alertError(error);
     }
   }, []);
@@ -138,7 +138,11 @@ const ContactUsForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button variant="brand" className="ml-auto block" disabled={form.formState.isSubmitting}>
+        <Button
+          variant="brand"
+          className="ml-auto block"
+          disabled={form.formState.isSubmitting}
+        >
           {form.formState.isSubmitting ? "Please wait..." : "Send Message"}
         </Button>
       </form>
