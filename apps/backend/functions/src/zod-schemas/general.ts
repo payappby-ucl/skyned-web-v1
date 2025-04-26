@@ -8,6 +8,6 @@ export const GeneralSchema = z.object({
     country: z.string().trim().optional(),
   }),
 
-  id: z.number().int().positive(),
+  id: z.coerce.number().int().positive(),
 });
 export type GeneralSchema = z.infer<typeof GeneralSchema>;

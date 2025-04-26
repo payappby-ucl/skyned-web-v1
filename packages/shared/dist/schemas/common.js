@@ -8,13 +8,13 @@ const libphonenumber_js_1 = require("libphonenumber-js");
 const zod_1 = __importDefault(require("zod"));
 /** Common schema use in multiple places */
 exports.CommonSchema = zod_1.default.object({
-    email: zod_1.default
+    email: zod_1.default.coerce
         .string()
         .trim()
         .toLowerCase()
         .email("Enter a valid email address")
         .nonempty("Required"),
-    phoneNumber: zod_1.default
+    phoneNumber: zod_1.default.coerce
         .string()
         .trim()
         .nonempty("Enter a valid phone number")

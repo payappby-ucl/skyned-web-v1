@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { EventsEnum, RegistryKeysEnum } from "../../../enum";
@@ -12,6 +13,7 @@ import { inquiryService, phoneNumberService } from "../../../services";
 import { env } from "../../../config";
 import { events } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
+import { ControllerUtils } from "../utils";
 
 /** Required dependencies to create ContactController instance */
 export interface ContactControllerDependencies {
@@ -26,14 +28,17 @@ export interface ContactControllerDependencies {
  * @class
  */
 
-export class ContactController implements IContactController {
+export class ContactController
+  extends ControllerUtils
+  implements IContactController
+{
   private static instance: IContactController | null = null;
   private constructor(
     private readonly event: IEvents,
     private readonly inquiryService: IInquiryService,
     private readonly phoneNumberService: IPhoneNumberService,
   ) {
-    // * Private
+    super();
   }
 
   /**
@@ -99,6 +104,41 @@ export class ContactController implements IContactController {
         next(error);
       }
     };
+
+  getContactUsMessages: IContactController["getContactUsMessages"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const admin = this._validateAdmin(req);
+      const { limit, page, from, to } = req.query;
+
+      const construct = this._constructPaginationData({
+        limit,
+        page,
+      });
+
+      const total = await this.inquiryService.count({
+        from,
+        to,
+      });
+
+      const inquiries = await this.inquiryService.findMany(admin, {
+        ...SkynedUtils.pick(construct, ["skip", "take"]),
+        from,
+        to,
+      });
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        data: inquiries,
+        total,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** ContactController instance */

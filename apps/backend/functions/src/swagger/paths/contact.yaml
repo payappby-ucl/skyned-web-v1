@@ -23,7 +23,7 @@ paths:
                   example: bobslegend795@gmail.com
                 name:
                   type: string
-                  format: email
+                  example: Ahmed Adegoke
                 subject:
                   type: string
                 message:
@@ -47,5 +47,47 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "429":
           $ref: "#/components/responses/RateLimit"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Get Contact us messages from database
+      description: >
+        Saves and Get Contact us messages from database
+      tags:
+        - Contact
+      operationId: getContactUsMessages
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+      responses:
+        "200":
+          description: The messages
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Inquiry"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/ServerError"

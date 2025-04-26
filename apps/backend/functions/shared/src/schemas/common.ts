@@ -3,14 +3,14 @@ import z from "zod";
 
 /** Common schema use in multiple places */
 export const CommonSchema = z.object({
-  email: z
+  email: z.coerce
     .string()
     .trim()
     .toLowerCase()
     .email("Enter a valid email address")
     .nonempty("Required"),
 
-  phoneNumber: z
+  phoneNumber: z.coerce
     .string()
     .trim()
     .nonempty("Enter a valid phone number")

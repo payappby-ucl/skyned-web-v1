@@ -12,8 +12,8 @@ export const ContactUsSchema = CommonSchema.pick({
       ),
     "This email is not accepted.",
   ),
-  message: z.string().trim().nonempty("Required"),
-  name: z.string().trim().nonempty("Required"),
-  subject: z.string().trim().nonempty("Required"),
+  message: z.coerce.string().trim().nonempty("Required"),
+  name: z.coerce.string().trim().nonempty("Required"),
+  subject: z.coerce.string().trim().nonempty("Required"),
 });
 export type ContactUsSchema = z.infer<typeof ContactUsSchema>;

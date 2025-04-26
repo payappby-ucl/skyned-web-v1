@@ -14,3 +14,6 @@ export const DEFAULT_RATE_LIMIT_MINUTE = 15;
 
 /** Default requests per default rate limit minute */
 export const REQUESTS_PER_DEFAULT_RATE_LIMIT_MINUTE = 5;
+
+/** Query limit */
+export const DEFAULT_QUERY_LIMIT = 100;

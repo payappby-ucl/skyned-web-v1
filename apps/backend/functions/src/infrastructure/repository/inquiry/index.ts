@@ -41,4 +41,18 @@ export class InquiryRepository extends DBUtils implements IInquiryRepository {
 
     return this.deserialize(inquiry);
   };
+
+  /**
+   * Counts document
+   */
+
+  count: IInquiryRepository["count"] = async (query) => {
+    const count = await this.db.inquiry.count(query);
+    return count;
+  };
+
+  findMany: IInquiryRepository["findMany"] = async (query) => {
+    const inquiries = await this.db.inquiry.findMany(query);
+    return inquiries.map((inquiry) => this.deserialize(inquiry));
+  };
 }

@@ -14,10 +14,8 @@ exports.inquiryPolicies = {
                 return false;
             return true;
         },
-        create(authClaim) {
-            if (authClaim.claim === "admin")
-                return false;
-            return true;
+        create() {
+            return false;
         },
         update() {
             return false;

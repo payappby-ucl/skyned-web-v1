@@ -2,10 +2,12 @@
 
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
-import { responseBody } from "./helpers/constants";
+import { clientAuth, responseBody } from "./helpers/constants";
 import { app } from "../src/app";
 import { phoneNumberService } from "../src/services";
 import { events } from "../src/infrastructure";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { admin } from "../src/data";
 
 describe("Contact API", () => {
   const server = app.getApp();
@@ -67,6 +69,40 @@ describe("Contact API", () => {
       });
 
       expect(emailEmitterSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET - /api/v1/contact", () => {
+    test("should pass", async () => {
+      const { user } = await signInWithEmailAndPassword(
+        clientAuth,
+        admin.email,
+        "12345678",
+      );
+
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .get("/api/v1/contact")
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        success: true,
+        data: {
+          total: expect.any(Number),
+          perPage: 100,
+          currentPage: 1,
+          nextPage: 2,
+          prevPage: 1,
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              message: expect.any(String),
+            }),
+          ]),
+        },
+      });
     });
   });
 });

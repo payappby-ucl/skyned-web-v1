@@ -12,9 +12,8 @@ export const inquiryPolicies: AccessControlType = {
       return true;
     },
 
-    create(authClaim) {
-      if (authClaim.claim === "admin") return false;
-      return true;
+    create() {
+      return false;
     },
 
     update() {

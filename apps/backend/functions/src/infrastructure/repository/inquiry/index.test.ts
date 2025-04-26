@@ -36,5 +36,21 @@ describe("InquiryRepository", () => {
         expect(data).toEqual(expect.objectContaining(testData));
       });
     });
+
+    describe("count", () => {
+      test("should create and return an inquiry", async () => {
+        const count = await repository.inquiry.count();
+        expect(count).toEqual(expect.any(Number));
+      });
+    });
+
+    describe("findMany", () => {
+      test("should return with array length of one", async () => {
+        const inquiries = await repository.inquiry.findMany();
+        expect(inquiries).toEqual(
+          expect.arrayContaining([expect.objectContaining(testData)]),
+        );
+      });
+    });
   });
 });

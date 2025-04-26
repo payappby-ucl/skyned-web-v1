@@ -20,6 +20,24 @@ components:
       required:
         - statusCode
         - success
+    PaginatedResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        perPage:
+          type: integer
+          maximum: 100
+        currentPage:
+          type: integer
+        nextPage:
+          type: integer
+        prevPage:
+          type: integer
+      required:
+        - total
+        - perPage
+        - currentPage
     FailedResponse:
       type: object
       properties:

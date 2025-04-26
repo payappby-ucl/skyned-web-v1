@@ -1,17 +1,24 @@
 import express from "express";
 import { ContactUsSchema } from "@workspace/shared";
-import { IContactController, IRouter } from "../../../../interfaces";
+import {
+  IAuthMiddleware,
+  IContactController,
+  IRouter,
+} from "../../../../interfaces";
 import SkynedRegistry from "../../../../registry";
 import { RegistryKeysEnum } from "../../../../enum";
 import {
+  authMiddleware,
   RateLimiterMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
 import { contactController } from "../../../../controllers";
+import { PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for auth router initialization */
 export interface ContactRouterDependencies {
   contactController: IContactController;
+  authMiddleware: IAuthMiddleware;
 }
 
 /**
@@ -23,26 +30,45 @@ export class ContactRouter implements IRouter {
   private static instance: IRouter | null = null;
   router = express.Router();
 
-  private constructor(contactController: IContactController) {
-    this.router.route("/").post(
-      RateLimiterMiddleware.limit({
-        minutes: 60,
-        requestPerMinutes: 2,
-      }),
-      RequestValidationMiddleware.validate({
-        body: ContactUsSchema,
-      }),
-      contactController.createAndSendContactMessage,
-    );
+  private constructor(
+    contactController: IContactController,
+    authMiddleware: IAuthMiddleware,
+  ) {
+    this.router
+      .route("/")
+      .get(
+        RequestValidationMiddleware.validate({
+          query: PageQuerySchema.partial(),
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        contactController.getContactUsMessages,
+      )
+      .post(
+        RateLimiterMiddleware.limit({
+          minutes: 60,
+          requestPerMinutes: 2,
+        }),
+        RequestValidationMiddleware.validate({
+          body: ContactUsSchema,
+        }),
+        contactController.createAndSendContactMessage,
+      );
   }
 
   /**
    * Creates the contact router instance
    */
 
-  static factory({ contactController }: ContactRouterDependencies) {
+  static factory({
+    contactController,
+    authMiddleware,
+  }: ContactRouterDependencies) {
     if (!ContactRouter.instance) {
-      ContactRouter.instance = new ContactRouter(contactController);
+      ContactRouter.instance = new ContactRouter(
+        contactController,
+        authMiddleware,
+      );
     }
 
     return ContactRouter.instance;
@@ -55,5 +81,6 @@ export const contactRouter = SkynedRegistry.getSingleton(
   () =>
     ContactRouter.factory({
       contactController,
+      authMiddleware,
     }),
 );

@@ -1,8 +1,9 @@
+/* eslint-disable brace-style */
 import { StatusCodes } from "http-status-codes";
 import { RegistryKeysEnum } from "../../../enum";
 import { IAdminController } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { SkynedUtils } from "../../../utils";
+import { ControllerUtils } from "../utils";
 
 /** Required dependencies to create AdminController instance */
 // export interface AdminControllerDependencies {}
@@ -13,10 +14,13 @@ import { SkynedUtils } from "../../../utils";
  * @class
  */
 
-export class AdminController implements IAdminController {
+export class AdminController
+  extends ControllerUtils
+  implements IAdminController
+{
   private static instance: IAdminController | null = null;
   private constructor() {
-    // * Private
+    super();
   }
 
   /**
@@ -29,14 +33,6 @@ export class AdminController implements IAdminController {
     }
 
     return AdminController.instance;
-  }
-
-  private _validateAdmin(req: Express.Request) {
-    if (!req.skynedAuth.admin) {
-      throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
-    }
-
-    return req.skynedAuth.admin;
   }
 
   getMe: IAdminController["getMe"] = async (req, res, next) => {

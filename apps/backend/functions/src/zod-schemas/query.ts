@@ -1,14 +1,15 @@
 import { z } from "zod";
 
 export const PageQuerySchema = z.object({
-  limit: z
+  limit: z.coerce
     .number()
     .int()
     .positive()
     .min(1, "A minimum of 1")
     .max(100, "A maximum of 100")
     .optional(),
-
-  page: z.number().int().positive().optional(),
+  page: z.coerce.number().int().positive().optional(),
+  from: z.coerce.date().optional(),
+  to: z.coerce.date().optional(),
 });
 export type PageQuerySchema = z.infer<typeof PageQuerySchema>;
