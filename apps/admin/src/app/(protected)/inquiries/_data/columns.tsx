@@ -3,6 +3,14 @@ import useClipboard from "@/src/hooks/use-clipboard";
 import { ColumnDef } from "@tanstack/react-table";
 import { IInquiry } from "@workspace/shared";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@workspace/ui/components/dialog";
+import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuPortal,
@@ -11,11 +19,12 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@workspace/ui/components/dropdown-menu";
+
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
 import { Country } from "country-state-city";
 import dayjs from "dayjs";
-import { Clipboard, Contact, Mail, Phone, Trash2 } from "lucide-react";
+import { Clipboard, Contact, Eye, Mail, Phone, Trash2 } from "lucide-react";
 
 export const columns: ColumnDef<IInquiry>[] = [
   {
@@ -50,14 +59,39 @@ export const columns: ColumnDef<IInquiry>[] = [
     },
   },
   {
-    accessorKey: "subject",
+    id: "subject",
+    accessorFn: (row) => row.subject,
     header: ({ column }) => (
       <DataTableColumnHeader title="Subject" column={column} />
     ),
+    cell: (info) => (
+      <p className="max-w-sm truncate font-semibold">
+        {info.getValue<string>()}
+      </p>
+    ),
   },
   {
-    accessorKey: "message",
+    id: "message",
+    accessorFn: (row) => ({ message: row.message, subject: row.subject }),
     header: "Message",
+    cell: (info) => {
+      const data = info.getValue<Pick<IInquiry, "message" | "subject">>();
+      return (
+        <Dialog>
+          <DialogTrigger>
+            <p className="max-w-sm truncate font-semibold">{data.message}</p>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="!text-lg">{data.subject}</DialogTitle>
+              <DialogDescription className="font-medium leading-5">
+                {data.message}
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      );
+    },
   },
   {
     accessorFn: (row) => row.createdAt,
