@@ -13,4 +13,26 @@ export class ServerUtils implements IServerUtils {
       },
     });
   };
+
+  constructQuery: IServerUtils["constructQuery"] = (data) => {
+    const queries = new URLSearchParams();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value) {
+        queries.append(key, value);
+      }
+    });
+
+    return queries;
+  };
+
+  constructTags: IServerUtils["constructTags"] = (data, base) => {
+    Object.entries(data).forEach(([key, { value, prefix }]) => {
+      if (value) {
+        base.push(`${prefix}-${value}`);
+      }
+    });
+
+    return base;
+  };
 }

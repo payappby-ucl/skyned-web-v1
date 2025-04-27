@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "@workspace/ui/components/sonner";
 
 export function ThemeProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +11,7 @@ export function ThemeProviders({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
       enableColorScheme
-      forcedTheme="light"
+      // forcedTheme="light"
     >
       {children}
     </NextThemesProvider>

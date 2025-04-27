@@ -1,13 +1,16 @@
-import { brandServerApi } from "@/src/lib/server";
+import Alert from "@/src/components/alert";
+import HasPermission from "@/src/components/has-permission";
+import InquiryList from "./_components/inquiry-list";
 
 export default async function InquiriesPage() {
-  const data = await brandServerApi.httpClient.request(
-    `/contact?page=1&from=${new Date()}`,
-    "GET",
-    {
-      cache: "no-store",
-    },
+  return (
+    <HasPermission
+      resourceName="inquiries"
+      action="list"
+      args={[]}
+      alert={<Alert />}
+    >
+      <InquiryList />
+    </HasPermission>
   );
-  console.log(data);
-  return <div>Inquiries page</div>;
 }

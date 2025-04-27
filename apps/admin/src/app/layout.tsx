@@ -3,6 +3,7 @@ import "@workspace/ui/globals.css";
 import { ThemeProviders } from "../components/providers/theme-provider";
 import { AuthProvider } from "../components/providers/auth-provider";
 import { Toaster } from "@workspace/ui/components/sonner";
+import TanstackQueryProvider from "../components/providers/tanstack-provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -24,10 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
-        <ThemeProviders>
-          <AuthProvider>{children}</AuthProvider>
-          <Toaster richColors closeButton />
-        </ThemeProviders>
+        <TanstackQueryProvider>
+          <ThemeProviders>
+            <AuthProvider>{children}</AuthProvider>
+            <Toaster richColors closeButton />
+          </ThemeProviders>
+        </TanstackQueryProvider>
       </body>
     </html>
   );

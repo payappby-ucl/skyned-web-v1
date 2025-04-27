@@ -17,6 +17,7 @@ import {
   COOKIE_EXPIRATION_UNIT,
 } from "@workspace/api/lib";
 import { usePathname, useRouter } from "next/navigation";
+import Loading from "../loading";
 
 interface IAuth {
   user: IAdmin | null;
@@ -95,11 +96,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     !auth.loaded ||
     (auth.loaded && !auth.user && !authPathnames.includes(pathname))
   ) {
-    return (
-      <section className="flex h-screen w-screen items-center justify-center">
-        <Loader2Icon size={14} className="text-muted-foreground animate-spin" />
-      </section>
-    );
+    return <Loading />;
   }
 
   return (

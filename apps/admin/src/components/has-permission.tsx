@@ -22,6 +22,7 @@ function HasPermission<
   action,
   children,
   args,
+  alert,
 }: {
   resourceName: Res;
   action: Act;
@@ -33,6 +34,7 @@ function HasPermission<
           ? PermissionType[Res]["createDataType"]
           : PermissionType[Res]["dataType"],
       ];
+  alert?: React.ReactNode;
 }) {
   const {
     auth: { user },
@@ -42,19 +44,6 @@ function HasPermission<
     const resource = args?.[0] || null;
     if (!user) return false;
     if (!["list"].includes(action) && !resource) return false;
-
-    // if (action === "create" && resource) {
-    //   resource
-    //   return accessControl.attribute<typeof resourceName, "create">(
-    //     {
-    //       claim: "admin",
-    //       user,
-    //     },
-    //     resourceName,
-    //     action,
-    //     resource,
-    //   );
-    // }
 
     if (action === "list") {
       return accessControl.attribute<typeof resourceName, "list">(
@@ -80,7 +69,7 @@ function HasPermission<
     );
   }, [resourceName, action, user]);
 
-  if (!hasAccess) return null;
+  if (!hasAccess) return alert || null;
   return children;
 }
 

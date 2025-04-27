@@ -26,5 +26,22 @@ class ServerUtils {
             },
         });
     };
+    constructQuery = (data) => {
+        const queries = new URLSearchParams();
+        Object.entries(data).forEach(([key, value]) => {
+            if (value) {
+                queries.append(key, value);
+            }
+        });
+        return queries;
+    };
+    constructTags = (data, base) => {
+        Object.entries(data).forEach(([key, { value, prefix }]) => {
+            if (value) {
+                base.push(`${prefix}-${value}`);
+            }
+        });
+        return base;
+    };
 }
 exports.ServerUtils = ServerUtils;
