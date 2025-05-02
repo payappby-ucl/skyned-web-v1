@@ -1,5 +1,5 @@
 import { ITimestamps } from "./utils";
-import { IAdmin } from "./admin";
+import { AdminProfile } from "./admin";
 import { ITeam } from "./team";
 import { Department } from "../types";
 
@@ -8,8 +8,8 @@ export interface IDepartment extends ITimestamps {
   name: Department;
 
   leadId?: string;
-  lead?: IAdmin;
+  lead?: AdminProfile;
 
-  members?: IAdmin[];
+  members?: AdminProfile[];
   teams?: ITeam[];
 }

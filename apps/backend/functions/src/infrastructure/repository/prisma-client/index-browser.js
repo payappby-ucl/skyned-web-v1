@@ -189,6 +189,18 @@ exports.Prisma.InquiryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ActivityLogScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  resource: 'resource',
+  resourceId: 'resourceId',
+  action: 'action',
+  previousState: 'previousState',
+  currentState: 'currentState',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -245,7 +257,8 @@ exports.Prisma.ModelName = {
   Department: 'Department',
   Team: 'Team',
   Faq: 'Faq',
-  Inquiry: 'Inquiry'
+  Inquiry: 'Inquiry',
+  ActivityLog: 'ActivityLog'
 };
 
 /**

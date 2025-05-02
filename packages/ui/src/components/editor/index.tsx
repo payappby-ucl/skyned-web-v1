@@ -20,6 +20,7 @@ interface Props {
   content?: string;
   className?: string;
   editable?: boolean;
+  placeholder?: string;
   invalid: boolean;
 }
 
@@ -29,6 +30,7 @@ const Editor: React.FC<Props> = ({
   editable,
   invalid,
   onChange,
+  placeholder,
 }) => {
   const editor = useEditor({
     extensions: [
@@ -43,7 +45,7 @@ const Editor: React.FC<Props> = ({
         protocols: ["http", "https"],
       }),
       Placeholder.configure({
-        placeholder: "Write something …",
+        placeholder: placeholder || "Write something …",
       }),
       TextAlign.configure({
         types: ["heading", "paragraph"],

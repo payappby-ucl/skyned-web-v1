@@ -3,6 +3,7 @@ import { IInquiryRepository } from "./interface";
 import { DBUtils } from "../utils";
 import { CreateContactUsSchema } from "./schema";
 import { JsonObject } from "../prisma-client/runtime/library";
+import { IdSchema } from "../../../zod-schemas";
 
 export * from "./interface";
 export * from "./schema";
@@ -22,7 +23,6 @@ export class InquiryRepository extends DBUtils implements IInquiryRepository {
   }
 
   /**
-   *
    * Creates an inquiry
    */
 
@@ -51,8 +51,50 @@ export class InquiryRepository extends DBUtils implements IInquiryRepository {
     return count;
   };
 
+  /** List Inquiries */
+
   findMany: IInquiryRepository["findMany"] = async (query) => {
     const inquiries = await this.db.inquiry.findMany(query);
     return inquiries.map((inquiry) => this.deserialize(inquiry));
+  };
+
+  /** Deletes inquiry */
+
+  delete: IInquiryRepository["delete"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: {
+        id,
+      },
+    });
+
+    const deletedInquiry = await this.db.inquiry.delete({
+      where: {
+        id,
+      },
+    });
+
+    return this.deserialize(deletedInquiry);
+  };
+
+  /** Find inquiry by id */
+
+  findById: IInquiryRepository["findById"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: {
+        id,
+      },
+    });
+
+    const inquiry = await this.db.inquiry.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!inquiry) return null;
+
+    return this.deserialize(inquiry);
   };
 }

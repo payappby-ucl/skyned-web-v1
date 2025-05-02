@@ -21,6 +21,10 @@ export abstract class DBUtils {
           return [key, value as unknown as IPhoneNumber];
         }
 
+        if (key === "previousState" || key === "currentState") {
+          return [key, value as any];
+        }
+
         if (Array.isArray(value)) {
           return [key, value.map((v) => this.deserialize(v))];
         }

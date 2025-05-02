@@ -1,6 +1,11 @@
 /* eslint-disable max-len */
 
-import { IAdminRepository, ITokenRepository } from "../../../infrastructure";
+import {
+  IAdminRepository,
+  IFaqRepository,
+  ITokenRepository,
+} from "../../../infrastructure";
+import { IActivityLogRepository } from "../../../infrastructure/repository/activity-log";
 import { IInquiryRepository } from "../../../infrastructure/repository/inquiry";
 import {
   Prisma,
@@ -15,4 +20,6 @@ export interface IRepository {
   token: ITokenRepository;
   admin: IAdminRepository;
   inquiry: IInquiryRepository;
+  activityLog: IActivityLogRepository;
+  faq: IFaqRepository;
 }

@@ -111,7 +111,10 @@ export class ContactController
     next,
   ) => {
     try {
-      const admin = this._validateAdmin(req);
+      const authUser = this._validateAdmin(req);
+
+      this._attributeBasedAccessControl(authUser, "inquiries", "list");
+
       const { limit, page, from, to } = req.query;
 
       const construct = this._constructPaginationData({
@@ -124,7 +127,7 @@ export class ContactController
         to,
       });
 
-      const inquiries = await this.inquiryService.findMany(admin, {
+      const inquiries = await this.inquiryService.findMany({
         ...SkynedUtils.pick(construct, ["skip", "take"]),
         from,
         to,
@@ -134,6 +137,52 @@ export class ContactController
         ...SkynedUtils.exclude(construct, ["skip", "take"]),
         data: inquiries,
         total,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteContactUsMessage: IContactController["deleteContactUsMessage"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+
+      const { id } = req.params;
+      const inquiry = await this.inquiryService.findById(id);
+
+      if (!inquiry) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "The resource you're trying to delete does not exist.",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        authUser,
+        "inquiries",
+        "delete",
+        inquiry,
+      );
+
+      await this.inquiryService.delete(inquiry.id);
+
+      this.event.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "inquiries",
+          resourceId: inquiry.id,
+          action: "delete",
+          previousState: inquiry,
+          adminId: authUser.user.id,
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: "Resource Deleted",
       });
     } catch (error) {
       next(error);

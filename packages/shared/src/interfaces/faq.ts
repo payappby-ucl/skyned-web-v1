@@ -1,4 +1,4 @@
-import { IAdmin } from "./admin";
+import { AdminProfile } from "./admin";
 import { ITimestamps } from "./utils";
 
 export interface IFaq extends ITimestamps {
@@ -6,5 +6,5 @@ export interface IFaq extends ITimestamps {
   question: string;
   answer: string;
   createdById: string;
-  createdBy?: IAdmin;
+  createdBy?: AdminProfile;
 }

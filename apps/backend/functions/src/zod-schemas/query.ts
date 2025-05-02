@@ -9,7 +9,7 @@ export const PageQuerySchema = z.object({
     .max(100, "A maximum of 100")
     .optional(),
   page: z.coerce.number().int().positive().optional(),
-  from: z.coerce.date().optional(),
-  to: z.coerce.date().optional(),
+  from: z.date().optional(),
+  to: z.date().optional(),
 });
 export type PageQuerySchema = z.infer<typeof PageQuerySchema>;

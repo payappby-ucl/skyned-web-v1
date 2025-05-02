@@ -13,7 +13,7 @@ export type RegisterSchema = z.infer<typeof RegisterSchema>;
 export const AccountCreationSchema = CommonSchema.pick({
   email: true,
 }).extend({
-  password: z.coerce.string().trim().min(8, "A minimum of 8 characters"),
+  password: z.string().trim().min(8, "A minimum of 8 characters"),
 });
 
 /** Schema type */

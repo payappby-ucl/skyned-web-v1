@@ -5,3 +5,4 @@ export * from "./team";
 export * from "./utils";
 export * from "./faq";
 export * from "./inquiry";
+export * from "./activity-log";

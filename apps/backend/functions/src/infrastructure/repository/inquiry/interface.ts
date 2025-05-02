@@ -15,4 +15,10 @@ export interface IInquiryRepository {
 
   /** Count */
   count(query?: Prisma.InquiryCountArgs): Promise<number>;
+
+  /** Delete data */
+  delete(id: number): Promise<IInquiry>;
+
+  /** Find an inquiry by id */
+  findById(id: number): Promise<IInquiry | null>;
 }

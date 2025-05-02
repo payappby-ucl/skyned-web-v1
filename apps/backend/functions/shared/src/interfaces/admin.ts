@@ -21,9 +21,9 @@ export interface IAdmin extends ITimestamps {
   phoneNumber: IPhoneNumber | null;
 
   createdById: string | null;
-  createdBy?: IAdmin | null;
+  createdBy?: AdminProfile | null;
 
-  created?: IAdmin[];
+  created?: AdminProfile[];
 
   departments?: IDepartment[];
   departmentsLeading?: IDepartment[];
@@ -31,3 +31,8 @@ export interface IAdmin extends ITimestamps {
   teams?: ITeam[];
   teamsLeading?: ITeam[];
 }
+
+export type AdminProfile = Pick<
+  IAdmin,
+  "adminId" | "firstName" | "lastName" | "email" | "jobTitle" | "primaryImage"
+>;

@@ -83,7 +83,7 @@ model Token {
 }
 
 model Admin {
-  id                 Int     @default(autoincrement())
+  id                 Int     @unique @default(autoincrement())
   adminId            String  @id @unique @map("admin_id") @db.VarChar(256)
   email              String  @unique
   firstName          String  @map("first_name") @db.VarChar(50)
@@ -115,6 +115,9 @@ model Admin {
 
   // * FAQs created
   faqsCreated Faq[]
+
+  // * Activity Logs
+  activityLogs ActivityLog[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -187,6 +190,27 @@ model Inquiry {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("inquiries")
+}
+
+// * Admin Activity log
+model ActivityLog {
+  id Int @id @default(autoincrement())
+
+  adminId Int   @map("admin_id")
+  admin   Admin @relation(fields: [adminId], references: [id])
+
+  resource   String
+  resourceId Int    @map("resource_id")
+
+  action String
+
+  previousState Json? @map("previous_state")
+  currentState  Json? @map("current_state")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("activity_logs")
 }
 
 // model Student {
@@ -320,20 +344,4 @@ model Inquiry {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
 //   @@map("programs")
-// }
-
-// model ActivityLog {
-//   id Int @id @default(autoincrement())
-
-//   adminId String @map("admin_id")
-//   admin   Admin  @relation(fields: [adminId], references: [adminId])
-
-//   resource      String
-//   previousState Json?   @map("previous_state")
-//   currentState  Json   @map("current_state")
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("activity_logs")
 // }

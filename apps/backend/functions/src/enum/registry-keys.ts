@@ -42,6 +42,8 @@ export enum RegistryKeysEnum {
   ADMIN_ROUTER = "AdminRouter",
   /** Contact us Router */
   CONTACT_ROUTER = "ContactRouter",
+  /** FAQ Router */
+  FAQ_ROUTER = "FaqRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -54,6 +56,8 @@ export enum RegistryKeysEnum {
   ADMIN_CONTROLLER = "AdminController",
   /** Contact Controller */
   CONTACT_CONTROLLER = "ContactController",
+  /** FAQ Controller */
+  FAQ_CONTROLLER = "FaqController",
 
   // * Services
   /** Email Service */
@@ -70,6 +74,10 @@ export enum RegistryKeysEnum {
   PHONE_NUMBER_SERVICE = "PhoneNumberService",
   /** Contact Service */
   INQUIRY_SERVICE = "InquiryService",
+  /** Activity Log */
+  ACTIVITY_LOG_SERVICE = "ActivityLogService",
+  /** FAQ Service */
+  FAQ_SERVICE = "FaqService",
 
   // * Utilities
   /** Handles internal validations */

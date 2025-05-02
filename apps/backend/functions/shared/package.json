@@ -12,12 +12,14 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.13.1",
+    "@types/sanitize-html": "^2.15.0",
     "typescript": "^5.7.3"
   },
   "dependencies": {
     "country-state-city": "^3.2.1",
     "http-status-codes": "^2.3.0",
     "libphonenumber-js": "^1.12.6",
+    "sanitize-html": "^2.16.0",
     "zod": "^3.24.2"
   }
 }

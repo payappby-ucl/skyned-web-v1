@@ -13,7 +13,7 @@ import {
   RequestValidationMiddleware,
 } from "../../../../middleware";
 import { contactController } from "../../../../controllers";
-import { PageQuerySchema } from "../../../../zod-schemas";
+import { IdSchema, PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for auth router initialization */
 export interface ContactRouterDependencies {
@@ -54,6 +54,15 @@ export class ContactRouter implements IRouter {
         }),
         contactController.createAndSendContactMessage,
       );
+
+    this.router.route("/:id").delete(
+      RequestValidationMiddleware.validate({
+        params: IdSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      contactController.deleteContactUsMessage,
+    );
   }
 
   /**

@@ -1,10 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { InquiryService, inquiryService } from ".";
 import { phoneNumberService } from "../phone-number";
-import { repository } from "../../../infrastructure";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { clientAuth } from "../../../../__tests__/helpers/constants";
-import { admin } from "../../../data";
 
 describe("InquiryService", () => {
   test("should be an instance of InquiryService", () => {
@@ -12,23 +8,15 @@ describe("InquiryService", () => {
   });
 
   describe("methods", () => {
+    const testData = {
+      name: "Alabi Emmanuel",
+      email: "bobslegend795@gmail.com",
+      phoneNumber: phoneNumberService.formatPhoneNumber("+2348136239706"),
+      subject: "Test Subject",
+      message: "Test Message",
+    };
+
     describe("create", () => {
-      beforeEach(() => {
-        jest.resetAllMocks();
-      });
-
-      afterAll(() => {
-        jest.restoreAllMocks();
-      });
-
-      const testData = {
-        name: "Alabi Emmanuel",
-        email: "bobslegend795@gmail.com",
-        phoneNumber: phoneNumberService.formatPhoneNumber("+2348136239706"),
-        subject: "Test Subject",
-        message: "Test Message",
-      };
-
       test("should throw a server error if given invalid data", async () => {
         try {
           await inquiryService.create({
@@ -43,17 +31,7 @@ describe("InquiryService", () => {
       });
 
       test("should create data", async () => {
-        const spy = jest
-          .spyOn(repository.inquiry, "create")
-          .mockImplementation(async () => ({
-            ...testData,
-            id: 1,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          }));
-
         const data = await inquiryService.create(testData);
-        expect(spy).toHaveBeenCalled();
         expect(data).toEqual(expect.objectContaining(testData));
       });
     });
@@ -67,17 +45,47 @@ describe("InquiryService", () => {
 
     describe("findMany", () => {
       test("should return with array length of one", async () => {
-        const { user } = await signInWithEmailAndPassword(
-          clientAuth,
-          admin.email,
-          "12345678",
-        );
+        const inquiries = await inquiryService.findMany();
+        expect(inquiries.length).toBeGreaterThanOrEqual(1);
+      });
+    });
 
-        const signedUser = await repository.admin.findAdminByAdminId(user.uid);
-        if (signedUser) {
-          const inquiries = await inquiryService.findMany(signedUser);
-          expect(inquiries.length).toBeGreaterThanOrEqual(1);
+    describe("findById", () => {
+      test("should fail if passed invalid id type", async () => {
+        try {
+          await inquiryService.findById("ee" as never as number);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
         }
+      });
+
+      test("should pass", async () => {
+        const inquiry = await inquiryService.create(testData);
+        const findInquiry = await inquiryService.findById(inquiry.id);
+        expect(findInquiry).not.toBeNull();
+        expect(inquiry.id).toBe(findInquiry?.id);
+        expect(findInquiry).toEqual(expect.objectContaining(testData));
+      });
+    });
+
+    describe("delete", () => {
+      test("should fail if passed invalid id type", async () => {
+        try {
+          await inquiryService.delete("ee" as never as number);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const inquiry = await inquiryService.create(testData);
+        const deletedInquiry = await inquiryService.delete(inquiry.id);
+        const findDeletedInquiry = await inquiryService.findById(inquiry.id);
+
+        expect(deletedInquiry).not.toBeNull();
+        expect(inquiry.id).toBe(deletedInquiry?.id);
+        expect(deletedInquiry).toEqual(expect.objectContaining(testData));
+        expect(findDeletedInquiry).toBeNull();
       });
     });
   });

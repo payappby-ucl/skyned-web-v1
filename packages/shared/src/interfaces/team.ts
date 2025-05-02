@@ -1,4 +1,4 @@
-import { IAdmin } from "./admin";
+import { AdminProfile } from "./admin";
 import { IDepartment } from "./department";
 import { ITimestamps } from "./utils";
 
@@ -9,7 +9,7 @@ export interface ITeam extends ITimestamps {
   department?: IDepartment;
 
   leadId?: string;
-  lead?: IAdmin;
+  lead?: AdminProfile;
 
-  members?: IAdmin[];
+  members?: AdminProfile[];
 }

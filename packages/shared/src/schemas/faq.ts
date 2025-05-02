@@ -2,8 +2,8 @@ import { z } from "zod";
 import sanitizeHtml from "sanitize-html";
 
 export const CreateFaqSchema = z.object({
-  question: z.coerce.string().trim().nonempty("Required"),
-  answer: z.coerce
+  question: z.string().trim().nonempty("Required"),
+  answer: z
     .string()
     .trim()
     .nonempty("Required")

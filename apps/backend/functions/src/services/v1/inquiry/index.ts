@@ -1,7 +1,6 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
 
-import { accessControl } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
 import { CreateContactUsSchema, repository } from "../../../infrastructure";
 import {
@@ -11,7 +10,7 @@ import {
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { SkynedUtils, validationUtility } from "../../../utils";
-import { StatusCodes } from "http-status-codes";
+import { IdSchema } from "../../../zod-schemas";
 
 /** Represents dependencies needed to instantiate IInquiryService concrete class */
 export interface InquiryServiceDependencies {
@@ -49,7 +48,7 @@ export class InquiryService implements IInquiryService {
     return InquiryService.instance;
   }
 
-  private _constructQuery(query: Parameters<IInquiryService["findMany"]>["1"]) {
+  private _constructQuery(query: Parameters<IInquiryService["findMany"]>["0"]) {
     let queryArgs: Parameters<typeof this.repository.inquiry.findMany>["0"] =
       {};
 
@@ -104,20 +103,7 @@ export class InquiryService implements IInquiryService {
     return res;
   };
 
-  findMany: IInquiryService["findMany"] = async (initiator, query) => {
-    const hasAccess = accessControl.attribute(
-      {
-        user: initiator,
-        claim: "admin",
-      },
-      "inquiries",
-      "list",
-    );
-
-    if (!hasAccess) {
-      throw SkynedUtils.createException(StatusCodes.FORBIDDEN, "Unauthorized");
-    }
-
+  findMany: IInquiryService["findMany"] = async (query) => {
     const queryArgs = this._constructQuery(query);
 
     const inquiries = await this.repository.inquiry.findMany(queryArgs);
@@ -135,6 +121,26 @@ export class InquiryService implements IInquiryService {
     );
 
     return total;
+  };
+
+  findById: IInquiryService["findById"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: { id },
+    });
+
+    const inquiry = await this.repository.inquiry.findById(id);
+    return inquiry;
+  };
+
+  delete: IInquiryService["delete"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: { id },
+    });
+
+    const inquiry = await this.repository.inquiry.delete(id);
+    return inquiry;
   };
 }
 

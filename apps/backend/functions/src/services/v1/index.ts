@@ -5,3 +5,5 @@ export * from "./id-generator";
 export * from "./admin";
 export * from "./phone-number";
 export * from "./inquiry";
+export * from "./activity-log";
+export * from "./faq";

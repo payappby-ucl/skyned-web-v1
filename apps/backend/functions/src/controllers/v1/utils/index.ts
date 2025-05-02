@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { DEFAULT_QUERY_LIMIT, SkynedUtils } from "../../../utils";
 import { PageQuerySchema } from "../../../zod-schemas";
+import { accessControl, AdminClaim } from "@workspace/shared";
 
 export abstract class ControllerUtils {
   protected _validateAdmin(req: Express.Request) {
@@ -8,7 +9,10 @@ export abstract class ControllerUtils {
       throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
     }
 
-    return req.skynedAuth.admin;
+    return {
+      user: req.skynedAuth.admin,
+      claim: req.skynedAuth.claim,
+    } as AdminClaim;
   }
 
   protected _constructPaginationData({
@@ -30,4 +34,17 @@ export abstract class ControllerUtils {
       perPage: take,
     };
   }
+
+  protected _attributeBasedAccessControl: (typeof accessControl)["attribute"] =
+    (...args) => {
+      const hasAccess = accessControl.attribute(...args);
+      if (!hasAccess) {
+        throw SkynedUtils.createException(
+          StatusCodes.FORBIDDEN,
+          "Unauthorized",
+        );
+      }
+
+      return true;
+    };
 }

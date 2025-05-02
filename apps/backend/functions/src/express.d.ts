@@ -1,4 +1,4 @@
-import { IAdmin } from "@workspace/shared";
+import { AuthClaim, IAdmin } from "@workspace/shared";
 import { _failed, _success } from "./middleware";
 
 declare global {
@@ -13,6 +13,7 @@ declare global {
         admin?: IAdmin;
         // TODO: Add student interface
         student?: "";
+        claim: AuthClaim["claim"];
       };
     }
   }

@@ -6,7 +6,7 @@ import {
   ISuccessResponse,
 } from "@workspace/shared";
 import { RequestHandler } from "express";
-import { PageQuerySchema } from "../../zod-schemas";
+import { IdSchema, PageQuerySchema } from "../../zod-schemas";
 
 /** Represents interface for contact controller */
 export interface IContactController {
@@ -21,5 +21,10 @@ export interface IContactController {
     ISuccessResponse<IPaginatedResponse<IInquiry>>,
     object,
     Partial<PageQuerySchema>
+  >;
+
+  deleteContactUsMessage: RequestHandler<
+    IdSchema & any,
+    ISuccessResponse<IMessageResponse>
   >;
 }

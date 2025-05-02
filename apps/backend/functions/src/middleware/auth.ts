@@ -84,6 +84,8 @@ export class AuthMiddleware implements IAuthMiddleware {
           throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
       }
 
+      req.skynedAuth.claim = authUser.claim;
+
       next();
     } catch (error) {
       next(error);

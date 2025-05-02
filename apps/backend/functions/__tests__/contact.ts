@@ -8,6 +8,7 @@ import { phoneNumberService } from "../src/services";
 import { events } from "../src/infrastructure";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { admin } from "../src/data";
+import { signInUser } from "./helpers/utils";
 
 describe("Contact API", () => {
   const server = app.getApp();
@@ -103,6 +104,41 @@ describe("Contact API", () => {
           ]),
         },
       });
+    });
+  });
+
+  describe("DELETE - /api/v1/contact", () => {
+    test("should fail if not authorized", async () => {
+      try {
+        await request(server).delete("/api/v1/contact/1");
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      }
+    });
+
+    test("should fail if invalid input is passed", async () => {
+      const emailEmitterSpy = jest
+        .spyOn(events, "emitEvent")
+        .mockImplementation();
+
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .delete("/api/v1/contact/1")
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        statusCode: StatusCodes.OK,
+        success: true,
+        data: {
+          message: "Resource Deleted",
+        },
+      });
+
+      expect(emailEmitterSpy).toHaveBeenCalled();
     });
   });
 });

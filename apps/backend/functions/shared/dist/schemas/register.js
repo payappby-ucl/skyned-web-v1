@@ -11,5 +11,5 @@ exports.RegisterSchema = common_1.CommonSchema.pick({
 exports.AccountCreationSchema = common_1.CommonSchema.pick({
     email: true,
 }).extend({
-    password: zod_1.z.coerce.string().trim().min(8, "A minimum of 8 characters"),
+    password: zod_1.z.string().trim().min(8, "A minimum of 8 characters"),
 });

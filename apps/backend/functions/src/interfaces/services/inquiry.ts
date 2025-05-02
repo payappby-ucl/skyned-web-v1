@@ -1,4 +1,4 @@
-import { IAdmin, IInquiry } from "@workspace/shared";
+import { IInquiry } from "@workspace/shared";
 import { IInquiryRepository } from "../../infrastructure";
 import { IQueryConstruct } from "../utils";
 
@@ -11,8 +11,11 @@ export interface IInquiryService {
   count(query?: Partial<IQueryConstruct<IInquiry>>): Promise<number>;
 
   /** Find many */
-  findMany(
-    initiator: IAdmin,
-    query?: Partial<IQueryConstruct<IInquiry>>,
-  ): Promise<IInquiry[]>;
+  findMany(query?: Partial<IQueryConstruct<IInquiry>>): Promise<IInquiry[]>;
+
+  /** findByID */
+  findById: IInquiryRepository["findById"];
+
+  /** Delete */
+  delete: IInquiryRepository["delete"];
 }

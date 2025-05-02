@@ -37,8 +37,8 @@ export class AdminController
 
   getMe: IAdminController["getMe"] = async (req, res, next) => {
     try {
-      const admin = this._validateAdmin(req);
-      res._success(StatusCodes.OK, admin);
+      const { user } = this._validateAdmin(req);
+      res._success(StatusCodes.OK, user);
     } catch (error) {
       next(error);
     }
