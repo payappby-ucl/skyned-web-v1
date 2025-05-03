@@ -1,0 +1,33 @@
+paths:
+  /admin/me:
+    summary: Get Auth
+    description: Gets the current auth user data
+
+    get:
+      summary: Get user data
+      description: >
+        Gets the auth user data
+      tags:
+        - Admin
+        - Auth
+      operationId: getAdminMe
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Auth admin data
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Admin"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"

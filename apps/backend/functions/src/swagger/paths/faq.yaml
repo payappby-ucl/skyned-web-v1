@@ -35,7 +35,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: "#/components/schemas/MessageResponse"
+                        $ref: "#/components/schemas/Faq"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":

@@ -1,5 +1,7 @@
 import HasPermission from "@/src/components/has-permission";
 import useClipboard from "@/src/hooks/use-clipboard";
+import { brandClientApi } from "@/src/lib/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { IInquiry } from "@workspace/shared";
 import {
@@ -25,6 +27,7 @@ import { DataTableRowActions } from "@workspace/ui/components/table/data-table-r
 import { Country } from "country-state-city";
 import dayjs from "dayjs";
 import { Clipboard, Contact, Eye, Mail, Phone, Trash2 } from "lucide-react";
+import { deleteInquiry } from "../_actions";
 
 export const columns: ColumnDef<IInquiry>[] = [
   {
@@ -113,8 +116,30 @@ export const columns: ColumnDef<IInquiry>[] = [
     header: "Actions",
     accessorFn: (row) => row,
     cell: (info) => {
+      const queryClient = useQueryClient();
       const { copyToClipboard } = useClipboard();
       const inquiry = info.getValue<IInquiry>();
+      const deleteInquiryMutation = useMutation({
+        mutationFn: async () => {
+          try {
+            brandClientApi.utils.toast.promise(deleteInquiry(inquiry.id), {
+              loading: "Deleting...",
+              success(data) {
+                queryClient.invalidateQueries({
+                  queryKey: ["inquiries"],
+                });
+                return data.message;
+              },
+              error(error) {
+                brandClientApi.utils.alertError(error);
+                return error;
+              },
+            });
+          } catch (error) {
+            brandClientApi.utils.alertError(error);
+          }
+        },
+      });
 
       return (
         <DataTableRowActions>
@@ -123,7 +148,10 @@ export const columns: ColumnDef<IInquiry>[] = [
             action="delete"
             args={[inquiry]}
           >
-            <DropdownMenuItem className="text-destructive hover:!text-destructive">
+            <DropdownMenuItem
+              className="text-destructive hover:!text-destructive"
+              onClick={() => deleteInquiryMutation.mutate()}
+            >
               <Trash2 className="text-destructive" />
               <span>Delete</span>
             </DropdownMenuItem>

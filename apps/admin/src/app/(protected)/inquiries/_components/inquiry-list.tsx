@@ -16,8 +16,8 @@ const InquiryList: React.FC = () => {
   >({
     queryKey: [
       "inquiries",
-      `${pagination.pageIndex}`,
-      `${pagination.pageSize}`,
+      `inquiries-page-${pagination.pageIndex}`,
+      `inquiries-limit-${pagination.pageSize}`,
     ],
     url: `/inquiries?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
   });

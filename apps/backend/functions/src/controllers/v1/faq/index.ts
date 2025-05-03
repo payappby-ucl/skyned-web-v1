@@ -47,7 +47,7 @@ export class FaqController extends ControllerUtils implements IFaqController {
           resource: "faqs",
           resourceId: faq.id,
           action: "create",
-          currentState: faq,
+          currentState: SkynedUtils.exclude(faq, ["createdBy"]),
           adminId: authUser.user.id,
         },
       });
@@ -116,7 +116,7 @@ export class FaqController extends ControllerUtils implements IFaqController {
           resource: "faqs",
           resourceId: faq.id,
           action: "delete",
-          previousState: faq,
+          previousState: SkynedUtils.exclude(faq, ["createdBy"]),
           adminId: authUser.user.id,
         },
       });

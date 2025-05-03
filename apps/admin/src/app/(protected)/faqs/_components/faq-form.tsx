@@ -14,14 +14,19 @@ import { Input } from "@workspace/ui/components/input";
 import { Editor } from "@workspace/ui/components/editor";
 import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback } from "react";
-import { Button } from "@workspace/ui/components/button";
 import { FormButton } from "@workspace/ui/components/form-button";
+import { createFaq } from "../_actions";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 interface Props {
   faq?: IFaq;
 }
 
 const FaqForm: React.FC<Props> = ({ faq }) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const form = useForm<CreateFaqSchema>({
     resolver: zodResolver(CreateFaqSchema),
     defaultValues: {
@@ -32,8 +37,16 @@ const FaqForm: React.FC<Props> = ({ faq }) => {
 
   const onSubmit = useCallback(async (data: CreateFaqSchema) => {
     try {
-      console.log(data);
-      brandClientApi.utils.toast.info("Currently under construction...");
+      if (faq) {
+        brandClientApi.utils.toast.info("Currently under construction");
+        return;
+      }
+      await createFaq(data);
+      brandClientApi.utils.toast.success("FAQ Created.");
+      queryClient.invalidateQueries({
+        queryKey: ["faq"],
+      });
+      router.replace("/faqs");
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }

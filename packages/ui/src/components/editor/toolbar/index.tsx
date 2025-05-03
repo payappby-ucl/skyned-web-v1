@@ -12,6 +12,7 @@ import { TextAlign } from "./text-align";
 import { Separator } from "../../separator";
 import { Links } from "./link";
 import { MobileLink } from "./mobile-link";
+import { ToggleGroupTwo } from "./toogle-group-2";
 
 export interface EditorToolbarProp {
   editor: Editor;
@@ -34,6 +35,8 @@ const EditorToolbar: React.FC<EditorToolbarProp> = ({ editor, className }) => {
       <Separator orientation="vertical" className="!h-[20px]" />
       <ToggleGroupOne editor={editor} />
       <Links editor={editor} setIsMobileLink={setIsMobileLink} />
+      <Separator orientation="vertical" className="!h-[20px]" />
+      <ToggleGroupTwo editor={editor} />
       <Separator orientation="vertical" className="!h-[20px]" />
       <Scripts editor={editor} />
       <Separator orientation="vertical" className="!h-[20px]" />

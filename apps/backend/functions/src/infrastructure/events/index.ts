@@ -14,7 +14,7 @@ import { SkynedUtils } from "../../utils";
 import { StatusCodes } from "http-status-codes";
 import { logger } from "../logger";
 import { marketing } from "../marketing";
-import { activityLogService } from "../../services";
+import { activityLogService } from "../../services/v1/activity-log";
 
 /** Represents dependencies needed to instantiate Events class */
 export interface EventsDependencies {

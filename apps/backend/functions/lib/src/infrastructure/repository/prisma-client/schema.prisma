@@ -1,0 +1,347 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output        = "../src/infrastructure/repository/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// * ENUMS
+enum DepartmentName {
+  Executive
+  Marketing
+  Admissions
+  Communications
+  Technical
+  Human_Resource
+  Quality_Assurance
+}
+
+enum Gender {
+  Male
+  Female
+  Others
+}
+
+enum TokenType {
+  verify
+  reset
+}
+
+// enum InstitutionType {
+//   university
+//   college
+// }
+
+// enum OwnershipType {
+//   private
+//   public
+// }
+
+// enum Currency {
+//   USD
+//   CAD
+//   AUD
+//   NGN
+//   EUR
+// }
+
+// enum DegreeLevel {
+//   undergraduate
+//   postgraduate
+//   masters
+//   diploma
+//   certificate
+// }
+
+// enum Intakes {
+//   winter
+//   fall
+//   spring
+// }
+
+model Token {
+  id        Int       @default(autoincrement())
+  tokenId   String    @id @default(cuid()) @map("token_id")
+  token     String    @db.Text
+  type      TokenType
+  expiresIn DateTime  @map("expires_in")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tokens")
+}
+
+model Admin {
+  id                 Int     @unique @default(autoincrement())
+  adminId            String  @id @unique @map("admin_id") @db.VarChar(256)
+  email              String  @unique
+  firstName          String  @map("first_name") @db.VarChar(50)
+  lastName           String  @map("last_name") @db.VarChar(50)
+  middleName         String? @map("middle_name") @db.VarChar(50)
+  gender             Gender
+  accountSuspended   Boolean @default(false) @map("account_suspended")
+  nationality        String  @db.VarChar(3)
+  countryOfResidence String  @map("country_of_residence") @db.VarChar(3)
+  about              String? @db.Text
+  primaryImage       Json    @map("primary_image")
+  secondaryImage     Json?   @map("secondary_image")
+  socials            Json?
+  phoneNumber        Json?   @map("phone_number")
+  jobTitle           String  @map("job_title")
+
+  // * Admin Creation
+  createdById String? @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin?  @relation("adminCreatedBy", fields: [createdById], references: [adminId])
+  created     Admin[] @relation("adminCreatedBy")
+
+  // * Department membership and Departments leading
+  departments        Department[]
+  departmentsLeading Department[] @relation("departmentLead")
+
+  // * Team membership and Teams leading
+  teams        Team[]
+  teamsLeading Team[] @relation("teamLead")
+
+  // * FAQs created
+  faqsCreated Faq[]
+
+  // * Activity Logs
+  activityLogs ActivityLog[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model Department {
+  id   Int            @id @default(autoincrement())
+  name DepartmentName @unique
+
+  leadId String? @map("lead_id") @db.VarChar(256)
+  lead   Admin?  @relation("departmentLead", fields: [leadId], references: [adminId])
+
+  members Admin[]
+  teams   Team[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("departments")
+}
+
+model Team {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(256)
+
+  leadId String? @map("lead_id") @db.VarChar(256)
+  lead   Admin?  @relation("teamLead", fields: [leadId], references: [adminId])
+
+  departmentId Int        @map("department_id")
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  members Admin[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([departmentId, name])
+  @@map("teams")
+}
+
+// * FAQ
+model Faq {
+  id Int @id @default(autoincrement())
+
+  question String
+  answer   String @db.Text
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("faqs")
+}
+
+// * Inquiry
+model Inquiry {
+  id Int @id @default(autoincrement())
+
+  name        String
+  phoneNumber Json
+  email       String
+  message     String
+  subject     String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("inquiries")
+}
+
+// * Admin Activity log
+model ActivityLog {
+  id Int @id @default(autoincrement())
+
+  adminId Int   @map("admin_id")
+  admin   Admin @relation(fields: [adminId], references: [id])
+
+  resource   String
+  resourceId Int    @map("resource_id")
+
+  action String
+
+  previousState Json? @map("previous_state")
+  currentState  Json? @map("current_state")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("activity_logs")
+}
+
+// model Student {
+//   id                 Int      @default(autoincrement())
+//   studentId          String   @id @map("student_id")
+//   email              String   @db.VarChar(100)
+//   firstName          String   @map("first_name") @db.VarChar(100)
+//   middleName         String?  @map("middle_name") @db.VarChar(100)
+//   lastName           String   @map("last_name") @db.VarChar(100)
+//   accountSuspended   Boolean  @default(false) @map("account_suspended")
+//   countryOfResidence String   @map("country_of_residence") @db.VarChar(3)
+//   nationality        String   @db.VarChar(3)
+//   gender             Gender
+//   dateOfBirth        DateTime @map("date_of_birth")
+//   phoneNumber        String   @map("phone_number") @db.VarChar(100)
+
+//   studyPreference       StudyPreference?
+//   educationalBackground EducationalBackground?
+//   workExperience        WorkExperience?
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("students")
+// }
+
+// model StudyPreference {
+//   id Int @id @default(autoincrement())
+
+//   studentId String  @unique @map("student_id")
+//   student   Student @relation(fields: [studentId], references: [studentId])
+
+//   desiredCountry          String      @map("desired_country") @db.VarChar(3)
+//   preferredProgramOfStudy String      @map("preferred_program_of_study")
+//   degreeLevel             DegreeLevel @map("degree_level")
+//   preferredIntake         Intakes     @map("preferred_intake")
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("study_preferences")
+// }
+
+// model EducationalBackground {
+//   id Int @id @default(autoincrement())
+
+//   studentId String  @unique @map("student_id")
+//   student   Student @relation(fields: [studentId], references: [studentId])
+
+//   highestLevelOfEducation DegreeLevel @map("highest_level_of_education")
+//   institutionName         String      @map("institution_name")
+//   yearOfGraduation        Int         @map("year_of_graduation")
+//   cgpa                    Decimal
+//   fieldOfStudy            String      @map("field_of_study")
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("educational_backgrounds")
+// }
+
+// model WorkExperience {
+//   id Int @id @default(autoincrement())
+
+//   studentId String  @unique @map("student_id")
+//   student   Student @relation(fields: [studentId], references: [studentId])
+
+//   yearsOfExperience Int    @map("years_of_experience")
+//   industry          String
+//   currentJobTitle   String @map("current_job_title")
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("work_experience")
+// }
+
+// // * Admins
+// model Admin {
+//   id      Int    @default(autoincrement())
+//   adminId String @id @map("admin_id")
+
+//   email            String  @db.VarChar(100)
+//   firstName        String  @map("first_name") @db.VarChar(100)
+//   middleName       String? @map("middle_name") @db.VarChar(100)
+//   lastName         String  @map("last_name") @db.VarChar(100)
+//   accountSuspended Boolean @default(false) @map("account_suspended")
+//   phoneNumber      String  @map("phone_number") @db.VarChar(100)
+
+//   activityLogs ActivityLog[]
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("admins")
+// }
+
+// // * Schools
+// model School {
+//   id       Int    @unique @default(autoincrement())
+//   schoolId String @id @default(cuid()) @map("school_id")
+
+//   name            String
+//   slug            String          @unique
+//   state           String          @db.VarChar(10)
+//   country         String          @db.VarChar(3)
+//   city            String
+//   institutionType InstitutionType
+//   ownershipType   OwnershipType
+
+//   programs Program[]
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("schools")
+// }
+
+// // * Programs
+// model Program {
+//   id        Int    @unique @default(autoincrement())
+//   programId String @id @default(cuid()) @map("program_id")
+
+//   schoolId String
+//   school   School @relation(fields: [schoolId], references: [schoolId])
+
+//   name String
+//   slug String @unique
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("programs")
+// }

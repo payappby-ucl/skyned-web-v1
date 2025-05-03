@@ -11,6 +11,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Typography from "@tiptap/extension-typography";
 import Placeholder from "@tiptap/extension-placeholder";
 import Link from "@tiptap/extension-link";
+import HardBreak from "@tiptap/extension-hard-break";
 import { EditorToolbar } from "./toolbar/index";
 
 import Selection from "./extensions/selection";
@@ -39,6 +40,7 @@ const Editor: React.FC<Props> = ({
       Superscript,
       Subscript,
       Typography,
+      HardBreak,
       Link.configure({
         openOnClick: false,
         defaultProtocol: "https",
@@ -55,6 +57,9 @@ const Editor: React.FC<Props> = ({
       }),
       Selection,
     ],
+    parseOptions: {
+      preserveWhitespace: "full",
+    },
     editorProps: {
       attributes: {
         class: `selection:bg-brand-900/30 dark:selection:bg-brand-900/60 text-foreground font-medium py-8 px-5 mx-auto min-w-0 min-h-56 overflow-y-scroll bg-transparent text-md border-0 focus:border-0 focus:outline-0 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5 [&_blockquote]:p-2 [&_blockquote]:border-foreground [&_blockquote]:border-l-4 [&_a]:text-brand [&_a]:dark:text-brand-secondary [&_a]:underline [&_a]:font-semibold ${className}`,

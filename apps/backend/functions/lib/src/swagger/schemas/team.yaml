@@ -1,0 +1,31 @@
+components:
+  schemas:
+    Team:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            leadId:
+              type: string
+            lead:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+            departmentId:
+              type: integer
+            department:
+              $ref: "#/components/schemas/Department"
+              nullable: true
+            members:
+              type: array
+              items:
+                $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+          required:
+            - id
+            - name
+            - leadId
+            - departmentId
