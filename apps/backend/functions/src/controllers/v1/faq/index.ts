@@ -5,6 +5,7 @@ import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import SkynedRegistry from "../../../registry";
 import { faqService } from "../../../services";
 import { events } from "../../../infrastructure";
+import { SkynedUtils } from "../../../utils";
 
 export interface IFaqControllerDependencies {
   faqService: IFaqService;
@@ -52,6 +53,86 @@ export class FaqController extends ControllerUtils implements IFaqController {
       });
 
       res._success(StatusCodes.CREATED, faq);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getFaqs: IFaqController["getFaqs"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+
+      this._attributeBasedAccessControl(authUser, "faqs", "list");
+
+      const { limit, page, from, to } = req.query;
+
+      const construct = this._constructPaginationData({
+        limit,
+        page,
+      });
+
+      const total = await this.faqService.count({
+        from,
+        to,
+      });
+
+      const faqs = await this.faqService.findMany({
+        ...SkynedUtils.pick(construct, ["skip", "take"]),
+        from,
+        to,
+      });
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        data: faqs,
+        total,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteFaq: IFaqController["deleteFaq"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+
+      const { id } = req.params;
+      const faq = await this.faqService.findById(id);
+
+      if (!faq) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "The resource you're trying to delete does not exist.",
+        );
+      }
+
+      this._attributeBasedAccessControl(authUser, "faqs", "delete", faq);
+
+      await this.faqService.delete(faq.id);
+
+      this.event.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "faqs",
+          resourceId: faq.id,
+          action: "delete",
+          previousState: faq,
+          adminId: authUser.user.id,
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: "Resource Deleted",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  listFaqs: IFaqController["listFaqs"] = async (req, res, next) => {
+    try {
+      const faqs = await this.faqService.findMany();
+      res._success(StatusCodes.OK, faqs);
     } catch (error) {
       next(error);
     }

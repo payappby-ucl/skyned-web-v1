@@ -116,7 +116,7 @@ describe("Contact API", () => {
       }
     });
 
-    test("should fail if invalid input is passed", async () => {
+    test("should pass", async () => {
       const emailEmitterSpy = jest
         .spyOn(events, "emitEvent")
         .mockImplementation();

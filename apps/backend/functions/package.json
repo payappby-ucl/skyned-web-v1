@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1-74",
+  "version": "0.0.1-75",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "pnpm run cp:local && pnpm i && pnpm run generate && tsc && ./cp-yaml && typedoc",

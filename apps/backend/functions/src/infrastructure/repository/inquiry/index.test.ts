@@ -38,7 +38,7 @@ describe("InquiryRepository", () => {
     });
 
     describe("count", () => {
-      test("should create and return an inquiry", async () => {
+      test("should count", async () => {
         const count = await repository.inquiry.count();
         expect(count).toEqual(expect.any(Number));
       });

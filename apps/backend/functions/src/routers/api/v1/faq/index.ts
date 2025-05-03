@@ -12,6 +12,7 @@ import {
   RequestValidationMiddleware,
 } from "../../../../middleware";
 import { faqController } from "../../../../controllers";
+import { IdSchema, PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for faq router initialization */
 export interface FaqRouterDependencies {
@@ -32,31 +33,35 @@ export class FaqRouter implements IRouter {
     faqController: IFaqController,
     authMiddleware: IAuthMiddleware,
   ) {
-    this.router.route("/").post(
+    this.router
+      .route("/")
+      .post(
+        RequestValidationMiddleware.validate({
+          body: CreateFaqSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        faqController.createFaq,
+      )
+      .get(
+        RequestValidationMiddleware.validate({
+          query: PageQuerySchema.partial(),
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        faqController.getFaqs,
+      );
+
+    this.router.route("/list").get(faqController.listFaqs);
+
+    this.router.route("/:id").delete(
       RequestValidationMiddleware.validate({
-        body: CreateFaqSchema,
+        params: IdSchema,
       }),
       authMiddleware.authenticate,
       authMiddleware.hasRole(["admin"]),
-      faqController.createFaq,
+      faqController.deleteFaq,
     );
-    //   .get(
-    //     RequestValidationMiddleware.validate({
-    //       query: PageQuerySchema.partial(),
-    //     }),
-    //     authMiddleware.authenticate,
-    //     authMiddleware.hasRole(["admin"]),
-    //     contactController.getContactUsMessages,
-    //   );
-
-    // this.router.route("/:id").delete(
-    //   RequestValidationMiddleware.validate({
-    //     params: IdSchema,
-    //   }),
-    //   authMiddleware.authenticate,
-    //   authMiddleware.hasRole(["admin"]),
-    //   contactController.deleteContactUsMessage,
-    // );
   }
 
   /**

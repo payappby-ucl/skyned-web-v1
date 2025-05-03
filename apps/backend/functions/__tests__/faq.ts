@@ -25,13 +25,7 @@ describe("FAQ API", () => {
       const data = {
         ...SkynedUtils.exclude(testData, ["answer"]),
       };
-
-      console.log(data);
-
       const res = await request(server).post("/api/v1/faq").send(data);
-
-      console.log(res.body);
-
       expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
       expect(res.body).toEqual({
         statusCode: StatusCodes.BAD_REQUEST,
@@ -64,6 +58,112 @@ describe("FAQ API", () => {
       });
 
       expect(emailEmitterSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET - /api/v1/faq", () => {
+    test("should fail if no authorization header is passed", async () => {
+      const res = await request(server).get("/api/v1/faq");
+
+      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.body).toEqual({
+        statusCode: StatusCodes.UNAUTHORIZED,
+        success: false,
+        data: expect.objectContaining({
+          message: expect.any(String),
+        }),
+      });
+    });
+
+    test("should pass", async () => {
+      const { user } = await signInUser();
+
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .get("/api/v1/faq")
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        success: true,
+        data: {
+          total: expect.any(Number),
+          perPage: 100,
+          currentPage: 1,
+          nextPage: 2,
+          prevPage: 1,
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              question: expect.any(String),
+              answer: expect.any(String),
+            }),
+          ]),
+        },
+      });
+    });
+  });
+
+  describe("DELETE - /api/v1/faq", () => {
+    test("should fail if not authorized", async () => {
+      try {
+        await request(server).delete("/api/v1/faq/1");
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      }
+    });
+
+    test("should pass", async () => {
+      const emailEmitterSpy = jest
+        .spyOn(events, "emitEvent")
+        .mockImplementation();
+
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const createRes = await request(server)
+        .post("/api/v1/faq")
+        .set("authorization", `bearer ${token}`)
+        .send({
+          question: "What's Skyned",
+          answer: "<p>An Educational Platform</p>",
+        });
+
+      const res = await request(server)
+        .delete(`/api/v1/faq/${createRes.body.data.id}`)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        statusCode: StatusCodes.OK,
+        success: true,
+        data: {
+          message: "Resource Deleted",
+        },
+      });
+
+      expect(emailEmitterSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("GET (List) - /api/v1/faq/list", () => {
+    test("should pass", async () => {
+      const res = await request(server).get("/api/v1/faq/list");
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        statusCode: StatusCodes.OK,
+        success: true,
+        data: expect.arrayContaining([
+          expect.objectContaining({
+            question: expect.any(String),
+            answer: expect.any(String),
+          }),
+        ]),
+      });
     });
   });
 });

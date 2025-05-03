@@ -1,4 +1,5 @@
 import { IRepository, IValidationUtility } from "../../../interfaces";
+import { IdSchema } from "../../../zod-schemas";
 import { DBUtils } from "../utils";
 import { IFaqRepository } from "./interface";
 import { CreateDbFaqSchema } from "./schema";
@@ -29,6 +30,60 @@ export class FaqRepository extends DBUtils implements IFaqRepository {
 
     const faq = await this.db.faq.create({
       data,
+    });
+
+    return faq;
+  };
+
+  /**
+   * Counts document
+   */
+
+  count: IFaqRepository["count"] = async (query) => {
+    const count = await this.db.faq.count(query);
+    return count;
+  };
+
+  /** List faqs */
+
+  findMany: IFaqRepository["findMany"] = async (query) => {
+    const faqs = await this.db.faq.findMany(query);
+    return faqs;
+  };
+
+  /** Deletes faqs */
+
+  delete: IFaqRepository["delete"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: {
+        id,
+      },
+    });
+
+    const deletedFaq = await this.db.faq.delete({
+      where: {
+        id,
+      },
+    });
+
+    return deletedFaq;
+  };
+
+  /** Find faq by id */
+
+  findById: IFaqRepository["findById"] = async (id) => {
+    this.validationUtility.validateInput({
+      schema: IdSchema,
+      inputData: {
+        id,
+      },
+    });
+
+    const faq = await this.db.faq.findUnique({
+      where: {
+        id,
+      },
     });
 
     return faq;
