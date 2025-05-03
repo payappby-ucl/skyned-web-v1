@@ -34,5 +34,12 @@ export interface IAdmin extends ITimestamps {
 
 export type AdminProfile = Pick<
   IAdmin,
-  "adminId" | "firstName" | "lastName" | "email" | "jobTitle" | "primaryImage"
+  | "adminId"
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "jobTitle"
+  | "primaryImage"
+  | "phoneNumber"
+  | "gender"
 >;

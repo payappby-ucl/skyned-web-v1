@@ -14,7 +14,7 @@ components:
             createdById:
               type: string
             createdBy:
-              $ref: "#/components/schemas/Admin"
+              $ref: "#/components/schemas/AdminProfile"
               nullable: true
           required:
             - id

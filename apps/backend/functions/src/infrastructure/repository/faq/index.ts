@@ -1,4 +1,5 @@
 import { IRepository, IValidationUtility } from "../../../interfaces";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
 import { DBUtils } from "../utils";
 import { IFaqRepository } from "./interface";
@@ -30,9 +31,16 @@ export class FaqRepository extends DBUtils implements IFaqRepository {
 
     const faq = await this.db.faq.create({
       data,
+      include: {
+        createdBy: {
+          select: {
+            ...SkynedUtils.select(adminProfileKeys),
+          },
+        },
+      },
     });
 
-    return faq;
+    return this.deserialize(faq);
   };
 
   /**
@@ -47,8 +55,17 @@ export class FaqRepository extends DBUtils implements IFaqRepository {
   /** List faqs */
 
   findMany: IFaqRepository["findMany"] = async (query) => {
-    const faqs = await this.db.faq.findMany(query);
-    return faqs;
+    const faqs = await this.db.faq.findMany({
+      ...query,
+      include: {
+        createdBy: {
+          select: {
+            ...SkynedUtils.select(adminProfileKeys),
+          },
+        },
+      },
+    });
+    return faqs.map((faq) => this.deserialize(faq));
   };
 
   /** Deletes faqs */
@@ -84,8 +101,17 @@ export class FaqRepository extends DBUtils implements IFaqRepository {
       where: {
         id,
       },
+      include: {
+        createdBy: {
+          select: {
+            ...SkynedUtils.select(adminProfileKeys),
+          },
+        },
+      },
     });
 
-    return faq;
+    if (!faq) return null;
+
+    return this.deserialize(faq);
   };
 }

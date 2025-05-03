@@ -24,6 +24,18 @@ export class SkynedUtils {
     return false;
   }
 
+  /** Restructure to true */
+
+  static select<T extends object, Key extends keyof T>(data: Key[]) {
+    return data.reduce(
+      (cum, curr) => {
+        cum[curr] = true;
+        return cum;
+      },
+      {} as Record<Key, true>,
+    );
+  }
+
   /**
    * Creates a custom exception/error type used across all parts of the app
    */

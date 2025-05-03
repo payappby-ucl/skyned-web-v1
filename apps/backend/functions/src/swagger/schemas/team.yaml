@@ -12,7 +12,7 @@ components:
             leadId:
               type: string
             lead:
-              $ref: "#/components/schemas/Admin"
+              $ref: "#/components/schemas/AdminProfile"
               nullable: true
             departmentId:
               type: integer
@@ -22,7 +22,7 @@ components:
             members:
               type: array
               items:
-                $ref: "#/components/schemas/Admin"
+                $ref: "#/components/schemas/AdminProfile"
               nullable: true
           required:
             - id

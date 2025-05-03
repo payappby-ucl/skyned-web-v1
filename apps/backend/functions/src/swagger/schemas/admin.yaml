@@ -56,12 +56,12 @@ components:
               type: string
               nullable: true
             createdBy:
-              $ref: "#/components/schemas/Admin"
+              $ref: "#/components/schemas/AdminProfile"
               nullable: true
             created:
               type: array
               items:
-                $ref: "#/components/schemas/Admin"
+                $ref: "#/components/schemas/AdminProfile"
               nullable: true
             departments:
               type: array

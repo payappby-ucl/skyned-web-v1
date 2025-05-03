@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 
+import { IAdmin } from "@workspace/shared";
+
 /** Email domains users are not supposed to use because it belongs to internal staff */
 export const PROHIBITED_USER_EMAIL_DOMAINS = [
   "skynedconsults.com",
@@ -17,3 +19,15 @@ export const REQUESTS_PER_DEFAULT_RATE_LIMIT_MINUTE = 5;
 
 /** Query limit */
 export const DEFAULT_QUERY_LIMIT = 100;
+
+/** Admin Profile Keys */
+export const adminProfileKeys: (keyof IAdmin)[] = [
+  "adminId",
+  "firstName",
+  "lastName",
+  "email",
+  "jobTitle",
+  "primaryImage",
+  "phoneNumber",
+  "gender",
+];
