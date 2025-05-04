@@ -1,5 +1,6 @@
 "use client";
-import { faqs } from "@/src/utils/data";
+
+import { IFaq } from "@workspace/shared";
 import {
   Collapsible,
   CollapsibleContent,
@@ -8,7 +9,11 @@ import {
 import { ChevronDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
-const FAQ: React.FC<(typeof faqs)[0]> = ({ question, answer }) => {
+interface Props {
+  faq: Pick<IFaq, "question" | "answer">;
+}
+
+const FAQ: React.FC<Props> = ({ faq: { question, answer } }) => {
   const [open, setOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -35,10 +40,10 @@ const FAQ: React.FC<(typeof faqs)[0]> = ({ question, answer }) => {
       ref={contentRef}
     >
       <CollapsibleTrigger
-        className="flex w-full items-center justify-between gap-2"
+        className="flex w-full items-center justify-between gap-2 px-2"
         ref={buttonRef}
       >
-        <p className="flex-1 text-left text-sm font-semibold">{question}</p>
+        <p className="text-md flex-1 text-left font-semibold">{question}</p>
         {
           <ChevronDownIcon
             size={15}
@@ -47,7 +52,12 @@ const FAQ: React.FC<(typeof faqs)[0]> = ({ question, answer }) => {
         }
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <p className="text-muted-foreground mt-5 text-sm">{answer}</p>
+        <div
+          className="wysiwyg-view mt-5 px-4"
+          dangerouslySetInnerHTML={{
+            __html: answer,
+          }}
+        />
       </CollapsibleContent>
     </Collapsible>
   );

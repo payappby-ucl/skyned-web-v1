@@ -166,4 +166,125 @@ describe("FAQ API", () => {
       });
     });
   });
+
+  describe("GET - /api/v1/faq/:id", () => {
+    test("should fail when passed invalid input", async () => {
+      try {
+        await request(server).get("/api/v1/faq/thhrn");
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
+      }
+    });
+
+    test("should fail when passed not authorized", async () => {
+      try {
+        await request(server).get("/api/v1/faq/1");
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      }
+    });
+
+    test("should pass but return null if finding FAQ that does not exist", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .get(`/api/v1/faq/${200}`)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body.data).toBeNull();
+    });
+
+    test("should pass", async () => {
+      const emailEmitterSpy = jest
+        .spyOn(events, "emitEvent")
+        .mockImplementation();
+
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const createRes = await request(server)
+        .post("/api/v1/faq")
+        .set("authorization", `bearer ${token}`)
+        .send({
+          question: "What's Skyned",
+          answer: "<p>An Educational Platform</p>",
+        });
+
+      const res = await request(server)
+        .get(`/api/v1/faq/${createRes.body.data.id}`)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body.data.id).toBe(createRes.body.data.id);
+      expect(emailEmitterSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("PUT - /api/v1/faq/:id - Updating Faq", () => {
+    test("should fail when passed invalid input", async () => {
+      try {
+        await request(server).put("/api/v1/faq/thhrn");
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
+      }
+    });
+
+    test("should fail when passed invalid input body", async () => {
+      try {
+        await request(server).put("/api/v1/faq/1").send({
+          question: "",
+          answer: "",
+        });
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
+      }
+    });
+
+    test("should fail when passed not authorized", async () => {
+      try {
+        await request(server).put("/api/v1/faq/1").send({
+          question: "What's your name?",
+          answer: "Alabi",
+        });
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      }
+    });
+
+    test("should pass", async () => {
+      const emailEmitterSpy = jest
+        .spyOn(events, "emitEvent")
+        .mockImplementation();
+
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const createRes = await request(server)
+        .post("/api/v1/faq")
+        .set("authorization", `bearer ${token}`)
+        .send({
+          question: "What's Skyned",
+          answer: "<p>An Educational Platform</p>",
+        });
+
+      const res = await request(server)
+        .put(`/api/v1/faq/${createRes.body.data.id}`)
+        .set("authorization", `bearer ${token}`)
+        .send({
+          question: "What's Skyned Consults",
+          answer: "<p>An Educational Platform</p>",
+        });
+
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(res.body.data.id).toBe(createRes.body.data.id);
+      expect(res.body.data).toEqual(
+        expect.objectContaining({
+          question: "What's Skyned Consults",
+        }),
+      );
+      expect(emailEmitterSpy).toHaveBeenCalled();
+    });
+  });
 });

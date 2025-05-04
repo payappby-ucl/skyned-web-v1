@@ -3,7 +3,7 @@ import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
 import { DBUtils } from "../utils";
 import { IFaqRepository } from "./interface";
-import { CreateDbFaqSchema } from "./schema";
+import { CreateDbFaqSchema, UpdateDbFaqSchema } from "./schema";
 
 export * from "./interface";
 export * from "./schema";
@@ -111,6 +111,35 @@ export class FaqRepository extends DBUtils implements IFaqRepository {
     });
 
     if (!faq) return null;
+
+    return this.deserialize(faq);
+  };
+
+  update: IFaqRepository["update"] = async (id, data) => {
+    const validatedDate = this.validationUtility.validateInput({
+      schema: UpdateDbFaqSchema,
+      inputData: {
+        ...data,
+        id,
+      },
+    });
+
+    const faq = await this.db.faq.update({
+      where: {
+        id: validatedDate.id,
+      },
+      data: {
+        ...SkynedUtils.pick(validatedDate, ["answer", "question"]),
+      },
+
+      include: {
+        createdBy: {
+          select: {
+            ...SkynedUtils.select(adminProfileKeys),
+          },
+        },
+      },
+    });
 
     return this.deserialize(faq);
   };

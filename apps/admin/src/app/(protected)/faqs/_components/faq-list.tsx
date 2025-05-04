@@ -10,6 +10,7 @@ import usePaginationQuery from "@/src/hooks/use-pagination-query";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import { FileClock, Plus } from "lucide-react";
+import { brandClientApi } from "@/src/lib/client";
 
 const FaqList: React.FC = () => {
   const { pagination, setPagination } = usePaginationQuery();
@@ -49,7 +50,13 @@ const FaqList: React.FC = () => {
               </Link>
             </Button>
 
-            <Button asChild variant="outline">
+            <Button
+              asChild
+              variant="outline"
+              onClick={() =>
+                brandClientApi.utils.toast.info("Under Construction")
+              }
+            >
               <Link
                 href="#"
                 aria-label="Link to create new FAQ"

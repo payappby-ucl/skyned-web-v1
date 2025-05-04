@@ -15,7 +15,7 @@ import { Editor } from "@workspace/ui/components/editor";
 import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback } from "react";
 import { FormButton } from "@workspace/ui/components/form-button";
-import { createFaq } from "../_actions";
+import { createFaq, updateFaq } from "../_actions";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -38,14 +38,17 @@ const FaqForm: React.FC<Props> = ({ faq }) => {
   const onSubmit = useCallback(async (data: CreateFaqSchema) => {
     try {
       if (faq) {
-        brandClientApi.utils.toast.info("Currently under construction");
-        return;
+        await updateFaq(faq.id, data);
+        brandClientApi.utils.toast.success("FAQ Updated.");
+      } else {
+        await createFaq(data);
+        brandClientApi.utils.toast.success("FAQ Created.");
       }
-      await createFaq(data);
-      brandClientApi.utils.toast.success("FAQ Created.");
+
       queryClient.invalidateQueries({
         queryKey: ["faq"],
       });
+
       router.replace("/faqs");
     } catch (error) {
       brandClientApi.utils.alertError(error);

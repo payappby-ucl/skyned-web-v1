@@ -132,7 +132,62 @@ export class FaqController extends ControllerUtils implements IFaqController {
   listFaqs: IFaqController["listFaqs"] = async (req, res, next) => {
     try {
       const faqs = await this.faqService.findMany();
-      res._success(StatusCodes.OK, faqs);
+      const filtered = faqs.map((faq) =>
+        SkynedUtils.pick(faq, ["answer", "question"]),
+      );
+
+      res._success(StatusCodes.OK, filtered);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateFaq: IFaqController["updateFaq"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { id } = req.params;
+      const { body } = req;
+
+      const faq = await this.faqService.findById(id);
+      if (!faq) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(authUser, "faqs", "update", faq);
+      const updatedFaq = await this.faqService.update(faq.id, body);
+
+      this.event.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "faqs",
+          action: "update",
+          previousState: SkynedUtils.exclude(faq, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedFaq, ["createdBy"]),
+          adminId: authUser.user.id,
+          resourceId: updatedFaq.id,
+        },
+      });
+
+      res._success(StatusCodes.OK, updatedFaq);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getFaq: IFaqController["getFaq"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { id } = req.params;
+
+      const faq = await this.faqService.findById(id);
+
+      if (faq) {
+        this._attributeBasedAccessControl(authUser, "faqs", "read", faq);
+      }
+      res._success(StatusCodes.OK, faq);
     } catch (error) {
       next(error);
     }

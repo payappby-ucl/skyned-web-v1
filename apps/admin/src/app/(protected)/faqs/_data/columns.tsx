@@ -2,7 +2,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { IFaq } from "@workspace/shared";
+import { dateFormats, IFaq } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -125,7 +125,7 @@ export const columns: ColumnDef<IFaq>[] = [
       const createdAt = info.getValue<IFaq["createdAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(createdAt).format("MMM DD YYYY@hh:mma")}
+          {dayjs(createdAt).format(dateFormats.dateAndTime)}
         </p>
       );
     },
@@ -140,7 +140,7 @@ export const columns: ColumnDef<IFaq>[] = [
       const updatedAt = info.getValue<IFaq["updatedAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(updatedAt).format("MMM DD YYYY@hh:mma")}
+          {dayjs(updatedAt).format(dateFormats.dateAndTime)}
         </p>
       );
     },
@@ -177,9 +177,14 @@ export const columns: ColumnDef<IFaq>[] = [
       return (
         <DataTableRowActions>
           <HasPermission resourceName="faqs" action="update" args={[faq]}>
-            <DropdownMenuItem>
-              <SquarePen />
-              <span>Edit</span>
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/faqs/${faq.id}`}
+                aria-label={`Link to edit faq with id of ${faq.id}`}
+              >
+                <SquarePen />
+                <span>Edit</span>
+              </Link>
             </DropdownMenuItem>
           </HasPermission>
           <HasPermission resourceName="faqs" action="delete" args={[faq]}>

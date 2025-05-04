@@ -126,6 +126,10 @@ describe("FaqService", () => {
     });
 
     describe("delete", () => {
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
       test("should fail if passed invalid id type", async () => {
         try {
           await faqService.delete("ee" as never as number);
@@ -161,6 +165,46 @@ describe("FaqService", () => {
         expect(findDeletedFaq).toBeNull();
         expect(spy).toHaveBeenCalled();
         expect(findByIdSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe("update", () => {
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+      test("should fail if passed invalid datae", async () => {
+        try {
+          await faqService.update("ee" as never as number, {
+            question: "",
+            answer: "",
+          });
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const data = {
+          id: 1,
+          question: "What's my name",
+          answer: "<p>Alabi Emmanuel</p>",
+          createdById: "wweerrr",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+
+        const spy = jest
+          .spyOn(repository.faq, "update")
+          .mockImplementation(async () => data);
+
+        const faq = await faqService.update(data.id, {
+          question: data.question,
+          answer: data.answer,
+        });
+
+        expect(faq).not.toBeNull();
+        expect(faq).toEqual(expect.objectContaining(data));
+        expect(spy).toHaveBeenCalled();
       });
     });
   });

@@ -106,13 +106,100 @@ paths:
                       data:
                         type: array
                         items:
-                          $ref: "#/components/schemas/Faq"
+                          type: object
+                          properties:
+                            question:
+                              type: string
+                            answer:
+                              type: string
+                          required:
+                            - question
+                            - answer
         "500":
           $ref: "#/components/responses/ServerError"
 
   /faq/{id}:
     summary: FAQ Resource
     description: Handles all routes regarding a single FAQ
+
+    get:
+      summary: Get FAQ
+      description: >
+        Gets FAQ from database
+      tags:
+        - Faq
+      operationId: getFaq
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: The FAQ
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Faq"
+                      nullable: true
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    post:
+      summary: Update FAQ Resource
+      description: >
+        Update FAQ on DB
+      tags:
+        - Faq
+      operationId: updateFaq
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        description: Data needed to update FAQ
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                answer:
+                  type: string
+      responses:
+        "200":
+          description: Faq updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Faq"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
 
     delete:
       summary: Delete FAQ

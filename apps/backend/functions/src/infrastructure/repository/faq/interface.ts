@@ -18,4 +18,7 @@ export interface IFaqRepository {
 
   /** Find an faq by id */
   findById(id: number): Promise<IFaq | null>;
+
+  /** Update Faq */
+  update(id: number, data: Pick<IFaq, "answer" | "question">): Promise<IFaq>;
 }

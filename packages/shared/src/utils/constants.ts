@@ -21,3 +21,8 @@ export const department = {
   Human_Resource: "Human_Resource",
   Quality_Assurance: "Quality_Assurance",
 } as const;
+
+/** Date and Time Default Format */
+export const dateFormats = {
+  dateAndTime: "MMM DD YYYY@hh:mma",
+} as const;

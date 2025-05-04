@@ -1,6 +1,10 @@
 /* eslint-disable operator-linebreak */
 import { RegistryKeysEnum } from "../../../enum";
-import { CreateDbFaqSchema, repository } from "../../../infrastructure";
+import {
+  CreateDbFaqSchema,
+  repository,
+  UpdateDbFaqSchema,
+} from "../../../infrastructure";
 import {
   IFaqService,
   IRepository,
@@ -130,6 +134,23 @@ export class FaqService implements IFaqService {
     });
 
     const faq = await this.repository.faq.delete(id);
+    return faq;
+  };
+
+  update: IFaqService["update"] = async (id, data) => {
+    const validInput = this.validationUtility.validateInput({
+      schema: UpdateDbFaqSchema,
+      inputData: {
+        ...data,
+        id,
+      },
+    });
+
+    const faq = await this.repository.faq.update(
+      validInput.id,
+      SkynedUtils.exclude(validInput, ["id"]),
+    );
+
     return faq;
   };
 }

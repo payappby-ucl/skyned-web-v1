@@ -120,5 +120,42 @@ describe("FaqRepository", () => {
         expect(findDeletedFaq).toBeNull();
       });
     });
+
+    describe("update", () => {
+      test("should fail if passed invalid id type", async () => {
+        try {
+          await repository.faq.update("ee" as never as number, {
+            question: "",
+            answer: "",
+          });
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should update the faq", async () => {
+        const { user } = await signInUser();
+        const signedInAdmin = await repository.admin.findAdminByAdminId(
+          user.uid,
+        );
+
+        const faq = await repository.faq.create({
+          question: "What's my name",
+          answer: "<p>Alabi Emmanuel</p>",
+          createdById: signedInAdmin?.adminId || "",
+        });
+
+        const updatedFaq = await repository.faq.update(faq.id, {
+          question: "What's my nick name",
+          answer: "<p>Alabi Emmanuel</p>",
+        });
+
+        expect(faq).not.toBeNull();
+        expect(updatedFaq).not.toBeNull();
+        expect(faq.id).toBe(updatedFaq.id);
+        expect(faq.question).toBe("What's my name");
+        expect(updatedFaq.question).toBe("What's my nick name");
+      });
+    });
   });
 });

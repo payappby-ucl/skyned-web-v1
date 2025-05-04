@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.department = exports.gender = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
+exports.dateFormats = exports.department = exports.gender = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
 /** Email domains users are not supposed to use because it belongs to internal staff */
 exports.PROHIBITED_USER_EMAIL_DOMAINS = [
     "skynedconsults.com",
@@ -21,4 +21,8 @@ exports.department = {
     Technical: "Technical",
     Human_Resource: "Human_Resource",
     Quality_Assurance: "Quality_Assurance",
+};
+/** Date and Time Default Format */
+exports.dateFormats = {
+    dateAndTime: "MMM DD YYYY@hh:mma",
 };

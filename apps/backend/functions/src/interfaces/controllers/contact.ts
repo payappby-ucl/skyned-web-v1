@@ -24,7 +24,7 @@ export interface IContactController {
   >;
 
   deleteContactUsMessage: RequestHandler<
-    IdSchema & any,
+    IdSchema & Record<string, string>,
     ISuccessResponse<IMessageResponse>
   >;
 }

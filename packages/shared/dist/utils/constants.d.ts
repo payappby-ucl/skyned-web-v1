@@ -16,3 +16,7 @@ export declare const department: {
     readonly Human_Resource: "Human_Resource";
     readonly Quality_Assurance: "Quality_Assurance";
 };
+/** Date and Time Default Format */
+export declare const dateFormats: {
+    readonly dateAndTime: "MMM DD YYYY@hh:mma";
+};

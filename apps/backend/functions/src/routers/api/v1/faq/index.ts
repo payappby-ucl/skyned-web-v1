@@ -54,14 +54,33 @@ export class FaqRouter implements IRouter {
 
     this.router.route("/list").get(faqController.listFaqs);
 
-    this.router.route("/:id").delete(
-      RequestValidationMiddleware.validate({
-        params: IdSchema,
-      }),
-      authMiddleware.authenticate,
-      authMiddleware.hasRole(["admin"]),
-      faqController.deleteFaq,
-    );
+    this.router
+      .route("/:id")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: IdSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        faqController.getFaq,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: IdSchema,
+          body: CreateFaqSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        faqController.updateFaq,
+      )
+      .delete(
+        RequestValidationMiddleware.validate({
+          params: IdSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        faqController.deleteFaq,
+      );
   }
 
   /**

@@ -17,4 +17,7 @@ export interface IFaqService {
 
   /** Delete */
   delete: IFaqRepository["delete"];
+
+  /** Update */
+  update: IFaqRepository["update"];
 }

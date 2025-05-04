@@ -5,7 +5,6 @@ import Script from "next/script";
 import { WithContext, WebPage } from "schema-dts";
 import ContactUsForm from "./_components/contact-form";
 import Offices from "./_components/offices/offices";
-import FAQs from "./_components/faq/faqs";
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { addresses, contacts } from "@/src/utils";
 
@@ -87,7 +86,6 @@ export default function Contact() {
         <ContactUsForm />
       </section>
       <Offices offices={addresses} />
-      <FAQs />
     </>
   );
 }

@@ -3,7 +3,7 @@ import useClipboard from "@/src/hooks/use-clipboard";
 import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { IInquiry } from "@workspace/shared";
+import { dateFormats, IInquiry } from "@workspace/shared";
 import {
   Dialog,
   DialogContent,
@@ -106,7 +106,7 @@ export const columns: ColumnDef<IInquiry>[] = [
       const createdAt = info.getValue<IInquiry["createdAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(createdAt).format("MMM DD YYYY@hh:mma")}
+          {dayjs(createdAt).format(dateFormats.dateAndTime)}
         </p>
       );
     },

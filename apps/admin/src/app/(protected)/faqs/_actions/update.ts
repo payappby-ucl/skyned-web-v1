@@ -1,0 +1,21 @@
+"use server";
+
+import { brandServerApi } from "@/src/lib/server";
+import { serverCacheTags } from "@/src/utils";
+import { CreateFaqSchema, IFaq } from "@workspace/shared";
+import { revalidateTag } from "next/cache";
+
+export async function updateFaq(id: number, data: CreateFaqSchema) {
+  try {
+    const { data: responseData } =
+      await brandServerApi.httpClient.request<IFaq>(`/faq/${id}`, "PUT", {
+        body: JSON.stringify(data),
+      });
+
+    revalidateTag(serverCacheTags.faq);
+    revalidateTag(`${serverCacheTags.faq}-id-${id}`);
+    return responseData;
+  } catch (error: any) {
+    throw brandServerApi.utils.createServerActionError(error);
+  }
+}

@@ -17,6 +17,23 @@ export interface IFaqController {
     object,
     Partial<PageQuerySchema>
   >;
-  deleteFaq: RequestHandler<IdSchema & any, ISuccessResponse<IMessageResponse>>;
-  listFaqs: RequestHandler<object, ISuccessResponse<IFaq[]>>;
+  deleteFaq: RequestHandler<
+    IdSchema & Record<string, string>,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  listFaqs: RequestHandler<
+    object,
+    ISuccessResponse<Pick<IFaq, "answer" | "question">[]>
+  >;
+
+  updateFaq: RequestHandler<
+    IdSchema & Record<string, string>,
+    ISuccessResponse<IFaq>,
+    CreateFaqSchema
+  >;
+  getFaq: RequestHandler<
+    IdSchema & Record<string, string>,
+    ISuccessResponse<IFaq | null>
+  >;
 }
