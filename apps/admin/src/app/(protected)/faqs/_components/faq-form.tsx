@@ -98,7 +98,6 @@ const FaqForm: React.FC<Props> = ({ faq }) => {
 
         <FormButton
           isLoading={form.formState.isSubmitting}
-          disabled={form.formState.isSubmitting}
           variant="brand"
           className="w-full md:w-fit"
         >

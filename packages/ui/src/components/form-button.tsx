@@ -10,7 +10,7 @@ type Props = Parameters<typeof Button>["0"] & {
 
 const FormButton: React.FC<Props> = ({ isLoading, children, ...props }) => {
   return (
-    <Button {...props}>
+    <Button {...props} disabled={isLoading}>
       {isLoading ? <Loader2 className="animate-spin" /> : null}
       {children}
     </Button>

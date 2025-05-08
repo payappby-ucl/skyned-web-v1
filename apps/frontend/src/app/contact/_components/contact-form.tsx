@@ -5,7 +5,6 @@ import {
   ContactUsSchema,
   DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
 } from "@workspace/shared";
-import { Button } from "@workspace/ui/components/button";
 import {
   Form,
   FormControl,
@@ -20,6 +19,7 @@ import { Textarea } from "@workspace/ui/components/textarea";
 import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback } from "react";
 import { sendContactUsMessage } from "../_actions";
+import { FormButton } from "@workspace/ui/components/form-button";
 
 const ContactUsForm: React.FC = () => {
   const form = useForm<ContactUsSchema>({
@@ -140,13 +140,13 @@ const ContactUsForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button
+        <FormButton
           variant="brand"
           className="ml-auto block"
-          disabled={form.formState.isSubmitting}
+          isLoading={form.formState.isSubmitting}
         >
-          {form.formState.isSubmitting ? "Please wait..." : "Send Message"}
-        </Button>
+          Send Message
+        </FormButton>
       </form>
     </Form>
   );

@@ -12,7 +12,8 @@ import {
   Form,
 } from "@workspace/ui/components/form";
 import { Input } from "@workspace/ui/components/input";
-import { Button } from "@workspace/ui/components/button";
+import { FormButton } from "@workspace/ui/components/form-button";
+import { subscribeToNewsletter } from "./actions";
 
 const NewsLetterForm: React.FC = () => {
   const form = useForm<NewsLetterFormSchema>({
@@ -24,6 +25,9 @@ const NewsLetterForm: React.FC = () => {
 
   const onSubmit = useCallback(async (values: NewsLetterFormSchema) => {
     try {
+      const { message } = await subscribeToNewsletter(values);
+      brandClientApi.utils.toast.success(message);
+      form.reset();
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
@@ -54,9 +58,13 @@ const NewsLetterForm: React.FC = () => {
           )}
         />
 
-        <Button variant="brand" className="rounded-full">
+        <FormButton
+          isLoading={form.formState.isSubmitting}
+          variant="brand"
+          className="rounded-full"
+        >
           Subscribe
-        </Button>
+        </FormButton>
       </form>
     </Form>
   );
