@@ -3,7 +3,7 @@
 import { Upload } from "lucide-react";
 import React from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
-import { Button } from "./button.js";
+import { Button } from "./button";
 
 interface Props {
   isInvalid: boolean;
