@@ -7,4 +7,5 @@ export declare class Utils implements IUtils {
     alertError: IUtils["alertError"];
     pick: IUtils["pick"];
     exclude: IUtils["exclude"];
+    copyToClipboard: IUtils["copyToClipboard"];
 }

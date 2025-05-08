@@ -2,7 +2,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { dateFormats, IFaq } from "@workspace/shared";
+import { IFaq } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -20,7 +20,6 @@ import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import dayjs from "dayjs";
 import { Eye, SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { deleteFaq } from "../_actions";
@@ -125,7 +124,7 @@ export const columns: ColumnDef<IFaq>[] = [
       const createdAt = info.getValue<IFaq["createdAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(createdAt).format(dateFormats.dateAndTime)}
+          {brandClientApi.date.formatDate(createdAt)}
         </p>
       );
     },
@@ -140,7 +139,7 @@ export const columns: ColumnDef<IFaq>[] = [
       const updatedAt = info.getValue<IFaq["updatedAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(updatedAt).format(dateFormats.dateAndTime)}
+          {brandClientApi.date.formatDate(updatedAt)}
         </p>
       );
     },

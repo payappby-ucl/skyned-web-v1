@@ -1,4 +1,4 @@
-import { IObject, IPhoneNumber, ITimestamps } from "./utils";
+import { IObject, IPhoneNumber, ISocial, ITimestamps } from "./utils";
 import { IDepartment } from "./department";
 import { ITeam } from "./team";
 import { Gender } from "../types";
@@ -19,6 +19,7 @@ export interface IAdmin extends ITimestamps {
   primaryImage: IObject;
   secondaryImage: IObject | null;
   phoneNumber: IPhoneNumber | null;
+  socials?: ISocial[];
 
   createdById: string | null;
   createdBy?: AdminProfile | null;

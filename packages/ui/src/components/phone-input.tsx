@@ -103,7 +103,7 @@ function PhoneInput(
   return (
     <div
       className="flex items-center border dark:bg-input/30 bg-transparent shadow-xs transition-[color,box-shadow] rounded-md has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 has-aria-invalid:dark:ring-destructive/40
-    has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-focus-visible:ring-[3px]
+    has-focus-visible:border-ring has-focus-visible:ring-ring/50 has-focus-visible:ring-[3px] !h-9
     "
     >
       <Select onValueChange={handleCountrySelectChange}>
@@ -138,7 +138,7 @@ function PhoneInput(
       <Input
         {...props}
         value={new AsYouType().input(value as string)}
-        className="border-0 rounded-none focus:ring-0 aria-invalid:ring-0"
+        className="border-0 rounded-none rounded-r-md focus:!ring-0 aria-invalid:ring-0"
       />
     </div>
   );

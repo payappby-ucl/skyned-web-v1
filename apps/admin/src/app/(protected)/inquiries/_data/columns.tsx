@@ -1,9 +1,9 @@
+"use client";
 import HasPermission from "@/src/components/has-permission";
-import useClipboard from "@/src/hooks/use-clipboard";
 import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { dateFormats, IInquiry } from "@workspace/shared";
+import { IInquiry } from "@workspace/shared";
 import {
   Dialog,
   DialogContent,
@@ -24,9 +24,7 @@ import {
 
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import { Country } from "country-state-city";
-import dayjs from "dayjs";
-import { Clipboard, Contact, Eye, Mail, Phone, Trash2 } from "lucide-react";
+import { Clipboard, Contact, Mail, Phone, Trash2 } from "lucide-react";
 import { deleteInquiry } from "../_actions";
 
 export const columns: ColumnDef<IInquiry>[] = [
@@ -52,7 +50,9 @@ export const columns: ColumnDef<IInquiry>[] = [
     ),
     cell: (info) => {
       const phoneNumber = info.getValue<IInquiry["phoneNumber"]>();
-      const country = Country.getCountryByCode(phoneNumber.country || "");
+      const country = brandClientApi.location.getCountryByISOCode(
+        phoneNumber.country || "",
+      );
       return (
         <div className="flex items-center gap-2">
           {country ? <span>{country.flag}</span> : null}
@@ -106,7 +106,7 @@ export const columns: ColumnDef<IInquiry>[] = [
       const createdAt = info.getValue<IInquiry["createdAt"]>();
       return (
         <p className="font-semibold">
-          {dayjs(createdAt).format(dateFormats.dateAndTime)}
+          {brandClientApi.date.formatDate(createdAt)}
         </p>
       );
     },
@@ -117,7 +117,6 @@ export const columns: ColumnDef<IInquiry>[] = [
     accessorFn: (row) => row,
     cell: (info) => {
       const queryClient = useQueryClient();
-      const { copyToClipboard } = useClipboard();
       const inquiry = info.getValue<IInquiry>();
       const deleteInquiryMutation = useMutation({
         mutationFn: async () => {
@@ -176,20 +175,29 @@ export const columns: ColumnDef<IInquiry>[] = [
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
-            <DropdownMenuItem onClick={() => copyToClipboard(inquiry.email)}>
+            <DropdownMenuItem
+              onClick={() =>
+                brandClientApi.utils.copyToClipboard(inquiry.email)
+              }
+            >
               <Clipboard />
               <span>Copy Email</span>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                copyToClipboard(inquiry.phoneNumber.number, "Phone number")
+                brandClientApi.utils.copyToClipboard(
+                  inquiry.phoneNumber.number,
+                  "Phone number",
+                )
               }
             >
               <Clipboard />
               <span>Copy Number</span>
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => copyToClipboard(inquiry.message, "Message")}
+              onClick={() =>
+                brandClientApi.utils.copyToClipboard(inquiry.message, "Message")
+              }
             >
               <Clipboard />
               <span>Copy Message</span>

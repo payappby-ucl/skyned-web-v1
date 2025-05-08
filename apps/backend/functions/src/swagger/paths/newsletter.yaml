@@ -1,0 +1,38 @@
+paths:
+  /newsletter/subscribe:
+    summary: Handles Newsletter
+    description: Handles all newsletter routes
+
+    post:
+      summary: Subscribe to newsletter
+      description: Subscribes an email to newsletter on system.io
+      tags:
+        - Newsletter
+      operationId: subscribeToNewsletter
+      requestBody:
+        description: Data needed to access this route
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: ahmed@skynedconsults.com
+      responses:
+        "200":
+          description: Subscribed successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"

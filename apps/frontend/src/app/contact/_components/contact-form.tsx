@@ -1,8 +1,10 @@
 "use client";
 
 import { brandClientApi } from "@/src/lib/client";
-import { DEFAULT_PHONE_NUMBER_COUNTRY_CODE } from "@/src/utils";
-import { ContactUsSchema } from "@workspace/shared";
+import {
+  ContactUsSchema,
+  DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
+} from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import {
   Form,

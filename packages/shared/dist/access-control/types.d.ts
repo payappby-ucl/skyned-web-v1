@@ -1,4 +1,4 @@
-import { ContactUsSchema, CreateFaqSchema } from "../schemas";
+import { ContactUsSchema, CreateAdminSchema, CreateFaqSchema } from "../schemas";
 import { IAdmin, IDepartment, IFaq, IInquiry, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 export type AuthClaim = AdminClaim | StudentClaim;
@@ -6,7 +6,7 @@ export type ResourceType = "departments" | "teams" | "admins" | "faqs" | "inquir
 export type PermissionType = {
     admins: {
         dataType: IAdmin;
-        createDataType: "";
+        createDataType: CreateAdminSchema;
         action: "list" | "create" | "read" | "update" | "delete";
     };
     departments: {

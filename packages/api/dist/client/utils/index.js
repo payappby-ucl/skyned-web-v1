@@ -70,5 +70,9 @@ class Utils {
         const result = Object.fromEntries(entries.filter(([key]) => !properties.includes(key)));
         return result;
     };
+    copyToClipboard = (text, alertMessage) => {
+        navigator.clipboard.writeText(text);
+        this.toast.info(`${alertMessage || text} copied to clipboard.`);
+    };
 }
 exports.Utils = Utils;

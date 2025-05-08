@@ -44,6 +44,8 @@ export enum RegistryKeysEnum {
   CONTACT_ROUTER = "ContactRouter",
   /** FAQ Router */
   FAQ_ROUTER = "FaqRouter",
+  /** Newsletter Router */
+  NEWSLETTER_ROUTER = "NewsLetterRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -58,6 +60,8 @@ export enum RegistryKeysEnum {
   CONTACT_CONTROLLER = "ContactController",
   /** FAQ Controller */
   FAQ_CONTROLLER = "FaqController",
+  /** Newsletter Controller */
+  NEWSLETTER_CONTROLLER = "NewsLetterController",
 
   // * Services
   /** Email Service */

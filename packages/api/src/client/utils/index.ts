@@ -74,4 +74,9 @@ export class Utils implements IUtils {
 
     return result;
   };
+
+  copyToClipboard: IUtils["copyToClipboard"] = (text, alertMessage) => {
+    navigator.clipboard.writeText(text);
+    this.toast.info(`${alertMessage || text} copied to clipboard.`);
+  };
 }

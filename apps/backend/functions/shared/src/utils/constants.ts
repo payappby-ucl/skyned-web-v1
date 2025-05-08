@@ -4,6 +4,9 @@ export const PROHIBITED_USER_EMAIL_DOMAINS = [
   "unicollegelink.com",
 ];
 
+export const DEFAULT_PHONE_NUMBER_COUNTRY_CODE = "+234";
+export const DEFAULT_COUNTRY_CODE = "NG";
+
 /** Gender */
 export const gender = {
   Male: "Male",
@@ -22,7 +25,12 @@ export const department = {
   Quality_Assurance: "Quality_Assurance",
 } as const;
 
-/** Date and Time Default Format */
-export const dateFormats = {
-  dateAndTime: "MMM DD YYYY@hh:mma",
+/** Social Media */
+export const socialMedia = {
+  facebook: "facebook",
+  instagram: "instagram",
+  linkedin: "linkedin",
+  x: "x",
+  tiktok: "tiktok",
+  pinterest: "pinterest",
 } as const;

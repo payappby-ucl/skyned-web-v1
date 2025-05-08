@@ -1,3 +1,4 @@
+"use client";
 import { Auth as FirebaseAuth } from "firebase/auth";
 import { IBrandClientApi } from "./interface";
 import { Auth, IAuth } from "./auth";
@@ -5,6 +6,9 @@ import { IUtils, ToastType, Utils } from "./utils";
 import { IHTTPClient } from "../http";
 import { ClientHttp } from "./http";
 import { Storage } from "./storage";
+import { Location } from "./location";
+import { DateService } from "./date";
+import { FileService } from "./file";
 
 export * from "./interface";
 interface Dependencies {
@@ -18,6 +22,9 @@ export class BrandClientApi implements IBrandClientApi {
   auth: IAuth;
   utils: IUtils;
   httpClient: IHTTPClient;
+  location = new Location();
+  date = new DateService();
+  file = new FileService();
 
   private constructor(
     auth: FirebaseAuth,

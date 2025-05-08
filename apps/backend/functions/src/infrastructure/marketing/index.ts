@@ -3,7 +3,7 @@ import { RegistryKeysEnum } from "../../enum";
 import { IMarketing, IValidationUtility } from "../../interfaces";
 import SkynedRegistry from "../../registry";
 import { env } from "../../config";
-import { AddContactToAudienceInputSchema } from "./schema";
+import { AddContactToAudienceInputSchema, CreateContactSchema } from "./schema";
 import { validationUtility } from "../../utils";
 
 /** Represents properties needed to instantiate IMarketing concrete class */
@@ -18,7 +18,7 @@ export interface MarketingDependencies {
  */
 export class Marketing implements IMarketing {
   private static instance: IMarketing | null = null;
-  private client = axios.create({
+  client = axios.create({
     baseURL: "https://api.systeme.io/api",
     headers: {
       "X-API-Key": env.marketing.systemIo.apiKey,
@@ -37,8 +37,22 @@ export class Marketing implements IMarketing {
   }
 
   /** Creates a contact on the system io dashboard for marketing/campaigns */
-  createContact: IMarketing["createContact"] = async () => {
-    return { contactId: "heklo" };
+  createContact: IMarketing["createContact"] = async ({ email }) => {
+    const inputData = this.validationUtility.validateInput({
+      schema: CreateContactSchema,
+      inputData: {
+        email,
+      },
+    });
+
+    const {
+      data: { id },
+    } = await this.client.post<{ id: number; email: string }>("/contacts", {
+      email: inputData.email,
+      locale: "en",
+    });
+
+    return { contactId: id };
   };
 
   /** Adds a contact to a specific audience for marketing */

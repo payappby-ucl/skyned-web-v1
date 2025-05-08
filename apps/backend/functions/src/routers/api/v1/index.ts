@@ -6,6 +6,7 @@ import { authRouter } from "./auth";
 import { adminRouter } from "./admin";
 import { contactRouter } from "./contact";
 import { faqRouter } from "./faq";
+import { newsletterRouter } from "./newsletter";
 
 /** Dependencies required to create v1 router */
 export interface V1RouterDependencies {
@@ -17,6 +18,8 @@ export interface V1RouterDependencies {
   contactRouter: IRouter;
   /** handle FAQ */
   faqRouter: IRouter;
+  /** Handles newsletter */
+  newsletterRouter: IRouter;
 }
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;
@@ -31,11 +34,13 @@ export class V1Router implements IRouter {
     adminRouter: IRouter,
     contactRouter: IRouter,
     faqRouter: IRouter,
+    newsletterRouter: IRouter,
   ) {
     this.router.use("/auth", authRouter.router);
     this.router.use("/admin", adminRouter.router);
     this.router.use("/contact", contactRouter.router);
     this.router.use("/faq", faqRouter.router);
+    this.router.use("/newsletter", newsletterRouter.router);
   }
 
   /**
@@ -47,6 +52,7 @@ export class V1Router implements IRouter {
     adminRouter,
     contactRouter,
     faqRouter,
+    newsletterRouter,
   }: V1RouterDependencies) {
     if (!V1Router.instance) {
       V1Router.instance = new V1Router(
@@ -54,6 +60,7 @@ export class V1Router implements IRouter {
         adminRouter,
         contactRouter,
         faqRouter,
+        newsletterRouter,
       );
     }
 
@@ -64,5 +71,12 @@ export class V1Router implements IRouter {
 /** The Version one router instance */
 export const v1Router = SkynedRegistry.getSingleton(
   RegistryKeysEnum.V1_ROUTER,
-  () => V1Router.factory({ authRouter, adminRouter, contactRouter, faqRouter }),
+  () =>
+    V1Router.factory({
+      authRouter,
+      adminRouter,
+      contactRouter,
+      faqRouter,
+      newsletterRouter,
+    }),
 );

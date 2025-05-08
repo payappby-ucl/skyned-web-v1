@@ -9,8 +9,6 @@ import {
 } from "react";
 import { IAdmin } from "@workspace/shared";
 import { brandClientApi } from "@/src/lib/client";
-import { Loader2Icon } from "lucide-react";
-import dayjs from "dayjs";
 import {
   AUTH_TIME_STORAGE_NAME,
   COOKIE_EXPIRATION,
@@ -66,8 +64,10 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
         if (
           lastSeen &&
-          dayjs().diff(dayjs(lastSeen), COOKIE_EXPIRATION_UNIT) >
-            COOKIE_EXPIRATION
+          brandClientApi.date.difference({
+            prevDate: lastSeen,
+            unit: COOKIE_EXPIRATION_UNIT,
+          }) > COOKIE_EXPIRATION
         ) {
           router.replace("/login");
           await brandClientApi.auth.logout();

@@ -28,7 +28,8 @@ export const env = {
   },
   marketing: {
     systemIo: {
-      apiKey: process.env.SYSTEM_IO_API_KEY || "",
+      apiKey: process.env.SYSTEM_IO_API_KEY as string,
+      subscriptionTagId: process.env.SYSTEM_IO_SUBSCRIPTION_TAD_ID as string,
     },
   },
 };

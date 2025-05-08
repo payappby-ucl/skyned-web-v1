@@ -4,12 +4,19 @@ module.exports = {
   transform: {
     "^.+.tsx?$": ["ts-jest", {}],
   },
-  testPathIgnorePatterns: ["./__tests__/helpers", "./lib"],
+  testPathIgnorePatterns: ["./__tests__/helpers", "./lib", "./shared"],
   collectCoverage: true,
-  coveragePathIgnorePatterns: ["./src/infrastructure/repository/prisma-client"],
+  coveragePathIgnorePatterns: [
+    "./src/infrastructure/repository/prisma-client",
+    "./shared",
+    "./lib",
+    "./__tests__",
+  ],
   coverageDirectory: "coverage",
   coverageReporters: ["clover", "json", "lcov", "text", "html"],
   coverageProvider: "v8",
+  transformIgnorePatterns: ["/node_modules/"],
+  workerIdleMemoryLimit: "1GB",
   // coverageThreshold: {
   //   // eslint-disable-next-line quote-props
   //   global: {

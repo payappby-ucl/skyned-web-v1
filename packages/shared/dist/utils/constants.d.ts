@@ -1,5 +1,7 @@
 /** Email domains users are not supposed to use because it belongs to internal staff */
 export declare const PROHIBITED_USER_EMAIL_DOMAINS: string[];
+export declare const DEFAULT_PHONE_NUMBER_COUNTRY_CODE = "+234";
+export declare const DEFAULT_COUNTRY_CODE = "NG";
 /** Gender */
 export declare const gender: {
     readonly Male: "Male";
@@ -16,7 +18,12 @@ export declare const department: {
     readonly Human_Resource: "Human_Resource";
     readonly Quality_Assurance: "Quality_Assurance";
 };
-/** Date and Time Default Format */
-export declare const dateFormats: {
-    readonly dateAndTime: "MMM DD YYYY@hh:mma";
+/** Social Media */
+export declare const socialMedia: {
+    readonly facebook: "facebook";
+    readonly instagram: "instagram";
+    readonly linkedin: "linkedin";
+    readonly x: "x";
+    readonly tiktok: "tiktok";
+    readonly pinterest: "pinterest";
 };

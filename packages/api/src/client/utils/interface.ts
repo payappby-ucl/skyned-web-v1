@@ -14,4 +14,6 @@ export interface IUtils {
     data: T,
     properties: K[],
   ): Omit<T, K>;
+
+  copyToClipboard: (text: string, alertMessage?: string) => void;
 }

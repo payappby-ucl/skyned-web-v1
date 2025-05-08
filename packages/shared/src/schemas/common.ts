@@ -1,5 +1,8 @@
+import { Country } from "country-state-city";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import z from "zod";
+import parseDataURL from "data-urls";
+import { gender, socialMedia } from "../utils";
+import { z } from "zod";
 
 /** Common schema use in multiple places */
 export const CommonSchema = z.object({
@@ -22,6 +25,35 @@ export const CommonSchema = z.object({
         });
       }
     }),
+
+  gender: z.enum([gender.Male, gender.Female, gender.Others]),
+  country: z
+    .string()
+    .trim()
+    .refine(
+      (val) => !!Country.getCountryByCode(val),
+      "Please enter a valid option",
+    ),
+  social: z.object({
+    name: z.enum([
+      socialMedia.facebook,
+      socialMedia.instagram,
+      socialMedia.linkedin,
+      socialMedia.pinterest,
+      socialMedia.tiktok,
+      socialMedia.x,
+    ]),
+    url: z
+      .string()
+      .trim()
+      .url("Enter a valid profile link")
+      .nonempty("Required"),
+  }),
+
+  image: z
+    .string()
+    .trim()
+    .refine((val) => !!parseDataURL(val), "Image must be of type data-url"),
 });
 
 /** Schema type */

@@ -25,7 +25,7 @@ const EditorToolbar: React.FC<EditorToolbarProp> = ({ editor, className }) => {
     <MobileLink editor={editor} setOpen={setIsMobileLink} />
   ) : (
     <div
-      className={`px-2 py-[3px] flex items-center justify-center-safe gap-1 md:justify-center w-full ${className || ""}`}
+      className={`px-2 py-[3px] flex items-center justify-center-safe gap-1 md:justify-center-safe w-full ${className || ""}`}
     >
       <HistoryToolbar editor={editor} />
       <Separator orientation="vertical" className="!h-[20px]" />

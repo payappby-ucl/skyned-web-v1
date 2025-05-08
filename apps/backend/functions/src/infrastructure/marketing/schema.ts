@@ -1,3 +1,4 @@
+import { CommonSchema } from "@workspace/shared";
 import { z } from "zod";
 
 export const AddContactToAudienceInputSchema = z.object({
@@ -13,3 +14,6 @@ export const AddContactToAudienceInputSchema = z.object({
 export type AddContactToAudienceInputSchema = z.infer<
   typeof AddContactToAudienceInputSchema
 >;
+
+export const CreateContactSchema = CommonSchema.pick({ email: true });
+export type CreateContactSchema = z.infer<typeof CreateContactSchema>;
