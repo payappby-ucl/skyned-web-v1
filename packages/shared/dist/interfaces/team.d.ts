@@ -8,5 +8,7 @@ export interface ITeam extends ITimestamps {
     department?: IDepartment;
     leadId?: string;
     lead?: AdminProfile;
+    createdById: String;
+    createdBy?: AdminProfile;
     members?: AdminProfile[];
 }

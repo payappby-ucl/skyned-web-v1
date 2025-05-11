@@ -7,7 +7,7 @@ export async function sendContactUsMessage(data: ContactUsSchema) {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
-        "/contact",
+        "/contacts",
         "POST",
         {
           body: JSON.stringify(data),

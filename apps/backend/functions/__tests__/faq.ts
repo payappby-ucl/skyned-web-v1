@@ -10,8 +10,9 @@ import { SkynedUtils } from "../src/utils";
 
 describe("FAQ API", () => {
   const server = app.getApp();
+  const baseUrl = "/api/v1/faqs";
 
-  describe("POST - /api/v1/faq", () => {
+  describe(`POST - ${baseUrl}`, () => {
     beforeEach(() => {
       jest.restoreAllMocks();
     });
@@ -25,7 +26,7 @@ describe("FAQ API", () => {
       const data = {
         ...SkynedUtils.exclude(testData, ["answer"]),
       };
-      const res = await request(server).post("/api/v1/faq").send(data);
+      const res = await request(server).post(baseUrl).send(data);
       expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
       expect(res.body).toEqual({
         statusCode: StatusCodes.BAD_REQUEST,
@@ -45,7 +46,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const res = await request(server)
-        .post("/api/v1/faq")
+        .post(baseUrl)
         .set("authorization", `bearer ${token}`)
         .send(testData);
 
@@ -61,9 +62,9 @@ describe("FAQ API", () => {
     });
   });
 
-  describe("GET - /api/v1/faq", () => {
+  describe(`GET - ${baseUrl}`, () => {
     test("should fail if no authorization header is passed", async () => {
-      const res = await request(server).get("/api/v1/faq");
+      const res = await request(server).get(baseUrl);
 
       expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
       expect(res.body).toEqual({
@@ -81,7 +82,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const res = await request(server)
-        .get("/api/v1/faq")
+        .get(baseUrl)
         .set("authorization", `bearer ${token}`);
 
       expect(res.status).toBe(StatusCodes.OK);
@@ -105,10 +106,10 @@ describe("FAQ API", () => {
     });
   });
 
-  describe("DELETE - /api/v1/faq", () => {
+  describe(`DELETE - ${baseUrl}`, () => {
     test("should fail if not authorized", async () => {
       try {
-        await request(server).delete("/api/v1/faq/1");
+        await request(server).delete(`${baseUrl}/1`);
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
       }
@@ -123,7 +124,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const createRes = await request(server)
-        .post("/api/v1/faq")
+        .post(baseUrl)
         .set("authorization", `bearer ${token}`)
         .send({
           question: "What's Skyned",
@@ -131,7 +132,7 @@ describe("FAQ API", () => {
         });
 
       const res = await request(server)
-        .delete(`/api/v1/faq/${createRes.body.data.id}`)
+        .delete(`${baseUrl}/${createRes.body.data.id}`)
         .set("authorization", `bearer ${token}`);
 
       expect(res.statusCode).toBe(StatusCodes.OK);
@@ -148,9 +149,9 @@ describe("FAQ API", () => {
     });
   });
 
-  describe("GET (List) - /api/v1/faq/list", () => {
+  describe(`GET (List) - ${baseUrl}/list`, () => {
     test("should pass", async () => {
-      const res = await request(server).get("/api/v1/faq/list");
+      const res = await request(server).get(`${baseUrl}/list`);
 
       expect(res.statusCode).toBe(StatusCodes.OK);
       expect(res.body).toEqual({
@@ -167,10 +168,10 @@ describe("FAQ API", () => {
     });
   });
 
-  describe("GET - /api/v1/faq/:id", () => {
+  describe(`GET - ${baseUrl}/:id`, () => {
     test("should fail when passed invalid input", async () => {
       try {
-        await request(server).get("/api/v1/faq/thhrn");
+        await request(server).get(`${baseUrl}/thhrn`);
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
       }
@@ -178,7 +179,7 @@ describe("FAQ API", () => {
 
     test("should fail when passed not authorized", async () => {
       try {
-        await request(server).get("/api/v1/faq/1");
+        await request(server).get(`${baseUrl}/1`);
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
       }
@@ -189,7 +190,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const res = await request(server)
-        .get(`/api/v1/faq/${200}`)
+        .get(`${baseUrl}/${200}`)
         .set("authorization", `bearer ${token}`);
 
       expect(res.statusCode).toBe(StatusCodes.OK);
@@ -205,7 +206,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const createRes = await request(server)
-        .post("/api/v1/faq")
+        .post(baseUrl)
         .set("authorization", `bearer ${token}`)
         .send({
           question: "What's Skyned",
@@ -213,7 +214,7 @@ describe("FAQ API", () => {
         });
 
       const res = await request(server)
-        .get(`/api/v1/faq/${createRes.body.data.id}`)
+        .get(`${baseUrl}/${createRes.body.data.id}`)
         .set("authorization", `bearer ${token}`);
 
       expect(res.statusCode).toBe(StatusCodes.OK);
@@ -222,10 +223,10 @@ describe("FAQ API", () => {
     });
   });
 
-  describe("PUT - /api/v1/faq/:id - Updating Faq", () => {
+  describe(`PUT - ${baseUrl}/:id - Updating Faq`, () => {
     test("should fail when passed invalid input", async () => {
       try {
-        await request(server).put("/api/v1/faq/thhrn");
+        await request(server).put(`${baseUrl}/thhrn`);
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
       }
@@ -233,7 +234,7 @@ describe("FAQ API", () => {
 
     test("should fail when passed invalid input body", async () => {
       try {
-        await request(server).put("/api/v1/faq/1").send({
+        await request(server).put(`${baseUrl}/1`).send({
           question: "",
           answer: "",
         });
@@ -244,7 +245,7 @@ describe("FAQ API", () => {
 
     test("should fail when passed not authorized", async () => {
       try {
-        await request(server).put("/api/v1/faq/1").send({
+        await request(server).put(`${baseUrl}/1`).send({
           question: "What's your name?",
           answer: "Alabi",
         });
@@ -262,7 +263,7 @@ describe("FAQ API", () => {
       const token = await user.getIdToken();
 
       const createRes = await request(server)
-        .post("/api/v1/faq")
+        .post(baseUrl)
         .set("authorization", `bearer ${token}`)
         .send({
           question: "What's Skyned",
@@ -270,7 +271,7 @@ describe("FAQ API", () => {
         });
 
       const res = await request(server)
-        .put(`/api/v1/faq/${createRes.body.data.id}`)
+        .put(`${baseUrl}/${createRes.body.data.id}`)
         .set("authorization", `bearer ${token}`)
         .send({
           question: "What's Skyned Consults",

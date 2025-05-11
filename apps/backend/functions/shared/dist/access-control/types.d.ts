@@ -12,7 +12,7 @@ export type PermissionType = {
     departments: {
         dataType: IDepartment;
         createDataType: "";
-        action: "list" | "read" | "create";
+        action: "list" | "read" | "create" | "delete" | "update";
     };
     teams: {
         dataType: ITeam;

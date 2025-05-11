@@ -7,3 +7,4 @@ export * from "./phone-number";
 export * from "./inquiry";
 export * from "./activity-log";
 export * from "./faq";
+export * from "./department";

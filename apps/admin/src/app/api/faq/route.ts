@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       [serverCacheTags.faq],
     );
 
-    const urlConstruct = `/faq?${urlQuery.toString()}`;
+    const urlConstruct = `/faqs?${urlQuery.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
       IPaginatedResponse<IFaq>

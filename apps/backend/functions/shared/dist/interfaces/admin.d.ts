@@ -26,5 +26,6 @@ export interface IAdmin extends ITimestamps {
     departmentsLeading?: IDepartment[];
     teams?: ITeam[];
     teamsLeading?: ITeam[];
+    teamsCreated?: ITeam[];
 }
 export type AdminProfile = Pick<IAdmin, "adminId" | "firstName" | "lastName" | "email" | "jobTitle" | "primaryImage" | "phoneNumber" | "gender">;

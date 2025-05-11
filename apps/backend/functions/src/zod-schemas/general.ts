@@ -9,5 +9,11 @@ export const GeneralSchema = z.object({
   }),
 
   id: z.coerce.number().int().positive(),
+
+  object: z.object({
+    path: z.string().trim().nonempty("Required"),
+    mimeType: z.string().trim().nonempty("Required"),
+    url: z.string().url("Enter a valid url").nonempty("Required"),
+  }),
 });
 export type GeneralSchema = z.infer<typeof GeneralSchema>;

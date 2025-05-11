@@ -6,8 +6,12 @@ import {
 } from "../../../../interfaces";
 import SkynedRegistry from "../../../../registry";
 import { RegistryKeysEnum } from "../../../../enum";
-import { authMiddleware } from "../../../../middleware";
+import {
+  authMiddleware,
+  RequestValidationMiddleware,
+} from "../../../../middleware";
 import { adminController } from "../../../../controllers";
+import { CreateAdminSchema } from "@workspace/shared";
 
 /** Required dependencies for admin router initialization */
 export interface AdminRouterDependencies {
@@ -28,6 +32,15 @@ export class AdminRouter implements IRouter {
     adminController: IAdminController,
     authMiddleware: IAuthMiddleware,
   ) {
+    this.router.route("/").post(
+      RequestValidationMiddleware.validate({
+        body: CreateAdminSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      adminController.createAdmin,
+    );
+
     this.router
       .route("/me")
       .get(

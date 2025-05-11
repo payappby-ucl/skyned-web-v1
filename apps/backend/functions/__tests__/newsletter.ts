@@ -6,16 +6,16 @@ import { app } from "../src/app";
 import { marketing } from "../src/infrastructure";
 
 describe("Newsletter API", () => {
-  describe("POST - /api/v1/newsletter/subscribe", () => {
+  const baseUrl = "/api/v1/newsletters";
+
+  describe(`POST - ${baseUrl}/subscribe`, () => {
     afterAll(() => {
       jest.restoreAllMocks();
     });
 
     test("should fail if no email in body", async () => {
       try {
-        await request(app.getApp())
-          .post("/api/v1/newsletter/subscribe")
-          .send({});
+        await request(app.getApp()).post(`${baseUrl}/subscribe`).send({});
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.BAD_REQUEST);
       }
@@ -31,7 +31,7 @@ describe("Newsletter API", () => {
         .mockImplementation();
 
       const res = await request(app.getApp())
-        .post("/api/v1/newsletter/subscribe")
+        .post(`${baseUrl}/subscribe`)
         .send({ email: "bobslegend795@gmail.com" });
 
       expect(contactSpy).toHaveBeenCalled();

@@ -4,6 +4,7 @@ import SkynedRegistry from "../../registry";
 import { validationUtility } from "../../utils";
 import { ActivityLogRepository } from "./activity-log";
 import { AdminRepository } from "./admin";
+import { DepartmentRepository } from "./department";
 import { FaqRepository } from "./faq";
 import { InquiryRepository } from "./inquiry";
 import { Client } from "./prisma";
@@ -14,6 +15,7 @@ export * from "./admin";
 export * from "./inquiry";
 export * from "./activity-log";
 export * from "./faq";
+export * from "./department";
 
 export interface RepositoryDependencies {
   validationUtility: IValidationUtility;
@@ -46,6 +48,7 @@ export class Repository extends Client implements IRepository {
   inquiry = new InquiryRepository(this.db, this.validationUtility);
   activityLog = new ActivityLogRepository(this.db);
   faq = new FaqRepository(this.db, this.validationUtility);
+  department = new DepartmentRepository(this.db);
 }
 
 export const repository = SkynedRegistry.getSingleton(

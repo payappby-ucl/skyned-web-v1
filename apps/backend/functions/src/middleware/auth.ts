@@ -44,7 +44,7 @@ export class AuthMiddleware implements IAuthMiddleware {
       }
 
       const [authType, token] = authorizationHeader.split(" ");
-      if (authType !== "bearer" || !token) {
+      if (authType.toLowerCase() !== "bearer" || !token) {
         throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
       }
 

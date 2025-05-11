@@ -2,6 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import { AdminService, adminService } from ".";
 import { admin } from "../../../data";
 import { repository } from "../../../infrastructure";
+import { phoneNumberService } from "../phone-number";
+import { gender } from "@workspace/shared";
 
 describe("AdminService", () => {
   describe("Instance", () => {
@@ -45,6 +47,52 @@ describe("AdminService", () => {
         const adm = await adminService.findAdminByAdminId("1234");
         expect(spy).toHaveBeenCalled();
         expect(adm).not.toBeNull();
+      });
+    });
+
+    describe("createAdmin", () => {
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      const data = {
+        firstName: "James",
+        lastName: "Emefele",
+        email: "james@skynedconsults.com",
+        phoneNumber: {
+          ...phoneNumberService.formatPhoneNumber("+2348136239706"),
+        },
+        createdById: "12345",
+        gender: gender.Male,
+        nationality: "NG",
+        countryOfResidence: "NG",
+        adminId: "23456",
+        jobTitle: "CTO",
+        primaryImage: {
+          path: "/user/me",
+          url: "https://www.google.com",
+          mimeType: "image/png",
+        },
+      };
+
+      test("should fail if input is invalid", async () => {
+        try {
+          await adminService.createAdmin(data, ["hello"] as any);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should create an admin", async () => {
+        const spy = jest
+          .spyOn(repository.admin, "create")
+          .mockImplementation(
+            () => data as unknown as ReturnType<typeof repository.admin.create>,
+          );
+
+        const created = await adminService.createAdmin(data, [1, 2]);
+        expect(spy).toHaveBeenCalled();
+        expect(created).toEqual(expect.objectContaining(data));
       });
     });
   });

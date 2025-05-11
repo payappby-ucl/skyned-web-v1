@@ -31,6 +31,7 @@ export interface IAdmin extends ITimestamps {
 
   teams?: ITeam[];
   teamsLeading?: ITeam[];
+  teamsCreated?: ITeam[];
 }
 
 export type AdminProfile = Pick<

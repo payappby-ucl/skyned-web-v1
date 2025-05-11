@@ -5,7 +5,7 @@ import { IAdmin } from "@workspace/shared";
 export async function GET() {
   try {
     const response = await brandServerApi.httpClient.request<IAdmin>(
-      "/admin/me",
+      "/admins/me",
       "GET",
       {
         next: {

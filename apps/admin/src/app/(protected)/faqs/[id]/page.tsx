@@ -15,7 +15,7 @@ export default async function EditFaqPage({
     const { id } = await params;
 
     const { data: faq } = await brandServerApi.httpClient.request<IFaq | null>(
-      `/faq/${id}`,
+      `/faqs/${id}`,
       "GET",
       {
         next: {

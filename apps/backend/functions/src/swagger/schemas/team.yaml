@@ -19,6 +19,10 @@ components:
             department:
               $ref: "#/components/schemas/Department"
               nullable: true
+            createdById:
+              type: integer
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
             members:
               type: array
               items:

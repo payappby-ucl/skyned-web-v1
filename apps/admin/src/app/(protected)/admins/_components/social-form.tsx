@@ -27,6 +27,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@workspace/ui/components/tooltip";
 import { useForm, z, zodResolver } from "@workspace/ui/lib/utils";
 import { Plus } from "lucide-react";
 import React, { useCallback, useState } from "react";
@@ -59,11 +65,21 @@ const SocialForm: React.FC<Props> = ({ append, socials }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button type="button" variant="outline" size="icon">
-          <Plus />
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DialogTrigger asChild>
+              <Button type="button" variant="outline" size="icon">
+                <Plus />
+              </Button>
+            </DialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add social media handle</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="!text-base">Add Link</DialogTitle>

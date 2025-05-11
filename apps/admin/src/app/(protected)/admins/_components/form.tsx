@@ -7,6 +7,7 @@ import {
   DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
   gender,
   IAdmin,
+  IDepartment,
   socialMedia,
 } from "@workspace/shared";
 import { Editor } from "@workspace/ui/components/editor";
@@ -23,6 +24,7 @@ import { Input } from "@workspace/ui/components/input";
 import { PhoneInput } from "@workspace/ui/components/phone-input";
 import { CountryInput } from "@workspace/ui/components/country-input";
 import { FileInput } from "@workspace/ui/components/file-input";
+import { Checkbox } from "@workspace/ui/components/checkbox";
 import {
   Select,
   SelectContent,
@@ -39,6 +41,7 @@ import { ExternalLink, Trash2 } from "lucide-react";
 import SocialForm from "./social-form";
 import getSocialIcon from "@/src/components/social-icons";
 import Link from "next/link";
+import useGet from "@/src/hooks/use-get";
 
 interface Props {
   admin?: IAdmin;
@@ -102,6 +105,13 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
       ].filter((social) => (socials || []).every((s) => s.name !== social)),
     [socials],
   );
+
+  const { data } = useGet<Pick<IDepartment, "id" | "name">[]>({
+    queryKey: ["getDepartmentsForAdminCreation"],
+    url: "/departments/create",
+  });
+
+  console.log(data);
 
   return (
     <Form {...form}>
@@ -173,7 +183,7 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
                 )}
 
                 <FormMessage />
-                <FormDescription>Use as profile image</FormDescription>
+                <FormDescription>Used as profile image</FormDescription>
               </FormItem>
             )}
           />
@@ -403,7 +413,7 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
             />
           </div>
 
-          <div>
+          <div className="md:col-span-2 lg:col-span-1">
             <FormField
               control={form.control}
               name="countryOfResidence"
@@ -424,8 +434,104 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
             />
           </div>
         </div>
+        <FormField
+          control={form.control}
+          name="departments"
+          render={() => (
+            <FormItem>
+              <FormLabel>Departments</FormLabel>
+              <div className="flex flex-wrap items-center gap-3">
+                {data?.map((department) => (
+                  <FormField
+                    key={department.id}
+                    control={form.control}
+                    name="departments"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center gap-2 rounded-md border px-4 py-2">
+                        <FormControl>
+                          <Checkbox
+                            className="data-[state=checked]:!bg-brand dark:data-[state=checked]:!bg-foreground"
+                            checked={
+                              !!field.value?.find((v) => v.id === department.id)
+                            }
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, department])
+                                : field.onChange(
+                                    field.value.filter(
+                                      (v) => v.id !== department.id,
+                                    ),
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel>
+                          {department.name.replaceAll("_", " ")}
+                        </FormLabel>
+                      </FormItem>
+                    )}
+                  />
+                ))}
+              </div>
+              <FormMessage />
+              <FormDescription>Add staff to a department</FormDescription>
+            </FormItem>
+          )}
+        />
 
-        <div className="space-y-5 rounded-md border p-4">
+        <FormField
+          control={form.control}
+          name="socials"
+          render={() => (
+            <FormItem>
+              <div className="flex items-center gap-2">
+                <FormLabel>Socials</FormLabel>
+                <SocialForm socials={unAddedSocials} append={append} />
+              </div>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+                {fields.map((field, index) => {
+                  const Icon = getSocialIcon({
+                    name: field.name,
+                  });
+                  return (
+                    <div
+                      key={field.id}
+                      className="flex items-center justify-between gap-3 rounded-md border px-4 py-2"
+                    >
+                      <Icon size={15} />
+                      <p className="text-md flex-1 capitalize">{field.name}</p>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="icon"
+                          type="button"
+                        >
+                          <Link href={field.url} target="_blank">
+                            <ExternalLink />
+                          </Link>
+                        </Button>
+
+                        <Button
+                          variant="outline"
+                          type="button"
+                          size="icon"
+                          onClick={() => remove(index)}
+                        >
+                          <Trash2 className="text-destructive" />
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <FormDescription>Social media handles</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* <div className="space-y-5 rounded-md border p-4">
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold">Socials</p>
             <SocialForm socials={unAddedSocials} append={append} />
@@ -462,7 +568,7 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         <FormField
           control={form.control}

@@ -7,6 +7,8 @@ import {
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { validationUtility } from "../../../utils";
+import { ServiceUtils } from "../utils";
+import { CreateAdminServiceSchema } from "./schema";
 
 /** Represents dependencies needed to initialize concrete IAdminService */
 export interface IAdminServiceDependencies {
@@ -22,12 +24,14 @@ export interface IAdminServiceDependencies {
  * @class
  */
 
-export class AdminService implements IAdminService {
+export class AdminService extends ServiceUtils implements IAdminService {
   private static instance: IAdminService | null;
   private constructor(
     private readonly repository: IRepository,
     private readonly validationUtility: IValidationUtility,
-  ) {}
+  ) {
+    super();
+  }
 
   static factory({ repository, validationUtility }: IAdminServiceDependencies) {
     if (!AdminService.instance) {
@@ -55,6 +59,32 @@ export class AdminService implements IAdminService {
       initiator,
     );
     return admin;
+  };
+
+  createAdmin: IAdminService["createAdmin"] = async (data, departments) => {
+    this.validationUtility.validateInput({
+      schema: CreateAdminServiceSchema,
+      inputData: {
+        ...data,
+        departments,
+      },
+    });
+
+    const admin = await this.repository.admin.create({
+      data: {
+        ...data,
+        departments: {
+          connect: departments.map((id) => ({
+            id,
+          })),
+        },
+      },
+    });
+
+    const dAdmin = this.deserialize(admin);
+    console.log(dAdmin);
+
+    return this.deserialize(admin);
   };
 }
 

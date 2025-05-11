@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       [serverCacheTags.inquiries],
     );
 
-    const urlConstruct = `/contact?${urlQuery.toString()}`;
+    const urlConstruct = `/contacts?${urlQuery.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
       IPaginatedResponse<IInquiry>

@@ -9,7 +9,7 @@ export async function deleteInquiry(id: number) {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
-        `/contact/${id}`,
+        `/contacts/${id}`,
         "DELETE",
       );
 

@@ -109,9 +109,10 @@ model Admin {
   departments        Department[]
   departmentsLeading Department[] @relation("departmentLead")
 
-  // * Team membership and Teams leading
+  // * Team membership and Teams leading an created
   teams        Team[]
   teamsLeading Team[] @relation("teamLead")
+  teamsCreated Team[] @relation("created")
 
   // * FAQs created
   faqsCreated Faq[]
@@ -150,6 +151,9 @@ model Team {
 
   departmentId Int        @map("department_id")
   department   Department @relation(fields: [departmentId], references: [id])
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation("created", fields: [createdById], references: [adminId])
 
   members Admin[]
 

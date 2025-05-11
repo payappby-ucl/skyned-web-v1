@@ -5,11 +5,15 @@ import { ITimestamps } from "./utils";
 export interface ITeam extends ITimestamps {
   id: number;
   name: string;
+
   departmentId: number;
   department?: IDepartment;
 
   leadId?: string;
   lead?: AdminProfile;
+
+  createdById: String;
+  createdBy?: AdminProfile;
 
   members?: AdminProfile[];
 }

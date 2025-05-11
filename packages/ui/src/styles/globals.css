@@ -232,6 +232,11 @@ textarea {
   @apply !text-sm;
 }
 
+/* .scrollbar {
+  scrollbar-width: "thin";
+  scrollbar-color: var(--color-brand) var(--color-background);
+} */
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

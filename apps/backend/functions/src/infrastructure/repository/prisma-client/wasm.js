@@ -165,6 +165,7 @@ exports.Prisma.TeamScalarFieldEnum = {
   name: 'name',
   leadId: 'leadId',
   departmentId: 'departmentId',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

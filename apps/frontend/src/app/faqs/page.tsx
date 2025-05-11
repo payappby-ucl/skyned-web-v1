@@ -27,7 +27,7 @@ export default async function Faqs() {
   try {
     const { data } = await brandServerApi.httpClient.request<
       Pick<IFaq, "answer" | "question">[]
-    >("/faq/list", "GET", {
+    >("/faqs/list", "GET", {
       next: {
         revalidate: 604800,
       },

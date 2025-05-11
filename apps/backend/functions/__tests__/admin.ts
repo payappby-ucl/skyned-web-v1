@@ -6,17 +6,22 @@ import request from "supertest";
 import { clientAuth, responseBody } from "./helpers/constants";
 import { app } from "../src/app";
 import { admin } from "../src/data";
+import { SkynedUtils } from "../src/utils";
+import { primaryImageDataUri } from "../src/seed/image";
+import { department } from "@workspace/shared";
+import { signInUser } from "./helpers/utils";
 
 describe("Admin API", () => {
   const server = app.getApp();
+  const baseUrl = "/api/v1/admins";
 
-  describe("POST - /api/v1/admin/me", () => {
+  describe(`POST - ${baseUrl}/me`, () => {
     beforeAll(() => {
       jest.resetAllMocks();
     });
 
     test(`should respond with JSON and status code of ${StatusCodes.UNAUTHORIZED} status code`, async () => {
-      const res = await request(server).get("/api/v1/admin/me");
+      const res = await request(server).get(`${baseUrl}/me`);
 
       expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
       expect(res.body).toEqual({
@@ -37,7 +42,7 @@ describe("Admin API", () => {
 
       const token = await user.getIdToken();
       const res = await request(server)
-        .get("/api/v1/admin/me")
+        .get(`${baseUrl}/me`)
         .set("authorization", `bearer ${token}`);
 
       expect(res.status).toBe(StatusCodes.OK);
@@ -50,5 +55,108 @@ describe("Admin API", () => {
         }),
       });
     });
+  });
+
+  describe(`Create Admin - POST - ${baseUrl}`, () => {
+    const creationData = {
+      ...SkynedUtils.exclude(admin, ["adminId"]),
+      primaryImage: primaryImageDataUri,
+      phoneNumber: "+2348136239706",
+      jobTitle: "CTO",
+      socials: [
+        {
+          name: "facebook",
+          url: "https://www.facebook.com",
+        },
+      ],
+      departments: [{ id: 6, name: department.Human_Resource }],
+    };
+
+    test("should fail if not an authorized user", async () => {
+      const res = await request(server).post(baseUrl).send(creationData);
+
+      expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+    });
+
+    test("should fail if input data is not valid", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .post(baseUrl)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          ...SkynedUtils.exclude(creationData, ["departments"]),
+        });
+
+      expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+    }, 10000);
+
+    test("should fail if creating with email that's not @skynedconsults.com", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .post(baseUrl)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          ...creationData,
+          email: "bobslegend795@gmail.com",
+        });
+
+      expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+    }, 10000);
+
+    test("should fail if creating with already existing email", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .post(baseUrl)
+        .set("Authorization", `Bearer ${token}`)
+        .send(creationData);
+
+      expect(res.status).toBe(StatusCodes.CONFLICT);
+    }, 10000);
+
+    test("should create an admin", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .post(baseUrl)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          ...creationData,
+          email: "tobi@skynedconsults.com",
+        });
+
+      expect(res.body.data).toEqual(
+        expect.objectContaining({
+          email: "tobi@skynedconsults.com",
+        }),
+      );
+    }, 10000);
+
+    test("should fail if creation data has executive department but the creator is not an executive lead", async () => {
+      const { user } = await signInUser("tobi@skynedconsults.com", "12345678");
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .post(baseUrl)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          ...creationData,
+          email: "tobi2@skynedconsults.com",
+          departments: [
+            {
+              id: 1,
+              name: department.Executive,
+            },
+          ],
+        });
+
+      expect(res.status).toBe(StatusCodes.FORBIDDEN);
+    }, 10000);
   });
 });

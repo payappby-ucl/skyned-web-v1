@@ -12,8 +12,9 @@ import { signInUser } from "./helpers/utils";
 
 describe("Contact API", () => {
   const server = app.getApp();
+  const base = "/api/v1/contacts";
 
-  describe("POST - /api/v1/contact", () => {
+  describe(`POST - ${base}`, () => {
     afterEach(() => {
       jest.resetAllMocks();
     });
@@ -32,7 +33,7 @@ describe("Contact API", () => {
 
     test(`should respond with JSON and status code of ${StatusCodes.BAD_REQUEST} status code for an invalid data`, async () => {
       const res = await request(server)
-        .post("/api/v1/contact")
+        .post(base)
         .send({
           ...testData,
           phoneNumber: "22334",
@@ -54,7 +55,7 @@ describe("Contact API", () => {
         .mockImplementation();
 
       const res = await request(server)
-        .post("/api/v1/contact")
+        .post(base)
         .send({
           ...testData,
           phoneNumber: "+2348136239706",
@@ -73,7 +74,7 @@ describe("Contact API", () => {
     });
   });
 
-  describe("GET - /api/v1/contact", () => {
+  describe(`GET - ${base}`, () => {
     test("should pass", async () => {
       const { user } = await signInWithEmailAndPassword(
         clientAuth,
@@ -84,7 +85,7 @@ describe("Contact API", () => {
       const token = await user.getIdToken();
 
       const res = await request(server)
-        .get("/api/v1/contact")
+        .get(base)
         .set("authorization", `bearer ${token}`);
 
       expect(res.status).toBe(StatusCodes.OK);
@@ -107,10 +108,10 @@ describe("Contact API", () => {
     });
   });
 
-  describe("DELETE - /api/v1/contact", () => {
+  describe(`DELETE - ${base}`, () => {
     test("should fail if not authorized", async () => {
       try {
-        await request(server).delete("/api/v1/contact/1");
+        await request(server).delete(`${base}/1`);
       } catch (error: any) {
         expect(error.statusCode).toBe(StatusCodes.UNAUTHORIZED);
       }
@@ -125,7 +126,7 @@ describe("Contact API", () => {
       const token = await user.getIdToken();
 
       const res = await request(server)
-        .delete("/api/v1/contact/1")
+        .delete(`${base}/1`)
         .set("authorization", `bearer ${token}`);
 
       expect(res.statusCode).toBe(StatusCodes.OK);

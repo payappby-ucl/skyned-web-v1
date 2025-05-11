@@ -14,6 +14,7 @@ export * from "./schema";
  *
  * @class
  */
+
 export class AdminRepository extends DBUtils implements IAdminRepository {
   constructor(
     private readonly db: IRepository["db"],
@@ -70,5 +71,9 @@ export class AdminRepository extends DBUtils implements IAdminRepository {
     if (!admin) return null;
 
     return this.deserialize(admin);
+  };
+
+  create: IAdminRepository["create"] = (options) => {
+    return this.db.admin.create(options);
   };
 }

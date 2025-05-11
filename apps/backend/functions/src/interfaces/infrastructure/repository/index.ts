@@ -2,6 +2,7 @@
 
 import {
   IAdminRepository,
+  IDepartmentRepository,
   IFaqRepository,
   ITokenRepository,
 } from "../../../infrastructure";
@@ -22,4 +23,5 @@ export interface IRepository {
   inquiry: IInquiryRepository;
   activityLog: IActivityLogRepository;
   faq: IFaqRepository;
+  department: IDepartmentRepository;
 }

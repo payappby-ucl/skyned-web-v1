@@ -78,7 +78,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         brandClientApi.httpClient.setTokenCookie(token);
         // * Get Admin from backend and set auth context
         const { data } = await brandClientApi.httpClient.request<IAdmin>(
-          "/admin",
+          "/admins",
           "GET",
         );
 

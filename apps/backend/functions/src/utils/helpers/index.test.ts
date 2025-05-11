@@ -120,4 +120,30 @@ describe("SkynedUtils", () => {
       expect(isTest).toBe(true);
     });
   });
+
+  describe("resolveStoragePath", () => {
+    test("should throw error if no valid type is passed", () => {
+      try {
+        SkynedUtils.resolveStoragePath({
+          type: "ggg" as "primaryImage",
+          data: {
+            adminId: "",
+          },
+        });
+      } catch (error: any) {
+        expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+      }
+    });
+
+    test("should pass", () => {
+      const path = SkynedUtils.resolveStoragePath({
+        type: "primaryImage",
+        data: {
+          adminId: "12345",
+        },
+      });
+
+      expect(path).toBe("users/12345/profile/primaryImage");
+    });
+  });
 });

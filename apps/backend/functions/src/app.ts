@@ -65,10 +65,11 @@ export class App implements IApp {
     this.app.use(helmet());
     this.app.disable("x-powered-by");
     this.app.set("trust proxy", 4);
-    this.app.use(express.json());
 
     // * Response Binder
     this.app.use(BinderMiddleware.responseBinder);
+
+    this.app.use(express.json({ limit: "10mb" }));
 
     // * Router
     this.app.use("/", baseRouter.router);

@@ -1467,6 +1467,7 @@ export namespace Prisma {
     departmentsLeading: number
     teams: number
     teamsLeading: number
+    teamsCreated: number
     faqsCreated: number
     activityLogs: number
   }
@@ -1477,6 +1478,7 @@ export namespace Prisma {
     departmentsLeading?: boolean | AdminCountOutputTypeCountDepartmentsLeadingArgs
     teams?: boolean | AdminCountOutputTypeCountTeamsArgs
     teamsLeading?: boolean | AdminCountOutputTypeCountTeamsLeadingArgs
+    teamsCreated?: boolean | AdminCountOutputTypeCountTeamsCreatedArgs
     faqsCreated?: boolean | AdminCountOutputTypeCountFaqsCreatedArgs
     activityLogs?: boolean | AdminCountOutputTypeCountActivityLogsArgs
   }
@@ -1524,6 +1526,13 @@ export namespace Prisma {
    * AdminCountOutputType without action
    */
   export type AdminCountOutputTypeCountTeamsLeadingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeamWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountTeamsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TeamWhereInput
   }
 
@@ -2972,6 +2981,7 @@ export namespace Prisma {
     departmentsLeading?: boolean | Admin$departmentsLeadingArgs<ExtArgs>
     teams?: boolean | Admin$teamsArgs<ExtArgs>
     teamsLeading?: boolean | Admin$teamsLeadingArgs<ExtArgs>
+    teamsCreated?: boolean | Admin$teamsCreatedArgs<ExtArgs>
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
@@ -3053,6 +3063,7 @@ export namespace Prisma {
     departmentsLeading?: boolean | Admin$departmentsLeadingArgs<ExtArgs>
     teams?: boolean | Admin$teamsArgs<ExtArgs>
     teamsLeading?: boolean | Admin$teamsLeadingArgs<ExtArgs>
+    teamsCreated?: boolean | Admin$teamsCreatedArgs<ExtArgs>
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
@@ -3073,6 +3084,7 @@ export namespace Prisma {
       departmentsLeading: Prisma.$DepartmentPayload<ExtArgs>[]
       teams: Prisma.$TeamPayload<ExtArgs>[]
       teamsLeading: Prisma.$TeamPayload<ExtArgs>[]
+      teamsCreated: Prisma.$TeamPayload<ExtArgs>[]
       faqsCreated: Prisma.$FaqPayload<ExtArgs>[]
       activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
     }
@@ -3496,6 +3508,7 @@ export namespace Prisma {
     departmentsLeading<T extends Admin$departmentsLeadingArgs<ExtArgs> = {}>(args?: Subset<T, Admin$departmentsLeadingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     teams<T extends Admin$teamsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     teamsLeading<T extends Admin$teamsLeadingArgs<ExtArgs> = {}>(args?: Subset<T, Admin$teamsLeadingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    teamsCreated<T extends Admin$teamsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$teamsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     faqsCreated<T extends Admin$faqsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$faqsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaqPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activityLogs<T extends Admin$activityLogsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4060,6 +4073,30 @@ export namespace Prisma {
    * Admin.teamsLeading
    */
   export type Admin$teamsLeadingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Team
+     */
+    select?: TeamSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Team
+     */
+    omit?: TeamOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamInclude<ExtArgs> | null
+    where?: TeamWhereInput
+    orderBy?: TeamOrderByWithRelationInput | TeamOrderByWithRelationInput[]
+    cursor?: TeamWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TeamScalarFieldEnum | TeamScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.teamsCreated
+   */
+  export type Admin$teamsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Team
      */
@@ -5343,6 +5380,7 @@ export namespace Prisma {
     name: string | null
     leadId: string | null
     departmentId: number | null
+    createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5352,6 +5390,7 @@ export namespace Prisma {
     name: string | null
     leadId: string | null
     departmentId: number | null
+    createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5361,6 +5400,7 @@ export namespace Prisma {
     name: number
     leadId: number
     departmentId: number
+    createdById: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5382,6 +5422,7 @@ export namespace Prisma {
     name?: true
     leadId?: true
     departmentId?: true
+    createdById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5391,6 +5432,7 @@ export namespace Prisma {
     name?: true
     leadId?: true
     departmentId?: true
+    createdById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5400,6 +5442,7 @@ export namespace Prisma {
     name?: true
     leadId?: true
     departmentId?: true
+    createdById?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5496,6 +5539,7 @@ export namespace Prisma {
     name: string
     leadId: string | null
     departmentId: number
+    createdById: string
     createdAt: Date
     updatedAt: Date
     _count: TeamCountAggregateOutputType | null
@@ -5524,10 +5568,12 @@ export namespace Prisma {
     name?: boolean
     leadId?: boolean
     departmentId?: boolean
+    createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     members?: boolean | Team$membersArgs<ExtArgs>
     _count?: boolean | TeamCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["team"]>
@@ -5537,10 +5583,12 @@ export namespace Prisma {
     name?: boolean
     leadId?: boolean
     departmentId?: boolean
+    createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["team"]>
 
   export type TeamSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5548,10 +5596,12 @@ export namespace Prisma {
     name?: boolean
     leadId?: boolean
     departmentId?: boolean
+    createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["team"]>
 
   export type TeamSelectScalar = {
@@ -5559,24 +5609,28 @@ export namespace Prisma {
     name?: boolean
     leadId?: boolean
     departmentId?: boolean
+    createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TeamOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "leadId" | "departmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["team"]>
+  export type TeamOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "leadId" | "departmentId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["team"]>
   export type TeamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     members?: boolean | Team$membersArgs<ExtArgs>
     _count?: boolean | TeamCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeamIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
   }
   export type TeamIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     lead?: boolean | Team$leadArgs<ExtArgs>
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
   }
 
   export type $TeamPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5584,6 +5638,7 @@ export namespace Prisma {
     objects: {
       lead: Prisma.$AdminPayload<ExtArgs> | null
       department: Prisma.$DepartmentPayload<ExtArgs>
+      createdBy: Prisma.$AdminPayload<ExtArgs>
       members: Prisma.$AdminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5591,6 +5646,7 @@ export namespace Prisma {
       name: string
       leadId: string | null
       departmentId: number
+      createdById: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["team"]>
@@ -5989,6 +6045,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     lead<T extends Team$leadArgs<ExtArgs> = {}>(args?: Subset<T, Team$leadArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     members<T extends Team$membersArgs<ExtArgs> = {}>(args?: Subset<T, Team$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6023,6 +6080,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Team", 'String'>
     readonly leadId: FieldRef<"Team", 'String'>
     readonly departmentId: FieldRef<"Team", 'Int'>
+    readonly createdById: FieldRef<"Team", 'String'>
     readonly createdAt: FieldRef<"Team", 'DateTime'>
     readonly updatedAt: FieldRef<"Team", 'DateTime'>
   }
@@ -9863,6 +9921,7 @@ export namespace Prisma {
     name: 'name',
     leadId: 'leadId',
     departmentId: 'departmentId',
+    createdById: 'createdById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10179,6 +10238,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentListRelationFilter
     teams?: TeamListRelationFilter
     teamsLeading?: TeamListRelationFilter
+    teamsCreated?: TeamListRelationFilter
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
   }
@@ -10209,6 +10269,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentOrderByRelationAggregateInput
     teams?: TeamOrderByRelationAggregateInput
     teamsLeading?: TeamOrderByRelationAggregateInput
+    teamsCreated?: TeamOrderByRelationAggregateInput
     faqsCreated?: FaqOrderByRelationAggregateInput
     activityLogs?: ActivityLogOrderByRelationAggregateInput
   }
@@ -10242,6 +10303,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentListRelationFilter
     teams?: TeamListRelationFilter
     teamsLeading?: TeamListRelationFilter
+    teamsCreated?: TeamListRelationFilter
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
@@ -10369,10 +10431,12 @@ export namespace Prisma {
     name?: StringFilter<"Team"> | string
     leadId?: StringNullableFilter<"Team"> | string | null
     departmentId?: IntFilter<"Team"> | number
+    createdById?: StringFilter<"Team"> | string
     createdAt?: DateTimeFilter<"Team"> | Date | string
     updatedAt?: DateTimeFilter<"Team"> | Date | string
     lead?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     members?: AdminListRelationFilter
   }
 
@@ -10381,10 +10445,12 @@ export namespace Prisma {
     name?: SortOrder
     leadId?: SortOrderInput | SortOrder
     departmentId?: SortOrder
+    createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     lead?: AdminOrderByWithRelationInput
     department?: DepartmentOrderByWithRelationInput
+    createdBy?: AdminOrderByWithRelationInput
     members?: AdminOrderByRelationAggregateInput
   }
 
@@ -10397,10 +10463,12 @@ export namespace Prisma {
     name?: StringFilter<"Team"> | string
     leadId?: StringNullableFilter<"Team"> | string | null
     departmentId?: IntFilter<"Team"> | number
+    createdById?: StringFilter<"Team"> | string
     createdAt?: DateTimeFilter<"Team"> | Date | string
     updatedAt?: DateTimeFilter<"Team"> | Date | string
     lead?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     members?: AdminListRelationFilter
   }, "id" | "departmentId_name">
 
@@ -10409,6 +10477,7 @@ export namespace Prisma {
     name?: SortOrder
     leadId?: SortOrderInput | SortOrder
     departmentId?: SortOrder
+    createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TeamCountOrderByAggregateInput
@@ -10426,6 +10495,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Team"> | string
     leadId?: StringNullableWithAggregatesFilter<"Team"> | string | null
     departmentId?: IntWithAggregatesFilter<"Team"> | number
+    createdById?: StringWithAggregatesFilter<"Team"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Team"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Team"> | Date | string
   }
@@ -10733,6 +10803,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -10762,6 +10833,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -10790,6 +10862,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -10819,6 +10892,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -10953,6 +11027,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lead?: AdminCreateNestedOneWithoutTeamsLeadingInput
     department: DepartmentCreateNestedOneWithoutTeamsInput
+    createdBy: AdminCreateNestedOneWithoutTeamsCreatedInput
     members?: AdminCreateNestedManyWithoutTeamsInput
   }
 
@@ -10961,6 +11036,7 @@ export namespace Prisma {
     name: string
     leadId?: string | null
     departmentId: number
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: AdminUncheckedCreateNestedManyWithoutTeamsInput
@@ -10972,6 +11048,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lead?: AdminUpdateOneWithoutTeamsLeadingNestedInput
     department?: DepartmentUpdateOneRequiredWithoutTeamsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutTeamsCreatedNestedInput
     members?: AdminUpdateManyWithoutTeamsNestedInput
   }
 
@@ -10980,6 +11057,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: AdminUncheckedUpdateManyWithoutTeamsNestedInput
@@ -10990,6 +11068,7 @@ export namespace Prisma {
     name: string
     leadId?: string | null
     departmentId: number
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11005,6 +11084,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11703,6 +11783,11 @@ export namespace Prisma {
     isNot?: DepartmentWhereInput
   }
 
+  export type AdminScalarRelationFilter = {
+    is?: AdminWhereInput
+    isNot?: AdminWhereInput
+  }
+
   export type TeamDepartmentIdNameCompoundUniqueInput = {
     departmentId: number
     name: string
@@ -11713,6 +11798,7 @@ export namespace Prisma {
     name?: SortOrder
     leadId?: SortOrder
     departmentId?: SortOrder
+    createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11727,6 +11813,7 @@ export namespace Prisma {
     name?: SortOrder
     leadId?: SortOrder
     departmentId?: SortOrder
+    createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11736,6 +11823,7 @@ export namespace Prisma {
     name?: SortOrder
     leadId?: SortOrder
     departmentId?: SortOrder
+    createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11743,11 +11831,6 @@ export namespace Prisma {
   export type TeamSumOrderByAggregateInput = {
     id?: SortOrder
     departmentId?: SortOrder
-  }
-
-  export type AdminScalarRelationFilter = {
-    is?: AdminWhereInput
-    isNot?: AdminWhereInput
   }
 
   export type FaqCountOrderByAggregateInput = {
@@ -11927,6 +12010,13 @@ export namespace Prisma {
     connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
   }
 
+  export type TeamCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput> | TeamCreateWithoutCreatedByInput[] | TeamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutCreatedByInput | TeamCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TeamCreateManyCreatedByInputEnvelope
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+  }
+
   export type FaqCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<FaqCreateWithoutCreatedByInput, FaqUncheckedCreateWithoutCreatedByInput> | FaqCreateWithoutCreatedByInput[] | FaqUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: FaqCreateOrConnectWithoutCreatedByInput | FaqCreateOrConnectWithoutCreatedByInput[]
@@ -11971,6 +12061,13 @@ export namespace Prisma {
     create?: XOR<TeamCreateWithoutLeadInput, TeamUncheckedCreateWithoutLeadInput> | TeamCreateWithoutLeadInput[] | TeamUncheckedCreateWithoutLeadInput[]
     connectOrCreate?: TeamCreateOrConnectWithoutLeadInput | TeamCreateOrConnectWithoutLeadInput[]
     createMany?: TeamCreateManyLeadInputEnvelope
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+  }
+
+  export type TeamUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput> | TeamCreateWithoutCreatedByInput[] | TeamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutCreatedByInput | TeamCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TeamCreateManyCreatedByInputEnvelope
     connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
   }
 
@@ -12078,6 +12175,20 @@ export namespace Prisma {
     deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
   }
 
+  export type TeamUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput> | TeamCreateWithoutCreatedByInput[] | TeamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutCreatedByInput | TeamCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TeamUpsertWithWhereUniqueWithoutCreatedByInput | TeamUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TeamCreateManyCreatedByInputEnvelope
+    set?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    disconnect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    delete?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    update?: TeamUpdateWithWhereUniqueWithoutCreatedByInput | TeamUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TeamUpdateManyWithWhereWithoutCreatedByInput | TeamUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
+  }
+
   export type FaqUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<FaqCreateWithoutCreatedByInput, FaqUncheckedCreateWithoutCreatedByInput> | FaqCreateWithoutCreatedByInput[] | FaqUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: FaqCreateOrConnectWithoutCreatedByInput | FaqCreateOrConnectWithoutCreatedByInput[]
@@ -12171,6 +12282,20 @@ export namespace Prisma {
     connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
     update?: TeamUpdateWithWhereUniqueWithoutLeadInput | TeamUpdateWithWhereUniqueWithoutLeadInput[]
     updateMany?: TeamUpdateManyWithWhereWithoutLeadInput | TeamUpdateManyWithWhereWithoutLeadInput[]
+    deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
+  }
+
+  export type TeamUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput> | TeamCreateWithoutCreatedByInput[] | TeamUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutCreatedByInput | TeamCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TeamUpsertWithWhereUniqueWithoutCreatedByInput | TeamUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TeamCreateManyCreatedByInputEnvelope
+    set?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    disconnect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    delete?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    update?: TeamUpdateWithWhereUniqueWithoutCreatedByInput | TeamUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TeamUpdateManyWithWhereWithoutCreatedByInput | TeamUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
   }
 
@@ -12314,6 +12439,12 @@ export namespace Prisma {
     connect?: DepartmentWhereUniqueInput
   }
 
+  export type AdminCreateNestedOneWithoutTeamsCreatedInput = {
+    create?: XOR<AdminCreateWithoutTeamsCreatedInput, AdminUncheckedCreateWithoutTeamsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutTeamsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
   export type AdminCreateNestedManyWithoutTeamsInput = {
     create?: XOR<AdminCreateWithoutTeamsInput, AdminUncheckedCreateWithoutTeamsInput> | AdminCreateWithoutTeamsInput[] | AdminUncheckedCreateWithoutTeamsInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutTeamsInput | AdminCreateOrConnectWithoutTeamsInput[]
@@ -12342,6 +12473,14 @@ export namespace Prisma {
     upsert?: DepartmentUpsertWithoutTeamsInput
     connect?: DepartmentWhereUniqueInput
     update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutTeamsInput, DepartmentUpdateWithoutTeamsInput>, DepartmentUncheckedUpdateWithoutTeamsInput>
+  }
+
+  export type AdminUpdateOneRequiredWithoutTeamsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutTeamsCreatedInput, AdminUncheckedCreateWithoutTeamsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutTeamsCreatedInput
+    upsert?: AdminUpsertWithoutTeamsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutTeamsCreatedInput, AdminUpdateWithoutTeamsCreatedInput>, AdminUncheckedUpdateWithoutTeamsCreatedInput>
   }
 
   export type AdminUpdateManyWithoutTeamsNestedInput = {
@@ -12668,6 +12807,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -12696,6 +12836,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -12729,6 +12870,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -12757,6 +12899,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -12826,6 +12969,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lead?: AdminCreateNestedOneWithoutTeamsLeadingInput
     department: DepartmentCreateNestedOneWithoutTeamsInput
+    createdBy: AdminCreateNestedOneWithoutTeamsCreatedInput
   }
 
   export type TeamUncheckedCreateWithoutMembersInput = {
@@ -12833,6 +12977,7 @@ export namespace Prisma {
     name: string
     leadId?: string | null
     departmentId: number
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12847,6 +12992,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     department: DepartmentCreateNestedOneWithoutTeamsInput
+    createdBy: AdminCreateNestedOneWithoutTeamsCreatedInput
     members?: AdminCreateNestedManyWithoutTeamsInput
   }
 
@@ -12854,6 +13000,7 @@ export namespace Prisma {
     id?: number
     name: string
     departmentId: number
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: AdminUncheckedCreateNestedManyWithoutTeamsInput
@@ -12866,6 +13013,35 @@ export namespace Prisma {
 
   export type TeamCreateManyLeadInputEnvelope = {
     data: TeamCreateManyLeadInput | TeamCreateManyLeadInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TeamCreateWithoutCreatedByInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lead?: AdminCreateNestedOneWithoutTeamsLeadingInput
+    department: DepartmentCreateNestedOneWithoutTeamsInput
+    members?: AdminCreateNestedManyWithoutTeamsInput
+  }
+
+  export type TeamUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    name: string
+    leadId?: string | null
+    departmentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: AdminUncheckedCreateNestedManyWithoutTeamsInput
+  }
+
+  export type TeamCreateOrConnectWithoutCreatedByInput = {
+    where: TeamWhereUniqueInput
+    create: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TeamCreateManyCreatedByInputEnvelope = {
+    data: TeamCreateManyCreatedByInput | TeamCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -12959,6 +13135,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -12987,6 +13164,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -13099,6 +13277,7 @@ export namespace Prisma {
     name?: StringFilter<"Team"> | string
     leadId?: StringNullableFilter<"Team"> | string | null
     departmentId?: IntFilter<"Team"> | number
+    createdById?: StringFilter<"Team"> | string
     createdAt?: DateTimeFilter<"Team"> | Date | string
     updatedAt?: DateTimeFilter<"Team"> | Date | string
   }
@@ -13117,6 +13296,22 @@ export namespace Prisma {
   export type TeamUpdateManyWithWhereWithoutLeadInput = {
     where: TeamScalarWhereInput
     data: XOR<TeamUpdateManyMutationInput, TeamUncheckedUpdateManyWithoutLeadInput>
+  }
+
+  export type TeamUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: TeamWhereUniqueInput
+    update: XOR<TeamUpdateWithoutCreatedByInput, TeamUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<TeamCreateWithoutCreatedByInput, TeamUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TeamUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: TeamWhereUniqueInput
+    data: XOR<TeamUpdateWithoutCreatedByInput, TeamUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type TeamUpdateManyWithWhereWithoutCreatedByInput = {
+    where: TeamScalarWhereInput
+    data: XOR<TeamUpdateManyMutationInput, TeamUncheckedUpdateManyWithoutCreatedByInput>
   }
 
   export type FaqUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -13202,6 +13397,7 @@ export namespace Prisma {
     departments?: DepartmentCreateNestedManyWithoutMembersInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -13230,6 +13426,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -13263,6 +13460,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -13291,6 +13489,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -13305,6 +13504,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     lead?: AdminCreateNestedOneWithoutTeamsLeadingInput
+    createdBy: AdminCreateNestedOneWithoutTeamsCreatedInput
     members?: AdminCreateNestedManyWithoutTeamsInput
   }
 
@@ -13312,6 +13512,7 @@ export namespace Prisma {
     id?: number
     name: string
     leadId?: string | null
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: AdminUncheckedCreateNestedManyWithoutTeamsInput
@@ -13361,6 +13562,7 @@ export namespace Prisma {
     departments?: DepartmentUpdateManyWithoutMembersNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -13389,6 +13591,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -13449,6 +13652,7 @@ export namespace Prisma {
     departments?: DepartmentCreateNestedManyWithoutMembersInput
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -13477,6 +13681,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -13508,6 +13713,69 @@ export namespace Prisma {
     create: XOR<DepartmentCreateWithoutTeamsInput, DepartmentUncheckedCreateWithoutTeamsInput>
   }
 
+  export type AdminCreateWithoutTeamsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutTeamsCreatedInput, AdminUncheckedCreateWithoutTeamsCreatedInput>
+  }
+
   export type AdminCreateWithoutTeamsInput = {
     id?: number
     adminId: string
@@ -13532,6 +13800,7 @@ export namespace Prisma {
     departments?: DepartmentCreateNestedManyWithoutMembersInput
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
@@ -13560,6 +13829,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -13603,6 +13873,7 @@ export namespace Prisma {
     departments?: DepartmentUpdateManyWithoutMembersNestedInput
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -13631,6 +13902,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -13661,6 +13933,74 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: AdminUncheckedUpdateManyWithoutDepartmentsNestedInput
+  }
+
+  export type AdminUpsertWithoutTeamsCreatedInput = {
+    update: XOR<AdminUpdateWithoutTeamsCreatedInput, AdminUncheckedUpdateWithoutTeamsCreatedInput>
+    create: XOR<AdminCreateWithoutTeamsCreatedInput, AdminUncheckedCreateWithoutTeamsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutTeamsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutTeamsCreatedInput, AdminUncheckedUpdateWithoutTeamsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutTeamsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -13704,6 +14044,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
   }
 
@@ -13732,6 +14073,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -13775,6 +14117,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
 
@@ -13803,6 +14146,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -13831,6 +14175,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
     teams?: TeamCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
   }
 
@@ -13859,6 +14204,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
     teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
@@ -13902,6 +14248,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
   }
 
@@ -13930,6 +14277,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
@@ -13964,6 +14312,16 @@ export namespace Prisma {
   export type TeamCreateManyLeadInput = {
     id?: number
     name: string
+    departmentId: number
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TeamCreateManyCreatedByInput = {
+    id?: number
+    name: string
+    leadId?: string | null
     departmentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14011,6 +14369,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -14039,6 +14398,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -14119,6 +14479,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lead?: AdminUpdateOneWithoutTeamsLeadingNestedInput
     department?: DepartmentUpdateOneRequiredWithoutTeamsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutTeamsCreatedNestedInput
   }
 
   export type TeamUncheckedUpdateWithoutMembersInput = {
@@ -14126,6 +14487,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14135,6 +14497,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14144,6 +14507,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: DepartmentUpdateOneRequiredWithoutTeamsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutTeamsCreatedNestedInput
     members?: AdminUpdateManyWithoutTeamsNestedInput
   }
 
@@ -14151,6 +14515,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: AdminUncheckedUpdateManyWithoutTeamsNestedInput
@@ -14159,6 +14524,35 @@ export namespace Prisma {
   export type TeamUncheckedUpdateManyWithoutLeadInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    departmentId?: IntFieldUpdateOperationsInput | number
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TeamUpdateWithoutCreatedByInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lead?: AdminUpdateOneWithoutTeamsLeadingNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutTeamsNestedInput
+    members?: AdminUpdateManyWithoutTeamsNestedInput
+  }
+
+  export type TeamUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: AdminUncheckedUpdateManyWithoutTeamsNestedInput
+  }
+
+  export type TeamUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
     departmentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14223,6 +14617,7 @@ export namespace Prisma {
     id?: number
     name: string
     leadId?: string | null
+    createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14250,6 +14645,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teams?: TeamUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -14278,6 +14674,7 @@ export namespace Prisma {
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -14309,6 +14706,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lead?: AdminUpdateOneWithoutTeamsLeadingNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutTeamsCreatedNestedInput
     members?: AdminUpdateManyWithoutTeamsNestedInput
   }
 
@@ -14316,6 +14714,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: AdminUncheckedUpdateManyWithoutTeamsNestedInput
@@ -14325,6 +14724,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14352,6 +14752,7 @@ export namespace Prisma {
     departments?: DepartmentUpdateManyWithoutMembersNestedInput
     departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
   }
@@ -14380,6 +14781,7 @@ export namespace Prisma {
     departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
     departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }

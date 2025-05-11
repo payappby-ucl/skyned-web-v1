@@ -14,8 +14,14 @@ exports.departmentPolicies = {
         read(authClaim, data) {
             return true;
         },
-        create(authClaim, data) {
-            return true;
+        create() {
+            return false;
+        },
+        update() {
+            return false;
+        },
+        delete() {
+            return false;
         },
     },
 };

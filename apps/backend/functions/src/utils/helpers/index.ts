@@ -4,6 +4,8 @@ import * as admin from "firebase-admin";
 import { Exception } from "../../lib";
 import { env } from "../../config";
 import { applicationDefault } from "firebase-admin/app";
+import { ResolveStoragePathType } from "../../types";
+import { IObject, IPhoneNumber } from "@workspace/shared";
 
 /**
  * Utility Class
@@ -143,5 +145,50 @@ export class SkynedUtils {
         admin.initializeApp();
       }
     }
+  }
+
+  /** Resolve path for storing objects */
+
+  static resolveStoragePath({ type, data }: ResolveStoragePathType) {
+    switch (type) {
+      case "primaryImage":
+      case "secondaryImage":
+        return `users/${data.adminId}/profile/${type}`;
+      default:
+        throw SkynedUtils.createException(
+          StatusCodes.INTERNAL_SERVER_ERROR,
+          "Please provide a valid type for resolving storage path",
+        );
+    }
+  }
+
+  /**
+   * Casts Database json type of interface
+   */
+
+  static deserialize<T extends object, K>(data: T): K {
+    const deserialized = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        if (["primaryImage", "secondaryImage"].includes(key)) {
+          return [key, value as unknown as IObject];
+        }
+
+        if (key === "phoneNumber") {
+          return [key, value as unknown as IPhoneNumber];
+        }
+
+        if (key === "previousState" || key === "currentState") {
+          return [key, value as any];
+        }
+
+        if (Array.isArray(value)) {
+          return [key, value.map((v) => this.deserialize(v))];
+        }
+
+        return [key, value];
+      }),
+    );
+
+    return deserialized as K;
   }
 }

@@ -6,7 +6,7 @@ import {
   PermissionType,
   ResourceType,
 } from "@workspace/shared";
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useAuthContext } from "./providers/auth-provider";
 
 interface Props {
