@@ -17,9 +17,9 @@ const FaqList: React.FC = () => {
 
   const { data, isError, isPending, error } = useGet<IPaginatedResponse<IFaq>>({
     queryKey: [
-      "faq",
-      `faq-page-${pagination.pageIndex}`,
-      `faq-limit-${pagination.pageSize}`,
+      "faqs",
+      `faqs-page-${pagination.pageIndex}`,
+      `faqs-limit-${pagination.pageSize}`,
     ],
     url: `/faqs?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
   });

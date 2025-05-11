@@ -7,10 +7,20 @@ export const adminPolicies: AccessControlType = {
       if (!authClaim) return false;
       const { claim, user } = authClaim;
       if (claim !== "admin") return false;
-      return isInDepartment(user, [department.Executive]);
+      return isInDepartment(user, [
+        department.Executive,
+        department.Human_Resource,
+      ]);
     },
     read(authClaim, data) {
-      return false;
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+
+      return isInDepartment(user, [
+        department.Executive,
+        department.Human_Resource,
+      ]);
     },
 
     update(authClaim, data) {

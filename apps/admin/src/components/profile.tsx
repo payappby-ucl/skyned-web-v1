@@ -18,7 +18,7 @@ const ProfileInfo: React.FC<Omit<Props, "disabled">> = (props) => (
       <AvatarImage
         src={props.primaryImage.url}
         alt={`${props.firstName} ${props.lastName}'s Profile image`}
-        className="object-cover"
+        className="object-cover object-top"
       />
       <AvatarFallback className="uppercase">
         {props.firstName[0]}

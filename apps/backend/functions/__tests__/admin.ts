@@ -159,4 +159,53 @@ describe("Admin API", () => {
       expect(res.status).toBe(StatusCodes.FORBIDDEN);
     }, 10000);
   });
+
+  describe(`GET - ${baseUrl}`, () => {
+    test("should fail if no authorization header is passed", async () => {
+      const res = await request(server).get(baseUrl);
+
+      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.body).toEqual({
+        statusCode: StatusCodes.UNAUTHORIZED,
+        success: false,
+        data: expect.objectContaining({
+          message: expect.any(String),
+        }),
+      });
+    });
+
+    test("should pass", async () => {
+      const { user } = await signInUser();
+
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .get(baseUrl)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body).toEqual({
+        ...responseBody,
+        success: true,
+        data: {
+          total: expect.any(Number),
+          perPage: 100,
+          currentPage: 1,
+          nextPage: 2,
+          prevPage: 1,
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              adminId: expect.any(String),
+              id: expect.any(Number),
+
+              _count: {
+                departments: expect.any(Number),
+                teams: expect.any(Number),
+              },
+            }),
+          ]),
+        },
+      });
+    });
+  });
 });

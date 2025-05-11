@@ -13,4 +13,14 @@ export interface IAdminRepository {
   create(
     options: Parameters<Prisma.AdminDelegate["create"]>["0"],
   ): ReturnType<Prisma.AdminDelegate["create"]>;
+
+  /** Count */
+  count(
+    query?: Parameters<Prisma.AdminDelegate["count"]>["0"],
+  ): ReturnType<Prisma.AdminDelegate["count"]>;
+
+  /** Find Many admins */
+  findMany(
+    query?: Parameters<Prisma.AdminDelegate["findMany"]>["0"],
+  ): ReturnType<Prisma.AdminDelegate["findMany"]>;
 }

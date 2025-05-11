@@ -222,6 +222,31 @@ export class AdminController
       next(error);
     }
   };
+
+  getAdminList: IAdminController["getAdminList"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      this._attributeBasedAccessControl(authUser, "admins", "list");
+      const { from, to, limit, page } = req.query;
+
+      const construct = this._constructPaginationData({ limit, page });
+
+      const total = await this.adminService.countAdminsForList(authUser.user);
+      const adminList = await this.adminService.listAdmins(authUser.user, {
+        ...SkynedUtils.pick(construct, ["skip", "take"]),
+        from,
+        to,
+      });
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        total,
+        data: adminList,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** AdminController instance */

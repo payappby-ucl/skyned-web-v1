@@ -42,23 +42,28 @@ import SocialForm from "./social-form";
 import getSocialIcon from "@/src/components/social-icons";
 import Link from "next/link";
 import useGet from "@/src/hooks/use-get";
+import { createAdmin } from "../_actions/create";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 interface Props {
   admin?: IAdmin;
 }
 
 const AdminForm: React.FC<Props> = ({ admin }) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const form = useForm<CreateAdminSchema>({
     resolver: zodResolver(CreateAdminSchema),
     defaultValues: {
       firstName: admin?.firstName || "",
-      middleName: admin?.middleName || undefined,
+      middleName: admin?.middleName || "",
       lastName: admin?.lastName || "",
       email: admin?.email || "",
       gender: admin?.gender || gender.Male,
       nationality: admin?.nationality || DEFAULT_COUNTRY_CODE,
       countryOfResidence: admin?.countryOfResidence || DEFAULT_COUNTRY_CODE,
-      about: admin?.about || undefined,
+      about: admin?.about || "",
       jobTitle: admin?.jobTitle || "",
       phoneNumber:
         admin?.phoneNumber?.number || DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
@@ -75,7 +80,19 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
 
   const onSubmit = useCallback(async (data: CreateAdminSchema) => {
     try {
-      console.log(data);
+      //  if (faq) {
+      //    await updateFaq(faq.id, data);
+      //    brandClientApi.utils.toast.success("FAQ Updated.");
+      //  } else {
+      await createAdmin(data);
+      brandClientApi.utils.toast.success("FAQ Created.");
+      //  }
+
+      queryClient.invalidateQueries({
+        queryKey: ["admins"],
+      });
+
+      router.replace("/admins");
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
@@ -106,12 +123,11 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
     [socials],
   );
 
+  // * Load Departments from backend
   const { data } = useGet<Pick<IDepartment, "id" | "name">[]>({
     queryKey: ["getDepartmentsForAdminCreation"],
     url: "/departments/create",
   });
-
-  console.log(data);
 
   return (
     <Form {...form}>
@@ -594,7 +610,11 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
           )}
         />
 
-        <FormButton variant="brand" className="w-full md:w-fit">
+        <FormButton
+          variant="brand"
+          className="w-full md:w-fit"
+          isLoading={form.formState.isSubmitting}
+        >
           Create Account
         </FormButton>
       </form>

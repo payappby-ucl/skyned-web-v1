@@ -12,8 +12,8 @@ export async function updateFaq(id: number, data: CreateFaqSchema) {
         body: JSON.stringify(data),
       });
 
-    revalidateTag(serverCacheTags.faq);
-    revalidateTag(`${serverCacheTags.faq}-id-${id}`);
+    revalidateTag(serverCacheTags.faqs);
+    revalidateTag(`${serverCacheTags.faqs}-id-${id}`);
     return responseData;
   } catch (error: any) {
     throw brandServerApi.utils.createServerActionError(error);

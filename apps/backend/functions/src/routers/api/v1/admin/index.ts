@@ -12,6 +12,7 @@ import {
 } from "../../../../middleware";
 import { adminController } from "../../../../controllers";
 import { CreateAdminSchema } from "@workspace/shared";
+import { PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for admin router initialization */
 export interface AdminRouterDependencies {
@@ -32,14 +33,24 @@ export class AdminRouter implements IRouter {
     adminController: IAdminController,
     authMiddleware: IAuthMiddleware,
   ) {
-    this.router.route("/").post(
-      RequestValidationMiddleware.validate({
-        body: CreateAdminSchema,
-      }),
-      authMiddleware.authenticate,
-      authMiddleware.hasRole(["admin"]),
-      adminController.createAdmin,
-    );
+    this.router
+      .route("/")
+      .post(
+        RequestValidationMiddleware.validate({
+          body: CreateAdminSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        adminController.createAdmin,
+      )
+      .get(
+        RequestValidationMiddleware.validate({
+          query: PageQuerySchema.partial(),
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        adminController.getAdminList,
+      );
 
     this.router
       .route("/me")

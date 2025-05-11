@@ -63,7 +63,7 @@ export function NavUser() {
                 <AvatarImage
                   src={user?.primaryImage.url}
                   alt={`${user?.firstName} ${user?.lastName} profile image`}
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
                 <AvatarFallback className="rounded-lg">
                   {user?.firstName?.[0]}
@@ -91,7 +91,7 @@ export function NavUser() {
                   <AvatarImage
                     src={user?.primaryImage.url}
                     alt={`${user?.firstName} ${user?.lastName} profile image`}
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                   <AvatarFallback className="rounded-lg">
                     {user?.firstName?.[0]}

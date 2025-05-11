@@ -13,7 +13,7 @@ export async function deleteFaq(id: number) {
         "DELETE",
       );
 
-    revalidateTag(serverCacheTags.faq);
+    revalidateTag(serverCacheTags.faqs);
     return responseData;
   } catch (error: any) {
     throw brandServerApi.utils.createServerActionError(error);

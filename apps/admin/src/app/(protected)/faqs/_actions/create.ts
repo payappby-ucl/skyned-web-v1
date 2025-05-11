@@ -12,7 +12,7 @@ export async function createFaq(data: CreateFaqSchema) {
         body: JSON.stringify(data),
       });
 
-    revalidateTag(serverCacheTags.faq);
+    revalidateTag(serverCacheTags.faqs);
     return responseData;
   } catch (error: any) {
     throw brandServerApi.utils.createServerActionError(error);

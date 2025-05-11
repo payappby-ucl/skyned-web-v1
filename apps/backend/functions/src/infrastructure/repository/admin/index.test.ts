@@ -107,5 +107,35 @@ describe("AdminRepository", () => {
         );
       });
     });
+
+    describe("count", () => {
+      test("should pass", async () => {
+        const adminCounts = await repository.admin.count();
+        expect(adminCounts).toEqual(expect.any(Number));
+      });
+    });
+
+    describe("findMany", () => {
+      test("should return array of admins", async () => {
+        const manyAdmins = await repository.admin.findMany({
+          orderBy: {
+            createdAt: "asc",
+          },
+          take: 1,
+        });
+
+        expect(manyAdmins[0]).toEqual(
+          expect.objectContaining({
+            firstName: admin.firstName,
+            lastName: admin.lastName,
+            email: admin.email,
+            jobTitle: admin.jobTitle,
+            gender: admin.gender,
+            adminId: expect.any(String),
+            id: expect.any(Number),
+          }),
+        );
+      });
+    });
   });
 });

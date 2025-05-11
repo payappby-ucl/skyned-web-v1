@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { RegistryKeysEnum } from "../../../enum";
 import { adminSchema, repository } from "../../../infrastructure";
 import {
@@ -6,7 +7,11 @@ import {
   IValidationUtility,
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { validationUtility } from "../../../utils";
+import {
+  adminProfileKeys,
+  SkynedUtils,
+  validationUtility,
+} from "../../../utils";
 import { ServiceUtils } from "../utils";
 import { CreateAdminServiceSchema } from "./schema";
 
@@ -82,6 +87,48 @@ export class AdminService extends ServiceUtils implements IAdminService {
     });
 
     return this.deserialize(admin);
+  };
+
+  count: IAdminService["count"] = async () => {
+    const count = await this.repository.admin.count();
+    return count;
+  };
+
+  countAdminsForList: IAdminService["countAdminsForList"] = async () => {
+    const count = await this.repository.admin.count();
+    return count;
+  };
+
+  listAdmins: IAdminService["listAdmins"] = async (
+    initiator,
+    { skip, take, from, to, order, where },
+  ) => {
+    const admins = await this.repository.admin.findMany({
+      skip,
+      take,
+      where: {
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+      orderBy: {
+        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+      },
+      include: {
+        createdBy: {
+          select: SkynedUtils.select(adminProfileKeys),
+        },
+        _count: {
+          select: {
+            departments: true,
+            teams: true,
+          },
+        },
+      },
+    });
+
+    return admins.map((admin) => this.deserialize(admin));
   };
 }
 

@@ -1,5 +1,12 @@
-import { CreateAdminSchema, IAdmin, ISuccessResponse } from "@workspace/shared";
+import {
+  CreateAdminSchema,
+  IAdmin,
+  IPaginatedResponse,
+  ISuccessResponse,
+} from "@workspace/shared";
 import { RequestHandler } from "express";
+import { PageQuerySchema } from "../../zod-schemas";
+import { IAdminService } from "../services";
 
 /** Represents interface for admin controller */
 export interface IAdminController {
@@ -11,5 +18,15 @@ export interface IAdminController {
     object,
     ISuccessResponse<IAdmin>,
     CreateAdminSchema
+  >;
+
+  /** List Admins */
+  getAdminList: RequestHandler<
+    object,
+    ISuccessResponse<
+      IPaginatedResponse<Awaited<ReturnType<IAdminService["listAdmins"]>>[0]>
+    >,
+    object,
+    Partial<PageQuerySchema>
   >;
 }

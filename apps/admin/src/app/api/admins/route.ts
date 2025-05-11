@@ -1,18 +1,38 @@
 import { brandServerApi, getErrorResponse } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IAdmin } from "@workspace/shared";
+import { IFaq, IPaginatedResponse } from "@workspace/shared";
+import { type NextRequest } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const response = await brandServerApi.httpClient.request<IAdmin>(
-      "/admins/me",
-      "GET",
+    const searchParams = request.nextUrl.searchParams;
+    const page = searchParams.get("page");
+    const limit = searchParams.get("limit");
+
+    const urlQuery = brandServerApi.utils.constructQuery({ page, limit });
+    const tags: string[] = brandServerApi.utils.constructTags(
       {
-        next: {
-          tags: [serverCacheTags.auth],
+        page: {
+          prefix: `${serverCacheTags.admins}-page`,
+          value: page,
+        },
+        limit: {
+          prefix: `${serverCacheTags.admins}-limit`,
+          value: limit,
         },
       },
+      [serverCacheTags.admins],
     );
+
+    const urlConstruct = `/admins?${urlQuery.toString()}`;
+
+    const response = await brandServerApi.httpClient.request<
+      IPaginatedResponse<IFaq>
+    >(urlConstruct, "GET", {
+      next: {
+        tags,
+      },
+    });
 
     return Response.json(response);
   } catch (error: any) {

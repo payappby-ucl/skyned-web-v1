@@ -76,4 +76,8 @@ export class AdminRepository extends DBUtils implements IAdminRepository {
   create: IAdminRepository["create"] = (options) => {
     return this.db.admin.create(options);
   };
+
+  count: IAdminRepository["count"] = (query) => this.db.admin.count(query);
+  findMany: IAdminRepository["findMany"] = (query) =>
+    this.db.admin.findMany(query);
 }

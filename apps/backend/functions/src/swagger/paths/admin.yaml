@@ -116,6 +116,57 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
+    get:
+      summary: Get Admins
+      description: Gets list of admins from database
+      tags:
+        - Admin
+      operationId: listAdmins
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+      responses:
+        "200":
+          description: The admins
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  allOf:
+                                    - $ref: "#/components/schemas/Admin"
+                                    - type: object
+                                      properties:
+                                        _count:
+                                          type: object
+                                          properties:
+                                            departments:
+                                              type: integer
+                                            teams:
+                                              type: integer
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
   /admins/me:
     summary: Admin Auth Route
     description: Handles all about the currently signed admin account

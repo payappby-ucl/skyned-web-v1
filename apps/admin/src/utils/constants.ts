@@ -1,5 +1,6 @@
 export const serverCacheTags = {
   auth: "auth",
   inquiries: "inquires",
-  faq: "faqs",
+  faqs: "faqs",
+  admins: "admins",
 } as const;

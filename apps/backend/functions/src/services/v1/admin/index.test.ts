@@ -4,6 +4,7 @@ import { admin } from "../../../data";
 import { repository } from "../../../infrastructure";
 import { phoneNumberService } from "../phone-number";
 import { gender } from "@workspace/shared";
+import { signInUser } from "../../../../__tests__/helpers/utils";
 
 describe("AdminService", () => {
   describe("Instance", () => {
@@ -93,6 +94,96 @@ describe("AdminService", () => {
         const created = await adminService.createAdmin(data, [1, 2]);
         expect(spy).toHaveBeenCalled();
         expect(created).toEqual(expect.objectContaining(data));
+      });
+    });
+
+    describe("count", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should return count", async () => {
+        const spy = jest
+          .spyOn(repository.admin, "count")
+          .mockImplementation(
+            () => 10 as unknown as ReturnType<typeof repository.admin.count>,
+          );
+
+        const { user } = await signInUser();
+        const admin = await repository.admin.findAdminByAdminId(user.uid);
+
+        const count = await adminService.count(admin!);
+        expect(spy).toHaveBeenCalled();
+        expect(count).toBe(10);
+      });
+    });
+
+    describe("countAdminsForList", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should return count", async () => {
+        const spy = jest
+          .spyOn(repository.admin, "count")
+          .mockImplementation(
+            () => 10 as unknown as ReturnType<typeof repository.admin.count>,
+          );
+
+        const { user } = await signInUser();
+        const admin = await repository.admin.findAdminByAdminId(user.uid);
+
+        const count = await adminService.countAdminsForList(admin!);
+        expect(spy).toHaveBeenCalled();
+        expect(count).toBe(10);
+      });
+    });
+
+    describe("listAdmins", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should return admin list", async () => {
+        const { user } = await signInUser();
+        const admin = await repository.admin.findAdminByAdminId(user.uid);
+
+        const adminList = await adminService.listAdmins(admin!, {
+          take: 1,
+          order: {
+            order: "asc",
+            orderBy: "createdAt",
+          },
+        });
+
+        expect(adminList).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              id: admin!.id,
+              firstName: admin!.firstName,
+              lastName: admin!.lastName,
+              email: admin!.email,
+              adminId: admin!.adminId,
+
+              _count: {
+                departments: expect.any(Number),
+                teams: expect.any(Number),
+              },
+            }),
+          ]),
+        );
       });
     });
   });

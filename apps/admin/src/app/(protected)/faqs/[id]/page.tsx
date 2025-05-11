@@ -19,7 +19,7 @@ export default async function EditFaqPage({
       "GET",
       {
         next: {
-          tags: [`${serverCacheTags.faq}-id-${id}`],
+          tags: [`${serverCacheTags.faqs}-id-${id}`],
         },
       },
     );

@@ -10,10 +10,21 @@ exports.adminPolicies = {
             const { claim, user } = authClaim;
             if (claim !== "admin")
                 return false;
-            return (0, utils_1.isInDepartment)(user, [utils_1.department.Executive]);
+            return (0, utils_1.isInDepartment)(user, [
+                utils_1.department.Executive,
+                utils_1.department.Human_Resource,
+            ]);
         },
         read(authClaim, data) {
-            return false;
+            if (!authClaim)
+                return false;
+            const { claim, user } = authClaim;
+            if (claim !== "admin")
+                return false;
+            return (0, utils_1.isInDepartment)(user, [
+                utils_1.department.Executive,
+                utils_1.department.Human_Resource,
+            ]);
         },
         update(authClaim, data) {
             return false;

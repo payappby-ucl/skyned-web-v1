@@ -92,7 +92,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between px-2">
+      <div className="flex items-center justify-between">
         {children}
         {!hideViewOptions ? <DataTableViewOptions table={table} /> : null}
       </div>
@@ -126,10 +126,12 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
+                      <div className="px-2.5">
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </div>
                     </TableCell>
                   ))}
                 </TableRow>

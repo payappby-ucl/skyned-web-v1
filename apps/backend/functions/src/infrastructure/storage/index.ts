@@ -95,13 +95,7 @@ class Storage implements IStorage {
       metadata: {
         ...metadata,
         contentType: mimeType,
-        // TODO: Figure out adding cacheControl
-        // cacheControl: "public, max-age=31536000",
-        // public: Allows shared caching by CDNs.
-        // private: Only the user's browser should cache it.
-        // max-age=31536000: Sets the cache duration (in seconds). Here, 31536000 seconds = 1 year.
-        // no-cache: Forces the browser to validate with the server before using a cached version.
-        // no-store: Prevents any caching (useful for sensitive data like personal documents).
+        cacheControl: "no-cache",
       },
     });
 

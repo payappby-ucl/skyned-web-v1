@@ -1,5 +1,6 @@
 import Alert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
+import AdminList from "./_components/admin-list";
 
 export default async function AdminsPage() {
   return (
@@ -9,7 +10,7 @@ export default async function AdminsPage() {
       args={[]}
       alert={<Alert />}
     >
-      <div>Admins page</div>
+      <AdminList />
     </HasPermission>
   );
 }
