@@ -24,7 +24,7 @@ describe("DepartmentService", () => {
         const { user } = await signInUser();
         const admin = await adminService.findAdminByAdminId(user.uid, "auth");
         const departments = await departmentService.getDepartments(admin!);
-        console.log(departments);
+
         expect(departments).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
@@ -49,8 +49,6 @@ describe("DepartmentService", () => {
         const admin = await adminService.findAdminByAdminId(user.uid, "auth");
         const departments =
           await departmentService.getDepartmentsForAdminCreation(admin!);
-
-        console.log(departments);
 
         expect(departments).toBe(
           expect.arrayContaining([

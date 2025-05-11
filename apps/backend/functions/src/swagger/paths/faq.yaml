@@ -1,5 +1,5 @@
 paths:
-  /faq:
+  /faqs:
     summary: FAQ Resource
     description: All routes as it concerns FAQ
 
@@ -86,7 +86,7 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
-  /faq/list:
+  /faqs/list:
     get:
       summary: Gets FAQs
       description: Fetches all FAQs from the database. Used for the public facing site
@@ -118,7 +118,7 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
-  /faq/{id}:
+  /faqs/{id}:
     summary: FAQ Resource
     description: Handles all routes regarding a single FAQ
 

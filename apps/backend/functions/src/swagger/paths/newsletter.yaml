@@ -1,5 +1,5 @@
 paths:
-  /newsletter/subscribe:
+  /newsletters/subscribe:
     summary: Handles Newsletter
     description: Handles all newsletter routes
 

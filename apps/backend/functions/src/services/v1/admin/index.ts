@@ -81,9 +81,6 @@ export class AdminService extends ServiceUtils implements IAdminService {
       },
     });
 
-    const dAdmin = this.deserialize(admin);
-    console.log(dAdmin);
-
     return this.deserialize(admin);
   };
 }

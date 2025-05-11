@@ -1,7 +1,124 @@
 paths:
-  /admin/me:
-    summary: Get Auth
-    description: Gets the current auth user data
+  /admins:
+    summary: Admins Auth Route
+    description: Handles all about other admins account
+
+    post:
+      summary: Create
+      description: Creates an admin
+      tags:
+        - Admin
+        - Auth
+      operationId: createAdmin
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data needed to access this route
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: ahmed@skynedconsults.com
+                firstName:
+                  type: string
+                middleName:
+                  type: string
+                  nullable: true
+                lastName:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Male
+                    - Female
+                    - Others
+                nationality:
+                  type: string
+                  example: "NG"
+                countryOfResidence:
+                  type: string
+                  example: "CA"
+                about:
+                  type: string
+                  nullable: true
+                phoneNumber:
+                  type: string
+                  example: +2348136239706
+                primaryImage:
+                  type: string
+                  format: uri
+                  description: Data URI of the image
+                secondaryImage:
+                  type: string
+                  format: uri
+                  description: Data URI of the image
+                socials:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Social"
+                jobTitle:
+                  type: string
+                  example: CEO
+                departments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                        enum:
+                          - Executive
+                          - Marketing
+                          - Admissions
+                          - Communications
+                          - Technical
+                          - Human_Resource
+                          - Quality_Assurance
+                    required:
+                      - id
+                      - name
+              required:
+                - firstName
+                - lastName
+                - email
+                - phoneNumber
+                - primaryImage
+                - jobTitle
+                - nationality
+                - countryOfResidence
+                - departments
+                - gender
+      responses:
+        "201":
+          description: Created admin data
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Admin"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admins/me:
+    summary: Admin Auth Route
+    description: Handles all about the currently signed admin account
 
     get:
       summary: Get user data
@@ -29,5 +146,7 @@ paths:
           $ref: "#/components/responses/UnAuthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"

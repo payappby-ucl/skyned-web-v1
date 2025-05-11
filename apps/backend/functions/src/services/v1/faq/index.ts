@@ -11,7 +11,11 @@ import {
   IValidationUtility,
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { SkynedUtils, validationUtility } from "../../../utils";
+import {
+  adminProfileKeys,
+  SkynedUtils,
+  validationUtility,
+} from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
 
 /** Represents dependencies needed to instantiate {FaqService} */
@@ -100,7 +104,14 @@ export class FaqService implements IFaqService {
   findMany: IFaqService["findMany"] = async (query) => {
     const queryArgs = this._constructQuery(query);
 
-    const faqs = await this.repository.faq.findMany(queryArgs);
+    const faqs = await this.repository.faq.findMany({
+      ...queryArgs,
+      include: {
+        createdBy: {
+          select: SkynedUtils.select(adminProfileKeys),
+        },
+      },
+    });
     return faqs;
   };
 

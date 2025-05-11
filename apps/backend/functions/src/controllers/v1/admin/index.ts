@@ -219,7 +219,6 @@ export class AdminController
 
       res._success(StatusCodes.CREATED, admin);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

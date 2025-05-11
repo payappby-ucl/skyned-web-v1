@@ -1,5 +1,5 @@
 paths:
-  /contact:
+  /contacts:
     summary: Represents Contact us function
     description: Contains all functionalities that has to do with contact us
 
@@ -92,7 +92,7 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
-  /contact/{id}:
+  /contacts/{id}:
     summary: Contact us Resource
     description: Handles all routes regarding a single contact
 
