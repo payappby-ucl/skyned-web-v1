@@ -46,7 +46,7 @@ const FaqForm: React.FC<Props> = ({ faq }) => {
       }
 
       queryClient.invalidateQueries({
-        queryKey: ["faq"],
+        queryKey: ["faqs"],
       });
 
       router.replace("/faqs");

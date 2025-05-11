@@ -8,7 +8,7 @@ import { revalidateTag } from "next/cache";
 export async function createFaq(data: CreateFaqSchema) {
   try {
     const { data: responseData } =
-      await brandServerApi.httpClient.request<IFaq>("/faq", "POST", {
+      await brandServerApi.httpClient.request<IFaq>("/faqs", "POST", {
         body: JSON.stringify(data),
       });
 

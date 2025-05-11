@@ -23,6 +23,7 @@ import { DataTableRowActions } from "@workspace/ui/components/table/data-table-r
 import { Eye, SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { deleteFaq } from "../_actions";
+import Profile from "@/src/components/profile";
 
 export const columns: ColumnDef<IFaq>[] = [
   {
@@ -81,34 +82,11 @@ export const columns: ColumnDef<IFaq>[] = [
 
       return (
         <HasPermission
-          resourceName="admins"
+          resourceName="faqs"
           action="read"
-          // TODO: Refactor after discussion on who can view admin info
-          // TODO: This will also affect details coming from the backend end
-          args={[createdBy as any]}
+          args={[info.row.original]}
         >
-          <Link
-            href={`/admins/${createdBy.adminId}`}
-            className="flex items-center gap-2"
-          >
-            <Avatar>
-              <AvatarImage
-                src={createdBy.primaryImage.url}
-                alt={`${createdBy.firstName} ${createdBy.lastName}'s Profile image`}
-                className="object-cover"
-              />
-              <AvatarFallback className="uppercase">
-                {createdBy.firstName[0]}
-                {createdBy.lastName[0]}
-              </AvatarFallback>
-            </Avatar>
-            <div className="font-semibold">
-              <p>
-                {createdBy.firstName} {createdBy.lastName}
-              </p>
-              <p className="text-xs">{createdBy.jobTitle}</p>
-            </div>
-          </Link>
+          <Profile {...createdBy} />
         </HasPermission>
       );
     },

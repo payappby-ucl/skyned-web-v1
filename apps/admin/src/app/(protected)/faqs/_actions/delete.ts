@@ -9,7 +9,7 @@ export async function deleteFaq(id: number) {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
-        `/faq/${id}`,
+        `/faqs/${id}`,
         "DELETE",
       );
 

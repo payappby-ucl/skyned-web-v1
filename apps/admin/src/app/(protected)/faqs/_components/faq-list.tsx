@@ -21,7 +21,7 @@ const FaqList: React.FC = () => {
       `faq-page-${pagination.pageIndex}`,
       `faq-limit-${pagination.pageSize}`,
     ],
-    url: `/faq?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
+    url: `/faqs?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
   });
 
   return (

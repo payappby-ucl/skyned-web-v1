@@ -27,7 +27,7 @@ import {
   Sidebar,
 } from "@workspace/ui/components/sidebar";
 import { NavMain } from "./main-nav";
-import { NavProjects } from "./nav-projects";
+// import { NavProjects } from "./nav-projects";
 import { NavUser } from "./nav-user";
 import { NavTitle } from "./nav-title";
 import { department, ResourceType } from "@workspace/shared";
