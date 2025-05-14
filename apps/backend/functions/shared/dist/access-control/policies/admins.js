@@ -21,13 +21,41 @@ exports.adminPolicies = {
             const { claim, user } = authClaim;
             if (claim !== "admin")
                 return false;
+            if (!data)
+                return false;
             return (0, utils_1.isInDepartment)(user, [
                 utils_1.department.Executive,
                 utils_1.department.Human_Resource,
             ]);
         },
-        update(authClaim, data) {
-            return false;
+        update(authClaim, data, beneficiary) {
+            if (!authClaim)
+                return false;
+            const { claim, user } = authClaim;
+            if (claim !== "admin")
+                return false;
+            if (!(0, utils_1.isInDepartment)(user, [utils_1.department.Human_Resource, utils_1.department.Executive])) {
+                return false;
+            }
+            if ((0, utils_1.isInDepartment)(beneficiary, [utils_1.department.Executive])) {
+                const executiveDepartment = beneficiary.departments?.find((dep) => dep.name === utils_1.department.Executive);
+                if (!(0, utils_1.isInDepartment)(user, [utils_1.department.Executive]))
+                    return false;
+                if (executiveDepartment?.leadId !== user.adminId)
+                    return false;
+            }
+            else {
+                if ((0, utils_1.isInDepartment)(beneficiary, [utils_1.department.Human_Resource])) {
+                    if (user.adminId === beneficiary.adminId)
+                        return false;
+                    if ((0, utils_1.isInDepartment)(user, [utils_1.department.Human_Resource]) &&
+                        beneficiary.departments?.find((dep) => dep.name === utils_1.department.Human_Resource)?.leadId !== user.adminId) {
+                        return false;
+                    }
+                }
+            }
+            // TODO: Work here on data been sent
+            return true;
         },
         create(authClaim, data) {
             if (!authClaim)

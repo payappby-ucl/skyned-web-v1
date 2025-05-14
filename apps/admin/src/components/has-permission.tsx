@@ -1,18 +1,9 @@
 "use client";
 
-import {
-  accessControl,
-  IAccessControl,
-  PermissionType,
-  ResourceType,
-} from "@workspace/shared";
-import React, { useMemo } from "react";
+import { accessControl, PermissionType, ResourceType } from "@workspace/shared";
+import React, { useEffect, useMemo } from "react";
 import { useAuthContext } from "./providers/auth-provider";
-
-interface Props {
-  resource: Parameters<IAccessControl["attribute"]>["1"];
-  actionType: Parameters<IAccessControl["attribute"]>["2"];
-}
+import { useRouter } from "next/navigation";
 
 function HasPermission<
   Res extends ResourceType,
@@ -22,28 +13,36 @@ function HasPermission<
   action,
   children,
   args,
-  alert,
+  secondaryComponent,
+  redirect,
 }: {
   resourceName: Res;
   action: Act;
   children: React.ReactNode;
   args: Act extends "list"
     ? []
-    : [
-        data: Act extends "create"
-          ? PermissionType[Res]["createDataType"]
-          : PermissionType[Res]["dataType"],
-      ];
-  alert?: React.ReactNode;
+    : Act extends "update"
+      ? [PermissionType[Res]["updateDataType"], PermissionType[Res]["dataType"]]
+      : [
+          data: Act extends "create"
+            ? PermissionType[Res]["createDataType"]
+            : PermissionType[Res]["dataType"],
+        ];
+  secondaryComponent?: React.ReactNode;
+  redirect?: boolean;
 }) {
   const {
     auth: { user },
   } = useAuthContext();
+  const router = useRouter();
 
   const hasAccess = useMemo(() => {
     const resource = args?.[0] || null;
+    const updateResource = args?.[1] || null;
+
     if (!user) return false;
     if (!["list"].includes(action) && !resource) return false;
+    if (["update"].includes(action) && !updateResource) return false;
 
     if (action === "list") {
       return accessControl.attribute<typeof resourceName, "list">(
@@ -56,6 +55,21 @@ function HasPermission<
       );
     }
 
+    if (action === "update") {
+      return accessControl.attribute<typeof resourceName, any>(
+        {
+          claim: "admin",
+          user,
+        },
+        resourceName,
+        action,
+        ...[
+          resource as PermissionType[Res]["updateDataType"],
+          updateResource as PermissionType[Res]["dataType"],
+        ],
+      );
+    }
+
     return accessControl.attribute<typeof resourceName, any>(
       {
         claim: "admin",
@@ -63,13 +77,21 @@ function HasPermission<
       },
       resourceName,
       action,
-      resource as
-        | PermissionType[Res]["createDataType"]
-        | PermissionType[Res]["dataType"],
+      ...[
+        resource as
+          | PermissionType[Res]["createDataType"]
+          | PermissionType[Res]["dataType"],
+      ],
     );
   }, [resourceName, action, user]);
 
-  if (!hasAccess) return alert || null;
+  useEffect(() => {
+    if (!hasAccess && redirect) {
+      router.replace("/");
+    }
+  }, [redirect, hasAccess]);
+
+  if (!hasAccess) return secondaryComponent || null;
   return children;
 }
 

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateAdminSchema = void 0;
+exports.UpdateAdminSchema = exports.CreateAdminSchema = void 0;
 const zod_1 = require("zod");
 const data_urls_1 = __importDefault(require("data-urls"));
 const common_1 = require("./common");
@@ -40,4 +40,14 @@ exports.CreateAdminSchema = zod_1.z.object({
         ]),
     }))
         .min(1, "Please select at least one department"),
+});
+exports.UpdateAdminSchema = exports.CreateAdminSchema.omit({
+    primaryImage: true,
+    departments: true,
+}).extend({
+    primaryImage: zod_1.z
+        .string()
+        .trim()
+        .optional()
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Image must be of type data-url"),
 });

@@ -1,0 +1,112 @@
+import Alert from "@/src/components/alert";
+import { env } from "@/src/config";
+import { brandServerApi } from "@/src/lib/server";
+import { organization, sharedMetadata } from "@/src/utils";
+import { IAdmin } from "@workspace/shared";
+import { Metadata } from "next";
+import Script from "next/script";
+import { WebPage, WithContext } from "schema-dts";
+import OurTeam from "./_components/our-team";
+import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
+
+export type OurTeamType = Pick<
+  IAdmin,
+  | "firstName"
+  | "lastName"
+  | "about"
+  | "jobTitle"
+  | "primaryImage"
+  | "secondaryImage"
+  | "socials"
+  | "email"
+>;
+
+const title = "Meet Our Team";
+const description =
+  "Our team of professionals will adequately guide you through your study application journey.";
+
+export async function generateMetadata() {
+  const { data: teams } = await brandServerApi.httpClient.request<
+    OurTeamType[]
+  >("/our-team?limit=1", "GET", {
+    next: {
+      revalidate: 86400,
+    },
+  });
+
+  const ceo = teams[0];
+  return {
+    ...sharedMetadata,
+    title,
+    description,
+    alternates: {
+      canonical: "/team",
+    },
+    openGraph: {
+      ...sharedMetadata.openGraph,
+      images: [
+        {
+          url: ceo?.primaryImage.url,
+          width: 1200,
+          height: 630,
+          alt: `${env.organization.name} CEO's picture`,
+        },
+      ],
+    },
+    twitter: {
+      ...sharedMetadata.twitter,
+      images: {
+        url: ceo?.primaryImage.url,
+        alt: `${env.organization.name} CEO's picture`,
+      },
+    },
+  } as Metadata;
+}
+
+export default async function OurTeamPage() {
+  try {
+    const { data: teams } = await brandServerApi.httpClient.request<
+      OurTeamType[]
+    >("/our-team", "GET", {
+      next: {
+        revalidate: 86400,
+      },
+    });
+
+    const ourTeamPageJsonLd: WithContext<WebPage> = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      url: `${env.client.baseUrl}/team`,
+      reviewedBy: organization,
+      mainEntity: {
+        "@type": "AboutPage",
+        mainEntity: teams.map((team) => ({
+          "@type": "Person",
+          name: `${team.firstName} ${team.lastName}`,
+          jobTitle: team.jobTitle,
+          image: team.primaryImage.url,
+          email: team.email,
+          sameAs: team.socials?.map((social) => social.url),
+        })),
+      },
+    };
+
+    return (
+      <>
+        <Script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(ourTeamPageJsonLd),
+          }}
+        />
+        <CustomBreadCrumb className="border-y" />
+        <OurTeam teams={teams} />
+      </>
+    );
+  } catch (error) {
+    console.log(error);
+    return <Alert message="Error" />;
+  }
+}

@@ -8,7 +8,9 @@ export const GeneralSchema = z.object({
     country: z.string().trim().optional(),
   }),
 
-  id: z.coerce.number().int().positive(),
+  id: z.coerce.number().int("Must be an integer").positive("Must be positive"),
+
+  adminId: z.string().nonempty("Required"),
 
   object: z.object({
     path: z.string().trim().nonempty("Required"),

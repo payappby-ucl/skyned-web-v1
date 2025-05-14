@@ -23,6 +23,13 @@ const nextConfig = {
         hostname: "www.passage.com",
         pathname: "**",
       },
+
+      // ? For test
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        pathname: "**",
+      },
       // TODO: Remove when dynamic images are fetched
       {
         protocol: "https",

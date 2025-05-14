@@ -247,6 +247,154 @@ export class AdminController
       next(error);
     }
   };
+
+  getAdminProfile: IAdminController["getAdminProfile"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { adminId } = req.params;
+
+      const admin = await this.adminService.getAdminProfile(
+        authUser.user,
+        adminId,
+      );
+
+      if (!admin) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Cannot find the resource you're looking for.",
+        );
+      }
+
+      this._attributeBasedAccessControl(authUser, "admins", "read", admin);
+      res._success(StatusCodes.OK, admin);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateAdminProfile: IAdminController["updateAdminProfile"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authClaim = this._validateAdmin(req);
+      const { body } = req;
+      const { adminId } = req.params;
+
+      const admin = await this.adminService.getAdminProfile(
+        authClaim.user,
+        adminId,
+      );
+
+      if (!admin) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        authClaim,
+        "admins",
+        "update",
+        body,
+        admin,
+      );
+
+      // * Check Email
+      if (body.email && body.email !== admin.email) {
+        const emailAlreadyExist = await this.auth.exists(body.email);
+        if (emailAlreadyExist) {
+          throw SkynedUtils.createException(
+            StatusCodes.CONFLICT,
+            `${body.email} is already an existing account.`,
+          );
+        }
+
+        await this.auth.updateAuth(admin.adminId, { email: body.email });
+      }
+
+      let primaryImage:
+        | {
+            url: string;
+            path: string;
+            mimeType: string;
+          }
+        | undefined;
+
+      if (body.primaryImage) {
+        primaryImage = await this.storageService.saveObject(
+          body.primaryImage,
+          SkynedUtils.resolveStoragePath({
+            type: "primaryImage",
+            data: {
+              adminId: admin.adminId,
+            },
+          }),
+        );
+      }
+
+      let secondaryImage:
+        | {
+            url: string;
+            path: string;
+            mimeType: string;
+          }
+        | undefined;
+
+      if (body.secondaryImage) {
+        secondaryImage = await this.storageService.saveObject(
+          body.secondaryImage,
+          SkynedUtils.resolveStoragePath({
+            type: "secondaryImage",
+            data: {
+              adminId: admin.adminId,
+            },
+          }),
+        );
+      }
+
+      const phoneNumber = body.phoneNumber
+        ? this.phoneNumberService.formatPhoneNumber(body.phoneNumber)
+        : undefined;
+
+      const updateAdmin = await this.adminService.updateAdmin(admin.adminId, {
+        ...SkynedUtils.exclude(body, [
+          "phoneNumber",
+          "primaryImage",
+          "secondaryImage",
+        ]),
+        primaryImage,
+        phoneNumber: phoneNumber
+          ? {
+              ...phoneNumber,
+            }
+          : undefined,
+        secondaryImage,
+      });
+
+      this.events.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          action: "update",
+          adminId: authClaim.user.id,
+          resource: "admins",
+          resourceId: admin.id,
+          previousState: admin,
+          currentState: updateAdmin,
+        },
+      });
+
+      res._success(StatusCodes.OK, { message: "Profile Updated" });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** AdminController instance */

@@ -8,7 +8,8 @@ export default async function AdminsPage() {
       resourceName="admins"
       action="list"
       args={[]}
-      alert={<Alert />}
+      secondaryComponent={<Alert />}
+      redirect
     >
       <AdminList />
     </HasPermission>

@@ -11,6 +11,7 @@ import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import { FileClock, Plus } from "lucide-react";
 import { brandClientApi } from "@/src/lib/client";
+import HasPermission from "@/src/components/has-permission";
 
 export type AdminListType = IAdmin & {
   _count: {
@@ -48,16 +49,22 @@ const AdminList: React.FC = () => {
           }}
         >
           <div className="space-x-2">
-            <Button asChild variant="outline">
-              <Link
-                href="/admins/new"
-                aria-label="Link to create new account"
-                className="!text-sm"
-              >
-                <Plus />
-                Create Account
-              </Link>
-            </Button>
+            <HasPermission
+              resourceName="admins"
+              action="create"
+              args={[{} as any]}
+            >
+              <Button asChild variant="outline">
+                <Link
+                  href="/admins/new"
+                  aria-label="Link to create new account"
+                  className="!text-sm"
+                >
+                  <Plus />
+                  Create Account
+                </Link>
+              </Button>
+            </HasPermission>
 
             <Button
               asChild

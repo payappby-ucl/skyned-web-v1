@@ -13,15 +13,15 @@ export async function GET(request: NextRequest) {
     const tags: string[] = brandServerApi.utils.constructTags(
       {
         page: {
-          prefix: `${serverCacheTags.faq}-page`,
+          prefix: `${serverCacheTags.faqs}-page`,
           value: page,
         },
         limit: {
-          prefix: `${serverCacheTags.faq}-limit`,
+          prefix: `${serverCacheTags.faqs}-limit`,
           value: limit,
         },
       },
-      [serverCacheTags.faq],
+      [serverCacheTags.faqs],
     );
 
     const urlConstruct = `/faqs?${urlQuery.toString()}`;

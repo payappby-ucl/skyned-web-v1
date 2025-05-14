@@ -12,8 +12,9 @@ import {
   SkynedUtils,
   validationUtility,
 } from "../../../utils";
+import { AdminIdSchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
-import { CreateAdminServiceSchema } from "./schema";
+import { CreateAdminServiceSchema, UpdateAdminServiceSchema } from "./schema";
 
 /** Represents dependencies needed to initialize concrete IAdminService */
 export interface IAdminServiceDependencies {
@@ -116,6 +117,12 @@ export class AdminService extends ServiceUtils implements IAdminService {
         [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
       },
       include: {
+        departments: {
+          select: {
+            name: true,
+            leadId: true,
+          },
+        },
         createdBy: {
           select: SkynedUtils.select(adminProfileKeys),
         },
@@ -129,6 +136,75 @@ export class AdminService extends ServiceUtils implements IAdminService {
     });
 
     return admins.map((admin) => this.deserialize(admin));
+  };
+
+  getAdminProfile: IAdminService["getAdminProfile"] = async (
+    initiator,
+    adminId: string,
+  ) => {
+    this.validationUtility.validateInput({
+      schema: AdminIdSchema,
+      inputData: {
+        adminId,
+      },
+    });
+
+    const admin = await this.repository.admin.findUnique({
+      where: {
+        adminId,
+      },
+      include: {
+        departments: {
+          select: {
+            id: true,
+            name: true,
+            leadId: true,
+          },
+        },
+        teams: {
+          select: {
+            id: true,
+            name: true,
+            departmentId: true,
+            leadId: true,
+
+            department: {
+              select: {
+                id: true,
+                name: true,
+                leadId: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!admin) return null;
+
+    return this.deserialize(admin);
+  };
+
+  updateAdmin: IAdminService["updateAdmin"] = async (adminId, data) => {
+    this.validationUtility.validateInput({
+      schema: UpdateAdminServiceSchema,
+      inputData: {
+        adminId,
+        ...data,
+      },
+    });
+
+    const admin = await this.repository.admin.update({
+      where: {
+        adminId,
+      },
+
+      data: {
+        ...data,
+      },
+    });
+
+    return this.deserialize(admin);
   };
 }
 

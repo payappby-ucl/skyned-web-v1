@@ -156,7 +156,7 @@ export class FaqController extends ControllerUtils implements IFaqController {
         );
       }
 
-      this._attributeBasedAccessControl(authUser, "faqs", "update", faq);
+      this._attributeBasedAccessControl(authUser, "faqs", "update", body, faq);
       const updatedFaq = await this.faqService.update(faq.id, body);
 
       this.event.emitEvent({

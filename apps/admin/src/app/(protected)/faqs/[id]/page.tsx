@@ -1,7 +1,7 @@
 import Alert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
-import { IFaq } from "@workspace/shared";
+import { CreateFaqSchema, IFaq } from "@workspace/shared";
 import { redirect } from "next/navigation";
 import FaqForm from "../_components/faq-form";
 import { serverCacheTags } from "@/src/utils";
@@ -31,9 +31,10 @@ export default async function EditFaqPage({
     return (
       <HasPermission
         resourceName="faqs"
-        action="read"
-        args={[faq]}
-        alert={<Alert />}
+        action="update"
+        args={[{} as CreateFaqSchema, faq]}
+        secondaryComponent={<Alert />}
+        redirect
       >
         <div className="space-y-5">
           <h1 className="text-center !text-2xl">Update FAQ</h1>

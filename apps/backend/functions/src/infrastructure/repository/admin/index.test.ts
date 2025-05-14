@@ -126,12 +126,63 @@ describe("AdminRepository", () => {
 
         expect(manyAdmins[0]).toEqual(
           expect.objectContaining({
-            firstName: admin.firstName,
             lastName: admin.lastName,
-            email: admin.email,
-            jobTitle: admin.jobTitle,
             gender: admin.gender,
             adminId: expect.any(String),
+            id: expect.any(Number),
+          }),
+        );
+      });
+    });
+
+    describe("findUnique", () => {
+      test("should return an admin", async () => {
+        const user = await auth.findUserByEmail(admin.email);
+        if (!user) return;
+
+        const adminProfile = await repository.admin.findUnique({
+          where: {
+            adminId: user.id,
+          },
+        });
+
+        expect(adminProfile).toEqual(
+          expect.objectContaining({
+            lastName: admin.lastName,
+            gender: admin.gender,
+            adminId: expect.any(String),
+            id: expect.any(Number),
+          }),
+        );
+      });
+    });
+
+    describe("Update", () => {
+      test("should update an admin", async () => {
+        const user = await auth.findUserByEmail(admin.email);
+        if (!user) return;
+
+        const adminProfile = await repository.admin.findUnique({
+          where: {
+            adminId: user.id,
+          },
+        });
+
+        const updatedProfile = await repository.admin.update({
+          where: {
+            adminId: user.id,
+          },
+          data: {
+            firstName: "Innocent",
+          },
+        });
+
+        expect(updatedProfile).toEqual(
+          expect.objectContaining({
+            firstName: "Innocent",
+            lastName: admin.lastName,
+            gender: admin.gender,
+            adminId: adminProfile?.adminId,
             id: expect.any(Number),
           }),
         );

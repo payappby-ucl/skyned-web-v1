@@ -2,7 +2,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
-import { IFaq } from "@workspace/shared";
+import { CreateFaqSchema, IFaq } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -82,9 +82,9 @@ export const columns: ColumnDef<IFaq>[] = [
 
       return (
         <HasPermission
-          resourceName="faqs"
+          resourceName="admins"
           action="read"
-          args={[info.row.original]}
+          args={[info.row.original.createdBy as any]}
         >
           <Profile {...createdBy} />
         </HasPermission>
@@ -153,7 +153,11 @@ export const columns: ColumnDef<IFaq>[] = [
 
       return (
         <DataTableRowActions>
-          <HasPermission resourceName="faqs" action="update" args={[faq]}>
+          <HasPermission
+            resourceName="faqs"
+            action="update"
+            args={[{} as CreateFaqSchema, faq]}
+          >
             <DropdownMenuItem asChild>
               <Link
                 href={`/faqs/${faq.id}`}

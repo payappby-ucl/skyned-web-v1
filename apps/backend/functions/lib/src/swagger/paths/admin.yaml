@@ -113,6 +113,8 @@ paths:
           $ref: "#/components/responses/UnAuthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"
 
@@ -197,6 +199,142 @@ paths:
           $ref: "#/components/responses/UnAuthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admins/{adminId}:
+    summary: Admin Route
+    description: Handles all about any admin that's not the current admin
+
+    get:
+      summary: Get admin data
+      description: >
+        Gets the admin data
+      tags:
+        - Admin
+      operationId: getAdminByAdminId
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
+      responses:
+        "200":
+          description: Admin data
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Admin"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Update admin data
+      description: >
+        Updates the admin data
+      tags:
+        - Admin
+      operationId: updateAdminByAdminId
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
+      requestBody:
+        description: Data needed to access this route
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: ahmed@skynedconsults.com
+                firstName:
+                  type: string
+                middleName:
+                  type: string
+                  nullable: true
+                lastName:
+                  type: string
+                gender:
+                  type: string
+                  enum:
+                    - Male
+                    - Female
+                    - Others
+                nationality:
+                  type: string
+                  example: "NG"
+                countryOfResidence:
+                  type: string
+                  example: "CA"
+                about:
+                  type: string
+                  nullable: true
+                phoneNumber:
+                  type: string
+                  example: +2348136239706
+                primaryImage:
+                  type: string
+                  format: uri
+                  description: Data URI of the image
+                secondaryImage:
+                  type: string
+                  format: uri
+                  description: Data URI of the image
+                socials:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Social"
+                jobTitle:
+                  type: string
+                  example: CEO
+              required:
+                - firstName
+                - lastName
+                - email
+                - phoneNumber
+                - jobTitle
+                - nationality
+                - countryOfResidence
+                - departments
+                - gender
+      responses:
+        "200":
+          description: Admin data
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "409":
           $ref: "#/components/responses/Conflict"
         "500":

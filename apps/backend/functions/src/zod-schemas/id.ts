@@ -6,3 +6,9 @@ export const IdSchema = GeneralSchema.pick({
 });
 
 export type IdSchema = z.infer<typeof IdSchema>;
+
+export const AdminIdSchema = GeneralSchema.pick({
+  adminId: true,
+});
+
+export type AdminIdSchema = z.infer<typeof AdminIdSchema>;

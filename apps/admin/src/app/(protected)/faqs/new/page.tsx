@@ -8,7 +8,8 @@ export default async function CreateFaqPage() {
       resourceName="faqs"
       action="create"
       args={[{ question: "", answer: "" }]}
-      alert={<Alert />}
+      secondaryComponent={<Alert />}
+      redirect
     >
       <div className="space-y-5">
         <h1 className="text-center !text-2xl">Create FAQ</h1>

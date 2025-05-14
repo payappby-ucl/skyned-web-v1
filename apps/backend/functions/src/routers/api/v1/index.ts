@@ -8,6 +8,7 @@ import { contactRouter } from "./contact";
 import { faqRouter } from "./faq";
 import { newsletterRouter } from "./newsletter";
 import { departmentRouter } from "./department";
+import { ourTeamRouter } from "./our-team";
 
 /** Dependencies required to create v1 router */
 export interface V1RouterDependencies {
@@ -23,6 +24,8 @@ export interface V1RouterDependencies {
   newsletterRouter: IRouter;
   /** Handles department */
   departmentRouter: IRouter;
+  /** Handles our team */
+  ourTeamRouter: IRouter;
 }
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;
@@ -39,6 +42,7 @@ export class V1Router implements IRouter {
     faqRouter: IRouter,
     newsletterRouter: IRouter,
     departmentRouter: IRouter,
+    ourTeamRouter: IRouter,
   ) {
     this.router.use("/auth", authRouter.router);
     this.router.use("/admins", adminRouter.router);
@@ -46,6 +50,7 @@ export class V1Router implements IRouter {
     this.router.use("/faqs", faqRouter.router);
     this.router.use("/newsletters", newsletterRouter.router);
     this.router.use("/departments", departmentRouter.router);
+    this.router.use("/our-team", ourTeamRouter.router);
   }
 
   /**
@@ -59,6 +64,7 @@ export class V1Router implements IRouter {
     faqRouter,
     newsletterRouter,
     departmentRouter,
+    ourTeamRouter,
   }: V1RouterDependencies) {
     if (!V1Router.instance) {
       V1Router.instance = new V1Router(
@@ -68,6 +74,7 @@ export class V1Router implements IRouter {
         faqRouter,
         newsletterRouter,
         departmentRouter,
+        ourTeamRouter,
       );
     }
 
@@ -86,5 +93,6 @@ export const v1Router = SkynedRegistry.getSingleton(
       faqRouter,
       newsletterRouter,
       departmentRouter,
+      ourTeamRouter,
     }),
 );

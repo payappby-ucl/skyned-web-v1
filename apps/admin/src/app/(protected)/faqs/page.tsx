@@ -8,7 +8,8 @@ export default async function FaqsPage() {
       resourceName="faqs"
       action="list"
       args={[]}
-      alert={<Alert />}
+      secondaryComponent={<Alert />}
+      redirect
     >
       <FaqList />
     </HasPermission>

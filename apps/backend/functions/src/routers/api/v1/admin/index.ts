@@ -11,8 +11,8 @@ import {
   RequestValidationMiddleware,
 } from "../../../../middleware";
 import { adminController } from "../../../../controllers";
-import { CreateAdminSchema } from "@workspace/shared";
-import { PageQuerySchema } from "../../../../zod-schemas";
+import { CreateAdminSchema, UpdateAdminSchema } from "@workspace/shared";
+import { AdminIdSchema, PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for admin router initialization */
 export interface AdminRouterDependencies {
@@ -58,6 +58,26 @@ export class AdminRouter implements IRouter {
         authMiddleware.authenticate,
         authMiddleware.hasRole(["admin"]),
         adminController.getMe,
+      );
+
+    this.router
+      .route("/:adminId")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: AdminIdSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        adminController.getAdminProfile,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: AdminIdSchema,
+          body: UpdateAdminSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        adminController.updateAdminProfile,
       );
   }
 

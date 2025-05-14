@@ -1,6 +1,13 @@
 import { Column } from "@tanstack/react-table";
 import { cn } from "@workspace/ui/lib/utils";
-import { ArrowDown, ArrowUp, ChevronsUpDown, EyeOff } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronsUpDown,
+  EyeOff,
+  Pin,
+  PinOff,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +28,8 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>;
+  if (!column.getCanSort() && !column.getCanHide() && !column.getCanPin()) {
+    return <div className={cn("px-2.5", className)}>{title}</div>;
   }
 
   return (
@@ -45,19 +52,48 @@ export function DataTableColumnHeader<TData, TValue>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-            <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
-            Asc
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-            <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
-            Desc
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-            <EyeOff className="h-3.5 w-3.5 text-muted-foreground/70" />
-            Hide
-          </DropdownMenuItem>
+          {column.getCanSort() ? (
+            <>
+              <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+                <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
+                Asc
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+                <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
+                Desc
+              </DropdownMenuItem>
+            </>
+          ) : null}
+
+          {column.getCanSort() &&
+          (column.getCanHide() || column.getCanPin()) ? (
+            <DropdownMenuSeparator />
+          ) : null}
+
+          {column.getCanHide() ? (
+            <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
+              <EyeOff className="h-3.5 w-3.5 text-muted-foreground/70" />
+              Hide
+            </DropdownMenuItem>
+          ) : null}
+
+          {column.getCanPin() && column.getCanHide() ? (
+            <DropdownMenuSeparator />
+          ) : null}
+
+          {column.getCanPin() ? (
+            column.getIsPinned() ? (
+              <DropdownMenuItem onClick={() => column.pin(false)}>
+                <PinOff className="h-3.5 w-3.5 text-muted-foreground/70" />
+                Unpin
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem onClick={() => column.pin("left")}>
+                <Pin className="h-3.5 w-3.5 text-muted-foreground/70" />
+                Pin
+              </DropdownMenuItem>
+            )
+          ) : null}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

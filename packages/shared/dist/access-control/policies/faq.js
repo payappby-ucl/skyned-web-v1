@@ -21,7 +21,7 @@ exports.faqPolicies = {
                 return false;
             return (0, utils_1.isInDepartment)(authClaim.user, [utils_1.department.Executive]);
         },
-        update(authClaim, data) {
+        update(authClaim, data, resource) {
             if (!authClaim)
                 return false;
             if (authClaim.claim !== "admin")

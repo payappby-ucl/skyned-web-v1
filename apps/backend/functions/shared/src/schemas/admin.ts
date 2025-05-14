@@ -45,3 +45,18 @@ export const CreateAdminSchema = z.object({
     .min(1, "Please select at least one department"),
 });
 export type CreateAdminSchema = z.infer<typeof CreateAdminSchema>;
+
+export const UpdateAdminSchema = CreateAdminSchema.omit({
+  primaryImage: true,
+  departments: true,
+}).extend({
+  primaryImage: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (val) => (val ? !!parseDataURL(val) : true),
+      "Image must be of type data-url",
+    ),
+});
+export type UpdateAdminSchema = z.infer<typeof UpdateAdminSchema>;

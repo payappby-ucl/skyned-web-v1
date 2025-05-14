@@ -11,6 +11,7 @@ import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import { FileClock, Plus } from "lucide-react";
 import { brandClientApi } from "@/src/lib/client";
+import HasPermission from "@/src/components/has-permission";
 
 const FaqList: React.FC = () => {
   const { pagination, setPagination } = usePaginationQuery();
@@ -39,16 +40,22 @@ const FaqList: React.FC = () => {
           }}
         >
           <div className="space-x-2">
-            <Button asChild variant="outline">
-              <Link
-                href="/faqs/new"
-                aria-label="Link to create new FAQ"
-                className="!text-sm"
-              >
-                <Plus />
-                Create FAQ
-              </Link>
-            </Button>
+            <HasPermission
+              resourceName="faqs"
+              action="create"
+              args={[{} as any]}
+            >
+              <Button asChild variant="outline">
+                <Link
+                  href="/faqs/new"
+                  aria-label="Link to create new FAQ"
+                  className="!text-sm"
+                >
+                  <Plus />
+                  Create FAQ
+                </Link>
+              </Button>
+            </HasPermission>
 
             <Button
               asChild

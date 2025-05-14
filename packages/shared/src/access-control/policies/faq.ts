@@ -18,7 +18,7 @@ export const faqPolicies: AccessControlType = {
       return isInDepartment(authClaim.user, [department.Executive]);
     },
 
-    update(authClaim, data) {
+    update(authClaim, data, resource) {
       if (!authClaim) return false;
       if (authClaim.claim !== "admin") return false;
       return isInDepartment(authClaim.user, [department.Executive]);

@@ -23,4 +23,14 @@ export interface IAdminRepository {
   findMany(
     query?: Parameters<Prisma.AdminDelegate["findMany"]>["0"],
   ): ReturnType<Prisma.AdminDelegate["findMany"]>;
+
+  /** Find by unique value */
+  findUnique(
+    query: Parameters<Prisma.AdminDelegate["findUnique"]>["0"],
+  ): ReturnType<Prisma.AdminDelegate["findUnique"]>;
+
+  /** Update */
+  update(
+    query: Parameters<Prisma.AdminDelegate["update"]>["0"],
+  ): ReturnType<Prisma.AdminDelegate["update"]>;
 }

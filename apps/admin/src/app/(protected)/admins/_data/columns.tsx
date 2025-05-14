@@ -15,7 +15,7 @@ import StatusView from "@/src/components/status-view";
 
 export const columns: ColumnDef<AdminListType>[] = [
   {
-    id: "name",
+    id: "profile",
     accessorFn: (row) => ({
       firstName: row.firstName,
       lastName: row.lastName,
@@ -24,7 +24,7 @@ export const columns: ColumnDef<AdminListType>[] = [
       adminId: row.adminId,
     }),
     header: ({ column }) => (
-      <DataTableColumnHeader title="Name" column={column} />
+      <DataTableColumnHeader title="Profile" column={column} />
     ),
     cell: (info) => {
       const adminInfo = info.getValue<IAdmin["createdBy"]>();
@@ -36,6 +36,7 @@ export const columns: ColumnDef<AdminListType>[] = [
           resourceName="admins"
           action="read"
           args={[info.row.original]}
+          secondaryComponent={<Profile {...adminInfo} />}
         >
           <Profile {...adminInfo} />
         </HasPermission>
@@ -199,10 +200,14 @@ export const columns: ColumnDef<AdminListType>[] = [
 
       return (
         <DataTableRowActions>
-          <HasPermission resourceName="admins" action="update" args={[admin]}>
+          <HasPermission
+            resourceName="admins"
+            action="update"
+            args={[{} as any, admin]}
+          >
             <DropdownMenuItem asChild>
               <Link
-                href={`/admins/${admin.adminId}`}
+                href={`/admins/${admin.adminId}/edit`}
                 aria-label={`Link to edit admin`}
               >
                 <SquarePen />

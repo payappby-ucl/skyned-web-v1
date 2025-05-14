@@ -25,6 +25,7 @@ export const DataTableRowActions: React.FC<PropsWithChildren> = ({
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
+
         {children}
       </DropdownMenuContent>
     </DropdownMenu>

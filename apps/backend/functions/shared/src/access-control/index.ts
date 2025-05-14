@@ -4,6 +4,7 @@ import {
   PermissionCheckCreateResource,
   PermissionCheckListResource,
   PermissionCheckSingleResource,
+  PermissionCheckUpdateResource,
   PermissionType,
 } from "./types";
 
@@ -36,6 +37,8 @@ export class AccessControl implements IAccessControl {
     ...args
   ) => {
     const data = args[0];
+    const resource = args[1];
+
     if (
       !resourceName ||
       !action ||
@@ -57,6 +60,19 @@ export class AccessControl implements IAccessControl {
           Function
         >
       )(auth, data as PermissionType[typeof resourceName]["createDataType"]);
+    }
+
+    if (action === "update") {
+      return (
+        actionPolicy as Extract<
+          PermissionCheckUpdateResource<typeof resourceName>,
+          Function
+        >
+      )(
+        auth,
+        data as PermissionType[typeof resourceName]["updateDataType"],
+        resource as PermissionType[typeof resourceName]["dataType"],
+      );
     }
 
     if (action === "list") {

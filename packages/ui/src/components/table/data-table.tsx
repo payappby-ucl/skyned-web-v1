@@ -63,6 +63,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
+  const [columnPinning, setColumnPinning] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -70,6 +71,8 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
+    onColumnPinningChange: setColumnPinning,
+    enableColumnPinning: true,
     getSortedRowModel: getSortedRowModel(),
     manualPagination: true,
     onPaginationChange:
@@ -83,6 +86,7 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnVisibility,
+      columnPinning,
       pagination:
         !pagination || pagination.hidePagination
           ? undefined
@@ -104,7 +108,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className={`${header.column.getIsPinned() ? "sticky left-0 z-50 bg-muted" : ""}`}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -125,7 +132,10 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={`${cell.column.getIsPinned() ? "sticky left-0 z-50 bg-background" : ""}`}
+                    >
                       <div className="px-2.5">
                         {flexRender(
                           cell.column.columnDef.cell,

@@ -42,7 +42,7 @@ import SocialForm from "./social-form";
 import getSocialIcon from "@/src/components/social-icons";
 import Link from "next/link";
 import useGet from "@/src/hooks/use-get";
-import { createAdmin } from "../_actions/create";
+import { createAdmin } from "../_actions";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -80,13 +80,8 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
 
   const onSubmit = useCallback(async (data: CreateAdminSchema) => {
     try {
-      //  if (faq) {
-      //    await updateFaq(faq.id, data);
-      //    brandClientApi.utils.toast.success("FAQ Updated.");
-      //  } else {
       await createAdmin(data);
-      brandClientApi.utils.toast.success("FAQ Created.");
-      //  }
+      brandClientApi.utils.toast.success("Profile Created.");
 
       queryClient.invalidateQueries({
         queryKey: ["admins"],

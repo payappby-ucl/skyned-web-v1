@@ -8,7 +8,8 @@ export default async function InquiriesPage() {
       resourceName="inquiries"
       action="list"
       args={[]}
-      alert={<Alert />}
+      secondaryComponent={<Alert />}
+      redirect
     >
       <InquiryList />
     </HasPermission>

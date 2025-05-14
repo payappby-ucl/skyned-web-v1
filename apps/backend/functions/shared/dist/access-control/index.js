@@ -34,6 +34,7 @@ class AccessControl {
     };
     attribute = (auth, resourceName, action, ...args) => {
         const data = args[0];
+        const resource = args[1];
         if (!resourceName ||
             !action ||
             !auth ||
@@ -47,6 +48,9 @@ class AccessControl {
             return actionPolicy;
         if (action === "create") {
             return actionPolicy(auth, data);
+        }
+        if (action === "update") {
+            return actionPolicy(auth, data, resource);
         }
         if (action === "list") {
             return actionPolicy(auth);

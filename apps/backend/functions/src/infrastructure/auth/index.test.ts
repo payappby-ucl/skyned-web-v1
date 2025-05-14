@@ -203,6 +203,39 @@ describe("Auth Infrastructure", () => {
       });
     });
 
+    describe("updateAuth", () => {
+      beforeEach(() => {
+        jest.resetAllMocks();
+      });
+
+      afterAll(() => {
+        jest.clearAllMocks();
+      });
+
+      const record = {
+        email: "bobslegend795@gmail.com",
+        password: "12345678",
+      };
+
+      test("should throw error if invalid input is passed", async () => {
+        try {
+          await auth.updateAuth({} as any, {
+            email: "bobslegend795@gmail.com",
+            password: "123",
+          });
+        } catch (error: any) {
+          expect(error.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const spy = jest.spyOn(getAuth(), "updateUser").mockImplementation();
+
+        await auth.updateAuth("233dd", record);
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+
     describe("verifyIdToken", () => {
       beforeAll(() => {
         jest.restoreAllMocks();

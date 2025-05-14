@@ -23,10 +23,15 @@ export interface IAccessControl {
     action: Act,
     ...args: Act extends "list"
       ? []
-      : [
-          data: Act extends "create"
-            ? PermissionType[Res]["createDataType"]
-            : PermissionType[Res]["dataType"],
-        ]
+      : Act extends "update"
+        ? [
+            PermissionType[Res]["updateDataType"],
+            PermissionType[Res]["dataType"],
+          ]
+        : [
+            data: Act extends "create"
+              ? PermissionType[Res]["createDataType"]
+              : PermissionType[Res]["dataType"],
+          ]
   ): boolean;
 }

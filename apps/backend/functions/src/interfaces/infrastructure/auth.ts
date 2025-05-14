@@ -16,4 +16,13 @@ export interface IAuth {
   verifyIdToken(
     data: TokenVerifySchema,
   ): Promise<{ id: string; claim: AuthClaim["claim"] } | null>;
+
+  /** Update Auth data */
+  updateAuth(
+    authId: string,
+    data: Partial<{
+      email: string;
+      password: string;
+    }>,
+  ): Promise<void>;
 }

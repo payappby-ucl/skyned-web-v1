@@ -1,4 +1,4 @@
-import { IAdmin } from "@workspace/shared";
+import { IAdmin, IDepartment } from "@workspace/shared";
 import { IAdminRepository } from "../../infrastructure";
 import { IQueryConstruct } from "../utils";
 
@@ -6,7 +6,8 @@ import { IQueryConstruct } from "../utils";
 export interface IAdminService {
   /** Get admin data using admin id */
   findAdminByAdminId: IAdminRepository["findAdminByAdminId"];
-  /** creates and admin */
+
+  /** creates an admin */
   createAdmin(
     data: Parameters<IAdminRepository["create"]>["0"]["data"],
     departments: number[],
@@ -26,10 +27,20 @@ export interface IAdminService {
     query: Partial<IQueryConstruct<IAdmin>>,
   ): Promise<
     (IAdmin & {
+      departments: Pick<IDepartment, "name" | "leadId">[];
       _count: {
         departments: number;
         teams: number;
       };
     })[]
   >;
+
+  /** Get Admin profile */
+  getAdminProfile(initiator: IAdmin, adminId: string): Promise<IAdmin | null>;
+
+  /** update and admin */
+  updateAdmin(
+    adminId: string,
+    data: Parameters<IAdminRepository["update"]>["0"]["data"],
+  ): Promise<IAdmin>;
 }

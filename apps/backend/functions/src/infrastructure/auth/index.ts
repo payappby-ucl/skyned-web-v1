@@ -5,7 +5,11 @@ import SkynedRegistry from "../../registry";
 import { SkynedUtils, validationUtility } from "../../utils";
 import { StatusCodes } from "http-status-codes";
 import { AuthClaim, RegisterSchema } from "@workspace/shared";
-import { AuthCreationSchema, TokenVerifySchema } from "./schema";
+import {
+  AuthCreationSchema,
+  AuthUpdateSchema,
+  TokenVerifySchema,
+} from "./schema";
 
 export * from "./schema";
 
@@ -115,6 +119,29 @@ export class Auth implements IAuth {
 
     await this.auth.setCustomUserClaims(userAuth.uid, { role: claim });
     return userAuth.uid;
+  };
+
+  /** Update Auth Data */
+
+  updateAuth: IAuth["updateAuth"] = async (authId, data) => {
+    const { adminId, ...rest } = this.validationUtility.validateInput({
+      schema: AuthUpdateSchema,
+      inputData: {
+        ...data,
+        adminId: authId,
+      },
+    });
+
+    try {
+      await this.auth.updateUser(adminId, {
+        ...rest,
+      });
+    } catch (error: any) {
+      throw SkynedUtils.createException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        error.message,
+      );
+    }
   };
 
   /**

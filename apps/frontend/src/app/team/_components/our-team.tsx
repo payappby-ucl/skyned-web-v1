@@ -4,13 +4,14 @@ import {
   AvatarImage,
 } from "@workspace/ui/components/avatar";
 import TeamMember from "./team-member";
-import { teams } from "@/src/utils";
+import { OurTeamType } from "../page";
 
 interface Props {
-  teams: typeof teams;
+  teams: OurTeamType[];
 }
 export default async function OurTeam({ teams }: Props) {
-  const top = Array.of(teams[0], teams[1], teams[2]) as typeof teams;
+  const [first, second, third] = teams;
+  const top = [first, second, third].filter((team) => team !== undefined);
 
   return (
     <section className="!p-0">
@@ -26,7 +27,10 @@ export default async function OurTeam({ teams }: Props) {
                   left: i > 0 ? i * -10 : 0,
                 }}
               >
-                <AvatarImage src={team.imageUrl} />
+                <AvatarImage
+                  src={team.primaryImage.url}
+                  className="object-cover object-top"
+                />
                 <AvatarFallback className="uppercase">
                   {team.firstName[0]}
                   {team.lastName[0]}
