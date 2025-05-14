@@ -8,6 +8,19 @@ import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import OurTeam from "./_components/our-team";
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
+import { cache } from "react";
+
+const getOurTeam = cache(async () => {
+  const { data: teams } = await brandServerApi.httpClient.request<
+    OurTeamType[]
+  >("/our-team", "GET", {
+    next: {
+      revalidate: 86400,
+    },
+  });
+
+  return teams;
+});
 
 export type OurTeamType = Pick<
   IAdmin,
@@ -26,13 +39,7 @@ const description =
   "Our team of professionals will adequately guide you through your study application journey.";
 
 export async function generateMetadata() {
-  const { data: teams } = await brandServerApi.httpClient.request<
-    OurTeamType[]
-  >("/our-team?limit=1", "GET", {
-    next: {
-      revalidate: 86400,
-    },
-  });
+  const teams = await getOurTeam();
 
   const ceo = teams[0];
   return {
@@ -65,13 +72,7 @@ export async function generateMetadata() {
 
 export default async function OurTeamPage() {
   try {
-    const { data: teams } = await brandServerApi.httpClient.request<
-      OurTeamType[]
-    >("/our-team", "GET", {
-      next: {
-        revalidate: 86400,
-      },
-    });
+    const teams = await getOurTeam();
 
     const ourTeamPageJsonLd: WithContext<WebPage> = {
       "@context": "https://schema.org",
