@@ -1,14 +1,16 @@
+export const dynamic = "force-dynamic";
+
 import Alert from "@/src/components/alert";
 import { env } from "@/src/config";
 import { brandServerApi } from "@/src/lib/server";
 import { organization, sharedMetadata } from "@/src/utils";
 import { IAdmin } from "@workspace/shared";
-import { Metadata } from "next";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import OurTeam from "./_components/our-team";
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { cache } from "react";
+import { Metadata } from "next";
 
 const getOurTeam = cache(async () => {
   const { data: teams } = await brandServerApi.httpClient.request<
