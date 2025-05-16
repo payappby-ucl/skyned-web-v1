@@ -24,6 +24,6 @@ export async function sendContactUsMessage(
       data: responseData,
     };
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }

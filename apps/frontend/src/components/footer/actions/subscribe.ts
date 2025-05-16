@@ -9,7 +9,7 @@ export async function subscribeToNewsletter(data: {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
-        "/newsletter/subscribe",
+        "/newsletters/subscribe",
         "POST",
         {
           body: JSON.stringify(data),
@@ -21,6 +21,6 @@ export async function subscribeToNewsletter(data: {
       data: responseData,
     };
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }
