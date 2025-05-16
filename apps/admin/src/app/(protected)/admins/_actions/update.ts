@@ -20,6 +20,6 @@ export async function updateAdmin(adminId: string, data: UpdateAdminSchema) {
     revalidateTag(`${serverCacheTags.admins}-id-${adminId}`);
     return responseData;
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }

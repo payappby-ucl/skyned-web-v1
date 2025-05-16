@@ -121,19 +121,26 @@ export const columns: ColumnDef<IInquiry>[] = [
       const deleteInquiryMutation = useMutation({
         mutationFn: async () => {
           try {
-            brandClientApi.utils.toast.promise(deleteInquiry(inquiry.id), {
-              loading: "Deleting...",
-              success(data) {
-                queryClient.invalidateQueries({
-                  queryKey: ["inquiries"],
-                });
-                return data.message;
+            brandClientApi.utils.toast.promise(
+              async () => {
+                const res = await deleteInquiry(inquiry.id);
+                brandClientApi.utils.handleServerActionResponse(res);
+                return res;
               },
-              error(error) {
-                brandClientApi.utils.alertError(error);
-                return error;
+              {
+                loading: "Deleting...",
+                success(data) {
+                  queryClient.invalidateQueries({
+                    queryKey: ["inquiries"],
+                  });
+                  return data.message;
+                },
+                error(error) {
+                  brandClientApi.utils.alertError(error);
+                  return error;
+                },
               },
-            });
+            );
           } catch (error) {
             brandClientApi.utils.alertError(error);
           }

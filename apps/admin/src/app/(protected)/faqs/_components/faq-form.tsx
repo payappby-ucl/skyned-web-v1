@@ -37,18 +37,12 @@ const FaqForm: React.FC<Props> = ({ faq }) => {
 
   const onSubmit = useCallback(async (data: CreateFaqSchema) => {
     try {
-      if (faq) {
-        await updateFaq(faq.id, data);
-        brandClientApi.utils.toast.success("FAQ Updated.");
-      } else {
-        await createFaq(data);
-        brandClientApi.utils.toast.success("FAQ Created.");
-      }
-
+      const res = await (faq ? updateFaq(faq.id, data) : createFaq(data));
+      brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(`FAQ ${faq ? "Updated" : "Created"}.`);
       queryClient.invalidateQueries({
         queryKey: ["faqs"],
       });
-
       router.replace("/faqs");
     } catch (error) {
       brandClientApi.utils.alertError(error);

@@ -80,13 +80,12 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
 
   const onSubmit = useCallback(async (data: CreateAdminSchema) => {
     try {
-      await createAdmin(data);
+      const serverRes = await createAdmin(data);
+      brandClientApi.utils.handleServerActionResponse(serverRes);
       brandClientApi.utils.toast.success("Profile Created.");
-
       queryClient.invalidateQueries({
         queryKey: ["admins"],
       });
-
       router.replace("/admins");
     } catch (error) {
       brandClientApi.utils.alertError(error);

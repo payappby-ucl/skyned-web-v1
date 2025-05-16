@@ -7,14 +7,17 @@ import { revalidateTag } from "next/cache";
 
 export async function createAdmin(data: CreateAdminSchema) {
   try {
-    const { data: responseData } =
-      await brandServerApi.httpClient.request<IAdmin>("/admins", "POST", {
+    const { data: admin } = await brandServerApi.httpClient.request<IAdmin>(
+      "/admins",
+      "POST",
+      {
         body: JSON.stringify(data),
-      });
+      },
+    );
 
     revalidateTag(serverCacheTags.admins);
-    return responseData;
+    return admin;
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }

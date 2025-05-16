@@ -16,6 +16,6 @@ export async function deleteFaq(id: number) {
     revalidateTag(serverCacheTags.faqs);
     return responseData;
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }

@@ -15,6 +15,6 @@ export async function createFaq(data: CreateFaqSchema) {
     revalidateTag(serverCacheTags.faqs);
     return responseData;
   } catch (error: any) {
-    throw brandServerApi.utils.createServerActionError(error);
+    return brandServerApi.utils.createServerActionError(error);
   }
 }
