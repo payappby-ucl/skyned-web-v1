@@ -51,6 +51,14 @@ export class Utils implements IUtils {
     this.toast.error(this.handleError(err));
   };
 
+  handleServerActionResponse: IUtils["handleServerActionResponse"] = (data) => {
+    if (data instanceof Error) {
+      throw data;
+    }
+
+    return data;
+  };
+
   pick: IUtils["pick"] = <T extends object, K extends keyof T>(
     data: T,
     properties: K[],

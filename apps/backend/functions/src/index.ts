@@ -8,4 +8,4 @@ import { SkynedUtils } from "./utils";
 
 SkynedUtils.initializeFirebaseApp();
 
-exports.api = onRequest({ timeoutSeconds: 3600 }, app.getApp());
+exports.api = onRequest({ timeoutSeconds: 3600, memory: "1GiB" }, app.getApp());

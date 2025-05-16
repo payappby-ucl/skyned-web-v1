@@ -5,6 +5,7 @@ export declare class Utils implements IUtils {
     toast: IUtils["toast"];
     handleError: IUtils["handleError"];
     alertError: IUtils["alertError"];
+    handleServerActionResponse: IUtils["handleServerActionResponse"];
     pick: IUtils["pick"];
     exclude: IUtils["exclude"];
     copyToClipboard: IUtils["copyToClipboard"];

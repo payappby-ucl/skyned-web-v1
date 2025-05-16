@@ -60,6 +60,12 @@ class Utils {
     alertError = (err) => {
         this.toast.error(this.handleError(err));
     };
+    handleServerActionResponse = (data) => {
+        if (data instanceof Error) {
+            throw data;
+        }
+        return data;
+    };
     pick = (data, properties) => {
         const entries = Object.entries(data);
         const result = Object.fromEntries(entries.filter(([key]) => properties.includes(key)));
