@@ -5,13 +5,19 @@ export class ServerUtils implements IServerUtils {
   createServerActionError: IServerUtils["createServerActionError"] = (
     error,
   ) => {
-    return new Error(error?.data?.message || "", {
-      cause: {
-        statusCode: error.statusCode,
-        success: false,
-        data: error.data,
-      },
-    });
+    return {
+      success: false,
+      message:
+        error?.data?.message ||
+        "Something went wrong, Please check your connection and try again.",
+    };
+    // return new Error(error?.data?.message || "", {
+    //   cause: {
+    //     statusCode: error.statusCode,
+    //     success: false,
+    //     data: error.data,
+    //   },
+    // });
   };
 
   constructQuery: IServerUtils["constructQuery"] = (data) => {

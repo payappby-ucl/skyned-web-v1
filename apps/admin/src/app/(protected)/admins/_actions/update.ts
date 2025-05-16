@@ -2,10 +2,17 @@
 
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IMessageResponse, UpdateAdminSchema } from "@workspace/shared";
+import {
+  IMessageResponse,
+  ServerActionReturnType,
+  UpdateAdminSchema,
+} from "@workspace/shared";
 import { revalidateTag } from "next/cache";
 
-export async function updateAdmin(adminId: string, data: UpdateAdminSchema) {
+export async function updateAdmin(
+  adminId: string,
+  data: UpdateAdminSchema,
+): Promise<ServerActionReturnType<IMessageResponse>> {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
@@ -18,7 +25,10 @@ export async function updateAdmin(adminId: string, data: UpdateAdminSchema) {
 
     revalidateTag(serverCacheTags.admins);
     revalidateTag(`${serverCacheTags.admins}-id-${adminId}`);
-    return responseData;
+    return {
+      success: true,
+      data: responseData,
+    };
   } catch (error: any) {
     return brandServerApi.utils.createServerActionError(error);
   }

@@ -135,8 +135,9 @@ export const columns: ColumnDef<IFaq>[] = [
             brandClientApi.utils.toast.promise(
               async () => {
                 const res = await deleteFaq(faq.id);
-                brandClientApi.utils.handleServerActionResponse(res);
-                return res;
+                const resData =
+                  brandClientApi.utils.handleServerActionResponse(res);
+                return resData;
               },
               {
                 loading: "Deleting...",

@@ -2,10 +2,16 @@
 
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { CreateFaqSchema, IFaq } from "@workspace/shared";
+import {
+  CreateFaqSchema,
+  IFaq,
+  ServerActionReturnType,
+} from "@workspace/shared";
 import { revalidateTag } from "next/cache";
 
-export async function createFaq(data: CreateFaqSchema) {
+export async function createFaq(
+  data: CreateFaqSchema,
+): Promise<ServerActionReturnType<IFaq>> {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IFaq>("/faqs", "POST", {
@@ -13,7 +19,10 @@ export async function createFaq(data: CreateFaqSchema) {
       });
 
     revalidateTag(serverCacheTags.faqs);
-    return responseData;
+    return {
+      success: true,
+      data: responseData,
+    };
   } catch (error: any) {
     return brandServerApi.utils.createServerActionError(error);
   }

@@ -5,7 +5,9 @@ export interface IUtils {
   toast: ToastType;
   handleError(error: any): string;
   alertError(error: any): void;
-  handleServerActionResponse<T>(data: T | Error): T;
+  handleServerActionResponse<T>(
+    data: { success: true; data: T } | { success: false; message: string },
+  ): T;
 
   pick<T extends object, K extends keyof T>(
     data: T,

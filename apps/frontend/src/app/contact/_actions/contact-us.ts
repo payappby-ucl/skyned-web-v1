@@ -1,9 +1,15 @@
 "use server";
 
 import { brandServerApi } from "@/src/lib/server";
-import { ContactUsSchema, IMessageResponse } from "@workspace/shared";
+import {
+  ContactUsSchema,
+  IMessageResponse,
+  ServerActionReturnType,
+} from "@workspace/shared";
 
-export async function sendContactUsMessage(data: ContactUsSchema) {
+export async function sendContactUsMessage(
+  data: ContactUsSchema,
+): Promise<ServerActionReturnType<IMessageResponse>> {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
@@ -13,7 +19,10 @@ export async function sendContactUsMessage(data: ContactUsSchema) {
           body: JSON.stringify(data),
         },
       );
-    return responseData;
+    return {
+      success: true,
+      data: responseData,
+    };
   } catch (error: any) {
     throw brandServerApi.utils.createServerActionError(error);
   }

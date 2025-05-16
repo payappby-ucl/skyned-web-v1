@@ -2,10 +2,16 @@
 
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { CreateAdminSchema, IAdmin } from "@workspace/shared";
+import {
+  CreateAdminSchema,
+  IAdmin,
+  ServerActionReturnType,
+} from "@workspace/shared";
 import { revalidateTag } from "next/cache";
 
-export async function createAdmin(data: CreateAdminSchema) {
+export async function createAdmin(
+  data: CreateAdminSchema,
+): Promise<ServerActionReturnType<IAdmin>> {
   try {
     const { data: admin } = await brandServerApi.httpClient.request<IAdmin>(
       "/admins",
@@ -16,7 +22,10 @@ export async function createAdmin(data: CreateAdminSchema) {
     );
 
     revalidateTag(serverCacheTags.admins);
-    return admin;
+    return {
+      success: true,
+      data: admin,
+    };
   } catch (error: any) {
     return brandServerApi.utils.createServerActionError(error);
   }

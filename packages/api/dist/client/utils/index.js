@@ -61,10 +61,10 @@ class Utils {
         this.toast.error(this.handleError(err));
     };
     handleServerActionResponse = (data) => {
-        if (data instanceof Error) {
-            throw data;
+        if (data.success === false) {
+            throw new Error(data.message);
         }
-        return data;
+        return data.data;
     };
     pick = (data, properties) => {
         const entries = Object.entries(data);

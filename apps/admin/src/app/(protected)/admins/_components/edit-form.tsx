@@ -71,9 +71,9 @@ const AdminUpdateFrom: React.FC<Props> = ({ admin }) => {
 
   const onSubmit = useCallback(async (data: UpdateAdminSchema) => {
     try {
-      let res = await updateAdmin(admin.adminId, data);
-      res = brandClientApi.utils.handleServerActionResponse(res);
-      brandClientApi.utils.toast.success(res.message);
+      const res = await updateAdmin(admin.adminId, data);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
 
       queryClient.invalidateQueries({
         queryKey: ["admins", `admins-id-${admin.adminId}`],

@@ -15,3 +15,6 @@ export type ProfileType = Pick<
 
 export type Gender = (typeof gender)[keyof typeof gender];
 export type Department = (typeof department)[keyof typeof department];
+export type ServerActionReturnType<T> =
+  | { success: true; data: T }
+  | { success: false; message: string };

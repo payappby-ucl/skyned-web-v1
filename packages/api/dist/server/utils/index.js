@@ -18,13 +18,18 @@ exports.ServerUtils = void 0;
 __exportStar(require("./interface"), exports);
 class ServerUtils {
     createServerActionError = (error) => {
-        return new Error(error?.data?.message || "", {
-            cause: {
-                statusCode: error.statusCode,
-                success: false,
-                data: error.data,
-            },
-        });
+        return {
+            success: false,
+            message: error?.data?.message ||
+                "Something went wrong, Please check your connection and try again.",
+        };
+        // return new Error(error?.data?.message || "", {
+        //   cause: {
+        //     statusCode: error.statusCode,
+        //     success: false,
+        //     data: error.data,
+        //   },
+        // });
     };
     constructQuery = (data) => {
         const queries = new URLSearchParams();

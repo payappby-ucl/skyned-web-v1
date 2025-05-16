@@ -52,11 +52,11 @@ export class Utils implements IUtils {
   };
 
   handleServerActionResponse: IUtils["handleServerActionResponse"] = (data) => {
-    if (data instanceof Error) {
-      throw data;
+    if (data.success === false) {
+      throw new Error(data.message);
     }
 
-    return data;
+    return data.data;
   };
 
   pick: IUtils["pick"] = <T extends object, K extends keyof T>(

@@ -44,7 +44,7 @@ export const AdminAccountCreation: React.FC<AdminAccountCreationEmailProps> = ({
           <Img
             src={image.url}
             alt={`${firstName} ${lastName}'s image`}
-            className="object-cover rounded-full w-10 h-10"
+            className="object-cover object-top rounded-full w-10 h-10"
           />
         </Column>
         <Column align="left" className="w-full">

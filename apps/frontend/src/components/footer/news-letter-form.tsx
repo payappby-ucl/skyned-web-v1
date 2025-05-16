@@ -25,8 +25,9 @@ const NewsLetterForm: React.FC = () => {
 
   const onSubmit = useCallback(async (values: NewsLetterFormSchema) => {
     try {
-      const { message } = await subscribeToNewsletter(values);
-      brandClientApi.utils.toast.success(message);
+      const res = await subscribeToNewsletter(values);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
       form.reset();
     } catch (error) {
       brandClientApi.utils.alertError(error);

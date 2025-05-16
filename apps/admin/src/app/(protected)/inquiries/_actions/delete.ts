@@ -2,10 +2,12 @@
 
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IMessageResponse } from "@workspace/shared";
+import { IMessageResponse, ServerActionReturnType } from "@workspace/shared";
 import { revalidateTag } from "next/cache";
 
-export async function deleteInquiry(id: number) {
+export async function deleteInquiry(
+  id: number,
+): Promise<ServerActionReturnType<IMessageResponse>> {
   try {
     const { data: responseData } =
       await brandServerApi.httpClient.request<IMessageResponse>(
@@ -14,7 +16,10 @@ export async function deleteInquiry(id: number) {
       );
 
     revalidateTag(serverCacheTags.inquiries);
-    return responseData;
+    return {
+      success: true,
+      data: responseData,
+    };
   } catch (error: any) {
     return brandServerApi.utils.createServerActionError(error);
   }

@@ -35,8 +35,9 @@ const ContactUsForm: React.FC = () => {
 
   const onSubmit = useCallback(async (data: ContactUsSchema) => {
     try {
-      const { message } = await sendContactUsMessage(data);
-      brandClientApi.utils.toast.success(message);
+      const res = await sendContactUsMessage(data);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
       form.reset();
     } catch (error: any) {
       brandClientApi.utils.alertError(error);
