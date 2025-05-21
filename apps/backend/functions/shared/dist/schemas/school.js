@@ -17,6 +17,7 @@ exports.CreateSchoolSchema = common_1.CommonSchema.pick({
     slug: zod_1.default
         .string()
         .trim()
+        .toLowerCase()
         .nonempty("required")
         .transform((val) => (0, slugify_1.default)(val, { lower: true })),
     state: zod_1.default.string().trim().nonempty("Required"),

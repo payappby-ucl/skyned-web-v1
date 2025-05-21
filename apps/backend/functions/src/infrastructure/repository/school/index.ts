@@ -13,4 +13,10 @@ export class SchoolRepository extends DBUtils implements ISchoolRepository {
 
   findUnique: ISchoolRepository["findUnique"] = (options) =>
     this.db.school.findUnique(options);
+
+  findMany: ISchoolRepository["findMany"] = (options) =>
+    this.db.school.findMany(options);
+
+  count: ISchoolRepository["count"] = (options) =>
+    this.db.school.count(options);
 }

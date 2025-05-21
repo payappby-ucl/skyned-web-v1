@@ -112,6 +112,31 @@ export class SchoolController
       next(error);
     }
   };
+
+  listSchools: ISchoolController["listSchools"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      this._attributeBasedAccessControl(authUser, "schools", "list");
+      const { from, to, limit, page } = req.query;
+
+      const construct = this._constructPaginationData({ limit, page });
+
+      const total = await this.schoolService.count();
+      const schoolList = await this.schoolService.listSchools({
+        ...SkynedUtils.pick(construct, ["skip", "take"]),
+        from,
+        to,
+      });
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        total,
+        data: schoolList,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */

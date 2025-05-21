@@ -13,6 +13,7 @@ import {
   RequestValidationMiddleware,
 } from "../../../../middleware";
 import { CreateSchoolSchema } from "@workspace/shared";
+import { PageQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for router initialization */
 export interface SchoolRouterDependencies {
@@ -33,14 +34,24 @@ export class SchoolRouter implements IRouter {
     schoolController: ISchoolController,
     authMiddleware: IAuthMiddleware,
   ) {
-    this.router.route("/").post(
-      RequestValidationMiddleware.validate({
-        body: CreateSchoolSchema,
-      }),
-      authMiddleware.authenticate,
-      authMiddleware.hasRole(["admin"]),
-      schoolController.createSchool,
-    );
+    this.router
+      .route("/")
+      .get(
+        RequestValidationMiddleware.validate({
+          query: PageQuerySchema.partial(),
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.listSchools,
+      )
+      .post(
+        RequestValidationMiddleware.validate({
+          body: CreateSchoolSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.createSchool,
+      );
   }
 
   /**

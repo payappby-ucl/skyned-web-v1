@@ -38,6 +38,7 @@ import React, { useCallback } from "react";
 import { createSchool } from "../_actions";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { CurrencyInput } from "@workspace/ui/components/currency-input";
 
 const CreateSchoolForm: React.FC = () => {
   const router = useRouter();
@@ -330,6 +331,23 @@ const CreateSchoolForm: React.FC = () => {
 
           <FormField
             control={form.control}
+            name="currency"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="currency">Currency</FormLabel>
+                <FormControl>
+                  <CurrencyInput
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="country"
             render={({ field }) => (
               <FormItem>
@@ -399,7 +417,7 @@ const CreateSchoolForm: React.FC = () => {
             control={form.control}
             name="address"
             render={({ field }) => (
-              <FormItem className="lg:col-span-2">
+              <FormItem className="md:col-span-2 lg:col-span-1">
                 <FormLabel htmlFor="address">Address</FormLabel>
                 <FormControl>
                   <Input

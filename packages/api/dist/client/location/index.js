@@ -30,5 +30,9 @@ class Location {
         const cities = country_state_city_1.City.getCitiesOfState(countryCode, stateCode);
         return cities;
     };
+    getState = (countryCode, stateCode) => {
+        const state = country_state_city_1.State.getStateByCodeAndCountry(stateCode, countryCode);
+        return state;
+    };
 }
 exports.Location = Location;

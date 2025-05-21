@@ -6,7 +6,11 @@ import {
   IValidationUtility,
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { validationUtility } from "../../../utils";
+import {
+  adminProfileKeys,
+  SkynedUtils,
+  validationUtility,
+} from "../../../utils";
 import { ServiceUtils } from "../utils";
 import { CreateSchoolServiceSchema } from "./schema";
 
@@ -80,6 +84,41 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
 
     if (!school) return null;
     return this.deserialize(school);
+  };
+
+  count: ISchoolService["count"] = async () => {
+    const count = await this.repository.school.count();
+    return count;
+  };
+
+  listSchools: ISchoolService["listSchools"] = async ({
+    skip,
+    take,
+    from,
+    to,
+    order,
+    where,
+  }) => {
+    const schools = await this.repository.school.findMany({
+      skip,
+      take,
+      where: {
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+      orderBy: {
+        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+      },
+      include: {
+        createdBy: {
+          select: SkynedUtils.select(adminProfileKeys),
+        },
+      },
+    });
+
+    return schools.map((school) => this.deserialize(school));
   };
 }
 

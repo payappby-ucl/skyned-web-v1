@@ -73,5 +73,49 @@ describe("SchoolService", () => {
         expect(spy).toHaveBeenCalled();
       });
     });
+
+    describe("count", () => {
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should pass", async () => {
+        const spy = jest
+          .spyOn(repository.school, "count")
+          .mockImplementation(() => 1 as any);
+
+        const count = await schoolService.count();
+        expect(spy).toHaveBeenCalled();
+        expect(count).toBe(1);
+      });
+    });
+
+    describe("listSchools", () => {
+      afterAll(() => {
+        jest.restoreAllMocks();
+      });
+
+      test("should pass", async () => {
+        const spy = jest
+          .spyOn(repository.school, "findMany")
+          .mockImplementation(
+            () => [{ name: "Montana", slug: "montana-state-uni" }] as any,
+          );
+
+        const schools = await schoolService.listSchools({
+          skip: 0,
+        });
+
+        expect(spy).toHaveBeenCalled();
+        expect(schools).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+            }),
+          ]),
+        );
+      });
+    });
   });
 });

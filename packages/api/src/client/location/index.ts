@@ -1,4 +1,4 @@
-import { City, Country } from "country-state-city";
+import { City, Country, State } from "country-state-city";
 import { ILocation } from "./interface";
 
 export * from "./interface";
@@ -20,5 +20,10 @@ export class Location implements ILocation {
     const cities = City.getCitiesOfState(countryCode, stateCode);
 
     return cities;
+  };
+
+  getState: ILocation["getState"] = (countryCode, stateCode) => {
+    const state = State.getStateByCodeAndCountry(stateCode, countryCode);
+    return state;
   };
 }

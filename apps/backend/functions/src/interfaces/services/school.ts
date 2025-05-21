@@ -4,6 +4,7 @@ import {
   IObject,
   ISchool,
 } from "@workspace/shared";
+import { IQueryConstruct } from "..";
 
 export interface ISchoolService {
   findSchoolBySlug(slug: string): Promise<ISchool | null>;
@@ -14,4 +15,8 @@ export interface ISchoolService {
       schoolImage: IObject;
     },
   ): Promise<ISchool>;
+
+  count(): Promise<number>;
+
+  listSchools(query: Partial<IQueryConstruct<IAdmin>>): Promise<ISchool[]>;
 }

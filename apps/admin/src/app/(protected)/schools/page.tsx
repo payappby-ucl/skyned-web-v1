@@ -1,5 +1,6 @@
 import Alert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
+import SchoolList from "./_components/school-list";
 
 export default async function SchoolsPage() {
   return (
@@ -10,7 +11,7 @@ export default async function SchoolsPage() {
       secondaryComponent={<Alert />}
       redirect
     >
-      <p>Schools Page</p>
+      <SchoolList />
     </HasPermission>
   );
 }
