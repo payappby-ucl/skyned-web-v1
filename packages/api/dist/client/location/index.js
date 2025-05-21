@@ -26,5 +26,9 @@ class Location {
         const country = country_state_city_1.Country.getCountryByCode(isoCode);
         return country ?? null;
     };
+    getCitiesOfState = (stateCode, countryCode) => {
+        const cities = country_state_city_1.City.getCitiesOfState(countryCode, stateCode);
+        return cities;
+    };
 }
 exports.Location = Location;

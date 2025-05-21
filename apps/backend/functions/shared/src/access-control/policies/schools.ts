@@ -11,19 +11,31 @@ export const schoolPolicies: AccessControlType = {
     },
 
     read(authClaim, data) {
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+
       return true;
     },
 
-    create() {
+    create(authClaim, data) {
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+
       return true;
     },
 
-    update() {
+    update(authClaim, data, school) {
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+
       return true;
     },
 
-    delete() {
-      return true;
+    delete(authClaim, school) {
+      return false;
     },
   },
 };

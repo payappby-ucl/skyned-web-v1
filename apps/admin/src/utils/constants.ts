@@ -3,4 +3,5 @@ export const serverCacheTags = {
   inquiries: "inquires",
   faqs: "faqs",
   admins: "admins",
+  schools: "schools",
 } as const;
