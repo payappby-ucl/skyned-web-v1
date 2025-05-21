@@ -3,10 +3,12 @@ import { adminPolicies } from "./admins";
 import { departmentPolicies } from "./department";
 import { faqPolicies } from "./faq";
 import { inquiryPolicies } from "./inquiry";
+import { schoolPolicies } from "./schools";
 
 export const policies: AccessControlType = {
   ...departmentPolicies,
   ...faqPolicies,
   ...inquiryPolicies,
   ...adminPolicies,
+  ...schoolPolicies,
 };

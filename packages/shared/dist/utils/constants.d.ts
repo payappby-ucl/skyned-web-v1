@@ -27,3 +27,22 @@ export declare const socialMedia: {
     readonly tiktok: "tiktok";
     readonly pinterest: "pinterest";
 };
+/** Institution Type */
+export declare const institutionType: {
+    readonly university: "university";
+    readonly college: "college";
+};
+/** Ownership Type */
+export declare const ownershipType: {
+    readonly private: "private";
+    readonly public: "public";
+};
+/** Currency */
+export declare const currencies: {
+    readonly USD: "USD";
+    readonly CAD: "CAD";
+    readonly AUD: "AUD";
+    readonly NGN: "NGN";
+    readonly EUR: "EUR";
+    readonly GBP: "GBP";
+};

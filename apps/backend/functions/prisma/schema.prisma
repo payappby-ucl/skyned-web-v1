@@ -37,23 +37,24 @@ enum TokenType {
   reset
 }
 
-// enum InstitutionType {
-//   university
-//   college
-// }
+enum InstitutionType {
+  university
+  college
+}
 
-// enum OwnershipType {
-//   private
-//   public
-// }
+enum OwnershipType {
+  private
+  public
+}
 
-// enum Currency {
-//   USD
-//   CAD
-//   AUD
-//   NGN
-//   EUR
-// }
+enum Currency {
+  USD
+  CAD
+  AUD
+  NGN
+  EUR
+  GBP
+}
 
 // enum DegreeLevel {
 //   undergraduate
@@ -61,12 +62,6 @@ enum TokenType {
 //   masters
 //   diploma
 //   certificate
-// }
-
-// enum Intakes {
-//   winter
-//   fall
-//   spring
 // }
 
 model Token {
@@ -119,6 +114,9 @@ model Admin {
 
   // * Activity Logs
   activityLogs ActivityLog[]
+
+  // * Schools created
+  schoolsCreated School[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -217,6 +215,37 @@ model ActivityLog {
   @@map("activity_logs")
 }
 
+// * Schools
+model School {
+  id       Int    @unique @default(autoincrement())
+  schoolId String @id @default(cuid()) @map("school_id")
+
+  logo            Json
+  schoolImage     Json            @map("school_image")
+  name            String
+  slug            String          @unique
+  state           String          @db.VarChar(10)
+  country         String          @db.VarChar(3)
+  city            String
+  address         String
+  link            String
+  institutionType InstitutionType @map("institution_type")
+  ownershipType   OwnershipType   @map("ownership_type")
+  currency        Currency
+  overview        String
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  // programs Program[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([name])
+  @@map("schools")
+}
+
 // model Student {
 //   id                 Int      @default(autoincrement())
 //   studentId          String   @id @map("student_id")
@@ -310,27 +339,6 @@ model ActivityLog {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
 //   @@map("admins")
-// }
-
-// // * Schools
-// model School {
-//   id       Int    @unique @default(autoincrement())
-//   schoolId String @id @default(cuid()) @map("school_id")
-
-//   name            String
-//   slug            String          @unique
-//   state           String          @db.VarChar(10)
-//   country         String          @db.VarChar(3)
-//   city            String
-//   institutionType InstitutionType
-//   ownershipType   OwnershipType
-
-//   programs Program[]
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("schools")
 // }
 
 // // * Programs

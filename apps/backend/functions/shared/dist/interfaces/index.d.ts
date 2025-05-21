@@ -6,3 +6,4 @@ export * from "./utils";
 export * from "./faq";
 export * from "./inquiry";
 export * from "./activity-log";
+export * from "./school";

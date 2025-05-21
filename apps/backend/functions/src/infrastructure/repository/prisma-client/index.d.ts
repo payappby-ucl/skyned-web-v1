@@ -48,6 +48,11 @@ export type Inquiry = $Result.DefaultSelection<Prisma.$InquiryPayload>
  * 
  */
 export type ActivityLog = $Result.DefaultSelection<Prisma.$ActivityLogPayload>
+/**
+ * Model School
+ * 
+ */
+export type School = $Result.DefaultSelection<Prisma.$SchoolPayload>
 
 /**
  * Enums
@@ -82,6 +87,34 @@ export const TokenType: {
 
 export type TokenType = (typeof TokenType)[keyof typeof TokenType]
 
+
+export const InstitutionType: {
+  university: 'university',
+  college: 'college'
+};
+
+export type InstitutionType = (typeof InstitutionType)[keyof typeof InstitutionType]
+
+
+export const OwnershipType: {
+  private: 'private',
+  public: 'public'
+};
+
+export type OwnershipType = (typeof OwnershipType)[keyof typeof OwnershipType]
+
+
+export const Currency: {
+  USD: 'USD',
+  CAD: 'CAD',
+  AUD: 'AUD',
+  NGN: 'NGN',
+  EUR: 'EUR',
+  GBP: 'GBP'
+};
+
+export type Currency = (typeof Currency)[keyof typeof Currency]
+
 }
 
 export type DepartmentName = $Enums.DepartmentName
@@ -95,6 +128,18 @@ export const Gender: typeof $Enums.Gender
 export type TokenType = $Enums.TokenType
 
 export const TokenType: typeof $Enums.TokenType
+
+export type InstitutionType = $Enums.InstitutionType
+
+export const InstitutionType: typeof $Enums.InstitutionType
+
+export type OwnershipType = $Enums.OwnershipType
+
+export const OwnershipType: typeof $Enums.OwnershipType
+
+export type Currency = $Enums.Currency
+
+export const Currency: typeof $Enums.Currency
 
 /**
  * ##  Prisma Client ʲˢ
@@ -290,6 +335,16 @@ export class PrismaClient<
     * ```
     */
   get activityLog(): Prisma.ActivityLogDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.school`: Exposes CRUD operations for the **School** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Schools
+    * const schools = await prisma.school.findMany()
+    * ```
+    */
+  get school(): Prisma.SchoolDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -348,7 +403,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.1
+   * Prisma Client JS version: 6.8.2
    * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
@@ -736,7 +791,8 @@ export namespace Prisma {
     Team: 'Team',
     Faq: 'Faq',
     Inquiry: 'Inquiry',
-    ActivityLog: 'ActivityLog'
+    ActivityLog: 'ActivityLog',
+    School: 'School'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -755,7 +811,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog"
+      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1277,6 +1333,80 @@ export namespace Prisma {
           }
         }
       }
+      School: {
+        payload: Prisma.$SchoolPayload<ExtArgs>
+        fields: Prisma.SchoolFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          update: {
+            args: Prisma.SchoolUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SchoolUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>[]
+          }
+          upsert: {
+            args: Prisma.SchoolUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchool>
+          }
+          groupBy: {
+            args: Prisma.SchoolGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1368,6 +1498,7 @@ export namespace Prisma {
     faq?: FaqOmit
     inquiry?: InquiryOmit
     activityLog?: ActivityLogOmit
+    school?: SchoolOmit
   }
 
   /* Types for Logging */
@@ -1470,6 +1601,7 @@ export namespace Prisma {
     teamsCreated: number
     faqsCreated: number
     activityLogs: number
+    schoolsCreated: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1481,6 +1613,7 @@ export namespace Prisma {
     teamsCreated?: boolean | AdminCountOutputTypeCountTeamsCreatedArgs
     faqsCreated?: boolean | AdminCountOutputTypeCountFaqsCreatedArgs
     activityLogs?: boolean | AdminCountOutputTypeCountActivityLogsArgs
+    schoolsCreated?: boolean | AdminCountOutputTypeCountSchoolsCreatedArgs
   }
 
   // Custom InputTypes
@@ -1548,6 +1681,13 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountActivityLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActivityLogWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountSchoolsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolWhereInput
   }
 
 
@@ -2984,6 +3124,7 @@ export namespace Prisma {
     teamsCreated?: boolean | Admin$teamsCreatedArgs<ExtArgs>
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
+    schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -3066,6 +3207,7 @@ export namespace Prisma {
     teamsCreated?: boolean | Admin$teamsCreatedArgs<ExtArgs>
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
+    schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3087,6 +3229,7 @@ export namespace Prisma {
       teamsCreated: Prisma.$TeamPayload<ExtArgs>[]
       faqsCreated: Prisma.$FaqPayload<ExtArgs>[]
       activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
+      schoolsCreated: Prisma.$SchoolPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3511,6 +3654,7 @@ export namespace Prisma {
     teamsCreated<T extends Admin$teamsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$teamsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     faqsCreated<T extends Admin$faqsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$faqsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaqPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activityLogs<T extends Admin$activityLogsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    schoolsCreated<T extends Admin$schoolsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$schoolsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4163,6 +4307,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.schoolsCreated
+   */
+  export type Admin$schoolsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    where?: SchoolWhereInput
+    orderBy?: SchoolOrderByWithRelationInput | SchoolOrderByWithRelationInput[]
+    cursor?: SchoolWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchoolScalarFieldEnum | SchoolScalarFieldEnum[]
   }
 
   /**
@@ -9854,6 +10022,1259 @@ export namespace Prisma {
 
 
   /**
+   * Model School
+   */
+
+  export type AggregateSchool = {
+    _count: SchoolCountAggregateOutputType | null
+    _avg: SchoolAvgAggregateOutputType | null
+    _sum: SchoolSumAggregateOutputType | null
+    _min: SchoolMinAggregateOutputType | null
+    _max: SchoolMaxAggregateOutputType | null
+  }
+
+  export type SchoolAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SchoolSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SchoolMinAggregateOutputType = {
+    id: number | null
+    schoolId: string | null
+    name: string | null
+    slug: string | null
+    state: string | null
+    country: string | null
+    city: string | null
+    address: string | null
+    link: string | null
+    institutionType: $Enums.InstitutionType | null
+    ownershipType: $Enums.OwnershipType | null
+    currency: $Enums.Currency | null
+    overview: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolMaxAggregateOutputType = {
+    id: number | null
+    schoolId: string | null
+    name: string | null
+    slug: string | null
+    state: string | null
+    country: string | null
+    city: string | null
+    address: string | null
+    link: string | null
+    institutionType: $Enums.InstitutionType | null
+    ownershipType: $Enums.OwnershipType | null
+    currency: $Enums.Currency | null
+    overview: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SchoolCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    logo: number
+    schoolImage: number
+    name: number
+    slug: number
+    state: number
+    country: number
+    city: number
+    address: number
+    link: number
+    institutionType: number
+    ownershipType: number
+    currency: number
+    overview: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SchoolAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SchoolSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SchoolMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    name?: true
+    slug?: true
+    state?: true
+    country?: true
+    city?: true
+    address?: true
+    link?: true
+    institutionType?: true
+    ownershipType?: true
+    currency?: true
+    overview?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    name?: true
+    slug?: true
+    state?: true
+    country?: true
+    city?: true
+    address?: true
+    link?: true
+    institutionType?: true
+    ownershipType?: true
+    currency?: true
+    overview?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SchoolCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    logo?: true
+    schoolImage?: true
+    name?: true
+    slug?: true
+    state?: true
+    country?: true
+    city?: true
+    address?: true
+    link?: true
+    institutionType?: true
+    ownershipType?: true
+    currency?: true
+    overview?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SchoolAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which School to aggregate.
+     */
+    where?: SchoolWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Schools to fetch.
+     */
+    orderBy?: SchoolOrderByWithRelationInput | SchoolOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Schools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Schools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Schools
+    **/
+    _count?: true | SchoolCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SchoolAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SchoolSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolMaxAggregateInputType
+  }
+
+  export type GetSchoolAggregateType<T extends SchoolAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchool]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchool[P]>
+      : GetScalarType<T[P], AggregateSchool[P]>
+  }
+
+
+
+
+  export type SchoolGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolWhereInput
+    orderBy?: SchoolOrderByWithAggregationInput | SchoolOrderByWithAggregationInput[]
+    by: SchoolScalarFieldEnum[] | SchoolScalarFieldEnum
+    having?: SchoolScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolCountAggregateInputType | true
+    _avg?: SchoolAvgAggregateInputType
+    _sum?: SchoolSumAggregateInputType
+    _min?: SchoolMinAggregateInputType
+    _max?: SchoolMaxAggregateInputType
+  }
+
+  export type SchoolGroupByOutputType = {
+    id: number
+    schoolId: string
+    logo: JsonValue
+    schoolImage: JsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: SchoolCountAggregateOutputType | null
+    _avg: SchoolAvgAggregateOutputType | null
+    _sum: SchoolSumAggregateOutputType | null
+    _min: SchoolMinAggregateOutputType | null
+    _max: SchoolMaxAggregateOutputType | null
+  }
+
+  type GetSchoolGroupByPayload<T extends SchoolGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    logo?: boolean
+    schoolImage?: boolean
+    name?: boolean
+    slug?: boolean
+    state?: boolean
+    country?: boolean
+    city?: boolean
+    address?: boolean
+    link?: boolean
+    institutionType?: boolean
+    ownershipType?: boolean
+    currency?: boolean
+    overview?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["school"]>
+
+  export type SchoolSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    logo?: boolean
+    schoolImage?: boolean
+    name?: boolean
+    slug?: boolean
+    state?: boolean
+    country?: boolean
+    city?: boolean
+    address?: boolean
+    link?: boolean
+    institutionType?: boolean
+    ownershipType?: boolean
+    currency?: boolean
+    overview?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["school"]>
+
+  export type SchoolSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    logo?: boolean
+    schoolImage?: boolean
+    name?: boolean
+    slug?: boolean
+    state?: boolean
+    country?: boolean
+    city?: boolean
+    address?: boolean
+    link?: boolean
+    institutionType?: boolean
+    ownershipType?: boolean
+    currency?: boolean
+    overview?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["school"]>
+
+  export type SchoolSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    logo?: boolean
+    schoolImage?: boolean
+    name?: boolean
+    slug?: boolean
+    state?: boolean
+    country?: boolean
+    city?: boolean
+    address?: boolean
+    link?: boolean
+    institutionType?: boolean
+    ownershipType?: boolean
+    currency?: boolean
+    overview?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
+  export type SchoolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type SchoolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type SchoolIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "School"
+    objects: {
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      schoolId: string
+      logo: Prisma.JsonValue
+      schoolImage: Prisma.JsonValue
+      name: string
+      slug: string
+      state: string
+      country: string
+      city: string
+      address: string
+      link: string
+      institutionType: $Enums.InstitutionType
+      ownershipType: $Enums.OwnershipType
+      currency: $Enums.Currency
+      overview: string
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["school"]>
+    composites: {}
+  }
+
+  type SchoolGetPayload<S extends boolean | null | undefined | SchoolDefaultArgs> = $Result.GetResult<Prisma.$SchoolPayload, S>
+
+  type SchoolCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SchoolFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SchoolCountAggregateInputType | true
+    }
+
+  export interface SchoolDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['School'], meta: { name: 'School' } }
+    /**
+     * Find zero or one School that matches the filter.
+     * @param {SchoolFindUniqueArgs} args - Arguments to find a School
+     * @example
+     * // Get one School
+     * const school = await prisma.school.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolFindUniqueArgs>(args: SelectSubset<T, SchoolFindUniqueArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one School that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SchoolFindUniqueOrThrowArgs} args - Arguments to find a School
+     * @example
+     * // Get one School
+     * const school = await prisma.school.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first School that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolFindFirstArgs} args - Arguments to find a School
+     * @example
+     * // Get one School
+     * const school = await prisma.school.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolFindFirstArgs>(args?: SelectSubset<T, SchoolFindFirstArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first School that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolFindFirstOrThrowArgs} args - Arguments to find a School
+     * @example
+     * // Get one School
+     * const school = await prisma.school.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Schools that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Schools
+     * const schools = await prisma.school.findMany()
+     * 
+     * // Get first 10 Schools
+     * const schools = await prisma.school.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolWithIdOnly = await prisma.school.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolFindManyArgs>(args?: SelectSubset<T, SchoolFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a School.
+     * @param {SchoolCreateArgs} args - Arguments to create a School.
+     * @example
+     * // Create one School
+     * const School = await prisma.school.create({
+     *   data: {
+     *     // ... data to create a School
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolCreateArgs>(args: SelectSubset<T, SchoolCreateArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Schools.
+     * @param {SchoolCreateManyArgs} args - Arguments to create many Schools.
+     * @example
+     * // Create many Schools
+     * const school = await prisma.school.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolCreateManyArgs>(args?: SelectSubset<T, SchoolCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Schools and returns the data saved in the database.
+     * @param {SchoolCreateManyAndReturnArgs} args - Arguments to create many Schools.
+     * @example
+     * // Create many Schools
+     * const school = await prisma.school.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Schools and only return the `id`
+     * const schoolWithIdOnly = await prisma.school.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a School.
+     * @param {SchoolDeleteArgs} args - Arguments to delete one School.
+     * @example
+     * // Delete one School
+     * const School = await prisma.school.delete({
+     *   where: {
+     *     // ... filter to delete one School
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolDeleteArgs>(args: SelectSubset<T, SchoolDeleteArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one School.
+     * @param {SchoolUpdateArgs} args - Arguments to update one School.
+     * @example
+     * // Update one School
+     * const school = await prisma.school.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolUpdateArgs>(args: SelectSubset<T, SchoolUpdateArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Schools.
+     * @param {SchoolDeleteManyArgs} args - Arguments to filter Schools to delete.
+     * @example
+     * // Delete a few Schools
+     * const { count } = await prisma.school.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolDeleteManyArgs>(args?: SelectSubset<T, SchoolDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Schools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Schools
+     * const school = await prisma.school.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolUpdateManyArgs>(args: SelectSubset<T, SchoolUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Schools and returns the data updated in the database.
+     * @param {SchoolUpdateManyAndReturnArgs} args - Arguments to update many Schools.
+     * @example
+     * // Update many Schools
+     * const school = await prisma.school.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Schools and only return the `id`
+     * const schoolWithIdOnly = await prisma.school.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SchoolUpdateManyAndReturnArgs>(args: SelectSubset<T, SchoolUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one School.
+     * @param {SchoolUpsertArgs} args - Arguments to update or create a School.
+     * @example
+     * // Update or create a School
+     * const school = await prisma.school.upsert({
+     *   create: {
+     *     // ... data to create a School
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the School we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolUpsertArgs>(args: SelectSubset<T, SchoolUpsertArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Schools.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolCountArgs} args - Arguments to filter Schools to count.
+     * @example
+     * // Count the number of Schools
+     * const count = await prisma.school.count({
+     *   where: {
+     *     // ... the filter for the Schools we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolCountArgs>(
+      args?: Subset<T, SchoolCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a School.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolAggregateArgs>(args: Subset<T, SchoolAggregateArgs>): Prisma.PrismaPromise<GetSchoolAggregateType<T>>
+
+    /**
+     * Group by School.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the School model
+   */
+  readonly fields: SchoolFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for School.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the School model
+   */
+  interface SchoolFieldRefs {
+    readonly id: FieldRef<"School", 'Int'>
+    readonly schoolId: FieldRef<"School", 'String'>
+    readonly logo: FieldRef<"School", 'Json'>
+    readonly schoolImage: FieldRef<"School", 'Json'>
+    readonly name: FieldRef<"School", 'String'>
+    readonly slug: FieldRef<"School", 'String'>
+    readonly state: FieldRef<"School", 'String'>
+    readonly country: FieldRef<"School", 'String'>
+    readonly city: FieldRef<"School", 'String'>
+    readonly address: FieldRef<"School", 'String'>
+    readonly link: FieldRef<"School", 'String'>
+    readonly institutionType: FieldRef<"School", 'InstitutionType'>
+    readonly ownershipType: FieldRef<"School", 'OwnershipType'>
+    readonly currency: FieldRef<"School", 'Currency'>
+    readonly overview: FieldRef<"School", 'String'>
+    readonly createdById: FieldRef<"School", 'String'>
+    readonly createdAt: FieldRef<"School", 'DateTime'>
+    readonly updatedAt: FieldRef<"School", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * School findUnique
+   */
+  export type SchoolFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter, which School to fetch.
+     */
+    where: SchoolWhereUniqueInput
+  }
+
+  /**
+   * School findUniqueOrThrow
+   */
+  export type SchoolFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter, which School to fetch.
+     */
+    where: SchoolWhereUniqueInput
+  }
+
+  /**
+   * School findFirst
+   */
+  export type SchoolFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter, which School to fetch.
+     */
+    where?: SchoolWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Schools to fetch.
+     */
+    orderBy?: SchoolOrderByWithRelationInput | SchoolOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Schools.
+     */
+    cursor?: SchoolWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Schools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Schools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Schools.
+     */
+    distinct?: SchoolScalarFieldEnum | SchoolScalarFieldEnum[]
+  }
+
+  /**
+   * School findFirstOrThrow
+   */
+  export type SchoolFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter, which School to fetch.
+     */
+    where?: SchoolWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Schools to fetch.
+     */
+    orderBy?: SchoolOrderByWithRelationInput | SchoolOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Schools.
+     */
+    cursor?: SchoolWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Schools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Schools.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Schools.
+     */
+    distinct?: SchoolScalarFieldEnum | SchoolScalarFieldEnum[]
+  }
+
+  /**
+   * School findMany
+   */
+  export type SchoolFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter, which Schools to fetch.
+     */
+    where?: SchoolWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Schools to fetch.
+     */
+    orderBy?: SchoolOrderByWithRelationInput | SchoolOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Schools.
+     */
+    cursor?: SchoolWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Schools from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Schools.
+     */
+    skip?: number
+    distinct?: SchoolScalarFieldEnum | SchoolScalarFieldEnum[]
+  }
+
+  /**
+   * School create
+   */
+  export type SchoolCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * The data needed to create a School.
+     */
+    data: XOR<SchoolCreateInput, SchoolUncheckedCreateInput>
+  }
+
+  /**
+   * School createMany
+   */
+  export type SchoolCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Schools.
+     */
+    data: SchoolCreateManyInput | SchoolCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * School createManyAndReturn
+   */
+  export type SchoolCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * The data used to create many Schools.
+     */
+    data: SchoolCreateManyInput | SchoolCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * School update
+   */
+  export type SchoolUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * The data needed to update a School.
+     */
+    data: XOR<SchoolUpdateInput, SchoolUncheckedUpdateInput>
+    /**
+     * Choose, which School to update.
+     */
+    where: SchoolWhereUniqueInput
+  }
+
+  /**
+   * School updateMany
+   */
+  export type SchoolUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Schools.
+     */
+    data: XOR<SchoolUpdateManyMutationInput, SchoolUncheckedUpdateManyInput>
+    /**
+     * Filter which Schools to update
+     */
+    where?: SchoolWhereInput
+    /**
+     * Limit how many Schools to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * School updateManyAndReturn
+   */
+  export type SchoolUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * The data used to update Schools.
+     */
+    data: XOR<SchoolUpdateManyMutationInput, SchoolUncheckedUpdateManyInput>
+    /**
+     * Filter which Schools to update
+     */
+    where?: SchoolWhereInput
+    /**
+     * Limit how many Schools to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * School upsert
+   */
+  export type SchoolUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * The filter to search for the School to update in case it exists.
+     */
+    where: SchoolWhereUniqueInput
+    /**
+     * In case the School found by the `where` argument doesn't exist, create a new School with this data.
+     */
+    create: XOR<SchoolCreateInput, SchoolUncheckedCreateInput>
+    /**
+     * In case the School was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolUpdateInput, SchoolUncheckedUpdateInput>
+  }
+
+  /**
+   * School delete
+   */
+  export type SchoolDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+    /**
+     * Filter which School to delete.
+     */
+    where: SchoolWhereUniqueInput
+  }
+
+  /**
+   * School deleteMany
+   */
+  export type SchoolDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Schools to delete
+     */
+    where?: SchoolWhereInput
+    /**
+     * Limit how many Schools to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * School without action
+   */
+  export type SchoolDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the School
+     */
+    select?: SchoolSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the School
+     */
+    omit?: SchoolOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9968,6 +11389,30 @@ export namespace Prisma {
   };
 
   export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
+
+
+  export const SchoolScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    logo: 'logo',
+    schoolImage: 'schoolImage',
+    name: 'name',
+    slug: 'slug',
+    state: 'state',
+    country: 'country',
+    city: 'city',
+    address: 'address',
+    link: 'link',
+    institutionType: 'institutionType',
+    ownershipType: 'ownershipType',
+    currency: 'currency',
+    overview: 'overview',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10129,6 +11574,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InstitutionType'
+   */
+  export type EnumInstitutionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstitutionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'InstitutionType[]'
+   */
+  export type ListEnumInstitutionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstitutionType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'OwnershipType'
+   */
+  export type EnumOwnershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OwnershipType'>
+    
+
+
+  /**
+   * Reference to a field of type 'OwnershipType[]'
+   */
+  export type ListEnumOwnershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OwnershipType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Currency'
+   */
+  export type EnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency'>
+    
+
+
+  /**
+   * Reference to a field of type 'Currency[]'
+   */
+  export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10241,6 +11728,7 @@ export namespace Prisma {
     teamsCreated?: TeamListRelationFilter
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
+    schoolsCreated?: SchoolListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -10272,6 +11760,7 @@ export namespace Prisma {
     teamsCreated?: TeamOrderByRelationAggregateInput
     faqsCreated?: FaqOrderByRelationAggregateInput
     activityLogs?: ActivityLogOrderByRelationAggregateInput
+    schoolsCreated?: SchoolOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -10306,6 +11795,7 @@ export namespace Prisma {
     teamsCreated?: TeamListRelationFilter
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
+    schoolsCreated?: SchoolListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -10708,6 +12198,128 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
   }
 
+  export type SchoolWhereInput = {
+    AND?: SchoolWhereInput | SchoolWhereInput[]
+    OR?: SchoolWhereInput[]
+    NOT?: SchoolWhereInput | SchoolWhereInput[]
+    id?: IntFilter<"School"> | number
+    schoolId?: StringFilter<"School"> | string
+    logo?: JsonFilter<"School">
+    schoolImage?: JsonFilter<"School">
+    name?: StringFilter<"School"> | string
+    slug?: StringFilter<"School"> | string
+    state?: StringFilter<"School"> | string
+    country?: StringFilter<"School"> | string
+    city?: StringFilter<"School"> | string
+    address?: StringFilter<"School"> | string
+    link?: StringFilter<"School"> | string
+    institutionType?: EnumInstitutionTypeFilter<"School"> | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
+    currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
+    overview?: StringFilter<"School"> | string
+    createdById?: StringFilter<"School"> | string
+    createdAt?: DateTimeFilter<"School"> | Date | string
+    updatedAt?: DateTimeFilter<"School"> | Date | string
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type SchoolOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    logo?: SortOrder
+    schoolImage?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    city?: SortOrder
+    address?: SortOrder
+    link?: SortOrder
+    institutionType?: SortOrder
+    ownershipType?: SortOrder
+    currency?: SortOrder
+    overview?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type SchoolWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    schoolId?: string
+    slug?: string
+    AND?: SchoolWhereInput | SchoolWhereInput[]
+    OR?: SchoolWhereInput[]
+    NOT?: SchoolWhereInput | SchoolWhereInput[]
+    logo?: JsonFilter<"School">
+    schoolImage?: JsonFilter<"School">
+    name?: StringFilter<"School"> | string
+    state?: StringFilter<"School"> | string
+    country?: StringFilter<"School"> | string
+    city?: StringFilter<"School"> | string
+    address?: StringFilter<"School"> | string
+    link?: StringFilter<"School"> | string
+    institutionType?: EnumInstitutionTypeFilter<"School"> | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
+    currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
+    overview?: StringFilter<"School"> | string
+    createdById?: StringFilter<"School"> | string
+    createdAt?: DateTimeFilter<"School"> | Date | string
+    updatedAt?: DateTimeFilter<"School"> | Date | string
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "schoolId" | "id" | "slug">
+
+  export type SchoolOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    logo?: SortOrder
+    schoolImage?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    city?: SortOrder
+    address?: SortOrder
+    link?: SortOrder
+    institutionType?: SortOrder
+    ownershipType?: SortOrder
+    currency?: SortOrder
+    overview?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SchoolCountOrderByAggregateInput
+    _avg?: SchoolAvgOrderByAggregateInput
+    _max?: SchoolMaxOrderByAggregateInput
+    _min?: SchoolMinOrderByAggregateInput
+    _sum?: SchoolSumOrderByAggregateInput
+  }
+
+  export type SchoolScalarWhereWithAggregatesInput = {
+    AND?: SchoolScalarWhereWithAggregatesInput | SchoolScalarWhereWithAggregatesInput[]
+    OR?: SchoolScalarWhereWithAggregatesInput[]
+    NOT?: SchoolScalarWhereWithAggregatesInput | SchoolScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"School"> | number
+    schoolId?: StringWithAggregatesFilter<"School"> | string
+    logo?: JsonWithAggregatesFilter<"School">
+    schoolImage?: JsonWithAggregatesFilter<"School">
+    name?: StringWithAggregatesFilter<"School"> | string
+    slug?: StringWithAggregatesFilter<"School"> | string
+    state?: StringWithAggregatesFilter<"School"> | string
+    country?: StringWithAggregatesFilter<"School"> | string
+    city?: StringWithAggregatesFilter<"School"> | string
+    address?: StringWithAggregatesFilter<"School"> | string
+    link?: StringWithAggregatesFilter<"School"> | string
+    institutionType?: EnumInstitutionTypeWithAggregatesFilter<"School"> | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeWithAggregatesFilter<"School"> | $Enums.OwnershipType
+    currency?: EnumCurrencyWithAggregatesFilter<"School"> | $Enums.Currency
+    overview?: StringWithAggregatesFilter<"School"> | string
+    createdById?: StringWithAggregatesFilter<"School"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
+  }
+
   export type TokenCreateInput = {
     id?: number
     tokenId?: string
@@ -10806,6 +12418,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -10836,6 +12449,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -10865,6 +12479,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -10895,6 +12510,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -11302,6 +12918,150 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SchoolCreateInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
+  }
+
+  export type SchoolUncheckedCreateInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolUpdateInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
+  }
+
+  export type SchoolUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolCreateManyInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolUpdateManyMutationInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11550,6 +13310,12 @@ export namespace Prisma {
     none?: ActivityLogWhereInput
   }
 
+  export type SchoolListRelationFilter = {
+    every?: SchoolWhereInput
+    some?: SchoolWhereInput
+    none?: SchoolWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11572,6 +13338,10 @@ export namespace Prisma {
   }
 
   export type ActivityLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SchoolOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11951,6 +13721,124 @@ export namespace Prisma {
     resourceId?: SortOrder
   }
 
+  export type EnumInstitutionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstitutionType | EnumInstitutionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstitutionTypeFilter<$PrismaModel> | $Enums.InstitutionType
+  }
+
+  export type EnumOwnershipTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OwnershipType | EnumOwnershipTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOwnershipTypeFilter<$PrismaModel> | $Enums.OwnershipType
+  }
+
+  export type EnumCurrencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
+  }
+
+  export type SchoolCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    logo?: SortOrder
+    schoolImage?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    city?: SortOrder
+    address?: SortOrder
+    link?: SortOrder
+    institutionType?: SortOrder
+    ownershipType?: SortOrder
+    currency?: SortOrder
+    overview?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type SchoolMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    city?: SortOrder
+    address?: SortOrder
+    link?: SortOrder
+    institutionType?: SortOrder
+    ownershipType?: SortOrder
+    currency?: SortOrder
+    overview?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    state?: SortOrder
+    country?: SortOrder
+    city?: SortOrder
+    address?: SortOrder
+    link?: SortOrder
+    institutionType?: SortOrder
+    ownershipType?: SortOrder
+    currency?: SortOrder
+    overview?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SchoolSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumInstitutionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstitutionType | EnumInstitutionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstitutionTypeWithAggregatesFilter<$PrismaModel> | $Enums.InstitutionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstitutionTypeFilter<$PrismaModel>
+    _max?: NestedEnumInstitutionTypeFilter<$PrismaModel>
+  }
+
+  export type EnumOwnershipTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OwnershipType | EnumOwnershipTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel> | $Enums.OwnershipType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOwnershipTypeFilter<$PrismaModel>
+    _max?: NestedEnumOwnershipTypeFilter<$PrismaModel>
+  }
+
+  export type EnumCurrencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyWithAggregatesFilter<$PrismaModel> | $Enums.Currency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyFilter<$PrismaModel>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12031,6 +13919,13 @@ export namespace Prisma {
     connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
   }
 
+  export type SchoolCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput> | SchoolCreateWithoutCreatedByInput[] | SchoolUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: SchoolCreateOrConnectWithoutCreatedByInput | SchoolCreateOrConnectWithoutCreatedByInput[]
+    createMany?: SchoolCreateManyCreatedByInputEnvelope
+    connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -12083,6 +13978,13 @@ export namespace Prisma {
     connectOrCreate?: ActivityLogCreateOrConnectWithoutAdminInput | ActivityLogCreateOrConnectWithoutAdminInput[]
     createMany?: ActivityLogCreateManyAdminInputEnvelope
     connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type SchoolUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput> | SchoolCreateWithoutCreatedByInput[] | SchoolUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: SchoolCreateOrConnectWithoutCreatedByInput | SchoolCreateOrConnectWithoutCreatedByInput[]
+    createMany?: SchoolCreateManyCreatedByInputEnvelope
+    connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -12217,6 +14119,20 @@ export namespace Prisma {
     deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
   }
 
+  export type SchoolUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput> | SchoolCreateWithoutCreatedByInput[] | SchoolUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: SchoolCreateOrConnectWithoutCreatedByInput | SchoolCreateOrConnectWithoutCreatedByInput[]
+    upsert?: SchoolUpsertWithWhereUniqueWithoutCreatedByInput | SchoolUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: SchoolCreateManyCreatedByInputEnvelope
+    set?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    disconnect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    delete?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    update?: SchoolUpdateWithWhereUniqueWithoutCreatedByInput | SchoolUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: SchoolUpdateManyWithWhereWithoutCreatedByInput | SchoolUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -12325,6 +14241,20 @@ export namespace Prisma {
     update?: ActivityLogUpdateWithWhereUniqueWithoutAdminInput | ActivityLogUpdateWithWhereUniqueWithoutAdminInput[]
     updateMany?: ActivityLogUpdateManyWithWhereWithoutAdminInput | ActivityLogUpdateManyWithWhereWithoutAdminInput[]
     deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type SchoolUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput> | SchoolCreateWithoutCreatedByInput[] | SchoolUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: SchoolCreateOrConnectWithoutCreatedByInput | SchoolCreateOrConnectWithoutCreatedByInput[]
+    upsert?: SchoolUpsertWithWhereUniqueWithoutCreatedByInput | SchoolUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: SchoolCreateManyCreatedByInputEnvelope
+    set?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    disconnect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    delete?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+    update?: SchoolUpdateWithWhereUniqueWithoutCreatedByInput | SchoolUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: SchoolUpdateManyWithWhereWithoutCreatedByInput | SchoolUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutDepartmentsLeadingInput = {
@@ -12535,6 +14465,32 @@ export namespace Prisma {
     upsert?: AdminUpsertWithoutActivityLogsInput
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutActivityLogsInput, AdminUpdateWithoutActivityLogsInput>, AdminUncheckedUpdateWithoutActivityLogsInput>
+  }
+
+  export type AdminCreateNestedOneWithoutSchoolsCreatedInput = {
+    create?: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutSchoolsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type EnumInstitutionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.InstitutionType
+  }
+
+  export type EnumOwnershipTypeFieldUpdateOperationsInput = {
+    set?: $Enums.OwnershipType
+  }
+
+  export type EnumCurrencyFieldUpdateOperationsInput = {
+    set?: $Enums.Currency
+  }
+
+  export type AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutSchoolsCreatedInput
+    upsert?: AdminUpsertWithoutSchoolsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutSchoolsCreatedInput, AdminUpdateWithoutSchoolsCreatedInput>, AdminUncheckedUpdateWithoutSchoolsCreatedInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12783,6 +14739,57 @@ export namespace Prisma {
     _max?: NestedEnumDepartmentNameFilter<$PrismaModel>
   }
 
+  export type NestedEnumInstitutionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstitutionType | EnumInstitutionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstitutionTypeFilter<$PrismaModel> | $Enums.InstitutionType
+  }
+
+  export type NestedEnumOwnershipTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.OwnershipType | EnumOwnershipTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOwnershipTypeFilter<$PrismaModel> | $Enums.OwnershipType
+  }
+
+  export type NestedEnumCurrencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
+  }
+
+  export type NestedEnumInstitutionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstitutionType | EnumInstitutionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstitutionType[] | ListEnumInstitutionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstitutionTypeWithAggregatesFilter<$PrismaModel> | $Enums.InstitutionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstitutionTypeFilter<$PrismaModel>
+    _max?: NestedEnumInstitutionTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OwnershipType | EnumOwnershipTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OwnershipType[] | ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel> | $Enums.OwnershipType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOwnershipTypeFilter<$PrismaModel>
+    _max?: NestedEnumOwnershipTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCurrencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyWithAggregatesFilter<$PrismaModel> | $Enums.Currency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyFilter<$PrismaModel>
+  }
+
   export type AdminCreateWithoutCreatedInput = {
     id?: number
     adminId: string
@@ -12810,6 +14817,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedInput = {
@@ -12839,6 +14847,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedInput = {
@@ -12873,6 +14882,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedByInput = {
@@ -12902,6 +14912,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedByInput = {
@@ -13101,6 +15112,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SchoolCreateWithoutCreatedByInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SchoolCreateOrConnectWithoutCreatedByInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type SchoolCreateManyCreatedByInputEnvelope = {
+    data: SchoolCreateManyCreatedByInput | SchoolCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AdminUpsertWithoutCreatedInput = {
     update: XOR<AdminUpdateWithoutCreatedInput, AdminUncheckedUpdateWithoutCreatedInput>
     create: XOR<AdminCreateWithoutCreatedInput, AdminUncheckedCreateWithoutCreatedInput>
@@ -13138,6 +15199,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedInput = {
@@ -13167,6 +15229,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -13373,6 +15436,46 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ActivityLog"> | Date | string
   }
 
+  export type SchoolUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: SchoolWhereUniqueInput
+    update: XOR<SchoolUpdateWithoutCreatedByInput, SchoolUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<SchoolCreateWithoutCreatedByInput, SchoolUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type SchoolUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: SchoolWhereUniqueInput
+    data: XOR<SchoolUpdateWithoutCreatedByInput, SchoolUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type SchoolUpdateManyWithWhereWithoutCreatedByInput = {
+    where: SchoolScalarWhereInput
+    data: XOR<SchoolUpdateManyMutationInput, SchoolUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type SchoolScalarWhereInput = {
+    AND?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
+    OR?: SchoolScalarWhereInput[]
+    NOT?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
+    id?: IntFilter<"School"> | number
+    schoolId?: StringFilter<"School"> | string
+    logo?: JsonFilter<"School">
+    schoolImage?: JsonFilter<"School">
+    name?: StringFilter<"School"> | string
+    slug?: StringFilter<"School"> | string
+    state?: StringFilter<"School"> | string
+    country?: StringFilter<"School"> | string
+    city?: StringFilter<"School"> | string
+    address?: StringFilter<"School"> | string
+    link?: StringFilter<"School"> | string
+    institutionType?: EnumInstitutionTypeFilter<"School"> | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
+    currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
+    overview?: StringFilter<"School"> | string
+    createdById?: StringFilter<"School"> | string
+    createdAt?: DateTimeFilter<"School"> | Date | string
+    updatedAt?: DateTimeFilter<"School"> | Date | string
+  }
+
   export type AdminCreateWithoutDepartmentsLeadingInput = {
     id?: number
     adminId: string
@@ -13400,6 +15503,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsLeadingInput = {
@@ -13429,6 +15533,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsLeadingInput = {
@@ -13463,6 +15568,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsInput = {
@@ -13492,6 +15598,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsInput = {
@@ -13565,6 +15672,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsLeadingInput = {
@@ -13594,6 +15702,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutDepartmentsInput = {
@@ -13655,6 +15764,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsLeadingInput = {
@@ -13684,6 +15794,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsLeadingInput = {
@@ -13740,6 +15851,7 @@ export namespace Prisma {
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
@@ -13769,6 +15881,7 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
@@ -13803,6 +15916,7 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsInput = {
@@ -13832,6 +15946,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsInput = {
@@ -13876,6 +15991,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsLeadingInput = {
@@ -13905,6 +16021,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutTeamsInput = {
@@ -13972,6 +16089,7 @@ export namespace Prisma {
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
@@ -14001,6 +16119,7 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -14046,6 +16165,7 @@ export namespace Prisma {
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutFaqsCreatedInput = {
@@ -14075,6 +16195,7 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutFaqsCreatedInput = {
@@ -14119,6 +16240,7 @@ export namespace Prisma {
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutFaqsCreatedInput = {
@@ -14148,6 +16270,7 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutActivityLogsInput = {
@@ -14177,6 +16300,7 @@ export namespace Prisma {
     teamsLeading?: TeamCreateNestedManyWithoutLeadInput
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutActivityLogsInput = {
@@ -14206,6 +16330,7 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutActivityLogsInput = {
@@ -14250,6 +16375,7 @@ export namespace Prisma {
     teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutActivityLogsInput = {
@@ -14279,6 +16405,142 @@ export namespace Prisma {
     teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminCreateWithoutSchoolsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutSchoolsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutSchoolsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
+  }
+
+  export type AdminUpsertWithoutSchoolsCreatedInput = {
+    update: XOR<AdminUpdateWithoutSchoolsCreatedInput, AdminUncheckedUpdateWithoutSchoolsCreatedInput>
+    create: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutSchoolsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutSchoolsCreatedInput, AdminUncheckedUpdateWithoutSchoolsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutSchoolsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutSchoolsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
   }
 
   export type AdminCreateManyCreatedByInput = {
@@ -14346,6 +16608,26 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SchoolCreateManyCreatedByInput = {
+    id?: number
+    schoolId?: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AdminUpdateWithoutCreatedByInput = {
     adminId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -14372,6 +16654,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedByInput = {
@@ -14401,6 +16684,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutCreatedByInput = {
@@ -14613,6 +16897,65 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SchoolUpdateWithoutCreatedByInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TeamCreateManyDepartmentInput = {
     id?: number
     name: string
@@ -14648,6 +16991,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsInput = {
@@ -14677,6 +17021,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutDepartmentsInput = {
@@ -14755,6 +17100,7 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsInput = {
@@ -14784,6 +17130,7 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutTeamsInput = {

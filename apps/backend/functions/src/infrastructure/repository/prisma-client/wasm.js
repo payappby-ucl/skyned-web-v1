@@ -20,11 +20,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.8.1
+ * Prisma Client JS version: 6.8.2
  * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.8.1",
+  client: "6.8.2",
   engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
@@ -202,6 +202,27 @@ exports.Prisma.ActivityLogScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SchoolScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  logo: 'logo',
+  schoolImage: 'schoolImage',
+  name: 'name',
+  slug: 'slug',
+  state: 'state',
+  country: 'country',
+  city: 'city',
+  address: 'address',
+  link: 'link',
+  institutionType: 'institutionType',
+  ownershipType: 'ownershipType',
+  currency: 'currency',
+  overview: 'overview',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -252,6 +273,25 @@ exports.DepartmentName = exports.$Enums.DepartmentName = {
   Quality_Assurance: 'Quality_Assurance'
 };
 
+exports.InstitutionType = exports.$Enums.InstitutionType = {
+  university: 'university',
+  college: 'college'
+};
+
+exports.OwnershipType = exports.$Enums.OwnershipType = {
+  private: 'private',
+  public: 'public'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  USD: 'USD',
+  CAD: 'CAD',
+  AUD: 'AUD',
+  NGN: 'NGN',
+  EUR: 'EUR',
+  GBP: 'GBP'
+};
+
 exports.Prisma.ModelName = {
   Token: 'Token',
   Admin: 'Admin',
@@ -259,7 +299,8 @@ exports.Prisma.ModelName = {
   Team: 'Team',
   Faq: 'Faq',
   Inquiry: 'Inquiry',
-  ActivityLog: 'ActivityLog'
+  ActivityLog: 'ActivityLog',
+  School: 'School'
 };
 
 /**

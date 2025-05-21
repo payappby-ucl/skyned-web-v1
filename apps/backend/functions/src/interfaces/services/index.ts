@@ -9,3 +9,4 @@ export * from "./activity-log";
 export * from "./faq";
 export * from "./department";
 export * from "./our-team";
+export * from "./school";

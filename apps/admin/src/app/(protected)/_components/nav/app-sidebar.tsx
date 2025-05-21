@@ -14,6 +14,7 @@ import {
   Map,
   MessageCircleQuestion,
   PieChart,
+  School,
   Settings2,
   Split,
   SquareTerminal,
@@ -51,6 +52,12 @@ const data: {
       title: "Dashboard",
       url: "/",
       icon: LayoutDashboard,
+    },
+    {
+      title: "Schools",
+      url: "/schools",
+      icon: School,
+      resource: "schools",
     },
 
     {

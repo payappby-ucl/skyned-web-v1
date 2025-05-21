@@ -4,6 +4,7 @@ import {
   IAdminRepository,
   IDepartmentRepository,
   IFaqRepository,
+  ISchoolRepository,
   ITokenRepository,
 } from "../../../infrastructure";
 import { IActivityLogRepository } from "../../../infrastructure/repository/activity-log";
@@ -24,4 +25,5 @@ export interface IRepository {
   activityLog: IActivityLogRepository;
   faq: IFaqRepository;
   department: IDepartmentRepository;
+  school: ISchoolRepository;
 }

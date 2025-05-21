@@ -19,3 +19,4 @@ __exportStar(require("./register"), exports);
 __exportStar(require("./contact"), exports);
 __exportStar(require("./faq"), exports);
 __exportStar(require("./admin"), exports);
+__exportStar(require("./school"), exports);

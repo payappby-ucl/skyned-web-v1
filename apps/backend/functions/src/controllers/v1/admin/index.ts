@@ -108,7 +108,7 @@ export class AdminController
       if (accountExists) {
         throw SkynedUtils.createException(
           StatusCodes.CONFLICT,
-          `${body.email} is already any existing account.`,
+          `${body.email} is already an existing account.`,
         );
       }
 

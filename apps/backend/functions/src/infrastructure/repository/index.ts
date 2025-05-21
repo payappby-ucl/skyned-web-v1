@@ -8,6 +8,7 @@ import { DepartmentRepository } from "./department";
 import { FaqRepository } from "./faq";
 import { InquiryRepository } from "./inquiry";
 import { Client } from "./prisma";
+import { SchoolRepository } from "./school";
 import { TokenRepository } from "./token";
 
 export * from "./token";
@@ -16,6 +17,7 @@ export * from "./inquiry";
 export * from "./activity-log";
 export * from "./faq";
 export * from "./department";
+export * from "./school";
 
 export interface RepositoryDependencies {
   validationUtility: IValidationUtility;
@@ -49,6 +51,7 @@ export class Repository extends Client implements IRepository {
   activityLog = new ActivityLogRepository(this.db);
   faq = new FaqRepository(this.db, this.validationUtility);
   department = new DepartmentRepository(this.db);
+  school = new SchoolRepository(this.db);
 }
 
 export const repository = SkynedRegistry.getSingleton(

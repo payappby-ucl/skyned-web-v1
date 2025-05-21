@@ -34,3 +34,25 @@ export const socialMedia = {
   tiktok: "tiktok",
   pinterest: "pinterest",
 } as const;
+
+/** Institution Type */
+export const institutionType = {
+  university: "university",
+  college: "college",
+} as const;
+
+/** Ownership Type */
+export const ownershipType = {
+  private: "private",
+  public: "public",
+} as const;
+
+/** Currency */
+export const currencies = {
+  USD: "USD",
+  CAD: "CAD",
+  AUD: "AUD",
+  NGN: "NGN",
+  EUR: "EUR",
+  GBP: "GBP",
+} as const;

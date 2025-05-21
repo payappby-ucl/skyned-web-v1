@@ -143,7 +143,7 @@ export const columns: ColumnDef<IFaq>[] = [
                 loading: "Deleting...",
                 success(data) {
                   queryClient.invalidateQueries({
-                    queryKey: ["faq"],
+                    queryKey: ["faqs"],
                   });
                   return data.message;
                 },

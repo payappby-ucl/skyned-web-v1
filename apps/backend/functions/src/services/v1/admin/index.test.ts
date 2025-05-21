@@ -21,7 +21,7 @@ describe("AdminService", () => {
       });
 
       afterAll(() => {
-        jest.clearAllMocks();
+        jest.restoreAllMocks();
       });
 
       test("should throw error when give and empty adminId", async () => {

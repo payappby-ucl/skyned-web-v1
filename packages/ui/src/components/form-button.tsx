@@ -8,9 +8,18 @@ type Props = Parameters<typeof Button>["0"] & {
   isLoading?: boolean;
 };
 
-const FormButton: React.FC<Props> = ({ isLoading, children, ...props }) => {
+const FormButton: React.FC<Props> = ({
+  isLoading,
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <Button {...props} disabled={isLoading}>
+    <Button
+      className={`flex items-center gap-2${className}`}
+      {...props}
+      disabled={isLoading}
+    >
       {isLoading ? <Loader2 className="animate-spin" /> : null}
       {children}
     </Button>

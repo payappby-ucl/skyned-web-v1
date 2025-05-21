@@ -15,7 +15,7 @@ describe("Admin API", () => {
   const server = app.getApp();
   const baseUrl = "/api/v1/admins";
 
-  describe(`POST - ${baseUrl}/me`, () => {
+  describe(`GET - ${baseUrl}/me`, () => {
     beforeAll(() => {
       jest.resetAllMocks();
     });

@@ -7,6 +7,7 @@ import { SkynedUtils } from "../utils";
 export const adminPassword = SkynedUtils.isEnvironment(["test"])
   ? "12345678"
   : idGeneratorService.id(10);
+
 export const admin = {
   adminId: "",
   email: SkynedUtils.isEnvironment(["dev", "test"])

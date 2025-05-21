@@ -22,3 +22,4 @@ __exportStar(require("./utils"), exports);
 __exportStar(require("./faq"), exports);
 __exportStar(require("./inquiry"), exports);
 __exportStar(require("./activity-log"), exports);
+__exportStar(require("./school"), exports);

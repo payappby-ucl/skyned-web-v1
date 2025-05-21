@@ -50,6 +50,8 @@ export enum RegistryKeysEnum {
   DEPARTMENT_ROUTER = "DepartmentRouter",
   /** Our team Router */
   OUR_TEAM_ROUTER = "OurTeamRouter",
+  /** School Router */
+  SCHOOL_ROUTER = "SchoolRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -70,6 +72,8 @@ export enum RegistryKeysEnum {
   DEPARTMENT_CONTROLLER = "DepartmentController",
   /** Our team Controller */
   OUR_TEAM_CONTROLLER = "OurTeamController",
+  /** School controller */
+  SCHOOL_CONTROLLER = "SchoolController",
 
   // * Services
   /** Email Service */
@@ -94,6 +98,8 @@ export enum RegistryKeysEnum {
   DEPARTMENT_SERVICE = "DepartmentService",
   /** Our team Service */
   OUR_TEAM_SERVICE = "OurTeamService",
+  /** School Service */
+  SCHOOL_SERVICE = "SchoolService",
 
   // * Utilities
   /** Handles internal validations */

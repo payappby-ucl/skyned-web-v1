@@ -7,3 +7,4 @@ export * from "./faq";
 export * from "./newsletter";
 export * from "./department";
 export * from "./our-team";
+export * from "./school";

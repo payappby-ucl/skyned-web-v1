@@ -5,4 +5,11 @@ interface ProfileImage {
   };
 }
 
-export type ResolveStoragePathType = ProfileImage;
+interface SchoolImage {
+  type: "logo" | "schoolImage";
+  data: {
+    schoolSlug: string;
+  };
+}
+
+export type ResolveStoragePathType = ProfileImage | SchoolImage;

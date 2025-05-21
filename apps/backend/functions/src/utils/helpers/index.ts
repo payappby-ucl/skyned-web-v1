@@ -154,6 +154,9 @@ export class SkynedUtils {
       case "primaryImage":
       case "secondaryImage":
         return `users/${data.adminId}/profile/${type}`;
+      case "logo":
+      case "schoolImage":
+        return `schools/${data.schoolSlug}/${type}`;
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,
@@ -169,7 +172,11 @@ export class SkynedUtils {
   static deserialize<T extends object, K>(data: T): K {
     const deserialized = Object.fromEntries(
       Object.entries(data).map(([key, value]) => {
-        if (["primaryImage", "secondaryImage"].includes(key)) {
+        if (
+          ["primaryImage", "secondaryImage", "logo", "schoolImage"].includes(
+            key,
+          )
+        ) {
           return [key, value as unknown as IObject];
         }
 

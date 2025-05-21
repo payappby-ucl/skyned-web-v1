@@ -1,0 +1,95 @@
+paths:
+  /schools:
+    post:
+      summary: Handles school creation
+      description: Creates a school on the database
+      operationId: createSchool
+      tags:
+        - School
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data needed to create a school
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  description: The school logo
+                schoolImage:
+                  type: string
+                  description: The school cover image
+                name:
+                  type: string
+                slug:
+                  type: string
+                  example: "test-school"
+                country:
+                  type: string
+                  example: CA
+                state:
+                  type: string
+                city:
+                  type: string
+                address:
+                  type: string
+                link:
+                  type: string
+                  format: uri
+                institutionType:
+                  type: string
+                  enum:
+                    - university
+                    - college
+                ownershipType:
+                  type: string
+                  enum:
+                    - private
+                    - public
+                currency:
+                  type: string
+                  enum:
+                    - USD
+                    - CAD
+                    - AUD
+                    - NGN
+                    - EUR
+                    - GBP
+              required:
+                - name
+                - logo
+                - schoolImage
+                - currency
+                - country
+                - state
+                - city
+                - address
+                - link
+                - ownershipType
+                - institutionType
+                - slug
+      responses:
+        "201":
+          description: School created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/ServerError"

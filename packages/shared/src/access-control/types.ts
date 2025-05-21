@@ -2,9 +2,17 @@ import {
   ContactUsSchema,
   CreateAdminSchema,
   CreateFaqSchema,
+  CreateSchoolSchema,
   UpdateAdminSchema,
 } from "../schemas";
-import { IAdmin, IDepartment, IFaq, IInquiry, ITeam } from "../interfaces";
+import {
+  IAdmin,
+  IDepartment,
+  IFaq,
+  IInquiry,
+  ISchool,
+  ITeam,
+} from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 
 export type AuthClaim = AdminClaim | StudentClaim;
@@ -14,7 +22,8 @@ export type ResourceType =
   | "teams"
   | "admins"
   | "faqs"
-  | "inquiries";
+  | "inquiries"
+  | "schools";
 
 export type PermissionType = {
   admins: {
@@ -48,6 +57,13 @@ export type PermissionType = {
   inquiries: {
     dataType: IInquiry;
     createDataType: ContactUsSchema;
+    updateDataType: "";
+    action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  schools: {
+    dataType: ISchool;
+    createDataType: CreateSchoolSchema;
     updateDataType: "";
     action: "list" | "create" | "read" | "update" | "delete";
   };

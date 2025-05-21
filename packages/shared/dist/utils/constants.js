@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
+exports.currencies = exports.ownershipType = exports.institutionType = exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
 /** Email domains users are not supposed to use because it belongs to internal staff */
 exports.PROHIBITED_USER_EMAIL_DOMAINS = [
     "skynedconsults.com",
@@ -32,4 +32,23 @@ exports.socialMedia = {
     x: "x",
     tiktok: "tiktok",
     pinterest: "pinterest",
+};
+/** Institution Type */
+exports.institutionType = {
+    university: "university",
+    college: "college",
+};
+/** Ownership Type */
+exports.ownershipType = {
+    private: "private",
+    public: "public",
+};
+/** Currency */
+exports.currencies = {
+    USD: "USD",
+    CAD: "CAD",
+    AUD: "AUD",
+    NGN: "NGN",
+    EUR: "EUR",
+    GBP: "GBP",
 };
