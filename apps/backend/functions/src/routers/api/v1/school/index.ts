@@ -70,6 +70,12 @@ export class SchoolRouter implements IRouter {
         authMiddleware.hasRole(["admin"]),
         schoolController.updateSchool,
       );
+
+    this.router.route("/:slug/accommodation");
+
+    this.router.route("/:slug/intakes");
+
+    this.router.route("/:slug/intakes/:id");
   }
 
   /**

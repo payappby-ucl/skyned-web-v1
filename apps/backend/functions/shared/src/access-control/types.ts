@@ -1,16 +1,20 @@
 import {
   ContactUsSchema,
+  CreateAccommodationSchema,
   CreateAdminSchema,
   CreateFaqSchema,
+  CreateIntakeSchema,
   CreateSchoolSchema,
   UpdateAdminSchema,
   UpdateSchoolSchema,
 } from "../schemas";
 import {
+  IAccommodation,
   IAdmin,
   IDepartment,
   IFaq,
   IInquiry,
+  IIntake,
   ISchool,
   ITeam,
 } from "../interfaces";
@@ -24,7 +28,9 @@ export type ResourceType =
   | "admins"
   | "faqs"
   | "inquiries"
-  | "schools";
+  | "schools"
+  | "accommodations"
+  | "intakes";
 
 export type PermissionType = {
   admins: {
@@ -66,6 +72,20 @@ export type PermissionType = {
     dataType: ISchool;
     createDataType: CreateSchoolSchema;
     updateDataType: UpdateSchoolSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  accommodations: {
+    dataType: IAccommodation;
+    createDataType: CreateAccommodationSchema;
+    updateDataType: CreateAccommodationSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  intakes: {
+    dataType: IIntake;
+    createDataType: CreateIntakeSchema;
+    updateDataType: CreateIntakeSchema;
     action: "list" | "create" | "read" | "update" | "delete";
   };
 };

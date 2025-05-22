@@ -55,6 +55,16 @@ components:
             createdBy:
               $ref: "#/components/schemas/AdminProfile"
               nullable: true
+
+            intakes:
+              type: array
+              items:
+                $ref: "#/components/schemas/Intake"
+              nullable: true
+
+            accommodation:
+              $ref: "#/components/schemas/Accommodation"
+              nullable: true
           required:
             - id
             - schoolId

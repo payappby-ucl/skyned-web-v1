@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schoolPolicies = void 0;
 exports.schoolPolicies = {
-    schools: {
+    accommodations: {
         list(authClaim) {
             if (!authClaim)
                 return false;

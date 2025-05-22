@@ -1,0 +1,43 @@
+components:
+  schemas:
+    Intake:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+
+            intake:
+              type: string
+              format: date-time
+
+            startDate:
+              type: string
+              format: date-time
+
+            deadline:
+              type: string
+              format: date-time
+
+            schoolId:
+              type: string
+
+            createdById:
+              type: string
+
+            school:
+              $ref: "#/components/schemas/School"
+              nullable: true
+
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+
+          required:
+            - id
+            - intake
+            - startDate
+            - deadline
+            - schoolId
+            - createdById

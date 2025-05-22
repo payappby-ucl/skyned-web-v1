@@ -1,7 +1,7 @@
 import { AccessControlType } from "../../access-control/types";
 
 export const schoolPolicies: AccessControlType = {
-  schools: {
+  accommodations: {
     list(authClaim) {
       if (!authClaim) return false;
       const { claim, user } = authClaim;

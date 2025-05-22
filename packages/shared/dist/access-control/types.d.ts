@@ -1,8 +1,8 @@
-import { ContactUsSchema, CreateAdminSchema, CreateFaqSchema, CreateSchoolSchema, UpdateAdminSchema, UpdateSchoolSchema } from "../schemas";
-import { IAdmin, IDepartment, IFaq, IInquiry, ISchool, ITeam } from "../interfaces";
+import { ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateSchoolSchema, UpdateAdminSchema, UpdateSchoolSchema } from "../schemas";
+import { IAccommodation, IAdmin, IDepartment, IFaq, IInquiry, IIntake, ISchool, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 export type AuthClaim = AdminClaim | StudentClaim;
-export type ResourceType = "departments" | "teams" | "admins" | "faqs" | "inquiries" | "schools";
+export type ResourceType = "departments" | "teams" | "admins" | "faqs" | "inquiries" | "schools" | "accommodations" | "intakes";
 export type PermissionType = {
     admins: {
         dataType: IAdmin;
@@ -38,6 +38,18 @@ export type PermissionType = {
         dataType: ISchool;
         createDataType: CreateSchoolSchema;
         updateDataType: UpdateSchoolSchema;
+        action: "list" | "create" | "read" | "update" | "delete";
+    };
+    accommodations: {
+        dataType: IAccommodation;
+        createDataType: CreateAccommodationSchema;
+        updateDataType: CreateAccommodationSchema;
+        action: "list" | "create" | "read" | "update" | "delete";
+    };
+    intakes: {
+        dataType: IIntake;
+        createDataType: CreateIntakeSchema;
+        updateDataType: CreateIntakeSchema;
         action: "list" | "create" | "read" | "update" | "delete";
     };
 };

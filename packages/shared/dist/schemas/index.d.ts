@@ -4,3 +4,5 @@ export * from "./contact";
 export * from "./faq";
 export * from "./admin";
 export * from "./school";
+export * from "./accommodation";
+export * from "./intake";

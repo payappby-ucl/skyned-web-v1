@@ -100,8 +100,6 @@ paths:
       tags:
         - School
       operationId: listSchools
-      security:
-        - bearerAuth: []
       parameters:
         - $ref: "#/components/parameters/LimitParam"
         - $ref: "#/components/parameters/OffsetParam"
@@ -128,9 +126,135 @@ paths:
                                   $ref: "#/components/schemas/School"
         "400":
           $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/UnAuthenticated"
-        "403":
-          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /schools/{slug}:
+    summary: Single school resource
+    description: Routes for a single school resource
+
+    get:
+      summary: Get a school
+      description: Get single school details
+      operationId: getSchool
+      tags:
+        - School
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: The school
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                $ref: "#/components/schemas/School"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Update a school
+      description: Update single school details
+      operationId: updateSchool
+      tags:
+        - School
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to update a school
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  description: The school logo
+                schoolImage:
+                  type: string
+                  description: The school cover image
+                name:
+                  type: string
+                slug:
+                  type: string
+                  example: "test-school"
+                country:
+                  type: string
+                  example: CA
+                state:
+                  type: string
+                city:
+                  type: string
+                address:
+                  type: string
+                link:
+                  type: string
+                  format: uri
+                institutionType:
+                  type: string
+                  enum:
+                    - university
+                    - college
+                ownershipType:
+                  type: string
+                  enum:
+                    - private
+                    - public
+                currency:
+                  type: string
+                  enum:
+                    - USD
+                    - CAD
+                    - AUD
+                    - NGN
+                    - EUR
+                    - GBP
+              required:
+                - name
+                - currency
+                - country
+                - state
+                - city
+                - address
+                - link
+                - ownershipType
+                - institutionType
+                - slug
+      responses:
+        "200":
+          description: The school
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"

@@ -1,9 +1,11 @@
 /* eslint-disable max-len */
 
 import {
+  IAccommodationRepository,
   IAdminRepository,
   IDepartmentRepository,
   IFaqRepository,
+  IIntakeRepository,
   ISchoolRepository,
   ITokenRepository,
 } from "../../../infrastructure";
@@ -26,4 +28,6 @@ export interface IRepository {
   faq: IFaqRepository;
   department: IDepartmentRepository;
   school: ISchoolRepository;
+  accommodation: IAccommodationRepository;
+  intake: IIntakeRepository;
 }

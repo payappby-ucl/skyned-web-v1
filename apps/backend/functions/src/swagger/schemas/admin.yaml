@@ -87,6 +87,16 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/Faq"
+            intakesCreated:
+              type: array
+              items:
+                $ref: "#/components/schemas/Intake"
+              nullable: true
+            accommodationsCreated:
+              type: array
+              items:
+                $ref: "#/components/schemas/Accommodation"
+              nullable: true
           required:
             - id
             - adminId

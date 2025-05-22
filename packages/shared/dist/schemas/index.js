@@ -20,3 +20,5 @@ __exportStar(require("./contact"), exports);
 __exportStar(require("./faq"), exports);
 __exportStar(require("./admin"), exports);
 __exportStar(require("./school"), exports);
+__exportStar(require("./accommodation"), exports);
+__exportStar(require("./intake"), exports);

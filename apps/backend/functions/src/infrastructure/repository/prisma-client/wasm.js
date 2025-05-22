@@ -223,6 +223,26 @@ exports.Prisma.SchoolScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AccommodationScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  schoolId: 'schoolId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IntakeScalarFieldEnum = {
+  id: 'id',
+  intake: 'intake',
+  startDate: 'startDate',
+  deadline: 'deadline',
+  schoolId: 'schoolId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -300,7 +320,9 @@ exports.Prisma.ModelName = {
   Faq: 'Faq',
   Inquiry: 'Inquiry',
   ActivityLog: 'ActivityLog',
-  School: 'School'
+  School: 'School',
+  Accommodation: 'Accommodation',
+  Intake: 'Intake'
 };
 
 /**

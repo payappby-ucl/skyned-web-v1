@@ -1,4 +1,5 @@
 import { CurrencyType, InstitutionType, OwnershipType } from "../types";
+import { IAccommodation } from "./accommodation";
 import { AdminProfile } from "./admin";
 import { IObject, ITimestamps } from "./utils";
 
@@ -19,6 +20,8 @@ export interface ISchool extends ITimestamps {
   institutionType: InstitutionType;
   ownershipType: OwnershipType;
   currency: CurrencyType;
+
+  accommodation?: IAccommodation;
 
   createdById: string;
   createdBy?: AdminProfile;

@@ -118,6 +118,12 @@ model Admin {
   // * Schools created
   schoolsCreated School[]
 
+  // * Accommodations Created
+  accommodationsCreated Accommodation[]
+
+  // * Intakes Created
+  intakesCreated Intake[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -239,6 +245,9 @@ model School {
 
   // programs Program[]
 
+  accommodation Accommodation?
+  intakes       Intake[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -248,6 +257,42 @@ model School {
   @@index([institutionType])
   @@index([ownershipType])
   @@map("schools")
+}
+
+model Accommodation {
+  id Int @id @default(autoincrement())
+
+  description String @db.Text
+
+  schoolId String @unique @map("school_id")
+  school   School @relation(fields: [schoolId], references: [schoolId])
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("accommodations")
+}
+
+model Intake {
+  id Int @id @default(autoincrement())
+
+  intake    DateTime
+  startDate DateTime @map("start_date")
+  deadline  DateTime
+
+  schoolId String @map("school_id")
+  school   School @relation(fields: [schoolId], references: [schoolId])
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("intakes")
 }
 
 // model Student {

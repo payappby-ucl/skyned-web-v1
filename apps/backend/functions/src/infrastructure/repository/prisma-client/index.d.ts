@@ -53,6 +53,16 @@ export type ActivityLog = $Result.DefaultSelection<Prisma.$ActivityLogPayload>
  * 
  */
 export type School = $Result.DefaultSelection<Prisma.$SchoolPayload>
+/**
+ * Model Accommodation
+ * 
+ */
+export type Accommodation = $Result.DefaultSelection<Prisma.$AccommodationPayload>
+/**
+ * Model Intake
+ * 
+ */
+export type Intake = $Result.DefaultSelection<Prisma.$IntakePayload>
 
 /**
  * Enums
@@ -345,6 +355,26 @@ export class PrismaClient<
     * ```
     */
   get school(): Prisma.SchoolDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accommodation`: Exposes CRUD operations for the **Accommodation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Accommodations
+    * const accommodations = await prisma.accommodation.findMany()
+    * ```
+    */
+  get accommodation(): Prisma.AccommodationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.intake`: Exposes CRUD operations for the **Intake** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Intakes
+    * const intakes = await prisma.intake.findMany()
+    * ```
+    */
+  get intake(): Prisma.IntakeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -792,7 +822,9 @@ export namespace Prisma {
     Faq: 'Faq',
     Inquiry: 'Inquiry',
     ActivityLog: 'ActivityLog',
-    School: 'School'
+    School: 'School',
+    Accommodation: 'Accommodation',
+    Intake: 'Intake'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -811,7 +843,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school"
+      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "intake"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1407,6 +1439,154 @@ export namespace Prisma {
           }
         }
       }
+      Accommodation: {
+        payload: Prisma.$AccommodationPayload<ExtArgs>
+        fields: Prisma.AccommodationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccommodationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccommodationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          findFirst: {
+            args: Prisma.AccommodationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccommodationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          findMany: {
+            args: Prisma.AccommodationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>[]
+          }
+          create: {
+            args: Prisma.AccommodationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          createMany: {
+            args: Prisma.AccommodationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccommodationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>[]
+          }
+          delete: {
+            args: Prisma.AccommodationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          update: {
+            args: Prisma.AccommodationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          deleteMany: {
+            args: Prisma.AccommodationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccommodationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AccommodationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>[]
+          }
+          upsert: {
+            args: Prisma.AccommodationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccommodationPayload>
+          }
+          aggregate: {
+            args: Prisma.AccommodationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccommodation>
+          }
+          groupBy: {
+            args: Prisma.AccommodationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccommodationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccommodationCountArgs<ExtArgs>
+            result: $Utils.Optional<AccommodationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Intake: {
+        payload: Prisma.$IntakePayload<ExtArgs>
+        fields: Prisma.IntakeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntakeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntakeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          findFirst: {
+            args: Prisma.IntakeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntakeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          findMany: {
+            args: Prisma.IntakeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>[]
+          }
+          create: {
+            args: Prisma.IntakeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          createMany: {
+            args: Prisma.IntakeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntakeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>[]
+          }
+          delete: {
+            args: Prisma.IntakeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          update: {
+            args: Prisma.IntakeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          deleteMany: {
+            args: Prisma.IntakeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntakeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntakeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>[]
+          }
+          upsert: {
+            args: Prisma.IntakeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntakePayload>
+          }
+          aggregate: {
+            args: Prisma.IntakeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntake>
+          }
+          groupBy: {
+            args: Prisma.IntakeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntakeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntakeCountArgs<ExtArgs>
+            result: $Utils.Optional<IntakeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1499,6 +1679,8 @@ export namespace Prisma {
     inquiry?: InquiryOmit
     activityLog?: ActivityLogOmit
     school?: SchoolOmit
+    accommodation?: AccommodationOmit
+    intake?: IntakeOmit
   }
 
   /* Types for Logging */
@@ -1602,6 +1784,8 @@ export namespace Prisma {
     faqsCreated: number
     activityLogs: number
     schoolsCreated: number
+    accommodationsCreated: number
+    intakesCreated: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1614,6 +1798,8 @@ export namespace Prisma {
     faqsCreated?: boolean | AdminCountOutputTypeCountFaqsCreatedArgs
     activityLogs?: boolean | AdminCountOutputTypeCountActivityLogsArgs
     schoolsCreated?: boolean | AdminCountOutputTypeCountSchoolsCreatedArgs
+    accommodationsCreated?: boolean | AdminCountOutputTypeCountAccommodationsCreatedArgs
+    intakesCreated?: boolean | AdminCountOutputTypeCountIntakesCreatedArgs
   }
 
   // Custom InputTypes
@@ -1690,6 +1876,20 @@ export namespace Prisma {
     where?: SchoolWhereInput
   }
 
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountAccommodationsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccommodationWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountIntakesCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntakeWhereInput
+  }
+
 
   /**
    * Count Type DepartmentCountOutputType
@@ -1759,6 +1959,37 @@ export namespace Prisma {
    */
   export type TeamCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdminWhereInput
+  }
+
+
+  /**
+   * Count Type SchoolCountOutputType
+   */
+
+  export type SchoolCountOutputType = {
+    intakes: number
+  }
+
+  export type SchoolCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intakes?: boolean | SchoolCountOutputTypeCountIntakesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolCountOutputType
+     */
+    select?: SchoolCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntakeWhereInput
   }
 
 
@@ -3125,6 +3356,8 @@ export namespace Prisma {
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
     schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
+    accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
+    intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -3208,6 +3441,8 @@ export namespace Prisma {
     faqsCreated?: boolean | Admin$faqsCreatedArgs<ExtArgs>
     activityLogs?: boolean | Admin$activityLogsArgs<ExtArgs>
     schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
+    accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
+    intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3230,6 +3465,8 @@ export namespace Prisma {
       faqsCreated: Prisma.$FaqPayload<ExtArgs>[]
       activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
       schoolsCreated: Prisma.$SchoolPayload<ExtArgs>[]
+      accommodationsCreated: Prisma.$AccommodationPayload<ExtArgs>[]
+      intakesCreated: Prisma.$IntakePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3655,6 +3892,8 @@ export namespace Prisma {
     faqsCreated<T extends Admin$faqsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$faqsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaqPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activityLogs<T extends Admin$activityLogsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     schoolsCreated<T extends Admin$schoolsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$schoolsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accommodationsCreated<T extends Admin$accommodationsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$accommodationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intakesCreated<T extends Admin$intakesCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$intakesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4331,6 +4570,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SchoolScalarFieldEnum | SchoolScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.accommodationsCreated
+   */
+  export type Admin$accommodationsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    where?: AccommodationWhereInput
+    orderBy?: AccommodationOrderByWithRelationInput | AccommodationOrderByWithRelationInput[]
+    cursor?: AccommodationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccommodationScalarFieldEnum | AccommodationScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.intakesCreated
+   */
+  export type Admin$intakesCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    where?: IntakeWhereInput
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    cursor?: IntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
   }
 
   /**
@@ -10316,6 +10603,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    accommodation?: boolean | School$accommodationArgs<ExtArgs>
+    intakes?: boolean | School$intakesArgs<ExtArgs>
+    _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["school"]>
 
   export type SchoolSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10386,6 +10676,9 @@ export namespace Prisma {
   export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
   export type SchoolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    accommodation?: boolean | School$accommodationArgs<ExtArgs>
+    intakes?: boolean | School$intakesArgs<ExtArgs>
+    _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SchoolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
@@ -10398,6 +10691,8 @@ export namespace Prisma {
     name: "School"
     objects: {
       createdBy: Prisma.$AdminPayload<ExtArgs>
+      accommodation: Prisma.$AccommodationPayload<ExtArgs> | null
+      intakes: Prisma.$IntakePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10813,6 +11108,8 @@ export namespace Prisma {
   export interface Prisma__SchoolClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    accommodation<T extends School$accommodationArgs<ExtArgs> = {}>(args?: Subset<T, School$accommodationArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    intakes<T extends School$intakesArgs<ExtArgs> = {}>(args?: Subset<T, School$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11256,6 +11553,49 @@ export namespace Prisma {
   }
 
   /**
+   * School.accommodation
+   */
+  export type School$accommodationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    where?: AccommodationWhereInput
+  }
+
+  /**
+   * School.intakes
+   */
+  export type School$intakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    where?: IntakeWhereInput
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    cursor?: IntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
    * School without action
    */
   export type SchoolDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11271,6 +11611,2258 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SchoolInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Accommodation
+   */
+
+  export type AggregateAccommodation = {
+    _count: AccommodationCountAggregateOutputType | null
+    _avg: AccommodationAvgAggregateOutputType | null
+    _sum: AccommodationSumAggregateOutputType | null
+    _min: AccommodationMinAggregateOutputType | null
+    _max: AccommodationMaxAggregateOutputType | null
+  }
+
+  export type AccommodationAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AccommodationSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AccommodationMinAggregateOutputType = {
+    id: number | null
+    description: string | null
+    schoolId: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccommodationMaxAggregateOutputType = {
+    id: number | null
+    description: string | null
+    schoolId: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccommodationCountAggregateOutputType = {
+    id: number
+    description: number
+    schoolId: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AccommodationAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AccommodationSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AccommodationMinAggregateInputType = {
+    id?: true
+    description?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccommodationMaxAggregateInputType = {
+    id?: true
+    description?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccommodationCountAggregateInputType = {
+    id?: true
+    description?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AccommodationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Accommodation to aggregate.
+     */
+    where?: AccommodationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accommodations to fetch.
+     */
+    orderBy?: AccommodationOrderByWithRelationInput | AccommodationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccommodationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accommodations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accommodations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Accommodations
+    **/
+    _count?: true | AccommodationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccommodationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccommodationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccommodationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccommodationMaxAggregateInputType
+  }
+
+  export type GetAccommodationAggregateType<T extends AccommodationAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccommodation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccommodation[P]>
+      : GetScalarType<T[P], AggregateAccommodation[P]>
+  }
+
+
+
+
+  export type AccommodationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccommodationWhereInput
+    orderBy?: AccommodationOrderByWithAggregationInput | AccommodationOrderByWithAggregationInput[]
+    by: AccommodationScalarFieldEnum[] | AccommodationScalarFieldEnum
+    having?: AccommodationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccommodationCountAggregateInputType | true
+    _avg?: AccommodationAvgAggregateInputType
+    _sum?: AccommodationSumAggregateInputType
+    _min?: AccommodationMinAggregateInputType
+    _max?: AccommodationMaxAggregateInputType
+  }
+
+  export type AccommodationGroupByOutputType = {
+    id: number
+    description: string
+    schoolId: string
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AccommodationCountAggregateOutputType | null
+    _avg: AccommodationAvgAggregateOutputType | null
+    _sum: AccommodationSumAggregateOutputType | null
+    _min: AccommodationMinAggregateOutputType | null
+    _max: AccommodationMaxAggregateOutputType | null
+  }
+
+  type GetAccommodationGroupByPayload<T extends AccommodationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccommodationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccommodationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccommodationGroupByOutputType[P]>
+            : GetScalarType<T[P], AccommodationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccommodationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accommodation"]>
+
+  export type AccommodationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accommodation"]>
+
+  export type AccommodationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accommodation"]>
+
+  export type AccommodationSelectScalar = {
+    id?: boolean
+    description?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AccommodationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["accommodation"]>
+  export type AccommodationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AccommodationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AccommodationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $AccommodationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Accommodation"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      description: string
+      schoolId: string
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["accommodation"]>
+    composites: {}
+  }
+
+  type AccommodationGetPayload<S extends boolean | null | undefined | AccommodationDefaultArgs> = $Result.GetResult<Prisma.$AccommodationPayload, S>
+
+  type AccommodationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AccommodationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccommodationCountAggregateInputType | true
+    }
+
+  export interface AccommodationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Accommodation'], meta: { name: 'Accommodation' } }
+    /**
+     * Find zero or one Accommodation that matches the filter.
+     * @param {AccommodationFindUniqueArgs} args - Arguments to find a Accommodation
+     * @example
+     * // Get one Accommodation
+     * const accommodation = await prisma.accommodation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccommodationFindUniqueArgs>(args: SelectSubset<T, AccommodationFindUniqueArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Accommodation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AccommodationFindUniqueOrThrowArgs} args - Arguments to find a Accommodation
+     * @example
+     * // Get one Accommodation
+     * const accommodation = await prisma.accommodation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccommodationFindUniqueOrThrowArgs>(args: SelectSubset<T, AccommodationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Accommodation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationFindFirstArgs} args - Arguments to find a Accommodation
+     * @example
+     * // Get one Accommodation
+     * const accommodation = await prisma.accommodation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccommodationFindFirstArgs>(args?: SelectSubset<T, AccommodationFindFirstArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Accommodation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationFindFirstOrThrowArgs} args - Arguments to find a Accommodation
+     * @example
+     * // Get one Accommodation
+     * const accommodation = await prisma.accommodation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccommodationFindFirstOrThrowArgs>(args?: SelectSubset<T, AccommodationFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Accommodations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Accommodations
+     * const accommodations = await prisma.accommodation.findMany()
+     * 
+     * // Get first 10 Accommodations
+     * const accommodations = await prisma.accommodation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accommodationWithIdOnly = await prisma.accommodation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccommodationFindManyArgs>(args?: SelectSubset<T, AccommodationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Accommodation.
+     * @param {AccommodationCreateArgs} args - Arguments to create a Accommodation.
+     * @example
+     * // Create one Accommodation
+     * const Accommodation = await prisma.accommodation.create({
+     *   data: {
+     *     // ... data to create a Accommodation
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccommodationCreateArgs>(args: SelectSubset<T, AccommodationCreateArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Accommodations.
+     * @param {AccommodationCreateManyArgs} args - Arguments to create many Accommodations.
+     * @example
+     * // Create many Accommodations
+     * const accommodation = await prisma.accommodation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccommodationCreateManyArgs>(args?: SelectSubset<T, AccommodationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Accommodations and returns the data saved in the database.
+     * @param {AccommodationCreateManyAndReturnArgs} args - Arguments to create many Accommodations.
+     * @example
+     * // Create many Accommodations
+     * const accommodation = await prisma.accommodation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Accommodations and only return the `id`
+     * const accommodationWithIdOnly = await prisma.accommodation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccommodationCreateManyAndReturnArgs>(args?: SelectSubset<T, AccommodationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Accommodation.
+     * @param {AccommodationDeleteArgs} args - Arguments to delete one Accommodation.
+     * @example
+     * // Delete one Accommodation
+     * const Accommodation = await prisma.accommodation.delete({
+     *   where: {
+     *     // ... filter to delete one Accommodation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccommodationDeleteArgs>(args: SelectSubset<T, AccommodationDeleteArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Accommodation.
+     * @param {AccommodationUpdateArgs} args - Arguments to update one Accommodation.
+     * @example
+     * // Update one Accommodation
+     * const accommodation = await prisma.accommodation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccommodationUpdateArgs>(args: SelectSubset<T, AccommodationUpdateArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Accommodations.
+     * @param {AccommodationDeleteManyArgs} args - Arguments to filter Accommodations to delete.
+     * @example
+     * // Delete a few Accommodations
+     * const { count } = await prisma.accommodation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccommodationDeleteManyArgs>(args?: SelectSubset<T, AccommodationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Accommodations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Accommodations
+     * const accommodation = await prisma.accommodation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccommodationUpdateManyArgs>(args: SelectSubset<T, AccommodationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Accommodations and returns the data updated in the database.
+     * @param {AccommodationUpdateManyAndReturnArgs} args - Arguments to update many Accommodations.
+     * @example
+     * // Update many Accommodations
+     * const accommodation = await prisma.accommodation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Accommodations and only return the `id`
+     * const accommodationWithIdOnly = await prisma.accommodation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AccommodationUpdateManyAndReturnArgs>(args: SelectSubset<T, AccommodationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Accommodation.
+     * @param {AccommodationUpsertArgs} args - Arguments to update or create a Accommodation.
+     * @example
+     * // Update or create a Accommodation
+     * const accommodation = await prisma.accommodation.upsert({
+     *   create: {
+     *     // ... data to create a Accommodation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Accommodation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccommodationUpsertArgs>(args: SelectSubset<T, AccommodationUpsertArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Accommodations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationCountArgs} args - Arguments to filter Accommodations to count.
+     * @example
+     * // Count the number of Accommodations
+     * const count = await prisma.accommodation.count({
+     *   where: {
+     *     // ... the filter for the Accommodations we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccommodationCountArgs>(
+      args?: Subset<T, AccommodationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccommodationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Accommodation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccommodationAggregateArgs>(args: Subset<T, AccommodationAggregateArgs>): Prisma.PrismaPromise<GetAccommodationAggregateType<T>>
+
+    /**
+     * Group by Accommodation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccommodationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccommodationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccommodationGroupByArgs['orderBy'] }
+        : { orderBy?: AccommodationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccommodationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccommodationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Accommodation model
+   */
+  readonly fields: AccommodationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Accommodation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccommodationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Accommodation model
+   */
+  interface AccommodationFieldRefs {
+    readonly id: FieldRef<"Accommodation", 'Int'>
+    readonly description: FieldRef<"Accommodation", 'String'>
+    readonly schoolId: FieldRef<"Accommodation", 'String'>
+    readonly createdById: FieldRef<"Accommodation", 'String'>
+    readonly createdAt: FieldRef<"Accommodation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Accommodation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Accommodation findUnique
+   */
+  export type AccommodationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter, which Accommodation to fetch.
+     */
+    where: AccommodationWhereUniqueInput
+  }
+
+  /**
+   * Accommodation findUniqueOrThrow
+   */
+  export type AccommodationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter, which Accommodation to fetch.
+     */
+    where: AccommodationWhereUniqueInput
+  }
+
+  /**
+   * Accommodation findFirst
+   */
+  export type AccommodationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter, which Accommodation to fetch.
+     */
+    where?: AccommodationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accommodations to fetch.
+     */
+    orderBy?: AccommodationOrderByWithRelationInput | AccommodationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Accommodations.
+     */
+    cursor?: AccommodationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accommodations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accommodations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Accommodations.
+     */
+    distinct?: AccommodationScalarFieldEnum | AccommodationScalarFieldEnum[]
+  }
+
+  /**
+   * Accommodation findFirstOrThrow
+   */
+  export type AccommodationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter, which Accommodation to fetch.
+     */
+    where?: AccommodationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accommodations to fetch.
+     */
+    orderBy?: AccommodationOrderByWithRelationInput | AccommodationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Accommodations.
+     */
+    cursor?: AccommodationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accommodations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accommodations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Accommodations.
+     */
+    distinct?: AccommodationScalarFieldEnum | AccommodationScalarFieldEnum[]
+  }
+
+  /**
+   * Accommodation findMany
+   */
+  export type AccommodationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter, which Accommodations to fetch.
+     */
+    where?: AccommodationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Accommodations to fetch.
+     */
+    orderBy?: AccommodationOrderByWithRelationInput | AccommodationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Accommodations.
+     */
+    cursor?: AccommodationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Accommodations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Accommodations.
+     */
+    skip?: number
+    distinct?: AccommodationScalarFieldEnum | AccommodationScalarFieldEnum[]
+  }
+
+  /**
+   * Accommodation create
+   */
+  export type AccommodationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Accommodation.
+     */
+    data: XOR<AccommodationCreateInput, AccommodationUncheckedCreateInput>
+  }
+
+  /**
+   * Accommodation createMany
+   */
+  export type AccommodationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Accommodations.
+     */
+    data: AccommodationCreateManyInput | AccommodationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Accommodation createManyAndReturn
+   */
+  export type AccommodationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Accommodations.
+     */
+    data: AccommodationCreateManyInput | AccommodationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Accommodation update
+   */
+  export type AccommodationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Accommodation.
+     */
+    data: XOR<AccommodationUpdateInput, AccommodationUncheckedUpdateInput>
+    /**
+     * Choose, which Accommodation to update.
+     */
+    where: AccommodationWhereUniqueInput
+  }
+
+  /**
+   * Accommodation updateMany
+   */
+  export type AccommodationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Accommodations.
+     */
+    data: XOR<AccommodationUpdateManyMutationInput, AccommodationUncheckedUpdateManyInput>
+    /**
+     * Filter which Accommodations to update
+     */
+    where?: AccommodationWhereInput
+    /**
+     * Limit how many Accommodations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Accommodation updateManyAndReturn
+   */
+  export type AccommodationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * The data used to update Accommodations.
+     */
+    data: XOR<AccommodationUpdateManyMutationInput, AccommodationUncheckedUpdateManyInput>
+    /**
+     * Filter which Accommodations to update
+     */
+    where?: AccommodationWhereInput
+    /**
+     * Limit how many Accommodations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Accommodation upsert
+   */
+  export type AccommodationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Accommodation to update in case it exists.
+     */
+    where: AccommodationWhereUniqueInput
+    /**
+     * In case the Accommodation found by the `where` argument doesn't exist, create a new Accommodation with this data.
+     */
+    create: XOR<AccommodationCreateInput, AccommodationUncheckedCreateInput>
+    /**
+     * In case the Accommodation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccommodationUpdateInput, AccommodationUncheckedUpdateInput>
+  }
+
+  /**
+   * Accommodation delete
+   */
+  export type AccommodationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+    /**
+     * Filter which Accommodation to delete.
+     */
+    where: AccommodationWhereUniqueInput
+  }
+
+  /**
+   * Accommodation deleteMany
+   */
+  export type AccommodationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Accommodations to delete
+     */
+    where?: AccommodationWhereInput
+    /**
+     * Limit how many Accommodations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Accommodation without action
+   */
+  export type AccommodationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Accommodation
+     */
+    select?: AccommodationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Accommodation
+     */
+    omit?: AccommodationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccommodationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Intake
+   */
+
+  export type AggregateIntake = {
+    _count: IntakeCountAggregateOutputType | null
+    _avg: IntakeAvgAggregateOutputType | null
+    _sum: IntakeSumAggregateOutputType | null
+    _min: IntakeMinAggregateOutputType | null
+    _max: IntakeMaxAggregateOutputType | null
+  }
+
+  export type IntakeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IntakeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IntakeMinAggregateOutputType = {
+    id: number | null
+    intake: Date | null
+    startDate: Date | null
+    deadline: Date | null
+    schoolId: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntakeMaxAggregateOutputType = {
+    id: number | null
+    intake: Date | null
+    startDate: Date | null
+    deadline: Date | null
+    schoolId: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntakeCountAggregateOutputType = {
+    id: number
+    intake: number
+    startDate: number
+    deadline: number
+    schoolId: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IntakeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type IntakeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type IntakeMinAggregateInputType = {
+    id?: true
+    intake?: true
+    startDate?: true
+    deadline?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntakeMaxAggregateInputType = {
+    id?: true
+    intake?: true
+    startDate?: true
+    deadline?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntakeCountAggregateInputType = {
+    id?: true
+    intake?: true
+    startDate?: true
+    deadline?: true
+    schoolId?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IntakeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Intake to aggregate.
+     */
+    where?: IntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intakes to fetch.
+     */
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Intakes
+    **/
+    _count?: true | IntakeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntakeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntakeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntakeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntakeMaxAggregateInputType
+  }
+
+  export type GetIntakeAggregateType<T extends IntakeAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntake]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntake[P]>
+      : GetScalarType<T[P], AggregateIntake[P]>
+  }
+
+
+
+
+  export type IntakeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntakeWhereInput
+    orderBy?: IntakeOrderByWithAggregationInput | IntakeOrderByWithAggregationInput[]
+    by: IntakeScalarFieldEnum[] | IntakeScalarFieldEnum
+    having?: IntakeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntakeCountAggregateInputType | true
+    _avg?: IntakeAvgAggregateInputType
+    _sum?: IntakeSumAggregateInputType
+    _min?: IntakeMinAggregateInputType
+    _max?: IntakeMaxAggregateInputType
+  }
+
+  export type IntakeGroupByOutputType = {
+    id: number
+    intake: Date
+    startDate: Date
+    deadline: Date
+    schoolId: string
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: IntakeCountAggregateOutputType | null
+    _avg: IntakeAvgAggregateOutputType | null
+    _sum: IntakeSumAggregateOutputType | null
+    _min: IntakeMinAggregateOutputType | null
+    _max: IntakeMaxAggregateOutputType | null
+  }
+
+  type GetIntakeGroupByPayload<T extends IntakeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntakeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntakeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntakeGroupByOutputType[P]>
+            : GetScalarType<T[P], IntakeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntakeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intake?: boolean
+    startDate?: boolean
+    deadline?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intake"]>
+
+  export type IntakeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intake?: boolean
+    startDate?: boolean
+    deadline?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intake"]>
+
+  export type IntakeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    intake?: boolean
+    startDate?: boolean
+    deadline?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intake"]>
+
+  export type IntakeSelectScalar = {
+    id?: boolean
+    intake?: boolean
+    startDate?: boolean
+    deadline?: boolean
+    schoolId?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intake" | "startDate" | "deadline" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["intake"]>
+  export type IntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type IntakeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type IntakeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $IntakePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Intake"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      intake: Date
+      startDate: Date
+      deadline: Date
+      schoolId: string
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["intake"]>
+    composites: {}
+  }
+
+  type IntakeGetPayload<S extends boolean | null | undefined | IntakeDefaultArgs> = $Result.GetResult<Prisma.$IntakePayload, S>
+
+  type IntakeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntakeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntakeCountAggregateInputType | true
+    }
+
+  export interface IntakeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Intake'], meta: { name: 'Intake' } }
+    /**
+     * Find zero or one Intake that matches the filter.
+     * @param {IntakeFindUniqueArgs} args - Arguments to find a Intake
+     * @example
+     * // Get one Intake
+     * const intake = await prisma.intake.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntakeFindUniqueArgs>(args: SelectSubset<T, IntakeFindUniqueArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Intake that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntakeFindUniqueOrThrowArgs} args - Arguments to find a Intake
+     * @example
+     * // Get one Intake
+     * const intake = await prisma.intake.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntakeFindUniqueOrThrowArgs>(args: SelectSubset<T, IntakeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Intake that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeFindFirstArgs} args - Arguments to find a Intake
+     * @example
+     * // Get one Intake
+     * const intake = await prisma.intake.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntakeFindFirstArgs>(args?: SelectSubset<T, IntakeFindFirstArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Intake that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeFindFirstOrThrowArgs} args - Arguments to find a Intake
+     * @example
+     * // Get one Intake
+     * const intake = await prisma.intake.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntakeFindFirstOrThrowArgs>(args?: SelectSubset<T, IntakeFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Intakes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Intakes
+     * const intakes = await prisma.intake.findMany()
+     * 
+     * // Get first 10 Intakes
+     * const intakes = await prisma.intake.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const intakeWithIdOnly = await prisma.intake.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntakeFindManyArgs>(args?: SelectSubset<T, IntakeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Intake.
+     * @param {IntakeCreateArgs} args - Arguments to create a Intake.
+     * @example
+     * // Create one Intake
+     * const Intake = await prisma.intake.create({
+     *   data: {
+     *     // ... data to create a Intake
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntakeCreateArgs>(args: SelectSubset<T, IntakeCreateArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Intakes.
+     * @param {IntakeCreateManyArgs} args - Arguments to create many Intakes.
+     * @example
+     * // Create many Intakes
+     * const intake = await prisma.intake.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntakeCreateManyArgs>(args?: SelectSubset<T, IntakeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Intakes and returns the data saved in the database.
+     * @param {IntakeCreateManyAndReturnArgs} args - Arguments to create many Intakes.
+     * @example
+     * // Create many Intakes
+     * const intake = await prisma.intake.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Intakes and only return the `id`
+     * const intakeWithIdOnly = await prisma.intake.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntakeCreateManyAndReturnArgs>(args?: SelectSubset<T, IntakeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Intake.
+     * @param {IntakeDeleteArgs} args - Arguments to delete one Intake.
+     * @example
+     * // Delete one Intake
+     * const Intake = await prisma.intake.delete({
+     *   where: {
+     *     // ... filter to delete one Intake
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntakeDeleteArgs>(args: SelectSubset<T, IntakeDeleteArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Intake.
+     * @param {IntakeUpdateArgs} args - Arguments to update one Intake.
+     * @example
+     * // Update one Intake
+     * const intake = await prisma.intake.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntakeUpdateArgs>(args: SelectSubset<T, IntakeUpdateArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Intakes.
+     * @param {IntakeDeleteManyArgs} args - Arguments to filter Intakes to delete.
+     * @example
+     * // Delete a few Intakes
+     * const { count } = await prisma.intake.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntakeDeleteManyArgs>(args?: SelectSubset<T, IntakeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Intakes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Intakes
+     * const intake = await prisma.intake.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntakeUpdateManyArgs>(args: SelectSubset<T, IntakeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Intakes and returns the data updated in the database.
+     * @param {IntakeUpdateManyAndReturnArgs} args - Arguments to update many Intakes.
+     * @example
+     * // Update many Intakes
+     * const intake = await prisma.intake.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Intakes and only return the `id`
+     * const intakeWithIdOnly = await prisma.intake.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntakeUpdateManyAndReturnArgs>(args: SelectSubset<T, IntakeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Intake.
+     * @param {IntakeUpsertArgs} args - Arguments to update or create a Intake.
+     * @example
+     * // Update or create a Intake
+     * const intake = await prisma.intake.upsert({
+     *   create: {
+     *     // ... data to create a Intake
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Intake we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntakeUpsertArgs>(args: SelectSubset<T, IntakeUpsertArgs<ExtArgs>>): Prisma__IntakeClient<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Intakes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeCountArgs} args - Arguments to filter Intakes to count.
+     * @example
+     * // Count the number of Intakes
+     * const count = await prisma.intake.count({
+     *   where: {
+     *     // ... the filter for the Intakes we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntakeCountArgs>(
+      args?: Subset<T, IntakeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntakeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Intake.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntakeAggregateArgs>(args: Subset<T, IntakeAggregateArgs>): Prisma.PrismaPromise<GetIntakeAggregateType<T>>
+
+    /**
+     * Group by Intake.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntakeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntakeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntakeGroupByArgs['orderBy'] }
+        : { orderBy?: IntakeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntakeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntakeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Intake model
+   */
+  readonly fields: IntakeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Intake.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntakeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Intake model
+   */
+  interface IntakeFieldRefs {
+    readonly id: FieldRef<"Intake", 'Int'>
+    readonly intake: FieldRef<"Intake", 'DateTime'>
+    readonly startDate: FieldRef<"Intake", 'DateTime'>
+    readonly deadline: FieldRef<"Intake", 'DateTime'>
+    readonly schoolId: FieldRef<"Intake", 'String'>
+    readonly createdById: FieldRef<"Intake", 'String'>
+    readonly createdAt: FieldRef<"Intake", 'DateTime'>
+    readonly updatedAt: FieldRef<"Intake", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Intake findUnique
+   */
+  export type IntakeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which Intake to fetch.
+     */
+    where: IntakeWhereUniqueInput
+  }
+
+  /**
+   * Intake findUniqueOrThrow
+   */
+  export type IntakeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which Intake to fetch.
+     */
+    where: IntakeWhereUniqueInput
+  }
+
+  /**
+   * Intake findFirst
+   */
+  export type IntakeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which Intake to fetch.
+     */
+    where?: IntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intakes to fetch.
+     */
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Intakes.
+     */
+    cursor?: IntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Intakes.
+     */
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Intake findFirstOrThrow
+   */
+  export type IntakeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which Intake to fetch.
+     */
+    where?: IntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intakes to fetch.
+     */
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Intakes.
+     */
+    cursor?: IntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Intakes.
+     */
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Intake findMany
+   */
+  export type IntakeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which Intakes to fetch.
+     */
+    where?: IntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Intakes to fetch.
+     */
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Intakes.
+     */
+    cursor?: IntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Intakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Intakes.
+     */
+    skip?: number
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Intake create
+   */
+  export type IntakeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Intake.
+     */
+    data: XOR<IntakeCreateInput, IntakeUncheckedCreateInput>
+  }
+
+  /**
+   * Intake createMany
+   */
+  export type IntakeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Intakes.
+     */
+    data: IntakeCreateManyInput | IntakeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Intake createManyAndReturn
+   */
+  export type IntakeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Intakes.
+     */
+    data: IntakeCreateManyInput | IntakeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Intake update
+   */
+  export type IntakeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Intake.
+     */
+    data: XOR<IntakeUpdateInput, IntakeUncheckedUpdateInput>
+    /**
+     * Choose, which Intake to update.
+     */
+    where: IntakeWhereUniqueInput
+  }
+
+  /**
+   * Intake updateMany
+   */
+  export type IntakeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Intakes.
+     */
+    data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyInput>
+    /**
+     * Filter which Intakes to update
+     */
+    where?: IntakeWhereInput
+    /**
+     * Limit how many Intakes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Intake updateManyAndReturn
+   */
+  export type IntakeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * The data used to update Intakes.
+     */
+    data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyInput>
+    /**
+     * Filter which Intakes to update
+     */
+    where?: IntakeWhereInput
+    /**
+     * Limit how many Intakes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Intake upsert
+   */
+  export type IntakeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Intake to update in case it exists.
+     */
+    where: IntakeWhereUniqueInput
+    /**
+     * In case the Intake found by the `where` argument doesn't exist, create a new Intake with this data.
+     */
+    create: XOR<IntakeCreateInput, IntakeUncheckedCreateInput>
+    /**
+     * In case the Intake was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntakeUpdateInput, IntakeUncheckedUpdateInput>
+  }
+
+  /**
+   * Intake delete
+   */
+  export type IntakeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    /**
+     * Filter which Intake to delete.
+     */
+    where: IntakeWhereUniqueInput
+  }
+
+  /**
+   * Intake deleteMany
+   */
+  export type IntakeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Intakes to delete
+     */
+    where?: IntakeWhereInput
+    /**
+     * Limit how many Intakes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Intake without action
+   */
+  export type IntakeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
   }
 
 
@@ -11413,6 +14005,32 @@ export namespace Prisma {
   };
 
   export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
+
+
+  export const AccommodationScalarFieldEnum: {
+    id: 'id',
+    description: 'description',
+    schoolId: 'schoolId',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AccommodationScalarFieldEnum = (typeof AccommodationScalarFieldEnum)[keyof typeof AccommodationScalarFieldEnum]
+
+
+  export const IntakeScalarFieldEnum: {
+    id: 'id',
+    intake: 'intake',
+    startDate: 'startDate',
+    deadline: 'deadline',
+    schoolId: 'schoolId',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IntakeScalarFieldEnum = (typeof IntakeScalarFieldEnum)[keyof typeof IntakeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11729,6 +14347,8 @@ export namespace Prisma {
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
     schoolsCreated?: SchoolListRelationFilter
+    accommodationsCreated?: AccommodationListRelationFilter
+    intakesCreated?: IntakeListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -11761,6 +14381,8 @@ export namespace Prisma {
     faqsCreated?: FaqOrderByRelationAggregateInput
     activityLogs?: ActivityLogOrderByRelationAggregateInput
     schoolsCreated?: SchoolOrderByRelationAggregateInput
+    accommodationsCreated?: AccommodationOrderByRelationAggregateInput
+    intakesCreated?: IntakeOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -11796,6 +14418,8 @@ export namespace Prisma {
     faqsCreated?: FaqListRelationFilter
     activityLogs?: ActivityLogListRelationFilter
     schoolsCreated?: SchoolListRelationFilter
+    accommodationsCreated?: AccommodationListRelationFilter
+    intakesCreated?: IntakeListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -12221,6 +14845,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    accommodation?: XOR<AccommodationNullableScalarRelationFilter, AccommodationWhereInput> | null
+    intakes?: IntakeListRelationFilter
   }
 
   export type SchoolOrderByWithRelationInput = {
@@ -12243,6 +14869,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdBy?: AdminOrderByWithRelationInput
+    accommodation?: AccommodationOrderByWithRelationInput
+    intakes?: IntakeOrderByRelationAggregateInput
   }
 
   export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -12268,6 +14896,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    accommodation?: XOR<AccommodationNullableScalarRelationFilter, AccommodationWhereInput> | null
+    intakes?: IntakeListRelationFilter
   }, "schoolId" | "id" | "schoolId" | "slug">
 
   export type SchoolOrderByWithAggregationInput = {
@@ -12318,6 +14948,146 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"School"> | string
     createdAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
+  }
+
+  export type AccommodationWhereInput = {
+    AND?: AccommodationWhereInput | AccommodationWhereInput[]
+    OR?: AccommodationWhereInput[]
+    NOT?: AccommodationWhereInput | AccommodationWhereInput[]
+    id?: IntFilter<"Accommodation"> | number
+    description?: StringFilter<"Accommodation"> | string
+    schoolId?: StringFilter<"Accommodation"> | string
+    createdById?: StringFilter<"Accommodation"> | string
+    createdAt?: DateTimeFilter<"Accommodation"> | Date | string
+    updatedAt?: DateTimeFilter<"Accommodation"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type AccommodationOrderByWithRelationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type AccommodationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    schoolId?: string
+    AND?: AccommodationWhereInput | AccommodationWhereInput[]
+    OR?: AccommodationWhereInput[]
+    NOT?: AccommodationWhereInput | AccommodationWhereInput[]
+    description?: StringFilter<"Accommodation"> | string
+    createdById?: StringFilter<"Accommodation"> | string
+    createdAt?: DateTimeFilter<"Accommodation"> | Date | string
+    updatedAt?: DateTimeFilter<"Accommodation"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "schoolId">
+
+  export type AccommodationOrderByWithAggregationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AccommodationCountOrderByAggregateInput
+    _avg?: AccommodationAvgOrderByAggregateInput
+    _max?: AccommodationMaxOrderByAggregateInput
+    _min?: AccommodationMinOrderByAggregateInput
+    _sum?: AccommodationSumOrderByAggregateInput
+  }
+
+  export type AccommodationScalarWhereWithAggregatesInput = {
+    AND?: AccommodationScalarWhereWithAggregatesInput | AccommodationScalarWhereWithAggregatesInput[]
+    OR?: AccommodationScalarWhereWithAggregatesInput[]
+    NOT?: AccommodationScalarWhereWithAggregatesInput | AccommodationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Accommodation"> | number
+    description?: StringWithAggregatesFilter<"Accommodation"> | string
+    schoolId?: StringWithAggregatesFilter<"Accommodation"> | string
+    createdById?: StringWithAggregatesFilter<"Accommodation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Accommodation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Accommodation"> | Date | string
+  }
+
+  export type IntakeWhereInput = {
+    AND?: IntakeWhereInput | IntakeWhereInput[]
+    OR?: IntakeWhereInput[]
+    NOT?: IntakeWhereInput | IntakeWhereInput[]
+    id?: IntFilter<"Intake"> | number
+    intake?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeFilter<"Intake"> | Date | string
+    deadline?: DateTimeFilter<"Intake"> | Date | string
+    schoolId?: StringFilter<"Intake"> | string
+    createdById?: StringFilter<"Intake"> | string
+    createdAt?: DateTimeFilter<"Intake"> | Date | string
+    updatedAt?: DateTimeFilter<"Intake"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type IntakeOrderByWithRelationInput = {
+    id?: SortOrder
+    intake?: SortOrder
+    startDate?: SortOrder
+    deadline?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type IntakeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: IntakeWhereInput | IntakeWhereInput[]
+    OR?: IntakeWhereInput[]
+    NOT?: IntakeWhereInput | IntakeWhereInput[]
+    intake?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeFilter<"Intake"> | Date | string
+    deadline?: DateTimeFilter<"Intake"> | Date | string
+    schoolId?: StringFilter<"Intake"> | string
+    createdById?: StringFilter<"Intake"> | string
+    createdAt?: DateTimeFilter<"Intake"> | Date | string
+    updatedAt?: DateTimeFilter<"Intake"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id">
+
+  export type IntakeOrderByWithAggregationInput = {
+    id?: SortOrder
+    intake?: SortOrder
+    startDate?: SortOrder
+    deadline?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IntakeCountOrderByAggregateInput
+    _avg?: IntakeAvgOrderByAggregateInput
+    _max?: IntakeMaxOrderByAggregateInput
+    _min?: IntakeMinOrderByAggregateInput
+    _sum?: IntakeSumOrderByAggregateInput
+  }
+
+  export type IntakeScalarWhereWithAggregatesInput = {
+    AND?: IntakeScalarWhereWithAggregatesInput | IntakeScalarWhereWithAggregatesInput[]
+    OR?: IntakeScalarWhereWithAggregatesInput[]
+    NOT?: IntakeScalarWhereWithAggregatesInput | IntakeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Intake"> | number
+    intake?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    startDate?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    deadline?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    schoolId?: StringWithAggregatesFilter<"Intake"> | string
+    createdById?: StringWithAggregatesFilter<"Intake"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
   }
 
   export type TokenCreateInput = {
@@ -12419,6 +15189,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -12450,6 +15222,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -12480,6 +15254,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -12511,6 +15287,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -12937,6 +15715,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
+    accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateInput = {
@@ -12958,6 +15738,8 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUpdateInput = {
@@ -12978,6 +15760,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
+    accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateInput = {
@@ -12999,6 +15783,8 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolCreateManyInput = {
@@ -13057,6 +15843,136 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccommodationCreateInput = {
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutAccommodationInput
+    createdBy: AdminCreateNestedOneWithoutAccommodationsCreatedInput
+  }
+
+  export type AccommodationUncheckedCreateInput = {
+    id?: number
+    description: string
+    schoolId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccommodationUpdateInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutAccommodationNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutAccommodationsCreatedNestedInput
+  }
+
+  export type AccommodationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccommodationCreateManyInput = {
+    id?: number
+    description: string
+    schoolId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccommodationUpdateManyMutationInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccommodationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeCreateInput = {
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutIntakesInput
+    createdBy: AdminCreateNestedOneWithoutIntakesCreatedInput
+  }
+
+  export type IntakeUncheckedCreateInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    schoolId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeUpdateInput = {
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput
+  }
+
+  export type IntakeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeCreateManyInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    schoolId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeUpdateManyMutationInput = {
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13316,6 +16232,18 @@ export namespace Prisma {
     none?: SchoolWhereInput
   }
 
+  export type AccommodationListRelationFilter = {
+    every?: AccommodationWhereInput
+    some?: AccommodationWhereInput
+    none?: AccommodationWhereInput
+  }
+
+  export type IntakeListRelationFilter = {
+    every?: IntakeWhereInput
+    some?: IntakeWhereInput
+    none?: IntakeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -13342,6 +16270,14 @@ export namespace Prisma {
   }
 
   export type SchoolOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AccommodationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IntakeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13742,6 +16678,11 @@ export namespace Prisma {
     not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
   }
 
+  export type AccommodationNullableScalarRelationFilter = {
+    is?: AccommodationWhereInput | null
+    isNot?: AccommodationWhereInput | null
+  }
+
   export type SchoolCountOrderByAggregateInput = {
     id?: SortOrder
     schoolId?: SortOrder
@@ -13839,6 +16780,87 @@ export namespace Prisma {
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
+  export type SchoolScalarRelationFilter = {
+    is?: SchoolWhereInput
+    isNot?: SchoolWhereInput
+  }
+
+  export type AccommodationCountOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccommodationAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AccommodationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccommodationMinOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccommodationSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntakeCountOrderByAggregateInput = {
+    id?: SortOrder
+    intake?: SortOrder
+    startDate?: SortOrder
+    deadline?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntakeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntakeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    intake?: SortOrder
+    startDate?: SortOrder
+    deadline?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntakeMinOrderByAggregateInput = {
+    id?: SortOrder
+    intake?: SortOrder
+    startDate?: SortOrder
+    deadline?: SortOrder
+    schoolId?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntakeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -13926,6 +16948,20 @@ export namespace Prisma {
     connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
   }
 
+  export type AccommodationCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput> | AccommodationCreateWithoutCreatedByInput[] | AccommodationUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccommodationCreateOrConnectWithoutCreatedByInput | AccommodationCreateOrConnectWithoutCreatedByInput[]
+    createMany?: AccommodationCreateManyCreatedByInputEnvelope
+    connect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+  }
+
+  export type IntakeCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput> | IntakeCreateWithoutCreatedByInput[] | IntakeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutCreatedByInput | IntakeCreateOrConnectWithoutCreatedByInput[]
+    createMany?: IntakeCreateManyCreatedByInputEnvelope
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -13985,6 +17021,20 @@ export namespace Prisma {
     connectOrCreate?: SchoolCreateOrConnectWithoutCreatedByInput | SchoolCreateOrConnectWithoutCreatedByInput[]
     createMany?: SchoolCreateManyCreatedByInputEnvelope
     connect?: SchoolWhereUniqueInput | SchoolWhereUniqueInput[]
+  }
+
+  export type AccommodationUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput> | AccommodationCreateWithoutCreatedByInput[] | AccommodationUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccommodationCreateOrConnectWithoutCreatedByInput | AccommodationCreateOrConnectWithoutCreatedByInput[]
+    createMany?: AccommodationCreateManyCreatedByInputEnvelope
+    connect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+  }
+
+  export type IntakeUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput> | IntakeCreateWithoutCreatedByInput[] | IntakeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutCreatedByInput | IntakeCreateOrConnectWithoutCreatedByInput[]
+    createMany?: IntakeCreateManyCreatedByInputEnvelope
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -14133,6 +17183,34 @@ export namespace Prisma {
     deleteMany?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
   }
 
+  export type AccommodationUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput> | AccommodationCreateWithoutCreatedByInput[] | AccommodationUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccommodationCreateOrConnectWithoutCreatedByInput | AccommodationCreateOrConnectWithoutCreatedByInput[]
+    upsert?: AccommodationUpsertWithWhereUniqueWithoutCreatedByInput | AccommodationUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: AccommodationCreateManyCreatedByInputEnvelope
+    set?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    disconnect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    delete?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    connect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    update?: AccommodationUpdateWithWhereUniqueWithoutCreatedByInput | AccommodationUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: AccommodationUpdateManyWithWhereWithoutCreatedByInput | AccommodationUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: AccommodationScalarWhereInput | AccommodationScalarWhereInput[]
+  }
+
+  export type IntakeUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput> | IntakeCreateWithoutCreatedByInput[] | IntakeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutCreatedByInput | IntakeCreateOrConnectWithoutCreatedByInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutCreatedByInput | IntakeUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: IntakeCreateManyCreatedByInputEnvelope
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutCreatedByInput | IntakeUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutCreatedByInput | IntakeUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -14255,6 +17333,34 @@ export namespace Prisma {
     update?: SchoolUpdateWithWhereUniqueWithoutCreatedByInput | SchoolUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: SchoolUpdateManyWithWhereWithoutCreatedByInput | SchoolUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: SchoolScalarWhereInput | SchoolScalarWhereInput[]
+  }
+
+  export type AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput> | AccommodationCreateWithoutCreatedByInput[] | AccommodationUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: AccommodationCreateOrConnectWithoutCreatedByInput | AccommodationCreateOrConnectWithoutCreatedByInput[]
+    upsert?: AccommodationUpsertWithWhereUniqueWithoutCreatedByInput | AccommodationUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: AccommodationCreateManyCreatedByInputEnvelope
+    set?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    disconnect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    delete?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    connect?: AccommodationWhereUniqueInput | AccommodationWhereUniqueInput[]
+    update?: AccommodationUpdateWithWhereUniqueWithoutCreatedByInput | AccommodationUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: AccommodationUpdateManyWithWhereWithoutCreatedByInput | AccommodationUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: AccommodationScalarWhereInput | AccommodationScalarWhereInput[]
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput> | IntakeCreateWithoutCreatedByInput[] | IntakeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutCreatedByInput | IntakeCreateOrConnectWithoutCreatedByInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutCreatedByInput | IntakeUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: IntakeCreateManyCreatedByInputEnvelope
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutCreatedByInput | IntakeUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutCreatedByInput | IntakeUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutDepartmentsLeadingInput = {
@@ -14473,6 +17579,32 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
+  export type AccommodationCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
+    connect?: AccommodationWhereUniqueInput
+  }
+
+  export type IntakeCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput> | IntakeCreateWithoutSchoolInput[] | IntakeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutSchoolInput | IntakeCreateOrConnectWithoutSchoolInput[]
+    createMany?: IntakeCreateManySchoolInputEnvelope
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type AccommodationUncheckedCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
+    connect?: AccommodationWhereUniqueInput
+  }
+
+  export type IntakeUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput> | IntakeCreateWithoutSchoolInput[] | IntakeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutSchoolInput | IntakeCreateOrConnectWithoutSchoolInput[]
+    createMany?: IntakeCreateManySchoolInputEnvelope
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
   export type EnumInstitutionTypeFieldUpdateOperationsInput = {
     set?: $Enums.InstitutionType
   }
@@ -14491,6 +17623,110 @@ export namespace Prisma {
     upsert?: AdminUpsertWithoutSchoolsCreatedInput
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutSchoolsCreatedInput, AdminUpdateWithoutSchoolsCreatedInput>, AdminUncheckedUpdateWithoutSchoolsCreatedInput>
+  }
+
+  export type AccommodationUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
+    upsert?: AccommodationUpsertWithoutSchoolInput
+    disconnect?: AccommodationWhereInput | boolean
+    delete?: AccommodationWhereInput | boolean
+    connect?: AccommodationWhereUniqueInput
+    update?: XOR<XOR<AccommodationUpdateToOneWithWhereWithoutSchoolInput, AccommodationUpdateWithoutSchoolInput>, AccommodationUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type IntakeUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput> | IntakeCreateWithoutSchoolInput[] | IntakeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutSchoolInput | IntakeCreateOrConnectWithoutSchoolInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutSchoolInput | IntakeUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: IntakeCreateManySchoolInputEnvelope
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutSchoolInput | IntakeUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutSchoolInput | IntakeUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type AccommodationUncheckedUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
+    upsert?: AccommodationUpsertWithoutSchoolInput
+    disconnect?: AccommodationWhereInput | boolean
+    delete?: AccommodationWhereInput | boolean
+    connect?: AccommodationWhereUniqueInput
+    update?: XOR<XOR<AccommodationUpdateToOneWithWhereWithoutSchoolInput, AccommodationUpdateWithoutSchoolInput>, AccommodationUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput> | IntakeCreateWithoutSchoolInput[] | IntakeUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutSchoolInput | IntakeCreateOrConnectWithoutSchoolInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutSchoolInput | IntakeUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: IntakeCreateManySchoolInputEnvelope
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutSchoolInput | IntakeUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutSchoolInput | IntakeUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type SchoolCreateNestedOneWithoutAccommodationInput = {
+    create?: XOR<SchoolCreateWithoutAccommodationInput, SchoolUncheckedCreateWithoutAccommodationInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutAccommodationInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type AdminCreateNestedOneWithoutAccommodationsCreatedInput = {
+    create?: XOR<AdminCreateWithoutAccommodationsCreatedInput, AdminUncheckedCreateWithoutAccommodationsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutAccommodationsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type SchoolUpdateOneRequiredWithoutAccommodationNestedInput = {
+    create?: XOR<SchoolCreateWithoutAccommodationInput, SchoolUncheckedCreateWithoutAccommodationInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutAccommodationInput
+    upsert?: SchoolUpsertWithoutAccommodationInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutAccommodationInput, SchoolUpdateWithoutAccommodationInput>, SchoolUncheckedUpdateWithoutAccommodationInput>
+  }
+
+  export type AdminUpdateOneRequiredWithoutAccommodationsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutAccommodationsCreatedInput, AdminUncheckedCreateWithoutAccommodationsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutAccommodationsCreatedInput
+    upsert?: AdminUpsertWithoutAccommodationsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutAccommodationsCreatedInput, AdminUpdateWithoutAccommodationsCreatedInput>, AdminUncheckedUpdateWithoutAccommodationsCreatedInput>
+  }
+
+  export type SchoolCreateNestedOneWithoutIntakesInput = {
+    create?: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutIntakesInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type AdminCreateNestedOneWithoutIntakesCreatedInput = {
+    create?: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutIntakesCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type SchoolUpdateOneRequiredWithoutIntakesNestedInput = {
+    create?: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutIntakesInput
+    upsert?: SchoolUpsertWithoutIntakesInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutIntakesInput, SchoolUpdateWithoutIntakesInput>, SchoolUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutIntakesCreatedInput
+    upsert?: AdminUpsertWithoutIntakesCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutIntakesCreatedInput, AdminUpdateWithoutIntakesCreatedInput>, AdminUncheckedUpdateWithoutIntakesCreatedInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14818,6 +18054,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedInput = {
@@ -14848,6 +18086,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedInput = {
@@ -14883,6 +18123,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedByInput = {
@@ -14913,6 +18155,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedByInput = {
@@ -15130,6 +18374,8 @@ export namespace Prisma {
     overview: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutCreatedByInput = {
@@ -15150,6 +18396,8 @@ export namespace Prisma {
     overview: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutCreatedByInput = {
@@ -15159,6 +18407,60 @@ export namespace Prisma {
 
   export type SchoolCreateManyCreatedByInputEnvelope = {
     data: SchoolCreateManyCreatedByInput | SchoolCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AccommodationCreateWithoutCreatedByInput = {
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutAccommodationInput
+  }
+
+  export type AccommodationUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    description: string
+    schoolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccommodationCreateOrConnectWithoutCreatedByInput = {
+    where: AccommodationWhereUniqueInput
+    create: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type AccommodationCreateManyCreatedByInputEnvelope = {
+    data: AccommodationCreateManyCreatedByInput | AccommodationCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IntakeCreateWithoutCreatedByInput = {
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutIntakesInput
+  }
+
+  export type IntakeUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    schoolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeCreateOrConnectWithoutCreatedByInput = {
+    where: IntakeWhereUniqueInput
+    create: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type IntakeCreateManyCreatedByInputEnvelope = {
+    data: IntakeCreateManyCreatedByInput | IntakeCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -15200,6 +18502,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedInput = {
@@ -15230,6 +18534,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -15476,6 +18782,64 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"School"> | Date | string
   }
 
+  export type AccommodationUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: AccommodationWhereUniqueInput
+    update: XOR<AccommodationUpdateWithoutCreatedByInput, AccommodationUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<AccommodationCreateWithoutCreatedByInput, AccommodationUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type AccommodationUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: AccommodationWhereUniqueInput
+    data: XOR<AccommodationUpdateWithoutCreatedByInput, AccommodationUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type AccommodationUpdateManyWithWhereWithoutCreatedByInput = {
+    where: AccommodationScalarWhereInput
+    data: XOR<AccommodationUpdateManyMutationInput, AccommodationUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type AccommodationScalarWhereInput = {
+    AND?: AccommodationScalarWhereInput | AccommodationScalarWhereInput[]
+    OR?: AccommodationScalarWhereInput[]
+    NOT?: AccommodationScalarWhereInput | AccommodationScalarWhereInput[]
+    id?: IntFilter<"Accommodation"> | number
+    description?: StringFilter<"Accommodation"> | string
+    schoolId?: StringFilter<"Accommodation"> | string
+    createdById?: StringFilter<"Accommodation"> | string
+    createdAt?: DateTimeFilter<"Accommodation"> | Date | string
+    updatedAt?: DateTimeFilter<"Accommodation"> | Date | string
+  }
+
+  export type IntakeUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: IntakeWhereUniqueInput
+    update: XOR<IntakeUpdateWithoutCreatedByInput, IntakeUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<IntakeCreateWithoutCreatedByInput, IntakeUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type IntakeUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: IntakeWhereUniqueInput
+    data: XOR<IntakeUpdateWithoutCreatedByInput, IntakeUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type IntakeUpdateManyWithWhereWithoutCreatedByInput = {
+    where: IntakeScalarWhereInput
+    data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type IntakeScalarWhereInput = {
+    AND?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+    OR?: IntakeScalarWhereInput[]
+    NOT?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+    id?: IntFilter<"Intake"> | number
+    intake?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeFilter<"Intake"> | Date | string
+    deadline?: DateTimeFilter<"Intake"> | Date | string
+    schoolId?: StringFilter<"Intake"> | string
+    createdById?: StringFilter<"Intake"> | string
+    createdAt?: DateTimeFilter<"Intake"> | Date | string
+    updatedAt?: DateTimeFilter<"Intake"> | Date | string
+  }
+
   export type AdminCreateWithoutDepartmentsLeadingInput = {
     id?: number
     adminId: string
@@ -15504,6 +18868,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsLeadingInput = {
@@ -15534,6 +18900,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsLeadingInput = {
@@ -15569,6 +18937,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsInput = {
@@ -15599,6 +18969,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsInput = {
@@ -15673,6 +19045,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsLeadingInput = {
@@ -15703,6 +19077,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutDepartmentsInput = {
@@ -15765,6 +19141,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsLeadingInput = {
@@ -15795,6 +19173,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsLeadingInput = {
@@ -15852,6 +19232,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
@@ -15882,6 +19264,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
@@ -15917,6 +19301,8 @@ export namespace Prisma {
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsInput = {
@@ -15947,6 +19333,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsInput = {
@@ -15992,6 +19380,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsLeadingInput = {
@@ -16022,6 +19412,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutTeamsInput = {
@@ -16090,6 +19482,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
@@ -16120,6 +19514,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -16166,6 +19562,8 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutFaqsCreatedInput = {
@@ -16196,6 +19594,8 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutFaqsCreatedInput = {
@@ -16241,6 +19641,8 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutFaqsCreatedInput = {
@@ -16271,6 +19673,8 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutActivityLogsInput = {
@@ -16301,6 +19705,8 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutActivityLogsInput = {
@@ -16331,6 +19737,8 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutActivityLogsInput = {
@@ -16376,6 +19784,8 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutActivityLogsInput = {
@@ -16406,6 +19816,8 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutSchoolsCreatedInput = {
@@ -16436,6 +19848,8 @@ export namespace Prisma {
     teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutSchoolsCreatedInput = {
@@ -16466,11 +19880,62 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
     faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutSchoolsCreatedInput = {
     where: AdminWhereUniqueInput
     create: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
+  }
+
+  export type AccommodationCreateWithoutSchoolInput = {
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutAccommodationsCreatedInput
+  }
+
+  export type AccommodationUncheckedCreateWithoutSchoolInput = {
+    id?: number
+    description: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccommodationCreateOrConnectWithoutSchoolInput = {
+    where: AccommodationWhereUniqueInput
+    create: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type IntakeCreateWithoutSchoolInput = {
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutIntakesCreatedInput
+  }
+
+  export type IntakeUncheckedCreateWithoutSchoolInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeCreateOrConnectWithoutSchoolInput = {
+    where: IntakeWhereUniqueInput
+    create: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type IntakeCreateManySchoolInputEnvelope = {
+    data: IntakeCreateManySchoolInput | IntakeCreateManySchoolInput[]
+    skipDuplicates?: boolean
   }
 
   export type AdminUpsertWithoutSchoolsCreatedInput = {
@@ -16511,6 +19976,8 @@ export namespace Prisma {
     teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutSchoolsCreatedInput = {
@@ -16541,6 +20008,542 @@ export namespace Prisma {
     teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AccommodationUpsertWithoutSchoolInput = {
+    update: XOR<AccommodationUpdateWithoutSchoolInput, AccommodationUncheckedUpdateWithoutSchoolInput>
+    create: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
+    where?: AccommodationWhereInput
+  }
+
+  export type AccommodationUpdateToOneWithWhereWithoutSchoolInput = {
+    where?: AccommodationWhereInput
+    data: XOR<AccommodationUpdateWithoutSchoolInput, AccommodationUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type AccommodationUpdateWithoutSchoolInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutAccommodationsCreatedNestedInput
+  }
+
+  export type AccommodationUncheckedUpdateWithoutSchoolInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: IntakeWhereUniqueInput
+    update: XOR<IntakeUpdateWithoutSchoolInput, IntakeUncheckedUpdateWithoutSchoolInput>
+    create: XOR<IntakeCreateWithoutSchoolInput, IntakeUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type IntakeUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: IntakeWhereUniqueInput
+    data: XOR<IntakeUpdateWithoutSchoolInput, IntakeUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type IntakeUpdateManyWithWhereWithoutSchoolInput = {
+    where: IntakeScalarWhereInput
+    data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyWithoutSchoolInput>
+  }
+
+  export type SchoolCreateWithoutAccommodationInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
+    intakes?: IntakeCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutAccommodationInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutAccommodationInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutAccommodationInput, SchoolUncheckedCreateWithoutAccommodationInput>
+  }
+
+  export type AdminCreateWithoutAccommodationsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutAccommodationsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutAccommodationsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutAccommodationsCreatedInput, AdminUncheckedCreateWithoutAccommodationsCreatedInput>
+  }
+
+  export type SchoolUpsertWithoutAccommodationInput = {
+    update: XOR<SchoolUpdateWithoutAccommodationInput, SchoolUncheckedUpdateWithoutAccommodationInput>
+    create: XOR<SchoolCreateWithoutAccommodationInput, SchoolUncheckedCreateWithoutAccommodationInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutAccommodationInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutAccommodationInput, SchoolUncheckedUpdateWithoutAccommodationInput>
+  }
+
+  export type SchoolUpdateWithoutAccommodationInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
+    intakes?: IntakeUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutAccommodationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type AdminUpsertWithoutAccommodationsCreatedInput = {
+    update: XOR<AdminUpdateWithoutAccommodationsCreatedInput, AdminUncheckedUpdateWithoutAccommodationsCreatedInput>
+    create: XOR<AdminCreateWithoutAccommodationsCreatedInput, AdminUncheckedCreateWithoutAccommodationsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutAccommodationsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutAccommodationsCreatedInput, AdminUncheckedUpdateWithoutAccommodationsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutAccommodationsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutAccommodationsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type SchoolCreateWithoutIntakesInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
+    accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutIntakesInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutIntakesInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type AdminCreateWithoutIntakesCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutIntakesCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutIntakesCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
+  }
+
+  export type SchoolUpsertWithoutIntakesInput = {
+    update: XOR<SchoolUpdateWithoutIntakesInput, SchoolUncheckedUpdateWithoutIntakesInput>
+    create: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutIntakesInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutIntakesInput, SchoolUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type SchoolUpdateWithoutIntakesInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
+    accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutIntakesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type AdminUpsertWithoutIntakesCreatedInput = {
+    update: XOR<AdminUpdateWithoutIntakesCreatedInput, AdminUncheckedUpdateWithoutIntakesCreatedInput>
+    create: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutIntakesCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutIntakesCreatedInput, AdminUncheckedUpdateWithoutIntakesCreatedInput>
+  }
+
+  export type AdminUpdateWithoutIntakesCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutIntakesCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyCreatedByInput = {
@@ -16628,6 +20631,24 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AccommodationCreateManyCreatedByInput = {
+    id?: number
+    description: string
+    schoolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeCreateManyCreatedByInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    schoolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AdminUpdateWithoutCreatedByInput = {
     adminId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -16655,6 +20676,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedByInput = {
@@ -16685,6 +20708,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutCreatedByInput = {
@@ -16914,6 +20939,8 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutCreatedByInput = {
@@ -16934,6 +20961,8 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateManyWithoutCreatedByInput = {
@@ -16952,6 +20981,58 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccommodationUpdateWithoutCreatedByInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutAccommodationNestedInput
+  }
+
+  export type AccommodationUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccommodationUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUpdateWithoutCreatedByInput = {
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
+  }
+
+  export type IntakeUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16992,6 +21073,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsInput = {
@@ -17022,6 +21105,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutDepartmentsInput = {
@@ -17101,6 +21186,8 @@ export namespace Prisma {
     faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsInput = {
@@ -17131,6 +21218,8 @@ export namespace Prisma {
     faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutTeamsInput = {
@@ -17151,6 +21240,45 @@ export namespace Prisma {
     phoneNumber?: NullableJsonNullValueInput | InputJsonValue
     jobTitle?: StringFieldUpdateOperationsInput | string
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeCreateManySchoolInput = {
+    id?: number
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeUpdateWithoutSchoolInput = {
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput
+  }
+
+  export type IntakeUncheckedUpdateWithoutSchoolInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutSchoolInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
