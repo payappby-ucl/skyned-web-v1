@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+import { ISchool } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
 import { repository } from "../../../infrastructure";
 import {
@@ -13,6 +15,31 @@ import {
 } from "../../../utils";
 import { ServiceUtils } from "../utils";
 import { CreateSchoolServiceSchema } from "./schema";
+import { GeneralSchema } from "../../../zod-schemas";
+
+const generalSchoolData: (keyof ISchool)[] = [
+  "name",
+  "slug",
+  "country",
+  "state",
+  "address",
+  "city",
+  "institutionType",
+  "ownershipType",
+  "currency",
+  "link",
+  "logo",
+  "schoolImage",
+  "overview",
+];
+
+const adminSchoolData: (keyof ISchool)[] = [
+  ...generalSchoolData,
+  "id",
+  "schoolId",
+  "createdAt",
+  "updatedAt",
+];
 
 /** Represents dependencies needed to instantiate  {SchoolService} */
 export interface ISchoolServiceDependencies {
@@ -66,7 +93,46 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
     return this.deserialize(school);
   };
 
-  findSchoolBySlug: ISchoolService["findSchoolBySlug"] = async (slug) => {
+  updateSchool: ISchoolService["updateSchool"] = async (schoolId, data) => {
+    const { schoolId: id, ...rest } = this.validationUtility.validateInput({
+      schema: CreateSchoolServiceSchema.partial({
+        logo: true,
+        schoolImage: true,
+      }),
+      inputData: {
+        ...data,
+        schoolId,
+      },
+    });
+
+    const school = await this.repository.school.update({
+      where: {
+        schoolId: id,
+      },
+
+      data: {
+        ...rest,
+        logo: rest.logo
+          ? {
+              ...rest.logo,
+            }
+          : undefined,
+
+        schoolImage: rest.schoolImage
+          ? {
+              ...rest.schoolImage,
+            }
+          : undefined,
+      },
+    });
+
+    return this.deserialize(school);
+  };
+
+  findSchoolBySlug: ISchoolService["findSchoolBySlug"] = async (
+    slug,
+    authUser,
+  ) => {
     const data = this.validationUtility.validateInput({
       schema: CreateSchoolServiceSchema.pick({
         slug: true,
@@ -80,6 +146,53 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
       where: {
         slug: data.slug,
       },
+      select: {
+        ...SkynedUtils.select(
+          authUser?.claim === "admin" ? adminSchoolData : generalSchoolData,
+        ),
+
+        createdBy:
+          authUser?.claim === "admin"
+            ? {
+                select: SkynedUtils.select(adminProfileKeys),
+              }
+            : undefined,
+      },
+    });
+
+    if (!school) return null;
+    return this.deserialize(school);
+  };
+
+  findSchoolBySchoolId: ISchoolService["findSchoolBySchoolId"] = async (
+    schoolId,
+    authUser,
+  ) => {
+    const data = this.validationUtility.validateInput({
+      schema: GeneralSchema.pick({
+        schoolId: true,
+      }),
+      inputData: {
+        schoolId,
+      },
+    });
+
+    const school = await this.repository.school.findUnique({
+      where: {
+        schoolId: data.schoolId,
+      },
+      select: {
+        ...SkynedUtils.select(
+          authUser?.claim === "admin" ? adminSchoolData : generalSchoolData,
+        ),
+
+        createdBy:
+          authUser?.claim === "admin"
+            ? {
+                select: SkynedUtils.select(adminProfileKeys),
+              }
+            : undefined,
+      },
     });
 
     if (!school) return null;
@@ -91,14 +204,10 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
     return count;
   };
 
-  listSchools: ISchoolService["listSchools"] = async ({
-    skip,
-    take,
-    from,
-    to,
-    order,
-    where,
-  }) => {
+  listSchools: ISchoolService["listSchools"] = async (
+    { skip, take, from, to, order, where },
+    authUser,
+  ) => {
     const schools = await this.repository.school.findMany({
       skip,
       take,
@@ -111,10 +220,17 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
       orderBy: {
         [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
       },
-      include: {
-        createdBy: {
-          select: SkynedUtils.select(adminProfileKeys),
-        },
+
+      select: {
+        ...SkynedUtils.select(
+          authUser?.claim === "admin" ? adminSchoolData : generalSchoolData,
+        ),
+        createdBy:
+          authUser?.claim === "admin"
+            ? {
+                select: SkynedUtils.select(adminProfileKeys),
+              }
+            : undefined,
       },
     });
 

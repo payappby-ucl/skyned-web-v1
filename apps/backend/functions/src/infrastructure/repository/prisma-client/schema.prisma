@@ -218,7 +218,7 @@ model ActivityLog {
 // * Schools
 model School {
   id       Int    @unique @default(autoincrement())
-  schoolId String @id @default(cuid()) @map("school_id")
+  schoolId String @id @unique @map("school_id")
 
   logo            Json
   schoolImage     Json            @map("school_image")

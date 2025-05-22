@@ -158,7 +158,7 @@ export const columns: ColumnDef<ISchool>[] = [
           >
             <DropdownMenuItem asChild>
               <Link
-                href={`/schools/${school.slug}/edit`}
+                href={`/schools/${school.schoolId}/edit`}
                 aria-label={`Link to edit school`}
               >
                 <SquarePen />

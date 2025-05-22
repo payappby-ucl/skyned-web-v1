@@ -16,4 +16,8 @@ export interface ISchoolRepository {
   count(
     options?: Parameters<Prisma.SchoolDelegate["count"]>["0"],
   ): ReturnType<Prisma.SchoolDelegate["count"]>;
+
+  update(
+    options: Parameters<Prisma.SchoolDelegate["update"]>["0"],
+  ): ReturnType<Prisma.SchoolDelegate["update"]>;
 }

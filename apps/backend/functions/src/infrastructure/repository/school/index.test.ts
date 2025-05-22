@@ -22,7 +22,7 @@ describe("SchoolRepository", () => {
           SkynedUtils.resolveStoragePath({
             type: "logo",
             data: {
-              schoolSlug: schoolData.slug,
+              schoolId: schoolData.slug,
             },
           }),
         );
@@ -32,7 +32,7 @@ describe("SchoolRepository", () => {
           SkynedUtils.resolveStoragePath({
             type: "schoolImage",
             data: {
-              schoolSlug: schoolData.slug,
+              schoolId: schoolData.slug,
             },
           }),
         );
@@ -42,6 +42,7 @@ describe("SchoolRepository", () => {
             ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage"]),
             logo,
             schoolImage,
+            schoolId: "1234567",
             createdById: user.id,
           },
         });
@@ -91,6 +92,59 @@ describe("SchoolRepository", () => {
             }),
           ]),
         );
+      });
+    });
+
+    describe("update", () => {
+      test("should pass", async () => {
+        const user = await auth.findUserByEmail(admin.email);
+        if (!user) throw Error("User not found");
+
+        const logo = await storageService.saveObject(
+          schoolData.logo,
+          SkynedUtils.resolveStoragePath({
+            type: "logo",
+            data: {
+              schoolId: schoolData.slug,
+            },
+          }),
+        );
+
+        const schoolImage = await storageService.saveObject(
+          schoolData.schoolImage,
+          SkynedUtils.resolveStoragePath({
+            type: "schoolImage",
+            data: {
+              schoolId: schoolData.slug,
+            },
+          }),
+        );
+
+        const school = await repository.school.create({
+          data: {
+            ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage"]),
+            slug: "another-school",
+            logo,
+            schoolImage,
+            createdById: user.id,
+            schoolId: "12345",
+          },
+        });
+
+        const updatedSchool = await repository.school.update({
+          where: {
+            slug: school.slug,
+          },
+          data: {
+            name: "New School",
+            slug: "new-school",
+          },
+        });
+
+        expect(school.id).toBe(updatedSchool.id);
+        expect(school.schoolId).toBe(updatedSchool.schoolId);
+        expect(updatedSchool.name).toBe("New School");
+        expect(updatedSchool.slug).toBe("new-school");
       });
     });
   });

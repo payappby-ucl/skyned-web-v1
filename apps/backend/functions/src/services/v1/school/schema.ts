@@ -8,6 +8,7 @@ export const CreateSchoolServiceSchema = CreateSchoolSchema.omit({
 }).extend({
   logo: GeneralSchema.shape.object,
   schoolImage: GeneralSchema.shape.object,
+  schoolId: GeneralSchema.shape.schoolId,
 });
 
 export type CreateSchoolServiceSchema = z.infer<

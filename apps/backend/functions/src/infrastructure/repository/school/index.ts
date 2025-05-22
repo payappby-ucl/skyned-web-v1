@@ -19,4 +19,7 @@ export class SchoolRepository extends DBUtils implements ISchoolRepository {
 
   count: ISchoolRepository["count"] = (options) =>
     this.db.school.count(options);
+
+  update: ISchoolRepository["update"] = (options) =>
+    this.db.school.update(options);
 }

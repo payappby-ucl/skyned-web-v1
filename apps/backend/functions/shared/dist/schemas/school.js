@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateSchoolSchema = void 0;
+exports.UpdateSchoolSchema = exports.CreateSchoolSchema = void 0;
 const zod_1 = __importDefault(require("zod"));
 const slugify_1 = __importDefault(require("slugify"));
 const common_1 = require("./common");
@@ -38,4 +38,8 @@ exports.CreateSchoolSchema = common_1.CommonSchema.pick({
         utils_1.currencies.USD,
     ]),
     overview: zod_1.default.string().trim().nonempty("Required"),
+});
+exports.UpdateSchoolSchema = exports.CreateSchoolSchema.partial({
+    logo: true,
+    schoolImage: true,
 });

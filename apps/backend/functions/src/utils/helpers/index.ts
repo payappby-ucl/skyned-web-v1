@@ -156,7 +156,7 @@ export class SkynedUtils {
         return `users/${data.adminId}/profile/${type}`;
       case "logo":
       case "schoolImage":
-        return `schools/${data.schoolSlug}/${type}`;
+        return `schools/${data.schoolId}/${type}`;
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,

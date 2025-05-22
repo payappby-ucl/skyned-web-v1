@@ -1,4 +1,4 @@
-import { ContactUsSchema, CreateAdminSchema, CreateFaqSchema, CreateSchoolSchema, UpdateAdminSchema } from "../schemas";
+import { ContactUsSchema, CreateAdminSchema, CreateFaqSchema, CreateSchoolSchema, UpdateAdminSchema, UpdateSchoolSchema } from "../schemas";
 import { IAdmin, IDepartment, IFaq, IInquiry, ISchool, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 export type AuthClaim = AdminClaim | StudentClaim;
@@ -37,7 +37,7 @@ export type PermissionType = {
     schools: {
         dataType: ISchool;
         createDataType: CreateSchoolSchema;
-        updateDataType: "";
+        updateDataType: UpdateSchoolSchema;
         action: "list" | "create" | "read" | "update" | "delete";
     };
 };

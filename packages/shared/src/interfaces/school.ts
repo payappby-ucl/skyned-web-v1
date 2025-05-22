@@ -15,6 +15,7 @@ export interface ISchool extends ITimestamps {
   city: string;
   address: string;
   link: string;
+  overview: string;
   institutionType: InstitutionType;
   ownershipType: OwnershipType;
   currency: CurrencyType;

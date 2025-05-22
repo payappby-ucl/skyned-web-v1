@@ -87,16 +87,27 @@ describe("Schools API", () => {
   });
 
   describe(`GET - ${url}`, () => {
-    test("should fail if no authorization header is passed", async () => {
+    test("should pass if no authorization header is passed", async () => {
       const res = await request(server).get(url);
 
-      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.status).toBe(StatusCodes.OK);
       expect(res.body).toEqual({
-        statusCode: StatusCodes.UNAUTHORIZED,
-        success: false,
-        data: expect.objectContaining({
-          message: expect.any(String),
-        }),
+        ...responseBody,
+        success: true,
+        data: {
+          total: expect.any(Number),
+          perPage: 100,
+          currentPage: 1,
+          nextPage: 2,
+          prevPage: 1,
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              overview: expect.any(String),
+            }),
+          ]),
+        },
       });
     });
 
@@ -130,6 +141,73 @@ describe("Schools API", () => {
           ]),
         },
       });
+    });
+  });
+
+  describe(`Get school by slug - ${url}/test-school`, () => {
+    const fullUrl = `${url}/test-school`;
+    test("should get school if no authorization header is passed", async () => {
+      const res = await request(server).get(fullUrl);
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body.data.id).not.toBeDefined();
+      expect(res.body.data.schoolId).not.toBeDefined();
+      expect(res.body.data.slug).toBe("test-school");
+    });
+
+    test("should get school if authorization header is passed", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .get(fullUrl)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body.data.id).not.toBeNull();
+      expect(res.body.data.schoolId).not.toBeNull();
+      expect(res.body.data.slug).toBe("test-school");
+    });
+  });
+
+  describe(`Update school - ${url}/test-school`, () => {
+    const fullUrl = `${url}/test-school`;
+    test("should fail if no authorization header is passed", async () => {
+      const res = await request(server)
+        .put(fullUrl)
+        .send({
+          ...schoolData,
+          slug: "test-school",
+        });
+
+      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.body).toEqual({
+        statusCode: StatusCodes.UNAUTHORIZED,
+        success: false,
+        data: expect.objectContaining({
+          message: expect.any(String),
+        }),
+      });
+    });
+
+    test("should update school", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .put(fullUrl)
+        .send({
+          ...schoolData,
+          slug: "test-school",
+          currency: "NGN",
+        })
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body.data).toEqual(
+        expect.objectContaining({
+          message: expect.any(String),
+        }),
+      );
     });
   });
 });

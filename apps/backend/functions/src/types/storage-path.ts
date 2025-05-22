@@ -8,7 +8,7 @@ interface ProfileImage {
 interface SchoolImage {
   type: "logo" | "schoolImage";
   data: {
-    schoolSlug: string;
+    schoolId: string;
   };
 }
 

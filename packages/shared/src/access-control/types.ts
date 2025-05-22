@@ -4,6 +4,7 @@ import {
   CreateFaqSchema,
   CreateSchoolSchema,
   UpdateAdminSchema,
+  UpdateSchoolSchema,
 } from "../schemas";
 import {
   IAdmin,
@@ -64,7 +65,7 @@ export type PermissionType = {
   schools: {
     dataType: ISchool;
     createDataType: CreateSchoolSchema;
-    updateDataType: "";
+    updateDataType: UpdateSchoolSchema;
     action: "list" | "create" | "read" | "update" | "delete";
   };
 };

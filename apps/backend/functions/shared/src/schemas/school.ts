@@ -36,3 +36,9 @@ export const CreateSchoolSchema = CommonSchema.pick({
 });
 
 export type CreateSchoolSchema = z.infer<typeof CreateSchoolSchema>;
+
+export const UpdateSchoolSchema = CreateSchoolSchema.partial({
+  logo: true,
+  schoolImage: true,
+});
+export type UpdateSchoolSchema = z.infer<typeof UpdateSchoolSchema>;

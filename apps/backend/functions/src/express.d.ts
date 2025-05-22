@@ -13,7 +13,7 @@ declare global {
         admin?: IAdmin;
         // TODO: Add student interface
         student?: "";
-        claim: AuthClaim["claim"];
+        claim?: AuthClaim["claim"];
       };
     }
   }

@@ -36,6 +36,57 @@ export class AuthMiddleware implements IAuthMiddleware {
     return AuthMiddleware.instance;
   }
 
+  safeAuthenticate: IAuthMiddleware["safeAuthenticate"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authorizationHeader = req.headers["authorization"];
+      if (authorizationHeader) {
+        const [authType, token] = authorizationHeader.split(" ");
+        if (authType.toLowerCase() === "bearer" && token) {
+          const authUser = await this.auth.verifyIdToken({ token });
+          if (authUser) {
+            switch (authUser.claim) {
+              case "admin":
+                {
+                  const admin = await this.adminService.findAdminByAdminId(
+                    authUser.id,
+                    "auth",
+                  );
+
+                  if (admin) {
+                    req.skynedAuth = {
+                      ...(req.skynedAuth || {}),
+                      admin,
+                    };
+                  }
+                }
+                break;
+              case "student":
+                {
+                  // TODO: Get Student
+                  req.skynedAuth = {
+                    ...(req.skynedAuth || {}),
+                    student: "",
+                  };
+                }
+                break;
+              default:
+            }
+
+            req.skynedAuth.claim = authUser.claim;
+          }
+        }
+      }
+
+      next();
+    } catch (error) {
+      next(error);
+    }
+  };
+
   authenticate: IAuthMiddleware["authenticate"] = async (req, res, next) => {
     try {
       const authorizationHeader = req.headers["authorization"];

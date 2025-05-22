@@ -12268,7 +12268,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
-  }, "schoolId" | "id" | "slug">
+  }, "schoolId" | "id" | "schoolId" | "slug">
 
   export type SchoolOrderByWithAggregationInput = {
     id?: SortOrder
@@ -12920,7 +12920,7 @@ export namespace Prisma {
 
   export type SchoolCreateInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string
@@ -12941,7 +12941,7 @@ export namespace Prisma {
 
   export type SchoolUncheckedCreateInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string
@@ -13003,7 +13003,7 @@ export namespace Prisma {
 
   export type SchoolCreateManyInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string
@@ -15114,7 +15114,7 @@ export namespace Prisma {
 
   export type SchoolCreateWithoutCreatedByInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string
@@ -15134,7 +15134,7 @@ export namespace Prisma {
 
   export type SchoolUncheckedCreateWithoutCreatedByInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string
@@ -16610,7 +16610,7 @@ export namespace Prisma {
 
   export type SchoolCreateManyCreatedByInput = {
     id?: number
-    schoolId?: string
+    schoolId: string
     logo: JsonNullValueInput | InputJsonValue
     schoolImage: JsonNullValueInput | InputJsonValue
     name: string

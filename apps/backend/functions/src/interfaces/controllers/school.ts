@@ -4,9 +4,10 @@ import {
   IMessageResponse,
   CreateSchoolSchema,
   IPaginatedResponse,
+  UpdateSchoolSchema,
 } from "@workspace/shared";
 import { ISchoolService } from "../services";
-import { PageQuerySchema } from "../../zod-schemas";
+import { PageQuerySchema, SchoolSlugSchema } from "../../zod-schemas";
 
 export interface ISchoolController {
   /** Creates a school */
@@ -24,5 +25,18 @@ export interface ISchoolController {
     >,
     object,
     Partial<PageQuerySchema>
+  >;
+
+  /** Finds a school */
+  findSchool: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<Awaited<ReturnType<ISchoolService["findSchoolBySlug"]>>>
+  >;
+
+  /** Update a school */
+  updateSchool: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    UpdateSchoolSchema
   >;
 }

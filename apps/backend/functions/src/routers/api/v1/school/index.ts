@@ -12,8 +12,8 @@ import {
   authMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
-import { CreateSchoolSchema } from "@workspace/shared";
-import { PageQuerySchema } from "../../../../zod-schemas";
+import { CreateSchoolSchema, UpdateSchoolSchema } from "@workspace/shared";
+import { PageQuerySchema, SchoolSlugSchema } from "../../../../zod-schemas";
 
 /** Required dependencies for router initialization */
 export interface SchoolRouterDependencies {
@@ -40,8 +40,7 @@ export class SchoolRouter implements IRouter {
         RequestValidationMiddleware.validate({
           query: PageQuerySchema.partial(),
         }),
-        authMiddleware.authenticate,
-        authMiddleware.hasRole(["admin"]),
+        authMiddleware.safeAuthenticate,
         schoolController.listSchools,
       )
       .post(
@@ -51,6 +50,25 @@ export class SchoolRouter implements IRouter {
         authMiddleware.authenticate,
         authMiddleware.hasRole(["admin"]),
         schoolController.createSchool,
+      );
+
+    this.router
+      .route("/:slug")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.safeAuthenticate,
+        schoolController.findSchool,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          body: UpdateSchoolSchema,
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.updateSchool,
       );
   }
 
