@@ -10,11 +10,11 @@ function StateInput({ country, ...props }: SelectProps & { country: string }) {
 
   const selectedState = useMemo(
     () => State.getStateByCodeAndCountry(props.value as string, country),
-    [props.value],
+    [props.value, country],
   );
 
   useEffect(() => {
-    props.onValueChange?.("");
+    props.onValueChange?.(selectedState?.isoCode || "");
   }, [country]);
 
   return (

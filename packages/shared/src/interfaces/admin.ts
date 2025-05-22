@@ -2,6 +2,7 @@ import { IObject, IPhoneNumber, ISocial, ITimestamps } from "./utils";
 import { IDepartment } from "./department";
 import { ITeam } from "./team";
 import { Gender } from "../types";
+import { ISchool } from "./school";
 
 export interface IAdmin extends ITimestamps {
   id: number;
@@ -32,6 +33,8 @@ export interface IAdmin extends ITimestamps {
   teams?: ITeam[];
   teamsLeading?: ITeam[];
   teamsCreated?: ITeam[];
+
+  schoolsCreated?: ISchool[];
 }
 
 export type AdminProfile = Pick<

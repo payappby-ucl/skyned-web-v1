@@ -2,6 +2,7 @@ import z from "zod";
 import slugify from "slugify";
 import { CommonSchema } from "./common";
 import { currencies, institutionType, ownershipType } from "../utils";
+import parseDataURL from "data-urls";
 
 export const CreateSchoolSchema = CommonSchema.pick({
   country: true,
@@ -37,8 +38,25 @@ export const CreateSchoolSchema = CommonSchema.pick({
 
 export type CreateSchoolSchema = z.infer<typeof CreateSchoolSchema>;
 
-export const UpdateSchoolSchema = CreateSchoolSchema.partial({
+export const UpdateSchoolSchema = CreateSchoolSchema.omit({
   logo: true,
   schoolImage: true,
+}).extend({
+  logo: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (val) => (val ? !!parseDataURL(val) : true),
+      "Image must be of type data-url",
+    ),
+  schoolImage: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (val) => (val ? !!parseDataURL(val) : true),
+      "Image must be of type data-url",
+    ),
 });
 export type UpdateSchoolSchema = z.infer<typeof UpdateSchoolSchema>;

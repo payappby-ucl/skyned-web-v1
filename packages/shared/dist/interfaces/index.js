@@ -23,3 +23,5 @@ __exportStar(require("./faq"), exports);
 __exportStar(require("./inquiry"), exports);
 __exportStar(require("./activity-log"), exports);
 __exportStar(require("./school"), exports);
+__exportStar(require("./accommodation"), exports);
+__exportStar(require("./intake"), exports);

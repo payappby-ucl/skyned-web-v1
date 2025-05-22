@@ -8,6 +8,7 @@ const zod_1 = __importDefault(require("zod"));
 const slugify_1 = __importDefault(require("slugify"));
 const common_1 = require("./common");
 const utils_1 = require("../utils");
+const data_urls_1 = __importDefault(require("data-urls"));
 exports.CreateSchoolSchema = common_1.CommonSchema.pick({
     country: true,
 }).extend({
@@ -39,7 +40,18 @@ exports.CreateSchoolSchema = common_1.CommonSchema.pick({
     ]),
     overview: zod_1.default.string().trim().nonempty("Required"),
 });
-exports.UpdateSchoolSchema = exports.CreateSchoolSchema.partial({
+exports.UpdateSchoolSchema = exports.CreateSchoolSchema.omit({
     logo: true,
     schoolImage: true,
+}).extend({
+    logo: zod_1.default
+        .string()
+        .trim()
+        .optional()
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Image must be of type data-url"),
+    schoolImage: zod_1.default
+        .string()
+        .trim()
+        .optional()
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Image must be of type data-url"),
 });

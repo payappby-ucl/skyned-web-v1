@@ -5,7 +5,7 @@ import { IAdmin, IFaq, ISchool } from "@workspace/shared";
 import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import { SquarePen } from "lucide-react";
+import { Eye, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import SchoolProfile from "@/src/components/school-profile";
@@ -151,6 +151,18 @@ export const columns: ColumnDef<ISchool>[] = [
 
       return (
         <DataTableRowActions>
+          <HasPermission resourceName="schools" action="read" args={[school]}>
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${school.slug}`}
+                aria-label={`Link to view school`}
+              >
+                <Eye />
+                <span>View</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+
           <HasPermission
             resourceName="schools"
             action="update"
@@ -158,7 +170,7 @@ export const columns: ColumnDef<ISchool>[] = [
           >
             <DropdownMenuItem asChild>
               <Link
-                href={`/schools/${school.schoolId}/edit`}
+                href={`/schools/${school.slug}/edit`}
                 aria-label={`Link to edit school`}
               >
                 <SquarePen />
