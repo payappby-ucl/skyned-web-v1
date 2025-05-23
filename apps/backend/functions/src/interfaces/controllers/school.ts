@@ -5,6 +5,8 @@ import {
   CreateSchoolSchema,
   IPaginatedResponse,
   UpdateSchoolSchema,
+  IAccommodation,
+  CreateAccommodationSchema,
 } from "@workspace/shared";
 import { ISchoolService } from "../services";
 import { PageQuerySchema, SchoolSlugSchema } from "../../zod-schemas";
@@ -38,5 +40,31 @@ export interface ISchoolController {
     object & SchoolSlugSchema,
     ISuccessResponse<IMessageResponse>,
     UpdateSchoolSchema
+  >;
+
+  /** Get Accommodation */
+  getAccommodation: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IAccommodation | null>
+  >;
+
+  /** Create Accommodation */
+  createAccommodation: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IAccommodation>,
+    CreateAccommodationSchema
+  >;
+
+  /** Update Accommodation */
+  updateAccommodation: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IAccommodation>,
+    CreateAccommodationSchema
+  >;
+
+  /** Delete Accommodation */
+  deleteAccommodation: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
   >;
 }

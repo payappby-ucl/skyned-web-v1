@@ -258,3 +258,160 @@ paths:
           $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/accommodation:
+    summary: School Accommodation operation
+
+    post:
+      summary: Creates accommodation
+      description: Creates accommodation for school
+      operation: createAccommodation
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Accommodation
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to create accommodation
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+              required:
+                - description
+      responses:
+        "201":
+          description: The accommodation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Accommodation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Updates accommodation
+      description: Updates accommodation for school
+      operation: updateAccommodation
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Accommodation
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to update accommodation
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+              required:
+                - description
+      responses:
+        "200":
+          description: The accommodation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Accommodation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    delete:
+      summary: Deletes accommodation
+      description: Deletes accommodation for school
+      operation: deleteAccommodation
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Accommodation
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: The accommodation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Gets accommodation
+      description: Gets accommodation for school
+      operation: getAccommodation
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Accommodation
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: The accommodation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Accommodation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"

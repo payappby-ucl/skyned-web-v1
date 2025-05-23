@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.accommodationPolicies = void 0;
 exports.accommodationPolicies = {
-    schools: {
+    accommodations: {
         list() {
             return true;
         },

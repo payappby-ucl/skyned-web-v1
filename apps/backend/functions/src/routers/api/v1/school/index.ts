@@ -12,7 +12,11 @@ import {
   authMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
-import { CreateSchoolSchema, UpdateSchoolSchema } from "@workspace/shared";
+import {
+  CreateAccommodationSchema,
+  CreateSchoolSchema,
+  UpdateSchoolSchema,
+} from "@workspace/shared";
 import { PageQuerySchema, SchoolSlugSchema } from "../../../../zod-schemas";
 
 /** Required dependencies for router initialization */
@@ -71,7 +75,41 @@ export class SchoolRouter implements IRouter {
         schoolController.updateSchool,
       );
 
-    this.router.route("/:slug/accommodation");
+    this.router
+      .route("/:slug/accommodation")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.safeAuthenticate,
+        schoolController.getAccommodation,
+      )
+      .post(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          body: CreateAccommodationSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.createAccommodation,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          body: CreateAccommodationSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.updateAccommodation,
+      )
+      .delete(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.deleteAccommodation,
+      );
 
     this.router.route("/:slug/intakes");
 

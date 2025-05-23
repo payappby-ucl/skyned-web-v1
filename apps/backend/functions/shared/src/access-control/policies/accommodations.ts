@@ -1,7 +1,7 @@
 import { AccessControlType } from "../../access-control/types";
 
 export const accommodationPolicies: AccessControlType = {
-  schools: {
+  accommodations: {
     list() {
       return true;
     },

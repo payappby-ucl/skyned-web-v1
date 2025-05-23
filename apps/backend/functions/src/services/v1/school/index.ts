@@ -151,6 +151,23 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
           authUser?.claim === "admin" ? adminSchoolData : generalSchoolData,
         ),
 
+        accommodation: {
+          select: {
+            id: authUser?.claim === "admin" ? true : false,
+            description: true,
+            school: {
+              select: {
+                name: true,
+                slug: true,
+                country: true,
+                state: true,
+                logo: true,
+                schoolImage: true,
+              },
+            },
+          },
+        },
+
         createdBy:
           authUser?.claim === "admin"
             ? {

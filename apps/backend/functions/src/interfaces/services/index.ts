@@ -10,3 +10,5 @@ export * from "./faq";
 export * from "./department";
 export * from "./our-team";
 export * from "./school";
+export * from "./accommodation";
+export * from "./intake";

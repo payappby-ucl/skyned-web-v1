@@ -3,6 +3,7 @@
 import { StatusCodes } from "http-status-codes";
 import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import {
+  IAccommodationService,
   IEvents,
   IIDGeneratorService,
   ISchoolController,
@@ -11,6 +12,7 @@ import {
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import {
+  accommodationService,
   idGeneratorService,
   schoolService,
   storageService,
@@ -26,6 +28,7 @@ export interface ISchoolControllerDependencies {
   storageService: IStorageService;
   idGeneratorService: IIDGeneratorService;
   events: IEvents;
+  accommodationService: IAccommodationService;
 }
 
 /**
@@ -44,6 +47,7 @@ export class SchoolController
     private readonly storageService: IStorageService,
     private readonly idGeneratorService: IIDGeneratorService,
     private readonly events: IEvents,
+    private readonly accommodationService: IAccommodationService,
   ) {
     super();
   }
@@ -55,6 +59,7 @@ export class SchoolController
     storageService,
     idGeneratorService,
     events,
+    accommodationService,
   }: ISchoolControllerDependencies) {
     if (!SchoolController.instance) {
       SchoolController.instance = new SchoolController(
@@ -62,6 +67,7 @@ export class SchoolController
         storageService,
         idGeneratorService,
         events,
+        accommodationService,
       );
     }
     return SchoolController.instance;
@@ -276,6 +282,192 @@ export class SchoolController
       next(error);
     }
   };
+
+  getAccommodation: ISchoolController["getAccommodation"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const authUser = this._validateUser(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      if (authUser?.claim === "admin") {
+        const adminUser = this._validateAdmin(req);
+        this._attributeBasedAccessControl(adminUser, "schools", "read", school);
+      }
+
+      res._success(StatusCodes.OK, school.accommodation || null);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  createAccommodation: ISchoolController["createAccommodation"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const { description } = req.body;
+      const adminUser = this._validateAdmin(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(adminUser, "schools", "read", school);
+      this._attributeBasedAccessControl(
+        adminUser,
+        "accommodations",
+        "create",
+        req.body,
+      );
+
+      const accommodation = await this.accommodationService.createAccommodation(
+        adminUser.user.adminId,
+        school.schoolId,
+        { description },
+      );
+
+      res._success(StatusCodes.CREATED, accommodation);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateAccommodation: ISchoolController["updateAccommodation"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const { description } = req.body;
+      const adminUser = this._validateAdmin(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+      const accommodation = school.accommodation;
+      if (!accommodation) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "accommodations",
+        "update",
+        req.body,
+        accommodation,
+      );
+
+      const updatedAccommodation =
+        await this.accommodationService.createAccommodation(
+          adminUser.user.adminId,
+          school.schoolId,
+          { description },
+        );
+
+      this.events.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "accommodations",
+          action: "update",
+          adminId: adminUser.user.id,
+          resourceId: accommodation.id,
+          previousState: SkynedUtils.exclude(accommodation, [
+            "school",
+            "createdBy",
+          ]),
+          currentState: updatedAccommodation,
+        },
+      });
+
+      res._success(StatusCodes.OK, updatedAccommodation);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteAccommodation: ISchoolController["deleteAccommodation"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+      const accommodation = school.accommodation;
+      if (!accommodation) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "accommodations",
+        "delete",
+        accommodation,
+      );
+
+
+      const deletedAccommodation =
+        await this.accommodationService.deleteAccommodation(accommodation.id);
+
+      this.events.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "accommodations",
+          action: "delete",
+          adminId: adminUser.user.id,
+          resourceId: accommodation.id,
+          previousState: SkynedUtils.exclude(accommodation, [
+            "school",
+            "createdBy",
+          ]),
+          currentState: deletedAccommodation,
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: "Operation Successful",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */
@@ -287,5 +479,6 @@ export const schoolController = SkynedRegistry.getSingleton(
       storageService,
       idGeneratorService,
       events,
+      accommodationService,
     }),
 );

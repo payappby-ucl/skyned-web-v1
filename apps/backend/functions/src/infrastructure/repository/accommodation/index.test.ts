@@ -10,6 +10,7 @@ describe("AccommodationRepository", () => {
   });
 
   describe("Methods", () => {
+    let accommodationId = 0;
     test("should create an accommodation", async () => {
       const userAuth = await signInUser();
       const school = await repository.school.create({
@@ -34,6 +35,8 @@ describe("AccommodationRepository", () => {
           ...accommodationData,
         },
       });
+
+      accommodationId = accommodation.id;
 
       const updatedSchool = await repository.school.findUnique({
         where: {
@@ -60,7 +63,7 @@ describe("AccommodationRepository", () => {
     test("should find a unique accommodation", async () => {
       const accommodation = await repository.accommodation.findUnique({
         where: {
-          schoolId: "accommodation-test",
+          id: accommodationId,
         },
 
         include: {
@@ -105,6 +108,27 @@ describe("AccommodationRepository", () => {
           }),
         ]),
       );
+    });
+
+    test("should count accommodation", async () => {
+      const count = await repository.accommodation.count();
+      expect(count).toEqual(expect.any(Number));
+    });
+
+    test("should delete accommodation", async () => {
+      await repository.accommodation.delete({
+        where: {
+          id: accommodationId,
+        },
+      });
+
+      const accommodation = await repository.accommodation.findUnique({
+        where: {
+          id: accommodationId,
+        },
+      });
+
+      expect(accommodation).toBeNull();
     });
   });
 });

@@ -52,6 +52,10 @@ export enum RegistryKeysEnum {
   OUR_TEAM_ROUTER = "OurTeamRouter",
   /** School Router */
   SCHOOL_ROUTER = "SchoolRouter",
+  /** Accommodation Router */
+  ACCOMMODATION_ROUTER = "AccommodationRouter",
+  /** Intake Router */
+  INTAKE_ROUTER = "IntakeRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -74,6 +78,10 @@ export enum RegistryKeysEnum {
   OUR_TEAM_CONTROLLER = "OurTeamController",
   /** School controller */
   SCHOOL_CONTROLLER = "SchoolController",
+  /** Accommodation Controller */
+  ACCOMMODATION_CONTROLLER = "AccommodationController",
+  /** Intake Controller */
+  INTAKE_CONTROLLER = "IntakeController",
 
   // * Services
   /** Email Service */
@@ -100,6 +108,10 @@ export enum RegistryKeysEnum {
   OUR_TEAM_SERVICE = "OurTeamService",
   /** School Service */
   SCHOOL_SERVICE = "SchoolService",
+  /** Accommodation Service */
+  ACCOMMODATION_SERVICE = "AccommodationService",
+  /** Intake Service */
+  INTAKE_SERVICE = "IntakeService",
 
   // * Utilities
   /** Handles internal validations */

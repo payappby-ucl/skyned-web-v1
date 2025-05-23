@@ -16,4 +16,10 @@ export class AccommodationRepository implements IAccommodationRepository {
 
   findMany: IAccommodationRepository["findMany"] = (options) =>
     this.db.accommodation.findMany(options);
+
+  count: IAccommodationRepository["count"] = (options) =>
+    this.db.accommodation.count(options);
+
+  delete: IAccommodationRepository["delete"] = (options) =>
+    this.db.accommodation.delete(options);
 }
