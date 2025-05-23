@@ -137,11 +137,12 @@ const EditSchoolForm: React.FC<Props> = ({ school }) => {
                         <FormControl>
                           <FileInput
                             isInvalid={fieldState.invalid}
-                            accept={{
-                              "image/png": [".png"],
-                              "image/jpeg": [".jpeg", ".jpg"],
-                            }}
-                            extensions={[".png", ".jpeg", ".jpg"]}
+                           accept={{
+                        "image/png": [".png"],
+                        "image/jpeg": [".jpeg", ".jpg"],
+                        "image/webp": [".webp"],
+                      }}
+                      extensions={[".png", ".jpeg", ".jpg", ".webp"]}
                             maxSize={2}
                             setError={(message) =>
                               form.setError("logo", {
@@ -217,8 +218,9 @@ const EditSchoolForm: React.FC<Props> = ({ school }) => {
                             accept={{
                               "image/png": [".png"],
                               "image/jpeg": [".jpeg", ".jpg"],
+                              "image/webp": [".webp"],
                             }}
-                            extensions={[".png", ".jpeg", ".jpg"]}
+                            extensions={[".png", ".jpeg", ".jpg", ".webp"]}
                             maxSize={2}
                             setError={(message) =>
                               form.setError("schoolImage", {

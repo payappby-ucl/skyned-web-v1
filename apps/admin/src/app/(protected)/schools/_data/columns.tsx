@@ -11,6 +11,46 @@ import Profile from "@/src/components/profile";
 import SchoolProfile from "@/src/components/school-profile";
 
 export const columns: ColumnDef<ISchool>[] = [
+   {
+    id: "actions",
+    header: "Actions",
+    accessorFn: (row) => row,
+    cell: (info) => {
+      const school = info.getValue<ISchool>();
+
+      return (
+        <DataTableRowActions>
+          <HasPermission resourceName="schools" action="read" args={[school]}>
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${school.slug}`}
+                aria-label={`Link to view school`}
+              >
+                <Eye />
+                <span>View</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+
+          <HasPermission
+            resourceName="schools"
+            action="update"
+            args={[{} as any, school]}
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${school.slug}/edit`}
+                aria-label={`Link to edit school`}
+              >
+                <SquarePen />
+                <span>Edit</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+        </DataTableRowActions>
+      );
+    },
+  },
   {
     id: "profile",
     accessorFn: (row) => row,
@@ -142,44 +182,5 @@ export const columns: ColumnDef<ISchool>[] = [
       );
     },
   },
-  {
-    id: "actions",
-    header: "Actions",
-    accessorFn: (row) => row,
-    cell: (info) => {
-      const school = info.getValue<ISchool>();
-
-      return (
-        <DataTableRowActions>
-          <HasPermission resourceName="schools" action="read" args={[school]}>
-            <DropdownMenuItem asChild>
-              <Link
-                href={`/schools/${school.slug}`}
-                aria-label={`Link to view school`}
-              >
-                <Eye />
-                <span>View</span>
-              </Link>
-            </DropdownMenuItem>
-          </HasPermission>
-
-          <HasPermission
-            resourceName="schools"
-            action="update"
-            args={[{} as any, school]}
-          >
-            <DropdownMenuItem asChild>
-              <Link
-                href={`/schools/${school.slug}/edit`}
-                aria-label={`Link to edit school`}
-              >
-                <SquarePen />
-                <span>Edit</span>
-              </Link>
-            </DropdownMenuItem>
-          </HasPermission>
-        </DataTableRowActions>
-      );
-    },
-  },
+ 
 ];
