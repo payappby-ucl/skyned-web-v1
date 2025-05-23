@@ -15,6 +15,34 @@ import StatusView from "@/src/components/status-view";
 
 export const columns: ColumnDef<AdminListType>[] = [
   {
+    id: "actions",
+    header: "Actions",
+    accessorFn: (row) => row,
+    cell: (info) => {
+      const admin = info.getValue<IAdmin>();
+
+      return (
+        <DataTableRowActions>
+          <HasPermission
+            resourceName="admins"
+            action="update"
+            args={[{} as any, admin]}
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/admins/${admin.adminId}/edit`}
+                aria-label={`Link to edit admin`}
+              >
+                <SquarePen />
+                <span>Edit</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+        </DataTableRowActions>
+      );
+    },
+  },
+  {
     id: "profile",
     accessorFn: (row) => ({
       firstName: row.firstName,
@@ -191,32 +219,5 @@ export const columns: ColumnDef<AdminListType>[] = [
       );
     },
   },
-  {
-    id: "actions",
-    header: "Actions",
-    accessorFn: (row) => row,
-    cell: (info) => {
-      const admin = info.getValue<IAdmin>();
-
-      return (
-        <DataTableRowActions>
-          <HasPermission
-            resourceName="admins"
-            action="update"
-            args={[{} as any, admin]}
-          >
-            <DropdownMenuItem asChild>
-              <Link
-                href={`/admins/${admin.adminId}/edit`}
-                aria-label={`Link to edit admin`}
-              >
-                <SquarePen />
-                <span>Edit</span>
-              </Link>
-            </DropdownMenuItem>
-          </HasPermission>
-        </DataTableRowActions>
-      );
-    },
-  },
+  
 ];

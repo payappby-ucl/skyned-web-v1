@@ -28,90 +28,7 @@ import { Clipboard, Contact, Mail, Phone, Trash2 } from "lucide-react";
 import { deleteInquiry } from "../_actions";
 
 export const columns: ColumnDef<IInquiry>[] = [
-  {
-    accessorFn: (row) => row.name,
-    id: "name",
-    header: ({ column }) => (
-      <DataTableColumnHeader title="Name" column={column} />
-    ),
-    cell: (info) => info.getValue<IInquiry["name"]>(),
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => (
-      <DataTableColumnHeader title="Email" column={column} />
-    ),
-  },
-  {
-    accessorFn: (row) => row.phoneNumber,
-    id: "phoneNumber",
-    header: ({ column }) => (
-      <DataTableColumnHeader title="Phone Number" column={column} />
-    ),
-    cell: (info) => {
-      const phoneNumber = info.getValue<IInquiry["phoneNumber"]>();
-      const country = brandClientApi.location.getCountryByISOCode(
-        phoneNumber.country || "",
-      );
-      return (
-        <div className="flex items-center gap-2">
-          {country ? <span>{country.flag}</span> : null}
-          <p className="font-semibold">{phoneNumber.number}</p>
-        </div>
-      );
-    },
-  },
-  {
-    id: "subject",
-    accessorFn: (row) => row.subject,
-    header: ({ column }) => (
-      <DataTableColumnHeader title="Subject" column={column} />
-    ),
-    cell: (info) => (
-      <p className="max-w-sm truncate font-semibold">
-        {info.getValue<string>()}
-      </p>
-    ),
-  },
-  {
-    id: "message",
-    accessorFn: (row) => ({ message: row.message, subject: row.subject }),
-    header: "Message",
-    cell: (info) => {
-      const data = info.getValue<Pick<IInquiry, "message" | "subject">>();
-      return (
-        <Dialog>
-          <DialogTrigger>
-            <p className="max-w-sm truncate font-semibold">{data.message}</p>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className="!text-lg">{data.subject}</DialogTitle>
-              <DialogDescription className="font-medium leading-5">
-                {data.message}
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      );
-    },
-  },
-  {
-    accessorFn: (row) => row.createdAt,
-    id: "createdAt",
-    header: ({ column }) => (
-      <DataTableColumnHeader title="Date Created" column={column} />
-    ),
-    cell: (info) => {
-      const createdAt = info.getValue<IInquiry["createdAt"]>();
-      return (
-        <p className="font-semibold">
-          {brandClientApi.date.formatDate(createdAt)}
-        </p>
-      );
-    },
-  },
-  {
+   {
     id: "actions",
     header: "Actions",
     accessorFn: (row) => row,
@@ -215,4 +132,88 @@ export const columns: ColumnDef<IInquiry>[] = [
       );
     },
   },
+  {
+    accessorFn: (row) => row.name,
+    id: "name",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Name" column={column} />
+    ),
+    cell: (info) => info.getValue<IInquiry["name"]>(),
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Email" column={column} />
+    ),
+  },
+  {
+    accessorFn: (row) => row.phoneNumber,
+    id: "phoneNumber",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Phone Number" column={column} />
+    ),
+    cell: (info) => {
+      const phoneNumber = info.getValue<IInquiry["phoneNumber"]>();
+      const country = brandClientApi.location.getCountryByISOCode(
+        phoneNumber.country || "",
+      );
+      return (
+        <div className="flex items-center gap-2">
+          {country ? <span>{country.flag}</span> : null}
+          <p className="font-semibold">{phoneNumber.number}</p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "subject",
+    accessorFn: (row) => row.subject,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Subject" column={column} />
+    ),
+    cell: (info) => (
+      <p className="max-w-sm truncate font-semibold">
+        {info.getValue<string>()}
+      </p>
+    ),
+  },
+  {
+    id: "message",
+    accessorFn: (row) => ({ message: row.message, subject: row.subject }),
+    header: "Message",
+    cell: (info) => {
+      const data = info.getValue<Pick<IInquiry, "message" | "subject">>();
+      return (
+        <Dialog>
+          <DialogTrigger>
+            <p className="max-w-sm truncate font-semibold">{data.message}</p>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="!text-lg">{data.subject}</DialogTitle>
+              <DialogDescription className="font-medium leading-5">
+                {data.message}
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      );
+    },
+  },
+  {
+    accessorFn: (row) => row.createdAt,
+    id: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Date Created" column={column} />
+    ),
+    cell: (info) => {
+      const createdAt = info.getValue<IInquiry["createdAt"]>();
+      return (
+        <p className="font-semibold">
+          {brandClientApi.date.formatDate(createdAt)}
+        </p>
+      );
+    },
+  },
+ 
 ];

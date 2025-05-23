@@ -26,6 +26,73 @@ import { deleteFaq } from "../_actions";
 import Profile from "@/src/components/profile";
 
 export const columns: ColumnDef<IFaq>[] = [
+   {
+    id: "actions",
+    header: "Actions",
+    accessorFn: (row) => row,
+    cell: (info) => {
+      const queryClient = useQueryClient();
+      const faq = info.getValue<IFaq>();
+      const deleteFaqMutation = useMutation({
+        mutationFn: async () => {
+          try {
+            brandClientApi.utils.toast.promise(
+              async () => {
+                const res = await deleteFaq(faq.id);
+                const resData =
+                  brandClientApi.utils.handleServerActionResponse(res);
+                return resData;
+              },
+              {
+                loading: "Deleting...",
+                success(data) {
+                  queryClient.invalidateQueries({
+                    queryKey: ["faqs"],
+                  });
+                  return data.message;
+                },
+                error(error) {
+                  brandClientApi.utils.alertError(error);
+                  return error;
+                },
+              },
+            );
+          } catch (error) {
+            brandClientApi.utils.alertError(error);
+          }
+        },
+      });
+
+      return (
+        <DataTableRowActions>
+          <HasPermission
+            resourceName="faqs"
+            action="update"
+            args={[{} as CreateFaqSchema, faq]}
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/faqs/${faq.id}`}
+                aria-label={`Link to edit faq with id of ${faq.id}`}
+              >
+                <SquarePen />
+                <span>Edit</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+          <HasPermission resourceName="faqs" action="delete" args={[faq]}>
+            <DropdownMenuItem
+              className="text-destructive hover:!text-destructive"
+              onClick={() => deleteFaqMutation.mutate()}
+            >
+              <Trash2 className="text-destructive" />
+              <span>Delete</span>
+            </DropdownMenuItem>
+          </HasPermission>
+        </DataTableRowActions>
+      );
+    },
+  },
   {
     accessorFn: (row) => row.question,
     id: "question",
@@ -122,71 +189,5 @@ export const columns: ColumnDef<IFaq>[] = [
       );
     },
   },
-  {
-    id: "actions",
-    header: "Actions",
-    accessorFn: (row) => row,
-    cell: (info) => {
-      const queryClient = useQueryClient();
-      const faq = info.getValue<IFaq>();
-      const deleteFaqMutation = useMutation({
-        mutationFn: async () => {
-          try {
-            brandClientApi.utils.toast.promise(
-              async () => {
-                const res = await deleteFaq(faq.id);
-                const resData =
-                  brandClientApi.utils.handleServerActionResponse(res);
-                return resData;
-              },
-              {
-                loading: "Deleting...",
-                success(data) {
-                  queryClient.invalidateQueries({
-                    queryKey: ["faqs"],
-                  });
-                  return data.message;
-                },
-                error(error) {
-                  brandClientApi.utils.alertError(error);
-                  return error;
-                },
-              },
-            );
-          } catch (error) {
-            brandClientApi.utils.alertError(error);
-          }
-        },
-      });
-
-      return (
-        <DataTableRowActions>
-          <HasPermission
-            resourceName="faqs"
-            action="update"
-            args={[{} as CreateFaqSchema, faq]}
-          >
-            <DropdownMenuItem asChild>
-              <Link
-                href={`/faqs/${faq.id}`}
-                aria-label={`Link to edit faq with id of ${faq.id}`}
-              >
-                <SquarePen />
-                <span>Edit</span>
-              </Link>
-            </DropdownMenuItem>
-          </HasPermission>
-          <HasPermission resourceName="faqs" action="delete" args={[faq]}>
-            <DropdownMenuItem
-              className="text-destructive hover:!text-destructive"
-              onClick={() => deleteFaqMutation.mutate()}
-            >
-              <Trash2 className="text-destructive" />
-              <span>Delete</span>
-            </DropdownMenuItem>
-          </HasPermission>
-        </DataTableRowActions>
-      );
-    },
-  },
+ 
 ];
