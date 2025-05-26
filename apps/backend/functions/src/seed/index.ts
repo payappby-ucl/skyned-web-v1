@@ -16,8 +16,10 @@ async function seed() {
     if (SkynedUtils.isEnvironment(["test"])) {
       console.log("Seeding Test Data...");
       await testSeed.createContactUsItems();
+      await testSeed.createSchool();
     }
   } catch (error) {
+    console.log(error);
     console.error(error);
   }
 }

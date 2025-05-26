@@ -1,6 +1,14 @@
 /* eslint-disable max-len */
+import { admin, schoolData } from "../data";
+import { auth } from "../infrastructure";
 import { Client } from "../infrastructure/repository/prisma";
-import { phoneNumberService } from "../services";
+import {
+  adminService,
+  phoneNumberService,
+  schoolService,
+  storageService,
+} from "../services";
+import { SkynedUtils } from "../utils";
 
 export class TestSeed extends Client {
   constructor() {
@@ -34,6 +42,44 @@ export class TestSeed extends Client {
       console.log("contact us data seed.");
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async createSchool() {
+    console.log("Seeding School...");
+    const user = await auth.findUserByEmail(admin.email);
+    if (user) {
+      const adminuser = await adminService.findAdminByAdminId(user.id);
+      if (adminuser) {
+        const logo = await storageService.saveObject(
+          schoolData.logo,
+          SkynedUtils.resolveStoragePath({
+            type: "logo",
+            data: {
+              schoolId: "local-school",
+            },
+          }),
+        );
+
+        const schoolImage = await storageService.saveObject(
+          schoolData.schoolImage,
+          SkynedUtils.resolveStoragePath({
+            type: "schoolImage",
+            data: {
+              schoolId: "local-school",
+            },
+          }),
+        );
+
+        await schoolService.createSchool(adminuser, {
+          ...schoolData,
+          schoolId: "local-school",
+          logo,
+          schoolImage,
+        });
+
+        console.log("School seeded.");
+      }
     }
   }
 }

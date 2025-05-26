@@ -65,7 +65,9 @@ export default async function SchoolPage({
                 <SchoolMenu school={school} />
               </div>
             </div>
-            <p className="text-muted-foreground text-sm whitespace-pre-line">{school.overview}</p>
+            <p className="text-muted-foreground whitespace-pre-line text-sm">
+              {school.overview}
+            </p>
             <SchoolLocation school={school} />
           </div>
         </div>

@@ -24,7 +24,6 @@ const ToggleGroupTwo: React.FC<Pick<EditorToolbarProp, "editor">> = ({
               className={`!p-0 !size-8 rounded-lg group box-border`}
               onClick={() => {
                 editor.chain().focus().setHardBreak().run();
-                editor.chain().focus().setHardBreak().run();
               }}
             >
               <ArrowDownToLine

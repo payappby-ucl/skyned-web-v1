@@ -24,7 +24,8 @@ const SchoolLocation: React.FC<Props> = ({ school }) => {
       <MapPin size={15} />
       <p>
         <span className="hidden md:inline">
-          {school.address} {school.city},{" "}
+          {school.address} {school.city}
+          {school.city ? ", " : null}
         </span>
         {state?.name}, {country?.name} {country?.flag}
       </p>

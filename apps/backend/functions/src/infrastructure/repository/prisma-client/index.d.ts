@@ -15046,6 +15046,7 @@ export namespace Prisma {
 
   export type IntakeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    schoolId_intake_startDate_deadline?: IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput
     AND?: IntakeWhereInput | IntakeWhereInput[]
     OR?: IntakeWhereInput[]
     NOT?: IntakeWhereInput | IntakeWhereInput[]
@@ -15058,7 +15059,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Intake"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
-  }, "id">
+  }, "id" | "schoolId_intake_startDate_deadline">
 
   export type IntakeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16818,6 +16819,13 @@ export namespace Prisma {
 
   export type AccommodationSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput = {
+    schoolId: string
+    intake: Date | string
+    startDate: Date | string
+    deadline: Date | string
   }
 
   export type IntakeCountOrderByAggregateInput = {
