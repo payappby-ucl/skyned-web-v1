@@ -39,17 +39,19 @@ describe("SchoolRepository", () => {
 
         const school = await repository.school.create({
           data: {
-            ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage"]),
+            ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage", "slug"]),
             logo,
             schoolImage,
             schoolId: "1234567",
             createdById: user.id,
+            slug: "school-repo-create",
           },
         });
 
         expect(school).toEqual(
           expect.objectContaining({
-            ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage"]),
+            ...SkynedUtils.exclude(schoolData, ["logo", "schoolImage", "slug"]),
+            slug: "school-repo-create",
           }),
         );
       });

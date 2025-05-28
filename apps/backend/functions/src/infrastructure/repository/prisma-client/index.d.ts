@@ -12749,7 +12749,7 @@ export namespace Prisma {
 
   export type IntakeMinAggregateOutputType = {
     id: number | null
-    intake: Date | null
+    intake: string | null
     startDate: Date | null
     deadline: Date | null
     schoolId: string | null
@@ -12760,7 +12760,7 @@ export namespace Prisma {
 
   export type IntakeMaxAggregateOutputType = {
     id: number | null
-    intake: Date | null
+    intake: string | null
     startDate: Date | null
     deadline: Date | null
     schoolId: string | null
@@ -12912,7 +12912,7 @@ export namespace Prisma {
 
   export type IntakeGroupByOutputType = {
     id: number
-    intake: Date
+    intake: string
     startDate: Date
     deadline: Date
     schoolId: string
@@ -13012,7 +13012,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      intake: Date
+      intake: string
       startDate: Date
       deadline: Date
       schoolId: string
@@ -13445,7 +13445,7 @@ export namespace Prisma {
    */
   interface IntakeFieldRefs {
     readonly id: FieldRef<"Intake", 'Int'>
-    readonly intake: FieldRef<"Intake", 'DateTime'>
+    readonly intake: FieldRef<"Intake", 'String'>
     readonly startDate: FieldRef<"Intake", 'DateTime'>
     readonly deadline: FieldRef<"Intake", 'DateTime'>
     readonly schoolId: FieldRef<"Intake", 'String'>
@@ -15020,7 +15020,7 @@ export namespace Prisma {
     OR?: IntakeWhereInput[]
     NOT?: IntakeWhereInput | IntakeWhereInput[]
     id?: IntFilter<"Intake"> | number
-    intake?: DateTimeFilter<"Intake"> | Date | string
+    intake?: StringFilter<"Intake"> | string
     startDate?: DateTimeFilter<"Intake"> | Date | string
     deadline?: DateTimeFilter<"Intake"> | Date | string
     schoolId?: StringFilter<"Intake"> | string
@@ -15050,7 +15050,7 @@ export namespace Prisma {
     AND?: IntakeWhereInput | IntakeWhereInput[]
     OR?: IntakeWhereInput[]
     NOT?: IntakeWhereInput | IntakeWhereInput[]
-    intake?: DateTimeFilter<"Intake"> | Date | string
+    intake?: StringFilter<"Intake"> | string
     startDate?: DateTimeFilter<"Intake"> | Date | string
     deadline?: DateTimeFilter<"Intake"> | Date | string
     schoolId?: StringFilter<"Intake"> | string
@@ -15082,7 +15082,7 @@ export namespace Prisma {
     OR?: IntakeScalarWhereWithAggregatesInput[]
     NOT?: IntakeScalarWhereWithAggregatesInput | IntakeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Intake"> | number
-    intake?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    intake?: StringWithAggregatesFilter<"Intake"> | string
     startDate?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
     deadline?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
     schoolId?: StringWithAggregatesFilter<"Intake"> | string
@@ -15908,7 +15908,7 @@ export namespace Prisma {
   }
 
   export type IntakeCreateInput = {
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     createdAt?: Date | string
@@ -15919,7 +15919,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedCreateInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     schoolId: string
@@ -15929,7 +15929,7 @@ export namespace Prisma {
   }
 
   export type IntakeUpdateInput = {
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15940,7 +15940,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     schoolId?: StringFieldUpdateOperationsInput | string
@@ -15951,7 +15951,7 @@ export namespace Prisma {
 
   export type IntakeCreateManyInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     schoolId: string
@@ -15961,7 +15961,7 @@ export namespace Prisma {
   }
 
   export type IntakeUpdateManyMutationInput = {
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15970,7 +15970,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     schoolId?: StringFieldUpdateOperationsInput | string
@@ -16823,7 +16823,7 @@ export namespace Prisma {
 
   export type IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput = {
     schoolId: string
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
   }
@@ -18444,7 +18444,7 @@ export namespace Prisma {
   }
 
   export type IntakeCreateWithoutCreatedByInput = {
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     createdAt?: Date | string
@@ -18454,7 +18454,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedCreateWithoutCreatedByInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     schoolId: string
@@ -18839,7 +18839,7 @@ export namespace Prisma {
     OR?: IntakeScalarWhereInput[]
     NOT?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
     id?: IntFilter<"Intake"> | number
-    intake?: DateTimeFilter<"Intake"> | Date | string
+    intake?: StringFilter<"Intake"> | string
     startDate?: DateTimeFilter<"Intake"> | Date | string
     deadline?: DateTimeFilter<"Intake"> | Date | string
     schoolId?: StringFilter<"Intake"> | string
@@ -19918,7 +19918,7 @@ export namespace Prisma {
   }
 
   export type IntakeCreateWithoutSchoolInput = {
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     createdAt?: Date | string
@@ -19928,7 +19928,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedCreateWithoutSchoolInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     createdById: string
@@ -20649,7 +20649,7 @@ export namespace Prisma {
 
   export type IntakeCreateManyCreatedByInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     schoolId: string
@@ -21017,7 +21017,7 @@ export namespace Prisma {
   }
 
   export type IntakeUpdateWithoutCreatedByInput = {
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21027,7 +21027,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     schoolId?: StringFieldUpdateOperationsInput | string
@@ -21037,7 +21037,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateManyWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     schoolId?: StringFieldUpdateOperationsInput | string
@@ -21254,7 +21254,7 @@ export namespace Prisma {
 
   export type IntakeCreateManySchoolInput = {
     id?: number
-    intake: Date | string
+    intake: string
     startDate: Date | string
     deadline: Date | string
     createdById: string
@@ -21263,7 +21263,7 @@ export namespace Prisma {
   }
 
   export type IntakeUpdateWithoutSchoolInput = {
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21273,7 +21273,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdById?: StringFieldUpdateOperationsInput | string
@@ -21283,7 +21283,7 @@ export namespace Prisma {
 
   export type IntakeUncheckedUpdateManyWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
-    intake?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdById?: StringFieldUpdateOperationsInput | string

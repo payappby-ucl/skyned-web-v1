@@ -28,5 +28,7 @@ class DateService {
     difference = ({ date, prevDate, unit }) => {
         return (0, dayjs_1.default)(date || undefined).diff(prevDate || unit, unit || "days");
     };
+    startOfDay = (date) => (0, dayjs_1.default)(date).startOf("D").toDate();
+    endOfDay = (date) => (0, dayjs_1.default)(date).endOf("D").toDate();
 }
 exports.DateService = DateService;

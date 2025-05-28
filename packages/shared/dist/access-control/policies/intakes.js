@@ -31,7 +31,7 @@ exports.intakePolicies = {
             const { claim, user } = authClaim;
             if (claim !== "admin")
                 return false;
-            return true;
+            return false;
         },
     },
 };

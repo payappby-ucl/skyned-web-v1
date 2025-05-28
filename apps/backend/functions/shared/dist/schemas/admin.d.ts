@@ -8,7 +8,7 @@ export declare const CreateAdminSchema: z.ZodObject<{
     nationality: z.ZodEffects<z.ZodString, string, string>;
     countryOfResidence: z.ZodEffects<z.ZodString, string, string>;
     jobTitle: z.ZodString;
-    about: z.ZodOptional<z.ZodString>;
+    about: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
     phoneNumber: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
     socials: z.ZodOptional<z.ZodArray<z.ZodObject<{
         name: z.ZodEnum<["facebook", "instagram", "linkedin", "pinterest", "tiktok", "x"]>;
@@ -85,7 +85,7 @@ export declare const UpdateAdminSchema: z.ZodObject<z.objectUtil.extendShape<Omi
     nationality: z.ZodEffects<z.ZodString, string, string>;
     countryOfResidence: z.ZodEffects<z.ZodString, string, string>;
     jobTitle: z.ZodString;
-    about: z.ZodOptional<z.ZodString>;
+    about: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
     phoneNumber: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
     socials: z.ZodOptional<z.ZodArray<z.ZodObject<{
         name: z.ZodEnum<["facebook", "instagram", "linkedin", "pinterest", "tiktok", "x"]>;

@@ -6,6 +6,7 @@ import {
   IAccommodationService,
   IEvents,
   IIDGeneratorService,
+  IIntakeService,
   ISchoolController,
   ISchoolService,
   IStorageService,
@@ -14,6 +15,7 @@ import SkynedRegistry from "../../../registry";
 import {
   accommodationService,
   idGeneratorService,
+  intakeService,
   schoolService,
   storageService,
 } from "../../../services";
@@ -29,6 +31,7 @@ export interface ISchoolControllerDependencies {
   idGeneratorService: IIDGeneratorService;
   events: IEvents;
   accommodationService: IAccommodationService;
+  intakeService: IIntakeService;
 }
 
 /**
@@ -48,6 +51,7 @@ export class SchoolController
     private readonly idGeneratorService: IIDGeneratorService,
     private readonly events: IEvents,
     private readonly accommodationService: IAccommodationService,
+    private readonly intakeService: IIntakeService,
   ) {
     super();
   }
@@ -60,6 +64,7 @@ export class SchoolController
     idGeneratorService,
     events,
     accommodationService,
+    intakeService,
   }: ISchoolControllerDependencies) {
     if (!SchoolController.instance) {
       SchoolController.instance = new SchoolController(
@@ -68,6 +73,7 @@ export class SchoolController
         idGeneratorService,
         events,
         accommodationService,
+        intakeService,
       );
     }
     return SchoolController.instance;
@@ -434,14 +440,12 @@ export class SchoolController
         );
       }
 
-
       this._attributeBasedAccessControl(
         adminUser,
         "accommodations",
         "delete",
         accommodation,
       );
-
 
       const deletedAccommodation =
         await this.accommodationService.deleteAccommodation(accommodation.id);
@@ -468,6 +472,145 @@ export class SchoolController
       next(error);
     }
   };
+
+  createIntake: ISchoolController["createIntake"] = async (req, res, next) => {
+    try {
+      const { slug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(adminUser, "schools", "read", school);
+      this._attributeBasedAccessControl(
+        adminUser,
+        "intakes",
+        "create",
+        req.body,
+      );
+
+      const intake = await this.intakeService.createIntake(
+        adminUser.user.adminId,
+        school.schoolId,
+        req.body,
+      );
+
+      res._success(StatusCodes.CREATED, intake);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getIntakes: ISchoolController["getIntakes"] = async (req, res, next) => {
+    try {
+      const { from, to, limit, page } = req.query;
+      const { slug } = req.params;
+      let authUser = this._validateUser(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      if (authUser?.claim === "admin") {
+        authUser = this._validateAdmin(req);
+        this._attributeBasedAccessControl(authUser, "schools", "read", school);
+        this._attributeBasedAccessControl(authUser, "intakes", "list");
+      }
+
+      const construct = this._constructPaginationData({ limit, page });
+
+      const total = await this.intakeService.count({
+        where: {
+          schoolId: school.schoolId,
+        },
+      });
+
+      const intakeList = await this.intakeService.listSchoolIntakes(
+        {
+          ...SkynedUtils.pick(construct, ["skip", "take"]),
+          from,
+          to,
+        },
+        school.schoolId,
+        authUser,
+      );
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        total,
+        data: intakeList,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateIntake: ISchoolController["updateIntake"] = async (req, res, next) => {
+    try {
+      const { slug, id } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(adminUser, "schools", "read", school);
+
+      const intake = await this.intakeService.findIntake(+id, school.schoolId);
+
+      if (!intake) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "intakes",
+        "update",
+        req.body,
+        intake,
+      );
+
+      const updatedIntake = await this.intakeService.updateIntake(
+        intake.id,
+        req.body,
+      );
+
+      this.events.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "intakes",
+          resourceId: updatedIntake.id,
+          adminId: adminUser.user.id,
+          action: "update",
+          previousState: SkynedUtils.exclude(intake, ["createdBy", "school"]),
+          currentState: SkynedUtils.exclude(updatedIntake, [
+            "createdBy",
+            "school",
+          ]),
+        },
+      });
+
+      res._success(StatusCodes.OK, updatedIntake);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */
@@ -480,5 +623,6 @@ export const schoolController = SkynedRegistry.getSingleton(
       idGeneratorService,
       events,
       accommodationService,
+      intakeService,
     }),
 );

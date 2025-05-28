@@ -7,9 +7,15 @@ import {
   UpdateSchoolSchema,
   IAccommodation,
   CreateAccommodationSchema,
+  IIntake,
+  CreateIntakeSchema,
 } from "@workspace/shared";
-import { ISchoolService } from "../services";
-import { PageQuerySchema, SchoolSlugSchema } from "../../zod-schemas";
+import { IIntakeService, ISchoolService } from "../services";
+import {
+  IntakeQuery,
+  PageQuerySchema,
+  SchoolSlugSchema,
+} from "../../zod-schemas";
 
 export interface ISchoolController {
   /** Creates a school */
@@ -66,5 +72,34 @@ export interface ISchoolController {
   deleteAccommodation: RequestHandler<
     object & SchoolSlugSchema,
     ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Create intake */
+  createIntake: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IIntake>,
+    CreateIntakeSchema
+  >;
+
+  /** Get intakes */
+  getIntakes: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<
+      IPaginatedResponse<
+        Awaited<ReturnType<IIntakeService["listSchoolIntakes"]>>[0]
+      >
+    >,
+    void,
+    Partial<PageQuerySchema & IntakeQuery>
+  >;
+
+  /** Update intake */
+  updateIntake: RequestHandler<
+    {
+      slug: SchoolSlugSchema["slug"];
+      id: string;
+    },
+    ISuccessResponse<IIntake>,
+    CreateIntakeSchema
   >;
 }

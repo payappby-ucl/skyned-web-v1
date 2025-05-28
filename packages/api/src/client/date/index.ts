@@ -14,4 +14,10 @@ export class DateService implements IDateService {
   difference: IDateService["difference"] = ({ date, prevDate, unit }) => {
     return dayjs(date || undefined).diff(prevDate || unit, unit || "days");
   };
+
+  startOfDay: IDateService["startOfDay"] = (date) =>
+    dayjs(date).startOf("D").toDate();
+
+  endOfDay: IDateService["endOfDay"] = (date) =>
+    dayjs(date).endOf("D").toDate();
 }

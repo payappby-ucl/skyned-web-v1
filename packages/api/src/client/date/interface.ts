@@ -7,4 +7,7 @@ export interface IDateService {
     prevDate?: dayjs.ConfigType;
     unit?: dayjs.QUnitType | dayjs.OpUnitType;
   }): number;
+
+  startOfDay(date: Date): Date;
+  endOfDay(date: Date): Date;
 }

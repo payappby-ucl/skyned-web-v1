@@ -1,6 +1,6 @@
 import { z } from "zod";
 export declare const CreateAccommodationSchema: z.ZodObject<{
-    description: z.ZodString;
+    description: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     description: string;
 }, {

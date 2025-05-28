@@ -415,3 +415,186 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "500":
           $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/intakes:
+    summary: School Intakes operation
+
+    post:
+      summary: Creates intake
+      description: Creates and intake for school
+      operation: createIntake
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Intake
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to create intake
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intake:
+                  type: string
+                  format: date-time
+
+                startDate:
+                  type: string
+                  format: date-time
+
+                deadline:
+                  type: string
+                  format: date-time
+              required:
+                - intake
+                - deadline
+                - startDate
+      responses:
+        "201":
+          description: The intake
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Intake"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Gets intakes
+      description: Gets intakes for school
+      operation: getSchoolIntakes
+      tags:
+        - School
+        - Intake
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: The intakes
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/PaginatedResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Intake"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/intakes/{id}:
+    summary: School single Intakes operation
+
+    put:
+      summary: Update intake
+      description: Updates an intake for school
+      operation: updateIntake
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Intake
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        description: Data needed to update intake
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intake:
+                  type: string
+                  format: date-time
+
+                startDate:
+                  type: string
+                  format: date-time
+
+                deadline:
+                  type: string
+                  format: date-time
+              required:
+                - intake
+                - deadline
+                - startDate
+      responses:
+        "200":
+          description: The intake
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Intake"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    # delete:
+    #   summary: Deletes accommodation
+    #   description: Deletes accommodation for school
+    #   operation: deleteAccommodation
+    #   security:
+    #     - bearerAuth: []
+    #   tags:
+    #     - School
+    #     - Accommodation
+    #   parameters:
+    #     - $ref: "#/components/parameters/Slug"
+    #   responses:
+    #     "200":
+    #       description: The accommodation
+    #       content:
+    #         application/json:
+    #           schema:
+    #             allOf:
+    #               - $ref: "#/components/schemas/SuccessResponse"
+    #               - type: object
+    #                 properties:
+    #                   data:
+    #                     $ref: "#/components/schemas/MessageResponse"
+    #     "400":
+    #       $ref: "#/components/responses/BadRequest"
+    #     "401":
+    #       $ref: "#/components/responses/UnAuthenticated"
+    #     "403":
+    #       $ref: "#/components/responses/Forbidden"
+    #     "404":
+    #       $ref: "#/components/responses/NotFound"
+    #     "500":
+    #       $ref: "#/components/responses/ServerError"

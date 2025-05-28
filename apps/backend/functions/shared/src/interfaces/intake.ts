@@ -4,7 +4,7 @@ import { ITimestamps } from "./utils";
 
 export interface IIntake extends ITimestamps {
   id: number;
-  intake: Date;
+  intake: string;
   startDate: Date;
   deadline: Date;
   schoolId: string;

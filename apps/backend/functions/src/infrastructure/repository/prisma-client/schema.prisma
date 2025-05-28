@@ -279,7 +279,7 @@ model Accommodation {
 model Intake {
   id Int @id @default(autoincrement())
 
-  intake    DateTime
+  intake    String
   startDate DateTime @map("start_date")
   deadline  DateTime
 

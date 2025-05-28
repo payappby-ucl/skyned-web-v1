@@ -323,4 +323,164 @@ describe("Schools API", () => {
       expect(delRes.body.data).toBeNull();
     });
   });
+
+  describe("School Intakes", () => {
+    const route = `${url}/test-school/intakes`;
+    let intakeId = 0;
+
+    describe(`POST Intake - ${route}`, () => {
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).post(`${route}`).send({
+          intake: "JUN 2025",
+          startDate: +new Date(),
+          deadline: +new Date(),
+        });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should create an intake", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .post(`${route}`)
+          .send({
+            intake: "FEB 2025",
+            startDate: +new Date(),
+            deadline: +new Date(),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        intakeId = res.body.data.id;
+        expect(res.status).toBe(StatusCodes.CREATED);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            intake: expect.any(String),
+            startDate: expect.any(String),
+            deadline: expect.any(String),
+            schoolId: expect.any(String),
+          }),
+        );
+      });
+    });
+
+    describe(`GET intakes - ${route}`, () => {
+      test("should get intakes", async () => {
+        const res = await request(server).get(`${route}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: {
+            total: expect.any(Number),
+            perPage: 100,
+            currentPage: 1,
+            nextPage: 2,
+            prevPage: 1,
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                intake: expect.any(String),
+                startDate: expect.any(String),
+                deadline: expect.any(String),
+              }),
+            ]),
+          },
+        });
+      });
+
+      test("should get intakes", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const res = await request(server)
+          .get(`${route}`)
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: {
+            total: expect.any(Number),
+            perPage: 100,
+            currentPage: 1,
+            nextPage: 2,
+            prevPage: 1,
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                intake: expect.any(String),
+                startDate: expect.any(String),
+                deadline: expect.any(String),
+                school: expect.objectContaining({
+                  name: expect.any(String),
+                  slug: expect.any(String),
+                  country: expect.any(String),
+                }),
+
+                createdBy: expect.objectContaining({
+                  firstName: expect.any(String),
+                }),
+              }),
+            ]),
+          },
+        });
+      });
+    });
+
+    describe(`PUT Intake - ${route}/${intakeId}`, () => {
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).put(`${route}/${intakeId}`).send({
+          intake: "MAY 2025",
+          startDate: +new Date(),
+          deadline: +new Date(),
+        });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should update an intake", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .put(`${route}/${intakeId}`)
+          .send({
+            intake: "MAY 2026",
+            startDate: +new Date(),
+            deadline: +new Date(),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        intakeId = res.body.data.id;
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            intake: expect.any(String),
+            startDate: expect.any(String),
+            deadline: expect.any(String),
+            schoolId: expect.any(String),
+          }),
+        );
+      });
+    });
+  });
 });

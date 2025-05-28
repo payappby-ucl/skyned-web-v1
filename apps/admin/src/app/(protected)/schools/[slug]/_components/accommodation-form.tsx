@@ -55,7 +55,7 @@ const AccommodationForm: React.FC<Props> = ({ accommodation, slug }) => {
         serverRes = await createSchoolAccommodation(slug, data);
       }
       brandClientApi.utils.handleServerActionResponse(serverRes);
-      brandClientApi.utils.toast.success("Action successfull");
+      brandClientApi.utils.toast.success("Action successful");
 
       queryClient.invalidateQueries({
         queryKey: ["accommodations"],
@@ -78,7 +78,7 @@ const AccommodationForm: React.FC<Props> = ({ accommodation, slug }) => {
       </DialogTrigger>
       <DialogContent className="min-w-[calc(100vw-100px)]">
         <DialogHeader>
-          <DialogTitle className="!text-2xl">
+          <DialogTitle className="!text-xl">
             {accommodation ? "Update" : "Create"} Accommodation
           </DialogTitle>
           {accommodation ? (

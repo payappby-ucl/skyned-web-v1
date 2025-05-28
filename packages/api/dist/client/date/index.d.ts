@@ -3,4 +3,6 @@ export * from "./interface";
 export declare class DateService implements IDateService {
     formatDate: IDateService["formatDate"];
     difference: IDateService["difference"];
+    startOfDay: IDateService["startOfDay"];
+    endOfDay: IDateService["endOfDay"];
 }

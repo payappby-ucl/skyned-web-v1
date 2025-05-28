@@ -263,3 +263,8 @@ textarea {
     margin: 0 0 1em;
   }
 }
+
+.rdp-root {
+  /* --rdp-accent-color: red; */
+  --rdp-today-color: var(--brand);
+}

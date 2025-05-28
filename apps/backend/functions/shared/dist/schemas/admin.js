@@ -8,6 +8,7 @@ const zod_1 = require("zod");
 const data_urls_1 = __importDefault(require("data-urls"));
 const common_1 = require("./common");
 const utils_1 = require("../utils");
+const sanitize_html_1 = __importDefault(require("sanitize-html"));
 exports.CreateAdminSchema = zod_1.z.object({
     firstName: zod_1.z.string().trim().nonempty("Required"),
     middleName: zod_1.z.string().trim().optional(),
@@ -17,7 +18,11 @@ exports.CreateAdminSchema = zod_1.z.object({
     nationality: common_1.CommonSchema.shape.country,
     countryOfResidence: common_1.CommonSchema.shape.country,
     jobTitle: zod_1.z.string().trim().nonempty("Required"),
-    about: zod_1.z.string().trim().optional(),
+    about: zod_1.z
+        .string()
+        .trim()
+        .optional()
+        .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
     phoneNumber: common_1.CommonSchema.shape.phoneNumber.optional(),
     socials: zod_1.z.array(common_1.CommonSchema.shape.social).optional(),
     primaryImage: common_1.CommonSchema.shape.image,

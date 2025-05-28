@@ -2,7 +2,7 @@
 
 import DataFetchingHandler from "@/src/components/data-fetching-handler";
 import useGet from "@/src/hooks/use-get";
-import { IAdmin, IFaq, IPaginatedResponse, ISchool } from "@workspace/shared";
+import { IPaginatedResponse, ISchool } from "@workspace/shared";
 import { DataTable } from "@workspace/ui/components/table/data-table";
 import React from "react";
 import usePaginationQuery from "@/src/hooks/use-pagination-query";
