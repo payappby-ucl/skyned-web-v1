@@ -5,7 +5,7 @@ import {
   SquareArrowOutUpRight,
   Trash,
 } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "../../popover.js";
+import { Popover, PopoverContent, PopoverTrigger } from "../../popover";
 import {
   Tooltip,
   TooltipContent,
