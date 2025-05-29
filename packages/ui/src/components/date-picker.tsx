@@ -10,13 +10,10 @@ import { DayPicker } from "react-day-picker";
 const DatePicker: React.FC<
   React.ComponentProps<typeof DayPicker> & {
     display?: string;
-    popoverModal?: boolean;
-    popoverOpen?: boolean;
-    setPopoverOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   }
-> = ({ display, mode, popoverModal = false, ...props }) => {
+> = ({ display, mode, ...props }) => {
   return (
-    <Popover modal={popoverModal}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button type="button" variant={"outline"}>
           <span className="text-sm font-medium">

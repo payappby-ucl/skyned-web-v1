@@ -168,7 +168,7 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                             )
                           : ""
                       }
-                      popoverModal={true}
+                      // popoverModal={true}
                     />
                   </FormControl>
                   <FormDescription>
@@ -202,7 +202,7 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                             )
                           : ""
                       }
-                      popoverModal={true}
+                      // popoverModal={true}
                     />
                   </FormControl>
                   <FormDescription>

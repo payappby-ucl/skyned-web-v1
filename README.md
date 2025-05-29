@@ -14,13 +14,6 @@ pnpm install
 [Test Coverage](https://api-dxmhb5dscq-uc.a.run.app/coverage)
 [Code Documentation](https://api-dxmhb5dscq-uc.a.run.app/code-docs)
 
-### Live Environment
-
-<!-- [Entry](https://api-dxmhb5dscq-uc.a.run.app)
-[Health Check](https://api-dxmhb5dscq-uc.a.run.app/health)
-[API Documentation](https://api-dxmhb5dscq-uc.a.run.app/api-docs)
-[Test Coverage](https://api-dxmhb5dscq-uc.a.run.app/coverage) -->
-
 ### ENV Files
 
 apps/backend/functions
@@ -33,20 +26,39 @@ check .env-sample and create the following
 .env.test
 ```
 
-### Run test
-
-Ensure you have Docker installed and runing
+apps/admin
 
 ```bash
-pnpm --filter functions start:emulators
-pnpm --filter functions test
+.env.dev
+.env.local
 ```
 
-### Deployment
+apps/frontend
+
+```bash
+.env.dev
+.env.local
+```
+
+### Run Locally
 
 Ensure you have Docker installed and running
 
 ```bash
-pnpm --filter functions start:emulators
-pnpm --filter functions deploy:test
+cd apps/backend/functions
+pnpm run start:emulators
+```
+
+Once the above command starts running, open another terminal
+
+```bash
+cd apps/backend/functions
+pnpm run start:test:server
+```
+
+Open another terminal tab
+
+```bash
+cd apps/admin
+pnpm run dev
 ```

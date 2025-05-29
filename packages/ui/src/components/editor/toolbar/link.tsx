@@ -5,7 +5,7 @@ import {
   SquareArrowOutUpRight,
   Trash,
 } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "../../popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../../popover.js";
 import {
   Tooltip,
   TooltipContent,
@@ -71,7 +71,7 @@ const LinkForm: React.FC<
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 "
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
