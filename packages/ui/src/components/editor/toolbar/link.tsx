@@ -13,11 +13,8 @@ import {
   TooltipTrigger,
 } from "../../tooltip";
 import { EditorToolbarProp } from "./index";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "../../form";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Input } from "../../input";
 import { Button } from "../../button";
 import { Separator } from "../../separator";
@@ -34,23 +31,17 @@ const LinkForm: React.FC<
     url?: string;
   }
 > = ({ editor, url, setOpen }) => {
-  const form = useForm<LinkSchema>({
-    resolver: zodResolver(LinkSchema),
-    defaultValues: {
-      link: url || "",
-    },
-    values: {
-      link: url || "",
-    },
-  });
+  const [link, setLink] = useState(url || "");
+  console.log(link);
+  const isValid = useMemo(() => LinkSchema.safeParse({ link }).success, [link]);
 
   const onSubmit = useCallback(
-    (data: LinkSchema) => {
+    (link: string) => {
       editor
         .chain()
         .focus()
         .extendMarkRange("link")
-        .setLink({ href: data.link })
+        .setLink({ href: link })
         .run();
 
       setOpen(false);
@@ -68,95 +59,77 @@ const LinkForm: React.FC<
   }, [editor.state]);
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center gap-1 "
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            form.handleSubmit(onSubmit)();
-          }
-        }}
-      >
-        <FormField
-          control={form.control}
-          name="link"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="url"
-                  placeholder="Paste a link..."
-                  className="outline-none focus:outline-none border-none shadow-none focus:!border-none ring-0 focus:!ring-0 !bg-transparent"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  autoFocus
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                className={`!p-0 size-7 group`}
-                type="button"
-                disabled={!form.formState.isValid}
-                onClick={() => form.handleSubmit(onSubmit)()}
-              >
-                <CornerDownLeft className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Apply Link</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <Separator orientation="vertical" className="!h-[20px]" />
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                disabled={!form.formState.isValid}
-                className={`!p-0 size-7 group`}
-                onClick={() => window.open(form.getValues("link"), "_blank")}
-              >
-                <SquareArrowOutUpRight className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Open in new window</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+    <div className="flex items-center">
+      <Input
+        type="url"
+        role="button"
+        value={link}
+        onChange={(e) => setLink(e.target.value)}
+        placeholder="Paste a link..."
+        className="outline-none focus:outline-none border-none shadow-none focus:!border-none ring-0 focus:!ring-0 !bg-transparent"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        autoFocus
+      />
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                disabled={!form.formState.isValid}
-                className={`!p-0 size-7 group`}
-                onClick={() => removeLink()}
-              >
-                <Trash className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Remove Link</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </form>
-    </Form>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              className={`!p-0 size-7 group`}
+              type="button"
+              disabled={!isValid}
+              onClick={() => onSubmit(link)}
+            >
+              <CornerDownLeft className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Apply Link</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <Separator orientation="vertical" className="!h-[20px]" />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={!isValid}
+              className={`!p-0 size-7 group`}
+              onClick={() => window.open(link, "_blank")}
+            >
+              <SquareArrowOutUpRight className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Open in new window</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={!isValid}
+              className={`!p-0 size-7 group`}
+              onClick={() => removeLink()}
+            >
+              <Trash className="!w-3.5 !h-3.5 text-muted-foreground group-hover:text-foreground" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Remove Link</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
   );
 };
 

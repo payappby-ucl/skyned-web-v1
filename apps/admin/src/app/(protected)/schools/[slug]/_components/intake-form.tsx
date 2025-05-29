@@ -152,6 +152,7 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                       selected={
                         field.value ? new Date(field.value) : new Date()
                       }
+                      mode="single"
                       onSelect={field.onChange}
                       captionLayout="dropdown"
                       fromYear={startYear}
@@ -190,6 +191,7 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                       selected={
                         field.value ? new Date(field.value) : new Date()
                       }
+                      mode="single"
                       onSelect={field.onChange}
                       captionLayout="dropdown"
                       fromYear={startYear}

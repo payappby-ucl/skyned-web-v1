@@ -11,7 +11,7 @@ const DatePicker: React.FC<
   React.ComponentProps<typeof DayPicker> & {
     display?: string;
   }
-> = ({ display, mode, ...props }) => {
+> = ({ display, ...props }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -23,7 +23,7 @@ const DatePicker: React.FC<
         </Button>
       </PopoverTrigger>
       <PopoverContent className="!w-full p-0" align="start">
-        <Calendar mode={mode || "single"} {...props} initialFocus />
+        <Calendar {...props} initialFocus />
       </PopoverContent>
     </Popover>
   );
