@@ -766,6 +766,125 @@ export class SchoolController
       next(error);
     }
   };
+
+  updateProgram: ISchoolController["updateProgram"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug, programSlug } = req.params;
+      const adminUser = this._validateAdmin(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        adminUser,
+      );
+
+      if (!program) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "programs",
+        "update",
+        req.body,
+        program,
+      );
+
+      if (req.body.slug && program.slug !== req.body.slug) {
+        const programCheck =
+          await this.programService.findProgramBySlugAndSchoolId(
+            school.schoolId,
+            req.body.slug,
+            adminUser,
+          );
+
+        if (programCheck) {
+          throw SkynedUtils.createException(
+            StatusCodes.CONFLICT,
+            `${programCheck.name} already exist.`,
+          );
+        }
+      }
+
+      const updatedProgram = await this.programService.updateSingleProgram(
+        school.schoolId,
+        program.slug,
+        req.body,
+      );
+
+      this.events.emitEvent({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "programs",
+          resourceId: program.id,
+          adminId: adminUser.user.id,
+          action: "update",
+          previousState: SkynedUtils.exclude(program, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedProgram, ["createdBy"]),
+        },
+      });
+
+      res._success(StatusCodes.OK, { message: "Program Updated." });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updatePrograms: ISchoolController["updatePrograms"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const { data } = req.body;
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      await this.programService.updateBulkProgram(school.schoolId, data);
+
+      // TODO: Figure out logging of this activity
+      // this.events.emitEvent({
+      //   type: EventsEnum.CREATE_ACTIVITY_LOG,
+      //   data: {
+      //     resource: "programs",
+      //     resourceId: program.id,
+      //     adminId: adminUser.user.id,
+      //     action: "update",
+      //     previousState: SkynedUtils.exclude(program, ["createdBy"]),
+      //     currentState: SkynedUtils.exclude(updatedProgram, ["createdBy"]),
+      //   },
+      // });
+
+      res._success(StatusCodes.OK, { message: "Programs Updated." });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */

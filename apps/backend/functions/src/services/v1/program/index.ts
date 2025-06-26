@@ -8,6 +8,8 @@ import { ServiceUtils } from "../utils";
 import {
   CreateProgramServiceSchema,
   CreateProgramsServiceSchema,
+  UpdateProgramServiceSchema,
+  UpdateProgramsServiceSchema,
 } from "./schema";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { Prisma } from "../../../infrastructure/repository/prisma-client";
@@ -189,7 +191,47 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       },
     });
 
-    return program as unknown as IProgram;
+    return this.deserialize(program);
+  };
+
+  updateSingleProgram: IProgramService["updateSingleProgram"] = async (
+    schoolId,
+    slug,
+    data,
+  ) => {
+    let {
+      schoolId: sid,
+      slug: slg,
+      data: d,
+    } = this.validationUtility.validateInput({
+      schema: UpdateProgramServiceSchema,
+      inputData: {
+        data,
+        schoolId,
+        slug,
+      },
+    });
+
+    d = SkynedUtils.formatDecimal(d);
+
+    const program = await this.repository.db.program.update({
+      where: {
+        schoolId_slug: {
+          schoolId: sid,
+          slug: slg,
+        },
+      },
+      data: {
+        ...SkynedUtils.exclude(d, ["intakes"]),
+        intakes: d.intakes?.length
+          ? {
+              connect: d.intakes.map((id) => ({ id, schoolId: sid })),
+            }
+          : undefined,
+      },
+    });
+
+    return this.deserialize(program);
   };
 
   createBulkProgram: IProgramService["createBulkProgram"] = async (
@@ -221,6 +263,44 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             intakes: {
               connect: d.intakes.map((id) => ({ id, schoolId: sid })),
             },
+          },
+        });
+      }),
+    );
+
+    return txResponse.length;
+  };
+
+  updateBulkProgram: IProgramService["updateBulkProgram"] = async (
+    schoolId,
+    data,
+  ) => {
+    const { schoolId: sid, data: d } = this.validationUtility.validateInput({
+      schema: UpdateProgramsServiceSchema,
+      inputData: {
+        data,
+        schoolId,
+      },
+    });
+
+    const txResponse = await this.repository.db.$transaction(
+      d.map((d) => {
+        d.data = SkynedUtils.formatDecimal(d.data);
+
+        return this.repository.db.program.update({
+          where: {
+            schoolId_slug: {
+              schoolId: sid,
+              slug: d.programSlug,
+            },
+          },
+          data: {
+            ...SkynedUtils.exclude(d.data, ["intakes", "name", "slug"]),
+            intakes: d.data.intakes?.length
+              ? {
+                  connect: d.data.intakes.map((id) => ({ id, schoolId: sid })),
+                }
+              : undefined,
           },
         });
       }),

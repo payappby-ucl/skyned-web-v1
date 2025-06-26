@@ -1,4 +1,4 @@
-import { ProgramSchema } from "@workspace/shared";
+import { ProgramSchema, UpdateBulkProgramSchema } from "@workspace/shared";
 import { z } from "zod";
 
 export const CreateProgramServiceSchema = z.object({
@@ -17,4 +17,23 @@ export const CreateProgramsServiceSchema = z.object({
 });
 export type CreateProgramsServiceSchema = z.infer<
   typeof CreateProgramsServiceSchema
+>;
+
+export const UpdateProgramServiceSchema = z.object({
+  data: ProgramSchema.partial(),
+  slug: z.string().trim().nonempty("Required"),
+  schoolId: z.string().trim().nonempty("Required"),
+});
+export type UpdateProgramServiceSchema = z.infer<
+  typeof UpdateProgramServiceSchema
+>;
+
+export const UpdateProgramsServiceSchema = UpdateBulkProgramSchema.pick({
+  data: true,
+}).extend({
+  schoolId: z.string().trim().nonempty("Required"),
+});
+
+export type UpdateProgramsServiceSchema = z.infer<
+  typeof UpdateProgramsServiceSchema
 >;

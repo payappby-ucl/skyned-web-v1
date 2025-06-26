@@ -17,6 +17,8 @@ import {
   CreateIntakeSchema,
   CreateProgramSchema,
   CreateSchoolSchema,
+  ProgramSchema,
+  UpdateBulkProgramSchema,
   UpdateSchoolSchema,
 } from "@workspace/shared";
 import {
@@ -175,6 +177,15 @@ export class SchoolRouter implements IRouter {
         }),
         authMiddleware.safeAuthenticate,
         schoolController.listPrograms,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          body: UpdateBulkProgramSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.updatePrograms,
       );
 
     this.router
@@ -189,10 +200,11 @@ export class SchoolRouter implements IRouter {
       .put(
         RequestValidationMiddleware.validate({
           params: SchoolSlugSchema.merge(ProgramSlugSchema),
-          body: CreateProgramSchema,
+          body: ProgramSchema.partial(),
         }),
         authMiddleware.authenticate,
         authMiddleware.hasRole(["admin"]),
+        schoolController.updateProgram,
       )
       // TODO: Remember to implement
       .delete();

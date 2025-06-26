@@ -1,4 +1,4 @@
-import { ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateSchoolSchema, UpdateAdminSchema, UpdateSchoolSchema } from "../schemas";
+import { ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBulkProgramSchema, UpdateSchoolSchema } from "../schemas";
 import { IAccommodation, IAdmin, IDepartment, IFaq, IInquiry, IIntake, IProgram, ISchool, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 export type AuthClaim = AdminClaim | StudentClaim;
@@ -55,7 +55,7 @@ export type PermissionType = {
     programs: {
         dataType: IProgram;
         createDataType: CreateProgramSchema["data"];
-        updateDataType: any;
+        updateDataType: Partial<ProgramSchema> | UpdateBulkProgramSchema;
         action: "list" | "create" | "read" | "update" | "delete";
     };
 };

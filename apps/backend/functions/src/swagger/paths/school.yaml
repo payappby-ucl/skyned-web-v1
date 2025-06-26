@@ -623,18 +623,6 @@ paths:
                     - type: array
                       items:
                         $ref: "#/components/schemas/CreateProgram"
-
-                startDate:
-                  type: string
-                  format: date-time
-
-                deadline:
-                  type: string
-                  format: date-time
-              required:
-                - intake
-                - deadline
-                - startDate
       responses:
         "201":
           description: Creation Message Response
@@ -653,6 +641,55 @@ paths:
           $ref: "#/components/responses/UnAuthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Update Programs
+      description: Update bulk programs belonging to a school
+      operation: updateSchoolPrograms
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to update programs
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      programSlug:
+                        type: string
+                      data:
+                        $ref: "#/components/schemas/CreateProgram"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "500":
           $ref: "#/components/responses/ServerError"
 
@@ -724,5 +761,47 @@ paths:
                         $ref: "#/components/schemas/Program"
         "400":
           $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Update Program
+      description: Update program belonging to a school
+      operation: updateSchoolProgram
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
+      requestBody:
+        description: Data needed to update program
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProgram"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"

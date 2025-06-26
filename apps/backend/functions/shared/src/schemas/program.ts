@@ -70,3 +70,13 @@ export const CreateProgramSchema = z
     }
   });
 export type CreateProgramSchema = z.infer<typeof CreateProgramSchema>;
+
+export const UpdateBulkProgramSchema = z.object({
+  data: z.array(
+    z.object({
+      programSlug: z.string().trim().nonempty("Required"),
+      data: ProgramSchema.partial(),
+    }),
+  ),
+});
+export type UpdateBulkProgramSchema = z.infer<typeof UpdateBulkProgramSchema>;

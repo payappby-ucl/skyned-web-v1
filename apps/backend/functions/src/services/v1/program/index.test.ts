@@ -90,6 +90,55 @@ describe("ProgramServive", () => {
       });
     });
 
+    describe("updateSingleProgram", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await programService.updateSingleProgram("", "", {} as any);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should update a program", async () => {
+        "program-service-test";
+
+        const program = await programService.updateSingleProgram(
+          schoolId,
+          programData.slug,
+          { applicationFee: 65.9, intakes: [intakeId] },
+        );
+
+        expect(program).not.toBeNull();
+        expect(program.slug).toBe("bachelor-of-art-in-fine-arts");
+        expect(program.applicationFee).toBe(65.9);
+      });
+    });
+
+    describe("updateBulkProgram", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await programService.updateBulkProgram("", {} as any);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should create multiple programs", async () => {
+        const count = await programService.updateBulkProgram(
+          schoolId,
+          ["Program 1", "Program 2"].map((name) => ({
+            programSlug: name.toLowerCase().split(" ").join("-"),
+            data: {
+              tuitionFee: 12500.99,
+              intakes: [intakeId],
+            },
+          })),
+        );
+
+        expect(count).toBe(2);
+      });
+    });
+
     describe("count", () => {
       test("should count programs", async () => {
         const count = await programService.count({});
@@ -139,6 +188,7 @@ describe("ProgramServive", () => {
         const programs = await programService.listPrograms({}, {
           claim: "admin",
         } as any);
+
         expect(programs).toEqual(
           expect.arrayContaining([
             expect.objectContaining({

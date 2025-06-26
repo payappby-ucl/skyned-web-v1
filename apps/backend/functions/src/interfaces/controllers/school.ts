@@ -10,6 +10,8 @@ import {
   IIntake,
   CreateIntakeSchema,
   CreateProgramSchema,
+  ProgramSchema,
+  UpdateBulkProgramSchema,
 } from "@workspace/shared";
 import { IIntakeService, IProgramService, ISchoolService } from "../services";
 import {
@@ -130,5 +132,19 @@ export interface ISchoolController {
     ISuccessResponse<
       Awaited<ReturnType<IProgramService["findProgramBySlugAndSchoolId"]>>
     >
+  >;
+
+  /** Update a program */
+  updateProgram: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    Partial<ProgramSchema>
+  >;
+
+  /** Update bulk program */
+  updatePrograms: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    UpdateBulkProgramSchema
   >;
 }

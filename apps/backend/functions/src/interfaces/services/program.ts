@@ -1,4 +1,9 @@
-import { AuthClaim, IProgram, ProgramSchema } from "@workspace/shared";
+import {
+  AuthClaim,
+  IProgram,
+  ProgramSchema,
+  UpdateBulkProgramSchema,
+} from "@workspace/shared";
 import { IQueryConstruct } from "../utils";
 
 /** Represents program service */
@@ -15,6 +20,19 @@ export interface IProgramService {
     adminId: string,
     schoolId: string,
     data: ProgramSchema[],
+  ): Promise<number>;
+
+  /** Update single program  */
+  updateSingleProgram(
+    schoolId: string,
+    slug: string,
+    data: Partial<ProgramSchema>,
+  ): Promise<IProgram>;
+
+  /** Update bulk program */
+  updateBulkProgram(
+    schoolId: string,
+    data: UpdateBulkProgramSchema["data"],
   ): Promise<number>;
 
   /** Count Programs */

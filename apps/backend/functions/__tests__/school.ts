@@ -720,5 +720,131 @@ describe("Schools API", () => {
         });
       });
     });
+
+    describe(`PUT Programs - ${route}`, () => {
+      test("should fail if invalid input is passed", async () => {
+        const res = await request(server)
+          .put(`${route}`)
+          .send({
+            ...programData,
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.BAD_REQUEST,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server)
+          .put(`${route}`)
+          .send({
+            data: [
+              {
+                programSlug: "school-program-one",
+                data: {
+                  ...programData,
+                  name: "School Program One",
+                  slug: "school-program-one",
+                  intakes: [1],
+                },
+              },
+            ],
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should update bulk programs", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .put(`${route}`)
+          .send({
+            data: ["Bulk School Program One", "Bulk School Program Two"].map(
+              (name) => ({
+                programSlug: name.toLowerCase().split(" ").join("-"),
+                data: {
+                  duration: 18,
+                  intakes: intakeRes.body.data.data.map((d: any) => d.id),
+                },
+              }),
+            ),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+      });
+    });
+
+    describe(`PUT Programs - ${route}/school-program-one`, () => {
+      const uri = `${route}/school-program-one`;
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server)
+          .put(uri)
+          .send({
+            ...programData,
+            name: "School Program One",
+            slug: "school-program-one",
+            intakes: [1],
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should update program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .put(uri)
+          .send({
+            name: "School Update Single Program One",
+            slug: "school-update-single-program-one",
+            intakes: intakeRes.body.data.data.map((d: any) => d.id),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+      });
+    });
   });
 });

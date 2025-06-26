@@ -6,7 +6,9 @@ import {
   CreateIntakeSchema,
   CreateProgramSchema,
   CreateSchoolSchema,
+  ProgramSchema,
   UpdateAdminSchema,
+  UpdateBulkProgramSchema,
   UpdateSchoolSchema,
 } from "../schemas";
 import {
@@ -95,7 +97,7 @@ export type PermissionType = {
   programs: {
     dataType: IProgram;
     createDataType: CreateProgramSchema["data"];
-    updateDataType: any;
+    updateDataType: Partial<ProgramSchema> | UpdateBulkProgramSchema;
     action: "list" | "create" | "read" | "update" | "delete";
   };
 };

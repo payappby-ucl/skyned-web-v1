@@ -358,3 +358,166 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
     }[];
 }>;
 export type CreateProgramSchema = z.infer<typeof CreateProgramSchema>;
+export declare const UpdateBulkProgramSchema: z.ZodObject<{
+    data: z.ZodArray<z.ZodObject<{
+        programSlug: z.ZodString;
+        data: z.ZodObject<{
+            name: z.ZodOptional<z.ZodString>;
+            slug: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
+            faculty: z.ZodOptional<z.ZodString>;
+            degreeType: z.ZodOptional<z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>>;
+            overview: z.ZodOptional<z.ZodString>;
+            description: z.ZodOptional<z.ZodString>;
+            applicationFee: z.ZodOptional<z.ZodNumber>;
+            applicationFeeDiscount: z.ZodOptional<z.ZodNumber>;
+            tuitionFee: z.ZodOptional<z.ZodNumber>;
+            tuitionFeeType: z.ZodOptional<z.ZodEnum<["per_year", "per_semester", "full"]>>;
+            timeframe: z.ZodOptional<z.ZodEnum<["day", "week", "month", "year"]>>;
+            duration: z.ZodOptional<z.ZodNumber>;
+            minimumEducationLevel: z.ZodOptional<z.ZodEnum<["primary", "secondary", "undergraduate", "postgraduate"]>>;
+            minimumEducationDegree: z.ZodOptional<z.ZodNumber>;
+            minimumEligibilityGpa: z.ZodOptional<z.ZodNumber>;
+            englishProficiency: z.ZodOptional<z.ZodEnum<["ielts", "toefl", "duolingo", "pte", "open"]>>;
+            minimumEnglishProficiencyScore: z.ZodOptional<z.ZodNumber>;
+            pgwp: z.ZodOptional<z.ZodDefault<z.ZodBoolean>>;
+            intakes: z.ZodOptional<z.ZodArray<z.ZodNumber, "many">>;
+        }, "strip", z.ZodTypeAny, {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        }, {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        }>;
+    }, "strip", z.ZodTypeAny, {
+        data: {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        };
+        programSlug: string;
+    }, {
+        data: {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        };
+        programSlug: string;
+    }>, "many">;
+}, "strip", z.ZodTypeAny, {
+    data: {
+        data: {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        };
+        programSlug: string;
+    }[];
+}, {
+    data: {
+        data: {
+            name?: string | undefined;
+            slug?: string | undefined;
+            overview?: string | undefined;
+            description?: string | undefined;
+            faculty?: string | undefined;
+            degreeType?: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree" | undefined;
+            applicationFee?: number | undefined;
+            applicationFeeDiscount?: number | undefined;
+            tuitionFee?: number | undefined;
+            tuitionFeeType?: "per_year" | "per_semester" | "full" | undefined;
+            timeframe?: "day" | "week" | "month" | "year" | undefined;
+            duration?: number | undefined;
+            minimumEducationLevel?: "primary" | "secondary" | "undergraduate" | "postgraduate" | undefined;
+            minimumEducationDegree?: number | undefined;
+            minimumEligibilityGpa?: number | undefined;
+            englishProficiency?: "ielts" | "toefl" | "pte" | "duolingo" | "open" | undefined;
+            minimumEnglishProficiencyScore?: number | undefined;
+            pgwp?: boolean | undefined;
+            intakes?: number[] | undefined;
+        };
+        programSlug: string;
+    }[];
+}>;
+export type UpdateBulkProgramSchema = z.infer<typeof UpdateBulkProgramSchema>;
