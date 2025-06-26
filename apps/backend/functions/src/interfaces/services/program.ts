@@ -53,4 +53,18 @@ export interface IProgramService {
     slug: string,
     authUser?: AuthClaim,
   ): Promise<IProgram | null>;
+
+  /** Disconnect intakes */
+  disconnectIntakes(
+    schoolId: string,
+    slug: string,
+    intakes: number[],
+  ): Promise<IProgram>;
+
+  /** Connect intakes */
+  connectIntakes(
+    schoolId: string,
+    slug: string,
+    intakes: number[],
+  ): Promise<IProgram>;
 }

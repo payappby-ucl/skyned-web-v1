@@ -100,8 +100,6 @@ describe("ProgramServive", () => {
       });
 
       test("should update a program", async () => {
-        "program-service-test";
-
         const program = await programService.updateSingleProgram(
           schoolId,
           programData.slug,
@@ -226,6 +224,50 @@ describe("ProgramServive", () => {
             }),
           }),
         );
+      });
+    });
+
+    describe("disconnectIntakes", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await programService.disconnectIntakes("", "", {} as any);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const program = await programService.disconnectIntakes(
+          schoolId,
+          "bachelor-of-art-in-fine-arts",
+          [intakeId],
+        );
+
+        expect(program).not.toBeNull();
+        expect(program.slug).toBe("bachelor-of-art-in-fine-arts");
+        expect(program.applicationFee).toBe(65.9);
+      });
+    });
+
+    describe("connectIntakes", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await programService.connectIntakes("", "", {} as any);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        const program = await programService.connectIntakes(
+          schoolId,
+          "bachelor-of-art-in-fine-arts",
+          [intakeId],
+        );
+
+        expect(program).not.toBeNull();
+        expect(program.slug).toBe("bachelor-of-art-in-fine-arts");
+        expect(program.applicationFee).toBe(65.9);
       });
     });
   });

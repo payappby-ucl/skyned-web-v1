@@ -8,6 +8,7 @@ import { ServiceUtils } from "../utils";
 import {
   CreateProgramServiceSchema,
   CreateProgramsServiceSchema,
+  intakeOperationSchema,
   UpdateProgramServiceSchema,
   UpdateProgramsServiceSchema,
 } from "./schema";
@@ -464,6 +465,78 @@ export class ProgramService extends ServiceUtils implements IProgramService {
 
       return this.deserialize(program);
     };
+
+  connectIntakes: IProgramService["connectIntakes"] = async (
+    schoolId,
+    slug,
+    intakes,
+  ) => {
+    const {
+      schoolId: sid,
+      slug: slg,
+      intakes: itks,
+    } = this.validationUtility.validateInput({
+      schema: intakeOperationSchema,
+      inputData: {
+        schoolId,
+        slug,
+        intakes,
+      },
+    });
+
+    const program = await this.repository.db.program.update({
+      where: {
+        schoolId_slug: {
+          schoolId: sid,
+          slug: slg,
+        },
+      },
+
+      data: {
+        intakes: {
+          connect: itks.map((itk) => ({ id: itk, schoolId: sid })),
+        },
+      },
+    });
+
+    return this.deserialize(program);
+  };
+
+  disconnectIntakes: IProgramService["disconnectIntakes"] = async (
+    schoolId,
+    slug,
+    intakes,
+  ) => {
+    const {
+      schoolId: sid,
+      slug: slg,
+      intakes: itks,
+    } = this.validationUtility.validateInput({
+      schema: intakeOperationSchema,
+      inputData: {
+        schoolId,
+        slug,
+        intakes,
+      },
+    });
+
+    const program = await this.repository.db.program.update({
+      where: {
+        schoolId_slug: {
+          schoolId: sid,
+          slug: slg,
+        },
+      },
+
+      data: {
+        intakes: {
+          disconnect: itks.map((itk) => ({ id: itk, schoolId: sid })),
+        },
+      },
+    });
+
+    return this.deserialize(program);
+  };
 }
 
 /** Concrete instance of {ProgramService} */

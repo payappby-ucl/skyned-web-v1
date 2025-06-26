@@ -846,5 +846,123 @@ describe("Schools API", () => {
         );
       });
     });
+
+    describe(`PUT Disconnect Intakes - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/disconnect-intakes`;
+
+      test("should fail if invalid input is passed", async () => {
+        const res = await request(server).put(`${uri}`).send({
+          name: "Alabi",
+        });
+
+        expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.BAD_REQUEST,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server)
+          .put(uri)
+          .send({
+            intakes: [1],
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should disconnect program intake", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .put(uri)
+          .send({
+            intakes: intakeRes.body.data.data.map((d: any) => d.id),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+      });
+    });
+
+    describe(`PUT Connect Intakes - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/connect-intakes`;
+
+      test("should fail if invalid input is passed", async () => {
+        const res = await request(server).put(`${uri}`).send({
+          name: "Alabi",
+        });
+
+        expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.BAD_REQUEST,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server)
+          .put(uri)
+          .send({
+            intakes: [1],
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should connect program intake", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .put(uri)
+          .send({
+            intakes: intakeRes.body.data.data.map((d: any) => d.id),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+      });
+    });
   });
 });

@@ -147,4 +147,18 @@ export interface ISchoolController {
     ISuccessResponse<IMessageResponse>,
     UpdateBulkProgramSchema
   >;
+
+  /** Connect Intakes */
+  connectIntakes: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    Pick<ProgramSchema, "intakes">
+  >;
+
+  /** Disconnect Intakes */
+  disconnectIntakes: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    Pick<ProgramSchema, "intakes">
+  >;
 }

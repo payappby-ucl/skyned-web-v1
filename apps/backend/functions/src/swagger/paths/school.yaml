@@ -805,3 +805,99 @@ paths:
           $ref: "#/components/responses/Conflict"
         "500":
           $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/programs/{programSlug}/disconnect-intakes:
+    summary: Program intakes operations
+
+    put:
+      summary: Update Program
+      description: Deletes intakes from program
+      operation: disconnectProgramIntakes
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
+      requestBody:
+        description: Data needed to update program
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intakes:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/programs/{programSlug}/connect-intakes:
+    summary: Program intakes operations
+
+    put:
+      summary: Update Program
+      description: Adds intakes from program
+      operation: connectProgramIntakes
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
+      requestBody:
+        description: Data needed to update program
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intakes:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"

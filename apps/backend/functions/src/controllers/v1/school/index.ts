@@ -885,6 +885,94 @@ export class SchoolController
       next(error);
     }
   };
+
+  connectIntakes: ISchoolController["connectIntakes"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug, programSlug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const { intakes } = req.body;
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        adminUser,
+      );
+
+      if (!program) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      await this.programService.connectIntakes(
+        school.schoolId,
+        program.slug,
+        intakes,
+      );
+
+      res._success(StatusCodes.OK, { message: "Updated." });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  disconnectIntakes: ISchoolController["disconnectIntakes"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug, programSlug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const { intakes } = req.body;
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        adminUser,
+      );
+
+      if (!program) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      await this.programService.disconnectIntakes(
+        school.schoolId,
+        program.slug,
+        intakes,
+      );
+
+      res._success(StatusCodes.OK, { message: "Updated." });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */

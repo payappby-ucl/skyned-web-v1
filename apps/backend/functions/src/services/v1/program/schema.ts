@@ -37,3 +37,12 @@ export const UpdateProgramsServiceSchema = UpdateBulkProgramSchema.pick({
 export type UpdateProgramsServiceSchema = z.infer<
   typeof UpdateProgramsServiceSchema
 >;
+
+export const intakeOperationSchema = z.object({
+  schoolId: z.string().trim().nonempty("Required"),
+  slug: z.string().trim().nonempty("Required"),
+  intakes: z
+    .array(z.number().positive().int())
+    .min(1, "Must select at least one"),
+});
+export type intakeOperationSchema = z.infer<typeof intakeOperationSchema>;
