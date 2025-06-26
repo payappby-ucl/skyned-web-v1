@@ -24,7 +24,7 @@ export declare const RegisterSchema: z.ZodObject<Pick<{
 /** Schema type */
 export type RegisterSchema = z.infer<typeof RegisterSchema>;
 /** Schema for user account creation */
-export declare const AccountCreationSchema: z.ZodObject<z.objectUtil.extendShape<Pick<{
+export declare const AccountCreationSchema: z.ZodObject<Pick<{
     email: z.ZodString;
     phoneNumber: z.ZodEffects<z.ZodString, string, string>;
     gender: z.ZodEnum<["Male", "Female", "Others"]>;
@@ -40,9 +40,9 @@ export declare const AccountCreationSchema: z.ZodObject<z.objectUtil.extendShape
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
-}, "email">, {
+}, "email"> & {
     password: z.ZodString;
-}>, "strip", z.ZodTypeAny, {
+}, "strip", z.ZodTypeAny, {
     email: string;
     password: string;
 }, {

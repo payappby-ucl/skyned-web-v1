@@ -16,6 +16,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isInDepartment = void 0;
 __exportStar(require("./constants"), exports);
+__exportStar(require("./education-level"), exports);
+__exportStar(require("./degree-types"), exports);
+__exportStar(require("./english-proficiency"), exports);
 const isInDepartment = (admin, departments) => {
     return (admin.departments?.some((department) => departments.includes(department.name)) || false);
 };

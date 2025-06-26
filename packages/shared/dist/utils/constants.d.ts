@@ -46,3 +46,7 @@ export declare const currencies: {
     readonly EUR: "EUR";
     readonly GBP: "GBP";
 };
+/** Tuition Fee Type */
+export declare const tuitionFeeType: readonly ["per_year", "per_semester", "full"];
+/** Program timeframe */
+export declare const timeframe: readonly ["day", "week", "month", "year"];

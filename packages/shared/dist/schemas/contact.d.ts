@@ -1,5 +1,5 @@
 import { z } from "zod";
-export declare const ContactUsSchema: z.ZodObject<z.objectUtil.extendShape<Pick<{
+export declare const ContactUsSchema: z.ZodObject<Pick<{
     email: z.ZodString;
     phoneNumber: z.ZodEffects<z.ZodString, string, string>;
     gender: z.ZodEnum<["Male", "Female", "Others"]>;
@@ -15,22 +15,22 @@ export declare const ContactUsSchema: z.ZodObject<z.objectUtil.extendShape<Pick<
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
-}, "phoneNumber">, {
+}, "phoneNumber"> & {
     email: z.ZodEffects<z.ZodString, string, string>;
     message: z.ZodString;
     name: z.ZodString;
     subject: z.ZodString;
-}>, "strip", z.ZodTypeAny, {
+}, "strip", z.ZodTypeAny, {
     email: string;
     phoneNumber: string;
-    message: string;
     name: string;
+    message: string;
     subject: string;
 }, {
     email: string;
     phoneNumber: string;
-    message: string;
     name: string;
+    message: string;
     subject: string;
 }>;
 export type ContactUsSchema = z.infer<typeof ContactUsSchema>;

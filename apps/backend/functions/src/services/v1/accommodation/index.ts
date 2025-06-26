@@ -1,25 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable brace-style */
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
-import {
-  IAccommodationService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { IAccommodationService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { validationUtility } from "../../../utils";
 import { ServiceUtils } from "../utils";
 import {
   CreateAccommodationServiceSchema,
   DeleteAccommodationSchema,
 } from "./schema";
-
-/** Represents dependencies needed for instantiation */
-export interface IAccommodationServiceDependencies {
-  repository: IRepository;
-  validationUtility: IValidationUtility;
-}
 
 /** Concrete implementation of {IAccommodationService} */
 
@@ -28,24 +16,15 @@ export class AccommodationService
   implements IAccommodationService
 {
   private static instance: IAccommodationService | null = null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
+  private constructor() {
     super();
   }
 
   /** Factory for instance creation */
 
-  static factory({
-    repository,
-    validationUtility,
-  }: IAccommodationServiceDependencies) {
+  static factory() {
     if (!AccommodationService.instance) {
-      AccommodationService.instance = new AccommodationService(
-        repository,
-        validationUtility,
-      );
+      AccommodationService.instance = new AccommodationService();
     }
 
     return AccommodationService.instance;
@@ -161,9 +140,5 @@ export class AccommodationService
 /** Concrete instance of {AccommodationService} */
 export const accommodationService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.ACCOMMODATION_SERVICE,
-  () =>
-    AccommodationService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => AccommodationService.factory(),
 );

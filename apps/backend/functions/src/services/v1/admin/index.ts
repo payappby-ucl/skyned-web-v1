@@ -1,28 +1,12 @@
 /* eslint-disable operator-linebreak */
 import { RegistryKeysEnum } from "../../../enum";
-import { adminSchema, repository } from "../../../infrastructure";
-import {
-  IAdminService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { adminSchema } from "../../../infrastructure";
+import { IAdminService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import {
-  adminProfileKeys,
-  SkynedUtils,
-  validationUtility,
-} from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { AdminIdSchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
 import { CreateAdminServiceSchema, UpdateAdminServiceSchema } from "./schema";
-
-/** Represents dependencies needed to initialize concrete IAdminService */
-export interface IAdminServiceDependencies {
-  /** Database object */
-  repository: IRepository;
-  /** Validation object */
-  validationUtility: IValidationUtility;
-}
 
 /**
  * Concrete implementation of IAdminService
@@ -32,16 +16,13 @@ export interface IAdminServiceDependencies {
 
 export class AdminService extends ServiceUtils implements IAdminService {
   private static instance: IAdminService | null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
+  private constructor() {
     super();
   }
 
-  static factory({ repository, validationUtility }: IAdminServiceDependencies) {
+  static factory() {
     if (!AdminService.instance) {
-      AdminService.instance = new AdminService(repository, validationUtility);
+      AdminService.instance = new AdminService();
     }
 
     return AdminService.instance;
@@ -210,9 +191,5 @@ export class AdminService extends ServiceUtils implements IAdminService {
 
 export const adminService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.ADMIN_SERVICE,
-  () =>
-    AdminService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => AdminService.factory(),
 );

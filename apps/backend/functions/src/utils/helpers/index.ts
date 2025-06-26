@@ -5,7 +5,7 @@ import { Exception } from "../../lib";
 import { env } from "../../config";
 import { applicationDefault } from "firebase-admin/app";
 import { ResolveStoragePathType } from "../../types";
-import { IObject, IPhoneNumber } from "@workspace/shared";
+import { IObject, IPhoneNumber, IProgram } from "@workspace/shared";
 
 /**
  * Utility Class
@@ -182,6 +182,10 @@ export class SkynedUtils {
 
         if (key === "phoneNumber") {
           return [key, value as unknown as IPhoneNumber];
+        }
+
+        if (key === "englishProficiency") {
+          return [key, value as unknown as IProgram["englishProficiency"]];
         }
 
         if (key === "previousState" || key === "currentState") {

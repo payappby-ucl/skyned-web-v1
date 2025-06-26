@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 import { app } from "../src/app";
 import { signInUser } from "./helpers/utils";
-import { accommodationData, schoolData } from "../src/data";
+import { accommodationData, programData, schoolData } from "../src/data";
 import { responseBody } from "./helpers/constants";
 
 describe("Schools API", () => {
@@ -478,6 +478,112 @@ describe("Schools API", () => {
             startDate: expect.any(String),
             deadline: expect.any(String),
             schoolId: expect.any(String),
+          }),
+        );
+      });
+    });
+  });
+
+  describe("School Programs", () => {
+    const route = `${url}/test-school/programs`;
+
+    describe(`POST Programs - ${route}`, () => {
+      test("should fail if invalid input is passed", async () => {
+        const res = await request(server)
+          .post(`${route}`)
+          .send({
+            ...programData,
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.BAD_REQUEST,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server)
+          .post(`${route}`)
+          .send({
+            type: "single",
+            data: {
+              ...programData,
+              name: "School Program One",
+              slug: "school-program-one",
+              intakes: [1],
+            },
+          });
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should create a program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .post(`${route}`)
+          .send({
+            type: "single",
+            data: {
+              ...programData,
+              name: "School Program One",
+              slug: "school-program-one",
+              intakes: intakeRes.body.data.data.map((d: any) => d.id),
+            },
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.CREATED);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+      });
+
+      test("should create bulk programs", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+        const intakeRes = (await request(server)
+          .get(`${url}/test-school/intakes`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        const res = await request(server)
+          .post(`${route}`)
+          .send({
+            type: "bulk",
+            data: ["Bulk School Program One", "Bulk School Program Two"].map(
+              (name) => ({
+                ...programData,
+                name,
+                slug: name.toLowerCase().split(" ").join("-"),
+                intakes: intakeRes.body.data.data.map((d: any) => d.id),
+              }),
+            ),
+          })
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.CREATED);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
           }),
         );
       });

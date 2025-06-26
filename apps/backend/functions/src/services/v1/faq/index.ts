@@ -1,47 +1,27 @@
 /* eslint-disable operator-linebreak */
 import { RegistryKeysEnum } from "../../../enum";
-import {
-  CreateDbFaqSchema,
-  repository,
-  UpdateDbFaqSchema,
-} from "../../../infrastructure";
-import {
-  IFaqService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { CreateDbFaqSchema, UpdateDbFaqSchema } from "../../../infrastructure";
+import { IFaqService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import {
-  adminProfileKeys,
-  SkynedUtils,
-  validationUtility,
-} from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
-
-/** Represents dependencies needed to instantiate {FaqService} */
-export interface IFaqServiceDependencies {
-  /** Database */
-  repository: IRepository;
-  /** Schema validation utils */
-  validationUtility: IValidationUtility;
-}
+import { ServiceUtils } from "../utils";
 
 /**
  * Concrete implementation of {IFaqService}
  * @class
  */
 
-export class FaqService implements IFaqService {
+export class FaqService extends ServiceUtils implements IFaqService {
   private static instance: IFaqService | null = null;
 
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {}
+  private constructor() {
+    super();
+  }
 
-  static factory({ repository, validationUtility }: IFaqServiceDependencies) {
+  static factory() {
     if (!FaqService.instance) {
-      FaqService.instance = new FaqService(repository, validationUtility);
+      FaqService.instance = new FaqService();
     }
 
     return FaqService.instance;
@@ -169,9 +149,5 @@ export class FaqService implements IFaqService {
 /** Instance of {FaqService} */
 export const faqService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.FAQ_SERVICE,
-  () =>
-    FaqService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => FaqService.factory(),
 );

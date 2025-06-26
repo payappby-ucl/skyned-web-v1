@@ -1,29 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable brace-style */
 import { department } from "@workspace/shared";
-import {
-  IDepartmentService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { IDepartmentService } from "../../../interfaces";
 import { ServiceUtils } from "../utils";
-import {
-  adminProfileKeys,
-  SkynedUtils,
-  validationUtility,
-} from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import SkynedRegistry from "../../../registry";
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
 import { DepartmentIdsSchema } from "./schema";
-
-/** Represents dependencies to instantiate DepartmentService */
-export interface IDepartmentServiceDependencies {
-  /** Database instance */
-  repository: IRepository;
-  /** Validation utility */
-  validationUtility: IValidationUtility;
-}
 
 /**
  * Concrete implementation of {IDepartmentService}
@@ -35,21 +18,12 @@ export class DepartmentService
   implements IDepartmentService
 {
   private static instance: IDepartmentService | null = null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
+  private constructor() {
     super();
   }
-  static factory({
-    repository,
-    validationUtility,
-  }: IDepartmentServiceDependencies) {
+  static factory() {
     if (!DepartmentService.instance) {
-      DepartmentService.instance = new DepartmentService(
-        repository,
-        validationUtility,
-      );
+      DepartmentService.instance = new DepartmentService();
     }
 
     return DepartmentService.instance;
@@ -123,9 +97,5 @@ export class DepartmentService
 /** Instance of {DepartmentService} */
 export const departmentService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.DEPARTMENT_SERVICE,
-  () =>
-    DepartmentService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => DepartmentService.factory(),
 );

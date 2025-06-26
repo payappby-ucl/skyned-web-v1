@@ -56,13 +56,18 @@ enum Currency {
   GBP
 }
 
-// enum DegreeLevel {
-//   undergraduate
-//   postgraduate
-//   masters
-//   diploma
-//   certificate
-// }
+enum TuitionFeeType {
+  per_year
+  per_semester
+  full
+}
+
+enum Timeframe {
+  day
+  week
+  month
+  year
+}
 
 model Token {
   id        Int       @default(autoincrement())
@@ -123,6 +128,9 @@ model Admin {
 
   // * Intakes Created
   intakesCreated Intake[]
+
+  // * Programs Created
+  programsCreated Program[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -239,14 +247,14 @@ model School {
   ownershipType   OwnershipType   @map("ownership_type")
   currency        Currency
   overview        String
+  active          Boolean         @default(true)
 
   createdById String @map("created_by_id") @db.VarChar(256)
   createdBy   Admin  @relation(fields: [createdById], references: [adminId])
 
-  // programs Program[]
-
   accommodation Accommodation?
   intakes       Intake[]
+  programs      Program[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -254,8 +262,11 @@ model School {
   @@index([name])
   @@index([country])
   @@index([state])
+  @@index([active])
   @@index([institutionType])
   @@index([ownershipType])
+  @@index([name, active])
+  @@index([country, active, institutionType, ownershipType])
   @@map("schools")
 }
 
@@ -276,6 +287,55 @@ model Accommodation {
   @@map("accommodations")
 }
 
+// * Programs
+model Program {
+  id        Int    @unique @default(autoincrement())
+  programId String @id @default(cuid()) @map("program_id")
+
+  schoolId String @map("school_id")
+  school   School @relation(fields: [schoolId], references: [schoolId])
+
+  name        String
+  slug        String
+  faculty     String
+  degreeType  String @map("degree_type")
+  overview    String
+  description String @db.Text
+
+  applicationFee         Decimal @map("application_fee")
+  applicationFeeDiscount Decimal @default(0) @map("application_fee_discount")
+
+  tuitionFee     Decimal        @map("tuition_fee")
+  tuitionFeeType TuitionFeeType @default(per_year) @map("tuition_fee_type")
+
+  timeframe Timeframe @default(month)
+  duration  Decimal
+
+  minimumEducationLevel  String  @map("minimum_education_level")
+  minimumEducationDegree Int     @map("minimum_education_degree")
+  minimumEligibilityGpa  Decimal @map("minimum_education_gpa")
+
+  englishProficiency             String  @map("english_proficiency")
+  minimumEnglishProficiencyScore Decimal @map("english_proficiency_score")
+
+  // * Boolean values
+  pgwp   Boolean @default(false)
+  active Boolean @default(true)
+
+  intakes Intake[]
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([schoolId, slug])
+  @@index([name])
+  @@index([name, active])
+  @@map("programs")
+}
+
 model Intake {
   id Int @id @default(autoincrement())
 
@@ -285,6 +345,8 @@ model Intake {
 
   schoolId String @map("school_id")
   school   School @relation(fields: [schoolId], references: [schoolId])
+
+  programs Program[]
 
   createdById String @map("created_by_id") @db.VarChar(256)
   createdBy   Admin  @relation(fields: [createdById], references: [adminId])
@@ -390,21 +452,4 @@ model Intake {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
 //   @@map("admins")
-// }
-
-// // * Programs
-// model Program {
-//   id        Int    @unique @default(autoincrement())
-//   programId String @id @default(cuid()) @map("program_id")
-
-//   schoolId String
-//   school   School @relation(fields: [schoolId], references: [schoolId])
-
-//   name String
-//   slug String @unique
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("programs")
 // }

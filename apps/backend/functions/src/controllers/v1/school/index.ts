@@ -7,6 +7,7 @@ import {
   IEvents,
   IIDGeneratorService,
   IIntakeService,
+  IProgramService,
   ISchoolController,
   ISchoolService,
   IStorageService,
@@ -16,6 +17,7 @@ import {
   accommodationService,
   idGeneratorService,
   intakeService,
+  programService,
   schoolService,
   storageService,
 } from "../../../services";
@@ -32,6 +34,7 @@ export interface ISchoolControllerDependencies {
   events: IEvents;
   accommodationService: IAccommodationService;
   intakeService: IIntakeService;
+  programService: IProgramService;
 }
 
 /**
@@ -52,6 +55,7 @@ export class SchoolController
     private readonly events: IEvents,
     private readonly accommodationService: IAccommodationService,
     private readonly intakeService: IIntakeService,
+    private readonly programService: IProgramService,
   ) {
     super();
   }
@@ -65,6 +69,7 @@ export class SchoolController
     events,
     accommodationService,
     intakeService,
+    programService,
   }: ISchoolControllerDependencies) {
     if (!SchoolController.instance) {
       SchoolController.instance = new SchoolController(
@@ -74,6 +79,7 @@ export class SchoolController
         events,
         accommodationService,
         intakeService,
+        programService,
       );
     }
     return SchoolController.instance;
@@ -611,6 +617,61 @@ export class SchoolController
       next(error);
     }
   };
+
+  createPrograms: ISchoolController["createPrograms"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+      const adminUser = this._validateAdmin(req);
+      const { type, data } = req.body;
+
+      if (
+        (type === "single" && Array.isArray(data)) ||
+        (type === "bulk" && !Array.isArray(data))
+      ) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          "Invalid data format.",
+        );
+      }
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(adminUser, "programs", "create", data);
+
+      let message = "Program Created";
+
+      if (!Array.isArray(data)) {
+        await this.programService.createSingleProgram(
+          adminUser.user.adminId,
+          school.schoolId,
+          data,
+        );
+      } else {
+        const count = await this.programService.createBulkProgram(
+          adminUser.user.adminId,
+          school.schoolId,
+          data,
+        );
+
+        message = `${count} programs created`;
+      }
+
+      res._success(StatusCodes.CREATED, { message });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */
@@ -624,5 +685,6 @@ export const schoolController = SkynedRegistry.getSingleton(
       events,
       accommodationService,
       intakeService,
+      programService,
     }),
 );

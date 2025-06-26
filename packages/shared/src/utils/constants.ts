@@ -56,3 +56,9 @@ export const currencies = {
   EUR: "EUR",
   GBP: "GBP",
 } as const;
+
+/** Tuition Fee Type */
+export const tuitionFeeType = ["per_year", "per_semester", "full"] as const;
+
+/** Program timeframe */
+export const timeframe = ["day", "week", "month", "year"] as const;

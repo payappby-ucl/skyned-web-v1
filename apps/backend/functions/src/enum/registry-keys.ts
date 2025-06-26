@@ -82,6 +82,8 @@ export enum RegistryKeysEnum {
   ACCOMMODATION_CONTROLLER = "AccommodationController",
   /** Intake Controller */
   INTAKE_CONTROLLER = "IntakeController",
+  /** program Controller */
+  PROGRAM_CONTROLLER = "ProgramController",
 
   // * Services
   /** Email Service */
@@ -112,6 +114,8 @@ export enum RegistryKeysEnum {
   ACCOMMODATION_SERVICE = "AccommodationService",
   /** Intake Service */
   INTAKE_SERVICE = "IntakeService",
+  /** program Service */
+  PROGRAM_SERVICE = "ProgramService",
 
   // * Utilities
   /** Handles internal validations */

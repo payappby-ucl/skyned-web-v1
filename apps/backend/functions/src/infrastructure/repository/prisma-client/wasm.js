@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.8.2
- * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+ * Prisma Client JS version: 6.10.1
+ * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
  */
 Prisma.prismaVersion = {
-  client: "6.8.2",
-  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
+  client: "6.10.1",
+  engine: "9b628578b3b7cae625e8c927178f15a170e74a9c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -218,6 +218,7 @@ exports.Prisma.SchoolScalarFieldEnum = {
   ownershipType: 'ownershipType',
   currency: 'currency',
   overview: 'overview',
+  active: 'active',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -227,6 +228,34 @@ exports.Prisma.AccommodationScalarFieldEnum = {
   id: 'id',
   description: 'description',
   schoolId: 'schoolId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProgramScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  schoolId: 'schoolId',
+  name: 'name',
+  slug: 'slug',
+  faculty: 'faculty',
+  degreeType: 'degreeType',
+  overview: 'overview',
+  description: 'description',
+  applicationFee: 'applicationFee',
+  applicationFeeDiscount: 'applicationFeeDiscount',
+  tuitionFee: 'tuitionFee',
+  tuitionFeeType: 'tuitionFeeType',
+  timeframe: 'timeframe',
+  duration: 'duration',
+  minimumEducationLevel: 'minimumEducationLevel',
+  minimumEducationDegree: 'minimumEducationDegree',
+  minimumEligibilityGpa: 'minimumEligibilityGpa',
+  englishProficiency: 'englishProficiency',
+  minimumEnglishProficiencyScore: 'minimumEnglishProficiencyScore',
+  pgwp: 'pgwp',
+  active: 'active',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -312,6 +341,19 @@ exports.Currency = exports.$Enums.Currency = {
   GBP: 'GBP'
 };
 
+exports.TuitionFeeType = exports.$Enums.TuitionFeeType = {
+  per_year: 'per_year',
+  per_semester: 'per_semester',
+  full: 'full'
+};
+
+exports.Timeframe = exports.$Enums.Timeframe = {
+  day: 'day',
+  week: 'week',
+  month: 'month',
+  year: 'year'
+};
+
 exports.Prisma.ModelName = {
   Token: 'Token',
   Admin: 'Admin',
@@ -322,6 +364,7 @@ exports.Prisma.ModelName = {
   ActivityLog: 'ActivityLog',
   School: 'School',
   Accommodation: 'Accommodation',
+  Program: 'Program',
   Intake: 'Intake'
 };
 

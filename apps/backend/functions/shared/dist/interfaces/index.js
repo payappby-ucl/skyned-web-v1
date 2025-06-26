@@ -25,3 +25,4 @@ __exportStar(require("./activity-log"), exports);
 __exportStar(require("./school"), exports);
 __exportStar(require("./accommodation"), exports);
 __exportStar(require("./intake"), exports);
+__exportStar(require("./program"), exports);

@@ -2,47 +2,27 @@
 /* eslint-disable max-len */
 
 import { RegistryKeysEnum } from "../../../enum";
-import { CreateContactUsSchema, repository } from "../../../infrastructure";
-import {
-  IInquiryService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { CreateContactUsSchema } from "../../../infrastructure";
+import { IInquiryService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import { SkynedUtils, validationUtility } from "../../../utils";
+import { SkynedUtils } from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
-
-/** Represents dependencies needed to instantiate IInquiryService concrete class */
-export interface InquiryServiceDependencies {
-  /** Database object */
-  repository: IRepository;
-  /** Validation object */
-  validationUtility: IValidationUtility;
-}
+import { ServiceUtils } from "../utils";
 
 /** Concrete implementation of IInquiryService */
 
-export class InquiryService implements IInquiryService {
+export class InquiryService extends ServiceUtils implements IInquiryService {
   private static instance: IInquiryService | null = null;
 
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
-    // * Private
+  private constructor() {
+    super();
   }
 
   /** Creates a instance of IInquiryService */
 
-  static factory({
-    repository,
-    validationUtility,
-  }: InquiryServiceDependencies) {
+  static factory() {
     if (!InquiryService.instance) {
-      InquiryService.instance = new InquiryService(
-        repository,
-        validationUtility,
-      );
+      InquiryService.instance = new InquiryService();
     }
 
     return InquiryService.instance;
@@ -147,9 +127,5 @@ export class InquiryService implements IInquiryService {
 /** instance of InquiryService */
 export const inquiryService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.INQUIRY_SERVICE,
-  () =>
-    InquiryService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => InquiryService.factory(),
 );

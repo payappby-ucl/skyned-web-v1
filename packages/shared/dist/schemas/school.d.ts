@@ -1,5 +1,5 @@
 import z from "zod";
-export declare const CreateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Pick<{
+export declare const CreateSchoolSchema: z.ZodObject<Pick<{
     email: z.ZodString;
     phoneNumber: z.ZodEffects<z.ZodString, string, string>;
     gender: z.ZodEnum<["Male", "Female", "Others"]>;
@@ -15,7 +15,7 @@ export declare const CreateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Pi
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
-}, "country">, {
+}, "country"> & {
     logo: z.ZodEffects<z.ZodString, string, string>;
     schoolImage: z.ZodEffects<z.ZodString, string, string>;
     name: z.ZodString;
@@ -28,9 +28,9 @@ export declare const CreateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Pi
     ownershipType: z.ZodEnum<["private", "public"]>;
     currency: z.ZodEnum<["AUD", "CAD", "EUR", "GBP", "NGN", "USD"]>;
     overview: z.ZodString;
-}>, "strip", z.ZodTypeAny, {
-    country: string;
+}, "strip", z.ZodTypeAny, {
     name: string;
+    country: string;
     logo: string;
     schoolImage: string;
     slug: string;
@@ -43,8 +43,8 @@ export declare const CreateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Pi
     currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
     overview: string;
 }, {
-    country: string;
     name: string;
+    country: string;
     logo: string;
     schoolImage: string;
     slug: string;
@@ -58,7 +58,7 @@ export declare const CreateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Pi
     overview: string;
 }>;
 export type CreateSchoolSchema = z.infer<typeof CreateSchoolSchema>;
-export declare const UpdateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Omit<z.objectUtil.extendShape<Pick<{
+export declare const UpdateSchoolSchema: z.ZodObject<Omit<Pick<{
     email: z.ZodString;
     phoneNumber: z.ZodEffects<z.ZodString, string, string>;
     gender: z.ZodEnum<["Male", "Female", "Others"]>;
@@ -74,7 +74,7 @@ export declare const UpdateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Om
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
-}, "country">, {
+}, "country"> & {
     logo: z.ZodEffects<z.ZodString, string, string>;
     schoolImage: z.ZodEffects<z.ZodString, string, string>;
     name: z.ZodString;
@@ -87,12 +87,12 @@ export declare const UpdateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Om
     ownershipType: z.ZodEnum<["private", "public"]>;
     currency: z.ZodEnum<["AUD", "CAD", "EUR", "GBP", "NGN", "USD"]>;
     overview: z.ZodString;
-}>, "logo" | "schoolImage">, {
+}, "logo" | "schoolImage"> & {
     logo: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
     schoolImage: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
-}>, "strip", z.ZodTypeAny, {
-    country: string;
+}, "strip", z.ZodTypeAny, {
     name: string;
+    country: string;
     slug: string;
     state: string;
     city: string;
@@ -105,8 +105,8 @@ export declare const UpdateSchoolSchema: z.ZodObject<z.objectUtil.extendShape<Om
     logo?: string | undefined;
     schoolImage?: string | undefined;
 }, {
-    country: string;
     name: string;
+    country: string;
     slug: string;
     state: string;
     city: string;

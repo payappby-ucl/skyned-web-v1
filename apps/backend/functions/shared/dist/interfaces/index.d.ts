@@ -9,3 +9,4 @@ export * from "./activity-log";
 export * from "./school";
 export * from "./accommodation";
 export * from "./intake";
+export * from "./program";

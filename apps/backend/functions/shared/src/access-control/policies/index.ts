@@ -5,6 +5,7 @@ import { departmentPolicies } from "./department";
 import { faqPolicies } from "./faq";
 import { inquiryPolicies } from "./inquiry";
 import { intakePolicies } from "./intakes";
+import { programPolicies } from "./programs";
 import { schoolPolicies } from "./schools";
 
 export const policies: AccessControlType = {
@@ -15,4 +16,5 @@ export const policies: AccessControlType = {
   ...schoolPolicies,
   ...accommodationPolicies,
   ...intakePolicies,
+  ...programPolicies,
 };

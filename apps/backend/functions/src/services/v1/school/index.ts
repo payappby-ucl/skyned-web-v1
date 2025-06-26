@@ -1,18 +1,9 @@
 /* eslint-disable operator-linebreak */
 import { ISchool } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
-import {
-  ISchoolService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { ISchoolService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import {
-  adminProfileKeys,
-  SkynedUtils,
-  validationUtility,
-} from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { ServiceUtils } from "../utils";
 import { CreateSchoolServiceSchema } from "./schema";
 import { GeneralSchema } from "../../../zod-schemas";
@@ -41,31 +32,19 @@ const adminSchoolData: (keyof ISchool)[] = [
   "updatedAt",
 ];
 
-/** Represents dependencies needed to instantiate  {SchoolService} */
-export interface ISchoolServiceDependencies {
-  repository: IRepository;
-  validationUtility: IValidationUtility;
-}
-
 /** Concrete implementation of {ISchoolService} */
 
 export class SchoolService extends ServiceUtils implements ISchoolService {
   private static instance: ISchoolService | null = null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
+  private constructor() {
     super();
   }
 
   /** Factory for instance creation */
 
-  static factory({
-    repository,
-    validationUtility,
-  }: ISchoolServiceDependencies) {
+  static factory() {
     if (!SchoolService.instance) {
-      SchoolService.instance = new SchoolService(repository, validationUtility);
+      SchoolService.instance = new SchoolService();
     }
 
     return SchoolService.instance;
@@ -258,9 +237,5 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
 /** Concrete instance of {SchoolService} */
 export const schoolService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.SCHOOL_SERVICE,
-  () =>
-    SchoolService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => SchoolService.factory(),
 );

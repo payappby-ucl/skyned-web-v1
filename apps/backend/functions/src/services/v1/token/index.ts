@@ -1,24 +1,12 @@
 import jwt from "jsonwebtoken";
 import { RegistryKeysEnum } from "../../../enum";
-import {
-  IRepository,
-  ITokenService,
-  IValidationUtility,
-} from "../../../interfaces";
+import { ITokenService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { env } from "../../../config";
-import {
-  SkynedUtils,
-  TOKEN_EXPIRY_IN_MINUTE,
-  validationUtility,
-} from "../../../utils";
+import { SkynedUtils, TOKEN_EXPIRY_IN_MINUTE } from "../../../utils";
 import { StatusCodes } from "http-status-codes";
-import { repository, tokenSchema } from "../../../infrastructure";
-
-export interface TokenServiceDependencies {
-  repository: IRepository;
-  validationUtility: IValidationUtility;
-}
+import { tokenSchema } from "../../../infrastructure";
+import { ServiceUtils } from "../utils";
 
 /**
  * Concrete implementation of ITokenService using jsonwebtoken
@@ -26,20 +14,17 @@ export interface TokenServiceDependencies {
  * @class
  */
 
-export class TokenService implements ITokenService {
+export class TokenService extends ServiceUtils implements ITokenService {
   private static instance: ITokenService | null = null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
-    // * Private
+  private constructor() {
+    super();
   }
 
   /** Creates TokenService instance */
 
-  static factory({ repository, validationUtility }: TokenServiceDependencies) {
+  static factory() {
     if (!TokenService.instance) {
-      TokenService.instance = new TokenService(repository, validationUtility);
+      TokenService.instance = new TokenService();
     }
 
     return TokenService.instance;
@@ -123,9 +108,5 @@ export class TokenService implements ITokenService {
 /** TokenService instance */
 export const tokenService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.TOKEN_SERVICE,
-  () =>
-    TokenService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => TokenService.factory(),
 );

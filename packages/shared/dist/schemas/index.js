@@ -22,3 +22,4 @@ __exportStar(require("./admin"), exports);
 __exportStar(require("./school"), exports);
 __exportStar(require("./accommodation"), exports);
 __exportStar(require("./intake"), exports);
+__exportStar(require("./program"), exports);

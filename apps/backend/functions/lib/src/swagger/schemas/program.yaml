@@ -1,0 +1,112 @@
+components:
+  schemas:
+    ProgramBase:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+          example: "test-program"
+        faculty:
+          type: string
+        degreeType:
+          type: string
+          enum:
+            [
+              "Grade 7",
+              "Grade 8",
+              "Grade 9",
+              "Grade 10",
+              "Grade 11",
+              "Grade 12",
+              "A Level",
+              "English as Second Language (ESL)",
+              "1-year Post-Secondary School Certificate",
+              "2-year Undergraduate Diploma",
+              "3-year Undergraduate Advanced Diploma",
+              "3-year Bachelor's Degree",
+              "Top-Up Degree",
+              "4-year Bachelor's Degree",
+              "Integrated Masters",
+              "Postgraduate Certificate",
+              "Postgraduate Diploma",
+              "Master's Degree",
+            ]
+        overview:
+          type: string
+        description:
+          type: string
+
+        applicationFee:
+          type: number
+        applicationFeeDiscount:
+          type: number
+
+        tuitionFee:
+          type: number
+        tuitionFeeType:
+          type: string
+          enum: ["per_year", "per_semester", "full"]
+
+        timeframe:
+          type: string
+        duration:
+          type: number
+
+        minimumEducationLevel:
+          type: string
+          enum: ["primary", "secondary", "undergraduate", "postgraduate"]
+        minimumEducationDegree:
+          type: integer
+        minimumEligibilityGpa:
+          type: number
+
+        englishProficiency:
+          type: string
+          enum: ["ielts", "toefl", "duolingo", "pte", "open"]
+        minimumEnglishProficiencyScore:
+          type: number
+
+        pgwp:
+          type: boolean
+        active:
+          type: boolean
+
+    Program:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - $ref: "#/components/schemas/ProgramBase"
+        - type: object
+          properties:
+            id:
+              type: integer
+            programId:
+              type: string
+              format: uuid
+            intakes:
+              type: array
+              items:
+                $ref: "#/components/schemas/Intake"
+              nullable: true
+            schoolId:
+              type: string
+              format: uuid
+            school:
+              $ref: "#/components/schemas/School"
+              nullable: true
+            createdById:
+              type: string
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+
+    CreateProgram:
+      allOf:
+        - $ref: "#/components/schemas/ProgramBase"
+        - type: object
+          properties:
+            intakes:
+              type: array
+              items:
+                type: integer

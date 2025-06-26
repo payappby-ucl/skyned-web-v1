@@ -5,4 +5,6 @@ export declare class DateService implements IDateService {
     difference: IDateService["difference"];
     startOfDay: IDateService["startOfDay"];
     endOfDay: IDateService["endOfDay"];
+    createDuration: IDateService["createDuration"];
+    humanizeDuration: IDateService["humanizeDuration"];
 }

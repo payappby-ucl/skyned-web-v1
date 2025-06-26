@@ -12,3 +12,4 @@ export * from "./our-team";
 export * from "./school";
 export * from "./accommodation";
 export * from "./intake";
+export * from "./program";

@@ -7,12 +7,18 @@ import {
 } from "@workspace/shared";
 import { IQueryConstruct } from "..";
 
+/** Represents school service */
 export interface ISchoolService {
+  /** Finds a school by it's slug */
   findSchoolBySlug(slug: string, authUser?: AuthClaim): Promise<ISchool | null>;
+
+  /** Finds a school by it's schoolId */
   findSchoolBySchoolId(
     schoolId: string,
     authUser?: AuthClaim,
   ): Promise<ISchool | null>;
+
+  /** Creates a school */
   createSchool(
     initiator: IAdmin,
     data: Omit<CreateSchoolSchema, "logo" | "schoolImage"> & {
@@ -22,14 +28,15 @@ export interface ISchoolService {
     },
   ): Promise<ISchool>;
 
+  /** Counts a school */
   count(): Promise<number>;
 
-  listSchools(
+  /** Get schools */ listSchools(
     query: Partial<IQueryConstruct<IAdmin>>,
     authUser?: AuthClaim,
   ): Promise<ISchool[]>;
 
-  updateSchool(
+  /** Update a school */ updateSchool(
     schoolId: string,
     data: Partial<
       Omit<CreateSchoolSchema, "logo" | "schoolImage"> & {

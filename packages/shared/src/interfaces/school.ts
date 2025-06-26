@@ -20,6 +20,7 @@ export interface ISchool extends ITimestamps {
   institutionType: InstitutionType;
   ownershipType: OwnershipType;
   currency: CurrencyType;
+  active: boolean;
 
   accommodation?: IAccommodation;
 

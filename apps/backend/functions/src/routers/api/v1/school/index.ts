@@ -15,6 +15,7 @@ import {
 import {
   CreateAccommodationSchema,
   CreateIntakeSchema,
+  CreateProgramSchema,
   CreateSchoolSchema,
   UpdateSchoolSchema,
 } from "@workspace/shared";
@@ -154,6 +155,19 @@ export class SchoolRouter implements IRouter {
     //   authMiddleware.hasRole(["admin"]),
     //   // TODO: Add Controller
     // );
+
+    this.router
+      .route("/:slug/programs")
+      .post(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          body: CreateProgramSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        schoolController.createPrograms,
+      )
+      .get();
   }
 
   /**

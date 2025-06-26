@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 
 export interface IDateService {
   formatDate(date: Date, format?: string): string;
@@ -10,4 +11,11 @@ export interface IDateService {
 
   startOfDay(date: Date): Date;
   endOfDay(date: Date): Date;
+
+  createDuration(
+    time: number,
+    unit?: duration.DurationUnitType,
+  ): duration.Duration;
+
+  humanizeDuration(duration: duration.Duration): string;
 }

@@ -9,6 +9,7 @@ import {
   CreateAccommodationSchema,
   IIntake,
   CreateIntakeSchema,
+  CreateProgramSchema,
 } from "@workspace/shared";
 import { IIntakeService, ISchoolService } from "../services";
 import {
@@ -101,5 +102,12 @@ export interface ISchoolController {
     },
     ISuccessResponse<IIntake>,
     CreateIntakeSchema
+  >;
+
+  /** Create Programs */
+  createPrograms: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    CreateProgramSchema
   >;
 }

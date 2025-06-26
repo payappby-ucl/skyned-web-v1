@@ -1,17 +1,8 @@
 /* eslint-disable operator-linebreak */
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
-import {
-  IIntakeService,
-  IRepository,
-  IValidationUtility,
-} from "../../../interfaces";
+import { IIntakeService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
-import {
-  adminProfileKeys,
-  SkynedUtils,
-  validationUtility,
-} from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { IdSchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
 import {
@@ -19,31 +10,19 @@ import {
   CreateManyIntakeServiceSchema,
 } from "./schema";
 
-/** Represents dependencies needed to instantiate */
-export interface IIntakeServiceDependencies {
-  repository: IRepository;
-  validationUtility: IValidationUtility;
-}
-
 /** Concrete implementation */
 
 export class IntakeService extends ServiceUtils implements IIntakeService {
   private static instance: IIntakeService | null = null;
-  private constructor(
-    private readonly repository: IRepository,
-    private readonly validationUtility: IValidationUtility,
-  ) {
+  private constructor() {
     super();
   }
 
   /** Factory for instance creation */
 
-  static factory({
-    repository,
-    validationUtility,
-  }: IIntakeServiceDependencies) {
+  static factory() {
     if (!IntakeService.instance) {
-      IntakeService.instance = new IntakeService(repository, validationUtility);
+      IntakeService.instance = new IntakeService();
     }
 
     return IntakeService.instance;
@@ -281,9 +260,5 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
 /** Concrete instance of {IntakeService} */
 export const intakeService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.INTAKE_SERVICE,
-  () =>
-    IntakeService.factory({
-      repository,
-      validationUtility,
-    }),
+  () => IntakeService.factory(),
 );

@@ -4,6 +4,7 @@ import {
   CreateAdminSchema,
   CreateFaqSchema,
   CreateIntakeSchema,
+  CreateProgramSchema,
   CreateSchoolSchema,
   UpdateAdminSchema,
   UpdateSchoolSchema,
@@ -15,6 +16,7 @@ import {
   IFaq,
   IInquiry,
   IIntake,
+  IProgram,
   ISchool,
   ITeam,
 } from "../interfaces";
@@ -30,7 +32,8 @@ export type ResourceType =
   | "inquiries"
   | "schools"
   | "accommodations"
-  | "intakes";
+  | "intakes"
+  | "programs";
 
 export type PermissionType = {
   admins: {
@@ -86,6 +89,13 @@ export type PermissionType = {
     dataType: IIntake;
     createDataType: CreateIntakeSchema;
     updateDataType: CreateIntakeSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  programs: {
+    dataType: IProgram;
+    createDataType: CreateProgramSchema["data"];
+    updateDataType: any;
     action: "list" | "create" | "read" | "update" | "delete";
   };
 };

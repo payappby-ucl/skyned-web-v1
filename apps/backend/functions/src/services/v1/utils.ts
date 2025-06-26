@@ -1,6 +1,7 @@
 import { department, IAdmin } from "@workspace/shared";
-import { SkynedUtils } from "../../utils";
 import { StatusCodes } from "http-status-codes";
+import { SkynedUtils, validationUtility } from "../../utils";
+import { repository } from "../../infrastructure/repository";
 
 export abstract class ServiceUtils {
   /**
@@ -25,4 +26,14 @@ export abstract class ServiceUtils {
    */
 
   protected deserialize = SkynedUtils.deserialize;
+
+  /**
+   * Validation Utility
+   */
+  protected validationUtility = validationUtility;
+
+  /**
+   * Repository - Database instance
+   */
+  protected repository = repository;
 }

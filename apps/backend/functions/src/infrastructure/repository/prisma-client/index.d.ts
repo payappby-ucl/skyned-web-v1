@@ -59,6 +59,11 @@ export type School = $Result.DefaultSelection<Prisma.$SchoolPayload>
  */
 export type Accommodation = $Result.DefaultSelection<Prisma.$AccommodationPayload>
 /**
+ * Model Program
+ * 
+ */
+export type Program = $Result.DefaultSelection<Prisma.$ProgramPayload>
+/**
  * Model Intake
  * 
  */
@@ -125,6 +130,25 @@ export const Currency: {
 
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
+
+export const TuitionFeeType: {
+  per_year: 'per_year',
+  per_semester: 'per_semester',
+  full: 'full'
+};
+
+export type TuitionFeeType = (typeof TuitionFeeType)[keyof typeof TuitionFeeType]
+
+
+export const Timeframe: {
+  day: 'day',
+  week: 'week',
+  month: 'month',
+  year: 'year'
+};
+
+export type Timeframe = (typeof Timeframe)[keyof typeof Timeframe]
+
 }
 
 export type DepartmentName = $Enums.DepartmentName
@@ -150,6 +174,14 @@ export const OwnershipType: typeof $Enums.OwnershipType
 export type Currency = $Enums.Currency
 
 export const Currency: typeof $Enums.Currency
+
+export type TuitionFeeType = $Enums.TuitionFeeType
+
+export const TuitionFeeType: typeof $Enums.TuitionFeeType
+
+export type Timeframe = $Enums.Timeframe
+
+export const Timeframe: typeof $Enums.Timeframe
 
 /**
  * ##  Prisma Client ʲˢ
@@ -367,6 +399,16 @@ export class PrismaClient<
   get accommodation(): Prisma.AccommodationDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.program`: Exposes CRUD operations for the **Program** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Programs
+    * const programs = await prisma.program.findMany()
+    * ```
+    */
+  get program(): Prisma.ProgramDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.intake`: Exposes CRUD operations for the **Intake** model.
     * Example usage:
     * ```ts
@@ -433,8 +475,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.10.1
+   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
    */
   export type PrismaVersion = {
     client: string
@@ -824,6 +866,7 @@ export namespace Prisma {
     ActivityLog: 'ActivityLog',
     School: 'School',
     Accommodation: 'Accommodation',
+    Program: 'Program',
     Intake: 'Intake'
   };
 
@@ -843,7 +886,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "intake"
+      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "intake"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1513,6 +1556,80 @@ export namespace Prisma {
           }
         }
       }
+      Program: {
+        payload: Prisma.$ProgramPayload<ExtArgs>
+        fields: Prisma.ProgramFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProgramFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProgramFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          findFirst: {
+            args: Prisma.ProgramFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProgramFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          findMany: {
+            args: Prisma.ProgramFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+          }
+          create: {
+            args: Prisma.ProgramCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          createMany: {
+            args: Prisma.ProgramCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProgramCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+          }
+          delete: {
+            args: Prisma.ProgramDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          update: {
+            args: Prisma.ProgramUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProgramDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProgramUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProgramUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProgramUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgramPayload>
+          }
+          aggregate: {
+            args: Prisma.ProgramAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProgram>
+          }
+          groupBy: {
+            args: Prisma.ProgramGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProgramGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProgramCountArgs<ExtArgs>
+            result: $Utils.Optional<ProgramCountAggregateOutputType> | number
+          }
+        }
+      }
       Intake: {
         payload: Prisma.$IntakePayload<ExtArgs>
         fields: Prisma.IntakeFieldRefs
@@ -1680,6 +1797,7 @@ export namespace Prisma {
     activityLog?: ActivityLogOmit
     school?: SchoolOmit
     accommodation?: AccommodationOmit
+    program?: ProgramOmit
     intake?: IntakeOmit
   }
 
@@ -1786,6 +1904,7 @@ export namespace Prisma {
     schoolsCreated: number
     accommodationsCreated: number
     intakesCreated: number
+    programsCreated: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1800,6 +1919,7 @@ export namespace Prisma {
     schoolsCreated?: boolean | AdminCountOutputTypeCountSchoolsCreatedArgs
     accommodationsCreated?: boolean | AdminCountOutputTypeCountAccommodationsCreatedArgs
     intakesCreated?: boolean | AdminCountOutputTypeCountIntakesCreatedArgs
+    programsCreated?: boolean | AdminCountOutputTypeCountProgramsCreatedArgs
   }
 
   // Custom InputTypes
@@ -1890,6 +2010,13 @@ export namespace Prisma {
     where?: IntakeWhereInput
   }
 
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountProgramsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgramWhereInput
+  }
+
 
   /**
    * Count Type DepartmentCountOutputType
@@ -1968,10 +2095,12 @@ export namespace Prisma {
 
   export type SchoolCountOutputType = {
     intakes: number
+    programs: number
   }
 
   export type SchoolCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     intakes?: boolean | SchoolCountOutputTypeCountIntakesArgs
+    programs?: boolean | SchoolCountOutputTypeCountProgramsArgs
   }
 
   // Custom InputTypes
@@ -1990,6 +2119,75 @@ export namespace Prisma {
    */
   export type SchoolCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IntakeWhereInput
+  }
+
+  /**
+   * SchoolCountOutputType without action
+   */
+  export type SchoolCountOutputTypeCountProgramsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgramWhereInput
+  }
+
+
+  /**
+   * Count Type ProgramCountOutputType
+   */
+
+  export type ProgramCountOutputType = {
+    intakes: number
+  }
+
+  export type ProgramCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intakes?: boolean | ProgramCountOutputTypeCountIntakesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProgramCountOutputType without action
+   */
+  export type ProgramCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProgramCountOutputType
+     */
+    select?: ProgramCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProgramCountOutputType without action
+   */
+  export type ProgramCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntakeWhereInput
+  }
+
+
+  /**
+   * Count Type IntakeCountOutputType
+   */
+
+  export type IntakeCountOutputType = {
+    programs: number
+  }
+
+  export type IntakeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    programs?: boolean | IntakeCountOutputTypeCountProgramsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * IntakeCountOutputType without action
+   */
+  export type IntakeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntakeCountOutputType
+     */
+    select?: IntakeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * IntakeCountOutputType without action
+   */
+  export type IntakeCountOutputTypeCountProgramsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgramWhereInput
   }
 
 
@@ -3358,6 +3556,7 @@ export namespace Prisma {
     schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
     accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
     intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
+    programsCreated?: boolean | Admin$programsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -3443,6 +3642,7 @@ export namespace Prisma {
     schoolsCreated?: boolean | Admin$schoolsCreatedArgs<ExtArgs>
     accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
     intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
+    programsCreated?: boolean | Admin$programsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3467,6 +3667,7 @@ export namespace Prisma {
       schoolsCreated: Prisma.$SchoolPayload<ExtArgs>[]
       accommodationsCreated: Prisma.$AccommodationPayload<ExtArgs>[]
       intakesCreated: Prisma.$IntakePayload<ExtArgs>[]
+      programsCreated: Prisma.$ProgramPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3894,6 +4095,7 @@ export namespace Prisma {
     schoolsCreated<T extends Admin$schoolsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$schoolsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accommodationsCreated<T extends Admin$accommodationsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$accommodationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     intakesCreated<T extends Admin$intakesCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$intakesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    programsCreated<T extends Admin$programsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$programsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4618,6 +4820,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.programsCreated
+   */
+  export type Admin$programsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    where?: ProgramWhereInput
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    cursor?: ProgramWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
   }
 
   /**
@@ -10342,6 +10568,7 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType | null
     currency: $Enums.Currency | null
     overview: string | null
+    active: boolean | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -10361,6 +10588,7 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType | null
     currency: $Enums.Currency | null
     overview: string | null
+    active: boolean | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -10382,6 +10610,7 @@ export namespace Prisma {
     ownershipType: number
     currency: number
     overview: number
+    active: number
     createdById: number
     createdAt: number
     updatedAt: number
@@ -10411,6 +10640,7 @@ export namespace Prisma {
     ownershipType?: true
     currency?: true
     overview?: true
+    active?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -10430,6 +10660,7 @@ export namespace Prisma {
     ownershipType?: true
     currency?: true
     overview?: true
+    active?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -10451,6 +10682,7 @@ export namespace Prisma {
     ownershipType?: true
     currency?: true
     overview?: true
+    active?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -10559,6 +10791,7 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active: boolean
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -10599,12 +10832,14 @@ export namespace Prisma {
     ownershipType?: boolean
     currency?: boolean
     overview?: boolean
+    active?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     accommodation?: boolean | School$accommodationArgs<ExtArgs>
     intakes?: boolean | School$intakesArgs<ExtArgs>
+    programs?: boolean | School$programsArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["school"]>
 
@@ -10624,6 +10859,7 @@ export namespace Prisma {
     ownershipType?: boolean
     currency?: boolean
     overview?: boolean
+    active?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10646,6 +10882,7 @@ export namespace Prisma {
     ownershipType?: boolean
     currency?: boolean
     overview?: boolean
+    active?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10668,16 +10905,18 @@ export namespace Prisma {
     ownershipType?: boolean
     currency?: boolean
     overview?: boolean
+    active?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
+  export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
   export type SchoolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     accommodation?: boolean | School$accommodationArgs<ExtArgs>
     intakes?: boolean | School$intakesArgs<ExtArgs>
+    programs?: boolean | School$programsArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SchoolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10693,6 +10932,7 @@ export namespace Prisma {
       createdBy: Prisma.$AdminPayload<ExtArgs>
       accommodation: Prisma.$AccommodationPayload<ExtArgs> | null
       intakes: Prisma.$IntakePayload<ExtArgs>[]
+      programs: Prisma.$ProgramPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10710,6 +10950,7 @@ export namespace Prisma {
       ownershipType: $Enums.OwnershipType
       currency: $Enums.Currency
       overview: string
+      active: boolean
       createdById: string
       createdAt: Date
       updatedAt: Date
@@ -11110,6 +11351,7 @@ export namespace Prisma {
     createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     accommodation<T extends School$accommodationArgs<ExtArgs> = {}>(args?: Subset<T, School$accommodationArgs<ExtArgs>>): Prisma__AccommodationClient<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     intakes<T extends School$intakesArgs<ExtArgs> = {}>(args?: Subset<T, School$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    programs<T extends School$programsArgs<ExtArgs> = {}>(args?: Subset<T, School$programsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11154,6 +11396,7 @@ export namespace Prisma {
     readonly ownershipType: FieldRef<"School", 'OwnershipType'>
     readonly currency: FieldRef<"School", 'Currency'>
     readonly overview: FieldRef<"School", 'String'>
+    readonly active: FieldRef<"School", 'Boolean'>
     readonly createdById: FieldRef<"School", 'String'>
     readonly createdAt: FieldRef<"School", 'DateTime'>
     readonly updatedAt: FieldRef<"School", 'DateTime'>
@@ -11593,6 +11836,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * School.programs
+   */
+  export type School$programsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    where?: ProgramWhereInput
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    cursor?: ProgramWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
   }
 
   /**
@@ -12728,6 +12995,1424 @@ export namespace Prisma {
 
 
   /**
+   * Model Program
+   */
+
+  export type AggregateProgram = {
+    _count: ProgramCountAggregateOutputType | null
+    _avg: ProgramAvgAggregateOutputType | null
+    _sum: ProgramSumAggregateOutputType | null
+    _min: ProgramMinAggregateOutputType | null
+    _max: ProgramMaxAggregateOutputType | null
+  }
+
+  export type ProgramAvgAggregateOutputType = {
+    id: number | null
+    applicationFee: Decimal | null
+    applicationFeeDiscount: Decimal | null
+    tuitionFee: Decimal | null
+    duration: Decimal | null
+    minimumEducationDegree: number | null
+    minimumEligibilityGpa: Decimal | null
+    minimumEnglishProficiencyScore: Decimal | null
+  }
+
+  export type ProgramSumAggregateOutputType = {
+    id: number | null
+    applicationFee: Decimal | null
+    applicationFeeDiscount: Decimal | null
+    tuitionFee: Decimal | null
+    duration: Decimal | null
+    minimumEducationDegree: number | null
+    minimumEligibilityGpa: Decimal | null
+    minimumEnglishProficiencyScore: Decimal | null
+  }
+
+  export type ProgramMinAggregateOutputType = {
+    id: number | null
+    programId: string | null
+    schoolId: string | null
+    name: string | null
+    slug: string | null
+    faculty: string | null
+    degreeType: string | null
+    overview: string | null
+    description: string | null
+    applicationFee: Decimal | null
+    applicationFeeDiscount: Decimal | null
+    tuitionFee: Decimal | null
+    tuitionFeeType: $Enums.TuitionFeeType | null
+    timeframe: $Enums.Timeframe | null
+    duration: Decimal | null
+    minimumEducationLevel: string | null
+    minimumEducationDegree: number | null
+    minimumEligibilityGpa: Decimal | null
+    englishProficiency: string | null
+    minimumEnglishProficiencyScore: Decimal | null
+    pgwp: boolean | null
+    active: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProgramMaxAggregateOutputType = {
+    id: number | null
+    programId: string | null
+    schoolId: string | null
+    name: string | null
+    slug: string | null
+    faculty: string | null
+    degreeType: string | null
+    overview: string | null
+    description: string | null
+    applicationFee: Decimal | null
+    applicationFeeDiscount: Decimal | null
+    tuitionFee: Decimal | null
+    tuitionFeeType: $Enums.TuitionFeeType | null
+    timeframe: $Enums.Timeframe | null
+    duration: Decimal | null
+    minimumEducationLevel: string | null
+    minimumEducationDegree: number | null
+    minimumEligibilityGpa: Decimal | null
+    englishProficiency: string | null
+    minimumEnglishProficiencyScore: Decimal | null
+    pgwp: boolean | null
+    active: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProgramCountAggregateOutputType = {
+    id: number
+    programId: number
+    schoolId: number
+    name: number
+    slug: number
+    faculty: number
+    degreeType: number
+    overview: number
+    description: number
+    applicationFee: number
+    applicationFeeDiscount: number
+    tuitionFee: number
+    tuitionFeeType: number
+    timeframe: number
+    duration: number
+    minimumEducationLevel: number
+    minimumEducationDegree: number
+    minimumEligibilityGpa: number
+    englishProficiency: number
+    minimumEnglishProficiencyScore: number
+    pgwp: number
+    active: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProgramAvgAggregateInputType = {
+    id?: true
+    applicationFee?: true
+    applicationFeeDiscount?: true
+    tuitionFee?: true
+    duration?: true
+    minimumEducationDegree?: true
+    minimumEligibilityGpa?: true
+    minimumEnglishProficiencyScore?: true
+  }
+
+  export type ProgramSumAggregateInputType = {
+    id?: true
+    applicationFee?: true
+    applicationFeeDiscount?: true
+    tuitionFee?: true
+    duration?: true
+    minimumEducationDegree?: true
+    minimumEligibilityGpa?: true
+    minimumEnglishProficiencyScore?: true
+  }
+
+  export type ProgramMinAggregateInputType = {
+    id?: true
+    programId?: true
+    schoolId?: true
+    name?: true
+    slug?: true
+    faculty?: true
+    degreeType?: true
+    overview?: true
+    description?: true
+    applicationFee?: true
+    applicationFeeDiscount?: true
+    tuitionFee?: true
+    tuitionFeeType?: true
+    timeframe?: true
+    duration?: true
+    minimumEducationLevel?: true
+    minimumEducationDegree?: true
+    minimumEligibilityGpa?: true
+    englishProficiency?: true
+    minimumEnglishProficiencyScore?: true
+    pgwp?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProgramMaxAggregateInputType = {
+    id?: true
+    programId?: true
+    schoolId?: true
+    name?: true
+    slug?: true
+    faculty?: true
+    degreeType?: true
+    overview?: true
+    description?: true
+    applicationFee?: true
+    applicationFeeDiscount?: true
+    tuitionFee?: true
+    tuitionFeeType?: true
+    timeframe?: true
+    duration?: true
+    minimumEducationLevel?: true
+    minimumEducationDegree?: true
+    minimumEligibilityGpa?: true
+    englishProficiency?: true
+    minimumEnglishProficiencyScore?: true
+    pgwp?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProgramCountAggregateInputType = {
+    id?: true
+    programId?: true
+    schoolId?: true
+    name?: true
+    slug?: true
+    faculty?: true
+    degreeType?: true
+    overview?: true
+    description?: true
+    applicationFee?: true
+    applicationFeeDiscount?: true
+    tuitionFee?: true
+    tuitionFeeType?: true
+    timeframe?: true
+    duration?: true
+    minimumEducationLevel?: true
+    minimumEducationDegree?: true
+    minimumEligibilityGpa?: true
+    englishProficiency?: true
+    minimumEnglishProficiencyScore?: true
+    pgwp?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProgramAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Program to aggregate.
+     */
+    where?: ProgramWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Programs to fetch.
+     */
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProgramWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Programs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Programs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Programs
+    **/
+    _count?: true | ProgramCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProgramAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProgramSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProgramMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProgramMaxAggregateInputType
+  }
+
+  export type GetProgramAggregateType<T extends ProgramAggregateArgs> = {
+        [P in keyof T & keyof AggregateProgram]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProgram[P]>
+      : GetScalarType<T[P], AggregateProgram[P]>
+  }
+
+
+
+
+  export type ProgramGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgramWhereInput
+    orderBy?: ProgramOrderByWithAggregationInput | ProgramOrderByWithAggregationInput[]
+    by: ProgramScalarFieldEnum[] | ProgramScalarFieldEnum
+    having?: ProgramScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProgramCountAggregateInputType | true
+    _avg?: ProgramAvgAggregateInputType
+    _sum?: ProgramSumAggregateInputType
+    _min?: ProgramMinAggregateInputType
+    _max?: ProgramMaxAggregateInputType
+  }
+
+  export type ProgramGroupByOutputType = {
+    id: number
+    programId: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal
+    applicationFeeDiscount: Decimal
+    tuitionFee: Decimal
+    tuitionFeeType: $Enums.TuitionFeeType
+    timeframe: $Enums.Timeframe
+    duration: Decimal
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal
+    pgwp: boolean
+    active: boolean
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ProgramCountAggregateOutputType | null
+    _avg: ProgramAvgAggregateOutputType | null
+    _sum: ProgramSumAggregateOutputType | null
+    _min: ProgramMinAggregateOutputType | null
+    _max: ProgramMaxAggregateOutputType | null
+  }
+
+  type GetProgramGroupByPayload<T extends ProgramGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProgramGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProgramGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProgramGroupByOutputType[P]>
+            : GetScalarType<T[P], ProgramGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProgramSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    programId?: boolean
+    schoolId?: boolean
+    name?: boolean
+    slug?: boolean
+    faculty?: boolean
+    degreeType?: boolean
+    overview?: boolean
+    description?: boolean
+    applicationFee?: boolean
+    applicationFeeDiscount?: boolean
+    tuitionFee?: boolean
+    tuitionFeeType?: boolean
+    timeframe?: boolean
+    duration?: boolean
+    minimumEducationLevel?: boolean
+    minimumEducationDegree?: boolean
+    minimumEligibilityGpa?: boolean
+    englishProficiency?: boolean
+    minimumEnglishProficiencyScore?: boolean
+    pgwp?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    intakes?: boolean | Program$intakesArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["program"]>
+
+  export type ProgramSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    programId?: boolean
+    schoolId?: boolean
+    name?: boolean
+    slug?: boolean
+    faculty?: boolean
+    degreeType?: boolean
+    overview?: boolean
+    description?: boolean
+    applicationFee?: boolean
+    applicationFeeDiscount?: boolean
+    tuitionFee?: boolean
+    tuitionFeeType?: boolean
+    timeframe?: boolean
+    duration?: boolean
+    minimumEducationLevel?: boolean
+    minimumEducationDegree?: boolean
+    minimumEligibilityGpa?: boolean
+    englishProficiency?: boolean
+    minimumEnglishProficiencyScore?: boolean
+    pgwp?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["program"]>
+
+  export type ProgramSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    programId?: boolean
+    schoolId?: boolean
+    name?: boolean
+    slug?: boolean
+    faculty?: boolean
+    degreeType?: boolean
+    overview?: boolean
+    description?: boolean
+    applicationFee?: boolean
+    applicationFeeDiscount?: boolean
+    tuitionFee?: boolean
+    tuitionFeeType?: boolean
+    timeframe?: boolean
+    duration?: boolean
+    minimumEducationLevel?: boolean
+    minimumEducationDegree?: boolean
+    minimumEligibilityGpa?: boolean
+    englishProficiency?: boolean
+    minimumEnglishProficiencyScore?: boolean
+    pgwp?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["program"]>
+
+  export type ProgramSelectScalar = {
+    id?: boolean
+    programId?: boolean
+    schoolId?: boolean
+    name?: boolean
+    slug?: boolean
+    faculty?: boolean
+    degreeType?: boolean
+    overview?: boolean
+    description?: boolean
+    applicationFee?: boolean
+    applicationFeeDiscount?: boolean
+    tuitionFee?: boolean
+    tuitionFeeType?: boolean
+    timeframe?: boolean
+    duration?: boolean
+    minimumEducationLevel?: boolean
+    minimumEducationDegree?: boolean
+    minimumEligibilityGpa?: boolean
+    englishProficiency?: boolean
+    minimumEnglishProficiencyScore?: boolean
+    pgwp?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "englishProficiency" | "minimumEnglishProficiencyScore" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
+  export type ProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    intakes?: boolean | Program$intakesArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProgramIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type ProgramIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $ProgramPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Program"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+      intakes: Prisma.$IntakePayload<ExtArgs>[]
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      programId: string
+      schoolId: string
+      name: string
+      slug: string
+      faculty: string
+      degreeType: string
+      overview: string
+      description: string
+      applicationFee: Prisma.Decimal
+      applicationFeeDiscount: Prisma.Decimal
+      tuitionFee: Prisma.Decimal
+      tuitionFeeType: $Enums.TuitionFeeType
+      timeframe: $Enums.Timeframe
+      duration: Prisma.Decimal
+      minimumEducationLevel: string
+      minimumEducationDegree: number
+      minimumEligibilityGpa: Prisma.Decimal
+      englishProficiency: string
+      minimumEnglishProficiencyScore: Prisma.Decimal
+      pgwp: boolean
+      active: boolean
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["program"]>
+    composites: {}
+  }
+
+  type ProgramGetPayload<S extends boolean | null | undefined | ProgramDefaultArgs> = $Result.GetResult<Prisma.$ProgramPayload, S>
+
+  type ProgramCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProgramFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProgramCountAggregateInputType | true
+    }
+
+  export interface ProgramDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Program'], meta: { name: 'Program' } }
+    /**
+     * Find zero or one Program that matches the filter.
+     * @param {ProgramFindUniqueArgs} args - Arguments to find a Program
+     * @example
+     * // Get one Program
+     * const program = await prisma.program.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProgramFindUniqueArgs>(args: SelectSubset<T, ProgramFindUniqueArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Program that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProgramFindUniqueOrThrowArgs} args - Arguments to find a Program
+     * @example
+     * // Get one Program
+     * const program = await prisma.program.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProgramFindUniqueOrThrowArgs>(args: SelectSubset<T, ProgramFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Program that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramFindFirstArgs} args - Arguments to find a Program
+     * @example
+     * // Get one Program
+     * const program = await prisma.program.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProgramFindFirstArgs>(args?: SelectSubset<T, ProgramFindFirstArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Program that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramFindFirstOrThrowArgs} args - Arguments to find a Program
+     * @example
+     * // Get one Program
+     * const program = await prisma.program.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProgramFindFirstOrThrowArgs>(args?: SelectSubset<T, ProgramFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Programs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Programs
+     * const programs = await prisma.program.findMany()
+     * 
+     * // Get first 10 Programs
+     * const programs = await prisma.program.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const programWithIdOnly = await prisma.program.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProgramFindManyArgs>(args?: SelectSubset<T, ProgramFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Program.
+     * @param {ProgramCreateArgs} args - Arguments to create a Program.
+     * @example
+     * // Create one Program
+     * const Program = await prisma.program.create({
+     *   data: {
+     *     // ... data to create a Program
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProgramCreateArgs>(args: SelectSubset<T, ProgramCreateArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Programs.
+     * @param {ProgramCreateManyArgs} args - Arguments to create many Programs.
+     * @example
+     * // Create many Programs
+     * const program = await prisma.program.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProgramCreateManyArgs>(args?: SelectSubset<T, ProgramCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Programs and returns the data saved in the database.
+     * @param {ProgramCreateManyAndReturnArgs} args - Arguments to create many Programs.
+     * @example
+     * // Create many Programs
+     * const program = await prisma.program.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Programs and only return the `id`
+     * const programWithIdOnly = await prisma.program.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProgramCreateManyAndReturnArgs>(args?: SelectSubset<T, ProgramCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Program.
+     * @param {ProgramDeleteArgs} args - Arguments to delete one Program.
+     * @example
+     * // Delete one Program
+     * const Program = await prisma.program.delete({
+     *   where: {
+     *     // ... filter to delete one Program
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProgramDeleteArgs>(args: SelectSubset<T, ProgramDeleteArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Program.
+     * @param {ProgramUpdateArgs} args - Arguments to update one Program.
+     * @example
+     * // Update one Program
+     * const program = await prisma.program.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProgramUpdateArgs>(args: SelectSubset<T, ProgramUpdateArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Programs.
+     * @param {ProgramDeleteManyArgs} args - Arguments to filter Programs to delete.
+     * @example
+     * // Delete a few Programs
+     * const { count } = await prisma.program.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProgramDeleteManyArgs>(args?: SelectSubset<T, ProgramDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Programs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Programs
+     * const program = await prisma.program.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProgramUpdateManyArgs>(args: SelectSubset<T, ProgramUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Programs and returns the data updated in the database.
+     * @param {ProgramUpdateManyAndReturnArgs} args - Arguments to update many Programs.
+     * @example
+     * // Update many Programs
+     * const program = await prisma.program.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Programs and only return the `id`
+     * const programWithIdOnly = await prisma.program.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProgramUpdateManyAndReturnArgs>(args: SelectSubset<T, ProgramUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Program.
+     * @param {ProgramUpsertArgs} args - Arguments to update or create a Program.
+     * @example
+     * // Update or create a Program
+     * const program = await prisma.program.upsert({
+     *   create: {
+     *     // ... data to create a Program
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Program we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProgramUpsertArgs>(args: SelectSubset<T, ProgramUpsertArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Programs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramCountArgs} args - Arguments to filter Programs to count.
+     * @example
+     * // Count the number of Programs
+     * const count = await prisma.program.count({
+     *   where: {
+     *     // ... the filter for the Programs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProgramCountArgs>(
+      args?: Subset<T, ProgramCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProgramCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Program.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProgramAggregateArgs>(args: Subset<T, ProgramAggregateArgs>): Prisma.PrismaPromise<GetProgramAggregateType<T>>
+
+    /**
+     * Group by Program.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProgramGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProgramGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProgramGroupByArgs['orderBy'] }
+        : { orderBy?: ProgramGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProgramGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProgramGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Program model
+   */
+  readonly fields: ProgramFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Program.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    intakes<T extends Program$intakesArgs<ExtArgs> = {}>(args?: Subset<T, Program$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Program model
+   */
+  interface ProgramFieldRefs {
+    readonly id: FieldRef<"Program", 'Int'>
+    readonly programId: FieldRef<"Program", 'String'>
+    readonly schoolId: FieldRef<"Program", 'String'>
+    readonly name: FieldRef<"Program", 'String'>
+    readonly slug: FieldRef<"Program", 'String'>
+    readonly faculty: FieldRef<"Program", 'String'>
+    readonly degreeType: FieldRef<"Program", 'String'>
+    readonly overview: FieldRef<"Program", 'String'>
+    readonly description: FieldRef<"Program", 'String'>
+    readonly applicationFee: FieldRef<"Program", 'Decimal'>
+    readonly applicationFeeDiscount: FieldRef<"Program", 'Decimal'>
+    readonly tuitionFee: FieldRef<"Program", 'Decimal'>
+    readonly tuitionFeeType: FieldRef<"Program", 'TuitionFeeType'>
+    readonly timeframe: FieldRef<"Program", 'Timeframe'>
+    readonly duration: FieldRef<"Program", 'Decimal'>
+    readonly minimumEducationLevel: FieldRef<"Program", 'String'>
+    readonly minimumEducationDegree: FieldRef<"Program", 'Int'>
+    readonly minimumEligibilityGpa: FieldRef<"Program", 'Decimal'>
+    readonly englishProficiency: FieldRef<"Program", 'String'>
+    readonly minimumEnglishProficiencyScore: FieldRef<"Program", 'Decimal'>
+    readonly pgwp: FieldRef<"Program", 'Boolean'>
+    readonly active: FieldRef<"Program", 'Boolean'>
+    readonly createdById: FieldRef<"Program", 'String'>
+    readonly createdAt: FieldRef<"Program", 'DateTime'>
+    readonly updatedAt: FieldRef<"Program", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Program findUnique
+   */
+  export type ProgramFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter, which Program to fetch.
+     */
+    where: ProgramWhereUniqueInput
+  }
+
+  /**
+   * Program findUniqueOrThrow
+   */
+  export type ProgramFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter, which Program to fetch.
+     */
+    where: ProgramWhereUniqueInput
+  }
+
+  /**
+   * Program findFirst
+   */
+  export type ProgramFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter, which Program to fetch.
+     */
+    where?: ProgramWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Programs to fetch.
+     */
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Programs.
+     */
+    cursor?: ProgramWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Programs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Programs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Programs.
+     */
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
+  }
+
+  /**
+   * Program findFirstOrThrow
+   */
+  export type ProgramFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter, which Program to fetch.
+     */
+    where?: ProgramWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Programs to fetch.
+     */
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Programs.
+     */
+    cursor?: ProgramWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Programs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Programs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Programs.
+     */
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
+  }
+
+  /**
+   * Program findMany
+   */
+  export type ProgramFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter, which Programs to fetch.
+     */
+    where?: ProgramWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Programs to fetch.
+     */
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Programs.
+     */
+    cursor?: ProgramWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Programs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Programs.
+     */
+    skip?: number
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
+  }
+
+  /**
+   * Program create
+   */
+  export type ProgramCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Program.
+     */
+    data: XOR<ProgramCreateInput, ProgramUncheckedCreateInput>
+  }
+
+  /**
+   * Program createMany
+   */
+  export type ProgramCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Programs.
+     */
+    data: ProgramCreateManyInput | ProgramCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Program createManyAndReturn
+   */
+  export type ProgramCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * The data used to create many Programs.
+     */
+    data: ProgramCreateManyInput | ProgramCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Program update
+   */
+  export type ProgramUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Program.
+     */
+    data: XOR<ProgramUpdateInput, ProgramUncheckedUpdateInput>
+    /**
+     * Choose, which Program to update.
+     */
+    where: ProgramWhereUniqueInput
+  }
+
+  /**
+   * Program updateMany
+   */
+  export type ProgramUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Programs.
+     */
+    data: XOR<ProgramUpdateManyMutationInput, ProgramUncheckedUpdateManyInput>
+    /**
+     * Filter which Programs to update
+     */
+    where?: ProgramWhereInput
+    /**
+     * Limit how many Programs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Program updateManyAndReturn
+   */
+  export type ProgramUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * The data used to update Programs.
+     */
+    data: XOR<ProgramUpdateManyMutationInput, ProgramUncheckedUpdateManyInput>
+    /**
+     * Filter which Programs to update
+     */
+    where?: ProgramWhereInput
+    /**
+     * Limit how many Programs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Program upsert
+   */
+  export type ProgramUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Program to update in case it exists.
+     */
+    where: ProgramWhereUniqueInput
+    /**
+     * In case the Program found by the `where` argument doesn't exist, create a new Program with this data.
+     */
+    create: XOR<ProgramCreateInput, ProgramUncheckedCreateInput>
+    /**
+     * In case the Program was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProgramUpdateInput, ProgramUncheckedUpdateInput>
+  }
+
+  /**
+   * Program delete
+   */
+  export type ProgramDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    /**
+     * Filter which Program to delete.
+     */
+    where: ProgramWhereUniqueInput
+  }
+
+  /**
+   * Program deleteMany
+   */
+  export type ProgramDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Programs to delete
+     */
+    where?: ProgramWhereInput
+    /**
+     * Limit how many Programs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Program.intakes
+   */
+  export type Program$intakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Intake
+     */
+    select?: IntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Intake
+     */
+    omit?: IntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntakeInclude<ExtArgs> | null
+    where?: IntakeWhereInput
+    orderBy?: IntakeOrderByWithRelationInput | IntakeOrderByWithRelationInput[]
+    cursor?: IntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntakeScalarFieldEnum | IntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Program without action
+   */
+  export type ProgramDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Intake
    */
 
@@ -12950,7 +14635,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     school?: boolean | SchoolDefaultArgs<ExtArgs>
+    programs?: boolean | Intake$programsArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | IntakeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["intake"]>
 
   export type IntakeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12993,7 +14680,9 @@ export namespace Prisma {
   export type IntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intake" | "startDate" | "deadline" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["intake"]>
   export type IntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
+    programs?: boolean | Intake$programsArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | IntakeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type IntakeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
@@ -13008,6 +14697,7 @@ export namespace Prisma {
     name: "Intake"
     objects: {
       school: Prisma.$SchoolPayload<ExtArgs>
+      programs: Prisma.$ProgramPayload<ExtArgs>[]
       createdBy: Prisma.$AdminPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13414,6 +15104,7 @@ export namespace Prisma {
   export interface Prisma__IntakeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    programs<T extends Intake$programsArgs<ExtArgs> = {}>(args?: Subset<T, Intake$programsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13848,6 +15539,30 @@ export namespace Prisma {
   }
 
   /**
+   * Intake.programs
+   */
+  export type Intake$programsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Program
+     */
+    select?: ProgramSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Program
+     */
+    omit?: ProgramOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProgramInclude<ExtArgs> | null
+    where?: ProgramWhereInput
+    orderBy?: ProgramOrderByWithRelationInput | ProgramOrderByWithRelationInput[]
+    cursor?: ProgramWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
+  }
+
+  /**
    * Intake without action
    */
   export type IntakeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13999,6 +15714,7 @@ export namespace Prisma {
     ownershipType: 'ownershipType',
     currency: 'currency',
     overview: 'overview',
+    active: 'active',
     createdById: 'createdById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -14017,6 +15733,37 @@ export namespace Prisma {
   };
 
   export type AccommodationScalarFieldEnum = (typeof AccommodationScalarFieldEnum)[keyof typeof AccommodationScalarFieldEnum]
+
+
+  export const ProgramScalarFieldEnum: {
+    id: 'id',
+    programId: 'programId',
+    schoolId: 'schoolId',
+    name: 'name',
+    slug: 'slug',
+    faculty: 'faculty',
+    degreeType: 'degreeType',
+    overview: 'overview',
+    description: 'description',
+    applicationFee: 'applicationFee',
+    applicationFeeDiscount: 'applicationFeeDiscount',
+    tuitionFee: 'tuitionFee',
+    tuitionFeeType: 'tuitionFeeType',
+    timeframe: 'timeframe',
+    duration: 'duration',
+    minimumEducationLevel: 'minimumEducationLevel',
+    minimumEducationDegree: 'minimumEducationDegree',
+    minimumEligibilityGpa: 'minimumEligibilityGpa',
+    englishProficiency: 'englishProficiency',
+    minimumEnglishProficiencyScore: 'minimumEnglishProficiencyScore',
+    pgwp: 'pgwp',
+    active: 'active',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
 
 
   export const IntakeScalarFieldEnum: {
@@ -14234,6 +15981,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TuitionFeeType'
+   */
+  export type EnumTuitionFeeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TuitionFeeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TuitionFeeType[]'
+   */
+  export type ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TuitionFeeType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Timeframe'
+   */
+  export type EnumTimeframeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Timeframe'>
+    
+
+
+  /**
+   * Reference to a field of type 'Timeframe[]'
+   */
+  export type ListEnumTimeframeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Timeframe[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -14349,6 +16138,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolListRelationFilter
     accommodationsCreated?: AccommodationListRelationFilter
     intakesCreated?: IntakeListRelationFilter
+    programsCreated?: ProgramListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -14383,6 +16173,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolOrderByRelationAggregateInput
     accommodationsCreated?: AccommodationOrderByRelationAggregateInput
     intakesCreated?: IntakeOrderByRelationAggregateInput
+    programsCreated?: ProgramOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -14420,6 +16211,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolListRelationFilter
     accommodationsCreated?: AccommodationListRelationFilter
     intakesCreated?: IntakeListRelationFilter
+    programsCreated?: ProgramListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -14841,12 +16633,14 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
+    active?: BoolFilter<"School"> | boolean
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     accommodation?: XOR<AccommodationNullableScalarRelationFilter, AccommodationWhereInput> | null
     intakes?: IntakeListRelationFilter
+    programs?: ProgramListRelationFilter
   }
 
   export type SchoolOrderByWithRelationInput = {
@@ -14865,12 +16659,14 @@ export namespace Prisma {
     ownershipType?: SortOrder
     currency?: SortOrder
     overview?: SortOrder
+    active?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdBy?: AdminOrderByWithRelationInput
     accommodation?: AccommodationOrderByWithRelationInput
     intakes?: IntakeOrderByRelationAggregateInput
+    programs?: ProgramOrderByRelationAggregateInput
   }
 
   export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -14892,12 +16688,14 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
+    active?: BoolFilter<"School"> | boolean
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     accommodation?: XOR<AccommodationNullableScalarRelationFilter, AccommodationWhereInput> | null
     intakes?: IntakeListRelationFilter
+    programs?: ProgramListRelationFilter
   }, "schoolId" | "id" | "schoolId" | "slug">
 
   export type SchoolOrderByWithAggregationInput = {
@@ -14916,6 +16714,7 @@ export namespace Prisma {
     ownershipType?: SortOrder
     currency?: SortOrder
     overview?: SortOrder
+    active?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14945,6 +16744,7 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeWithAggregatesFilter<"School"> | $Enums.OwnershipType
     currency?: EnumCurrencyWithAggregatesFilter<"School"> | $Enums.Currency
     overview?: StringWithAggregatesFilter<"School"> | string
+    active?: BoolWithAggregatesFilter<"School"> | boolean
     createdById?: StringWithAggregatesFilter<"School"> | string
     createdAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
@@ -15015,6 +16815,170 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Accommodation"> | Date | string
   }
 
+  export type ProgramWhereInput = {
+    AND?: ProgramWhereInput | ProgramWhereInput[]
+    OR?: ProgramWhereInput[]
+    NOT?: ProgramWhereInput | ProgramWhereInput[]
+    id?: IntFilter<"Program"> | number
+    programId?: StringFilter<"Program"> | string
+    schoolId?: StringFilter<"Program"> | string
+    name?: StringFilter<"Program"> | string
+    slug?: StringFilter<"Program"> | string
+    faculty?: StringFilter<"Program"> | string
+    degreeType?: StringFilter<"Program"> | string
+    overview?: StringFilter<"Program"> | string
+    description?: StringFilter<"Program"> | string
+    applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFilter<"Program"> | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFilter<"Program"> | $Enums.Timeframe
+    duration?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFilter<"Program"> | string
+    minimumEducationDegree?: IntFilter<"Program"> | number
+    minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFilter<"Program"> | string
+    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFilter<"Program"> | boolean
+    active?: BoolFilter<"Program"> | boolean
+    createdById?: StringFilter<"Program"> | string
+    createdAt?: DateTimeFilter<"Program"> | Date | string
+    updatedAt?: DateTimeFilter<"Program"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    intakes?: IntakeListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type ProgramOrderByWithRelationInput = {
+    id?: SortOrder
+    programId?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    faculty?: SortOrder
+    degreeType?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    tuitionFeeType?: SortOrder
+    timeframe?: SortOrder
+    duration?: SortOrder
+    minimumEducationLevel?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    englishProficiency?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+    pgwp?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+    intakes?: IntakeOrderByRelationAggregateInput
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type ProgramWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    programId?: string
+    schoolId_slug?: ProgramSchoolIdSlugCompoundUniqueInput
+    AND?: ProgramWhereInput | ProgramWhereInput[]
+    OR?: ProgramWhereInput[]
+    NOT?: ProgramWhereInput | ProgramWhereInput[]
+    schoolId?: StringFilter<"Program"> | string
+    name?: StringFilter<"Program"> | string
+    slug?: StringFilter<"Program"> | string
+    faculty?: StringFilter<"Program"> | string
+    degreeType?: StringFilter<"Program"> | string
+    overview?: StringFilter<"Program"> | string
+    description?: StringFilter<"Program"> | string
+    applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFilter<"Program"> | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFilter<"Program"> | $Enums.Timeframe
+    duration?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFilter<"Program"> | string
+    minimumEducationDegree?: IntFilter<"Program"> | number
+    minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFilter<"Program"> | string
+    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFilter<"Program"> | boolean
+    active?: BoolFilter<"Program"> | boolean
+    createdById?: StringFilter<"Program"> | string
+    createdAt?: DateTimeFilter<"Program"> | Date | string
+    updatedAt?: DateTimeFilter<"Program"> | Date | string
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    intakes?: IntakeListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "programId" | "id" | "schoolId_slug">
+
+  export type ProgramOrderByWithAggregationInput = {
+    id?: SortOrder
+    programId?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    faculty?: SortOrder
+    degreeType?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    tuitionFeeType?: SortOrder
+    timeframe?: SortOrder
+    duration?: SortOrder
+    minimumEducationLevel?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    englishProficiency?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+    pgwp?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProgramCountOrderByAggregateInput
+    _avg?: ProgramAvgOrderByAggregateInput
+    _max?: ProgramMaxOrderByAggregateInput
+    _min?: ProgramMinOrderByAggregateInput
+    _sum?: ProgramSumOrderByAggregateInput
+  }
+
+  export type ProgramScalarWhereWithAggregatesInput = {
+    AND?: ProgramScalarWhereWithAggregatesInput | ProgramScalarWhereWithAggregatesInput[]
+    OR?: ProgramScalarWhereWithAggregatesInput[]
+    NOT?: ProgramScalarWhereWithAggregatesInput | ProgramScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Program"> | number
+    programId?: StringWithAggregatesFilter<"Program"> | string
+    schoolId?: StringWithAggregatesFilter<"Program"> | string
+    name?: StringWithAggregatesFilter<"Program"> | string
+    slug?: StringWithAggregatesFilter<"Program"> | string
+    faculty?: StringWithAggregatesFilter<"Program"> | string
+    degreeType?: StringWithAggregatesFilter<"Program"> | string
+    overview?: StringWithAggregatesFilter<"Program"> | string
+    description?: StringWithAggregatesFilter<"Program"> | string
+    applicationFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeWithAggregatesFilter<"Program"> | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeWithAggregatesFilter<"Program"> | $Enums.Timeframe
+    duration?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringWithAggregatesFilter<"Program"> | string
+    minimumEducationDegree?: IntWithAggregatesFilter<"Program"> | number
+    minimumEligibilityGpa?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringWithAggregatesFilter<"Program"> | string
+    minimumEnglishProficiencyScore?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolWithAggregatesFilter<"Program"> | boolean
+    active?: BoolWithAggregatesFilter<"Program"> | boolean
+    createdById?: StringWithAggregatesFilter<"Program"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Program"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Program"> | Date | string
+  }
+
   export type IntakeWhereInput = {
     AND?: IntakeWhereInput | IntakeWhereInput[]
     OR?: IntakeWhereInput[]
@@ -15028,6 +16992,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Intake"> | Date | string
     updatedAt?: DateTimeFilter<"Intake"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    programs?: ProgramListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }
 
@@ -15041,6 +17006,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     school?: SchoolOrderByWithRelationInput
+    programs?: ProgramOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
   }
 
@@ -15058,6 +17024,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Intake"> | Date | string
     updatedAt?: DateTimeFilter<"Intake"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+    programs?: ProgramListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }, "id" | "schoolId_intake_startDate_deadline">
 
@@ -15192,6 +17159,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -15225,6 +17193,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -15257,6 +17226,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -15290,6 +17260,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -15713,11 +17684,13 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
     accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
     intakes?: IntakeCreateNestedManyWithoutSchoolInput
+    programs?: ProgramCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateInput = {
@@ -15736,11 +17709,13 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
     intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
+    programs?: ProgramUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUpdateInput = {
@@ -15758,11 +17733,13 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
     accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
     intakes?: IntakeUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateInput = {
@@ -15781,11 +17758,13 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
     intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolCreateManyInput = {
@@ -15804,6 +17783,7 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15824,6 +17804,7 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15844,6 +17825,7 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15907,6 +17889,202 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProgramCreateInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutProgramsInput
+    intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+  }
+
+  export type ProgramUncheckedCreateInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+  }
+
+  export type ProgramUpdateInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+  }
+
+  export type ProgramUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+  }
+
+  export type ProgramCreateManyInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgramUpdateManyMutationInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgramUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntakeCreateInput = {
     intake: string
     startDate: Date | string
@@ -15914,6 +18092,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutIntakesInput
+    programs?: ProgramCreateNestedManyWithoutIntakesInput
     createdBy: AdminCreateNestedOneWithoutIntakesCreatedInput
   }
 
@@ -15926,6 +18105,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    programs?: ProgramUncheckedCreateNestedManyWithoutIntakesInput
   }
 
   export type IntakeUpdateInput = {
@@ -15935,6 +18115,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
+    programs?: ProgramUpdateManyWithoutIntakesNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput
   }
 
@@ -15947,6 +18128,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programs?: ProgramUncheckedUpdateManyWithoutIntakesNestedInput
   }
 
   export type IntakeCreateManyInput = {
@@ -16245,6 +18427,12 @@ export namespace Prisma {
     none?: IntakeWhereInput
   }
 
+  export type ProgramListRelationFilter = {
+    every?: ProgramWhereInput
+    some?: ProgramWhereInput
+    none?: ProgramWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -16279,6 +18467,10 @@ export namespace Prisma {
   }
 
   export type IntakeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProgramOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16700,6 +18892,7 @@ export namespace Prisma {
     ownershipType?: SortOrder
     currency?: SortOrder
     overview?: SortOrder
+    active?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16723,6 +18916,7 @@ export namespace Prisma {
     ownershipType?: SortOrder
     currency?: SortOrder
     overview?: SortOrder
+    active?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16742,6 +18936,7 @@ export namespace Prisma {
     ownershipType?: SortOrder
     currency?: SortOrder
     overview?: SortOrder
+    active?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16819,6 +19014,178 @@ export namespace Prisma {
 
   export type AccommodationSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnumTuitionFeeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuitionFeeType | EnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuitionFeeTypeFilter<$PrismaModel> | $Enums.TuitionFeeType
+  }
+
+  export type EnumTimeframeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Timeframe | EnumTimeframeFieldRefInput<$PrismaModel>
+    in?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeframeFilter<$PrismaModel> | $Enums.Timeframe
+  }
+
+  export type ProgramSchoolIdSlugCompoundUniqueInput = {
+    schoolId: string
+    slug: string
+  }
+
+  export type ProgramCountOrderByAggregateInput = {
+    id?: SortOrder
+    programId?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    faculty?: SortOrder
+    degreeType?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    tuitionFeeType?: SortOrder
+    timeframe?: SortOrder
+    duration?: SortOrder
+    minimumEducationLevel?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    englishProficiency?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+    pgwp?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgramAvgOrderByAggregateInput = {
+    id?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    duration?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+  }
+
+  export type ProgramMaxOrderByAggregateInput = {
+    id?: SortOrder
+    programId?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    faculty?: SortOrder
+    degreeType?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    tuitionFeeType?: SortOrder
+    timeframe?: SortOrder
+    duration?: SortOrder
+    minimumEducationLevel?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    englishProficiency?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+    pgwp?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgramMinOrderByAggregateInput = {
+    id?: SortOrder
+    programId?: SortOrder
+    schoolId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    faculty?: SortOrder
+    degreeType?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    tuitionFeeType?: SortOrder
+    timeframe?: SortOrder
+    duration?: SortOrder
+    minimumEducationLevel?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    englishProficiency?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+    pgwp?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProgramSumOrderByAggregateInput = {
+    id?: SortOrder
+    applicationFee?: SortOrder
+    applicationFeeDiscount?: SortOrder
+    tuitionFee?: SortOrder
+    duration?: SortOrder
+    minimumEducationDegree?: SortOrder
+    minimumEligibilityGpa?: SortOrder
+    minimumEnglishProficiencyScore?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type EnumTuitionFeeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuitionFeeType | EnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuitionFeeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TuitionFeeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTuitionFeeTypeFilter<$PrismaModel>
+    _max?: NestedEnumTuitionFeeTypeFilter<$PrismaModel>
+  }
+
+  export type EnumTimeframeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Timeframe | EnumTimeframeFieldRefInput<$PrismaModel>
+    in?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeframeWithAggregatesFilter<$PrismaModel> | $Enums.Timeframe
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTimeframeFilter<$PrismaModel>
+    _max?: NestedEnumTimeframeFilter<$PrismaModel>
   }
 
   export type IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput = {
@@ -16970,6 +19337,13 @@ export namespace Prisma {
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
   }
 
+  export type ProgramCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput> | ProgramCreateWithoutCreatedByInput[] | ProgramUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutCreatedByInput | ProgramCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProgramCreateManyCreatedByInputEnvelope
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -17043,6 +19417,13 @@ export namespace Prisma {
     connectOrCreate?: IntakeCreateOrConnectWithoutCreatedByInput | IntakeCreateOrConnectWithoutCreatedByInput[]
     createMany?: IntakeCreateManyCreatedByInputEnvelope
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type ProgramUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput> | ProgramCreateWithoutCreatedByInput[] | ProgramUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutCreatedByInput | ProgramCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProgramCreateManyCreatedByInputEnvelope
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -17219,6 +19600,20 @@ export namespace Prisma {
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
   }
 
+  export type ProgramUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput> | ProgramCreateWithoutCreatedByInput[] | ProgramUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutCreatedByInput | ProgramCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutCreatedByInput | ProgramUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProgramCreateManyCreatedByInputEnvelope
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutCreatedByInput | ProgramUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutCreatedByInput | ProgramUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -17369,6 +19764,20 @@ export namespace Prisma {
     update?: IntakeUpdateWithWhereUniqueWithoutCreatedByInput | IntakeUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: IntakeUpdateManyWithWhereWithoutCreatedByInput | IntakeUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput> | ProgramCreateWithoutCreatedByInput[] | ProgramUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutCreatedByInput | ProgramCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutCreatedByInput | ProgramUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProgramCreateManyCreatedByInputEnvelope
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutCreatedByInput | ProgramUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutCreatedByInput | ProgramUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutDepartmentsLeadingInput = {
@@ -17600,6 +20009,13 @@ export namespace Prisma {
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
   }
 
+  export type ProgramCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput> | ProgramCreateWithoutSchoolInput[] | ProgramUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutSchoolInput | ProgramCreateOrConnectWithoutSchoolInput[]
+    createMany?: ProgramCreateManySchoolInputEnvelope
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+  }
+
   export type AccommodationUncheckedCreateNestedOneWithoutSchoolInput = {
     create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
@@ -17611,6 +20027,13 @@ export namespace Prisma {
     connectOrCreate?: IntakeCreateOrConnectWithoutSchoolInput | IntakeCreateOrConnectWithoutSchoolInput[]
     createMany?: IntakeCreateManySchoolInputEnvelope
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type ProgramUncheckedCreateNestedManyWithoutSchoolInput = {
+    create?: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput> | ProgramCreateWithoutSchoolInput[] | ProgramUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutSchoolInput | ProgramCreateOrConnectWithoutSchoolInput[]
+    createMany?: ProgramCreateManySchoolInputEnvelope
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
   }
 
   export type EnumInstitutionTypeFieldUpdateOperationsInput = {
@@ -17657,6 +20080,20 @@ export namespace Prisma {
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
   }
 
+  export type ProgramUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput> | ProgramCreateWithoutSchoolInput[] | ProgramUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutSchoolInput | ProgramCreateOrConnectWithoutSchoolInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutSchoolInput | ProgramUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: ProgramCreateManySchoolInputEnvelope
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutSchoolInput | ProgramUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutSchoolInput | ProgramUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+  }
+
   export type AccommodationUncheckedUpdateOneWithoutSchoolNestedInput = {
     create?: XOR<AccommodationCreateWithoutSchoolInput, AccommodationUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: AccommodationCreateOrConnectWithoutSchoolInput
@@ -17679,6 +20116,20 @@ export namespace Prisma {
     update?: IntakeUpdateWithWhereUniqueWithoutSchoolInput | IntakeUpdateWithWhereUniqueWithoutSchoolInput[]
     updateMany?: IntakeUpdateManyWithWhereWithoutSchoolInput | IntakeUpdateManyWithWhereWithoutSchoolInput[]
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutSchoolNestedInput = {
+    create?: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput> | ProgramCreateWithoutSchoolInput[] | ProgramUncheckedCreateWithoutSchoolInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutSchoolInput | ProgramCreateOrConnectWithoutSchoolInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutSchoolInput | ProgramUpsertWithWhereUniqueWithoutSchoolInput[]
+    createMany?: ProgramCreateManySchoolInputEnvelope
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutSchoolInput | ProgramUpdateWithWhereUniqueWithoutSchoolInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutSchoolInput | ProgramUpdateManyWithWhereWithoutSchoolInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
   }
 
   export type SchoolCreateNestedOneWithoutAccommodationInput = {
@@ -17709,16 +20160,110 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutAccommodationsCreatedInput, AdminUpdateWithoutAccommodationsCreatedInput>, AdminUncheckedUpdateWithoutAccommodationsCreatedInput>
   }
 
+  export type SchoolCreateNestedOneWithoutProgramsInput = {
+    create?: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutProgramsInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type IntakeCreateNestedManyWithoutProgramsInput = {
+    create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutProgramsCreatedInput = {
+    create?: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutProgramsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type IntakeUncheckedCreateNestedManyWithoutProgramsInput = {
+    create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnumTuitionFeeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TuitionFeeType
+  }
+
+  export type EnumTimeframeFieldUpdateOperationsInput = {
+    set?: $Enums.Timeframe
+  }
+
+  export type SchoolUpdateOneRequiredWithoutProgramsNestedInput = {
+    create?: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutProgramsInput
+    upsert?: SchoolUpsertWithoutProgramsInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutProgramsInput, SchoolUpdateWithoutProgramsInput>, SchoolUncheckedUpdateWithoutProgramsInput>
+  }
+
+  export type IntakeUpdateManyWithoutProgramsNestedInput = {
+    create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutProgramsInput | IntakeUpsertWithWhereUniqueWithoutProgramsInput[]
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutProgramsInput | IntakeUpdateWithWhereUniqueWithoutProgramsInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutProgramsInput | IntakeUpdateManyWithWhereWithoutProgramsInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutProgramsCreatedInput
+    upsert?: AdminUpsertWithoutProgramsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutProgramsCreatedInput, AdminUpdateWithoutProgramsCreatedInput>, AdminUncheckedUpdateWithoutProgramsCreatedInput>
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutProgramsNestedInput = {
+    create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
+    connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
+    upsert?: IntakeUpsertWithWhereUniqueWithoutProgramsInput | IntakeUpsertWithWhereUniqueWithoutProgramsInput[]
+    set?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    disconnect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    delete?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+    update?: IntakeUpdateWithWhereUniqueWithoutProgramsInput | IntakeUpdateWithWhereUniqueWithoutProgramsInput[]
+    updateMany?: IntakeUpdateManyWithWhereWithoutProgramsInput | IntakeUpdateManyWithWhereWithoutProgramsInput[]
+    deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
   export type SchoolCreateNestedOneWithoutIntakesInput = {
     create?: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
     connectOrCreate?: SchoolCreateOrConnectWithoutIntakesInput
     connect?: SchoolWhereUniqueInput
   }
 
+  export type ProgramCreateNestedManyWithoutIntakesInput = {
+    create?: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput> | ProgramCreateWithoutIntakesInput[] | ProgramUncheckedCreateWithoutIntakesInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutIntakesInput | ProgramCreateOrConnectWithoutIntakesInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+  }
+
   export type AdminCreateNestedOneWithoutIntakesCreatedInput = {
     create?: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
     connectOrCreate?: AdminCreateOrConnectWithoutIntakesCreatedInput
     connect?: AdminWhereUniqueInput
+  }
+
+  export type ProgramUncheckedCreateNestedManyWithoutIntakesInput = {
+    create?: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput> | ProgramCreateWithoutIntakesInput[] | ProgramUncheckedCreateWithoutIntakesInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutIntakesInput | ProgramCreateOrConnectWithoutIntakesInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
   }
 
   export type SchoolUpdateOneRequiredWithoutIntakesNestedInput = {
@@ -17729,12 +20274,38 @@ export namespace Prisma {
     update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutIntakesInput, SchoolUpdateWithoutIntakesInput>, SchoolUncheckedUpdateWithoutIntakesInput>
   }
 
+  export type ProgramUpdateManyWithoutIntakesNestedInput = {
+    create?: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput> | ProgramCreateWithoutIntakesInput[] | ProgramUncheckedCreateWithoutIntakesInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutIntakesInput | ProgramCreateOrConnectWithoutIntakesInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutIntakesInput | ProgramUpsertWithWhereUniqueWithoutIntakesInput[]
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutIntakesInput | ProgramUpdateWithWhereUniqueWithoutIntakesInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutIntakesInput | ProgramUpdateManyWithWhereWithoutIntakesInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+  }
+
   export type AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput = {
     create?: XOR<AdminCreateWithoutIntakesCreatedInput, AdminUncheckedCreateWithoutIntakesCreatedInput>
     connectOrCreate?: AdminCreateOrConnectWithoutIntakesCreatedInput
     upsert?: AdminUpsertWithoutIntakesCreatedInput
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutIntakesCreatedInput, AdminUpdateWithoutIntakesCreatedInput>, AdminUncheckedUpdateWithoutIntakesCreatedInput>
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutIntakesNestedInput = {
+    create?: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput> | ProgramCreateWithoutIntakesInput[] | ProgramUncheckedCreateWithoutIntakesInput[]
+    connectOrCreate?: ProgramCreateOrConnectWithoutIntakesInput | ProgramCreateOrConnectWithoutIntakesInput[]
+    upsert?: ProgramUpsertWithWhereUniqueWithoutIntakesInput | ProgramUpsertWithWhereUniqueWithoutIntakesInput[]
+    set?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    disconnect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    delete?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+    update?: ProgramUpdateWithWhereUniqueWithoutIntakesInput | ProgramUpdateWithWhereUniqueWithoutIntakesInput[]
+    updateMany?: ProgramUpdateManyWithWhereWithoutIntakesInput | ProgramUpdateManyWithWhereWithoutIntakesInput[]
+    deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -18034,6 +20605,67 @@ export namespace Prisma {
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedEnumTuitionFeeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuitionFeeType | EnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuitionFeeTypeFilter<$PrismaModel> | $Enums.TuitionFeeType
+  }
+
+  export type NestedEnumTimeframeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Timeframe | EnumTimeframeFieldRefInput<$PrismaModel>
+    in?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeframeFilter<$PrismaModel> | $Enums.Timeframe
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTuitionFeeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuitionFeeType | EnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuitionFeeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TuitionFeeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTuitionFeeTypeFilter<$PrismaModel>
+    _max?: NestedEnumTuitionFeeTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTimeframeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Timeframe | EnumTimeframeFieldRefInput<$PrismaModel>
+    in?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Timeframe[] | ListEnumTimeframeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTimeframeWithAggregatesFilter<$PrismaModel> | $Enums.Timeframe
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTimeframeFilter<$PrismaModel>
+    _max?: NestedEnumTimeframeFilter<$PrismaModel>
+  }
+
   export type AdminCreateWithoutCreatedInput = {
     id?: number
     adminId: string
@@ -18064,6 +20696,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedInput = {
@@ -18096,6 +20729,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedInput = {
@@ -18133,6 +20767,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedByInput = {
@@ -18165,6 +20800,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedByInput = {
@@ -18380,10 +21016,12 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
     intakes?: IntakeCreateNestedManyWithoutSchoolInput
+    programs?: ProgramCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutCreatedByInput = {
@@ -18402,10 +21040,12 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
     intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
+    programs?: ProgramUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutCreatedByInput = {
@@ -18450,6 +21090,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutIntakesInput
+    programs?: ProgramCreateNestedManyWithoutIntakesInput
   }
 
   export type IntakeUncheckedCreateWithoutCreatedByInput = {
@@ -18460,6 +21101,7 @@ export namespace Prisma {
     schoolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    programs?: ProgramUncheckedCreateNestedManyWithoutIntakesInput
   }
 
   export type IntakeCreateOrConnectWithoutCreatedByInput = {
@@ -18469,6 +21111,72 @@ export namespace Prisma {
 
   export type IntakeCreateManyCreatedByInputEnvelope = {
     data: IntakeCreateManyCreatedByInput | IntakeCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProgramCreateWithoutCreatedByInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutProgramsInput
+    intakes?: IntakeCreateNestedManyWithoutProgramsInput
+  }
+
+  export type ProgramUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+  }
+
+  export type ProgramCreateOrConnectWithoutCreatedByInput = {
+    where: ProgramWhereUniqueInput
+    create: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProgramCreateManyCreatedByInputEnvelope = {
+    data: ProgramCreateManyCreatedByInput | ProgramCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -18512,6 +21220,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedInput = {
@@ -18544,6 +21253,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -18785,6 +21495,7 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFilter<"School"> | $Enums.OwnershipType
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
+    active?: BoolFilter<"School"> | boolean
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
@@ -18848,6 +21559,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Intake"> | Date | string
   }
 
+  export type ProgramUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ProgramWhereUniqueInput
+    update: XOR<ProgramUpdateWithoutCreatedByInput, ProgramUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ProgramCreateWithoutCreatedByInput, ProgramUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProgramUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ProgramWhereUniqueInput
+    data: XOR<ProgramUpdateWithoutCreatedByInput, ProgramUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ProgramUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ProgramScalarWhereInput
+    data: XOR<ProgramUpdateManyMutationInput, ProgramUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ProgramScalarWhereInput = {
+    AND?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+    OR?: ProgramScalarWhereInput[]
+    NOT?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+    id?: IntFilter<"Program"> | number
+    programId?: StringFilter<"Program"> | string
+    schoolId?: StringFilter<"Program"> | string
+    name?: StringFilter<"Program"> | string
+    slug?: StringFilter<"Program"> | string
+    faculty?: StringFilter<"Program"> | string
+    degreeType?: StringFilter<"Program"> | string
+    overview?: StringFilter<"Program"> | string
+    description?: StringFilter<"Program"> | string
+    applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFilter<"Program"> | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFilter<"Program"> | $Enums.Timeframe
+    duration?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFilter<"Program"> | string
+    minimumEducationDegree?: IntFilter<"Program"> | number
+    minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFilter<"Program"> | string
+    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFilter<"Program"> | boolean
+    active?: BoolFilter<"Program"> | boolean
+    createdById?: StringFilter<"Program"> | string
+    createdAt?: DateTimeFilter<"Program"> | Date | string
+    updatedAt?: DateTimeFilter<"Program"> | Date | string
+  }
+
   export type AdminCreateWithoutDepartmentsLeadingInput = {
     id?: number
     adminId: string
@@ -18878,6 +21636,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsLeadingInput = {
@@ -18910,6 +21669,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsLeadingInput = {
@@ -18947,6 +21707,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsInput = {
@@ -18979,6 +21740,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsInput = {
@@ -19055,6 +21817,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsLeadingInput = {
@@ -19087,6 +21850,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutDepartmentsInput = {
@@ -19151,6 +21915,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsLeadingInput = {
@@ -19183,6 +21948,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsLeadingInput = {
@@ -19242,6 +22008,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
@@ -19274,6 +22041,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
@@ -19311,6 +22079,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsInput = {
@@ -19343,6 +22112,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsInput = {
@@ -19390,6 +22160,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsLeadingInput = {
@@ -19422,6 +22193,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutTeamsInput = {
@@ -19492,6 +22264,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
@@ -19524,6 +22297,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -19572,6 +22346,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutFaqsCreatedInput = {
@@ -19604,6 +22379,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutFaqsCreatedInput = {
@@ -19651,6 +22427,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutFaqsCreatedInput = {
@@ -19683,6 +22460,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutActivityLogsInput = {
@@ -19715,6 +22493,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutActivityLogsInput = {
@@ -19747,6 +22526,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutActivityLogsInput = {
@@ -19794,6 +22574,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutActivityLogsInput = {
@@ -19826,6 +22607,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutSchoolsCreatedInput = {
@@ -19858,6 +22640,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutSchoolsCreatedInput = {
@@ -19890,6 +22673,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutSchoolsCreatedInput = {
@@ -19923,6 +22707,7 @@ export namespace Prisma {
     deadline: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    programs?: ProgramCreateNestedManyWithoutIntakesInput
     createdBy: AdminCreateNestedOneWithoutIntakesCreatedInput
   }
 
@@ -19934,6 +22719,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    programs?: ProgramUncheckedCreateNestedManyWithoutIntakesInput
   }
 
   export type IntakeCreateOrConnectWithoutSchoolInput = {
@@ -19943,6 +22729,72 @@ export namespace Prisma {
 
   export type IntakeCreateManySchoolInputEnvelope = {
     data: IntakeCreateManySchoolInput | IntakeCreateManySchoolInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProgramCreateWithoutSchoolInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+  }
+
+  export type ProgramUncheckedCreateWithoutSchoolInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+  }
+
+  export type ProgramCreateOrConnectWithoutSchoolInput = {
+    where: ProgramWhereUniqueInput
+    create: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type ProgramCreateManySchoolInputEnvelope = {
+    data: ProgramCreateManySchoolInput | ProgramCreateManySchoolInput[]
     skipDuplicates?: boolean
   }
 
@@ -19986,6 +22838,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutSchoolsCreatedInput = {
@@ -20018,6 +22871,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AccommodationUpsertWithoutSchoolInput = {
@@ -20062,6 +22916,22 @@ export namespace Prisma {
     data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyWithoutSchoolInput>
   }
 
+  export type ProgramUpsertWithWhereUniqueWithoutSchoolInput = {
+    where: ProgramWhereUniqueInput
+    update: XOR<ProgramUpdateWithoutSchoolInput, ProgramUncheckedUpdateWithoutSchoolInput>
+    create: XOR<ProgramCreateWithoutSchoolInput, ProgramUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type ProgramUpdateWithWhereUniqueWithoutSchoolInput = {
+    where: ProgramWhereUniqueInput
+    data: XOR<ProgramUpdateWithoutSchoolInput, ProgramUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type ProgramUpdateManyWithWhereWithoutSchoolInput = {
+    where: ProgramScalarWhereInput
+    data: XOR<ProgramUpdateManyMutationInput, ProgramUncheckedUpdateManyWithoutSchoolInput>
+  }
+
   export type SchoolCreateWithoutAccommodationInput = {
     id?: number
     schoolId: string
@@ -20078,10 +22948,12 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
     intakes?: IntakeCreateNestedManyWithoutSchoolInput
+    programs?: ProgramCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutAccommodationInput = {
@@ -20100,10 +22972,12 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
+    programs?: ProgramUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutAccommodationInput = {
@@ -20141,6 +23015,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutAccommodationsCreatedInput = {
@@ -20173,6 +23048,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutAccommodationsCreatedInput = {
@@ -20206,10 +23082,12 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
     intakes?: IntakeUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutAccommodationInput = {
@@ -20228,10 +23106,12 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type AdminUpsertWithoutAccommodationsCreatedInput = {
@@ -20274,6 +23154,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAccommodationsCreatedInput = {
@@ -20306,6 +23187,307 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type SchoolCreateWithoutProgramsInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
+    accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutProgramsInput = {
+    id?: number
+    schoolId: string
+    logo: JsonNullValueInput | InputJsonValue
+    schoolImage: JsonNullValueInput | InputJsonValue
+    name: string
+    slug: string
+    state: string
+    country: string
+    city: string
+    address: string
+    link: string
+    institutionType: $Enums.InstitutionType
+    ownershipType: $Enums.OwnershipType
+    currency: $Enums.Currency
+    overview: string
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
+    intakes?: IntakeUncheckedCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutProgramsInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
+  }
+
+  export type IntakeCreateWithoutProgramsInput = {
+    intake: string
+    startDate: Date | string
+    deadline: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutIntakesInput
+    createdBy: AdminCreateNestedOneWithoutIntakesCreatedInput
+  }
+
+  export type IntakeUncheckedCreateWithoutProgramsInput = {
+    id?: number
+    intake: string
+    startDate: Date | string
+    deadline: Date | string
+    schoolId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntakeCreateOrConnectWithoutProgramsInput = {
+    where: IntakeWhereUniqueInput
+    create: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput>
+  }
+
+  export type AdminCreateWithoutProgramsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutProgramsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutProgramsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
+  }
+
+  export type SchoolUpsertWithoutProgramsInput = {
+    update: XOR<SchoolUpdateWithoutProgramsInput, SchoolUncheckedUpdateWithoutProgramsInput>
+    create: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutProgramsInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutProgramsInput, SchoolUncheckedUpdateWithoutProgramsInput>
+  }
+
+  export type SchoolUpdateWithoutProgramsInput = {
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
+    accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutProgramsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schoolId?: StringFieldUpdateOperationsInput | string
+    logo?: JsonNullValueInput | InputJsonValue
+    schoolImage?: JsonNullValueInput | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    institutionType?: EnumInstitutionTypeFieldUpdateOperationsInput | $Enums.InstitutionType
+    ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
+    intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type IntakeUpsertWithWhereUniqueWithoutProgramsInput = {
+    where: IntakeWhereUniqueInput
+    update: XOR<IntakeUpdateWithoutProgramsInput, IntakeUncheckedUpdateWithoutProgramsInput>
+    create: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput>
+  }
+
+  export type IntakeUpdateWithWhereUniqueWithoutProgramsInput = {
+    where: IntakeWhereUniqueInput
+    data: XOR<IntakeUpdateWithoutProgramsInput, IntakeUncheckedUpdateWithoutProgramsInput>
+  }
+
+  export type IntakeUpdateManyWithWhereWithoutProgramsInput = {
+    where: IntakeScalarWhereInput
+    data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyWithoutProgramsInput>
+  }
+
+  export type AdminUpsertWithoutProgramsCreatedInput = {
+    update: XOR<AdminUpdateWithoutProgramsCreatedInput, AdminUncheckedUpdateWithoutProgramsCreatedInput>
+    create: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutProgramsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutProgramsCreatedInput, AdminUncheckedUpdateWithoutProgramsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutProgramsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutProgramsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type SchoolCreateWithoutIntakesInput = {
@@ -20324,10 +23506,12 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
     accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
+    programs?: ProgramCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutIntakesInput = {
@@ -20346,15 +23530,78 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
+    programs?: ProgramUncheckedCreateNestedManyWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutIntakesInput = {
     where: SchoolWhereUniqueInput
     create: XOR<SchoolCreateWithoutIntakesInput, SchoolUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type ProgramCreateWithoutIntakesInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutProgramsInput
+    createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+  }
+
+  export type ProgramUncheckedCreateWithoutIntakesInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgramCreateOrConnectWithoutIntakesInput = {
+    where: ProgramWhereUniqueInput
+    create: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput>
   }
 
   export type AdminCreateWithoutIntakesCreatedInput = {
@@ -20387,6 +23634,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutIntakesCreatedInput = {
@@ -20419,6 +23667,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutIntakesCreatedInput = {
@@ -20452,10 +23701,12 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
     accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
+    programs?: ProgramUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutIntakesInput = {
@@ -20474,10 +23725,28 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
+    programs?: ProgramUncheckedUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type ProgramUpsertWithWhereUniqueWithoutIntakesInput = {
+    where: ProgramWhereUniqueInput
+    update: XOR<ProgramUpdateWithoutIntakesInput, ProgramUncheckedUpdateWithoutIntakesInput>
+    create: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type ProgramUpdateWithWhereUniqueWithoutIntakesInput = {
+    where: ProgramWhereUniqueInput
+    data: XOR<ProgramUpdateWithoutIntakesInput, ProgramUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type ProgramUpdateManyWithWhereWithoutIntakesInput = {
+    where: ProgramScalarWhereInput
+    data: XOR<ProgramUpdateManyMutationInput, ProgramUncheckedUpdateManyWithoutIntakesInput>
   }
 
   export type AdminUpsertWithoutIntakesCreatedInput = {
@@ -20520,6 +23789,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutIntakesCreatedInput = {
@@ -20552,6 +23822,7 @@ export namespace Prisma {
     activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyCreatedByInput = {
@@ -20635,6 +23906,7 @@ export namespace Prisma {
     ownershipType: $Enums.OwnershipType
     currency: $Enums.Currency
     overview: string
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20653,6 +23925,33 @@ export namespace Prisma {
     startDate: Date | string
     deadline: Date | string
     schoolId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProgramCreateManyCreatedByInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20686,6 +23985,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedByInput = {
@@ -20718,6 +24018,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutCreatedByInput = {
@@ -20945,10 +24246,12 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
     intakes?: IntakeUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutCreatedByInput = {
@@ -20967,10 +24270,12 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
     intakes?: IntakeUncheckedUpdateManyWithoutSchoolNestedInput
+    programs?: ProgramUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateManyWithoutCreatedByInput = {
@@ -20989,6 +24294,7 @@ export namespace Prisma {
     ownershipType?: EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21023,6 +24329,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
+    programs?: ProgramUpdateManyWithoutIntakesNestedInput
   }
 
   export type IntakeUncheckedUpdateWithoutCreatedByInput = {
@@ -21033,6 +24340,7 @@ export namespace Prisma {
     schoolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programs?: ProgramUncheckedUpdateManyWithoutIntakesNestedInput
   }
 
   export type IntakeUncheckedUpdateManyWithoutCreatedByInput = {
@@ -21041,6 +24349,88 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgramUpdateWithoutCreatedByInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+  }
+
+  export type ProgramUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21083,6 +24473,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsInput = {
@@ -21115,6 +24506,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutDepartmentsInput = {
@@ -21196,6 +24588,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsInput = {
@@ -21228,6 +24621,7 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutTeamsInput = {
@@ -21262,12 +24656,40 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ProgramCreateManySchoolInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    englishProficiency: string
+    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type IntakeUpdateWithoutSchoolInput = {
     intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programs?: ProgramUpdateManyWithoutIntakesNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput
   }
 
@@ -21279,6 +24701,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programs?: ProgramUncheckedUpdateManyWithoutIntakesNestedInput
   }
 
   export type IntakeUncheckedUpdateManyWithoutSchoolInput = {
@@ -21286,6 +24709,203 @@ export namespace Prisma {
     intake?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgramUpdateWithoutSchoolInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+  }
+
+  export type ProgramUncheckedUpdateWithoutSchoolInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutSchoolInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUpdateWithoutProgramsInput = {
+    intake?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutIntakesCreatedNestedInput
+  }
+
+  export type IntakeUncheckedUpdateWithoutProgramsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntakeUncheckedUpdateManyWithoutProgramsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    intake?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgramUpdateWithoutIntakesInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+  }
+
+  export type ProgramUncheckedUpdateWithoutIntakesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProgramUncheckedUpdateManyWithoutIntakesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    englishProficiency?: StringFieldUpdateOperationsInput | string
+    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

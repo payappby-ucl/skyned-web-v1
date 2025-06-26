@@ -76,7 +76,7 @@ export declare const CreateAdminSchema: z.ZodObject<{
     }[] | undefined;
 }>;
 export type CreateAdminSchema = z.infer<typeof CreateAdminSchema>;
-export declare const UpdateAdminSchema: z.ZodObject<z.objectUtil.extendShape<Omit<{
+export declare const UpdateAdminSchema: z.ZodObject<Omit<{
     firstName: z.ZodString;
     middleName: z.ZodOptional<z.ZodString>;
     lastName: z.ZodString;
@@ -109,9 +109,9 @@ export declare const UpdateAdminSchema: z.ZodObject<z.objectUtil.extendShape<Omi
         id: number;
         name: "Executive" | "Marketing" | "Admissions" | "Communications" | "Technical" | "Human_Resource" | "Quality_Assurance";
     }>, "many">;
-}, "primaryImage" | "departments">, {
+}, "primaryImage" | "departments"> & {
     primaryImage: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
-}>, "strip", z.ZodTypeAny, {
+}, "strip", z.ZodTypeAny, {
     firstName: string;
     lastName: string;
     email: string;

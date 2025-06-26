@@ -19,6 +19,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateService = void 0;
 const dayjs_1 = __importDefault(require("dayjs"));
+const duration_1 = __importDefault(require("dayjs/plugin/duration"));
+const relativeTime_1 = __importDefault(require("dayjs/plugin/relativeTime"));
+dayjs_1.default.extend(duration_1.default);
+dayjs_1.default.extend(relativeTime_1.default);
 const lib_1 = require("../../lib");
 __exportStar(require("./interface"), exports);
 class DateService {
@@ -30,5 +34,17 @@ class DateService {
     };
     startOfDay = (date) => (0, dayjs_1.default)(date).startOf("D").toDate();
     endOfDay = (date) => (0, dayjs_1.default)(date).endOf("D").toDate();
+    createDuration = (...props) => dayjs_1.default.duration(...props);
+    humanizeDuration = (d) => {
+        const totalMonths = Math.floor(d.asMonths());
+        const years = Math.floor(totalMonths / 12);
+        const months = totalMonths % 12;
+        const parts = [];
+        if (years > 0)
+            parts.push(`${years} year${years > 1 ? "s" : ""}`);
+        if (months > 0)
+            parts.push(`${months} month${months > 1 ? "s" : ""}`);
+        return parts.length > 0 ? parts.join(" and ") : "0 months";
+    };
 }
 exports.DateService = DateService;

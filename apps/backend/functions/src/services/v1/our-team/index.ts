@@ -1,27 +1,21 @@
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
-import { IOurTeamService, IRepository } from "../../../interfaces";
+import { IOurTeamService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { ServiceUtils } from "../utils";
-
-/** Represents dependencies needed to instantiate  {OurTeamService} */
-export interface IOurTeamServiceDependencies {
-  repository: IRepository;
-}
 
 /** Concrete implementation of {IOurTeamService} */
 
 export class OurTeamService extends ServiceUtils implements IOurTeamService {
   private static instance: IOurTeamService | null = null;
-  private constructor(private readonly repository: IRepository) {
+  private constructor() {
     super();
   }
 
   /** Factory for instance creation */
 
-  static factory({ repository }: IOurTeamServiceDependencies) {
+  static factory() {
     if (!OurTeamService.instance) {
-      OurTeamService.instance = new OurTeamService(repository);
+      OurTeamService.instance = new OurTeamService();
     }
 
     return OurTeamService.instance;
@@ -52,8 +46,5 @@ export class OurTeamService extends ServiceUtils implements IOurTeamService {
 /** Concrete instance of {OurTeamService} */
 export const ourTeamService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.OUR_TEAM_SERVICE,
-  () =>
-    OurTeamService.factory({
-      repository,
-    }),
+  () => OurTeamService.factory(),
 );

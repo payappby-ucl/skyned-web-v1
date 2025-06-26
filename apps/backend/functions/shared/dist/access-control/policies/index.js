@@ -7,6 +7,7 @@ const department_1 = require("./department");
 const faq_1 = require("./faq");
 const inquiry_1 = require("./inquiry");
 const intakes_1 = require("./intakes");
+const programs_1 = require("./programs");
 const schools_1 = require("./schools");
 exports.policies = {
     ...department_1.departmentPolicies,
@@ -16,4 +17,5 @@ exports.policies = {
     ...schools_1.schoolPolicies,
     ...accommodations_1.accommodationPolicies,
     ...intakes_1.intakePolicies,
+    ...programs_1.programPolicies,
 };

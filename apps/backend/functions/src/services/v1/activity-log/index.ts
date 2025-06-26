@@ -1,21 +1,23 @@
+/* eslint-disable brace-style */
 /* eslint-disable max-len */
+import { ServiceUtils } from "../utils";
 import { RegistryKeysEnum } from "../../../enum";
-import { repository } from "../../../infrastructure";
-import { IActivityLogService, IRepository } from "../../../interfaces";
+import { IActivityLogService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 
-/** Abstract representation of dependencies needed to instantiate {ActivityLogService} */
-export interface ActivityLogServiceDependencies {
-  /** Database object */
-  repository: IRepository;
-}
-export class ActivityLogService implements IActivityLogService {
+export class ActivityLogService
+  extends ServiceUtils
+  implements IActivityLogService
+{
   private static instance: IActivityLogService | null = null;
 
-  private constructor(private repository: IRepository) {}
-  static factory({ repository }: ActivityLogServiceDependencies) {
+  private constructor() {
+    super();
+  }
+
+  static factory() {
     if (!ActivityLogService.instance) {
-      ActivityLogService.instance = new ActivityLogService(repository);
+      ActivityLogService.instance = new ActivityLogService();
     }
 
     return ActivityLogService.instance;
@@ -28,8 +30,5 @@ export class ActivityLogService implements IActivityLogService {
 /** Concrete instance */
 export const activityLogService = SkynedRegistry.getSingleton(
   RegistryKeysEnum.ACTIVITY_LOG_SERVICE,
-  () =>
-    ActivityLogService.factory({
-      repository,
-    }),
+  () => ActivityLogService.factory(),
 );
