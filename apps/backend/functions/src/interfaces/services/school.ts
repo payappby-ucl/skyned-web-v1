@@ -31,12 +31,14 @@ export interface ISchoolService {
   /** Counts a school */
   count(): Promise<number>;
 
-  /** Get schools */ listSchools(
-    query: Partial<IQueryConstruct<IAdmin>>,
+  /** Get schools */
+  listSchools(
+    query: Partial<IQueryConstruct<ISchool>>,
     authUser?: AuthClaim,
   ): Promise<ISchool[]>;
 
-  /** Update a school */ updateSchool(
+  /** Update a school */
+  updateSchool(
     schoolId: string,
     data: Partial<
       Omit<CreateSchoolSchema, "logo" | "schoolImage"> & {

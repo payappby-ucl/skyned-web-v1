@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { ProgramService, programService } from ".";
 import { repository } from "../../../infrastructure";
@@ -86,6 +87,95 @@ describe("ProgramServive", () => {
         );
 
         expect(count).toBe(2);
+      });
+    });
+
+    describe("count", () => {
+      test("should count programs", async () => {
+        const count = await programService.count({});
+        expect(count).toEqual(expect.any(Number));
+      });
+    });
+
+    describe("listPrograms", () => {
+      test("should return list of programs with limited data for unauthenticated auth user", async () => {
+        const programs = await programService.listPrograms({});
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+            }),
+          ]),
+        );
+      });
+
+      test("should return list of programs with limited data for auth user (not admin)", async () => {
+        const programs = await programService.listPrograms({}, {
+          claim: "student",
+        } as any);
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+              description: expect.any(String),
+            }),
+          ]),
+        );
+      });
+
+      test("should return list of programs with limited data for auth user (admin)", async () => {
+        const programs = await programService.listPrograms({}, {
+          claim: "admin",
+        } as any);
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+              description: expect.any(String),
+              schoolId: expect.any(String),
+            }),
+          ]),
+        );
+      });
+    });
+
+    describe("findProgramBySlugAndSchoolId", () => {
+      test("should find program", async () => {
+        const program = await programService.findProgramBySlugAndSchoolId(
+          schoolId,
+          "bachelor-of-art-in-fine-arts",
+        );
+
+        expect(program).not.toBeNull();
+        expect(program).toEqual(
+          expect.objectContaining({
+            name: expect.any(String),
+            slug: expect.any(String),
+            school: expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              currency: expect.any(String),
+            }),
+          }),
+        );
       });
     });
   });

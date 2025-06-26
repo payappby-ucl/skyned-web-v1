@@ -11,10 +11,11 @@ import {
   CreateIntakeSchema,
   CreateProgramSchema,
 } from "@workspace/shared";
-import { IIntakeService, ISchoolService } from "../services";
+import { IIntakeService, IProgramService, ISchoolService } from "../services";
 import {
   IntakeQuery,
   PageQuerySchema,
+  ProgramSlugSchema,
   SchoolSlugSchema,
 } from "../../zod-schemas";
 
@@ -109,5 +110,25 @@ export interface ISchoolController {
     object & SchoolSlugSchema,
     ISuccessResponse<IMessageResponse>,
     CreateProgramSchema
+  >;
+
+  /** List Programs */
+  listPrograms: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<
+      IPaginatedResponse<
+        Awaited<ReturnType<IProgramService["listPrograms"]>>[0]
+      >
+    >,
+    object,
+    Partial<PageQuerySchema>
+  >;
+
+  /** Get a program */
+  getProgram: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<
+      Awaited<ReturnType<IProgramService["findProgramBySlugAndSchoolId"]>>
+    >
   >;
 }

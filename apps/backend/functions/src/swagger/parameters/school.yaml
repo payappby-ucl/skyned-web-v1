@@ -7,3 +7,10 @@ components:
       required: true
       schema:
         type: string
+    ProgramSlug:
+      name: slug
+      in: path
+      description: School identifier
+      required: true
+      schema:
+        type: string

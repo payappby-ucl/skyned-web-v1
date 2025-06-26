@@ -1,4 +1,5 @@
-import { IProgram, ProgramSchema } from "@workspace/shared";
+import { AuthClaim, IProgram, ProgramSchema } from "@workspace/shared";
+import { IQueryConstruct } from "../utils";
 
 /** Represents program service */
 export interface IProgramService {
@@ -15,4 +16,23 @@ export interface IProgramService {
     schoolId: string,
     data: ProgramSchema[],
   ): Promise<number>;
+
+  /** Count Programs */
+  count(
+    query: Partial<IQueryConstruct<IProgram>>,
+    authUser?: AuthClaim,
+  ): Promise<number>;
+
+  /** List programs */
+  listPrograms(
+    query: Partial<IQueryConstruct<IProgram>>,
+    authUser?: AuthClaim,
+  ): Promise<Partial<IProgram>[]>;
+
+  /** Find unique program */
+  findProgramBySlugAndSchoolId(
+    schoolId: string,
+    slug: string,
+    authUser?: AuthClaim,
+  ): Promise<IProgram | null>;
 }

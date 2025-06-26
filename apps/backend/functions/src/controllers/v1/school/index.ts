@@ -672,6 +672,100 @@ export class SchoolController
       next(error);
     }
   };
+
+  listPrograms: ISchoolController["listPrograms"] = async (req, res, next) => {
+    try {
+      const { from, to, limit, page } = req.query;
+      const { slug } = req.params;
+      let authUser = this._validateUser(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      if (authUser?.claim === "admin") {
+        authUser = this._validateAdmin(req);
+        this._attributeBasedAccessControl(authUser, "schools", "read", school);
+        this._attributeBasedAccessControl(authUser, "programs", "list");
+      }
+
+      const construct = this._constructPaginationData({ limit, page });
+
+      const total = await this.programService.count(
+        {
+          from,
+          to,
+          where: {
+            schoolId: school.schoolId,
+          },
+        },
+        authUser,
+      );
+
+      const programList = await this.programService.listPrograms(
+        {
+          ...SkynedUtils.pick(construct, ["skip", "take"]),
+          from,
+          to,
+          where: {
+            schoolId: school.schoolId,
+          },
+        },
+        authUser,
+      );
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        total,
+        data: programList,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getProgram: ISchoolController["getProgram"] = async (req, res, next) => {
+    try {
+      const { slug, programSlug } = req.params;
+      let authUser = this._validateUser(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, {
+        claim: "admin",
+      } as typeof authUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        authUser,
+      );
+
+      if (authUser?.claim === "admin" && program) {
+        authUser = this._validateAdmin(req);
+        this._attributeBasedAccessControl(authUser, "schools", "read", school);
+        this._attributeBasedAccessControl(
+          authUser,
+          "programs",
+          "read",
+          program,
+        );
+      }
+
+      res._success(StatusCodes.OK, program);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {SchoolController} */

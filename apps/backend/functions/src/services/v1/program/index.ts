@@ -1,38 +1,54 @@
-import { IProgram } from "@workspace/shared";
+/* eslint-disable max-len */
+/* eslint-disable operator-linebreak */
+import { AuthClaim, IProgram } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
-import { IProgramService } from "../../../interfaces";
+import { IProgramService, IQueryConstruct } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { ServiceUtils } from "../utils";
 import {
   CreateProgramServiceSchema,
   CreateProgramsServiceSchema,
 } from "./schema";
-import { SkynedUtils } from "../../../utils";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
+import { Prisma } from "../../../infrastructure/repository/prisma-client";
+import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/runtime/library";
 
-// const generalData: (keyof IProgram)[] = [
-//   "applicationFee",
-//   "applicationFeeDiscount",
-//   "degreeType",
-//   "faculty",
-//   "name",
-//   "overview",
-//   "tuitionFee",
-//   "tuitionFeeType",
-//   "slug",
-//   "englishProficiency",
-//   "minimumEnglishProficiencyScore",
-//   "minimumEducationDegree",
-//   "minimumEducationLevel",
-// ];
+const generalData: (keyof IProgram)[] = [
+  "applicationFee",
+  "applicationFeeDiscount",
+  "degreeType",
+  "faculty",
+  "name",
+  "overview",
+  "pgwp",
+  "slug",
+];
 
-// const authData: (keyof IProgram)[] = [];
+const authData: (keyof IProgram)[] = [
+  ...generalData,
+  "description",
+  "minimumEducationDegree",
+  "minimumEducationDegree",
+  "minimumEducationLevel",
+  "minimumEligibilityGpa",
+  "englishProficiency",
+  "minimumEnglishProficiencyScore",
+  "timeframe",
+  "duration",
+  "tuitionFee",
+  "tuitionFeeType",
+];
 
-// const adminData: (keyof IProgram)[] = [
-//   ...generalData,
-//   ...authData,
-//   "id",
-//   "programId",
-// ];
+const adminData: (keyof IProgram)[] = [
+  ...authData,
+  "id",
+  "programId",
+  "updatedAt",
+  "createdAt",
+  "createdById",
+  "schoolId",
+  "active",
+];
 
 /** Concrete implementation of IProgramService */
 
@@ -52,12 +68,99 @@ export class ProgramService extends ServiceUtils implements IProgramService {
     return ProgramService.instance;
   }
 
+  _constructWhereQuery(
+    query: Partial<IQueryConstruct<IProgram>["where"]>,
+    authUser?: AuthClaim,
+  ) {
+    const where: Prisma.ProgramWhereInput | undefined = {};
+    const equalInput: (keyof typeof query)[] = [
+      "schoolId",
+      "degreeType",
+      "pgwp",
+      "slug",
+      "timeframe",
+      "englishProficiency",
+      "minimumEducationLevel",
+      "tuitionFeeType",
+    ];
+
+    const numberGreaterInput: (keyof typeof query)[] = [
+      "applicationFeeDiscount",
+      "minimumEligibilityGpa",
+      "minimumEducationDegree",
+      "minimumEnglishProficiencyScore",
+    ];
+
+    const numberLessInput: (keyof typeof query)[] = [
+      "applicationFee",
+      "tuitionFee",
+      "duration",
+    ];
+
+    if (!authUser || authUser.claim !== "admin") {
+      where.active = true;
+    }
+
+    if (query.name) {
+      where.OR = [
+        { name: { equals: query.name } },
+        { name: { contains: query.name } },
+      ];
+    }
+
+    if (query.faculty) {
+      if (where.OR) {
+        where.OR = [
+          ...where.OR,
+          { faculty: { equals: query.faculty } },
+          { faculty: { contains: query.faculty } },
+        ];
+      } else {
+        where.OR = [
+          { faculty: { equals: query.faculty } },
+          { faculty: { contains: query.faculty } },
+        ];
+      }
+    }
+
+    const queryKeys = Object.keys(query) as (keyof typeof query)[];
+
+    const equalsKeys = queryKeys.filter((key) => equalInput.includes(key));
+    if (equalsKeys.length) {
+      queryKeys.forEach((key) => {
+        where[key] = query[key];
+      });
+    }
+
+    const greaterKeys = queryKeys.filter((key) =>
+      numberGreaterInput.includes(key),
+    );
+    if (greaterKeys.length) {
+      queryKeys.forEach((key) => {
+        where[key] = {
+          gte: query[key],
+        };
+      });
+    }
+
+    const lesserKeys = queryKeys.filter((key) => numberLessInput.includes(key));
+    if (lesserKeys.length) {
+      queryKeys.forEach((key) => {
+        where[key] = {
+          lte: query[key],
+        };
+      });
+    }
+
+    return where;
+  }
+
   createSingleProgram: IProgramService["createSingleProgram"] = async (
     adminId,
     schoolId,
     data,
   ) => {
-    const {
+    let {
       adminId: aid,
       schoolId: sid,
       data: d,
@@ -69,6 +172,8 @@ export class ProgramService extends ServiceUtils implements IProgramService {
         schoolId,
       },
     });
+
+    d = SkynedUtils.formatDecimal(d);
 
     const program = await this.repository.db.program.create({
       data: {
@@ -106,8 +211,9 @@ export class ProgramService extends ServiceUtils implements IProgramService {
     });
 
     const txResponse = await this.repository.db.$transaction(
-      d.map((d) =>
-        this.repository.db.program.create({
+      d.map((d) => {
+        d = SkynedUtils.formatDecimal(d);
+        return this.repository.db.program.create({
           data: {
             schoolId: sid,
             createdById: aid,
@@ -116,12 +222,168 @@ export class ProgramService extends ServiceUtils implements IProgramService {
               connect: d.intakes.map((id) => ({ id, schoolId: sid })),
             },
           },
-        }),
-      ),
+        });
+      }),
     );
 
     return txResponse.length;
   };
+
+  count: IProgramService["count"] = async ({ where, from, to }, authUser) => {
+    const whereConstruct = this._constructWhereQuery(
+      where || { active: true },
+      authUser,
+    );
+
+    const count = await this.repository.db.program.count({
+      where: {
+        ...whereConstruct,
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+    });
+
+    return count;
+  };
+
+  listPrograms: IProgramService["listPrograms"] = async (
+    { skip, take, from, to, order, where },
+    authUser,
+  ) => {
+    const whereConstruct = this._constructWhereQuery(
+      where || { active: true },
+      authUser,
+    );
+
+    const programs = await this.repository.db.program.findMany({
+      skip,
+      take,
+      where: {
+        ...whereConstruct,
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+      orderBy: {
+        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+      },
+
+      select: {
+        ...SkynedUtils.select<
+          Prisma.ProgramSelect<DefaultArgs>,
+          keyof Prisma.ProgramSelect<DefaultArgs>
+        >(
+          !authUser
+            ? generalData
+            : authUser.claim === "admin"
+              ? adminData
+              : authData,
+        ),
+
+        school: {
+          select: {
+            slug: true,
+            name: true,
+            country: true,
+            state: true,
+            city: true,
+            currency: true,
+            logo: true,
+          },
+        },
+
+        intakes:
+          !authUser || authUser.claim !== "admin"
+            ? {
+                where: {
+                  deadline: {
+                    gte: new Date(),
+                  },
+                },
+                select: SkynedUtils.select(["intake", "deadline", "startDate"]),
+              }
+            : {
+                include: {
+                  _count: true,
+                },
+              },
+
+        createdBy:
+          authUser?.claim === "admin"
+            ? {
+                select: SkynedUtils.select(adminProfileKeys),
+              }
+            : undefined,
+      },
+    });
+
+    return programs.map((program) => this.deserialize(program));
+  };
+
+  findProgramBySlugAndSchoolId: IProgramService["findProgramBySlugAndSchoolId"] =
+    async (schoolId, slug, authUser) => {
+      const program = await this.repository.db.program.findUnique({
+        where: {
+          schoolId_slug: {
+            schoolId,
+            slug,
+          },
+        },
+        select: {
+          ...SkynedUtils.select<
+            Prisma.ProgramSelect<DefaultArgs>,
+            keyof Prisma.ProgramSelect<DefaultArgs>
+          >(
+            !authUser
+              ? generalData
+              : authUser.claim === "admin"
+                ? adminData
+                : authData,
+          ),
+
+          school: {
+            select: {
+              slug: true,
+              name: true,
+              country: true,
+              state: true,
+              city: true,
+              currency: true,
+              logo: true,
+            },
+          },
+
+          intakes: {
+            where:
+              !authUser || authUser.claim !== "admin"
+                ? {
+                    deadline: {
+                      gte: new Date(),
+                    },
+                  }
+                : undefined,
+            select:
+              !authUser || authUser.claim !== "admin"
+                ? SkynedUtils.select(["intake", "deadline", "startDate"])
+                : undefined,
+          },
+
+          createdBy:
+            authUser?.claim === "admin"
+              ? {
+                  select: SkynedUtils.select(adminProfileKeys),
+                }
+              : undefined,
+        },
+      });
+
+      if (!program) return null;
+
+      return this.deserialize(program);
+    };
 }
 
 /** Concrete instance of {ProgramService} */

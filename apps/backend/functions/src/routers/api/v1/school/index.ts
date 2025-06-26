@@ -23,6 +23,7 @@ import {
   IdSchema,
   IntakeQuery,
   PageQuerySchema,
+  ProgramSlugSchema,
   SchoolSlugSchema,
 } from "../../../../zod-schemas";
 
@@ -167,7 +168,34 @@ export class SchoolRouter implements IRouter {
         authMiddleware.hasRole(["admin"]),
         schoolController.createPrograms,
       )
-      .get();
+      .get(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          query: PageQuerySchema.partial(),
+        }),
+        authMiddleware.safeAuthenticate,
+        schoolController.listPrograms,
+      );
+
+    this.router
+      .route("/:slug/programs/:programSlug")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema.merge(ProgramSlugSchema),
+        }),
+        authMiddleware.safeAuthenticate,
+        schoolController.getProgram,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema.merge(ProgramSlugSchema),
+          body: CreateProgramSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+      )
+      // TODO: Remember to implement
+      .delete();
   }
 
   /**

@@ -23,3 +23,9 @@ export const SchoolSlugSchema = GeneralSchema.pick({
 });
 
 export type SchoolSlugSchema = z.infer<typeof SchoolSlugSchema>;
+
+export const ProgramSlugSchema = GeneralSchema.pick({
+  programSlug: true,
+});
+
+export type ProgramSlugSchema = z.infer<typeof ProgramSlugSchema>;

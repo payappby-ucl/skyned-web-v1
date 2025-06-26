@@ -13,6 +13,7 @@ export const GeneralSchema = z.object({
   adminId: z.string().nonempty("Required"),
   schoolId: z.string().nonempty("Required"),
   slug: z.string().nonempty("Required"),
+  programSlug: z.string().nonempty("Required"),
 
   object: z.object({
     path: z.string().trim().nonempty("Required"),

@@ -151,12 +151,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        allOf:
-                          - $ref: "#/components/schemas/PaginatedResponse"
-                          - type: object
-                            properties:
-                              data:
-                                $ref: "#/components/schemas/School"
+                        $ref: "#/components/schemas/School"
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":
@@ -244,12 +239,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        allOf:
-                          - $ref: "#/components/schemas/PaginatedResponse"
-                          - type: object
-                            properties:
-                              data:
-                                $ref: "#/components/schemas/MessageResponse"
+                        $ref: "#/components/schemas/MessageResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "404":
@@ -663,5 +653,76 @@ paths:
           $ref: "#/components/responses/UnAuthenticated"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Get Programs
+      description: Get list of programs belonging to a school
+      operation: getSchoolPrograms
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+      responses:
+        "200":
+          description: The school's programs
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Program"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/programs/{programSlug}:
+    summary: Single program operations
+
+    get:
+      summary: Get Program
+      description: Get program belonging to a school
+      operation: getSchoolProgram
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+      responses:
+        "200":
+          description: The school program
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Program"
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "500":
           $ref: "#/components/responses/ServerError"

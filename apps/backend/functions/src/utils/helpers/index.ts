@@ -6,6 +6,16 @@ import { env } from "../../config";
 import { applicationDefault } from "firebase-admin/app";
 import { ResolveStoragePathType } from "../../types";
 import { IObject, IPhoneNumber, IProgram } from "@workspace/shared";
+import { Decimal } from "../../infrastructure/repository/prisma-client/runtime/library";
+
+const decimalKeys = [
+  "applicationFee",
+  "applicationFeeDiscount",
+  "tuitionFee",
+  "duration",
+  "minimumEligibilityGpa",
+  "minimumEnglishProficiencyScore",
+];
 
 /**
  * Utility Class
@@ -192,6 +202,10 @@ export class SkynedUtils {
           return [key, value as any];
         }
 
+        if (decimalKeys.includes(key)) {
+          return [key, (value as Decimal).toNumber()];
+        }
+
         if (Array.isArray(value)) {
           return [key, value.map((v) => this.deserialize(v))];
         }
@@ -201,5 +215,23 @@ export class SkynedUtils {
     );
 
     return deserialized as K;
+  }
+
+  /**
+   * Format decimal values for DB
+   */
+
+  static formatDecimal<T extends object, K>(data: T): K {
+    const formatted = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        if (decimalKeys.includes(key)) {
+          return [key, `${value}`];
+        }
+
+        return [key, value];
+      }),
+    );
+
+    return formatted as K;
   }
 }

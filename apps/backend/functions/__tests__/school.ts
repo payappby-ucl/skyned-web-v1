@@ -588,5 +588,137 @@ describe("Schools API", () => {
         );
       });
     });
+
+    describe(`GET Programs - ${route}`, () => {
+      test("should return program list when unauthenticated", async () => {
+        const res = await request(server).get(`${route}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: {
+            total: expect.any(Number),
+            perPage: 100,
+            currentPage: 1,
+            nextPage: 2,
+            prevPage: 1,
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                school: expect.objectContaining({
+                  name: expect.any(String),
+                  slug: expect.any(String),
+                  currency: expect.any(String),
+                }),
+              }),
+            ]),
+          },
+        });
+      });
+
+      test("should return program list when admin", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .get(`${route}`)
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: {
+            total: expect.any(Number),
+            perPage: 100,
+            currentPage: 1,
+            nextPage: 2,
+            prevPage: 1,
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                school: expect.objectContaining({
+                  name: expect.any(String),
+                  slug: expect.any(String),
+                  currency: expect.any(String),
+                }),
+                description: expect.any(String),
+                schoolId: expect.any(String),
+              }),
+            ]),
+          },
+        });
+      });
+    });
+
+    describe(`GET Program - ${route}/school-program-one`, () => {
+      const url = `${route}/school-program-one`;
+
+      test("should return program when unauthenticated", async () => {
+        const res = await request(server).get(`${url}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: expect.objectContaining({
+            name: expect.any(String),
+            slug: expect.any(String),
+            school: expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              currency: expect.any(String),
+            }),
+          }),
+        });
+      });
+
+      test("should return program when admin", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .get(url)
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: expect.objectContaining({
+            name: expect.any(String),
+            slug: expect.any(String),
+            school: expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              currency: expect.any(String),
+            }),
+            description: expect.any(String),
+            schoolId: expect.any(String),
+          }),
+        });
+      });
+
+      test("should return null for not found programs", async () => {
+        const res = await request(server).get(
+          `${route}/school-program-one-12345`,
+        );
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: null,
+        });
+      });
+    });
   });
 });
