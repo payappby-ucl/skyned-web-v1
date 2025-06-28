@@ -264,7 +264,24 @@ textarea {
   }
 }
 
+/* Justify calendar content to fill up width */
 .rdp-root {
   /* --rdp-accent-color: red; */
   --rdp-today-color: var(--brand);
+}
+
+.rdp-caption_start.rdp-caption_end {
+  width: 100%;
+}
+.rdp-tbody tr,
+.rdp-head tr {
+  justify-content: space-between;
+}
+
+.rdp-vhidden {
+  @apply hidden;
+}
+
+.rdp-caption_dropdowns {
+  @apply flex gap-2;
 }
