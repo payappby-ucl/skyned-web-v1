@@ -161,9 +161,9 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
                 select: SkynedUtils.select(adminProfileKeys),
               },
 
-              programs: {
+              _count: {
                 select: {
-                  _count: true,
+                  programs: true,
                 },
               },
             }
@@ -222,6 +222,12 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
 
               createdBy: {
                 select: SkynedUtils.select(adminProfileKeys),
+              },
+
+              _count: {
+                select: {
+                  programs: true,
+                },
               },
             }
           : undefined,

@@ -88,6 +88,17 @@ export const intakeColumns: (
   },
 
   {
+    accessorFn: (row) => row._count?.programs || 0,
+    id: "programCount",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Programs" column={column} />
+    ),
+    cell: (info) => {
+      return <p className="font-semibold">{info.getValue<number>()}</p>;
+    },
+  },
+
+  {
     id: "createdBy",
     accessorFn: (row) => row.createdBy,
     header: ({ column }) => (

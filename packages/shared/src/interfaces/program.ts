@@ -49,4 +49,8 @@ export interface IProgram extends ITimestamps {
 
   createdById: string;
   createdBy?: AdminProfile;
+
+  _count?: {
+    intakes: number;
+  };
 }

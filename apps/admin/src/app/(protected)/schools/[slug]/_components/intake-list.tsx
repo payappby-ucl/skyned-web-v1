@@ -33,8 +33,6 @@ const IntakeList: React.FC<Props> = ({ slug }) => {
     url: `/schools/${slug}/intakes?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
   });
 
-  console.log(data);
-
   return (
     <>
       {data ? (
