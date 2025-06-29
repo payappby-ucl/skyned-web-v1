@@ -11,7 +11,7 @@ import Profile from "@/src/components/profile";
 import SchoolProfile from "@/src/components/school-profile";
 
 export const columns: ColumnDef<ISchool>[] = [
-   {
+  {
     id: "actions",
     header: "Actions",
     accessorFn: (row) => row,
@@ -125,6 +125,25 @@ export const columns: ColumnDef<ISchool>[] = [
   },
 
   {
+    id: "status",
+    accessorFn: (row) => row.active,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Status" column={column} />
+    ),
+    cell: (info) => {
+      const status = info.getValue<boolean>();
+
+      return (
+        <p
+          className={`rounded-sm px-4 py-1 text-sm font-bold uppercase text-white ${status ? "bg-green-600" : "bg-destructive"}`}
+        >
+          {status ? "Active" : "Inactive"}
+        </p>
+      );
+    },
+  },
+
+  {
     id: "currency",
     accessorFn: (row) => row.currency,
     header: ({ column }) => (
@@ -182,5 +201,4 @@ export const columns: ColumnDef<ISchool>[] = [
       );
     },
   },
- 
 ];

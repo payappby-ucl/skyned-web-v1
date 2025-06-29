@@ -23,3 +23,4 @@ __exportStar(require("./school"), exports);
 __exportStar(require("./accommodation"), exports);
 __exportStar(require("./intake"), exports);
 __exportStar(require("./program"), exports);
+__exportStar(require("./english-proficiency"), exports);

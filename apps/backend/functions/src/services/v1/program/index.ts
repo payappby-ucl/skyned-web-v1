@@ -72,7 +72,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
   }
 
   _constructWhereQuery(
-    query: Partial<IQueryConstruct<IProgram>["where"]>,
+    query: Partial<IQueryConstruct<Omit<IProgram, "_count">>["where"]>,
     authUser?: AuthClaim,
   ) {
     const where: Prisma.ProgramWhereInput | undefined = {};
@@ -102,6 +102,9 @@ export class ProgramService extends ServiceUtils implements IProgramService {
 
     if (!authUser || authUser.claim !== "admin") {
       where.active = true;
+      where.school = {
+        active: true,
+      };
     }
 
     if (query.name) {

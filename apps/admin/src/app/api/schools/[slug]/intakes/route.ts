@@ -1,6 +1,6 @@
 import { brandServerApi, getErrorResponse } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IFaq, IPaginatedResponse } from "@workspace/shared";
+import { IIntake, IPaginatedResponse } from "@workspace/shared";
 import { type NextRequest } from "next/server";
 
 export async function GET(
@@ -16,8 +16,13 @@ export async function GET(
     const { slug } = await params;
     const page = searchParams.get("page");
     const limit = searchParams.get("limit");
+    const status = searchParams.get("status");
 
-    const urlQuery = brandServerApi.utils.constructQuery({ page, limit });
+    const urlQuery = brandServerApi.utils.constructQuery({
+      page,
+      limit,
+      status,
+    });
     const tags: string[] = brandServerApi.utils.constructTags(
       {
         page: {
@@ -35,7 +40,7 @@ export async function GET(
     const urlConstruct = `/schools/${slug}/intakes?${urlQuery.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
-      IPaginatedResponse<IFaq>
+      IPaginatedResponse<IIntake>
     >(urlConstruct, "GET", {
       next: {
         tags,

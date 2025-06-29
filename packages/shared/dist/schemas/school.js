@@ -20,7 +20,7 @@ exports.CreateSchoolSchema = common_1.CommonSchema.pick({
         .trim()
         .toLowerCase()
         .nonempty("required")
-        .transform((val) => (0, slugify_1.default)(val, { lower: true })),
+        .transform((val) => (0, slugify_1.default)(val, { lower: true, strict: true })),
     state: zod_1.default.string().trim().nonempty("Required"),
     city: zod_1.default.string().trim().nonempty("Required"),
     address: zod_1.default.string().trim().nonempty("Required"),

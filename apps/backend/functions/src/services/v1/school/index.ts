@@ -22,6 +22,7 @@ const generalSchoolData: (keyof ISchool)[] = [
   "logo",
   "schoolImage",
   "overview",
+  "active",
 ];
 
 const adminSchoolData: (keyof ISchool)[] = [
@@ -208,6 +209,7 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
       skip,
       take,
       where: {
+        active: authUser?.claim !== "admin" ? true : undefined,
         createdAt: {
           gte: from,
           lte: to,

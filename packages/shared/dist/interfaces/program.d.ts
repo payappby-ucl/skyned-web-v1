@@ -30,7 +30,4 @@ export interface IProgram extends ITimestamps {
     intakes: IIntake[];
     createdById: string;
     createdBy?: AdminProfile;
-    _count?: {
-        intakes: number;
-    };
 }

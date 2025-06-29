@@ -80,5 +80,14 @@ class Utils {
         navigator.clipboard.writeText(text);
         this.toast.info(`${alertMessage || text} copied to clipboard.`);
     };
+    formatCurrency = ({ amount, currency = "CAD", currencyDisplay = "narrowSymbol", maximumFractionDigits = 2, style = "currency", ...rest }) => {
+        return new Intl.NumberFormat("en-Us", {
+            style,
+            currency,
+            currencyDisplay,
+            maximumFractionDigits,
+            ...rest,
+        }).format(amount);
+    };
 }
 exports.Utils = Utils;

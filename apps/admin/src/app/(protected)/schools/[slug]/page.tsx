@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import SchoolLocation from "../_components/location";
 import Image from "next/image";
 import SchoolMenu from "./_components/school-menu";
+import ProgramList from "./_components/program-list";
 
 export default async function SchoolPage({
   params,
@@ -70,6 +71,17 @@ export default async function SchoolPage({
             </p>
             <SchoolLocation school={school} />
           </div>
+        </div>
+
+        <div className="mt-5">
+          <HasPermission
+            resourceName="programs"
+            action="list"
+            secondaryComponent={<Alert />}
+            args={[]}
+          >
+            <ProgramList slug={slug} />
+          </HasPermission>
         </div>
       </HasPermission>
     );

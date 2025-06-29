@@ -15,7 +15,7 @@ export const CreateSchoolSchema = CommonSchema.pick({
     .trim()
     .toLowerCase()
     .nonempty("required")
-    .transform((val) => slugify(val, { lower: true })),
+    .transform((val) => slugify(val, { lower: true, strict: true })),
   state: z.string().trim().nonempty("Required"),
   city: z.string().trim().nonempty("Required"),
   address: z.string().trim().nonempty("Required"),

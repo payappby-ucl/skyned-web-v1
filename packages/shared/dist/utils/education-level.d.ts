@@ -46,24 +46,34 @@ export declare const schemes: {
         readonly name: "Higher Education Percentage Scale : 0-100";
         readonly max: 100;
         readonly min: 0;
+        readonly step: 0.1;
         readonly averages: null;
+        readonly key: "percentage";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly "5_diploma": {
         readonly name: "National Diploma/Higher National Diploma 5.0 Scale";
         readonly max: 5;
         readonly min: 0;
+        readonly step: 0.1;
         readonly averages: null;
+        readonly key: "5_diploma";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly "4_diploma": {
         readonly name: "National Diploma/Higher National Diploma 4.0 Scale";
         readonly max: 4;
         readonly min: 0;
+        readonly step: 0.1;
         readonly averages: null;
+        readonly key: "4_diploma";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly division: {
         readonly name: "Higher Education Division Scale";
         readonly max: 4;
         readonly min: 1;
+        readonly step: 1;
         readonly averages: readonly [{
             readonly label: "First class";
             readonly value: 4;
@@ -77,17 +87,23 @@ export declare const schemes: {
             readonly label: "Third Class";
             readonly value: 1;
         }];
+        readonly key: "division";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly education: {
         readonly name: "Higher Education 5.0 Scale";
         readonly max: 5;
         readonly min: 0;
+        readonly step: 0.1;
         readonly averages: null;
+        readonly key: "education";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly waec: {
         readonly name: "West African Examinations Council (WAEC) -  Scale A1-F9";
         readonly max: 9;
         readonly min: 1;
+        readonly step: 1;
         readonly averages: readonly [{
             readonly label: "A1";
             readonly value: 9;
@@ -116,11 +132,14 @@ export declare const schemes: {
             readonly label: "F9";
             readonly value: 1;
         }];
+        readonly key: "waec";
+        readonly computeCGPA: (val: number) => number;
     };
     readonly neco: {
         readonly name: "National Examinations Council (NECO) -  Scale A1-F9";
         readonly max: 9;
         readonly min: 1;
+        readonly step: 1;
         readonly averages: readonly [{
             readonly label: "A1";
             readonly value: 9;
@@ -149,6 +168,8 @@ export declare const schemes: {
             readonly label: "F9";
             readonly value: 1;
         }];
+        readonly key: "neco";
+        readonly computeCGPA: (val: number) => number;
     };
 };
 export declare const educationLevels: {
@@ -203,6 +224,7 @@ export declare const educationLevels: {
             readonly name: "West African Examinations Council (WAEC) -  Scale A1-F9";
             readonly max: 9;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "A1";
                 readonly value: 9;
@@ -231,10 +253,13 @@ export declare const educationLevels: {
                 readonly label: "F9";
                 readonly value: 1;
             }];
+            readonly key: "waec";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Examinations Council (NECO) -  Scale A1-F9";
             readonly max: 9;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "A1";
                 readonly value: 9;
@@ -263,6 +288,8 @@ export declare const educationLevels: {
                 readonly label: "F9";
                 readonly value: 1;
             }];
+            readonly key: "neco";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 12;
     }];
@@ -272,17 +299,26 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 5.0 Scale";
             readonly max: 5;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "5_diploma";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 4.0 Scale";
             readonly max: 4;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "4_diploma";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 13;
     }, {
@@ -291,17 +327,26 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 5.0 Scale";
             readonly max: 5;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "5_diploma";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 4.0 Scale";
             readonly max: 4;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "4_diploma";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 14;
     }, {
@@ -310,17 +355,26 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 5.0 Scale";
             readonly max: 5;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "5_diploma";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "National Diploma/Higher National Diploma 4.0 Scale";
             readonly max: 4;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "4_diploma";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 15;
     }, {
@@ -329,11 +383,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -347,6 +405,8 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 16;
     }, {
@@ -355,11 +415,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -373,11 +437,16 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education 5.0 Scale";
             readonly max: 5;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "education";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 17;
     }, {
@@ -386,11 +455,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -404,11 +477,16 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education 5.0 Scale";
             readonly max: 5;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "education";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 18;
     }];
@@ -418,11 +496,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -436,6 +518,8 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 19;
     }, {
@@ -444,11 +528,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -462,6 +550,8 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 20;
     }, {
@@ -470,11 +560,15 @@ export declare const educationLevels: {
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;
             readonly min: 0;
+            readonly step: 0.1;
             readonly averages: null;
+            readonly key: "percentage";
+            readonly computeCGPA: (val: number) => number;
         }, {
             readonly name: "Higher Education Division Scale";
             readonly max: 4;
             readonly min: 1;
+            readonly step: 1;
             readonly averages: readonly [{
                 readonly label: "First class";
                 readonly value: 4;
@@ -488,6 +582,8 @@ export declare const educationLevels: {
                 readonly label: "Third Class";
                 readonly value: 1;
             }];
+            readonly key: "division";
+            readonly computeCGPA: (val: number) => number;
         }];
         readonly levelValue: 21;
     }];

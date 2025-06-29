@@ -11,4 +11,7 @@ export interface IIntake extends ITimestamps {
   school?: ISchool;
   createdById: string;
   createdBy?: AdminProfile;
+  _count?: {
+    programs: number;
+  };
 }

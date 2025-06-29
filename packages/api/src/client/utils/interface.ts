@@ -19,4 +19,8 @@ export interface IUtils {
   ): Omit<T, K>;
 
   copyToClipboard: (text: string, alertMessage?: string) => void;
+
+  formatCurrency(
+    options: { amount: number } & Intl.NumberFormatOptions,
+  ): string;
 }

@@ -63,7 +63,7 @@ export declare const ProgramSchema: z.ZodObject<{
 export type ProgramSchema = z.infer<typeof ProgramSchema>;
 export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
     type: z.ZodEnum<["single", "bulk"]>;
-    data: z.ZodUnion<[z.ZodObject<{
+    data: z.ZodUnion<[z.ZodEffects<z.ZodObject<{
         name: z.ZodString;
         slug: z.ZodEffects<z.ZodString, string, string>;
         faculty: z.ZodString;
@@ -123,7 +123,47 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         minimumEnglishProficiencyScore: number;
         intakes: number[];
         pgwp?: boolean | undefined;
-    }>, z.ZodArray<z.ZodObject<{
+    }>, {
+        name: string;
+        slug: string;
+        overview: string;
+        description: string;
+        faculty: string;
+        degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
+        applicationFee: number;
+        applicationFeeDiscount: number;
+        tuitionFee: number;
+        tuitionFeeType: "per_year" | "per_semester" | "full";
+        timeframe: "day" | "week" | "month" | "year";
+        duration: number;
+        minimumEducationLevel: "primary" | "secondary" | "undergraduate" | "postgraduate";
+        minimumEducationDegree: number;
+        minimumEligibilityGpa: number;
+        englishProficiency: "ielts" | "toefl" | "pte" | "duolingo" | "open";
+        minimumEnglishProficiencyScore: number;
+        pgwp: boolean;
+        intakes: number[];
+    }, {
+        name: string;
+        slug: string;
+        overview: string;
+        description: string;
+        faculty: string;
+        degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
+        applicationFee: number;
+        applicationFeeDiscount: number;
+        tuitionFee: number;
+        tuitionFeeType: "per_year" | "per_semester" | "full";
+        timeframe: "day" | "week" | "month" | "year";
+        duration: number;
+        minimumEducationLevel: "primary" | "secondary" | "undergraduate" | "postgraduate";
+        minimumEducationDegree: number;
+        minimumEligibilityGpa: number;
+        englishProficiency: "ielts" | "toefl" | "pte" | "duolingo" | "open";
+        minimumEnglishProficiencyScore: number;
+        intakes: number[];
+        pgwp?: boolean | undefined;
+    }>, z.ZodArray<z.ZodEffects<z.ZodObject<{
         name: z.ZodString;
         slug: z.ZodEffects<z.ZodString, string, string>;
         faculty: z.ZodString;
@@ -144,6 +184,46 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         pgwp: z.ZodDefault<z.ZodBoolean>;
         intakes: z.ZodArray<z.ZodNumber, "many">;
     }, "strip", z.ZodTypeAny, {
+        name: string;
+        slug: string;
+        overview: string;
+        description: string;
+        faculty: string;
+        degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
+        applicationFee: number;
+        applicationFeeDiscount: number;
+        tuitionFee: number;
+        tuitionFeeType: "per_year" | "per_semester" | "full";
+        timeframe: "day" | "week" | "month" | "year";
+        duration: number;
+        minimumEducationLevel: "primary" | "secondary" | "undergraduate" | "postgraduate";
+        minimumEducationDegree: number;
+        minimumEligibilityGpa: number;
+        englishProficiency: "ielts" | "toefl" | "pte" | "duolingo" | "open";
+        minimumEnglishProficiencyScore: number;
+        pgwp: boolean;
+        intakes: number[];
+    }, {
+        name: string;
+        slug: string;
+        overview: string;
+        description: string;
+        faculty: string;
+        degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
+        applicationFee: number;
+        applicationFeeDiscount: number;
+        tuitionFee: number;
+        tuitionFeeType: "per_year" | "per_semester" | "full";
+        timeframe: "day" | "week" | "month" | "year";
+        duration: number;
+        minimumEducationLevel: "primary" | "secondary" | "undergraduate" | "postgraduate";
+        minimumEducationDegree: number;
+        minimumEligibilityGpa: number;
+        englishProficiency: "ielts" | "toefl" | "pte" | "duolingo" | "open";
+        minimumEnglishProficiencyScore: number;
+        intakes: number[];
+        pgwp?: boolean | undefined;
+    }>, {
         name: string;
         slug: string;
         overview: string;

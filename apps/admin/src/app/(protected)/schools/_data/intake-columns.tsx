@@ -9,9 +9,10 @@ import IntakeForm from "../[slug]/_components/intake-form";
 import { Button } from "@workspace/ui/components/button";
 import { SquarePen } from "lucide-react";
 import Profile from "@/src/components/profile";
+import { Checkbox } from "@workspace/ui/components/checkbox";
 
 export const intakeColumns: (
-  setEditIntake: React.Dispatch<React.SetStateAction<IIntake | null>>,
+  setEditIntake?: React.Dispatch<React.SetStateAction<IIntake | null>>,
 ) => ColumnDef<IIntake>[] = (setEditIntake) => [
   {
     id: "actions",
@@ -29,7 +30,7 @@ export const intakeColumns: (
           >
             <DropdownMenuItem asChild>
               <Button
-                onClick={() => setEditIntake(intake)}
+                onClick={() => setEditIntake?.(intake)}
                 variant="ghost"
                 className="w-full justify-start focus:!ring-0"
               >
@@ -143,4 +144,30 @@ export const intakeColumns: (
       );
     },
   },
+];
+
+export const selectIntakeColumns: (
+  selectedIntakes: IIntake[],
+  onChange: (isSelected: boolean, intake: IIntake) => void,
+) => ColumnDef<IIntake>[] = (selectedIntakes, onChange) => [
+  {
+    id: "add",
+    accessorFn: (row) => row,
+    header: ({ column }) => <DataTableColumnHeader title="" column={column} />,
+    cell: (info) => {
+      const intake = info.getValue<IIntake>();
+      return (
+        <Checkbox
+          checked={!!selectedIntakes.find((itk) => itk.id === intake.id)}
+          onCheckedChange={(val) => {
+            onChange(val ? true : false, intake);
+          }}
+        />
+      );
+    },
+    enableHiding: false,
+    enablePinning: false,
+    enableSorting: false,
+  },
+  ...intakeColumns().filter((itk) => itk.id !== "actions"),
 ];

@@ -11,7 +11,6 @@ import TextAlign from "@tiptap/extension-text-align";
 import Typography from "@tiptap/extension-typography";
 import Placeholder from "@tiptap/extension-placeholder";
 import Link from "@tiptap/extension-link";
-import HardBreak from "@tiptap/extension-hard-break";
 import { EditorToolbar } from "./toolbar/index";
 
 import Selection from "./extensions/selection";
@@ -40,7 +39,6 @@ const Editor: React.FC<Props> = ({
       Superscript,
       Subscript,
       Typography,
-      HardBreak,
       Link.configure({
         openOnClick: false,
         defaultProtocol: "https",

@@ -65,7 +65,7 @@ const IntakeList: React.FC<Props> = ({ slug }) => {
             >
               <Link
                 href="#"
-                aria-label="Link to create new FAQ"
+                aria-label="Link to intake logs"
                 className="!text-sm"
               >
                 <FileClock />

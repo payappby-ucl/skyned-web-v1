@@ -1,0 +1,357 @@
+import HasPermission from "@/src/components/has-permission";
+import { brandClientApi } from "@/src/lib/client";
+import { ColumnDef } from "@tanstack/react-table";
+import {
+  educationLevels,
+  EnglishProficiency,
+  IAdmin,
+  IFaq,
+  IProgram,
+} from "@workspace/shared";
+import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
+import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
+import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
+import { ArrowBigRight, Eye, SquarePen } from "lucide-react";
+import Link from "next/link";
+import Profile from "@/src/components/profile";
+import SchoolProfile from "@/src/components/school-profile";
+
+export const columns: ColumnDef<IProgram>[] = [
+  {
+    id: "actions",
+    header: "Actions",
+    accessorFn: (row) => row,
+    cell: (info) => {
+      const program = info.getValue<IProgram>();
+
+      return (
+        <DataTableRowActions>
+          <HasPermission resourceName="programs" action="read" args={[program]}>
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${program.school?.slug}/programs/${program.slug}`}
+                aria-label={`Link to view ${program.name}'s details`}
+              >
+                <Eye />
+                <span>View</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+
+          <HasPermission
+            resourceName="programs"
+            action="update"
+            args={[{} as any, program]}
+          >
+            <DropdownMenuItem asChild>
+              <Link
+                href={`/schools/${program.school?.slug}/programs/${program.slug}/edit`}
+                aria-label={`Link to edit ${program.name}`}
+              >
+                <SquarePen />
+                <span>Edit</span>
+              </Link>
+            </DropdownMenuItem>
+          </HasPermission>
+        </DataTableRowActions>
+      );
+    },
+  },
+
+  {
+    id: "name",
+    accessorFn: (row) => row.name,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Name" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["name"]>()}
+      </p>
+    ),
+  },
+
+  {
+    id: "faculty",
+    accessorFn: (row) => row.faculty,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Faculty" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["faculty"]>()}
+      </p>
+    ),
+  },
+
+  {
+    id: "degreeType",
+    accessorFn: (row) => row.degreeType,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Degree" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["degreeType"]>() as string}
+      </p>
+    ),
+  },
+
+  {
+    id: "status",
+    accessorFn: (row) => row.active,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Status" column={column} />
+    ),
+    cell: (info) => {
+      const status = info.getValue<boolean>();
+
+      return (
+        <p
+          className={`rounded-sm px-4 py-1 text-sm font-bold uppercase text-white ${status ? "bg-green-600" : "bg-destructive"}`}
+        >
+          {status ? "Active" : "Inactive"}
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "currency",
+    accessorFn: (row) => row.school?.currency,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Currency" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<string>() || ""}
+      </p>
+    ),
+  },
+
+  {
+    id: "applicationFee",
+    accessorFn: (row) => ({
+      fee: row.applicationFee,
+      currency: row.school?.currency,
+    }),
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Application Fee" column={column} />
+    ),
+    cell: (info) => {
+      const data = info.getValue<{
+        fee: IProgram["applicationFee"];
+        currency: string;
+      }>();
+
+      return (
+        <p className="font-semibold capitalize">
+          {brandClientApi.utils.formatCurrency({
+            amount: data.fee,
+            currency: data.currency,
+          })}
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "applicationFeeDiscount",
+    accessorFn: (row) => row.applicationFeeDiscount,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        title="Application Fee Discount (%)"
+        column={column}
+      />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["applicationFeeDiscount"]>()}
+      </p>
+    ),
+  },
+
+  {
+    id: "tuitionFee",
+    accessorFn: (row) => ({
+      fee: row.tuitionFee,
+      currency: row.school?.currency,
+      unit: row.tuitionFeeType,
+    }),
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Tuition Fee" column={column} />
+    ),
+    cell: (info) => {
+      const data = info.getValue<{
+        fee: IProgram["tuitionFee"];
+        currency: string;
+        unit: IProgram["tuitionFeeType"];
+      }>();
+      return (
+        <p className="font-semibold capitalize">
+          {brandClientApi.utils.formatCurrency({
+            amount: data.fee,
+            currency: data.currency,
+          })}{" "}
+          ({(data.unit as string).split("_").join(" ")})
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "minimumEducationLevel",
+    accessorFn: (row) => row.minimumEducationLevel,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Minimum Education Level" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["minimumEducationLevel"]>()}
+      </p>
+    ),
+  },
+
+  {
+    id: "minimumEducationDegree",
+    accessorFn: (row) => ({
+      level: row.minimumEducationLevel,
+      degree: row.minimumEducationDegree,
+    }),
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Minimum Education Degree" column={column} />
+    ),
+    cell: (info) => {
+      const data = info.getValue<{
+        level: IProgram["minimumEducationLevel"];
+        degree: IProgram["minimumEducationDegree"];
+      }>();
+
+      const degree = educationLevels[data.level].find(
+        (level) => level.levelValue === data.degree,
+      );
+
+      return <p className="font-semibold capitalize">{degree?.level}</p>;
+    },
+  },
+
+  {
+    id: "minimumEligibilityGpa",
+    accessorFn: (row) => row.minimumEligibilityGpa,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        title="Minimum Education GPA (%)"
+        column={column}
+      />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["minimumEligibilityGpa"]>()}
+      </p>
+    ),
+  },
+
+  {
+    id: "intakes",
+    accessorFn: (row) => row.intakes.length,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Intakes" column={column} />
+    ),
+    cell: (info) => {
+      return (
+        <p className="font-semibold capitalize">{info.getValue<number>()}</p>
+      );
+    },
+  },
+
+  {
+    id: "duration",
+    accessorFn: (row) => ({
+      duration: row.duration,
+      timeframe: row.timeframe,
+    }),
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Duration" column={column} />
+    ),
+    cell: (info) => {
+      const data = info.getValue<{
+        duration: number;
+        timeframe: string;
+      }>();
+      return (
+        <p className="font-semibold capitalize">
+          {data.duration} {`${data.timeframe}${data.duration > 1 ? "s" : ""}`}
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "proficiency",
+    accessorFn: (row) => ({
+      proficiency: row.englishProficiency,
+      score: row.minimumEnglishProficiencyScore,
+    }),
+    header: ({ column }) => (
+      <DataTableColumnHeader title="English Proficiency" column={column} />
+    ),
+    cell: (info) => {
+      const data = info.getValue<{
+        score: number;
+        proficiency: Exclude<IProgram["englishProficiency"], "open">;
+      }>();
+      return (
+        <p className="flex items-center gap-1 font-semibold uppercase">
+          {data.proficiency} ({data.score} <ArrowBigRight className="size-3" />{" "}
+          {EnglishProficiency.getCefr(data.proficiency, data.score).name})
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "createdBy",
+    accessorFn: (row) => row.createdBy,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Created By" column={column} />
+    ),
+    cell: (info) => {
+      const createdBy = info.getValue<IAdmin["createdBy"]>();
+
+      if (!createdBy) return null;
+
+      return <Profile {...createdBy} />;
+    },
+  },
+
+  {
+    accessorFn: (row) => row.createdAt,
+    id: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Date Created" column={column} />
+    ),
+    cell: (info) => {
+      const createdAt = info.getValue<IFaq["createdAt"]>();
+      return (
+        <p className="font-semibold">
+          {brandClientApi.date.formatDate(createdAt)}
+        </p>
+      );
+    },
+  },
+  {
+    accessorFn: (row) => row.updatedAt,
+    id: "updatedAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Last Updated" column={column} />
+    ),
+    cell: (info) => {
+      const updatedAt = info.getValue<IFaq["updatedAt"]>();
+      return (
+        <p className="font-semibold">
+          {brandClientApi.date.formatDate(updatedAt)}
+        </p>
+      );
+    },
+  },
+];
