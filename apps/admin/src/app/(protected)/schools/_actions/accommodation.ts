@@ -5,7 +5,6 @@ import { serverCacheTags } from "@/src/utils";
 import {
   CreateAccommodationSchema,
   IAccommodation,
-  IMessageResponse,
   ServerActionReturnType,
 } from "@workspace/shared";
 import { revalidateTag } from "next/cache";

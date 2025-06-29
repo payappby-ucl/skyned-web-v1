@@ -143,6 +143,41 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
 
             <FormField
               control={form.control}
+              name="deadline"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Deadline</FormLabel>
+                  <FormControl>
+                    <DatePicker
+                      selected={
+                        field.value ? new Date(field.value) : new Date()
+                      }
+                      mode="single"
+                      onSelect={field.onChange}
+                      captionLayout="dropdown"
+                      fromYear={startYear}
+                      toYear={endYear}
+                      display={
+                        field.value
+                          ? brandClientApi.date.formatDate(
+                              new Date(field.value),
+                              "MMM DD YYYY",
+                            )
+                          : ""
+                      }
+                      // popoverModal={true}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Date in which school will stops collecting intakes
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="startDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
@@ -174,41 +209,6 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                   </FormControl>
                   <FormDescription>
                     Date in which school will start collecting intakes
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="deadline"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>Deadline</FormLabel>
-                  <FormControl>
-                    <DatePicker
-                      selected={
-                        field.value ? new Date(field.value) : new Date()
-                      }
-                      mode="single"
-                      onSelect={field.onChange}
-                      captionLayout="dropdown"
-                      fromYear={startYear}
-                      toYear={endYear}
-                      display={
-                        field.value
-                          ? brandClientApi.date.formatDate(
-                              new Date(field.value),
-                              "MMM DD YYYY",
-                            )
-                          : ""
-                      }
-                      // popoverModal={true}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Date in which school will stops collecting intakes
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

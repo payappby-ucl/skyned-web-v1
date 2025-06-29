@@ -842,6 +842,7 @@ export class SchoolController
 
       res._success(StatusCodes.OK, { message: "Program Updated." });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   };

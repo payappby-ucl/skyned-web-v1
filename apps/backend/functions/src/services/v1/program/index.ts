@@ -376,6 +376,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             city: true,
             currency: true,
             logo: true,
+            accommodation: true,
           },
         },
 
@@ -437,6 +438,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
               city: true,
               currency: true,
               logo: true,
+              accommodation: true,
             },
           },
 

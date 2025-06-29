@@ -14,7 +14,6 @@ import { DataTableRowActions } from "@workspace/ui/components/table/data-table-r
 import { ArrowBigRight, Eye, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
-import SchoolProfile from "@/src/components/school-profile";
 
 export const columns: ColumnDef<IProgram>[] = [
   {
@@ -65,9 +64,12 @@ export const columns: ColumnDef<IProgram>[] = [
       <DataTableColumnHeader title="Name" column={column} />
     ),
     cell: (info) => (
-      <p className="font-semibold capitalize">
+      <Link
+        href={`/schools/${info.row.original.school?.slug}/programs/${info.row.original.slug}`}
+        className="font-semibold capitalize"
+      >
         {info.getValue<IProgram["name"]>()}
-      </p>
+      </Link>
     ),
   },
 
@@ -298,15 +300,44 @@ export const columns: ColumnDef<IProgram>[] = [
     cell: (info) => {
       const data = info.getValue<{
         score: number;
-        proficiency: Exclude<IProgram["englishProficiency"], "open">;
+        proficiency: IProgram["englishProficiency"];
       }>();
       return (
         <p className="flex items-center gap-1 font-semibold uppercase">
-          {data.proficiency} ({data.score} <ArrowBigRight className="size-3" />{" "}
-          {EnglishProficiency.getCefr(data.proficiency, data.score).name})
+          {data.proficiency}
+          {data.proficiency !== "open" ? (
+            <>
+              ({data.score} <ArrowBigRight className="size-3" />{" "}
+              {
+                EnglishProficiency.getCefr(
+                  data.proficiency as Exclude<
+                    IProgram["englishProficiency"],
+                    "open"
+                  >,
+                  data.score,
+                ).name
+              }
+              )
+            </>
+          ) : (
+            ""
+          )}
         </p>
       );
     },
+  },
+
+  {
+    id: "pgwp",
+    accessorFn: (row) => row.pgwp,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="PGWP" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">
+        {info.getValue<IProgram["pgwp"]>() ? "Yes" : "No"}
+      </p>
+    ),
   },
 
   {

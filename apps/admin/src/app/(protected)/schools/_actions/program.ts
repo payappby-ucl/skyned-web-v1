@@ -44,7 +44,7 @@ export async function updateProgram(
         `/schools/${schoolSlug}/programs/${programSlug}`,
         "PUT",
         {
-          body: JSON.stringify(data),
+          body: JSON.stringify(data.data),
         },
       );
 

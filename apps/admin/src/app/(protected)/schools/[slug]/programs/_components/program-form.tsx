@@ -38,6 +38,7 @@ import { FormButton } from "@workspace/ui/components/form-button";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { createProgram, updateProgram } from "../../../_actions";
+import { Switch } from "@workspace/ui/components/switch";
 
 interface Props {
   /** School slug */
@@ -75,11 +76,10 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
         intakes: program?.intakes.map((itk) => itk.id) || [],
         overview: program?.overview || "",
         description: program?.description || "",
+        pgwp: program?.pgwp || false,
       },
     },
   });
-
-  console.log(form);
 
   const onSubmit = useCallback(async (data: CreateProgramSchema) => {
     try {
@@ -212,7 +212,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
             <FormItem>
               <FormLabel>Application Fee ({school.currency})</FormLabel>
               <FormControl>
-                <Input {...field} type="number" step={0.1} min={0} />
+                <Input {...field} type="number" step={0.01} min={0} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -227,7 +227,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
             <FormItem>
               <FormLabel>Application Fee Discount (%)</FormLabel>
               <FormControl>
-                <Input {...field} type="number" step={0.1} min={0} max={100} />
+                <Input {...field} type="number" step={0.01} min={0} max={100} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -242,7 +242,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
             <FormItem>
               <FormLabel>Tuition Fee ({school.currency})</FormLabel>
               <FormControl>
-                <Input {...field} type="number" step={0.1} min={0} />
+                <Input {...field} type="number" step={0.01} min={0} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -663,6 +663,31 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
           )}
         />
 
+        {/* PGWP */}
+        <FormField
+          control={form.control}
+          name="data.pgwp"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>PGWP</FormLabel>
+              <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+                <div className="flex-1">
+                  <FormDescription>
+                    Does this program offer Post Graduate Work Permit?
+                  </FormDescription>
+                </div>
+
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </div>
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="data.intakes"
@@ -692,7 +717,6 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
               {field.value.length ? (
                 <div className="grid grid-cols-1 gap-1 rounded-lg border p-2 md:grid-cols-2 lg:grid-cols-4">
                   {field.value.map((id) => {
-                    console.log(field);
                     const intake = selectedIntakes.find((itk) => itk.id === id);
 
                     return intake ? (
