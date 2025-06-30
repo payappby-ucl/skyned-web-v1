@@ -107,7 +107,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
         // router.replace(`/schools/${school.slug}/programs/${program.slug}`);
       }
 
-      router.replace(`/schools/${school.slug}`);
+      router.back();
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }

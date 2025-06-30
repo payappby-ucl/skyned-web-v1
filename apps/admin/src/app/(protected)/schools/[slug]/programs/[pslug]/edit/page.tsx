@@ -50,7 +50,6 @@ export default async function EditSchoolProgramPage({
       </HasPermission>
     );
   } catch (error) {
-    console.log(error);
     return <Alert message="Error" />;
   }
 }

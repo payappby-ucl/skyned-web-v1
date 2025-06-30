@@ -6,6 +6,7 @@ import {
   tuitionFeeType,
 } from "../utils";
 import { z } from "zod";
+import sanitizeHtml from "sanitize-html";
 
 export const ProgramSchema = z.object({
   name: z.string().trim().nonempty("Required"),
@@ -18,7 +19,11 @@ export const ProgramSchema = z.object({
   faculty: z.string().trim().nonempty("Required"),
   degreeType: z.enum(degreeTypes),
   overview: z.string().trim().nonempty("Required"),
-  description: z.string().trim().nonempty("Required"),
+  description: z
+    .string()
+    .trim()
+    .nonempty("Required")
+    .transform((val) => (val ? sanitizeHtml(val) : val)),
 
   applicationFee: z.coerce.number().min(0, "Minimum of 0"),
 

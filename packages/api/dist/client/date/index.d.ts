@@ -7,4 +7,7 @@ export declare class DateService implements IDateService {
     endOfDay: IDateService["endOfDay"];
     createDuration: IDateService["createDuration"];
     humanizeDuration: IDateService["humanizeDuration"];
+    isAfter: IDateService["isAfter"];
+    isBefore: IDateService["isBefore"];
+    isEqual: IDateService["isEqual"];
 }

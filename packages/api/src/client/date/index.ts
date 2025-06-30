@@ -39,4 +39,13 @@ export class DateService implements IDateService {
 
     return parts.length > 0 ? parts.join(" and ") : "0 months";
   };
+
+  isAfter: IDateService["isAfter"] = (first, second) =>
+    dayjs(first).isAfter(second);
+
+  isBefore: IDateService["isBefore"] = (first, second) =>
+    dayjs(first).isBefore(second);
+
+  isEqual: IDateService["isEqual"] = (first, second) =>
+    dayjs(first).isSame(second);
 }

@@ -31,8 +31,6 @@ const ProgramList: React.FC<Props> = ({ slug }) => {
     url: `/schools/${slug}/programs?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize}`,
   });
 
-  console.log(data);
-
   return (
     <>
       {data ? (

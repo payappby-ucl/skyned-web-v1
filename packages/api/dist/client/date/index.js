@@ -46,5 +46,8 @@ class DateService {
             parts.push(`${months} month${months > 1 ? "s" : ""}`);
         return parts.length > 0 ? parts.join(" and ") : "0 months";
     };
+    isAfter = (first, second) => (0, dayjs_1.default)(first).isAfter(second);
+    isBefore = (first, second) => (0, dayjs_1.default)(first).isBefore(second);
+    isEqual = (first, second) => (0, dayjs_1.default)(first).isSame(second);
 }
 exports.DateService = DateService;

@@ -59,3 +59,57 @@ export async function updateProgram(
     return brandServerApi.utils.createServerActionError(error);
   }
 }
+
+export async function disconnectIntake(
+  schoolSlug: string,
+  programSlug: string,
+  intakes: number[],
+): Promise<ServerActionReturnType<IMessageResponse>> {
+  try {
+    const { data: res } =
+      await brandServerApi.httpClient.request<IMessageResponse>(
+        `/schools/${schoolSlug}/programs/${programSlug}/disconnect-intakes`,
+        "PUT",
+        {
+          body: JSON.stringify({ intakes: intakes }),
+        },
+      );
+
+    revalidateTag(
+      `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
+    );
+    return {
+      success: true,
+      data: res,
+    };
+  } catch (error: any) {
+    return brandServerApi.utils.createServerActionError(error);
+  }
+}
+
+export async function connectIntake(
+  schoolSlug: string,
+  programSlug: string,
+  intakes: number[],
+): Promise<ServerActionReturnType<IMessageResponse>> {
+  try {
+    const { data: res } =
+      await brandServerApi.httpClient.request<IMessageResponse>(
+        `/schools/${schoolSlug}/programs/${programSlug}/connect-intakes`,
+        "PUT",
+        {
+          body: JSON.stringify({ intakes }),
+        },
+      );
+
+    revalidateTag(
+      `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
+    );
+    return {
+      success: true,
+      data: res,
+    };
+  } catch (error: any) {
+    return brandServerApi.utils.createServerActionError(error);
+  }
+}

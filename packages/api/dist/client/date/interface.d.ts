@@ -11,4 +11,7 @@ export interface IDateService {
     endOfDay(date: Date): Date;
     createDuration(time: number, unit?: duration.DurationUnitType): duration.Duration;
     humanizeDuration(duration: duration.Duration): string;
+    isAfter(first: Date, second: Date): boolean;
+    isBefore(first: Date, second: Date): boolean;
+    isEqual(first: Date, second: Date): boolean;
 }

@@ -12,8 +12,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select.js";
-import { ScrollArea } from "./scroll-area.js";
+} from "./select";
+import { ScrollArea } from "./scroll-area";
 
 function Calendar({
   className,

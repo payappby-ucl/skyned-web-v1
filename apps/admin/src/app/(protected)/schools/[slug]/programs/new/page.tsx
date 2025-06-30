@@ -46,7 +46,6 @@ export default async function CreateSchoolProgramPage({
       </HasPermission>
     );
   } catch (error) {
-    console.log(error);
     return <Alert message="Error" />;
   }
 }
