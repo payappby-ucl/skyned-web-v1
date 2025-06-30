@@ -12,7 +12,6 @@ import {
   Award,
   Banknote,
   CalendarDays,
-  ChevronDown,
   Clock,
   FileText,
   GraduationCap,
@@ -34,13 +33,8 @@ import EnglishProficiencyDetails from "../_components/english-proficiency";
 import Fee from "../_components/fee";
 import ProgramIntakes from "../_components/intakes";
 import FormatDate from "@/src/components/format-date";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@workspace/ui/components/popover";
-import { Button } from "@workspace/ui/components/button";
 import ProgramOptions from "./_components/program-options";
+import Image from "next/image";
 
 export default async function SchoolProgramPage({
   params,
@@ -73,6 +67,25 @@ export default async function SchoolProgramPage({
         redirect
       >
         <div className="space-y-5">
+          <div className="relative mb-10 md:hidden">
+            <Image
+              src={program.school?.schoolImage.url || ""}
+              width={200}
+              height={200}
+              alt={`${program.school?.name}'s view image`}
+              className="w-full"
+            />
+
+            <Avatar className="absolute -bottom-10 left-1/2 h-20 w-20 -translate-x-1/2 transform border md:block">
+              <AvatarImage
+                src={program.school?.logo.url}
+                alt={`${program.school?.name}'s logo`}
+              />
+              <AvatarFallback>
+                {program.school?.name[0]?.toLowerCase()}
+              </AvatarFallback>
+            </Avatar>
+          </div>
           <div className="flex items-center gap-2 border-b pb-3">
             <Avatar className="hidden h-10 w-10 md:block">
               <AvatarImage
@@ -245,6 +258,7 @@ export default async function SchoolProgramPage({
       </HasPermission>
     );
   } catch (error) {
+    console.log(error);
     return <Alert message="Error" />;
   }
 }

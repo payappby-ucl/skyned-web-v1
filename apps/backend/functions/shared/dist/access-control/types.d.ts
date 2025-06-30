@@ -56,7 +56,7 @@ export type PermissionType = {
         dataType: IProgram;
         createDataType: CreateProgramSchema["data"];
         updateDataType: Partial<ProgramSchema> | UpdateBulkProgramSchema;
-        action: "list" | "create" | "read" | "update" | "delete";
+        action: "list" | "create" | "read" | "update" | "delete" | "activate" | "deactivate";
     };
 };
 export type PermissionCheckSingleResource<Key extends keyof PermissionType> = boolean | ((authClaim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);

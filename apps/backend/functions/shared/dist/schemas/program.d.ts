@@ -5,7 +5,7 @@ export declare const ProgramSchema: z.ZodObject<{
     faculty: z.ZodString;
     degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
     overview: z.ZodString;
-    description: z.ZodString;
+    description: z.ZodEffects<z.ZodString, string, string>;
     applicationFee: z.ZodNumber;
     applicationFeeDiscount: z.ZodNumber;
     tuitionFee: z.ZodNumber;
@@ -69,7 +69,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         faculty: z.ZodString;
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
-        description: z.ZodString;
+        description: z.ZodEffects<z.ZodString, string, string>;
         applicationFee: z.ZodNumber;
         applicationFeeDiscount: z.ZodNumber;
         tuitionFee: z.ZodNumber;
@@ -169,7 +169,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         faculty: z.ZodString;
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
-        description: z.ZodString;
+        description: z.ZodEffects<z.ZodString, string, string>;
         applicationFee: z.ZodNumber;
         applicationFeeDiscount: z.ZodNumber;
         tuitionFee: z.ZodNumber;
@@ -447,7 +447,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             faculty: z.ZodOptional<z.ZodString>;
             degreeType: z.ZodOptional<z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>>;
             overview: z.ZodOptional<z.ZodString>;
-            description: z.ZodOptional<z.ZodString>;
+            description: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
             applicationFee: z.ZodOptional<z.ZodNumber>;
             applicationFeeDiscount: z.ZodOptional<z.ZodNumber>;
             tuitionFee: z.ZodOptional<z.ZodNumber>;

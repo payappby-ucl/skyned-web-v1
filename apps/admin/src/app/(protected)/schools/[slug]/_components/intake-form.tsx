@@ -217,8 +217,10 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
 
             <FormButton
               variant="brand"
-              type="submit"
+              type="button"
+              role="button"
               isLoading={form.formState.isSubmitting}
+              onClick={form.handleSubmit(onSubmit)}
             >
               {intake ? "Update" : "Create"} Intake
             </FormButton>

@@ -7,6 +7,7 @@ exports.UpdateBulkProgramSchema = exports.CreateProgramSchema = exports.ProgramS
 const slugify_1 = __importDefault(require("slugify"));
 const utils_1 = require("../utils");
 const zod_1 = require("zod");
+const sanitize_html_1 = __importDefault(require("sanitize-html"));
 exports.ProgramSchema = zod_1.z.object({
     name: zod_1.z.string().trim().nonempty("Required"),
     slug: zod_1.z
@@ -18,7 +19,11 @@ exports.ProgramSchema = zod_1.z.object({
     faculty: zod_1.z.string().trim().nonempty("Required"),
     degreeType: zod_1.z.enum(utils_1.degreeTypes),
     overview: zod_1.z.string().trim().nonempty("Required"),
-    description: zod_1.z.string().trim().nonempty("Required"),
+    description: zod_1.z
+        .string()
+        .trim()
+        .nonempty("Required")
+        .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
     applicationFee: zod_1.z.coerce.number().min(0, "Minimum of 0"),
     applicationFeeDiscount: zod_1.z.coerce
         .number()

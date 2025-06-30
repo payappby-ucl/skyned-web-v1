@@ -98,7 +98,14 @@ export type PermissionType = {
     dataType: IProgram;
     createDataType: CreateProgramSchema["data"];
     updateDataType: Partial<ProgramSchema> | UpdateBulkProgramSchema;
-    action: "list" | "create" | "read" | "update" | "delete";
+    action:
+      | "list"
+      | "create"
+      | "read"
+      | "update"
+      | "delete"
+      | "activate"
+      | "deactivate";
   };
 };
 

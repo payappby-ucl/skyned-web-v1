@@ -16,6 +16,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
+import HasPermission from "@/src/components/has-permission";
+import IntakeForm from "../../_components/intake-form";
 
 interface Props {
   schoolSlug: string;
@@ -71,7 +73,17 @@ const AddIntakesForm: React.FC<Props> = ({
               //     setPagination,
               //     rowCount: data.total,
               //   }}
-            />
+            >
+              <div className="space-x-2">
+                <HasPermission
+                  resourceName="intakes"
+                  action="create"
+                  args={[{} as any]}
+                >
+                  <IntakeForm slug={schoolSlug} />
+                </HasPermission>
+              </div>
+            </DataTable>
           </div>
         ) : null}
 

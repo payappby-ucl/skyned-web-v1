@@ -439,6 +439,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
               currency: true,
               logo: true,
               accommodation: true,
+              schoolImage: true,
             },
           },
 
