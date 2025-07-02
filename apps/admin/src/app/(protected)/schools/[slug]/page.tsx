@@ -62,14 +62,19 @@ export default async function SchoolPage({
               </Avatar>
 
               <div className="flex w-full items-center justify-between">
-                <h1 className="!text-2xl">{school.name}</h1>
-                <SchoolMenu school={school} />
+                <h1 className="!text-xl md:!text-2xl">{school.name}</h1>
+                <div className="hidden md:block">
+                  <SchoolMenu school={school} />
+                </div>
               </div>
             </div>
             <p className="text-muted-foreground whitespace-pre-line text-sm">
               {school.overview}
             </p>
             <SchoolLocation school={school} />
+            <div className="md:hidden">
+              <SchoolMenu school={school} />
+            </div>
           </div>
         </div>
 

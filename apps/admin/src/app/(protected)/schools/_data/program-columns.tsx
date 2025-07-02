@@ -14,6 +14,7 @@ import { DataTableRowActions } from "@workspace/ui/components/table/data-table-r
 import { ArrowBigRight, Eye, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
+import StatusView from "@/src/components/status-view";
 
 export const columns: ColumnDef<IProgram>[] = [
   {
@@ -105,17 +106,7 @@ export const columns: ColumnDef<IProgram>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader title="Status" column={column} />
     ),
-    cell: (info) => {
-      const status = info.getValue<boolean>();
-
-      return (
-        <p
-          className={`rounded-sm px-4 py-1 text-sm font-bold uppercase text-white ${status ? "bg-green-600" : "bg-destructive"}`}
-        >
-          {status ? "Active" : "Inactive"}
-        </p>
-      );
-    },
+    cell: (info) => <StatusView status={info.getValue<boolean>()} />,
   },
 
   {
@@ -289,40 +280,14 @@ export const columns: ColumnDef<IProgram>[] = [
   },
 
   {
-    id: "proficiency",
-    accessorFn: (row) => ({
-      proficiency: row.englishProficiency,
-      score: row.minimumEnglishProficiencyScore,
-    }),
+    id: "proficiencies",
+    accessorFn: (row) => row.proficiencies.length,
     header: ({ column }) => (
-      <DataTableColumnHeader title="English Proficiency" column={column} />
+      <DataTableColumnHeader title="Proficiencies" column={column} />
     ),
     cell: (info) => {
-      const data = info.getValue<{
-        score: number;
-        proficiency: IProgram["englishProficiency"];
-      }>();
       return (
-        <p className="flex items-center gap-1 font-semibold uppercase">
-          {data.proficiency}
-          {data.proficiency !== "open" ? (
-            <>
-              ({data.score} <ArrowBigRight className="size-3" />{" "}
-              {
-                EnglishProficiency.getCefr(
-                  data.proficiency as Exclude<
-                    IProgram["englishProficiency"],
-                    "open"
-                  >,
-                  data.score,
-                ).name
-              }
-              )
-            </>
-          ) : (
-            ""
-          )}
-        </p>
+        <p className="font-semibold capitalize">{info.getValue<number>()}</p>
       );
     },
   },

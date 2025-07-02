@@ -2,7 +2,7 @@ import Alert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IProgram } from "@workspace/shared";
+import { EnglishProficiency, IProgram } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -35,6 +35,7 @@ import ProgramIntakes from "../_components/intakes";
 import FormatDate from "@/src/components/format-date";
 import ProgramOptions from "./_components/program-options";
 import Image from "next/image";
+import { ProficiencyDisplay } from "@workspace/ui/components/proficiency-display";
 
 export default async function SchoolProgramPage({
   params,
@@ -130,10 +131,16 @@ export default async function SchoolProgramPage({
               defaultValue="overview"
               className="w-full rounded-md border p-4 lg:col-span-2"
             >
-              <TabsList>
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="description">Description</TabsTrigger>
-              </TabsList>
+              <div className="overflow-x-scroll">
+                <TabsList>
+                  <TabsTrigger value="overview">Overview</TabsTrigger>
+                  <TabsTrigger value="description">Description</TabsTrigger>
+                  {program.requirements ? (
+                    <TabsTrigger value="requirements">Requirements</TabsTrigger>
+                  ) : null}
+                  <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
+                </TabsList>
+              </div>
               <Separator />
               <TabsContent value="overview" className="text-md font-normal">
                 {program.overview}
@@ -143,6 +150,17 @@ export default async function SchoolProgramPage({
                   className="wysiwyg-view"
                   dangerouslySetInnerHTML={{ __html: program.description }}
                 />
+              </TabsContent>
+              {program.requirements ? (
+                <TabsContent value="requirements">
+                  <div
+                    className="wysiwyg-view"
+                    dangerouslySetInnerHTML={{ __html: program.requirements }}
+                  />
+                </TabsContent>
+              ) : null}
+              <TabsContent value="scholarships" className="text-md font-normal">
+                Under Construction
               </TabsContent>
             </Tabs>
 
@@ -181,31 +199,6 @@ export default async function SchoolProgramPage({
                       </p>
                       <small className="text-muted-foreground">
                         Minimum Education Level
-                      </small>
-                    </div>
-                  </div>
-
-                  {/* English Proficiency */}
-                  <div className="flex items-center gap-4">
-                    <div className="bg-accent rounded-lg p-2">
-                      <Speech />
-                    </div>
-                    <div>
-                      <p className="text-md flex items-center font-semibold">
-                        <span className="uppercase">
-                          {program.englishProficiency}
-                        </span>
-                        {program.englishProficiency !== "open" ? (
-                          <EnglishProficiencyDetails
-                            proficiency={program.englishProficiency}
-                            score={program.minimumEnglishProficiencyScore}
-                          />
-                        ) : (
-                          program.minimumEnglishProficiencyScore
-                        )}
-                      </p>
-                      <small className="text-muted-foreground">
-                        Minimum English Proficiency
                       </small>
                     </div>
                   </div>
@@ -249,8 +242,29 @@ export default async function SchoolProgramPage({
                 </div>
               </div>
 
-              {/* Intakes */}
+              {/* Proficiencies */}
+              {program.proficiencies ? (
+                <div className="space-y-2 rounded-md border p-4">
+                  <h3 className="!text-xl">Minimum English Proficiency</h3>
+                  <Separator />
+                  <div className="space-y-3">
+                    {program.proficiencies.map(({ test, score }) => {
+                      const gcfe = EnglishProficiency.getCefr(test, score);
+                      return (
+                        <ProficiencyDisplay
+                          key={test}
+                          name={gcfe.name}
+                          tags={gcfe.tags}
+                          test={test}
+                          score={score}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
 
+              {/* Intakes */}
               <ProgramIntakes intakes={program.intakes} program={program} />
             </div>
           </div>

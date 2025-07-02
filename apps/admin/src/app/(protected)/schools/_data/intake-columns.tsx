@@ -5,11 +5,11 @@ import { IAdmin, IIntake } from "@workspace/shared";
 import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import IntakeForm from "../[slug]/_components/intake-form";
 import { Button } from "@workspace/ui/components/button";
 import { SquarePen } from "lucide-react";
 import Profile from "@/src/components/profile";
 import { Checkbox } from "@workspace/ui/components/checkbox";
+import { IntakeStatus } from "@workspace/ui/components/intake-status";
 
 export const intakeColumns: (
   setEditIntake?: React.Dispatch<React.SetStateAction<IIntake | null>>,
@@ -57,6 +57,17 @@ export const intakeColumns: (
   },
 
   {
+    id: "status",
+    accessorFn: (row) => row.status,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Status" column={column} />
+    ),
+    cell: (info) => (
+      <IntakeStatus status={info.getValue<IIntake["status"]>()} />
+    ),
+  },
+
+  {
     accessorFn: (row) => row.startDate,
     id: "startDate",
     header: ({ column }) => (
@@ -66,7 +77,9 @@ export const intakeColumns: (
       const startDate = info.getValue<IIntake["startDate"]>();
       return (
         <p className="font-semibold">
-          {brandClientApi.date.formatDate(startDate)}
+          {startDate
+            ? brandClientApi.date.formatDate(startDate, "DD/MM/YYYY")
+            : "No Information"}
         </p>
       );
     },
@@ -82,7 +95,9 @@ export const intakeColumns: (
       const deadline = info.getValue<IIntake["deadline"]>();
       return (
         <p className="font-semibold">
-          {brandClientApi.date.formatDate(deadline)}
+          {deadline
+            ? brandClientApi.date.formatDate(deadline, "DD/MM/YYYY")
+            : "No Information"}
         </p>
       );
     },

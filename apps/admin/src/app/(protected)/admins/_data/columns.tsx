@@ -96,9 +96,7 @@ export const columns: ColumnDef<AdminListType>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader title="Account Status" column={column} />
     ),
-    cell: (info) => (
-      <StatusView status={info.getValue<boolean>() ? "Suspended" : "Active"} />
-    ),
+    cell: (info) => <StatusView status={!info.getValue<boolean>()} />,
   },
   {
     id: "phoneNumber",
@@ -219,5 +217,4 @@ export const columns: ColumnDef<AdminListType>[] = [
       );
     },
   },
-  
 ];

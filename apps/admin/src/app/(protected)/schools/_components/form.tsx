@@ -258,12 +258,14 @@ const CreateSchoolForm: React.FC = () => {
                   Institution Type
                 </FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger
-                    id="institutionType"
-                    className="w-full capitalize"
-                  >
-                    <SelectValue placeholder="Select institution type" />
-                  </SelectTrigger>
+                  <FormControl>
+                    <SelectTrigger
+                      id="institutionType"
+                      className="w-full capitalize"
+                    >
+                      <SelectValue placeholder="Select institution type" />
+                    </SelectTrigger>
+                  </FormControl>
                   <SelectContent>
                     {[institutionType.university, institutionType.college].map(
                       (type) => (
@@ -290,12 +292,14 @@ const CreateSchoolForm: React.FC = () => {
               <FormItem className="self-start">
                 <FormLabel htmlFor="ownershipType">Ownership Type</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger
-                    id="ownershipType"
-                    className="w-full capitalize"
-                  >
-                    <SelectValue placeholder="Select institution type" />
-                  </SelectTrigger>
+                  <FormControl>
+                    <SelectTrigger
+                      id="ownershipType"
+                      className="w-full capitalize"
+                    >
+                      <SelectValue placeholder="Select institution type" />
+                    </SelectTrigger>
+                  </FormControl>
                   <SelectContent>
                     {[ownershipType.private, ownershipType.public].map(
                       (type) => (

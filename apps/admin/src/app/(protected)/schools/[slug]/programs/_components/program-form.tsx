@@ -5,6 +5,7 @@ import {
   CreateProgramSchema,
   degreeTypes,
   educationLevels,
+  EnglishProficiency,
   IIntake,
   IProgram,
   ISchool,
@@ -30,7 +31,7 @@ import {
   SelectItem,
 } from "@workspace/ui/components/select";
 import { Textarea } from "@workspace/ui/components/textarea";
-import { useForm, zodResolver } from "@workspace/ui/lib/utils";
+import { useFieldArray, useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback, useMemo, useState } from "react";
 import AddIntakesForm from "./add-intakes-form";
 import { brandClientApi } from "@/src/lib/client";
@@ -39,6 +40,11 @@ import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { createProgram, updateProgram } from "../../../_actions";
 import { Switch } from "@workspace/ui/components/switch";
+import { IntakeStatus } from "@workspace/ui/components/intake-status";
+import ProgramProficiencyForm from "./program-proficiency-form";
+import { ProficiencyDisplay } from "@workspace/ui/components/proficiency-display";
+import { Button } from "@workspace/ui/components/button";
+import { Trash2 } from "lucide-react";
 
 interface Props {
   /** School slug */
@@ -70,12 +76,11 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
         minimumEducationLevel: program?.minimumEducationLevel || "primary",
         minimumEducationDegree: program?.minimumEducationDegree || 1,
         minimumEligibilityGpa: program?.minimumEligibilityGpa || 1,
-        englishProficiency: program?.englishProficiency || "open",
-        minimumEnglishProficiencyScore:
-          program?.minimumEnglishProficiencyScore || 0,
+        proficiencies: program?.proficiencies || [],
         intakes: program?.intakes.map((itk) => itk.id) || [],
         overview: program?.overview || "",
         description: program?.description || "",
+        requirements: program?.requirements || "",
         pgwp: program?.pgwp || false,
       },
     },
@@ -99,12 +104,10 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
         queryClient.invalidateQueries({
           queryKey: [`programs-${school.slug}`],
         });
-        // router.replace(`/schools/${school.slug}`);
       } else {
         queryClient.invalidateQueries({
           queryKey: [`schools-${school.slug}-programs-${program.slug}`],
         });
-        // router.replace(`/schools/${school.slug}/programs/${program.slug}`);
       }
 
       router.back();
@@ -117,7 +120,6 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
   const mel = form.watch("data.minimumEducationLevel");
   // const melDegree = form.watch("data.minimumEducationDegree");
   const tf = form.watch("data.timeframe");
-  const englishProficiency = form.watch("data.englishProficiency");
 
   // * Grading Schemes
   // const {
@@ -130,6 +132,16 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
   //   mel,
   //   melDegree,
   // });
+
+  const {
+    append,
+    remove,
+    replace,
+    fields: proficiencyFields,
+  } = useFieldArray({
+    control: form.control,
+    name: "data.proficiencies",
+  });
 
   return (
     <Form {...form}>
@@ -598,65 +610,59 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
           )
         ) : null} */}
 
-        {/* English Proficiency */}
+        {/* Proficiencies */}
         <FormField
           control={form.control}
-          name="data.englishProficiency"
+          name="data.proficiencies"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>English Proficiency</FormLabel>
-              <Select
-                onValueChange={(val) => {
-                  field.onChange(val);
-                  if (val === "open") {
-                    form.setValue("data.minimumEnglishProficiencyScore", 0);
-                  }
-                }}
-                value={`${field.value}`}
-              >
-                <FormControl>
-                  <SelectTrigger
-                    id="englishProficiency"
-                    className="w-full uppercase"
-                  >
-                    <SelectValue placeholder="Select English Proficiency" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {["open", "ielts", "toefl", "duolingo", "pte"].map((val) => (
-                    <SelectItem key={val} value={val} className="uppercase">
-                      {val}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Minimum English Proficiency Score */}
-        <FormField
-          control={form.control}
-          name="data.minimumEnglishProficiencyScore"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center justify-between">
-                <p>Minimum English Proficiency Score</p>
-                {englishProficiency !== "open" ? (
-                  <ComputeEnglishProficiency
-                    onChange={field.onChange}
-                    examType={englishProficiency}
-                  />
-                ) : null}
-              </FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  disabled={englishProficiency === "open"}
-                  type="number"
-                  placeholder="Minimum Proficiency Score"
+            <FormItem className="md:col-span-2 lg:col-span-3">
+              <div className="flex items-center gap-2">
+                <FormLabel>English Proficiencies</FormLabel>
+                <ProgramProficiencyForm
+                  proficiencies={field.value}
+                  onChange={(data) => field.onChange([...field.value, data])}
                 />
+              </div>
+              <FormControl>
+                <div className="grid grid-cols-1 gap-1 rounded-lg border p-2 md:grid-cols-2 lg:grid-cols-4">
+                  {field.value.length ? (
+                    field.value.map(({ test, score }) => {
+                      const cefr = EnglishProficiency.getCefr(test, score);
+
+                      return (
+                        <div className="flex items-center">
+                          <div className="flex-1">
+                            <ProficiencyDisplay
+                              key={test}
+                              test={test}
+                              name={cefr.name}
+                              tags={cefr.tags}
+                              score={score}
+                              slim
+                            />
+                          </div>
+
+                          <Button
+                            type="button"
+                            role="button"
+                            variant="ghost"
+                            onClick={() =>
+                              field.onChange(
+                                field.value.filter((v) => v.test !== test),
+                              )
+                            }
+                          >
+                            <Trash2 className="text-destructive" />
+                          </Button>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+                      <p className="text-sm">No Proficiency Added</p>
+                    </div>
+                  )}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -668,26 +674,27 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
           control={form.control}
           name="data.pgwp"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="md:col-span-2 lg:col-span-3">
               <FormLabel>PGWP</FormLabel>
-              <div className="flex items-center gap-2 rounded-md border px-3 py-2">
-                <div className="flex-1">
-                  <FormDescription>
-                    Does this program offer Post Graduate Work Permit?
-                  </FormDescription>
-                </div>
+              <FormControl>
+                <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+                  <div className="flex-1">
+                    <FormDescription>
+                      Does this program offer Post Graduate Work Permit?
+                    </FormDescription>
+                  </div>
 
-                <FormControl>
                   <Switch
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
-                </FormControl>
-              </div>
+                </div>
+              </FormControl>
             </FormItem>
           )}
         />
 
+        {/* Intakes */}
         <FormField
           control={form.control}
           name="data.intakes"
@@ -714,26 +721,30 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
                 />
               </div>
 
-              {field.value.length ? (
-                <div className="grid grid-cols-1 gap-1 rounded-lg border p-2 md:grid-cols-2 lg:grid-cols-4">
-                  {field.value.map((id) => {
+              <div className="grid grid-cols-1 gap-1 rounded-lg border p-2 md:grid-cols-2 lg:grid-cols-4">
+                {field.value.length ? (
+                  field.value.map((id) => {
                     const intake = selectedIntakes.find((itk) => itk.id === id);
 
                     return intake ? (
                       <div
                         key={`${id}`}
-                        className="w-full rounded-lg border px-4 py-2"
+                        className="flex w-full items-center justify-between rounded-lg border px-4 py-2"
                       >
                         <p className="text-sm font-semibold">{intake.intake}</p>
-                        <p className="text-xs">
-                          {brandClientApi.date.formatDate(intake.startDate)} -{" "}
-                          {brandClientApi.date.formatDate(intake.deadline)}
-                        </p>
+                        <IntakeStatus
+                          status={intake.status}
+                          classNames="text-xs !px-2"
+                        />
                       </div>
                     ) : null;
-                  })}
-                </div>
-              ) : null}
+                  })
+                ) : (
+                  <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+                    <p className="text-sm">No Intake Added</p>
+                  </div>
+                )}
+              </div>
 
               <FormMessage />
             </FormItem>
@@ -754,6 +765,30 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
                 />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Requirements */}
+        <FormField
+          control={form.control}
+          name="data.requirements"
+          render={({ field, fieldState }) => (
+            <FormItem className="md:col-span-2 lg:col-span-3">
+              <FormLabel htmlFor="description">Program Requirements</FormLabel>
+              <FormControl>
+                <Editor
+                  onChange={field.onChange}
+                  invalid={fieldState.invalid}
+                  content={field.value}
+                  editable={!form.formState.isSubmitting}
+                  className="max-h-[400px]"
+                />
+              </FormControl>
+              <FormMessage />
+              <FormDescription>
+                Program requirements / prerequisites
+              </FormDescription>
             </FormItem>
           )}
         />

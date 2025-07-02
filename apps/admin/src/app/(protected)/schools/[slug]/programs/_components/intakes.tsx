@@ -10,15 +10,11 @@ import {
   CollapsibleTrigger,
 } from "@workspace/ui/components/collapsible";
 import { Separator } from "@workspace/ui/components/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@workspace/ui/components/tooltip";
 import { ChevronsUpDown, Trash2 } from "lucide-react";
 import React, { useCallback, useMemo, useState } from "react";
 import AddIntakesForm from "./add-intakes-form";
 import { connectIntake, disconnectIntake } from "../../../_actions";
+import { IntakeStatus } from "@workspace/ui/components/intake-status";
 
 interface Props {
   intakes: IIntake[];
@@ -30,41 +26,6 @@ const Item: React.FC<{ intake: IIntake; program: IProgram }> = ({
   program,
 }) => {
   const [open, seOpen] = useState(false);
-  const intakeStatus = useMemo(() => {
-    let status: "open" | "likely open" | "closed" = "open";
-
-    if (brandClientApi.date.isBefore(intake.deadline, new Date()))
-      status = "closed";
-    if (brandClientApi.date.isAfter(intake.deadline, new Date())) {
-      if (brandClientApi.date.isAfter(intake.startDate, new Date())) {
-        status = "likely open";
-      } else {
-        status = "open";
-      }
-    }
-
-    return status;
-  }, [intake]);
-
-  //   const promise = useCallback(async () => {
-  //     const queryClient = useQueryClient();
-  //     const serverRes = await disconnectIntake(
-  //       program.school?.slug!,
-  //       program.slug,
-  //       [intake.id],
-  //     );
-  //     const res = brandClientApi.utils.handleServerActionResponse(serverRes);
-
-  //     queryClient.invalidateQueries({
-  //       queryKey: [`intakes-${program.school!.slug}`],
-  //     });
-
-  //     queryClient.invalidateQueries({
-  //       queryKey: [`programs-${program.school!.slug}`],
-  //     });
-
-  //     return res;
-  //   }, [program, intake]);
 
   return (
     <Collapsible
@@ -73,11 +34,7 @@ const Item: React.FC<{ intake: IIntake; program: IProgram }> = ({
       className="w-full space-y-5 rounded-md border p-2"
     >
       <div className="flex items-center gap-2 text-sm">
-        <p
-          className={`rounded-md border px-4 py-1 font-semibold capitalize ${intakeStatus === "open" ? "border-green-600 bg-green-600/10 text-green-600" : intakeStatus === "closed" ? "bg-destructive/10 text-destructive border-destructive" : "border-amber-600 bg-amber-600/10 text-amber-600"}`}
-        >
-          {intakeStatus}
-        </p>
+        <IntakeStatus status={intake.status} />
         <p className="ml-auto font-semibold">{intake.intake}</p>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="icon" className="size-8">
@@ -85,41 +42,22 @@ const Item: React.FC<{ intake: IIntake; program: IProgram }> = ({
             <span className="sr-only">Toggle</span>
           </Button>
         </CollapsibleTrigger>
-        {/* <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="size-8"
-              onClick={() => {
-                brandClientApi.utils.toast.promise(promise, {
-                  loading: "Updating...",
-                  success: (data) => {
-                    return data.message;
-                  },
-                  error(error: any) {
-                    return brandClientApi.utils.handleError(error);
-                  },
-                });
-              }}
-            >
-              <Trash2 className="text-destructive" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Disconnect from program</TooltipContent>
-        </Tooltip> */}
       </div>
       <CollapsibleContent className="text-md space-y-2 px-2">
         <div className="space-y-1">
-          <p className="font-semibold">Open Date</p>
+          <p className="text-sm font-semibold">Open Date</p>
           <p className="text-sm">
-            {brandClientApi.date.formatDate(intake.startDate)}
+            {intake.startDate
+              ? brandClientApi.date.formatDate(intake.startDate, "DD/MM/YYYY")
+              : "No Information"}
           </p>
         </div>
         <div className="space-y-1">
-          <p className="font-semibold">Deadline</p>
+          <p className="text-sm font-semibold">Deadline</p>
           <p className="text-sm">
-            {brandClientApi.date.formatDate(intake.deadline)}
+            {intake.deadline
+              ? brandClientApi.date.formatDate(intake.deadline, "DD/MM/YYYY")
+              : "No Information"}
           </p>
         </div>
       </CollapsibleContent>

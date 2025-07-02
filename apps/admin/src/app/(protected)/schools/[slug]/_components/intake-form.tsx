@@ -1,6 +1,11 @@
 "use client";
 
-import { CreateIntakeSchema, IIntake } from "@workspace/shared";
+import {
+  CreateIntakeSchema,
+  IIntake,
+  institutionType,
+  intakeStatus,
+} from "@workspace/shared";
 import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import React, { useCallback, useMemo, useState } from "react";
 import { brandClientApi } from "@/src/lib/client";
@@ -29,6 +34,13 @@ import { FormButton } from "@workspace/ui/components/form-button";
 import { DatePicker } from "@workspace/ui/components/date-picker";
 import { IntakeInput } from "@workspace/ui/components/intake-input";
 import { createSchoolIntake, updateSchoolIntake } from "../../_actions";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@workspace/ui/components/select";
 
 interface Props {
   slug: string;
@@ -50,26 +62,37 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
       intake:
         intake?.intake ||
         `${brandClientApi.date.formatDate(new Date(), "MMM").toUpperCase()} ${startYear}`,
-      startDate: +new Date(intake?.startDate || Date.now()),
-      deadline: +new Date(intake?.deadline || Date.now()),
+      status: intake?.status || "open",
+      startDate: intake?.startDate ? +new Date(intake.startDate) : undefined,
+      deadline: intake?.deadline ? +new Date(intake.deadline) : undefined,
     },
   });
 
   const onSubmit = useCallback(async (data: CreateIntakeSchema) => {
     try {
+      let body: CreateIntakeSchema = {
+        ...data,
+        startDate: data.startDate
+          ? +brandClientApi.date.startOfDay(new Date(data.startDate))
+          : undefined,
+        deadline: data.deadline
+          ? +brandClientApi.date.endOfDay(new Date(data.deadline))
+          : undefined,
+      };
+
+      if (!body.startDate) {
+        delete body.startDate;
+      }
+
+      if (!body.deadline) {
+        delete body.deadline;
+      }
+
       let serverRes;
       if (intake) {
-        serverRes = await updateSchoolIntake(intake.id, slug, {
-          ...data,
-          startDate: +brandClientApi.date.startOfDay(new Date(data.startDate)),
-          deadline: +brandClientApi.date.endOfDay(new Date(data.deadline)),
-        });
+        serverRes = await updateSchoolIntake(intake.id, slug, body);
       } else {
-        serverRes = await createSchoolIntake(slug, {
-          ...data,
-          startDate: +brandClientApi.date.startOfDay(new Date(data.startDate)),
-          deadline: +brandClientApi.date.endOfDay(new Date(data.deadline)),
-        });
+        serverRes = await createSchoolIntake(slug, body);
       }
       brandClientApi.utils.handleServerActionResponse(serverRes);
       brandClientApi.utils.toast.success("Action successful");
@@ -136,6 +159,36 @@ const IntakeForm: React.FC<Props> = ({ intake, slug, setEditIntake }) => {
                       endYear={endYear}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Intake Status</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger id="status" className="w-full capitalize">
+                        <SelectValue placeholder="Select intake status" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      {intakeStatus.map((status) => (
+                        <SelectItem
+                          key={status}
+                          value={status}
+                          className="capitalize"
+                        >
+                          {status.replaceAll("_", " ")}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

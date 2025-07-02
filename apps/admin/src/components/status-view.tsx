@@ -1,25 +1,14 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 interface Props {
-  status: "Active" | "Suspended";
+  status: boolean;
 }
 const StatusView: React.FC<Props> = ({ status }) => {
-  const classNames = useMemo(() => {
-    switch (status) {
-      case "Active":
-        return "bg-green-500/20 border-green-600 dark:bg-green-800/20 dark:border-green-800";
-      case "Suspended":
-        return "bg-destructive/20 border-destructive";
-      default:
-        return "";
-    }
-  }, []);
-
   return (
     <p
-      className={`w-fit rounded-md border px-3 py-1 text-xs font-bold uppercase ${classNames}`}
+      className={`w-fit rounded-sm px-4 py-1 text-sm font-bold uppercase text-white ${status ? "bg-green-600" : "bg-destructive"}`}
     >
-      {status}
+      {status ? "Active" : "Inactive"}
     </p>
   );
 };

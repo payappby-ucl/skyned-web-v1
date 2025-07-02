@@ -9,6 +9,7 @@ import { Eye, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import SchoolProfile from "@/src/components/school-profile";
+import StatusView from "@/src/components/status-view";
 
 export const columns: ColumnDef<ISchool>[] = [
   {
@@ -130,17 +131,7 @@ export const columns: ColumnDef<ISchool>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader title="Status" column={column} />
     ),
-    cell: (info) => {
-      const status = info.getValue<boolean>();
-
-      return (
-        <p
-          className={`rounded-sm px-4 py-1 text-sm font-bold uppercase text-white ${status ? "bg-green-600" : "bg-destructive"}`}
-        >
-          {status ? "Active" : "Inactive"}
-        </p>
-      );
-    },
+    cell: (info) => <StatusView status={info.getValue<boolean>()} />,
   },
 
   {

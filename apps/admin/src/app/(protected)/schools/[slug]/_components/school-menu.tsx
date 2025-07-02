@@ -1,3 +1,5 @@
+"use client";
+
 import { ISchool } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -6,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@workspace/ui/components/dropdown-menu";
-import { EllipsisVertical, House, NotebookPen, SquarePen } from "lucide-react";
+import { ChevronDown, House, NotebookPen, SquarePen } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -17,10 +19,12 @@ interface Props {
 const SchoolMenu: React.FC<Props> = ({ school }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="text-muted-foreground hover:bg-muted flex size-8 items-center justify-center rounded-sm">
-        <EllipsisVertical size={18} />
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="rounded-sm px-4 py-1 text-sm">
+          More <ChevronDown />
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="mr-2">
+      <DropdownMenuContent align="start" className="md:mr-2">
         <DropdownMenuItem>
           <Link
             href={`/schools/${school.slug}/edit`}

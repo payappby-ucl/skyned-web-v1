@@ -1,17 +1,19 @@
 "use client";
 
-import { EnglishProficiency, IProgram } from "@workspace/shared";
+import {
+  EnglishProficiency,
+  EnglishProficiencySchema,
+} from "@workspace/shared";
 import { ArrowBigRight } from "lucide-react";
 import React, { useMemo } from "react";
 
-interface Props {
-  proficiency: Exclude<IProgram["englishProficiency"], "open">;
-  score: IProgram["minimumEnglishProficiencyScore"];
-}
-const EnglishProficiencyDetails: React.FC<Props> = ({ proficiency, score }) => {
+const EnglishProficiencyDetails: React.FC<EnglishProficiencySchema> = ({
+  test,
+  score,
+}) => {
   const cefr = useMemo(
-    () => EnglishProficiency.getCefr(proficiency, score),
-    [proficiency, score],
+    () => EnglishProficiency.getCefr(test, score),
+    [test, score],
   );
 
   return (
