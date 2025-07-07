@@ -5,6 +5,7 @@ import { repository } from "../../../infrastructure";
 import { signInUser } from "../../../../__tests__/helpers/utils";
 import { programData, schoolData } from "../../../data";
 import { intakeService } from "../intake";
+import { AuthClaim } from "@workspace/shared";
 
 describe("ProgramServive", () => {
   describe("Instance", () => {
@@ -42,6 +43,7 @@ describe("ProgramServive", () => {
           school.schoolId,
           {
             intake: "MAY 2030",
+            status: "open",
             startDate: Date.now(),
             deadline: Date.now(),
           },
@@ -93,16 +95,25 @@ describe("ProgramServive", () => {
     describe("updateSingleProgram", () => {
       test("should fail if invalid data is passed", async () => {
         try {
-          await programService.updateSingleProgram("", "", {} as any);
+          await programService.updateSingleProgram("", "", "", {} as any);
         } catch (error: any) {
           expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
         }
       });
 
       test("should update a program", async () => {
-        const program = await programService.updateSingleProgram(
+        const p = await programService.findProgramBySlugAndSchoolId(
           schoolId,
           programData.slug,
+          { claim: "admin" } as AuthClaim,
+        );
+
+        if (!p) throw new Error("Program not found");
+
+        const program = await programService.updateSingleProgram(
+          schoolId,
+          p.slug,
+          p.programId,
           { applicationFee: 65.9, intakes: [intakeId] },
         );
 
@@ -121,11 +132,26 @@ describe("ProgramServive", () => {
         }
       });
 
-      test("should create multiple programs", async () => {
+      test("should update multiple programs", async () => {
+        const p1 = await programService.findProgramBySlugAndSchoolId(
+          schoolId,
+          "program-1",
+          { claim: "admin" } as AuthClaim,
+        );
+        const p2 = await programService.findProgramBySlugAndSchoolId(
+          schoolId,
+          "program-2",
+          { claim: "admin" } as AuthClaim,
+        );
+
+        if (!p1 || !p2) {
+          throw new Error("Programs not found - Bulk Update test");
+        }
+
         const count = await programService.updateBulkProgram(
           schoolId,
-          ["Program 1", "Program 2"].map((name) => ({
-            programSlug: name.toLowerCase().split(" ").join("-"),
+          [p1, p2].map((p) => ({
+            programId: p.programId,
             data: {
               tuitionFee: 12500.99,
               intakes: [intakeId],

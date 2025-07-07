@@ -62,11 +62,10 @@ components:
         minimumEligibilityGpa:
           type: number
 
-        englishProficiency:
-          type: string
-          enum: ["ielts", "toefl", "duolingo", "pte", "open"]
-        minimumEnglishProficiencyScore:
-          type: number
+        proficiencies:
+          type: array
+          items:
+            $ref: "#/components/schemas/Proficiency"
 
         pgwp:
           type: boolean

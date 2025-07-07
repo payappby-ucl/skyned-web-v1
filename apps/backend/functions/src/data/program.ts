@@ -22,8 +22,12 @@ export const programData = {
   minimumEducationDegree: 1,
   minimumEligibilityGpa: 80,
 
-  englishProficiency: "open" as const,
-  minimumEnglishProficiencyScore: 0,
+  proficiencies: [
+    {
+      test: "ielts" as any,
+      score: 8,
+    },
+  ],
 
   pgwp: false,
 };

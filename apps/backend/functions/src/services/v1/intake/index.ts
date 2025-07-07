@@ -51,8 +51,9 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
         createdById: aid,
         schoolId: sid,
         intake: input.intake,
-        startDate: new Date(input.startDate),
-        deadline: new Date(input.deadline),
+        status: input.status,
+        startDate: input.startDate ? new Date(input.startDate) : null,
+        deadline: input.deadline ? new Date(input.deadline) : null,
       },
     });
 
@@ -82,8 +83,8 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
         createdById: aid,
         schoolId: sid,
         intake: input.intake,
-        startDate: new Date(input.startDate),
-        deadline: new Date(input.deadline),
+        startDate: input.startDate ? new Date(input.startDate) : null,
+        deadline: input.deadline ? new Date(input.deadline) : null,
       })),
       skipDuplicates: true,
     });
@@ -129,8 +130,8 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
       take,
       where: status
         ? {
-            deadline: {
-              gte: new Date(),
+            status: {
+              in: ["likely_open", "open"],
             },
           }
         : {
@@ -172,7 +173,12 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
       select:
         authUser?.claim !== "admin"
           ? {
-              ...SkynedUtils.select(["intake", "deadline", "startDate"]),
+              ...SkynedUtils.select([
+                "intake",
+                "deadline",
+                "startDate",
+                "status",
+              ]),
             }
           : undefined,
     });
@@ -191,8 +197,8 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
       where: status
         ? {
             schoolId,
-            deadline: {
-              gte: new Date(),
+            status: {
+              in: ["likely_open", "open"],
             },
           }
         : {
@@ -235,7 +241,12 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
       select:
         authUser?.claim !== "admin"
           ? {
-              ...SkynedUtils.select(["intake", "deadline", "startDate"]),
+              ...SkynedUtils.select([
+                "intake",
+                "deadline",
+                "startDate",
+                "status",
+              ]),
             }
           : undefined,
     });
@@ -260,8 +271,9 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
       },
       data: {
         intake: input.intake,
-        startDate: new Date(input.startDate),
-        deadline: new Date(input.deadline),
+        status: input.status,
+        startDate: input.startDate ? new Date(input.startDate) : undefined,
+        deadline: input.deadline ? new Date(input.deadline) : undefined,
       },
     });
 

@@ -1,3 +1,4 @@
+import { intakeStatus } from "../utils";
 import { z } from "zod";
 
 export const CreateIntakeSchema = z.object({
@@ -11,8 +12,9 @@ export const CreateIntakeSchema = z.object({
         ),
       "Enter a valid intake",
     ),
-  startDate: z.coerce.number().positive().int(),
-  deadline: z.coerce.number().positive().int(),
+  startDate: z.coerce.number().positive().int().optional(),
+  deadline: z.coerce.number().positive().int().optional(),
+  status: z.enum(intakeStatus).default("open"),
 });
 
 export type CreateIntakeSchema = z.infer<typeof CreateIntakeSchema>;

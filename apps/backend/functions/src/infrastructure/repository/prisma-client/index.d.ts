@@ -64,10 +64,30 @@ export type Accommodation = $Result.DefaultSelection<Prisma.$AccommodationPayloa
  */
 export type Program = $Result.DefaultSelection<Prisma.$ProgramPayload>
 /**
+ * Model EnglishProficiency
+ * 
+ */
+export type EnglishProficiency = $Result.DefaultSelection<Prisma.$EnglishProficiencyPayload>
+/**
  * Model Intake
  * 
  */
 export type Intake = $Result.DefaultSelection<Prisma.$IntakePayload>
+/**
+ * Model BlogPost
+ * 
+ */
+export type BlogPost = $Result.DefaultSelection<Prisma.$BlogPostPayload>
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
+/**
+ * Model Category
+ * 
+ */
+export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
 
 /**
  * Enums
@@ -149,6 +169,25 @@ export const Timeframe: {
 
 export type Timeframe = (typeof Timeframe)[keyof typeof Timeframe]
 
+
+export const IntakeStatus: {
+  open: 'open',
+  closed: 'closed',
+  likely_open: 'likely_open'
+};
+
+export type IntakeStatus = (typeof IntakeStatus)[keyof typeof IntakeStatus]
+
+
+export const BlogStatus: {
+  draft: 'draft',
+  scheduled: 'scheduled',
+  published: 'published',
+  unpublished: 'unpublished'
+};
+
+export type BlogStatus = (typeof BlogStatus)[keyof typeof BlogStatus]
+
 }
 
 export type DepartmentName = $Enums.DepartmentName
@@ -182,6 +221,14 @@ export const TuitionFeeType: typeof $Enums.TuitionFeeType
 export type Timeframe = $Enums.Timeframe
 
 export const Timeframe: typeof $Enums.Timeframe
+
+export type IntakeStatus = $Enums.IntakeStatus
+
+export const IntakeStatus: typeof $Enums.IntakeStatus
+
+export type BlogStatus = $Enums.BlogStatus
+
+export const BlogStatus: typeof $Enums.BlogStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -409,6 +456,16 @@ export class PrismaClient<
   get program(): Prisma.ProgramDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.englishProficiency`: Exposes CRUD operations for the **EnglishProficiency** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EnglishProficiencies
+    * const englishProficiencies = await prisma.englishProficiency.findMany()
+    * ```
+    */
+  get englishProficiency(): Prisma.EnglishProficiencyDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.intake`: Exposes CRUD operations for the **Intake** model.
     * Example usage:
     * ```ts
@@ -417,6 +474,36 @@ export class PrismaClient<
     * ```
     */
   get intake(): Prisma.IntakeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.blogPost`: Exposes CRUD operations for the **BlogPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BlogPosts
+    * const blogPosts = await prisma.blogPost.findMany()
+    * ```
+    */
+  get blogPost(): Prisma.BlogPostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tags
+    * const tags = await prisma.tag.findMany()
+    * ```
+    */
+  get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.category`: Exposes CRUD operations for the **Category** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.category.findMany()
+    * ```
+    */
+  get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -475,8 +562,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.10.1
-   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
+   * Prisma Client JS version: 6.11.1
+   * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
    */
   export type PrismaVersion = {
     client: string
@@ -867,7 +954,11 @@ export namespace Prisma {
     School: 'School',
     Accommodation: 'Accommodation',
     Program: 'Program',
-    Intake: 'Intake'
+    EnglishProficiency: 'EnglishProficiency',
+    Intake: 'Intake',
+    BlogPost: 'BlogPost',
+    Tag: 'Tag',
+    Category: 'Category'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -886,7 +977,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "intake"
+      modelProps: "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "englishProficiency" | "intake" | "blogPost" | "tag" | "category"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1630,6 +1721,80 @@ export namespace Prisma {
           }
         }
       }
+      EnglishProficiency: {
+        payload: Prisma.$EnglishProficiencyPayload<ExtArgs>
+        fields: Prisma.EnglishProficiencyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnglishProficiencyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnglishProficiencyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          findFirst: {
+            args: Prisma.EnglishProficiencyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnglishProficiencyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          findMany: {
+            args: Prisma.EnglishProficiencyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>[]
+          }
+          create: {
+            args: Prisma.EnglishProficiencyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          createMany: {
+            args: Prisma.EnglishProficiencyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnglishProficiencyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>[]
+          }
+          delete: {
+            args: Prisma.EnglishProficiencyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          update: {
+            args: Prisma.EnglishProficiencyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnglishProficiencyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnglishProficiencyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnglishProficiencyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnglishProficiencyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishProficiencyPayload>
+          }
+          aggregate: {
+            args: Prisma.EnglishProficiencyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnglishProficiency>
+          }
+          groupBy: {
+            args: Prisma.EnglishProficiencyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnglishProficiencyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnglishProficiencyCountArgs<ExtArgs>
+            result: $Utils.Optional<EnglishProficiencyCountAggregateOutputType> | number
+          }
+        }
+      }
       Intake: {
         payload: Prisma.$IntakePayload<ExtArgs>
         fields: Prisma.IntakeFieldRefs
@@ -1701,6 +1866,228 @@ export namespace Prisma {
           count: {
             args: Prisma.IntakeCountArgs<ExtArgs>
             result: $Utils.Optional<IntakeCountAggregateOutputType> | number
+          }
+        }
+      }
+      BlogPost: {
+        payload: Prisma.$BlogPostPayload<ExtArgs>
+        fields: Prisma.BlogPostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BlogPostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BlogPostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          findFirst: {
+            args: Prisma.BlogPostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BlogPostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          findMany: {
+            args: Prisma.BlogPostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          create: {
+            args: Prisma.BlogPostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          createMany: {
+            args: Prisma.BlogPostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BlogPostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          delete: {
+            args: Prisma.BlogPostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          update: {
+            args: Prisma.BlogPostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          deleteMany: {
+            args: Prisma.BlogPostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BlogPostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BlogPostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>[]
+          }
+          upsert: {
+            args: Prisma.BlogPostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BlogPostPayload>
+          }
+          aggregate: {
+            args: Prisma.BlogPostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBlogPost>
+          }
+          groupBy: {
+            args: Prisma.BlogPostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BlogPostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BlogPostCountArgs<ExtArgs>
+            result: $Utils.Optional<BlogPostCountAggregateOutputType> | number
+          }
+        }
+      }
+      Tag: {
+        payload: Prisma.$TagPayload<ExtArgs>
+        fields: Prisma.TagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findFirst: {
+            args: Prisma.TagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findMany: {
+            args: Prisma.TagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          create: {
+            args: Prisma.TagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          createMany: {
+            args: Prisma.TagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          delete: {
+            args: Prisma.TagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          update: {
+            args: Prisma.TagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          deleteMany: {
+            args: Prisma.TagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          upsert: {
+            args: Prisma.TagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          aggregate: {
+            args: Prisma.TagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTag>
+          }
+          groupBy: {
+            args: Prisma.TagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TagCountArgs<ExtArgs>
+            result: $Utils.Optional<TagCountAggregateOutputType> | number
+          }
+        }
+      }
+      Category: {
+        payload: Prisma.$CategoryPayload<ExtArgs>
+        fields: Prisma.CategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.CategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          findMany: {
+            args: Prisma.CategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          create: {
+            args: Prisma.CategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          createMany: {
+            args: Prisma.CategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.CategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          update: {
+            args: Prisma.CategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.CategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.CategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.CategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCategory>
+          }
+          groupBy: {
+            args: Prisma.CategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<CategoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1798,7 +2185,11 @@ export namespace Prisma {
     school?: SchoolOmit
     accommodation?: AccommodationOmit
     program?: ProgramOmit
+    englishProficiency?: EnglishProficiencyOmit
     intake?: IntakeOmit
+    blogPost?: BlogPostOmit
+    tag?: TagOmit
+    category?: CategoryOmit
   }
 
   /* Types for Logging */
@@ -1905,6 +2296,9 @@ export namespace Prisma {
     accommodationsCreated: number
     intakesCreated: number
     programsCreated: number
+    blogsCreated: number
+    tagsCreated: number
+    categoriesCreated: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1920,6 +2314,9 @@ export namespace Prisma {
     accommodationsCreated?: boolean | AdminCountOutputTypeCountAccommodationsCreatedArgs
     intakesCreated?: boolean | AdminCountOutputTypeCountIntakesCreatedArgs
     programsCreated?: boolean | AdminCountOutputTypeCountProgramsCreatedArgs
+    blogsCreated?: boolean | AdminCountOutputTypeCountBlogsCreatedArgs
+    tagsCreated?: boolean | AdminCountOutputTypeCountTagsCreatedArgs
+    categoriesCreated?: boolean | AdminCountOutputTypeCountCategoriesCreatedArgs
   }
 
   // Custom InputTypes
@@ -2015,6 +2412,27 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountProgramsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProgramWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountBlogsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountTagsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountCategoriesCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategoryWhereInput
   }
 
 
@@ -2135,10 +2553,12 @@ export namespace Prisma {
 
   export type ProgramCountOutputType = {
     intakes: number
+    proficiencies: number
   }
 
   export type ProgramCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     intakes?: boolean | ProgramCountOutputTypeCountIntakesArgs
+    proficiencies?: boolean | ProgramCountOutputTypeCountProficienciesArgs
   }
 
   // Custom InputTypes
@@ -2157,6 +2577,13 @@ export namespace Prisma {
    */
   export type ProgramCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IntakeWhereInput
+  }
+
+  /**
+   * ProgramCountOutputType without action
+   */
+  export type ProgramCountOutputTypeCountProficienciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishProficiencyWhereInput
   }
 
 
@@ -2188,6 +2615,108 @@ export namespace Prisma {
    */
   export type IntakeCountOutputTypeCountProgramsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProgramWhereInput
+  }
+
+
+  /**
+   * Count Type BlogPostCountOutputType
+   */
+
+  export type BlogPostCountOutputType = {
+    tags: number
+    categories: number
+  }
+
+  export type BlogPostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | BlogPostCountOutputTypeCountTagsArgs
+    categories?: boolean | BlogPostCountOutputTypeCountCategoriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPostCountOutputType
+     */
+    select?: BlogPostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategoryWhereInput
+  }
+
+
+  /**
+   * Count Type TagCountOutputType
+   */
+
+  export type TagCountOutputType = {
+    posts: number
+  }
+
+  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | TagCountOutputTypeCountPostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TagCountOutputType
+     */
+    select?: TagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
+  }
+
+
+  /**
+   * Count Type CategoryCountOutputType
+   */
+
+  export type CategoryCountOutputType = {
+    posts: number
+  }
+
+  export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | CategoryCountOutputTypeCountPostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CategoryCountOutputType
+     */
+    select?: CategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
   }
 
 
@@ -3557,6 +4086,9 @@ export namespace Prisma {
     accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
     intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
     programsCreated?: boolean | Admin$programsCreatedArgs<ExtArgs>
+    blogsCreated?: boolean | Admin$blogsCreatedArgs<ExtArgs>
+    tagsCreated?: boolean | Admin$tagsCreatedArgs<ExtArgs>
+    categoriesCreated?: boolean | Admin$categoriesCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -3643,6 +4175,9 @@ export namespace Prisma {
     accommodationsCreated?: boolean | Admin$accommodationsCreatedArgs<ExtArgs>
     intakesCreated?: boolean | Admin$intakesCreatedArgs<ExtArgs>
     programsCreated?: boolean | Admin$programsCreatedArgs<ExtArgs>
+    blogsCreated?: boolean | Admin$blogsCreatedArgs<ExtArgs>
+    tagsCreated?: boolean | Admin$tagsCreatedArgs<ExtArgs>
+    categoriesCreated?: boolean | Admin$categoriesCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3668,6 +4203,9 @@ export namespace Prisma {
       accommodationsCreated: Prisma.$AccommodationPayload<ExtArgs>[]
       intakesCreated: Prisma.$IntakePayload<ExtArgs>[]
       programsCreated: Prisma.$ProgramPayload<ExtArgs>[]
+      blogsCreated: Prisma.$BlogPostPayload<ExtArgs>[]
+      tagsCreated: Prisma.$TagPayload<ExtArgs>[]
+      categoriesCreated: Prisma.$CategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4096,6 +4634,9 @@ export namespace Prisma {
     accommodationsCreated<T extends Admin$accommodationsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$accommodationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccommodationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     intakesCreated<T extends Admin$intakesCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$intakesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     programsCreated<T extends Admin$programsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$programsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blogsCreated<T extends Admin$blogsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$blogsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tagsCreated<T extends Admin$tagsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$tagsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categoriesCreated<T extends Admin$categoriesCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$categoriesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4844,6 +5385,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProgramScalarFieldEnum | ProgramScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.blogsCreated
+   */
+  export type Admin$blogsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    where?: BlogPostWhereInput
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    cursor?: BlogPostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.tagsCreated
+   */
+  export type Admin$tagsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.categoriesCreated
+   */
+  export type Admin$categoriesCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    cursor?: CategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
   }
 
   /**
@@ -9420,6 +10033,7 @@ export namespace Prisma {
     resource: string | null
     resourceId: number | null
     action: string | null
+    message: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9430,6 +10044,7 @@ export namespace Prisma {
     resource: string | null
     resourceId: number | null
     action: string | null
+    message: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9440,6 +10055,7 @@ export namespace Prisma {
     resource: number
     resourceId: number
     action: number
+    message: number
     previousState: number
     currentState: number
     createdAt: number
@@ -9466,6 +10082,7 @@ export namespace Prisma {
     resource?: true
     resourceId?: true
     action?: true
+    message?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9476,6 +10093,7 @@ export namespace Prisma {
     resource?: true
     resourceId?: true
     action?: true
+    message?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9486,6 +10104,7 @@ export namespace Prisma {
     resource?: true
     resourceId?: true
     action?: true
+    message?: true
     previousState?: true
     currentState?: true
     createdAt?: true
@@ -9585,6 +10204,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message: string | null
     previousState: JsonValue | null
     currentState: JsonValue | null
     createdAt: Date
@@ -9616,6 +10236,7 @@ export namespace Prisma {
     resource?: boolean
     resourceId?: boolean
     action?: boolean
+    message?: boolean
     previousState?: boolean
     currentState?: boolean
     createdAt?: boolean
@@ -9629,6 +10250,7 @@ export namespace Prisma {
     resource?: boolean
     resourceId?: boolean
     action?: boolean
+    message?: boolean
     previousState?: boolean
     currentState?: boolean
     createdAt?: boolean
@@ -9642,6 +10264,7 @@ export namespace Prisma {
     resource?: boolean
     resourceId?: boolean
     action?: boolean
+    message?: boolean
     previousState?: boolean
     currentState?: boolean
     createdAt?: boolean
@@ -9655,13 +10278,14 @@ export namespace Prisma {
     resource?: boolean
     resourceId?: boolean
     action?: boolean
+    message?: boolean
     previousState?: boolean
     currentState?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ActivityLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "resource" | "resourceId" | "action" | "previousState" | "currentState" | "createdAt" | "updatedAt", ExtArgs["result"]["activityLog"]>
+  export type ActivityLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "resource" | "resourceId" | "action" | "message" | "previousState" | "currentState" | "createdAt" | "updatedAt", ExtArgs["result"]["activityLog"]>
   export type ActivityLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | AdminDefaultArgs<ExtArgs>
   }
@@ -9683,6 +10307,7 @@ export namespace Prisma {
       resource: string
       resourceId: number
       action: string
+      message: string | null
       previousState: Prisma.JsonValue | null
       currentState: Prisma.JsonValue | null
       createdAt: Date
@@ -10116,6 +10741,7 @@ export namespace Prisma {
     readonly resource: FieldRef<"ActivityLog", 'String'>
     readonly resourceId: FieldRef<"ActivityLog", 'Int'>
     readonly action: FieldRef<"ActivityLog", 'String'>
+    readonly message: FieldRef<"ActivityLog", 'String'>
     readonly previousState: FieldRef<"ActivityLog", 'Json'>
     readonly currentState: FieldRef<"ActivityLog", 'Json'>
     readonly createdAt: FieldRef<"ActivityLog", 'DateTime'>
@@ -13014,7 +13640,6 @@ export namespace Prisma {
     duration: Decimal | null
     minimumEducationDegree: number | null
     minimumEligibilityGpa: Decimal | null
-    minimumEnglishProficiencyScore: Decimal | null
   }
 
   export type ProgramSumAggregateOutputType = {
@@ -13025,7 +13650,6 @@ export namespace Prisma {
     duration: Decimal | null
     minimumEducationDegree: number | null
     minimumEligibilityGpa: Decimal | null
-    minimumEnglishProficiencyScore: Decimal | null
   }
 
   export type ProgramMinAggregateOutputType = {
@@ -13038,6 +13662,7 @@ export namespace Prisma {
     degreeType: string | null
     overview: string | null
     description: string | null
+    requirements: string | null
     applicationFee: Decimal | null
     applicationFeeDiscount: Decimal | null
     tuitionFee: Decimal | null
@@ -13047,8 +13672,6 @@ export namespace Prisma {
     minimumEducationLevel: string | null
     minimumEducationDegree: number | null
     minimumEligibilityGpa: Decimal | null
-    englishProficiency: string | null
-    minimumEnglishProficiencyScore: Decimal | null
     pgwp: boolean | null
     active: boolean | null
     createdById: string | null
@@ -13066,6 +13689,7 @@ export namespace Prisma {
     degreeType: string | null
     overview: string | null
     description: string | null
+    requirements: string | null
     applicationFee: Decimal | null
     applicationFeeDiscount: Decimal | null
     tuitionFee: Decimal | null
@@ -13075,8 +13699,6 @@ export namespace Prisma {
     minimumEducationLevel: string | null
     minimumEducationDegree: number | null
     minimumEligibilityGpa: Decimal | null
-    englishProficiency: string | null
-    minimumEnglishProficiencyScore: Decimal | null
     pgwp: boolean | null
     active: boolean | null
     createdById: string | null
@@ -13094,6 +13716,7 @@ export namespace Prisma {
     degreeType: number
     overview: number
     description: number
+    requirements: number
     applicationFee: number
     applicationFeeDiscount: number
     tuitionFee: number
@@ -13103,8 +13726,6 @@ export namespace Prisma {
     minimumEducationLevel: number
     minimumEducationDegree: number
     minimumEligibilityGpa: number
-    englishProficiency: number
-    minimumEnglishProficiencyScore: number
     pgwp: number
     active: number
     createdById: number
@@ -13122,7 +13743,6 @@ export namespace Prisma {
     duration?: true
     minimumEducationDegree?: true
     minimumEligibilityGpa?: true
-    minimumEnglishProficiencyScore?: true
   }
 
   export type ProgramSumAggregateInputType = {
@@ -13133,7 +13753,6 @@ export namespace Prisma {
     duration?: true
     minimumEducationDegree?: true
     minimumEligibilityGpa?: true
-    minimumEnglishProficiencyScore?: true
   }
 
   export type ProgramMinAggregateInputType = {
@@ -13146,6 +13765,7 @@ export namespace Prisma {
     degreeType?: true
     overview?: true
     description?: true
+    requirements?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -13155,8 +13775,6 @@ export namespace Prisma {
     minimumEducationLevel?: true
     minimumEducationDegree?: true
     minimumEligibilityGpa?: true
-    englishProficiency?: true
-    minimumEnglishProficiencyScore?: true
     pgwp?: true
     active?: true
     createdById?: true
@@ -13174,6 +13792,7 @@ export namespace Prisma {
     degreeType?: true
     overview?: true
     description?: true
+    requirements?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -13183,8 +13802,6 @@ export namespace Prisma {
     minimumEducationLevel?: true
     minimumEducationDegree?: true
     minimumEligibilityGpa?: true
-    englishProficiency?: true
-    minimumEnglishProficiencyScore?: true
     pgwp?: true
     active?: true
     createdById?: true
@@ -13202,6 +13819,7 @@ export namespace Prisma {
     degreeType?: true
     overview?: true
     description?: true
+    requirements?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -13211,8 +13829,6 @@ export namespace Prisma {
     minimumEducationLevel?: true
     minimumEducationDegree?: true
     minimumEligibilityGpa?: true
-    englishProficiency?: true
-    minimumEnglishProficiencyScore?: true
     pgwp?: true
     active?: true
     createdById?: true
@@ -13317,6 +13933,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements: string | null
     applicationFee: Decimal
     applicationFeeDiscount: Decimal
     tuitionFee: Decimal
@@ -13326,8 +13943,6 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal
     pgwp: boolean
     active: boolean
     createdById: string
@@ -13364,6 +13979,7 @@ export namespace Prisma {
     degreeType?: boolean
     overview?: boolean
     description?: boolean
+    requirements?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -13373,8 +13989,6 @@ export namespace Prisma {
     minimumEducationLevel?: boolean
     minimumEducationDegree?: boolean
     minimumEligibilityGpa?: boolean
-    englishProficiency?: boolean
-    minimumEnglishProficiencyScore?: boolean
     pgwp?: boolean
     active?: boolean
     createdById?: boolean
@@ -13382,6 +13996,7 @@ export namespace Prisma {
     updatedAt?: boolean
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     intakes?: boolean | Program$intakesArgs<ExtArgs>
+    proficiencies?: boolean | Program$proficienciesArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["program"]>
@@ -13396,6 +14011,7 @@ export namespace Prisma {
     degreeType?: boolean
     overview?: boolean
     description?: boolean
+    requirements?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -13405,8 +14021,6 @@ export namespace Prisma {
     minimumEducationLevel?: boolean
     minimumEducationDegree?: boolean
     minimumEligibilityGpa?: boolean
-    englishProficiency?: boolean
-    minimumEnglishProficiencyScore?: boolean
     pgwp?: boolean
     active?: boolean
     createdById?: boolean
@@ -13426,6 +14040,7 @@ export namespace Prisma {
     degreeType?: boolean
     overview?: boolean
     description?: boolean
+    requirements?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -13435,8 +14050,6 @@ export namespace Prisma {
     minimumEducationLevel?: boolean
     minimumEducationDegree?: boolean
     minimumEligibilityGpa?: boolean
-    englishProficiency?: boolean
-    minimumEnglishProficiencyScore?: boolean
     pgwp?: boolean
     active?: boolean
     createdById?: boolean
@@ -13456,6 +14069,7 @@ export namespace Prisma {
     degreeType?: boolean
     overview?: boolean
     description?: boolean
+    requirements?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -13465,8 +14079,6 @@ export namespace Prisma {
     minimumEducationLevel?: boolean
     minimumEducationDegree?: boolean
     minimumEligibilityGpa?: boolean
-    englishProficiency?: boolean
-    minimumEnglishProficiencyScore?: boolean
     pgwp?: boolean
     active?: boolean
     createdById?: boolean
@@ -13474,10 +14086,11 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "englishProficiency" | "minimumEnglishProficiencyScore" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
+  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "requirements" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
   export type ProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     intakes?: boolean | Program$intakesArgs<ExtArgs>
+    proficiencies?: boolean | Program$proficienciesArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13495,6 +14108,7 @@ export namespace Prisma {
     objects: {
       school: Prisma.$SchoolPayload<ExtArgs>
       intakes: Prisma.$IntakePayload<ExtArgs>[]
+      proficiencies: Prisma.$EnglishProficiencyPayload<ExtArgs>[]
       createdBy: Prisma.$AdminPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13507,6 +14121,7 @@ export namespace Prisma {
       degreeType: string
       overview: string
       description: string
+      requirements: string | null
       applicationFee: Prisma.Decimal
       applicationFeeDiscount: Prisma.Decimal
       tuitionFee: Prisma.Decimal
@@ -13516,8 +14131,6 @@ export namespace Prisma {
       minimumEducationLevel: string
       minimumEducationDegree: number
       minimumEligibilityGpa: Prisma.Decimal
-      englishProficiency: string
-      minimumEnglishProficiencyScore: Prisma.Decimal
       pgwp: boolean
       active: boolean
       createdById: string
@@ -13919,6 +14532,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     intakes<T extends Program$intakesArgs<ExtArgs> = {}>(args?: Subset<T, Program$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    proficiencies<T extends Program$proficienciesArgs<ExtArgs> = {}>(args?: Subset<T, Program$proficienciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13958,6 +14572,7 @@ export namespace Prisma {
     readonly degreeType: FieldRef<"Program", 'String'>
     readonly overview: FieldRef<"Program", 'String'>
     readonly description: FieldRef<"Program", 'String'>
+    readonly requirements: FieldRef<"Program", 'String'>
     readonly applicationFee: FieldRef<"Program", 'Decimal'>
     readonly applicationFeeDiscount: FieldRef<"Program", 'Decimal'>
     readonly tuitionFee: FieldRef<"Program", 'Decimal'>
@@ -13967,8 +14582,6 @@ export namespace Prisma {
     readonly minimumEducationLevel: FieldRef<"Program", 'String'>
     readonly minimumEducationDegree: FieldRef<"Program", 'Int'>
     readonly minimumEligibilityGpa: FieldRef<"Program", 'Decimal'>
-    readonly englishProficiency: FieldRef<"Program", 'String'>
-    readonly minimumEnglishProficiencyScore: FieldRef<"Program", 'Decimal'>
     readonly pgwp: FieldRef<"Program", 'Boolean'>
     readonly active: FieldRef<"Program", 'Boolean'>
     readonly createdById: FieldRef<"Program", 'String'>
@@ -14394,6 +15007,30 @@ export namespace Prisma {
   }
 
   /**
+   * Program.proficiencies
+   */
+  export type Program$proficienciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    where?: EnglishProficiencyWhereInput
+    orderBy?: EnglishProficiencyOrderByWithRelationInput | EnglishProficiencyOrderByWithRelationInput[]
+    cursor?: EnglishProficiencyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnglishProficiencyScalarFieldEnum | EnglishProficiencyScalarFieldEnum[]
+  }
+
+  /**
    * Program without action
    */
   export type ProgramDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14409,6 +15046,1072 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProgramInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EnglishProficiency
+   */
+
+  export type AggregateEnglishProficiency = {
+    _count: EnglishProficiencyCountAggregateOutputType | null
+    _avg: EnglishProficiencyAvgAggregateOutputType | null
+    _sum: EnglishProficiencySumAggregateOutputType | null
+    _min: EnglishProficiencyMinAggregateOutputType | null
+    _max: EnglishProficiencyMaxAggregateOutputType | null
+  }
+
+  export type EnglishProficiencyAvgAggregateOutputType = {
+    score: Decimal | null
+  }
+
+  export type EnglishProficiencySumAggregateOutputType = {
+    score: Decimal | null
+  }
+
+  export type EnglishProficiencyMinAggregateOutputType = {
+    test: string | null
+    score: Decimal | null
+    programId: string | null
+  }
+
+  export type EnglishProficiencyMaxAggregateOutputType = {
+    test: string | null
+    score: Decimal | null
+    programId: string | null
+  }
+
+  export type EnglishProficiencyCountAggregateOutputType = {
+    test: number
+    score: number
+    programId: number
+    _all: number
+  }
+
+
+  export type EnglishProficiencyAvgAggregateInputType = {
+    score?: true
+  }
+
+  export type EnglishProficiencySumAggregateInputType = {
+    score?: true
+  }
+
+  export type EnglishProficiencyMinAggregateInputType = {
+    test?: true
+    score?: true
+    programId?: true
+  }
+
+  export type EnglishProficiencyMaxAggregateInputType = {
+    test?: true
+    score?: true
+    programId?: true
+  }
+
+  export type EnglishProficiencyCountAggregateInputType = {
+    test?: true
+    score?: true
+    programId?: true
+    _all?: true
+  }
+
+  export type EnglishProficiencyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishProficiency to aggregate.
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishProficiencies to fetch.
+     */
+    orderBy?: EnglishProficiencyOrderByWithRelationInput | EnglishProficiencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnglishProficiencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishProficiencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishProficiencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EnglishProficiencies
+    **/
+    _count?: true | EnglishProficiencyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnglishProficiencyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnglishProficiencySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnglishProficiencyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnglishProficiencyMaxAggregateInputType
+  }
+
+  export type GetEnglishProficiencyAggregateType<T extends EnglishProficiencyAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnglishProficiency]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnglishProficiency[P]>
+      : GetScalarType<T[P], AggregateEnglishProficiency[P]>
+  }
+
+
+
+
+  export type EnglishProficiencyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishProficiencyWhereInput
+    orderBy?: EnglishProficiencyOrderByWithAggregationInput | EnglishProficiencyOrderByWithAggregationInput[]
+    by: EnglishProficiencyScalarFieldEnum[] | EnglishProficiencyScalarFieldEnum
+    having?: EnglishProficiencyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnglishProficiencyCountAggregateInputType | true
+    _avg?: EnglishProficiencyAvgAggregateInputType
+    _sum?: EnglishProficiencySumAggregateInputType
+    _min?: EnglishProficiencyMinAggregateInputType
+    _max?: EnglishProficiencyMaxAggregateInputType
+  }
+
+  export type EnglishProficiencyGroupByOutputType = {
+    test: string
+    score: Decimal
+    programId: string
+    _count: EnglishProficiencyCountAggregateOutputType | null
+    _avg: EnglishProficiencyAvgAggregateOutputType | null
+    _sum: EnglishProficiencySumAggregateOutputType | null
+    _min: EnglishProficiencyMinAggregateOutputType | null
+    _max: EnglishProficiencyMaxAggregateOutputType | null
+  }
+
+  type GetEnglishProficiencyGroupByPayload<T extends EnglishProficiencyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnglishProficiencyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnglishProficiencyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnglishProficiencyGroupByOutputType[P]>
+            : GetScalarType<T[P], EnglishProficiencyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnglishProficiencySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    test?: boolean
+    score?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishProficiency"]>
+
+  export type EnglishProficiencySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    test?: boolean
+    score?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishProficiency"]>
+
+  export type EnglishProficiencySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    test?: boolean
+    score?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishProficiency"]>
+
+  export type EnglishProficiencySelectScalar = {
+    test?: boolean
+    score?: boolean
+    programId?: boolean
+  }
+
+  export type EnglishProficiencyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"test" | "score" | "programId", ExtArgs["result"]["englishProficiency"]>
+  export type EnglishProficiencyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
+  export type EnglishProficiencyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
+  export type EnglishProficiencyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
+
+  export type $EnglishProficiencyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EnglishProficiency"
+    objects: {
+      program: Prisma.$ProgramPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      test: string
+      score: Prisma.Decimal
+      programId: string
+    }, ExtArgs["result"]["englishProficiency"]>
+    composites: {}
+  }
+
+  type EnglishProficiencyGetPayload<S extends boolean | null | undefined | EnglishProficiencyDefaultArgs> = $Result.GetResult<Prisma.$EnglishProficiencyPayload, S>
+
+  type EnglishProficiencyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnglishProficiencyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnglishProficiencyCountAggregateInputType | true
+    }
+
+  export interface EnglishProficiencyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EnglishProficiency'], meta: { name: 'EnglishProficiency' } }
+    /**
+     * Find zero or one EnglishProficiency that matches the filter.
+     * @param {EnglishProficiencyFindUniqueArgs} args - Arguments to find a EnglishProficiency
+     * @example
+     * // Get one EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnglishProficiencyFindUniqueArgs>(args: SelectSubset<T, EnglishProficiencyFindUniqueArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EnglishProficiency that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnglishProficiencyFindUniqueOrThrowArgs} args - Arguments to find a EnglishProficiency
+     * @example
+     * // Get one EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnglishProficiencyFindUniqueOrThrowArgs>(args: SelectSubset<T, EnglishProficiencyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishProficiency that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyFindFirstArgs} args - Arguments to find a EnglishProficiency
+     * @example
+     * // Get one EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnglishProficiencyFindFirstArgs>(args?: SelectSubset<T, EnglishProficiencyFindFirstArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishProficiency that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyFindFirstOrThrowArgs} args - Arguments to find a EnglishProficiency
+     * @example
+     * // Get one EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnglishProficiencyFindFirstOrThrowArgs>(args?: SelectSubset<T, EnglishProficiencyFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EnglishProficiencies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EnglishProficiencies
+     * const englishProficiencies = await prisma.englishProficiency.findMany()
+     * 
+     * // Get first 10 EnglishProficiencies
+     * const englishProficiencies = await prisma.englishProficiency.findMany({ take: 10 })
+     * 
+     * // Only select the `test`
+     * const englishProficiencyWithTestOnly = await prisma.englishProficiency.findMany({ select: { test: true } })
+     * 
+     */
+    findMany<T extends EnglishProficiencyFindManyArgs>(args?: SelectSubset<T, EnglishProficiencyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EnglishProficiency.
+     * @param {EnglishProficiencyCreateArgs} args - Arguments to create a EnglishProficiency.
+     * @example
+     * // Create one EnglishProficiency
+     * const EnglishProficiency = await prisma.englishProficiency.create({
+     *   data: {
+     *     // ... data to create a EnglishProficiency
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnglishProficiencyCreateArgs>(args: SelectSubset<T, EnglishProficiencyCreateArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EnglishProficiencies.
+     * @param {EnglishProficiencyCreateManyArgs} args - Arguments to create many EnglishProficiencies.
+     * @example
+     * // Create many EnglishProficiencies
+     * const englishProficiency = await prisma.englishProficiency.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnglishProficiencyCreateManyArgs>(args?: SelectSubset<T, EnglishProficiencyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EnglishProficiencies and returns the data saved in the database.
+     * @param {EnglishProficiencyCreateManyAndReturnArgs} args - Arguments to create many EnglishProficiencies.
+     * @example
+     * // Create many EnglishProficiencies
+     * const englishProficiency = await prisma.englishProficiency.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EnglishProficiencies and only return the `test`
+     * const englishProficiencyWithTestOnly = await prisma.englishProficiency.createManyAndReturn({
+     *   select: { test: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnglishProficiencyCreateManyAndReturnArgs>(args?: SelectSubset<T, EnglishProficiencyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EnglishProficiency.
+     * @param {EnglishProficiencyDeleteArgs} args - Arguments to delete one EnglishProficiency.
+     * @example
+     * // Delete one EnglishProficiency
+     * const EnglishProficiency = await prisma.englishProficiency.delete({
+     *   where: {
+     *     // ... filter to delete one EnglishProficiency
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnglishProficiencyDeleteArgs>(args: SelectSubset<T, EnglishProficiencyDeleteArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EnglishProficiency.
+     * @param {EnglishProficiencyUpdateArgs} args - Arguments to update one EnglishProficiency.
+     * @example
+     * // Update one EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnglishProficiencyUpdateArgs>(args: SelectSubset<T, EnglishProficiencyUpdateArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EnglishProficiencies.
+     * @param {EnglishProficiencyDeleteManyArgs} args - Arguments to filter EnglishProficiencies to delete.
+     * @example
+     * // Delete a few EnglishProficiencies
+     * const { count } = await prisma.englishProficiency.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnglishProficiencyDeleteManyArgs>(args?: SelectSubset<T, EnglishProficiencyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishProficiencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EnglishProficiencies
+     * const englishProficiency = await prisma.englishProficiency.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnglishProficiencyUpdateManyArgs>(args: SelectSubset<T, EnglishProficiencyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishProficiencies and returns the data updated in the database.
+     * @param {EnglishProficiencyUpdateManyAndReturnArgs} args - Arguments to update many EnglishProficiencies.
+     * @example
+     * // Update many EnglishProficiencies
+     * const englishProficiency = await prisma.englishProficiency.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EnglishProficiencies and only return the `test`
+     * const englishProficiencyWithTestOnly = await prisma.englishProficiency.updateManyAndReturn({
+     *   select: { test: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnglishProficiencyUpdateManyAndReturnArgs>(args: SelectSubset<T, EnglishProficiencyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EnglishProficiency.
+     * @param {EnglishProficiencyUpsertArgs} args - Arguments to update or create a EnglishProficiency.
+     * @example
+     * // Update or create a EnglishProficiency
+     * const englishProficiency = await prisma.englishProficiency.upsert({
+     *   create: {
+     *     // ... data to create a EnglishProficiency
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EnglishProficiency we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnglishProficiencyUpsertArgs>(args: SelectSubset<T, EnglishProficiencyUpsertArgs<ExtArgs>>): Prisma__EnglishProficiencyClient<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EnglishProficiencies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyCountArgs} args - Arguments to filter EnglishProficiencies to count.
+     * @example
+     * // Count the number of EnglishProficiencies
+     * const count = await prisma.englishProficiency.count({
+     *   where: {
+     *     // ... the filter for the EnglishProficiencies we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnglishProficiencyCountArgs>(
+      args?: Subset<T, EnglishProficiencyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnglishProficiencyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EnglishProficiency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnglishProficiencyAggregateArgs>(args: Subset<T, EnglishProficiencyAggregateArgs>): Prisma.PrismaPromise<GetEnglishProficiencyAggregateType<T>>
+
+    /**
+     * Group by EnglishProficiency.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishProficiencyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnglishProficiencyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnglishProficiencyGroupByArgs['orderBy'] }
+        : { orderBy?: EnglishProficiencyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnglishProficiencyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnglishProficiencyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EnglishProficiency model
+   */
+  readonly fields: EnglishProficiencyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EnglishProficiency.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnglishProficiencyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    program<T extends ProgramDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProgramDefaultArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EnglishProficiency model
+   */
+  interface EnglishProficiencyFieldRefs {
+    readonly test: FieldRef<"EnglishProficiency", 'String'>
+    readonly score: FieldRef<"EnglishProficiency", 'Decimal'>
+    readonly programId: FieldRef<"EnglishProficiency", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EnglishProficiency findUnique
+   */
+  export type EnglishProficiencyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishProficiency to fetch.
+     */
+    where: EnglishProficiencyWhereUniqueInput
+  }
+
+  /**
+   * EnglishProficiency findUniqueOrThrow
+   */
+  export type EnglishProficiencyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishProficiency to fetch.
+     */
+    where: EnglishProficiencyWhereUniqueInput
+  }
+
+  /**
+   * EnglishProficiency findFirst
+   */
+  export type EnglishProficiencyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishProficiency to fetch.
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishProficiencies to fetch.
+     */
+    orderBy?: EnglishProficiencyOrderByWithRelationInput | EnglishProficiencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishProficiencies.
+     */
+    cursor?: EnglishProficiencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishProficiencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishProficiencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishProficiencies.
+     */
+    distinct?: EnglishProficiencyScalarFieldEnum | EnglishProficiencyScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishProficiency findFirstOrThrow
+   */
+  export type EnglishProficiencyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishProficiency to fetch.
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishProficiencies to fetch.
+     */
+    orderBy?: EnglishProficiencyOrderByWithRelationInput | EnglishProficiencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishProficiencies.
+     */
+    cursor?: EnglishProficiencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishProficiencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishProficiencies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishProficiencies.
+     */
+    distinct?: EnglishProficiencyScalarFieldEnum | EnglishProficiencyScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishProficiency findMany
+   */
+  export type EnglishProficiencyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishProficiencies to fetch.
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishProficiencies to fetch.
+     */
+    orderBy?: EnglishProficiencyOrderByWithRelationInput | EnglishProficiencyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EnglishProficiencies.
+     */
+    cursor?: EnglishProficiencyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishProficiencies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishProficiencies.
+     */
+    skip?: number
+    distinct?: EnglishProficiencyScalarFieldEnum | EnglishProficiencyScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishProficiency create
+   */
+  export type EnglishProficiencyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EnglishProficiency.
+     */
+    data: XOR<EnglishProficiencyCreateInput, EnglishProficiencyUncheckedCreateInput>
+  }
+
+  /**
+   * EnglishProficiency createMany
+   */
+  export type EnglishProficiencyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EnglishProficiencies.
+     */
+    data: EnglishProficiencyCreateManyInput | EnglishProficiencyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishProficiency createManyAndReturn
+   */
+  export type EnglishProficiencyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * The data used to create many EnglishProficiencies.
+     */
+    data: EnglishProficiencyCreateManyInput | EnglishProficiencyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishProficiency update
+   */
+  export type EnglishProficiencyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EnglishProficiency.
+     */
+    data: XOR<EnglishProficiencyUpdateInput, EnglishProficiencyUncheckedUpdateInput>
+    /**
+     * Choose, which EnglishProficiency to update.
+     */
+    where: EnglishProficiencyWhereUniqueInput
+  }
+
+  /**
+   * EnglishProficiency updateMany
+   */
+  export type EnglishProficiencyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EnglishProficiencies.
+     */
+    data: XOR<EnglishProficiencyUpdateManyMutationInput, EnglishProficiencyUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishProficiencies to update
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * Limit how many EnglishProficiencies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishProficiency updateManyAndReturn
+   */
+  export type EnglishProficiencyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * The data used to update EnglishProficiencies.
+     */
+    data: XOR<EnglishProficiencyUpdateManyMutationInput, EnglishProficiencyUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishProficiencies to update
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * Limit how many EnglishProficiencies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishProficiency upsert
+   */
+  export type EnglishProficiencyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EnglishProficiency to update in case it exists.
+     */
+    where: EnglishProficiencyWhereUniqueInput
+    /**
+     * In case the EnglishProficiency found by the `where` argument doesn't exist, create a new EnglishProficiency with this data.
+     */
+    create: XOR<EnglishProficiencyCreateInput, EnglishProficiencyUncheckedCreateInput>
+    /**
+     * In case the EnglishProficiency was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnglishProficiencyUpdateInput, EnglishProficiencyUncheckedUpdateInput>
+  }
+
+  /**
+   * EnglishProficiency delete
+   */
+  export type EnglishProficiencyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
+    /**
+     * Filter which EnglishProficiency to delete.
+     */
+    where: EnglishProficiencyWhereUniqueInput
+  }
+
+  /**
+   * EnglishProficiency deleteMany
+   */
+  export type EnglishProficiencyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishProficiencies to delete
+     */
+    where?: EnglishProficiencyWhereInput
+    /**
+     * Limit how many EnglishProficiencies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishProficiency without action
+   */
+  export type EnglishProficiencyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishProficiency
+     */
+    select?: EnglishProficiencySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishProficiency
+     */
+    omit?: EnglishProficiencyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishProficiencyInclude<ExtArgs> | null
   }
 
 
@@ -14437,6 +16140,7 @@ export namespace Prisma {
     intake: string | null
     startDate: Date | null
     deadline: Date | null
+    status: $Enums.IntakeStatus | null
     schoolId: string | null
     createdById: string | null
     createdAt: Date | null
@@ -14448,6 +16152,7 @@ export namespace Prisma {
     intake: string | null
     startDate: Date | null
     deadline: Date | null
+    status: $Enums.IntakeStatus | null
     schoolId: string | null
     createdById: string | null
     createdAt: Date | null
@@ -14459,6 +16164,7 @@ export namespace Prisma {
     intake: number
     startDate: number
     deadline: number
+    status: number
     schoolId: number
     createdById: number
     createdAt: number
@@ -14480,6 +16186,7 @@ export namespace Prisma {
     intake?: true
     startDate?: true
     deadline?: true
+    status?: true
     schoolId?: true
     createdById?: true
     createdAt?: true
@@ -14491,6 +16198,7 @@ export namespace Prisma {
     intake?: true
     startDate?: true
     deadline?: true
+    status?: true
     schoolId?: true
     createdById?: true
     createdAt?: true
@@ -14502,6 +16210,7 @@ export namespace Prisma {
     intake?: true
     startDate?: true
     deadline?: true
+    status?: true
     schoolId?: true
     createdById?: true
     createdAt?: true
@@ -14598,8 +16307,9 @@ export namespace Prisma {
   export type IntakeGroupByOutputType = {
     id: number
     intake: string
-    startDate: Date
-    deadline: Date
+    startDate: Date | null
+    deadline: Date | null
+    status: $Enums.IntakeStatus
     schoolId: string
     createdById: string
     createdAt: Date
@@ -14630,6 +16340,7 @@ export namespace Prisma {
     intake?: boolean
     startDate?: boolean
     deadline?: boolean
+    status?: boolean
     schoolId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -14645,6 +16356,7 @@ export namespace Prisma {
     intake?: boolean
     startDate?: boolean
     deadline?: boolean
+    status?: boolean
     schoolId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -14658,6 +16370,7 @@ export namespace Prisma {
     intake?: boolean
     startDate?: boolean
     deadline?: boolean
+    status?: boolean
     schoolId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -14671,13 +16384,14 @@ export namespace Prisma {
     intake?: boolean
     startDate?: boolean
     deadline?: boolean
+    status?: boolean
     schoolId?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type IntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intake" | "startDate" | "deadline" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["intake"]>
+  export type IntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "intake" | "startDate" | "deadline" | "status" | "schoolId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["intake"]>
   export type IntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     programs?: boolean | Intake$programsArgs<ExtArgs>
@@ -14703,8 +16417,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       intake: string
-      startDate: Date
-      deadline: Date
+      startDate: Date | null
+      deadline: Date | null
+      status: $Enums.IntakeStatus
       schoolId: string
       createdById: string
       createdAt: Date
@@ -15139,6 +16854,7 @@ export namespace Prisma {
     readonly intake: FieldRef<"Intake", 'String'>
     readonly startDate: FieldRef<"Intake", 'DateTime'>
     readonly deadline: FieldRef<"Intake", 'DateTime'>
+    readonly status: FieldRef<"Intake", 'IntakeStatus'>
     readonly schoolId: FieldRef<"Intake", 'String'>
     readonly createdById: FieldRef<"Intake", 'String'>
     readonly createdAt: FieldRef<"Intake", 'DateTime'>
@@ -15582,6 +17298,3500 @@ export namespace Prisma {
 
 
   /**
+   * Model BlogPost
+   */
+
+  export type AggregateBlogPost = {
+    _count: BlogPostCountAggregateOutputType | null
+    _avg: BlogPostAvgAggregateOutputType | null
+    _sum: BlogPostSumAggregateOutputType | null
+    _min: BlogPostMinAggregateOutputType | null
+    _max: BlogPostMaxAggregateOutputType | null
+  }
+
+  export type BlogPostAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type BlogPostSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type BlogPostMinAggregateOutputType = {
+    id: number | null
+    blogPostId: string | null
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    content: string | null
+    featured: boolean | null
+    status: $Enums.BlogStatus | null
+    publishedAt: Date | null
+    authorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogPostMaxAggregateOutputType = {
+    id: number | null
+    blogPostId: string | null
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    content: string | null
+    featured: boolean | null
+    status: $Enums.BlogStatus | null
+    publishedAt: Date | null
+    authorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BlogPostCountAggregateOutputType = {
+    id: number
+    blogPostId: number
+    title: number
+    slug: number
+    excerpt: number
+    content: number
+    coverImage: number
+    featured: number
+    status: number
+    publishedAt: number
+    authorId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BlogPostAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type BlogPostSumAggregateInputType = {
+    id?: true
+  }
+
+  export type BlogPostMinAggregateInputType = {
+    id?: true
+    blogPostId?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    featured?: true
+    status?: true
+    publishedAt?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogPostMaxAggregateInputType = {
+    id?: true
+    blogPostId?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    featured?: true
+    status?: true
+    publishedAt?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BlogPostCountAggregateInputType = {
+    id?: true
+    blogPostId?: true
+    title?: true
+    slug?: true
+    excerpt?: true
+    content?: true
+    coverImage?: true
+    featured?: true
+    status?: true
+    publishedAt?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BlogPostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogPost to aggregate.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BlogPosts
+    **/
+    _count?: true | BlogPostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BlogPostAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BlogPostSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BlogPostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BlogPostMaxAggregateInputType
+  }
+
+  export type GetBlogPostAggregateType<T extends BlogPostAggregateArgs> = {
+        [P in keyof T & keyof AggregateBlogPost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBlogPost[P]>
+      : GetScalarType<T[P], AggregateBlogPost[P]>
+  }
+
+
+
+
+  export type BlogPostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
+    orderBy?: BlogPostOrderByWithAggregationInput | BlogPostOrderByWithAggregationInput[]
+    by: BlogPostScalarFieldEnum[] | BlogPostScalarFieldEnum
+    having?: BlogPostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BlogPostCountAggregateInputType | true
+    _avg?: BlogPostAvgAggregateInputType
+    _sum?: BlogPostSumAggregateInputType
+    _min?: BlogPostMinAggregateInputType
+    _max?: BlogPostMaxAggregateInputType
+  }
+
+  export type BlogPostGroupByOutputType = {
+    id: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonValue
+    featured: boolean
+    status: $Enums.BlogStatus
+    publishedAt: Date | null
+    authorId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: BlogPostCountAggregateOutputType | null
+    _avg: BlogPostAvgAggregateOutputType | null
+    _sum: BlogPostSumAggregateOutputType | null
+    _min: BlogPostMinAggregateOutputType | null
+    _max: BlogPostMaxAggregateOutputType | null
+  }
+
+  type GetBlogPostGroupByPayload<T extends BlogPostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BlogPostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BlogPostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
+            : GetScalarType<T[P], BlogPostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BlogPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    blogPostId?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImage?: boolean
+    featured?: boolean
+    status?: boolean
+    publishedAt?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tags?: boolean | BlogPost$tagsArgs<ExtArgs>
+    categories?: boolean | BlogPost$categoriesArgs<ExtArgs>
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    blogPostId?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImage?: boolean
+    featured?: boolean
+    status?: boolean
+    publishedAt?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    blogPostId?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImage?: boolean
+    featured?: boolean
+    status?: boolean
+    publishedAt?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["blogPost"]>
+
+  export type BlogPostSelectScalar = {
+    id?: boolean
+    blogPostId?: boolean
+    title?: boolean
+    slug?: boolean
+    excerpt?: boolean
+    content?: boolean
+    coverImage?: boolean
+    featured?: boolean
+    status?: boolean
+    publishedAt?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "blogPostId" | "title" | "slug" | "excerpt" | "content" | "coverImage" | "featured" | "status" | "publishedAt" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["blogPost"]>
+  export type BlogPostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | BlogPost$tagsArgs<ExtArgs>
+    categories?: boolean | BlogPost$categoriesArgs<ExtArgs>
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BlogPostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type BlogPostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $BlogPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BlogPost"
+    objects: {
+      tags: Prisma.$TagPayload<ExtArgs>[]
+      categories: Prisma.$CategoryPayload<ExtArgs>[]
+      author: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      blogPostId: string
+      title: string
+      slug: string
+      excerpt: string
+      content: string
+      coverImage: Prisma.JsonValue
+      featured: boolean
+      status: $Enums.BlogStatus
+      publishedAt: Date | null
+      authorId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["blogPost"]>
+    composites: {}
+  }
+
+  type BlogPostGetPayload<S extends boolean | null | undefined | BlogPostDefaultArgs> = $Result.GetResult<Prisma.$BlogPostPayload, S>
+
+  type BlogPostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BlogPostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BlogPostCountAggregateInputType | true
+    }
+
+  export interface BlogPostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BlogPost'], meta: { name: 'BlogPost' } }
+    /**
+     * Find zero or one BlogPost that matches the filter.
+     * @param {BlogPostFindUniqueArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BlogPostFindUniqueArgs>(args: SelectSubset<T, BlogPostFindUniqueArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BlogPost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BlogPostFindUniqueOrThrowArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BlogPostFindUniqueOrThrowArgs>(args: SelectSubset<T, BlogPostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogPost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindFirstArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BlogPostFindFirstArgs>(args?: SelectSubset<T, BlogPostFindFirstArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BlogPost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindFirstOrThrowArgs} args - Arguments to find a BlogPost
+     * @example
+     * // Get one BlogPost
+     * const blogPost = await prisma.blogPost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BlogPostFindFirstOrThrowArgs>(args?: SelectSubset<T, BlogPostFindFirstOrThrowArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BlogPosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BlogPosts
+     * const blogPosts = await prisma.blogPost.findMany()
+     * 
+     * // Get first 10 BlogPosts
+     * const blogPosts = await prisma.blogPost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BlogPostFindManyArgs>(args?: SelectSubset<T, BlogPostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BlogPost.
+     * @param {BlogPostCreateArgs} args - Arguments to create a BlogPost.
+     * @example
+     * // Create one BlogPost
+     * const BlogPost = await prisma.blogPost.create({
+     *   data: {
+     *     // ... data to create a BlogPost
+     *   }
+     * })
+     * 
+     */
+    create<T extends BlogPostCreateArgs>(args: SelectSubset<T, BlogPostCreateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BlogPosts.
+     * @param {BlogPostCreateManyArgs} args - Arguments to create many BlogPosts.
+     * @example
+     * // Create many BlogPosts
+     * const blogPost = await prisma.blogPost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BlogPostCreateManyArgs>(args?: SelectSubset<T, BlogPostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BlogPosts and returns the data saved in the database.
+     * @param {BlogPostCreateManyAndReturnArgs} args - Arguments to create many BlogPosts.
+     * @example
+     * // Create many BlogPosts
+     * const blogPost = await prisma.blogPost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BlogPosts and only return the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BlogPostCreateManyAndReturnArgs>(args?: SelectSubset<T, BlogPostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BlogPost.
+     * @param {BlogPostDeleteArgs} args - Arguments to delete one BlogPost.
+     * @example
+     * // Delete one BlogPost
+     * const BlogPost = await prisma.blogPost.delete({
+     *   where: {
+     *     // ... filter to delete one BlogPost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BlogPostDeleteArgs>(args: SelectSubset<T, BlogPostDeleteArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BlogPost.
+     * @param {BlogPostUpdateArgs} args - Arguments to update one BlogPost.
+     * @example
+     * // Update one BlogPost
+     * const blogPost = await prisma.blogPost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BlogPostUpdateArgs>(args: SelectSubset<T, BlogPostUpdateArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BlogPosts.
+     * @param {BlogPostDeleteManyArgs} args - Arguments to filter BlogPosts to delete.
+     * @example
+     * // Delete a few BlogPosts
+     * const { count } = await prisma.blogPost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BlogPostDeleteManyArgs>(args?: SelectSubset<T, BlogPostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BlogPosts
+     * const blogPost = await prisma.blogPost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BlogPostUpdateManyArgs>(args: SelectSubset<T, BlogPostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BlogPosts and returns the data updated in the database.
+     * @param {BlogPostUpdateManyAndReturnArgs} args - Arguments to update many BlogPosts.
+     * @example
+     * // Update many BlogPosts
+     * const blogPost = await prisma.blogPost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BlogPosts and only return the `id`
+     * const blogPostWithIdOnly = await prisma.blogPost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BlogPostUpdateManyAndReturnArgs>(args: SelectSubset<T, BlogPostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BlogPost.
+     * @param {BlogPostUpsertArgs} args - Arguments to update or create a BlogPost.
+     * @example
+     * // Update or create a BlogPost
+     * const blogPost = await prisma.blogPost.upsert({
+     *   create: {
+     *     // ... data to create a BlogPost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BlogPost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BlogPostUpsertArgs>(args: SelectSubset<T, BlogPostUpsertArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BlogPosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostCountArgs} args - Arguments to filter BlogPosts to count.
+     * @example
+     * // Count the number of BlogPosts
+     * const count = await prisma.blogPost.count({
+     *   where: {
+     *     // ... the filter for the BlogPosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends BlogPostCountArgs>(
+      args?: Subset<T, BlogPostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BlogPostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BlogPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BlogPostAggregateArgs>(args: Subset<T, BlogPostAggregateArgs>): Prisma.PrismaPromise<GetBlogPostAggregateType<T>>
+
+    /**
+     * Group by BlogPost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BlogPostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BlogPostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BlogPostGroupByArgs['orderBy'] }
+        : { orderBy?: BlogPostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BlogPostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBlogPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BlogPost model
+   */
+  readonly fields: BlogPostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BlogPost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BlogPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tags<T extends BlogPost$tagsArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categories<T extends BlogPost$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    author<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BlogPost model
+   */
+  interface BlogPostFieldRefs {
+    readonly id: FieldRef<"BlogPost", 'Int'>
+    readonly blogPostId: FieldRef<"BlogPost", 'String'>
+    readonly title: FieldRef<"BlogPost", 'String'>
+    readonly slug: FieldRef<"BlogPost", 'String'>
+    readonly excerpt: FieldRef<"BlogPost", 'String'>
+    readonly content: FieldRef<"BlogPost", 'String'>
+    readonly coverImage: FieldRef<"BlogPost", 'Json'>
+    readonly featured: FieldRef<"BlogPost", 'Boolean'>
+    readonly status: FieldRef<"BlogPost", 'BlogStatus'>
+    readonly publishedAt: FieldRef<"BlogPost", 'DateTime'>
+    readonly authorId: FieldRef<"BlogPost", 'String'>
+    readonly createdAt: FieldRef<"BlogPost", 'DateTime'>
+    readonly updatedAt: FieldRef<"BlogPost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BlogPost findUnique
+   */
+  export type BlogPostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost findUniqueOrThrow
+   */
+  export type BlogPostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost findFirst
+   */
+  export type BlogPostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogPosts.
+     */
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost findFirstOrThrow
+   */
+  export type BlogPostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogPost to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BlogPosts.
+     */
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost findMany
+   */
+  export type BlogPostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter, which BlogPosts to fetch.
+     */
+    where?: BlogPostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BlogPosts to fetch.
+     */
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BlogPosts.
+     */
+    cursor?: BlogPostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BlogPosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BlogPosts.
+     */
+    skip?: number
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost create
+   */
+  export type BlogPostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BlogPost.
+     */
+    data: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
+  }
+
+  /**
+   * BlogPost createMany
+   */
+  export type BlogPostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BlogPosts.
+     */
+    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BlogPost createManyAndReturn
+   */
+  export type BlogPostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data used to create many BlogPosts.
+     */
+    data: BlogPostCreateManyInput | BlogPostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogPost update
+   */
+  export type BlogPostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BlogPost.
+     */
+    data: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
+    /**
+     * Choose, which BlogPost to update.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost updateMany
+   */
+  export type BlogPostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BlogPosts.
+     */
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogPosts to update
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogPost updateManyAndReturn
+   */
+  export type BlogPostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * The data used to update BlogPosts.
+     */
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyInput>
+    /**
+     * Filter which BlogPosts to update
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BlogPost upsert
+   */
+  export type BlogPostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BlogPost to update in case it exists.
+     */
+    where: BlogPostWhereUniqueInput
+    /**
+     * In case the BlogPost found by the `where` argument doesn't exist, create a new BlogPost with this data.
+     */
+    create: XOR<BlogPostCreateInput, BlogPostUncheckedCreateInput>
+    /**
+     * In case the BlogPost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BlogPostUpdateInput, BlogPostUncheckedUpdateInput>
+  }
+
+  /**
+   * BlogPost delete
+   */
+  export type BlogPostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
+     * Filter which BlogPost to delete.
+     */
+    where: BlogPostWhereUniqueInput
+  }
+
+  /**
+   * BlogPost deleteMany
+   */
+  export type BlogPostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BlogPosts to delete
+     */
+    where?: BlogPostWhereInput
+    /**
+     * Limit how many BlogPosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BlogPost.tags
+   */
+  export type BlogPost$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost.categories
+   */
+  export type BlogPost$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    cursor?: CategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * BlogPost without action
+   */
+  export type BlogPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Tag
+   */
+
+  export type AggregateTag = {
+    _count: TagCountAggregateOutputType | null
+    _avg: TagAvgAggregateOutputType | null
+    _sum: TagSumAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  export type TagAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TagSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TagMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TagMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TagCountAggregateOutputType = {
+    id: number
+    name: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TagAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type TagSumAggregateInputType = {
+    id?: true
+  }
+
+  export type TagMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TagMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TagCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tag to aggregate.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tags
+    **/
+    _count?: true | TagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TagAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TagSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type GetTagAggregateType<T extends TagAggregateArgs> = {
+        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTag[P]>
+      : GetScalarType<T[P], AggregateTag[P]>
+  }
+
+
+
+
+  export type TagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithAggregationInput | TagOrderByWithAggregationInput[]
+    by: TagScalarFieldEnum[] | TagScalarFieldEnum
+    having?: TagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TagCountAggregateInputType | true
+    _avg?: TagAvgAggregateInputType
+    _sum?: TagSumAggregateInputType
+    _min?: TagMinAggregateInputType
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type TagGroupByOutputType = {
+    id: number
+    name: string
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TagCountAggregateOutputType | null
+    _avg: TagAvgAggregateOutputType | null
+    _sum: TagSumAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  type GetTagGroupByPayload<T extends TagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TagGroupByOutputType[P]>
+            : GetScalarType<T[P], TagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    posts?: boolean | Tag$postsArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["tag"]>
+  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | Tag$postsArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tag"
+    objects: {
+      posts: Prisma.$BlogPostPayload<ExtArgs>[]
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tag"]>
+    composites: {}
+  }
+
+  type TagGetPayload<S extends boolean | null | undefined | TagDefaultArgs> = $Result.GetResult<Prisma.$TagPayload, S>
+
+  type TagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TagCountAggregateInputType | true
+    }
+
+  export interface TagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tag'], meta: { name: 'Tag' } }
+    /**
+     * Find zero or one Tag that matches the filter.
+     * @param {TagFindUniqueArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TagFindUniqueArgs>(args: SelectSubset<T, TagFindUniqueArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TagFindUniqueOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TagFindUniqueOrThrowArgs>(args: SelectSubset<T, TagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TagFindFirstArgs>(args?: SelectSubset<T, TagFindFirstArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TagFindFirstOrThrowArgs>(args?: SelectSubset<T, TagFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tags
+     * const tags = await prisma.tag.findMany()
+     * 
+     * // Get first 10 Tags
+     * const tags = await prisma.tag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TagFindManyArgs>(args?: SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tag.
+     * @param {TagCreateArgs} args - Arguments to create a Tag.
+     * @example
+     * // Create one Tag
+     * const Tag = await prisma.tag.create({
+     *   data: {
+     *     // ... data to create a Tag
+     *   }
+     * })
+     * 
+     */
+    create<T extends TagCreateArgs>(args: SelectSubset<T, TagCreateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tags.
+     * @param {TagCreateManyArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TagCreateManyArgs>(args?: SelectSubset<T, TagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tags and returns the data saved in the database.
+     * @param {TagCreateManyAndReturnArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TagCreateManyAndReturnArgs>(args?: SelectSubset<T, TagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tag.
+     * @param {TagDeleteArgs} args - Arguments to delete one Tag.
+     * @example
+     * // Delete one Tag
+     * const Tag = await prisma.tag.delete({
+     *   where: {
+     *     // ... filter to delete one Tag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TagDeleteArgs>(args: SelectSubset<T, TagDeleteArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tag.
+     * @param {TagUpdateArgs} args - Arguments to update one Tag.
+     * @example
+     * // Update one Tag
+     * const tag = await prisma.tag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TagUpdateArgs>(args: SelectSubset<T, TagUpdateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tags.
+     * @param {TagDeleteManyArgs} args - Arguments to filter Tags to delete.
+     * @example
+     * // Delete a few Tags
+     * const { count } = await prisma.tag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TagDeleteManyArgs>(args?: SelectSubset<T, TagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TagUpdateManyArgs>(args: SelectSubset<T, TagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags and returns the data updated in the database.
+     * @param {TagUpdateManyAndReturnArgs} args - Arguments to update many Tags.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TagUpdateManyAndReturnArgs>(args: SelectSubset<T, TagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tag.
+     * @param {TagUpsertArgs} args - Arguments to update or create a Tag.
+     * @example
+     * // Update or create a Tag
+     * const tag = await prisma.tag.upsert({
+     *   create: {
+     *     // ... data to create a Tag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TagUpsertArgs>(args: SelectSubset<T, TagUpsertArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagCountArgs} args - Arguments to filter Tags to count.
+     * @example
+     * // Count the number of Tags
+     * const count = await prisma.tag.count({
+     *   where: {
+     *     // ... the filter for the Tags we want to count
+     *   }
+     * })
+    **/
+    count<T extends TagCountArgs>(
+      args?: Subset<T, TagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
+
+    /**
+     * Group by Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TagGroupByArgs['orderBy'] }
+        : { orderBy?: TagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tag model
+   */
+  readonly fields: TagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    posts<T extends Tag$postsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tag model
+   */
+  interface TagFieldRefs {
+    readonly id: FieldRef<"Tag", 'Int'>
+    readonly name: FieldRef<"Tag", 'String'>
+    readonly createdById: FieldRef<"Tag", 'String'>
+    readonly createdAt: FieldRef<"Tag", 'DateTime'>
+    readonly updatedAt: FieldRef<"Tag", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tag findUnique
+   */
+  export type TagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findUniqueOrThrow
+   */
+  export type TagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findFirst
+   */
+  export type TagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findFirstOrThrow
+   */
+  export type TagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findMany
+   */
+  export type TagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tags to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag create
+   */
+  export type TagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tag.
+     */
+    data: XOR<TagCreateInput, TagUncheckedCreateInput>
+  }
+
+  /**
+   * Tag createMany
+   */
+  export type TagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tag createManyAndReturn
+   */
+  export type TagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Tag update
+   */
+  export type TagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tag.
+     */
+    data: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+    /**
+     * Choose, which Tag to update.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag updateMany
+   */
+  export type TagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag updateManyAndReturn
+   */
+  export type TagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Tag upsert
+   */
+  export type TagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tag to update in case it exists.
+     */
+    where: TagWhereUniqueInput
+    /**
+     * In case the Tag found by the `where` argument doesn't exist, create a new Tag with this data.
+     */
+    create: XOR<TagCreateInput, TagUncheckedCreateInput>
+    /**
+     * In case the Tag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+  }
+
+  /**
+   * Tag delete
+   */
+  export type TagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter which Tag to delete.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag deleteMany
+   */
+  export type TagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tags to delete
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag.posts
+   */
+  export type Tag$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    where?: BlogPostWhereInput
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    cursor?: BlogPostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * Tag without action
+   */
+  export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Category
+   */
+
+  export type AggregateCategory = {
+    _count: CategoryCountAggregateOutputType | null
+    _avg: CategoryAvgAggregateOutputType | null
+    _sum: CategorySumAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  export type CategoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CategorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CategoryMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CategoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type CategorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type CategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Category to aggregate.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Categories
+    **/
+    _count?: true | CategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type GetCategoryAggregateType<T extends CategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCategory[P]>
+      : GetScalarType<T[P], AggregateCategory[P]>
+  }
+
+
+
+
+  export type CategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CategoryWhereInput
+    orderBy?: CategoryOrderByWithAggregationInput | CategoryOrderByWithAggregationInput[]
+    by: CategoryScalarFieldEnum[] | CategoryScalarFieldEnum
+    having?: CategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CategoryCountAggregateInputType | true
+    _avg?: CategoryAvgAggregateInputType
+    _sum?: CategorySumAggregateInputType
+    _min?: CategoryMinAggregateInputType
+    _max?: CategoryMaxAggregateInputType
+  }
+
+  export type CategoryGroupByOutputType = {
+    id: number
+    name: string
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CategoryCountAggregateOutputType | null
+    _avg: CategoryAvgAggregateOutputType | null
+    _sum: CategorySumAggregateOutputType | null
+    _min: CategoryMinAggregateOutputType | null
+    _max: CategoryMaxAggregateOutputType | null
+  }
+
+  type GetCategoryGroupByPayload<T extends CategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], CategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    posts?: boolean | Category$postsArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["category"]>
+
+  export type CategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | Category$postsArgs<ExtArgs>
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type CategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Category"
+    objects: {
+      posts: Prisma.$BlogPostPayload<ExtArgs>[]
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["category"]>
+    composites: {}
+  }
+
+  type CategoryGetPayload<S extends boolean | null | undefined | CategoryDefaultArgs> = $Result.GetResult<Prisma.$CategoryPayload, S>
+
+  type CategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CategoryCountAggregateInputType | true
+    }
+
+  export interface CategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Category'], meta: { name: 'Category' } }
+    /**
+     * Find zero or one Category that matches the filter.
+     * @param {CategoryFindUniqueArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CategoryFindUniqueArgs>(args: SelectSubset<T, CategoryFindUniqueArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Category that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CategoryFindUniqueOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, CategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CategoryFindFirstArgs>(args?: SelectSubset<T, CategoryFindFirstArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Category that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindFirstOrThrowArgs} args - Arguments to find a Category
+     * @example
+     * // Get one Category
+     * const category = await prisma.category.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, CategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Categories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Categories
+     * const categories = await prisma.category.findMany()
+     * 
+     * // Get first 10 Categories
+     * const categories = await prisma.category.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const categoryWithIdOnly = await prisma.category.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CategoryFindManyArgs>(args?: SelectSubset<T, CategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Category.
+     * @param {CategoryCreateArgs} args - Arguments to create a Category.
+     * @example
+     * // Create one Category
+     * const Category = await prisma.category.create({
+     *   data: {
+     *     // ... data to create a Category
+     *   }
+     * })
+     * 
+     */
+    create<T extends CategoryCreateArgs>(args: SelectSubset<T, CategoryCreateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Categories.
+     * @param {CategoryCreateManyArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CategoryCreateManyArgs>(args?: SelectSubset<T, CategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Categories and returns the data saved in the database.
+     * @param {CategoryCreateManyAndReturnArgs} args - Arguments to create many Categories.
+     * @example
+     * // Create many Categories
+     * const category = await prisma.category.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Categories and only return the `id`
+     * const categoryWithIdOnly = await prisma.category.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Category.
+     * @param {CategoryDeleteArgs} args - Arguments to delete one Category.
+     * @example
+     * // Delete one Category
+     * const Category = await prisma.category.delete({
+     *   where: {
+     *     // ... filter to delete one Category
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CategoryDeleteArgs>(args: SelectSubset<T, CategoryDeleteArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Category.
+     * @param {CategoryUpdateArgs} args - Arguments to update one Category.
+     * @example
+     * // Update one Category
+     * const category = await prisma.category.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CategoryUpdateArgs>(args: SelectSubset<T, CategoryUpdateArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Categories.
+     * @param {CategoryDeleteManyArgs} args - Arguments to filter Categories to delete.
+     * @example
+     * // Delete a few Categories
+     * const { count } = await prisma.category.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CategoryDeleteManyArgs>(args?: SelectSubset<T, CategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Categories
+     * const category = await prisma.category.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CategoryUpdateManyArgs>(args: SelectSubset<T, CategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Categories and returns the data updated in the database.
+     * @param {CategoryUpdateManyAndReturnArgs} args - Arguments to update many Categories.
+     * @example
+     * // Update many Categories
+     * const category = await prisma.category.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Categories and only return the `id`
+     * const categoryWithIdOnly = await prisma.category.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, CategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Category.
+     * @param {CategoryUpsertArgs} args - Arguments to update or create a Category.
+     * @example
+     * // Update or create a Category
+     * const category = await prisma.category.upsert({
+     *   create: {
+     *     // ... data to create a Category
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Category we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CategoryUpsertArgs>(args: SelectSubset<T, CategoryUpsertArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Categories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryCountArgs} args - Arguments to filter Categories to count.
+     * @example
+     * // Count the number of Categories
+     * const count = await prisma.category.count({
+     *   where: {
+     *     // ... the filter for the Categories we want to count
+     *   }
+     * })
+    **/
+    count<T extends CategoryCountArgs>(
+      args?: Subset<T, CategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CategoryAggregateArgs>(args: Subset<T, CategoryAggregateArgs>): Prisma.PrismaPromise<GetCategoryAggregateType<T>>
+
+    /**
+     * Group by Category.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CategoryGroupByArgs['orderBy'] }
+        : { orderBy?: CategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Category model
+   */
+  readonly fields: CategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Category.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    posts<T extends Category$postsArgs<ExtArgs> = {}>(args?: Subset<T, Category$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Category model
+   */
+  interface CategoryFieldRefs {
+    readonly id: FieldRef<"Category", 'Int'>
+    readonly name: FieldRef<"Category", 'String'>
+    readonly createdById: FieldRef<"Category", 'String'>
+    readonly createdAt: FieldRef<"Category", 'DateTime'>
+    readonly updatedAt: FieldRef<"Category", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Category findUnique
+   */
+  export type CategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findUniqueOrThrow
+   */
+  export type CategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category findFirst
+   */
+  export type CategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findFirstOrThrow
+   */
+  export type CategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Category to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category findMany
+   */
+  export type CategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which Categories to fetch.
+     */
+    where?: CategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Categories to fetch.
+     */
+    orderBy?: CategoryOrderByWithRelationInput | CategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Categories.
+     */
+    cursor?: CategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Categories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Categories.
+     */
+    skip?: number
+    distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Category create
+   */
+  export type CategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Category.
+     */
+    data: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+  }
+
+  /**
+   * Category createMany
+   */
+  export type CategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Category createManyAndReturn
+   */
+  export type CategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Categories.
+     */
+    data: CategoryCreateManyInput | CategoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Category update
+   */
+  export type CategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Category.
+     */
+    data: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+    /**
+     * Choose, which Category to update.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category updateMany
+   */
+  export type CategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Category updateManyAndReturn
+   */
+  export type CategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update Categories.
+     */
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which Categories to update
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Category upsert
+   */
+  export type CategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Category to update in case it exists.
+     */
+    where: CategoryWhereUniqueInput
+    /**
+     * In case the Category found by the `where` argument doesn't exist, create a new Category with this data.
+     */
+    create: XOR<CategoryCreateInput, CategoryUncheckedCreateInput>
+    /**
+     * In case the Category was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CategoryUpdateInput, CategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * Category delete
+   */
+  export type CategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    /**
+     * Filter which Category to delete.
+     */
+    where: CategoryWhereUniqueInput
+  }
+
+  /**
+   * Category deleteMany
+   */
+  export type CategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Categories to delete
+     */
+    where?: CategoryWhereInput
+    /**
+     * Limit how many Categories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Category.posts
+   */
+  export type Category$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPost
+     */
+    select?: BlogPostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BlogPost
+     */
+    omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    where?: BlogPostWhereInput
+    orderBy?: BlogPostOrderByWithRelationInput | BlogPostOrderByWithRelationInput[]
+    cursor?: BlogPostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BlogPostScalarFieldEnum | BlogPostScalarFieldEnum[]
+  }
+
+  /**
+   * Category without action
+   */
+  export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15689,6 +20899,7 @@ export namespace Prisma {
     resource: 'resource',
     resourceId: 'resourceId',
     action: 'action',
+    message: 'message',
     previousState: 'previousState',
     currentState: 'currentState',
     createdAt: 'createdAt',
@@ -15745,6 +20956,7 @@ export namespace Prisma {
     degreeType: 'degreeType',
     overview: 'overview',
     description: 'description',
+    requirements: 'requirements',
     applicationFee: 'applicationFee',
     applicationFeeDiscount: 'applicationFeeDiscount',
     tuitionFee: 'tuitionFee',
@@ -15754,8 +20966,6 @@ export namespace Prisma {
     minimumEducationLevel: 'minimumEducationLevel',
     minimumEducationDegree: 'minimumEducationDegree',
     minimumEligibilityGpa: 'minimumEligibilityGpa',
-    englishProficiency: 'englishProficiency',
-    minimumEnglishProficiencyScore: 'minimumEnglishProficiencyScore',
     pgwp: 'pgwp',
     active: 'active',
     createdById: 'createdById',
@@ -15766,11 +20976,21 @@ export namespace Prisma {
   export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
 
 
+  export const EnglishProficiencyScalarFieldEnum: {
+    test: 'test',
+    score: 'score',
+    programId: 'programId'
+  };
+
+  export type EnglishProficiencyScalarFieldEnum = (typeof EnglishProficiencyScalarFieldEnum)[keyof typeof EnglishProficiencyScalarFieldEnum]
+
+
   export const IntakeScalarFieldEnum: {
     id: 'id',
     intake: 'intake',
     startDate: 'startDate',
     deadline: 'deadline',
+    status: 'status',
     schoolId: 'schoolId',
     createdById: 'createdById',
     createdAt: 'createdAt',
@@ -15778,6 +20998,47 @@ export namespace Prisma {
   };
 
   export type IntakeScalarFieldEnum = (typeof IntakeScalarFieldEnum)[keyof typeof IntakeScalarFieldEnum]
+
+
+  export const BlogPostScalarFieldEnum: {
+    id: 'id',
+    blogPostId: 'blogPostId',
+    title: 'title',
+    slug: 'slug',
+    excerpt: 'excerpt',
+    content: 'content',
+    coverImage: 'coverImage',
+    featured: 'featured',
+    status: 'status',
+    publishedAt: 'publishedAt',
+    authorId: 'authorId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BlogPostScalarFieldEnum = (typeof BlogPostScalarFieldEnum)[keyof typeof BlogPostScalarFieldEnum]
+
+
+  export const TagScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
+
+
+  export const CategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -16023,6 +21284,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'IntakeStatus'
+   */
+  export type EnumIntakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntakeStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'IntakeStatus[]'
+   */
+  export type ListEnumIntakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntakeStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogStatus'
+   */
+  export type EnumBlogStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'BlogStatus[]'
+   */
+  export type ListEnumBlogStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -16139,6 +21428,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationListRelationFilter
     intakesCreated?: IntakeListRelationFilter
     programsCreated?: ProgramListRelationFilter
+    blogsCreated?: BlogPostListRelationFilter
+    tagsCreated?: TagListRelationFilter
+    categoriesCreated?: CategoryListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -16174,6 +21466,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationOrderByRelationAggregateInput
     intakesCreated?: IntakeOrderByRelationAggregateInput
     programsCreated?: ProgramOrderByRelationAggregateInput
+    blogsCreated?: BlogPostOrderByRelationAggregateInput
+    tagsCreated?: TagOrderByRelationAggregateInput
+    categoriesCreated?: CategoryOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -16212,6 +21507,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationListRelationFilter
     intakesCreated?: IntakeListRelationFilter
     programsCreated?: ProgramListRelationFilter
+    blogsCreated?: BlogPostListRelationFilter
+    tagsCreated?: TagListRelationFilter
+    categoriesCreated?: CategoryListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -16546,6 +21844,7 @@ export namespace Prisma {
     resource?: StringFilter<"ActivityLog"> | string
     resourceId?: IntFilter<"ActivityLog"> | number
     action?: StringFilter<"ActivityLog"> | string
+    message?: StringNullableFilter<"ActivityLog"> | string | null
     previousState?: JsonNullableFilter<"ActivityLog">
     currentState?: JsonNullableFilter<"ActivityLog">
     createdAt?: DateTimeFilter<"ActivityLog"> | Date | string
@@ -16559,6 +21858,7 @@ export namespace Prisma {
     resource?: SortOrder
     resourceId?: SortOrder
     action?: SortOrder
+    message?: SortOrderInput | SortOrder
     previousState?: SortOrderInput | SortOrder
     currentState?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -16575,6 +21875,7 @@ export namespace Prisma {
     resource?: StringFilter<"ActivityLog"> | string
     resourceId?: IntFilter<"ActivityLog"> | number
     action?: StringFilter<"ActivityLog"> | string
+    message?: StringNullableFilter<"ActivityLog"> | string | null
     previousState?: JsonNullableFilter<"ActivityLog">
     currentState?: JsonNullableFilter<"ActivityLog">
     createdAt?: DateTimeFilter<"ActivityLog"> | Date | string
@@ -16588,6 +21889,7 @@ export namespace Prisma {
     resource?: SortOrder
     resourceId?: SortOrder
     action?: SortOrder
+    message?: SortOrderInput | SortOrder
     previousState?: SortOrderInput | SortOrder
     currentState?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -16608,6 +21910,7 @@ export namespace Prisma {
     resource?: StringWithAggregatesFilter<"ActivityLog"> | string
     resourceId?: IntWithAggregatesFilter<"ActivityLog"> | number
     action?: StringWithAggregatesFilter<"ActivityLog"> | string
+    message?: StringNullableWithAggregatesFilter<"ActivityLog"> | string | null
     previousState?: JsonNullableWithAggregatesFilter<"ActivityLog">
     currentState?: JsonNullableWithAggregatesFilter<"ActivityLog">
     createdAt?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
@@ -16828,6 +22131,7 @@ export namespace Prisma {
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
+    requirements?: StringNullableFilter<"Program"> | string | null
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -16837,8 +22141,6 @@ export namespace Prisma {
     minimumEducationLevel?: StringFilter<"Program"> | string
     minimumEducationDegree?: IntFilter<"Program"> | number
     minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFilter<"Program"> | string
-    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFilter<"Program"> | boolean
     active?: BoolFilter<"Program"> | boolean
     createdById?: StringFilter<"Program"> | string
@@ -16846,6 +22148,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Program"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
     intakes?: IntakeListRelationFilter
+    proficiencies?: EnglishProficiencyListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }
 
@@ -16859,6 +22162,7 @@ export namespace Prisma {
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
+    requirements?: SortOrderInput | SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -16868,8 +22172,6 @@ export namespace Prisma {
     minimumEducationLevel?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    englishProficiency?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
     pgwp?: SortOrder
     active?: SortOrder
     createdById?: SortOrder
@@ -16877,6 +22179,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     school?: SchoolOrderByWithRelationInput
     intakes?: IntakeOrderByRelationAggregateInput
+    proficiencies?: EnglishProficiencyOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
   }
 
@@ -16894,6 +22197,7 @@ export namespace Prisma {
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
+    requirements?: StringNullableFilter<"Program"> | string | null
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -16903,8 +22207,6 @@ export namespace Prisma {
     minimumEducationLevel?: StringFilter<"Program"> | string
     minimumEducationDegree?: IntFilter<"Program"> | number
     minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFilter<"Program"> | string
-    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFilter<"Program"> | boolean
     active?: BoolFilter<"Program"> | boolean
     createdById?: StringFilter<"Program"> | string
@@ -16912,6 +22214,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Program"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
     intakes?: IntakeListRelationFilter
+    proficiencies?: EnglishProficiencyListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }, "programId" | "id" | "schoolId_slug">
 
@@ -16925,6 +22228,7 @@ export namespace Prisma {
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
+    requirements?: SortOrderInput | SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -16934,8 +22238,6 @@ export namespace Prisma {
     minimumEducationLevel?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    englishProficiency?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
     pgwp?: SortOrder
     active?: SortOrder
     createdById?: SortOrder
@@ -16961,6 +22263,7 @@ export namespace Prisma {
     degreeType?: StringWithAggregatesFilter<"Program"> | string
     overview?: StringWithAggregatesFilter<"Program"> | string
     description?: StringWithAggregatesFilter<"Program"> | string
+    requirements?: StringNullableWithAggregatesFilter<"Program"> | string | null
     applicationFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -16970,13 +22273,59 @@ export namespace Prisma {
     minimumEducationLevel?: StringWithAggregatesFilter<"Program"> | string
     minimumEducationDegree?: IntWithAggregatesFilter<"Program"> | number
     minimumEligibilityGpa?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringWithAggregatesFilter<"Program"> | string
-    minimumEnglishProficiencyScore?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
     pgwp?: BoolWithAggregatesFilter<"Program"> | boolean
     active?: BoolWithAggregatesFilter<"Program"> | boolean
     createdById?: StringWithAggregatesFilter<"Program"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Program"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Program"> | Date | string
+  }
+
+  export type EnglishProficiencyWhereInput = {
+    AND?: EnglishProficiencyWhereInput | EnglishProficiencyWhereInput[]
+    OR?: EnglishProficiencyWhereInput[]
+    NOT?: EnglishProficiencyWhereInput | EnglishProficiencyWhereInput[]
+    test?: StringFilter<"EnglishProficiency"> | string
+    score?: DecimalFilter<"EnglishProficiency"> | Decimal | DecimalJsLike | number | string
+    programId?: StringFilter<"EnglishProficiency"> | string
+    program?: XOR<ProgramScalarRelationFilter, ProgramWhereInput>
+  }
+
+  export type EnglishProficiencyOrderByWithRelationInput = {
+    test?: SortOrder
+    score?: SortOrder
+    programId?: SortOrder
+    program?: ProgramOrderByWithRelationInput
+  }
+
+  export type EnglishProficiencyWhereUniqueInput = Prisma.AtLeast<{
+    proficiency?: EnglishProficiencyProficiencyCompoundUniqueInput
+    AND?: EnglishProficiencyWhereInput | EnglishProficiencyWhereInput[]
+    OR?: EnglishProficiencyWhereInput[]
+    NOT?: EnglishProficiencyWhereInput | EnglishProficiencyWhereInput[]
+    test?: StringFilter<"EnglishProficiency"> | string
+    score?: DecimalFilter<"EnglishProficiency"> | Decimal | DecimalJsLike | number | string
+    programId?: StringFilter<"EnglishProficiency"> | string
+    program?: XOR<ProgramScalarRelationFilter, ProgramWhereInput>
+  }, "proficiency">
+
+  export type EnglishProficiencyOrderByWithAggregationInput = {
+    test?: SortOrder
+    score?: SortOrder
+    programId?: SortOrder
+    _count?: EnglishProficiencyCountOrderByAggregateInput
+    _avg?: EnglishProficiencyAvgOrderByAggregateInput
+    _max?: EnglishProficiencyMaxOrderByAggregateInput
+    _min?: EnglishProficiencyMinOrderByAggregateInput
+    _sum?: EnglishProficiencySumOrderByAggregateInput
+  }
+
+  export type EnglishProficiencyScalarWhereWithAggregatesInput = {
+    AND?: EnglishProficiencyScalarWhereWithAggregatesInput | EnglishProficiencyScalarWhereWithAggregatesInput[]
+    OR?: EnglishProficiencyScalarWhereWithAggregatesInput[]
+    NOT?: EnglishProficiencyScalarWhereWithAggregatesInput | EnglishProficiencyScalarWhereWithAggregatesInput[]
+    test?: StringWithAggregatesFilter<"EnglishProficiency"> | string
+    score?: DecimalWithAggregatesFilter<"EnglishProficiency"> | Decimal | DecimalJsLike | number | string
+    programId?: StringWithAggregatesFilter<"EnglishProficiency"> | string
   }
 
   export type IntakeWhereInput = {
@@ -16985,8 +22334,9 @@ export namespace Prisma {
     NOT?: IntakeWhereInput | IntakeWhereInput[]
     id?: IntFilter<"Intake"> | number
     intake?: StringFilter<"Intake"> | string
-    startDate?: DateTimeFilter<"Intake"> | Date | string
-    deadline?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    deadline?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    status?: EnumIntakeStatusFilter<"Intake"> | $Enums.IntakeStatus
     schoolId?: StringFilter<"Intake"> | string
     createdById?: StringFilter<"Intake"> | string
     createdAt?: DateTimeFilter<"Intake"> | Date | string
@@ -16999,8 +22349,9 @@ export namespace Prisma {
   export type IntakeOrderByWithRelationInput = {
     id?: SortOrder
     intake?: SortOrder
-    startDate?: SortOrder
-    deadline?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    deadline?: SortOrderInput | SortOrder
+    status?: SortOrder
     schoolId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -17017,8 +22368,9 @@ export namespace Prisma {
     OR?: IntakeWhereInput[]
     NOT?: IntakeWhereInput | IntakeWhereInput[]
     intake?: StringFilter<"Intake"> | string
-    startDate?: DateTimeFilter<"Intake"> | Date | string
-    deadline?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    deadline?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    status?: EnumIntakeStatusFilter<"Intake"> | $Enums.IntakeStatus
     schoolId?: StringFilter<"Intake"> | string
     createdById?: StringFilter<"Intake"> | string
     createdAt?: DateTimeFilter<"Intake"> | Date | string
@@ -17031,8 +22383,9 @@ export namespace Prisma {
   export type IntakeOrderByWithAggregationInput = {
     id?: SortOrder
     intake?: SortOrder
-    startDate?: SortOrder
-    deadline?: SortOrder
+    startDate?: SortOrderInput | SortOrder
+    deadline?: SortOrderInput | SortOrder
+    status?: SortOrder
     schoolId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -17050,12 +22403,236 @@ export namespace Prisma {
     NOT?: IntakeScalarWhereWithAggregatesInput | IntakeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Intake"> | number
     intake?: StringWithAggregatesFilter<"Intake"> | string
-    startDate?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
-    deadline?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+    startDate?: DateTimeNullableWithAggregatesFilter<"Intake"> | Date | string | null
+    deadline?: DateTimeNullableWithAggregatesFilter<"Intake"> | Date | string | null
+    status?: EnumIntakeStatusWithAggregatesFilter<"Intake"> | $Enums.IntakeStatus
     schoolId?: StringWithAggregatesFilter<"Intake"> | string
     createdById?: StringWithAggregatesFilter<"Intake"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Intake"> | Date | string
+  }
+
+  export type BlogPostWhereInput = {
+    AND?: BlogPostWhereInput | BlogPostWhereInput[]
+    OR?: BlogPostWhereInput[]
+    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
+    id?: IntFilter<"BlogPost"> | number
+    blogPostId?: StringFilter<"BlogPost"> | string
+    title?: StringFilter<"BlogPost"> | string
+    slug?: StringFilter<"BlogPost"> | string
+    excerpt?: StringFilter<"BlogPost"> | string
+    content?: StringFilter<"BlogPost"> | string
+    coverImage?: JsonFilter<"BlogPost">
+    featured?: BoolFilter<"BlogPost"> | boolean
+    status?: EnumBlogStatusFilter<"BlogPost"> | $Enums.BlogStatus
+    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
+    authorId?: StringFilter<"BlogPost"> | string
+    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
+    tags?: TagListRelationFilter
+    categories?: CategoryListRelationFilter
+    author?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type BlogPostOrderByWithRelationInput = {
+    id?: SortOrder
+    blogPostId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    featured?: SortOrder
+    status?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tags?: TagOrderByRelationAggregateInput
+    categories?: CategoryOrderByRelationAggregateInput
+    author?: AdminOrderByWithRelationInput
+  }
+
+  export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    blogPostId?: string
+    slug?: string
+    AND?: BlogPostWhereInput | BlogPostWhereInput[]
+    OR?: BlogPostWhereInput[]
+    NOT?: BlogPostWhereInput | BlogPostWhereInput[]
+    title?: StringFilter<"BlogPost"> | string
+    excerpt?: StringFilter<"BlogPost"> | string
+    content?: StringFilter<"BlogPost"> | string
+    coverImage?: JsonFilter<"BlogPost">
+    featured?: BoolFilter<"BlogPost"> | boolean
+    status?: EnumBlogStatusFilter<"BlogPost"> | $Enums.BlogStatus
+    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
+    authorId?: StringFilter<"BlogPost"> | string
+    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
+    tags?: TagListRelationFilter
+    categories?: CategoryListRelationFilter
+    author?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "blogPostId" | "slug">
+
+  export type BlogPostOrderByWithAggregationInput = {
+    id?: SortOrder
+    blogPostId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    featured?: SortOrder
+    status?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BlogPostCountOrderByAggregateInput
+    _avg?: BlogPostAvgOrderByAggregateInput
+    _max?: BlogPostMaxOrderByAggregateInput
+    _min?: BlogPostMinOrderByAggregateInput
+    _sum?: BlogPostSumOrderByAggregateInput
+  }
+
+  export type BlogPostScalarWhereWithAggregatesInput = {
+    AND?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
+    OR?: BlogPostScalarWhereWithAggregatesInput[]
+    NOT?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"BlogPost"> | number
+    blogPostId?: StringWithAggregatesFilter<"BlogPost"> | string
+    title?: StringWithAggregatesFilter<"BlogPost"> | string
+    slug?: StringWithAggregatesFilter<"BlogPost"> | string
+    excerpt?: StringWithAggregatesFilter<"BlogPost"> | string
+    content?: StringWithAggregatesFilter<"BlogPost"> | string
+    coverImage?: JsonWithAggregatesFilter<"BlogPost">
+    featured?: BoolWithAggregatesFilter<"BlogPost"> | boolean
+    status?: EnumBlogStatusWithAggregatesFilter<"BlogPost"> | $Enums.BlogStatus
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"BlogPost"> | Date | string | null
+    authorId?: StringWithAggregatesFilter<"BlogPost"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
+  }
+
+  export type TagWhereInput = {
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    id?: IntFilter<"Tag"> | number
+    name?: StringFilter<"Tag"> | string
+    createdById?: StringFilter<"Tag"> | string
+    createdAt?: DateTimeFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeFilter<"Tag"> | Date | string
+    posts?: BlogPostListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type TagOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    posts?: BlogPostOrderByRelationAggregateInput
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type TagWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    createdById?: StringFilter<"Tag"> | string
+    createdAt?: DateTimeFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeFilter<"Tag"> | Date | string
+    posts?: BlogPostListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "name">
+
+  export type TagOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TagCountOrderByAggregateInput
+    _avg?: TagAvgOrderByAggregateInput
+    _max?: TagMaxOrderByAggregateInput
+    _min?: TagMinOrderByAggregateInput
+    _sum?: TagSumOrderByAggregateInput
+  }
+
+  export type TagScalarWhereWithAggregatesInput = {
+    AND?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    OR?: TagScalarWhereWithAggregatesInput[]
+    NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Tag"> | number
+    name?: StringWithAggregatesFilter<"Tag"> | string
+    createdById?: StringWithAggregatesFilter<"Tag"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
+  }
+
+  export type CategoryWhereInput = {
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    id?: IntFilter<"Category"> | number
+    name?: StringFilter<"Category"> | string
+    createdById?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    posts?: BlogPostListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type CategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    posts?: BlogPostOrderByRelationAggregateInput
+    createdBy?: AdminOrderByWithRelationInput
+  }
+
+  export type CategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: CategoryWhereInput | CategoryWhereInput[]
+    OR?: CategoryWhereInput[]
+    NOT?: CategoryWhereInput | CategoryWhereInput[]
+    createdById?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
+    posts?: BlogPostListRelationFilter
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "name">
+
+  export type CategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CategoryCountOrderByAggregateInput
+    _avg?: CategoryAvgOrderByAggregateInput
+    _max?: CategoryMaxOrderByAggregateInput
+    _min?: CategoryMinOrderByAggregateInput
+    _sum?: CategorySumOrderByAggregateInput
+  }
+
+  export type CategoryScalarWhereWithAggregatesInput = {
+    AND?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    OR?: CategoryScalarWhereWithAggregatesInput[]
+    NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Category"> | number
+    name?: StringWithAggregatesFilter<"Category"> | string
+    createdById?: StringWithAggregatesFilter<"Category"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
   export type TokenCreateInput = {
@@ -17160,6 +22737,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -17194,6 +22774,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -17227,6 +22810,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -17261,6 +22847,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -17592,6 +23181,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -17605,6 +23195,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -17615,6 +23206,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17628,6 +23220,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17640,6 +23233,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -17650,6 +23244,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17662,6 +23257,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17898,6 +23494,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -17907,14 +23504,13 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutProgramsInput
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
   }
 
@@ -17928,6 +23524,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -17937,14 +23534,13 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUpdateInput = {
@@ -17955,6 +23551,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17964,14 +23561,13 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
   }
 
@@ -17985,6 +23581,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -17994,14 +23591,13 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramCreateManyInput = {
@@ -18014,6 +23610,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -18023,8 +23620,6 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdById: string
@@ -18040,6 +23635,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -18049,8 +23645,6 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18067,6 +23661,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -18076,8 +23671,6 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
@@ -18085,10 +23678,52 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnglishProficiencyCreateInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+    program: ProgramCreateNestedOneWithoutProficienciesInput
+  }
+
+  export type EnglishProficiencyUncheckedCreateInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+    programId: string
+  }
+
+  export type EnglishProficiencyUpdateInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    program?: ProgramUpdateOneRequiredWithoutProficienciesNestedInput
+  }
+
+  export type EnglishProficiencyUncheckedUpdateInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    programId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EnglishProficiencyCreateManyInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+    programId: string
+  }
+
+  export type EnglishProficiencyUpdateManyMutationInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnglishProficiencyUncheckedUpdateManyInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    programId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type IntakeCreateInput = {
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutIntakesInput
@@ -18099,8 +23734,9 @@ export namespace Prisma {
   export type IntakeUncheckedCreateInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     schoolId: string
     createdById: string
     createdAt?: Date | string
@@ -18110,8 +23746,9 @@ export namespace Prisma {
 
   export type IntakeUpdateInput = {
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
@@ -18122,8 +23759,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18134,8 +23772,9 @@ export namespace Prisma {
   export type IntakeCreateManyInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     schoolId: string
     createdById: string
     createdAt?: Date | string
@@ -18144,8 +23783,9 @@ export namespace Prisma {
 
   export type IntakeUpdateManyMutationInput = {
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18153,9 +23793,238 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostCreateInput = {
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagCreateNestedManyWithoutPostsInput
+    categories?: CategoryCreateNestedManyWithoutPostsInput
+    author: AdminCreateNestedOneWithoutBlogsCreatedInput
+  }
+
+  export type BlogPostUncheckedCreateInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type BlogPostUpdateInput = {
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUpdateManyWithoutPostsNestedInput
+    categories?: CategoryUpdateManyWithoutPostsNestedInput
+    author?: AdminUpdateOneRequiredWithoutBlogsCreatedNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type BlogPostCreateManyInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostUpdateManyMutationInput = {
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagCreateInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostCreateNestedManyWithoutTagsInput
+    createdBy: AdminCreateNestedOneWithoutTagsCreatedInput
+  }
+
+  export type TagUncheckedCreateInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUpdateManyWithoutTagsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutTagsCreatedNestedInput
+  }
+
+  export type TagUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagCreateManyInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryCreateInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostCreateNestedManyWithoutCategoriesInput
+    createdBy: AdminCreateNestedOneWithoutCategoriesCreatedInput
+  }
+
+  export type CategoryUncheckedCreateInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostUncheckedCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type CategoryUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUpdateManyWithoutCategoriesNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutCategoriesCreatedNestedInput
+  }
+
+  export type CategoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUncheckedUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type CategoryCreateManyInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18433,6 +24302,24 @@ export namespace Prisma {
     none?: ProgramWhereInput
   }
 
+  export type BlogPostListRelationFilter = {
+    every?: BlogPostWhereInput
+    some?: BlogPostWhereInput
+    none?: BlogPostWhereInput
+  }
+
+  export type TagListRelationFilter = {
+    every?: TagWhereInput
+    some?: TagWhereInput
+    none?: TagWhereInput
+  }
+
+  export type CategoryListRelationFilter = {
+    every?: CategoryWhereInput
+    some?: CategoryWhereInput
+    none?: CategoryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18471,6 +24358,18 @@ export namespace Prisma {
   }
 
   export type ProgramOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BlogPostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CategoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18812,6 +24711,7 @@ export namespace Prisma {
     resource?: SortOrder
     resourceId?: SortOrder
     action?: SortOrder
+    message?: SortOrder
     previousState?: SortOrder
     currentState?: SortOrder
     createdAt?: SortOrder
@@ -18830,6 +24730,7 @@ export namespace Prisma {
     resource?: SortOrder
     resourceId?: SortOrder
     action?: SortOrder
+    message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -18840,6 +24741,7 @@ export namespace Prisma {
     resource?: SortOrder
     resourceId?: SortOrder
     action?: SortOrder
+    message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19041,6 +24943,16 @@ export namespace Prisma {
     not?: NestedEnumTimeframeFilter<$PrismaModel> | $Enums.Timeframe
   }
 
+  export type EnglishProficiencyListRelationFilter = {
+    every?: EnglishProficiencyWhereInput
+    some?: EnglishProficiencyWhereInput
+    none?: EnglishProficiencyWhereInput
+  }
+
+  export type EnglishProficiencyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ProgramSchoolIdSlugCompoundUniqueInput = {
     schoolId: string
     slug: string
@@ -19056,6 +24968,7 @@ export namespace Prisma {
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
+    requirements?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -19065,8 +24978,6 @@ export namespace Prisma {
     minimumEducationLevel?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    englishProficiency?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
     pgwp?: SortOrder
     active?: SortOrder
     createdById?: SortOrder
@@ -19082,7 +24993,6 @@ export namespace Prisma {
     duration?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
   }
 
   export type ProgramMaxOrderByAggregateInput = {
@@ -19095,6 +25005,7 @@ export namespace Prisma {
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
+    requirements?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -19104,8 +25015,6 @@ export namespace Prisma {
     minimumEducationLevel?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    englishProficiency?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
     pgwp?: SortOrder
     active?: SortOrder
     createdById?: SortOrder
@@ -19123,6 +25032,7 @@ export namespace Prisma {
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
+    requirements?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -19132,8 +25042,6 @@ export namespace Prisma {
     minimumEducationLevel?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    englishProficiency?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
     pgwp?: SortOrder
     active?: SortOrder
     createdById?: SortOrder
@@ -19149,7 +25057,6 @@ export namespace Prisma {
     duration?: SortOrder
     minimumEducationDegree?: SortOrder
     minimumEligibilityGpa?: SortOrder
-    minimumEnglishProficiencyScore?: SortOrder
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -19188,6 +25095,60 @@ export namespace Prisma {
     _max?: NestedEnumTimeframeFilter<$PrismaModel>
   }
 
+  export type ProgramScalarRelationFilter = {
+    is?: ProgramWhereInput
+    isNot?: ProgramWhereInput
+  }
+
+  export type EnglishProficiencyProficiencyCompoundUniqueInput = {
+    test: string
+    programId: string
+  }
+
+  export type EnglishProficiencyCountOrderByAggregateInput = {
+    test?: SortOrder
+    score?: SortOrder
+    programId?: SortOrder
+  }
+
+  export type EnglishProficiencyAvgOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type EnglishProficiencyMaxOrderByAggregateInput = {
+    test?: SortOrder
+    score?: SortOrder
+    programId?: SortOrder
+  }
+
+  export type EnglishProficiencyMinOrderByAggregateInput = {
+    test?: SortOrder
+    score?: SortOrder
+    programId?: SortOrder
+  }
+
+  export type EnglishProficiencySumOrderByAggregateInput = {
+    score?: SortOrder
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumIntakeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntakeStatus | EnumIntakeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntakeStatusFilter<$PrismaModel> | $Enums.IntakeStatus
+  }
+
   export type IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput = {
     schoolId: string
     intake: string
@@ -19200,6 +25161,7 @@ export namespace Prisma {
     intake?: SortOrder
     startDate?: SortOrder
     deadline?: SortOrder
+    status?: SortOrder
     schoolId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -19215,6 +25177,7 @@ export namespace Prisma {
     intake?: SortOrder
     startDate?: SortOrder
     deadline?: SortOrder
+    status?: SortOrder
     schoolId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -19226,6 +25189,7 @@ export namespace Prisma {
     intake?: SortOrder
     startDate?: SortOrder
     deadline?: SortOrder
+    status?: SortOrder
     schoolId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -19233,6 +25197,165 @@ export namespace Prisma {
   }
 
   export type IntakeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumIntakeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntakeStatus | EnumIntakeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntakeStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntakeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIntakeStatusFilter<$PrismaModel>
+    _max?: NestedEnumIntakeStatusFilter<$PrismaModel>
+  }
+
+  export type EnumBlogStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogStatus | EnumBlogStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogStatusFilter<$PrismaModel> | $Enums.BlogStatus
+  }
+
+  export type BlogPostCountOrderByAggregateInput = {
+    id?: SortOrder
+    blogPostId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    featured?: SortOrder
+    status?: SortOrder
+    publishedAt?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BlogPostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    blogPostId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    featured?: SortOrder
+    status?: SortOrder
+    publishedAt?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostMinOrderByAggregateInput = {
+    id?: SortOrder
+    blogPostId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    excerpt?: SortOrder
+    content?: SortOrder
+    featured?: SortOrder
+    status?: SortOrder
+    publishedAt?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BlogPostSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumBlogStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogStatus | EnumBlogStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogStatusWithAggregatesFilter<$PrismaModel> | $Enums.BlogStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogStatusFilter<$PrismaModel>
+    _max?: NestedEnumBlogStatusFilter<$PrismaModel>
+  }
+
+  export type TagCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type TagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CategorySumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -19344,6 +25467,27 @@ export namespace Prisma {
     connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
   }
 
+  export type BlogPostCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput> | BlogPostCreateWithoutAuthorInput[] | BlogPostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutAuthorInput | BlogPostCreateOrConnectWithoutAuthorInput[]
+    createMany?: BlogPostCreateManyAuthorInputEnvelope
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type TagCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput> | TagCreateWithoutCreatedByInput[] | TagUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutCreatedByInput | TagCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TagCreateManyCreatedByInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type CategoryCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput> | CategoryCreateWithoutCreatedByInput[] | CategoryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutCreatedByInput | CategoryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CategoryCreateManyCreatedByInputEnvelope
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -19424,6 +25568,27 @@ export namespace Prisma {
     connectOrCreate?: ProgramCreateOrConnectWithoutCreatedByInput | ProgramCreateOrConnectWithoutCreatedByInput[]
     createMany?: ProgramCreateManyCreatedByInputEnvelope
     connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+  }
+
+  export type BlogPostUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput> | BlogPostCreateWithoutAuthorInput[] | BlogPostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutAuthorInput | BlogPostCreateOrConnectWithoutAuthorInput[]
+    createMany?: BlogPostCreateManyAuthorInputEnvelope
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput> | TagCreateWithoutCreatedByInput[] | TagUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutCreatedByInput | TagCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TagCreateManyCreatedByInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type CategoryUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput> | CategoryCreateWithoutCreatedByInput[] | CategoryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutCreatedByInput | CategoryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: CategoryCreateManyCreatedByInputEnvelope
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -19614,6 +25779,48 @@ export namespace Prisma {
     deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
   }
 
+  export type BlogPostUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput> | BlogPostCreateWithoutAuthorInput[] | BlogPostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutAuthorInput | BlogPostCreateOrConnectWithoutAuthorInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutAuthorInput | BlogPostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: BlogPostCreateManyAuthorInputEnvelope
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutAuthorInput | BlogPostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutAuthorInput | BlogPostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type TagUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput> | TagCreateWithoutCreatedByInput[] | TagUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutCreatedByInput | TagCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutCreatedByInput | TagUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TagCreateManyCreatedByInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutCreatedByInput | TagUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutCreatedByInput | TagUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type CategoryUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput> | CategoryCreateWithoutCreatedByInput[] | CategoryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutCreatedByInput | CategoryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CategoryUpsertWithWhereUniqueWithoutCreatedByInput | CategoryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CategoryCreateManyCreatedByInputEnvelope
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    update?: CategoryUpdateWithWhereUniqueWithoutCreatedByInput | CategoryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CategoryUpdateManyWithWhereWithoutCreatedByInput | CategoryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -19778,6 +25985,48 @@ export namespace Prisma {
     update?: ProgramUpdateWithWhereUniqueWithoutCreatedByInput | ProgramUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: ProgramUpdateManyWithWhereWithoutCreatedByInput | ProgramUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput> | BlogPostCreateWithoutAuthorInput[] | BlogPostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutAuthorInput | BlogPostCreateOrConnectWithoutAuthorInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutAuthorInput | BlogPostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: BlogPostCreateManyAuthorInputEnvelope
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutAuthorInput | BlogPostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutAuthorInput | BlogPostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput> | TagCreateWithoutCreatedByInput[] | TagUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutCreatedByInput | TagCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutCreatedByInput | TagUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TagCreateManyCreatedByInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutCreatedByInput | TagUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutCreatedByInput | TagUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type CategoryUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput> | CategoryCreateWithoutCreatedByInput[] | CategoryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutCreatedByInput | CategoryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: CategoryUpsertWithWhereUniqueWithoutCreatedByInput | CategoryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: CategoryCreateManyCreatedByInputEnvelope
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    update?: CategoryUpdateWithWhereUniqueWithoutCreatedByInput | CategoryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: CategoryUpdateManyWithWhereWithoutCreatedByInput | CategoryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutDepartmentsLeadingInput = {
@@ -20172,6 +26421,13 @@ export namespace Prisma {
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
   }
 
+  export type EnglishProficiencyCreateNestedManyWithoutProgramInput = {
+    create?: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput> | EnglishProficiencyCreateWithoutProgramInput[] | EnglishProficiencyUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
+    createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
+    connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+  }
+
   export type AdminCreateNestedOneWithoutProgramsCreatedInput = {
     create?: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
     connectOrCreate?: AdminCreateOrConnectWithoutProgramsCreatedInput
@@ -20182,6 +26438,13 @@ export namespace Prisma {
     create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
     connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
     connect?: IntakeWhereUniqueInput | IntakeWhereUniqueInput[]
+  }
+
+  export type EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput = {
+    create?: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput> | EnglishProficiencyCreateWithoutProgramInput[] | EnglishProficiencyUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
+    createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
+    connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -20221,6 +26484,20 @@ export namespace Prisma {
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
   }
 
+  export type EnglishProficiencyUpdateManyWithoutProgramNestedInput = {
+    create?: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput> | EnglishProficiencyCreateWithoutProgramInput[] | EnglishProficiencyUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
+    upsert?: EnglishProficiencyUpsertWithWhereUniqueWithoutProgramInput | EnglishProficiencyUpsertWithWhereUniqueWithoutProgramInput[]
+    createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
+    set?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    disconnect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    delete?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    update?: EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput | EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput[]
+    updateMany?: EnglishProficiencyUpdateManyWithWhereWithoutProgramInput | EnglishProficiencyUpdateManyWithWhereWithoutProgramInput[]
+    deleteMany?: EnglishProficiencyScalarWhereInput | EnglishProficiencyScalarWhereInput[]
+  }
+
   export type AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput = {
     create?: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
     connectOrCreate?: AdminCreateOrConnectWithoutProgramsCreatedInput
@@ -20240,6 +26517,34 @@ export namespace Prisma {
     update?: IntakeUpdateWithWhereUniqueWithoutProgramsInput | IntakeUpdateWithWhereUniqueWithoutProgramsInput[]
     updateMany?: IntakeUpdateManyWithWhereWithoutProgramsInput | IntakeUpdateManyWithWhereWithoutProgramsInput[]
     deleteMany?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
+  }
+
+  export type EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput = {
+    create?: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput> | EnglishProficiencyCreateWithoutProgramInput[] | EnglishProficiencyUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
+    upsert?: EnglishProficiencyUpsertWithWhereUniqueWithoutProgramInput | EnglishProficiencyUpsertWithWhereUniqueWithoutProgramInput[]
+    createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
+    set?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    disconnect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    delete?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+    update?: EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput | EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput[]
+    updateMany?: EnglishProficiencyUpdateManyWithWhereWithoutProgramInput | EnglishProficiencyUpdateManyWithWhereWithoutProgramInput[]
+    deleteMany?: EnglishProficiencyScalarWhereInput | EnglishProficiencyScalarWhereInput[]
+  }
+
+  export type ProgramCreateNestedOneWithoutProficienciesInput = {
+    create?: XOR<ProgramCreateWithoutProficienciesInput, ProgramUncheckedCreateWithoutProficienciesInput>
+    connectOrCreate?: ProgramCreateOrConnectWithoutProficienciesInput
+    connect?: ProgramWhereUniqueInput
+  }
+
+  export type ProgramUpdateOneRequiredWithoutProficienciesNestedInput = {
+    create?: XOR<ProgramCreateWithoutProficienciesInput, ProgramUncheckedCreateWithoutProficienciesInput>
+    connectOrCreate?: ProgramCreateOrConnectWithoutProficienciesInput
+    upsert?: ProgramUpsertWithoutProficienciesInput
+    connect?: ProgramWhereUniqueInput
+    update?: XOR<XOR<ProgramUpdateToOneWithWhereWithoutProficienciesInput, ProgramUpdateWithoutProficienciesInput>, ProgramUncheckedUpdateWithoutProficienciesInput>
   }
 
   export type SchoolCreateNestedOneWithoutIntakesInput = {
@@ -20264,6 +26569,14 @@ export namespace Prisma {
     create?: XOR<ProgramCreateWithoutIntakesInput, ProgramUncheckedCreateWithoutIntakesInput> | ProgramCreateWithoutIntakesInput[] | ProgramUncheckedCreateWithoutIntakesInput[]
     connectOrCreate?: ProgramCreateOrConnectWithoutIntakesInput | ProgramCreateOrConnectWithoutIntakesInput[]
     connect?: ProgramWhereUniqueInput | ProgramWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumIntakeStatusFieldUpdateOperationsInput = {
+    set?: $Enums.IntakeStatus
   }
 
   export type SchoolUpdateOneRequiredWithoutIntakesNestedInput = {
@@ -20306,6 +26619,204 @@ export namespace Prisma {
     update?: ProgramUpdateWithWhereUniqueWithoutIntakesInput | ProgramUpdateWithWhereUniqueWithoutIntakesInput[]
     updateMany?: ProgramUpdateManyWithWhereWithoutIntakesInput | ProgramUpdateManyWithWhereWithoutIntakesInput[]
     deleteMany?: ProgramScalarWhereInput | ProgramScalarWhereInput[]
+  }
+
+  export type TagCreateNestedManyWithoutPostsInput = {
+    create?: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput> | TagCreateWithoutPostsInput[] | TagUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutPostsInput | TagCreateOrConnectWithoutPostsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type CategoryCreateNestedManyWithoutPostsInput = {
+    create?: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput> | CategoryCreateWithoutPostsInput[] | CategoryUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutPostsInput | CategoryCreateOrConnectWithoutPostsInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutBlogsCreatedInput = {
+    create?: XOR<AdminCreateWithoutBlogsCreatedInput, AdminUncheckedCreateWithoutBlogsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutBlogsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutPostsInput = {
+    create?: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput> | TagCreateWithoutPostsInput[] | TagUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutPostsInput | TagCreateOrConnectWithoutPostsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type CategoryUncheckedCreateNestedManyWithoutPostsInput = {
+    create?: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput> | CategoryCreateWithoutPostsInput[] | CategoryUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutPostsInput | CategoryCreateOrConnectWithoutPostsInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+  }
+
+  export type EnumBlogStatusFieldUpdateOperationsInput = {
+    set?: $Enums.BlogStatus
+  }
+
+  export type TagUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput> | TagCreateWithoutPostsInput[] | TagUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutPostsInput | TagCreateOrConnectWithoutPostsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutPostsInput | TagUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutPostsInput | TagUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutPostsInput | TagUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type CategoryUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput> | CategoryCreateWithoutPostsInput[] | CategoryUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutPostsInput | CategoryCreateOrConnectWithoutPostsInput[]
+    upsert?: CategoryUpsertWithWhereUniqueWithoutPostsInput | CategoryUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    update?: CategoryUpdateWithWhereUniqueWithoutPostsInput | CategoryUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: CategoryUpdateManyWithWhereWithoutPostsInput | CategoryUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutBlogsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutBlogsCreatedInput, AdminUncheckedCreateWithoutBlogsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutBlogsCreatedInput
+    upsert?: AdminUpsertWithoutBlogsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutBlogsCreatedInput, AdminUpdateWithoutBlogsCreatedInput>, AdminUncheckedUpdateWithoutBlogsCreatedInput>
+  }
+
+  export type TagUncheckedUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput> | TagCreateWithoutPostsInput[] | TagUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutPostsInput | TagCreateOrConnectWithoutPostsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutPostsInput | TagUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutPostsInput | TagUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutPostsInput | TagUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type CategoryUncheckedUpdateManyWithoutPostsNestedInput = {
+    create?: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput> | CategoryCreateWithoutPostsInput[] | CategoryUncheckedCreateWithoutPostsInput[]
+    connectOrCreate?: CategoryCreateOrConnectWithoutPostsInput | CategoryCreateOrConnectWithoutPostsInput[]
+    upsert?: CategoryUpsertWithWhereUniqueWithoutPostsInput | CategoryUpsertWithWhereUniqueWithoutPostsInput[]
+    set?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    disconnect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    delete?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+    update?: CategoryUpdateWithWhereUniqueWithoutPostsInput | CategoryUpdateWithWhereUniqueWithoutPostsInput[]
+    updateMany?: CategoryUpdateManyWithWhereWithoutPostsInput | CategoryUpdateManyWithWhereWithoutPostsInput[]
+    deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+  }
+
+  export type BlogPostCreateNestedManyWithoutTagsInput = {
+    create?: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput> | BlogPostCreateWithoutTagsInput[] | BlogPostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutTagsInput | BlogPostCreateOrConnectWithoutTagsInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutTagsCreatedInput = {
+    create?: XOR<AdminCreateWithoutTagsCreatedInput, AdminUncheckedCreateWithoutTagsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutTagsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type BlogPostUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput> | BlogPostCreateWithoutTagsInput[] | BlogPostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutTagsInput | BlogPostCreateOrConnectWithoutTagsInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type BlogPostUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput> | BlogPostCreateWithoutTagsInput[] | BlogPostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutTagsInput | BlogPostCreateOrConnectWithoutTagsInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutTagsInput | BlogPostUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutTagsInput | BlogPostUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutTagsInput | BlogPostUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutTagsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutTagsCreatedInput, AdminUncheckedCreateWithoutTagsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutTagsCreatedInput
+    upsert?: AdminUpsertWithoutTagsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutTagsCreatedInput, AdminUpdateWithoutTagsCreatedInput>, AdminUncheckedUpdateWithoutTagsCreatedInput>
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput> | BlogPostCreateWithoutTagsInput[] | BlogPostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutTagsInput | BlogPostCreateOrConnectWithoutTagsInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutTagsInput | BlogPostUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutTagsInput | BlogPostUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutTagsInput | BlogPostUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type BlogPostCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput> | BlogPostCreateWithoutCategoriesInput[] | BlogPostUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCategoriesInput | BlogPostCreateOrConnectWithoutCategoriesInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutCategoriesCreatedInput = {
+    create?: XOR<AdminCreateWithoutCategoriesCreatedInput, AdminUncheckedCreateWithoutCategoriesCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutCategoriesCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type BlogPostUncheckedCreateNestedManyWithoutCategoriesInput = {
+    create?: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput> | BlogPostCreateWithoutCategoriesInput[] | BlogPostUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCategoriesInput | BlogPostCreateOrConnectWithoutCategoriesInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+  }
+
+  export type BlogPostUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput> | BlogPostCreateWithoutCategoriesInput[] | BlogPostUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCategoriesInput | BlogPostCreateOrConnectWithoutCategoriesInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutCategoriesInput | BlogPostUpsertWithWhereUniqueWithoutCategoriesInput[]
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutCategoriesInput | BlogPostUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutCategoriesInput | BlogPostUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutCategoriesCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutCategoriesCreatedInput, AdminUncheckedCreateWithoutCategoriesCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutCategoriesCreatedInput
+    upsert?: AdminUpsertWithoutCategoriesCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutCategoriesCreatedInput, AdminUpdateWithoutCategoriesCreatedInput>, AdminUncheckedUpdateWithoutCategoriesCreatedInput>
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutCategoriesNestedInput = {
+    create?: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput> | BlogPostCreateWithoutCategoriesInput[] | BlogPostUncheckedCreateWithoutCategoriesInput[]
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCategoriesInput | BlogPostCreateOrConnectWithoutCategoriesInput[]
+    upsert?: BlogPostUpsertWithWhereUniqueWithoutCategoriesInput | BlogPostUpsertWithWhereUniqueWithoutCategoriesInput[]
+    set?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    disconnect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    delete?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    connect?: BlogPostWhereUniqueInput | BlogPostWhereUniqueInput[]
+    update?: BlogPostUpdateWithWhereUniqueWithoutCategoriesInput | BlogPostUpdateWithWhereUniqueWithoutCategoriesInput[]
+    updateMany?: BlogPostUpdateManyWithWhereWithoutCategoriesInput | BlogPostUpdateManyWithWhereWithoutCategoriesInput[]
+    deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -20666,6 +27177,65 @@ export namespace Prisma {
     _max?: NestedEnumTimeframeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumIntakeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntakeStatus | EnumIntakeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntakeStatusFilter<$PrismaModel> | $Enums.IntakeStatus
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumIntakeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IntakeStatus | EnumIntakeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumIntakeStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntakeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIntakeStatusFilter<$PrismaModel>
+    _max?: NestedEnumIntakeStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumBlogStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogStatus | EnumBlogStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogStatusFilter<$PrismaModel> | $Enums.BlogStatus
+  }
+
+  export type NestedEnumBlogStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.BlogStatus | EnumBlogStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.BlogStatus[] | ListEnumBlogStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumBlogStatusWithAggregatesFilter<$PrismaModel> | $Enums.BlogStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumBlogStatusFilter<$PrismaModel>
+    _max?: NestedEnumBlogStatusFilter<$PrismaModel>
+  }
+
   export type AdminCreateWithoutCreatedInput = {
     id?: number
     adminId: string
@@ -20697,6 +27267,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedInput = {
@@ -20730,6 +27303,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedInput = {
@@ -20768,6 +27344,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedByInput = {
@@ -20801,6 +27380,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedByInput = {
@@ -20973,6 +27555,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -20984,6 +27567,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -21085,8 +27669,9 @@ export namespace Prisma {
 
   export type IntakeCreateWithoutCreatedByInput = {
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutIntakesInput
@@ -21096,8 +27681,9 @@ export namespace Prisma {
   export type IntakeUncheckedCreateWithoutCreatedByInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     schoolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21123,6 +27709,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -21132,14 +27719,13 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutProgramsInput
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateWithoutCreatedByInput = {
@@ -21152,6 +27738,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -21161,13 +27748,12 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutCreatedByInput = {
@@ -21177,6 +27763,99 @@ export namespace Prisma {
 
   export type ProgramCreateManyCreatedByInputEnvelope = {
     data: ProgramCreateManyCreatedByInput | ProgramCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogPostCreateWithoutAuthorInput = {
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagCreateNestedManyWithoutPostsInput
+    categories?: CategoryCreateNestedManyWithoutPostsInput
+  }
+
+  export type BlogPostUncheckedCreateWithoutAuthorInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type BlogPostCreateOrConnectWithoutAuthorInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type BlogPostCreateManyAuthorInputEnvelope = {
+    data: BlogPostCreateManyAuthorInput | BlogPostCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TagCreateWithoutCreatedByInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagCreateOrConnectWithoutCreatedByInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TagCreateManyCreatedByInputEnvelope = {
+    data: TagCreateManyCreatedByInput | TagCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CategoryCreateWithoutCreatedByInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type CategoryUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    posts?: BlogPostUncheckedCreateNestedManyWithoutCategoriesInput
+  }
+
+  export type CategoryCreateOrConnectWithoutCreatedByInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CategoryCreateManyCreatedByInputEnvelope = {
+    data: CategoryCreateManyCreatedByInput | CategoryCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -21221,6 +27900,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedInput = {
@@ -21254,6 +27936,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -21454,6 +28139,7 @@ export namespace Prisma {
     resource?: StringFilter<"ActivityLog"> | string
     resourceId?: IntFilter<"ActivityLog"> | number
     action?: StringFilter<"ActivityLog"> | string
+    message?: StringNullableFilter<"ActivityLog"> | string | null
     previousState?: JsonNullableFilter<"ActivityLog">
     currentState?: JsonNullableFilter<"ActivityLog">
     createdAt?: DateTimeFilter<"ActivityLog"> | Date | string
@@ -21551,8 +28237,9 @@ export namespace Prisma {
     NOT?: IntakeScalarWhereInput | IntakeScalarWhereInput[]
     id?: IntFilter<"Intake"> | number
     intake?: StringFilter<"Intake"> | string
-    startDate?: DateTimeFilter<"Intake"> | Date | string
-    deadline?: DateTimeFilter<"Intake"> | Date | string
+    startDate?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    deadline?: DateTimeNullableFilter<"Intake"> | Date | string | null
+    status?: EnumIntakeStatusFilter<"Intake"> | $Enums.IntakeStatus
     schoolId?: StringFilter<"Intake"> | string
     createdById?: StringFilter<"Intake"> | string
     createdAt?: DateTimeFilter<"Intake"> | Date | string
@@ -21588,6 +28275,7 @@ export namespace Prisma {
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
+    requirements?: StringNullableFilter<"Program"> | string | null
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -21597,13 +28285,100 @@ export namespace Prisma {
     minimumEducationLevel?: StringFilter<"Program"> | string
     minimumEducationDegree?: IntFilter<"Program"> | number
     minimumEligibilityGpa?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFilter<"Program"> | string
-    minimumEnglishProficiencyScore?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFilter<"Program"> | boolean
     active?: BoolFilter<"Program"> | boolean
     createdById?: StringFilter<"Program"> | string
     createdAt?: DateTimeFilter<"Program"> | Date | string
     updatedAt?: DateTimeFilter<"Program"> | Date | string
+  }
+
+  export type BlogPostUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: BlogPostWhereUniqueInput
+    update: XOR<BlogPostUpdateWithoutAuthorInput, BlogPostUncheckedUpdateWithoutAuthorInput>
+    create: XOR<BlogPostCreateWithoutAuthorInput, BlogPostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type BlogPostUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: BlogPostWhereUniqueInput
+    data: XOR<BlogPostUpdateWithoutAuthorInput, BlogPostUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type BlogPostUpdateManyWithWhereWithoutAuthorInput = {
+    where: BlogPostScalarWhereInput
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type BlogPostScalarWhereInput = {
+    AND?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+    OR?: BlogPostScalarWhereInput[]
+    NOT?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
+    id?: IntFilter<"BlogPost"> | number
+    blogPostId?: StringFilter<"BlogPost"> | string
+    title?: StringFilter<"BlogPost"> | string
+    slug?: StringFilter<"BlogPost"> | string
+    excerpt?: StringFilter<"BlogPost"> | string
+    content?: StringFilter<"BlogPost"> | string
+    coverImage?: JsonFilter<"BlogPost">
+    featured?: BoolFilter<"BlogPost"> | boolean
+    status?: EnumBlogStatusFilter<"BlogPost"> | $Enums.BlogStatus
+    publishedAt?: DateTimeNullableFilter<"BlogPost"> | Date | string | null
+    authorId?: StringFilter<"BlogPost"> | string
+    createdAt?: DateTimeFilter<"BlogPost"> | Date | string
+    updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutCreatedByInput, TagUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<TagCreateWithoutCreatedByInput, TagUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutCreatedByInput, TagUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutCreatedByInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type TagScalarWhereInput = {
+    AND?: TagScalarWhereInput | TagScalarWhereInput[]
+    OR?: TagScalarWhereInput[]
+    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
+    id?: IntFilter<"Tag"> | number
+    name?: StringFilter<"Tag"> | string
+    createdById?: StringFilter<"Tag"> | string
+    createdAt?: DateTimeFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeFilter<"Tag"> | Date | string
+  }
+
+  export type CategoryUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: CategoryWhereUniqueInput
+    update: XOR<CategoryUpdateWithoutCreatedByInput, CategoryUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<CategoryCreateWithoutCreatedByInput, CategoryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type CategoryUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: CategoryWhereUniqueInput
+    data: XOR<CategoryUpdateWithoutCreatedByInput, CategoryUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type CategoryUpdateManyWithWhereWithoutCreatedByInput = {
+    where: CategoryScalarWhereInput
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type CategoryScalarWhereInput = {
+    AND?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+    OR?: CategoryScalarWhereInput[]
+    NOT?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+    id?: IntFilter<"Category"> | number
+    name?: StringFilter<"Category"> | string
+    createdById?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
   }
 
   export type AdminCreateWithoutDepartmentsLeadingInput = {
@@ -21637,6 +28412,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsLeadingInput = {
@@ -21670,6 +28448,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsLeadingInput = {
@@ -21708,6 +28489,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsInput = {
@@ -21741,6 +28525,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsInput = {
@@ -21818,6 +28605,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsLeadingInput = {
@@ -21851,6 +28641,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutDepartmentsInput = {
@@ -21916,6 +28709,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsLeadingInput = {
@@ -21949,6 +28745,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsLeadingInput = {
@@ -22009,6 +28808,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
@@ -22042,6 +28844,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
@@ -22080,6 +28885,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsInput = {
@@ -22113,6 +28921,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsInput = {
@@ -22161,6 +28972,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsLeadingInput = {
@@ -22194,6 +29008,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutTeamsInput = {
@@ -22265,6 +29082,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
@@ -22298,6 +29118,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -22347,6 +29170,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutFaqsCreatedInput = {
@@ -22380,6 +29206,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutFaqsCreatedInput = {
@@ -22428,6 +29257,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutFaqsCreatedInput = {
@@ -22461,6 +29293,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutActivityLogsInput = {
@@ -22494,6 +29329,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutActivityLogsInput = {
@@ -22527,6 +29365,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutActivityLogsInput = {
@@ -22575,6 +29416,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutActivityLogsInput = {
@@ -22608,6 +29452,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutSchoolsCreatedInput = {
@@ -22641,6 +29488,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutSchoolsCreatedInput = {
@@ -22674,6 +29524,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutSchoolsCreatedInput = {
@@ -22703,8 +29556,9 @@ export namespace Prisma {
 
   export type IntakeCreateWithoutSchoolInput = {
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     programs?: ProgramCreateNestedManyWithoutIntakesInput
@@ -22714,8 +29568,9 @@ export namespace Prisma {
   export type IntakeUncheckedCreateWithoutSchoolInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22741,6 +29596,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -22750,13 +29606,12 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
   }
 
@@ -22769,6 +29624,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -22778,14 +29634,13 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutSchoolInput = {
@@ -22839,6 +29694,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutSchoolsCreatedInput = {
@@ -22872,6 +29730,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AccommodationUpsertWithoutSchoolInput = {
@@ -23016,6 +29877,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutAccommodationsCreatedInput = {
@@ -23049,6 +29913,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutAccommodationsCreatedInput = {
@@ -23155,6 +30022,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAccommodationsCreatedInput = {
@@ -23188,6 +30058,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type SchoolCreateWithoutProgramsInput = {
@@ -23245,8 +30118,9 @@ export namespace Prisma {
 
   export type IntakeCreateWithoutProgramsInput = {
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutIntakesInput
@@ -23256,8 +30130,9 @@ export namespace Prisma {
   export type IntakeUncheckedCreateWithoutProgramsInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     schoolId: string
     createdById: string
     createdAt?: Date | string
@@ -23267,6 +30142,26 @@ export namespace Prisma {
   export type IntakeCreateOrConnectWithoutProgramsInput = {
     where: IntakeWhereUniqueInput
     create: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput>
+  }
+
+  export type EnglishProficiencyCreateWithoutProgramInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnglishProficiencyUncheckedCreateWithoutProgramInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnglishProficiencyCreateOrConnectWithoutProgramInput = {
+    where: EnglishProficiencyWhereUniqueInput
+    create: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput>
+  }
+
+  export type EnglishProficiencyCreateManyProgramInputEnvelope = {
+    data: EnglishProficiencyCreateManyProgramInput | EnglishProficiencyCreateManyProgramInput[]
+    skipDuplicates?: boolean
   }
 
   export type AdminCreateWithoutProgramsCreatedInput = {
@@ -23300,6 +30195,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutProgramsCreatedInput = {
@@ -23333,6 +30231,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutProgramsCreatedInput = {
@@ -23414,6 +30315,31 @@ export namespace Prisma {
     data: XOR<IntakeUpdateManyMutationInput, IntakeUncheckedUpdateManyWithoutProgramsInput>
   }
 
+  export type EnglishProficiencyUpsertWithWhereUniqueWithoutProgramInput = {
+    where: EnglishProficiencyWhereUniqueInput
+    update: XOR<EnglishProficiencyUpdateWithoutProgramInput, EnglishProficiencyUncheckedUpdateWithoutProgramInput>
+    create: XOR<EnglishProficiencyCreateWithoutProgramInput, EnglishProficiencyUncheckedCreateWithoutProgramInput>
+  }
+
+  export type EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput = {
+    where: EnglishProficiencyWhereUniqueInput
+    data: XOR<EnglishProficiencyUpdateWithoutProgramInput, EnglishProficiencyUncheckedUpdateWithoutProgramInput>
+  }
+
+  export type EnglishProficiencyUpdateManyWithWhereWithoutProgramInput = {
+    where: EnglishProficiencyScalarWhereInput
+    data: XOR<EnglishProficiencyUpdateManyMutationInput, EnglishProficiencyUncheckedUpdateManyWithoutProgramInput>
+  }
+
+  export type EnglishProficiencyScalarWhereInput = {
+    AND?: EnglishProficiencyScalarWhereInput | EnglishProficiencyScalarWhereInput[]
+    OR?: EnglishProficiencyScalarWhereInput[]
+    NOT?: EnglishProficiencyScalarWhereInput | EnglishProficiencyScalarWhereInput[]
+    test?: StringFilter<"EnglishProficiency"> | string
+    score?: DecimalFilter<"EnglishProficiency"> | Decimal | DecimalJsLike | number | string
+    programId?: StringFilter<"EnglishProficiency"> | string
+  }
+
   export type AdminUpsertWithoutProgramsCreatedInput = {
     update: XOR<AdminUpdateWithoutProgramsCreatedInput, AdminUncheckedUpdateWithoutProgramsCreatedInput>
     create: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
@@ -23455,6 +30381,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutProgramsCreatedInput = {
@@ -23488,6 +30417,136 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type ProgramCreateWithoutProficienciesInput = {
+    id?: number
+    programId?: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    requirements?: string | null
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutProgramsInput
+    intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+  }
+
+  export type ProgramUncheckedCreateWithoutProficienciesInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    name: string
+    slug: string
+    faculty: string
+    degreeType: string
+    overview: string
+    description: string
+    requirements?: string | null
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+  }
+
+  export type ProgramCreateOrConnectWithoutProficienciesInput = {
+    where: ProgramWhereUniqueInput
+    create: XOR<ProgramCreateWithoutProficienciesInput, ProgramUncheckedCreateWithoutProficienciesInput>
+  }
+
+  export type ProgramUpsertWithoutProficienciesInput = {
+    update: XOR<ProgramUpdateWithoutProficienciesInput, ProgramUncheckedUpdateWithoutProficienciesInput>
+    create: XOR<ProgramCreateWithoutProficienciesInput, ProgramUncheckedCreateWithoutProficienciesInput>
+    where?: ProgramWhereInput
+  }
+
+  export type ProgramUpdateToOneWithWhereWithoutProficienciesInput = {
+    where?: ProgramWhereInput
+    data: XOR<ProgramUpdateWithoutProficienciesInput, ProgramUncheckedUpdateWithoutProficienciesInput>
+  }
+
+  export type ProgramUpdateWithoutProficienciesInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+  }
+
+  export type ProgramUncheckedUpdateWithoutProficienciesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: StringFieldUpdateOperationsInput | string
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
   }
 
   export type SchoolCreateWithoutIntakesInput = {
@@ -23552,6 +30611,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -23561,13 +30621,12 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutProgramsInput
+    proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
   }
 
@@ -23581,6 +30640,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -23590,13 +30650,12 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutIntakesInput = {
@@ -23635,6 +30694,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutIntakesCreatedInput = {
@@ -23668,6 +30730,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
     accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutIntakesCreatedInput = {
@@ -23790,6 +30855,9 @@ export namespace Prisma {
     schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutIntakesCreatedInput = {
@@ -23823,6 +30891,666 @@ export namespace Prisma {
     schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type TagCreateWithoutPostsInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutTagsCreatedInput
+  }
+
+  export type TagUncheckedCreateWithoutPostsInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagCreateOrConnectWithoutPostsInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput>
+  }
+
+  export type CategoryCreateWithoutPostsInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutCategoriesCreatedInput
+  }
+
+  export type CategoryUncheckedCreateWithoutPostsInput = {
+    id?: number
+    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryCreateOrConnectWithoutPostsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput>
+  }
+
+  export type AdminCreateWithoutBlogsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutBlogsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutBlogsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutBlogsCreatedInput, AdminUncheckedCreateWithoutBlogsCreatedInput>
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutPostsInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutPostsInput, TagUncheckedUpdateWithoutPostsInput>
+    create: XOR<TagCreateWithoutPostsInput, TagUncheckedCreateWithoutPostsInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutPostsInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutPostsInput, TagUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutPostsInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutPostsInput>
+  }
+
+  export type CategoryUpsertWithWhereUniqueWithoutPostsInput = {
+    where: CategoryWhereUniqueInput
+    update: XOR<CategoryUpdateWithoutPostsInput, CategoryUncheckedUpdateWithoutPostsInput>
+    create: XOR<CategoryCreateWithoutPostsInput, CategoryUncheckedCreateWithoutPostsInput>
+  }
+
+  export type CategoryUpdateWithWhereUniqueWithoutPostsInput = {
+    where: CategoryWhereUniqueInput
+    data: XOR<CategoryUpdateWithoutPostsInput, CategoryUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type CategoryUpdateManyWithWhereWithoutPostsInput = {
+    where: CategoryScalarWhereInput
+    data: XOR<CategoryUpdateManyMutationInput, CategoryUncheckedUpdateManyWithoutPostsInput>
+  }
+
+  export type AdminUpsertWithoutBlogsCreatedInput = {
+    update: XOR<AdminUpdateWithoutBlogsCreatedInput, AdminUncheckedUpdateWithoutBlogsCreatedInput>
+    create: XOR<AdminCreateWithoutBlogsCreatedInput, AdminUncheckedCreateWithoutBlogsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutBlogsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutBlogsCreatedInput, AdminUncheckedUpdateWithoutBlogsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutBlogsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutBlogsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type BlogPostCreateWithoutTagsInput = {
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: CategoryCreateNestedManyWithoutPostsInput
+    author: AdminCreateNestedOneWithoutBlogsCreatedInput
+  }
+
+  export type BlogPostUncheckedCreateWithoutTagsInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type BlogPostCreateOrConnectWithoutTagsInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput>
+  }
+
+  export type AdminCreateWithoutTagsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutTagsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutTagsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutTagsCreatedInput, AdminUncheckedCreateWithoutTagsCreatedInput>
+  }
+
+  export type BlogPostUpsertWithWhereUniqueWithoutTagsInput = {
+    where: BlogPostWhereUniqueInput
+    update: XOR<BlogPostUpdateWithoutTagsInput, BlogPostUncheckedUpdateWithoutTagsInput>
+    create: XOR<BlogPostCreateWithoutTagsInput, BlogPostUncheckedCreateWithoutTagsInput>
+  }
+
+  export type BlogPostUpdateWithWhereUniqueWithoutTagsInput = {
+    where: BlogPostWhereUniqueInput
+    data: XOR<BlogPostUpdateWithoutTagsInput, BlogPostUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type BlogPostUpdateManyWithWhereWithoutTagsInput = {
+    where: BlogPostScalarWhereInput
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutTagsInput>
+  }
+
+  export type AdminUpsertWithoutTagsCreatedInput = {
+    update: XOR<AdminUpdateWithoutTagsCreatedInput, AdminUncheckedUpdateWithoutTagsCreatedInput>
+    create: XOR<AdminCreateWithoutTagsCreatedInput, AdminUncheckedCreateWithoutTagsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutTagsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutTagsCreatedInput, AdminUncheckedUpdateWithoutTagsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutTagsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutTagsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type BlogPostCreateWithoutCategoriesInput = {
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagCreateNestedManyWithoutPostsInput
+    author: AdminCreateNestedOneWithoutBlogsCreatedInput
+  }
+
+  export type BlogPostUncheckedCreateWithoutCategoriesInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type BlogPostCreateOrConnectWithoutCategoriesInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type AdminCreateWithoutCategoriesCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutCategoriesCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutCategoriesCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutCategoriesCreatedInput, AdminUncheckedCreateWithoutCategoriesCreatedInput>
+  }
+
+  export type BlogPostUpsertWithWhereUniqueWithoutCategoriesInput = {
+    where: BlogPostWhereUniqueInput
+    update: XOR<BlogPostUpdateWithoutCategoriesInput, BlogPostUncheckedUpdateWithoutCategoriesInput>
+    create: XOR<BlogPostCreateWithoutCategoriesInput, BlogPostUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type BlogPostUpdateWithWhereUniqueWithoutCategoriesInput = {
+    where: BlogPostWhereUniqueInput
+    data: XOR<BlogPostUpdateWithoutCategoriesInput, BlogPostUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type BlogPostUpdateManyWithWhereWithoutCategoriesInput = {
+    where: BlogPostScalarWhereInput
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutCategoriesInput>
+  }
+
+  export type AdminUpsertWithoutCategoriesCreatedInput = {
+    update: XOR<AdminUpdateWithoutCategoriesCreatedInput, AdminUncheckedUpdateWithoutCategoriesCreatedInput>
+    create: XOR<AdminCreateWithoutCategoriesCreatedInput, AdminUncheckedCreateWithoutCategoriesCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutCategoriesCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutCategoriesCreatedInput, AdminUncheckedUpdateWithoutCategoriesCreatedInput>
+  }
+
+  export type AdminUpdateWithoutCategoriesCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutCategoriesCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyCreatedByInput = {
@@ -23884,6 +31612,7 @@ export namespace Prisma {
     resource: string
     resourceId: number
     action: string
+    message?: string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
@@ -23922,8 +31651,9 @@ export namespace Prisma {
   export type IntakeCreateManyCreatedByInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     schoolId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23939,6 +31669,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -23948,10 +31679,37 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogPostCreateManyAuthorInput = {
+    id?: number
+    blogPostId: string
+    title: string
+    slug: string
+    excerpt: string
+    content: string
+    coverImage: JsonNullValueInput | InputJsonValue
+    featured?: boolean
+    status?: $Enums.BlogStatus
+    publishedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagCreateManyCreatedByInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CategoryCreateManyCreatedByInput = {
+    id?: number
+    name: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23986,6 +31744,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedByInput = {
@@ -24019,6 +31780,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutCreatedByInput = {
@@ -24203,6 +31967,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24214,6 +31979,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24225,6 +31991,7 @@ export namespace Prisma {
     resource?: StringFieldUpdateOperationsInput | string
     resourceId?: IntFieldUpdateOperationsInput | number
     action?: StringFieldUpdateOperationsInput | string
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     previousState?: NullableJsonNullValueInput | InputJsonValue
     currentState?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24324,8 +32091,9 @@ export namespace Prisma {
 
   export type IntakeUpdateWithoutCreatedByInput = {
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
@@ -24335,8 +32103,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24346,8 +32115,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateManyWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24361,6 +32131,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24370,14 +32141,13 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateWithoutCreatedByInput = {
@@ -24390,6 +32160,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24399,13 +32170,12 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutCreatedByInput = {
@@ -24418,6 +32188,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24427,10 +32198,100 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUpdateWithoutAuthorInput = {
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUpdateManyWithoutPostsNestedInput
+    categories?: CategoryUpdateManyWithoutPostsNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUpdateWithoutCreatedByInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUpdateWithoutCreatedByInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: BlogPostUncheckedUpdateManyWithoutCategoriesNestedInput
+  }
+
+  export type CategoryUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24474,6 +32335,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsInput = {
@@ -24507,6 +32371,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutDepartmentsInput = {
@@ -24589,6 +32456,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsInput = {
@@ -24622,6 +32492,9 @@ export namespace Prisma {
     accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
     intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutTeamsInput = {
@@ -24649,8 +32522,9 @@ export namespace Prisma {
   export type IntakeCreateManySchoolInput = {
     id?: number
     intake: string
-    startDate: Date | string
-    deadline: Date | string
+    startDate?: Date | string | null
+    deadline?: Date | string | null
+    status?: $Enums.IntakeStatus
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24665,6 +32539,7 @@ export namespace Prisma {
     degreeType: string
     overview: string
     description: string
+    requirements?: string | null
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -24674,8 +32549,6 @@ export namespace Prisma {
     minimumEducationLevel: string
     minimumEducationDegree: number
     minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
-    englishProficiency: string
-    minimumEnglishProficiencyScore: Decimal | DecimalJsLike | number | string
     pgwp?: boolean
     active?: boolean
     createdById: string
@@ -24685,8 +32558,9 @@ export namespace Prisma {
 
   export type IntakeUpdateWithoutSchoolInput = {
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     programs?: ProgramUpdateManyWithoutIntakesNestedInput
@@ -24696,8 +32570,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24707,8 +32582,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateManyWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24722,6 +32598,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24731,13 +32608,12 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
   }
 
@@ -24750,6 +32626,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24759,14 +32636,13 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutSchoolInput = {
@@ -24778,6 +32654,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24787,8 +32664,6 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
@@ -24796,10 +32671,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnglishProficiencyCreateManyProgramInput = {
+    test: string
+    score: Decimal | DecimalJsLike | number | string
+  }
+
   export type IntakeUpdateWithoutProgramsInput = {
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutIntakesNestedInput
@@ -24809,8 +32690,9 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateWithoutProgramsInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24820,12 +32702,28 @@ export namespace Prisma {
   export type IntakeUncheckedUpdateManyWithoutProgramsInput = {
     id?: IntFieldUpdateOperationsInput | number
     intake?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    deadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumIntakeStatusFieldUpdateOperationsInput | $Enums.IntakeStatus
     schoolId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishProficiencyUpdateWithoutProgramInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnglishProficiencyUncheckedUpdateWithoutProgramInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type EnglishProficiencyUncheckedUpdateManyWithoutProgramInput = {
+    test?: StringFieldUpdateOperationsInput | string
+    score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type ProgramUpdateWithoutIntakesInput = {
@@ -24836,6 +32734,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24845,13 +32744,12 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
   }
 
@@ -24865,6 +32763,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24874,13 +32773,12 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutIntakesInput = {
@@ -24893,6 +32791,7 @@ export namespace Prisma {
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -24902,11 +32801,153 @@ export namespace Prisma {
     minimumEducationLevel?: StringFieldUpdateOperationsInput | string
     minimumEducationDegree?: IntFieldUpdateOperationsInput | number
     minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    englishProficiency?: StringFieldUpdateOperationsInput | string
-    minimumEnglishProficiencyScore?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     pgwp?: BoolFieldUpdateOperationsInput | boolean
     active?: BoolFieldUpdateOperationsInput | boolean
     createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUpdateWithoutPostsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutTagsCreatedNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUncheckedUpdateManyWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUpdateWithoutPostsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutCategoriesCreatedNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CategoryUncheckedUpdateManyWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUpdateWithoutTagsInput = {
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: CategoryUpdateManyWithoutPostsNestedInput
+    author?: AdminUpdateOneRequiredWithoutBlogsCreatedNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogPostUpdateWithoutCategoriesInput = {
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUpdateManyWithoutPostsNestedInput
+    author?: AdminUpdateOneRequiredWithoutBlogsCreatedNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateWithoutCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutCategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    blogPostId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: JsonNullValueInput | InputJsonValue
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumBlogStatusFieldUpdateOperationsInput | $Enums.BlogStatus
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

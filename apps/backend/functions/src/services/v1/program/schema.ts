@@ -22,6 +22,7 @@ export type CreateProgramsServiceSchema = z.infer<
 export const UpdateProgramServiceSchema = z.object({
   data: ProgramSchema.partial(),
   slug: z.string().trim().nonempty("Required"),
+  programId: z.string().trim().nonempty("Required"),
   schoolId: z.string().trim().nonempty("Required"),
 });
 export type UpdateProgramServiceSchema = z.infer<

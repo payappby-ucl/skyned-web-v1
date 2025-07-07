@@ -5,10 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommonSchema = void 0;
 const country_state_city_1 = require("country-state-city");
+const slugify_1 = __importDefault(require("slugify"));
 const libphonenumber_js_1 = require("libphonenumber-js");
 const data_urls_1 = __importDefault(require("data-urls"));
 const utils_1 = require("../utils");
 const zod_1 = require("zod");
+const sanitize_html_1 = __importDefault(require("sanitize-html"));
 /** Common schema use in multiple places */
 exports.CommonSchema = zod_1.z.object({
     email: zod_1.z
@@ -53,4 +55,15 @@ exports.CommonSchema = zod_1.z.object({
         .string()
         .trim()
         .refine((val) => !!(0, data_urls_1.default)(val), "Image must be of type data-url"),
+    slug: zod_1.z
+        .string()
+        .trim()
+        .toLowerCase()
+        .nonempty("required")
+        .transform((val) => (0, slugify_1.default)(val, { lower: true, strict: true })),
+    html: zod_1.z
+        .string()
+        .trim()
+        .nonempty("Required")
+        .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
 });

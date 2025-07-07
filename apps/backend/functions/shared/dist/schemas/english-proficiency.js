@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ComputeEnglishProficiencySchema = void 0;
+exports.EnglishProficiencySchema = exports.ComputeEnglishProficiencySchema = void 0;
+const utils_1 = require("../utils");
 const zod_1 = require("zod");
-const program_1 = require("./program");
 exports.ComputeEnglishProficiencySchema = zod_1.z
     .object({
-    examType: program_1.ProgramSchema.shape.englishProficiency,
+    examType: zod_1.z.enum(["ielts", "toefl", "duolingo", "pte"]),
     score: zod_1.z.coerce
         .number()
         .positive("Must be a positive number")
@@ -34,6 +34,26 @@ exports.ComputeEnglishProficiencySchema = zod_1.z
         typeof arg.score === "number") ||
         (["pte", "duolingo"].includes(arg.examType) &&
             typeof arg.score !== "number")) {
+        ctx.addIssue({
+            code: zod_1.z.ZodIssueCode.custom,
+            message: "Invalid score",
+            path: ["score"],
+        });
+    }
+});
+exports.EnglishProficiencySchema = zod_1.z
+    .object({
+    test: zod_1.z.enum(["ielts", "toefl", "duolingo", "pte"]),
+    score: zod_1.z.coerce
+        .number()
+        .positive("Must be a positive number")
+        .min(1, "Minimum of 1"),
+})
+    .superRefine((arg, ctx) => {
+    try {
+        utils_1.EnglishProficiency.getCefr(arg.test, arg.score);
+    }
+    catch (error) {
         ctx.addIssue({
             code: zod_1.z.ZodIssueCode.custom,
             message: "Invalid score",

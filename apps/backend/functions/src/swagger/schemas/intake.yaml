@@ -12,13 +12,22 @@ components:
               type: string
               format: date-time
 
+            status:
+              type: string
+              enum:
+                - open
+                - closed
+                - likely_open
+
             startDate:
               type: string
               format: date-time
+              nullable: true
 
             deadline:
               type: string
               format: date-time
+              nullable: true
 
             schoolId:
               type: string
@@ -37,7 +46,5 @@ components:
           required:
             - id
             - intake
-            - startDate
-            - deadline
             - schoolId
             - createdById

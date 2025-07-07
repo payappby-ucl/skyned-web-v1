@@ -16,6 +16,8 @@ export declare const RegisterSchema: z.ZodObject<Pick<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "email">, "strip", z.ZodTypeAny, {
     email: string;
 }, {
@@ -40,6 +42,8 @@ export declare const AccountCreationSchema: z.ZodObject<Pick<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "email"> & {
     password: z.ZodString;
 }, "strip", z.ZodTypeAny, {

@@ -1,9 +1,9 @@
+import { EnglishProficiency } from "../utils";
 import { z } from "zod";
-import { ProgramSchema } from "./program";
 
 export const ComputeEnglishProficiencySchema = z
   .object({
-    examType: ProgramSchema.shape.englishProficiency,
+    examType: z.enum(["ielts", "toefl", "duolingo", "pte"]),
     score: z.coerce
       .number()
       .positive("Must be a positive number")
@@ -46,3 +46,24 @@ export const ComputeEnglishProficiencySchema = z
 export type ComputeEnglishProficiencySchema = z.infer<
   typeof ComputeEnglishProficiencySchema
 >;
+
+export const EnglishProficiencySchema = z
+  .object({
+    test: z.enum(["ielts", "toefl", "duolingo", "pte"]),
+    score: z.coerce
+      .number()
+      .positive("Must be a positive number")
+      .min(1, "Minimum of 1"),
+  })
+  .superRefine((arg, ctx) => {
+    try {
+      EnglishProficiency.getCefr(arg.test, arg.score);
+    } catch (error) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Invalid score",
+        path: ["score"],
+      });
+    }
+  });
+export type EnglishProficiencySchema = z.infer<typeof EnglishProficiencySchema>;

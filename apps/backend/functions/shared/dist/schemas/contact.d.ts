@@ -15,6 +15,8 @@ export declare const ContactUsSchema: z.ZodObject<Pick<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "phoneNumber"> & {
     email: z.ZodEffects<z.ZodString, string, string>;
     message: z.ZodString;

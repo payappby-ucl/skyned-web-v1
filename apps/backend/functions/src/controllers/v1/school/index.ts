@@ -825,6 +825,7 @@ export class SchoolController
       const updatedProgram = await this.programService.updateSingleProgram(
         school.schoolId,
         program.slug,
+        program.programId,
         req.body,
       );
 

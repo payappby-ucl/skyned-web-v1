@@ -42,6 +42,7 @@ describe("IntakeService", () => {
           school.schoolId,
           {
             intake: "MAY 2025",
+            status: "open",
             startDate: Date.now(),
             deadline: Date.now(),
           },
@@ -69,12 +70,14 @@ describe("IntakeService", () => {
         const res = await intakeService.createManyIntakes(adminId, schoolId, [
           {
             intake: "DEC 2025",
+            status: "open",
             startDate: Date.now() + 2,
             deadline: Date.now() + 2,
           },
 
           {
             intake: "NOV 2025",
+            status: "open",
             startDate: Date.now() + 3,
             deadline: Date.now() + 3,
           },
@@ -96,6 +99,7 @@ describe("IntakeService", () => {
       test("should update an intake", async () => {
         const intake = await intakeService.updateIntake(intakeId, {
           intake: "SEP 2025",
+          status: "open",
           startDate: +new Date() + 100,
           deadline: +new Date() + 100,
         });

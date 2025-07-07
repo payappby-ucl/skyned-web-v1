@@ -12,4 +12,11 @@ interface SchoolImage {
   };
 }
 
-export type ResolveStoragePathType = ProfileImage | SchoolImage;
+interface BlogImage {
+  type: "coverImage";
+  data: {
+    blogPostId: string;
+  };
+}
+
+export type ResolveStoragePathType = ProfileImage | SchoolImage | BlogImage;

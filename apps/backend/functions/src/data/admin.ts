@@ -10,7 +10,7 @@ export const adminPassword = SkynedUtils.isEnvironment(["test"])
 
 export const admin = {
   adminId: "",
-  email: SkynedUtils.isEnvironment(["dev", "test"])
+  email: SkynedUtils.isEnvironment(["test"])
     ? "admin@skynedconsults.com"
     : "info@skynedconsults.com",
   firstName: "Chinedu",

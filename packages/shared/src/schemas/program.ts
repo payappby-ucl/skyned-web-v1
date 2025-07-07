@@ -1,10 +1,5 @@
 import slugify from "slugify";
-import {
-  degreeTypes,
-  EnglishProficiency,
-  timeframe,
-  tuitionFeeType,
-} from "../utils";
+import { degreeTypes, timeframe, tuitionFeeType } from "../utils";
 import { z } from "zod";
 import sanitizeHtml from "sanitize-html";
 
@@ -23,6 +18,12 @@ export const ProgramSchema = z.object({
     .string()
     .trim()
     .nonempty("Required")
+    .transform((val) => (val ? sanitizeHtml(val) : val)),
+
+  requirements: z
+    .string()
+    .trim()
+    .optional()
     .transform((val) => (val ? sanitizeHtml(val) : val)),
 
   applicationFee: z.coerce.number().min(0, "Minimum of 0"),
@@ -55,8 +56,12 @@ export const ProgramSchema = z.object({
     .min(1, "Minimum of 1")
     .max(100, "Maximum of 100"),
 
-  englishProficiency: z.enum(["ielts", "toefl", "duolingo", "pte", "open"]),
-  minimumEnglishProficiencyScore: z.coerce.number().min(0),
+  proficiencies: z.array(
+    z.object({
+      test: z.enum(["ielts", "toefl", "duolingo", "pte"]),
+      score: z.coerce.number().min(0),
+    }),
+  ),
 
   pgwp: z.boolean().default(false),
 
@@ -70,42 +75,8 @@ export type ProgramSchema = z.infer<typeof ProgramSchema>;
 export const CreateProgramSchema = z
   .object({
     type: z.enum(["single", "bulk"]),
-    data: ProgramSchema.superRefine((args, ctx) => {
-      if (args.englishProficiency !== "open") {
-        try {
-          EnglishProficiency.getCefr(
-            args.englishProficiency,
-            args.minimumEnglishProficiencyScore,
-          );
-        } catch {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Invalid score",
-            path: ["minimumEnglishProficiencyScore"],
-          });
-        }
-      }
-    }).or(
-      z
-        .array(
-          ProgramSchema.superRefine((args, ctx) => {
-            if (args.englishProficiency !== "open") {
-              try {
-                EnglishProficiency.getCefr(
-                  args.englishProficiency,
-                  args.minimumEnglishProficiencyScore,
-                );
-              } catch {
-                ctx.addIssue({
-                  code: z.ZodIssueCode.custom,
-                  message: "Invalid score",
-                  path: ["minimumEnglishProficiencyScore"],
-                });
-              }
-            }
-          }),
-        )
-        .min(1, "Must have at least one program."),
+    data: ProgramSchema.or(
+      z.array(ProgramSchema).min(1, "Must have at least one program."),
     ),
   })
   .superRefine(({ type, data }, ctx) => {
@@ -122,7 +93,7 @@ export type CreateProgramSchema = z.infer<typeof CreateProgramSchema>;
 export const UpdateBulkProgramSchema = z.object({
   data: z.array(
     z.object({
-      programSlug: z.string().trim().nonempty("Required"),
+      programId: z.string().trim().nonempty("Required"),
       data: ProgramSchema.partial(),
     }),
   ),

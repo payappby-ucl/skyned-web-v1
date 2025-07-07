@@ -332,7 +332,7 @@ describe("Schools API", () => {
       test("should fail if no authorization header is passed", async () => {
         const res = await request(server).post(`${route}`).send({
           intake: "JUN 2025",
-          startDate: +new Date(),
+          status: "open",
           deadline: +new Date(),
         });
 
@@ -354,6 +354,7 @@ describe("Schools API", () => {
           .post(`${route}`)
           .send({
             intake: "FEB 2025",
+            status: "open",
             startDate: +new Date(),
             deadline: +new Date(),
           })
@@ -366,6 +367,7 @@ describe("Schools API", () => {
           expect.objectContaining({
             id: expect.any(Number),
             intake: expect.any(String),
+            status: "open",
             startDate: expect.any(String),
             deadline: expect.any(String),
             schoolId: expect.any(String),
@@ -391,7 +393,7 @@ describe("Schools API", () => {
             data: expect.arrayContaining([
               expect.objectContaining({
                 intake: expect.any(String),
-                startDate: expect.any(String),
+                status: expect.any(String),
                 deadline: expect.any(String),
               }),
             ]),
@@ -419,7 +421,7 @@ describe("Schools API", () => {
             data: expect.arrayContaining([
               expect.objectContaining({
                 intake: expect.any(String),
-                startDate: expect.any(String),
+                status: expect.any(String),
                 deadline: expect.any(String),
                 school: expect.objectContaining({
                   name: expect.any(String),
@@ -441,6 +443,7 @@ describe("Schools API", () => {
       test("should fail if no authorization header is passed", async () => {
         const res = await request(server).put(`${route}/${intakeId}`).send({
           intake: "MAY 2025",
+          status: "open",
           startDate: +new Date(),
           deadline: +new Date(),
         });
@@ -463,6 +466,7 @@ describe("Schools API", () => {
           .put(`${route}/${intakeId}`)
           .send({
             intake: "MAY 2026",
+            status: "open",
             startDate: +new Date(),
             deadline: +new Date(),
           })
@@ -745,12 +749,9 @@ describe("Schools API", () => {
           .send({
             data: [
               {
-                programSlug: "school-program-one",
+                programId: "school-program-one",
                 data: {
-                  ...programData,
-                  name: "School Program One",
-                  slug: "school-program-one",
-                  intakes: [1],
+                  duration: 18,
                 },
               },
             ],
@@ -773,18 +774,20 @@ describe("Schools API", () => {
           .get(`${url}/test-school/intakes`)
           .set("authorization", `bearer ${token}`)) as any;
 
+        const programsRes = await request(server)
+          .get(`${route}`)
+          .set("authorization", `bearer ${token}`);
+
         const res = await request(server)
           .put(`${route}`)
           .send({
-            data: ["Bulk School Program One", "Bulk School Program Two"].map(
-              (name) => ({
-                programSlug: name.toLowerCase().split(" ").join("-"),
-                data: {
-                  duration: 18,
-                  intakes: intakeRes.body.data.data.map((d: any) => d.id),
-                },
-              }),
-            ),
+            data: programsRes.body.data.data.map((p: any) => ({
+              programId: p.programId,
+              data: {
+                duration: 18,
+                intakes: intakeRes.body.data.data.map((d: any) => d.id),
+              },
+            })),
           })
           .set("authorization", `bearer ${token}`);
 
@@ -798,7 +801,7 @@ describe("Schools API", () => {
       });
     });
 
-    describe(`PUT Programs - ${route}/school-program-one`, () => {
+    describe(`PUT Program - ${route}/school-program-one`, () => {
       const uri = `${route}/school-program-one`;
 
       test("should fail if no authorization header is passed", async () => {

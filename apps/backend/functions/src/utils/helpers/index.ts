@@ -5,7 +5,7 @@ import { Exception } from "../../lib";
 import { env } from "../../config";
 import { applicationDefault } from "firebase-admin/app";
 import { ResolveStoragePathType } from "../../types";
-import { IObject, IPhoneNumber, IProgram } from "@workspace/shared";
+import { IObject, IPhoneNumber } from "@workspace/shared";
 import { Decimal } from "../../infrastructure/repository/prisma-client/runtime/library";
 
 const decimalKeys = [
@@ -14,7 +14,7 @@ const decimalKeys = [
   "tuitionFee",
   "duration",
   "minimumEligibilityGpa",
-  "minimumEnglishProficiencyScore",
+  "score",
 ];
 
 /**
@@ -167,6 +167,8 @@ export class SkynedUtils {
       case "logo":
       case "schoolImage":
         return `schools/${data.schoolId}/${type}`;
+      case "coverImage":
+        return `blogs/${data.blogPostId}`;
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,
@@ -183,19 +185,19 @@ export class SkynedUtils {
     const deserialized = Object.fromEntries(
       Object.entries(data).map(([key, value]) => {
         if (
-          ["primaryImage", "secondaryImage", "logo", "schoolImage"].includes(
-            key,
-          )
+          [
+            "primaryImage",
+            "secondaryImage",
+            "logo",
+            "schoolImage",
+            "coverImage",
+          ].includes(key)
         ) {
           return [key, value as unknown as IObject];
         }
 
         if (key === "phoneNumber") {
           return [key, value as unknown as IPhoneNumber];
-        }
-
-        if (key === "englishProficiency") {
-          return [key, value as unknown as IProgram["englishProficiency"]];
         }
 
         if (key === "previousState" || key === "currentState") {

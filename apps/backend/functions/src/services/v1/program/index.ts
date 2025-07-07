@@ -30,12 +30,11 @@ const generalData: (keyof IProgram)[] = [
 const authData: (keyof IProgram)[] = [
   ...generalData,
   "description",
+  "requirements",
   "minimumEducationDegree",
   "minimumEducationDegree",
   "minimumEducationLevel",
   "minimumEligibilityGpa",
-  "englishProficiency",
-  "minimumEnglishProficiencyScore",
   "timeframe",
   "duration",
   "tuitionFee",
@@ -72,7 +71,9 @@ export class ProgramService extends ServiceUtils implements IProgramService {
   }
 
   _constructWhereQuery(
-    query: Partial<IQueryConstruct<Omit<IProgram, "_count">>["where"]>,
+    query: Partial<
+      IQueryConstruct<Omit<IProgram, "_count" | "proficiencies">>["where"]
+    >,
     authUser?: AuthClaim,
   ) {
     const where: Prisma.ProgramWhereInput | undefined = {};
@@ -82,7 +83,6 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       "pgwp",
       "slug",
       "timeframe",
-      "englishProficiency",
       "minimumEducationLevel",
       "tuitionFeeType",
     ];
@@ -91,7 +91,6 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       "applicationFeeDiscount",
       "minimumEligibilityGpa",
       "minimumEducationDegree",
-      "minimumEnglishProficiencyScore",
     ];
 
     const numberLessInput: (keyof typeof query)[] = [
@@ -185,13 +184,22 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       data: {
         schoolId: sid,
         createdById: aid,
-        ...SkynedUtils.exclude(d, ["intakes"]),
+        ...SkynedUtils.exclude(d, ["intakes", "proficiencies"]),
+        proficiencies: d.proficiencies.length
+          ? {
+              createMany: {
+                data: d.proficiencies,
+                skipDuplicates: true,
+              },
+            }
+          : undefined,
         intakes: {
           connect: d.intakes.map((id) => ({ id, schoolId: sid })),
         },
       },
       include: {
         intakes: true,
+        proficiencies: true,
       },
     });
 
@@ -201,17 +209,20 @@ export class ProgramService extends ServiceUtils implements IProgramService {
   updateSingleProgram: IProgramService["updateSingleProgram"] = async (
     schoolId,
     slug,
+    programId,
     data,
   ) => {
     let {
       schoolId: sid,
       slug: slg,
       data: d,
+      programId: pid,
     } = this.validationUtility.validateInput({
       schema: UpdateProgramServiceSchema,
       inputData: {
         data,
         schoolId,
+        programId,
         slug,
       },
     });
@@ -226,10 +237,32 @@ export class ProgramService extends ServiceUtils implements IProgramService {
         },
       },
       data: {
-        ...SkynedUtils.exclude(d, ["intakes"]),
+        ...SkynedUtils.exclude(d, ["intakes", "proficiencies"]),
+        proficiencies: d.proficiencies?.length
+          ? {
+              deleteMany: d.proficiencies.length
+                ? {
+                    NOT: d.proficiencies.map((proficiency) => ({
+                      programId: pid,
+                      test: proficiency.test,
+                    })),
+                  }
+                : undefined,
+              upsert: d.proficiencies.map((proficiency) => ({
+                where: {
+                  proficiency: {
+                    test: proficiency.test,
+                    programId: pid,
+                  },
+                },
+                update: proficiency,
+                create: proficiency,
+              })),
+            }
+          : undefined,
         intakes: d.intakes?.length
           ? {
-              connect: d.intakes.map((id) => ({ id, schoolId: sid })),
+              set: d.intakes.map((id) => ({ id, schoolId: sid })),
             }
           : undefined,
       },
@@ -263,7 +296,15 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           data: {
             schoolId: sid,
             createdById: aid,
-            ...SkynedUtils.exclude(d, ["intakes"]),
+            ...SkynedUtils.exclude(d, ["intakes", "proficiencies"]),
+            proficiencies: d.proficiencies.length
+              ? {
+                  createMany: {
+                    data: d.proficiencies,
+                    skipDuplicates: true,
+                  },
+                }
+              : undefined,
             intakes: {
               connect: d.intakes.map((id) => ({ id, schoolId: sid })),
             },
@@ -293,16 +334,41 @@ export class ProgramService extends ServiceUtils implements IProgramService {
 
         return this.repository.db.program.update({
           where: {
-            schoolId_slug: {
-              schoolId: sid,
-              slug: d.programSlug,
-            },
+            schoolId: sid,
+            programId: d.programId,
           },
           data: {
-            ...SkynedUtils.exclude(d.data, ["intakes", "name", "slug"]),
+            ...SkynedUtils.exclude(d.data, [
+              "intakes",
+              "name",
+              "slug",
+              "proficiencies",
+            ]),
+            proficiencies: d.data.proficiencies?.length
+              ? {
+                  deleteMany: d.data.proficiencies.length
+                    ? {
+                        NOT: d.data.proficiencies.map((proficiency) => ({
+                          programId: d.programId,
+                          test: proficiency.test,
+                        })),
+                      }
+                    : undefined,
+                  upsert: d.data.proficiencies.map((proficiency) => ({
+                    where: {
+                      proficiency: {
+                        test: proficiency.test,
+                        programId: d.programId,
+                      },
+                    },
+                    update: proficiency,
+                    create: proficiency,
+                  })),
+                }
+              : undefined,
             intakes: d.data.intakes?.length
               ? {
-                  connect: d.data.intakes.map((id) => ({ id, schoolId: sid })),
+                  set: d.data.intakes.map((id) => ({ id, schoolId: sid })),
                 }
               : undefined,
           },
@@ -314,10 +380,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
   };
 
   count: IProgramService["count"] = async ({ where, from, to }, authUser) => {
-    const whereConstruct = this._constructWhereQuery(
-      where || { active: true },
-      authUser,
-    );
+    const whereConstruct = this._constructWhereQuery(where || {}, authUser);
 
     const count = await this.repository.db.program.count({
       where: {
@@ -336,10 +399,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
     { skip, take, from, to, order, where },
     authUser,
   ) => {
-    const whereConstruct = this._constructWhereQuery(
-      where || { active: true },
-      authUser,
-    );
+    const whereConstruct = this._constructWhereQuery(where || {}, authUser);
 
     const programs = await this.repository.db.program.findMany({
       skip,
@@ -367,6 +427,16 @@ export class ProgramService extends ServiceUtils implements IProgramService {
               : authData,
         ),
 
+        proficiencies:
+          authUser?.claim === "admin"
+            ? true
+            : {
+                select: {
+                  test: true,
+                  score: true,
+                },
+              },
+
         school: {
           select: {
             slug: true,
@@ -384,11 +454,16 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           !authUser || authUser.claim !== "admin"
             ? {
                 where: {
-                  deadline: {
-                    gte: new Date(),
+                  status: {
+                    in: ["likely_open", "open"],
                   },
                 },
-                select: SkynedUtils.select(["intake", "deadline", "startDate"]),
+                select: SkynedUtils.select([
+                  "intake",
+                  "status",
+                  "deadline",
+                  "startDate",
+                ]),
               }
             : {
                 include: {
@@ -443,12 +518,22 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             },
           },
 
+          proficiencies:
+            authUser?.claim === "admin"
+              ? true
+              : {
+                  select: {
+                    test: true,
+                    score: true,
+                  },
+                },
+
           intakes: {
             where:
               !authUser || authUser.claim !== "admin"
                 ? {
-                    deadline: {
-                      gte: new Date(),
+                    status: {
+                      in: ["open", "likely_open"],
                     },
                   }
                 : undefined,

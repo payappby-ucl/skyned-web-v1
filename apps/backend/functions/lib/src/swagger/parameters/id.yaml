@@ -1,9 +1,0 @@
-components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      description: Resource id
-      required: true
-      schema:
-        type: integer

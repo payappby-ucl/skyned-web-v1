@@ -24,3 +24,4 @@ __exportStar(require("./accommodation"), exports);
 __exportStar(require("./intake"), exports);
 __exportStar(require("./program"), exports);
 __exportStar(require("./english-proficiency"), exports);
+__exportStar(require("./blog-post"), exports);

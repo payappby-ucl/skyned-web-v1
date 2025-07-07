@@ -3,6 +3,11 @@ import { AdminProfile } from "./admin";
 import { IIntake } from "./intake";
 import { ISchool } from "./school";
 import { ITimestamps } from "./utils";
+export interface IProficiency {
+    test: (typeof EnglishProficiency.examinations)[number]["name"];
+    score: number;
+    programId: string;
+}
 export interface IProgram extends ITimestamps {
     id: number;
     programId: string;
@@ -11,23 +16,23 @@ export interface IProgram extends ITimestamps {
     name: string;
     slug: string;
     faculty: string;
-    degreeType: (typeof degreeTypes)[keyof typeof degreeTypes];
+    degreeType: (typeof degreeTypes)[number];
     overview: string;
     description: string;
+    requirements?: string;
     applicationFee: number;
     applicationFeeDiscount: number;
     tuitionFee: number;
-    tuitionFeeType: (typeof tuitionFeeType)[keyof typeof tuitionFeeType];
-    timeframe: (typeof timeframe)[keyof typeof timeframe];
+    tuitionFeeType: (typeof tuitionFeeType)[number];
+    timeframe: (typeof timeframe)[number];
     duration: number;
     minimumEducationLevel: keyof typeof educationLevels;
     minimumEducationDegree: number;
     minimumEligibilityGpa: number;
-    englishProficiency: (typeof EnglishProficiency.examinations)[number]["name"] | "open";
-    minimumEnglishProficiencyScore: number;
     pgwp: boolean;
     active: boolean;
     intakes: IIntake[];
+    proficiencies: IProficiency[];
     createdById: string;
     createdBy?: AdminProfile;
 }

@@ -15,6 +15,7 @@ export interface IActivityLog<Key extends keyof PermissionType>
   resourceId: number;
 
   action: ActivityActionType;
+  message?: string;
 
   previousState?: PermissionType[Key]["dataType"];
   currentState?: PermissionType[Key]["dataType"];

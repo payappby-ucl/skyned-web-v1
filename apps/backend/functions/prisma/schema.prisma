@@ -69,6 +69,19 @@ enum Timeframe {
   year
 }
 
+enum IntakeStatus {
+  open
+  closed
+  likely_open
+}
+
+enum BlogStatus {
+  draft
+  scheduled
+  published
+  unpublished
+}
+
 model Token {
   id        Int       @default(autoincrement())
   tokenId   String    @id @default(cuid()) @map("token_id")
@@ -131,6 +144,11 @@ model Admin {
 
   // * Programs Created
   programsCreated Program[]
+
+  // * Blogs Created
+  blogsCreated      BlogPost[]
+  tagsCreated       Tag[]
+  categoriesCreated Category[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -218,7 +236,8 @@ model ActivityLog {
   resource   String
   resourceId Int    @map("resource_id")
 
-  action String
+  action  String
+  message String?
 
   previousState Json? @map("previous_state")
   currentState  Json? @map("current_state")
@@ -293,14 +312,15 @@ model Program {
   programId String @id @default(cuid()) @map("program_id")
 
   schoolId String @map("school_id")
-  school   School @relation(fields: [schoolId], references: [schoolId])
+  school   School @relation(fields: [schoolId], references: [schoolId], onDelete: Cascade)
 
-  name        String
-  slug        String
-  faculty     String
-  degreeType  String @map("degree_type")
-  overview    String
-  description String @db.Text
+  name         String
+  slug         String
+  faculty      String
+  degreeType   String  @map("degree_type")
+  overview     String
+  description  String  @db.Text
+  requirements String? @db.Text
 
   applicationFee         Decimal @map("application_fee")
   applicationFeeDiscount Decimal @default(0) @map("application_fee_discount")
@@ -315,14 +335,12 @@ model Program {
   minimumEducationDegree Int     @map("minimum_education_degree")
   minimumEligibilityGpa  Decimal @map("minimum_education_gpa")
 
-  englishProficiency             String  @map("english_proficiency")
-  minimumEnglishProficiencyScore Decimal @map("english_proficiency_score")
-
   // * Boolean values
   pgwp   Boolean @default(false)
   active Boolean @default(true)
 
-  intakes Intake[]
+  intakes       Intake[]
+  proficiencies EnglishProficiency[]
 
   createdById String @map("created_by_id") @db.VarChar(256)
   createdBy   Admin  @relation(fields: [createdById], references: [adminId])
@@ -336,15 +354,27 @@ model Program {
   @@map("programs")
 }
 
+model EnglishProficiency {
+  test  String
+  score Decimal
+
+  programId String
+  program   Program @relation(fields: [programId], references: [programId], onDelete: Cascade)
+
+  @@unique(name: "proficiency", [test, programId])
+  @@map("english_proficiencies")
+}
+
 model Intake {
   id Int @id @default(autoincrement())
 
   intake    String
-  startDate DateTime @map("start_date")
-  deadline  DateTime
+  startDate DateTime?    @map("start_date")
+  deadline  DateTime?
+  status    IntakeStatus @default(open)
 
   schoolId String @map("school_id")
-  school   School @relation(fields: [schoolId], references: [schoolId])
+  school   School @relation(fields: [schoolId], references: [schoolId], onDelete: Cascade)
 
   programs Program[]
 
@@ -357,6 +387,63 @@ model Intake {
   @@unique([schoolId, intake, startDate, deadline])
   @@index([deadline])
   @@map("intakes")
+}
+
+model BlogPost {
+  id         Int    @id @default(autoincrement())
+  blogPostId String @unique @map("blog_post_id")
+
+  title      String
+  slug       String @unique
+  excerpt    String
+  content    String @db.Text
+  coverImage Json   @map("cover_image")
+
+  featured    Boolean    @default(false)
+  status      BlogStatus @default(draft)
+  publishedAt DateTime?  @map("published_at")
+
+  tags       Tag[]
+  categories Category[]
+
+  authorId String @map("author_id") @db.VarChar(256)
+  author   Admin  @relation(fields: [authorId], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([title])
+  @@map("blog_posts")
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  posts BlogPost[]
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tags")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  posts BlogPost[]
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("categories")
 }
 
 // model Student {
@@ -432,24 +519,4 @@ model Intake {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
 //   @@map("work_experience")
-// }
-
-// // * Admins
-// model Admin {
-//   id      Int    @default(autoincrement())
-//   adminId String @id @map("admin_id")
-
-//   email            String  @db.VarChar(100)
-//   firstName        String  @map("first_name") @db.VarChar(100)
-//   middleName       String? @map("middle_name") @db.VarChar(100)
-//   lastName         String  @map("last_name") @db.VarChar(100)
-//   accountSuspended Boolean @default(false) @map("account_suspended")
-//   phoneNumber      String  @map("phone_number") @db.VarChar(100)
-
-//   activityLogs ActivityLog[]
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("admins")
 // }

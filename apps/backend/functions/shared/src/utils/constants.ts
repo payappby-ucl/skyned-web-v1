@@ -62,3 +62,14 @@ export const tuitionFeeType = ["per_year", "per_semester", "full"] as const;
 
 /** Program timeframe */
 export const timeframe = ["day", "week", "month", "year"] as const;
+
+/** Intake Status */
+export const intakeStatus = ["open", "closed", "likely_open"] as const;
+
+/** Blog Post Status */
+export const blogPostStatus = [
+  "draft",
+  "scheduled",
+  "published",
+  "unpublished",
+] as const;

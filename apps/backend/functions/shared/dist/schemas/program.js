@@ -24,6 +24,11 @@ exports.ProgramSchema = zod_1.z.object({
         .trim()
         .nonempty("Required")
         .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
+    requirements: zod_1.z
+        .string()
+        .trim()
+        .optional()
+        .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
     applicationFee: zod_1.z.coerce.number().min(0, "Minimum of 0"),
     applicationFeeDiscount: zod_1.z.coerce
         .number()
@@ -49,8 +54,10 @@ exports.ProgramSchema = zod_1.z.object({
         .number()
         .min(1, "Minimum of 1")
         .max(100, "Maximum of 100"),
-    englishProficiency: zod_1.z.enum(["ielts", "toefl", "duolingo", "pte", "open"]),
-    minimumEnglishProficiencyScore: zod_1.z.coerce.number().min(0),
+    proficiencies: zod_1.z.array(zod_1.z.object({
+        test: zod_1.z.enum(["ielts", "toefl", "duolingo", "pte"]),
+        score: zod_1.z.coerce.number().min(0),
+    })),
     pgwp: zod_1.z.boolean().default(false),
     intakes: zod_1.z
         .array(zod_1.z.number().positive().int())
@@ -59,35 +66,7 @@ exports.ProgramSchema = zod_1.z.object({
 exports.CreateProgramSchema = zod_1.z
     .object({
     type: zod_1.z.enum(["single", "bulk"]),
-    data: exports.ProgramSchema.superRefine((args, ctx) => {
-        if (args.englishProficiency !== "open") {
-            try {
-                utils_1.EnglishProficiency.getCefr(args.englishProficiency, args.minimumEnglishProficiencyScore);
-            }
-            catch {
-                ctx.addIssue({
-                    code: zod_1.z.ZodIssueCode.custom,
-                    message: "Invalid score",
-                    path: ["minimumEnglishProficiencyScore"],
-                });
-            }
-        }
-    }).or(zod_1.z
-        .array(exports.ProgramSchema.superRefine((args, ctx) => {
-        if (args.englishProficiency !== "open") {
-            try {
-                utils_1.EnglishProficiency.getCefr(args.englishProficiency, args.minimumEnglishProficiencyScore);
-            }
-            catch {
-                ctx.addIssue({
-                    code: zod_1.z.ZodIssueCode.custom,
-                    message: "Invalid score",
-                    path: ["minimumEnglishProficiencyScore"],
-                });
-            }
-        }
-    }))
-        .min(1, "Must have at least one program.")),
+    data: exports.ProgramSchema.or(zod_1.z.array(exports.ProgramSchema).min(1, "Must have at least one program.")),
 })
     .superRefine(({ type, data }, ctx) => {
     if (type === "bulk" && !Array.isArray(data)) {
@@ -100,7 +79,7 @@ exports.CreateProgramSchema = zod_1.z
 });
 exports.UpdateBulkProgramSchema = zod_1.z.object({
     data: zod_1.z.array(zod_1.z.object({
-        programSlug: zod_1.z.string().trim().nonempty("Required"),
+        programId: zod_1.z.string().trim().nonempty("Required"),
         data: exports.ProgramSchema.partial(),
     })),
 });

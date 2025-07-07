@@ -26,6 +26,7 @@ export interface IProgramService {
   updateSingleProgram(
     schoolId: string,
     slug: string,
+    programId: string,
     data: Partial<ProgramSchema>,
   ): Promise<IProgram>;
 

@@ -1,0 +1,13 @@
+/* eslint-disable max-len */
+
+export const blogPostData = {
+  title: "Blog Post",
+  slug: "blog-post",
+  excerpt:
+    "The B.F.A. in Art is considered the professional undergraduate degree in studio art and is designed to provide students with a thorough grounding in fundamental principles and techniques with opportunities for emphasis in one or more specific studio art areas.",
+  content: "<h1>Bachelor of Art in Fine Arts</h1>",
+  featured: false,
+  status: "published",
+  coverImage:
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAE80lEQVRIia2WWWxUVRjHf+fM1mlLKVBLC0UIDW2VQlMpixJ8QCMxIg8UKOCDoHUPARIXFBKjDxqXROVFErWQSBAISlBEBVljSCUFipQWWluVIBAodJ/ptJ3z+TD33rnTBfvAyTeTO3Pv/f+/7fzPp5iey3CWsj72EmRY73n/D1ehlIWeiG9xiCB3ohqaIAatFUrZ6AMjEEQwcgeawQjc0I4NHoEggroTzQACC1pb306KlOr/pLhSJAYEMRj6cSQSKIXWgxEMkSKxvXZKgmCMm8ObiO64r+0Uaet/EoOIQRjbfdEgGNAGlDuORAKl4+haWwFZNRiMwMq+QgwY0BhQoMwAAsd9y7SdJYXWVoWVwhi6u/D58fotGmPQYDQabHhQiIpxeBg7GkDHHPfE3XdMKTwKrREKxmR89MK67JS0qqZ6vB477lhkCsSukzhRel2d45iOZyZeDEVveMm8+asWL2tpb0Oi6ABKMIIxKIUG0SiT0Nwi3rgXMesJ09XOyNEkpxLqoK+HlDQiIYIpRPseuK8Q+O63o4TaiYQRSB1p+REJ09ZKuI2UMQSTHQJtBYdCKSLhtYvKGg+e2lS2iuZr2996r/7bwxtLn6r75sDHq16mo6VwSj4wv3jm+R0/1WzfX1WxJ29UBgi3bzxZNPPYV7ubT1/+ZO0GQp2ujVmUS3EeJQXMmkrB2J+PHhaR1RvWM8nf0dkpIhV7dolIS3sbGYjIxaY/z9bWiMj3Rw6JyI4f9jI5sHXPTrHXM6+tpWgyJQUU51GUq+M6o6C7Y2p+AbD1l31MLExNSalrbCjMywfSR6QtK18HnKmrnTolvysUutZ8E9h3/PDqFWtWlZaFwuHFr5SrgqyK44cIBB1Y1z4QwePPyR5341Yzt5teWvQmcPrC+SULnojd/3DNq0BrZ7vP6/V5vc8vXQEsX7Bw4rjxwJp3N+09eYSMLIzBGAdVxwl6e0ofKwX+qKsF5hQVA9ebbyYFApXnzhpjYkCxpvz06wqVqYB5JbNy750IVFSeQGuifSQuF0Ek/MicucA//16hnYdnzgGixgBn62qqL9YCxpjUpCBwsubc48vLgVstLd2RCFC1+csNZasXTiuhr7cfQVyq/D4f8GzZSrktk3ImXGpqzBw1GjhVW3Oy+jRQ/3fT7GlFwO4PPjuw+QvgnS2bt+zcDsyYVvT+6xsz0tOJRl3ahzf+I3Vk+dvre6N9c0tmGWMqq8+8+MbTdccagG2VJy5c/mvy+AlHqn6fUXD/+fpLICZqPt+76+iFarpDl69eeW7pypys7G2/7sef5NJXUUzPRWs8tjCEOuntxuMhmErrdWlo6wqFUh/KIzOHcAh/gL5eW5AFfxCPh6ihO0xHKz3djMnCgIliDFGDMV6rfxxZT0lDp+PRmOiDsx8FLjY24AuiNMkjUODzJ7wSU2yfn1H3xBARE78bFzvcWgQoxORnZpu+6O6DP567dhWPZ5BD2Lmwrh1oY90CZY0tSsWzZImoRqJEwgSCBJKcBo1vGmy5dtCNy6LGpabWowKOGTQoD8kjrGNgKIIEdInbICeadfiBibWvQQkyzCPT1m2xa2CvRAIDCNpgYlWx9V2GnouMO+mmn/v0nypiOXXL3/DHFpNQ2yEInDhUjEaGNXj166jENdhkZ73jOkfv8ujo0EQlYWfc5eHXHQ0Dx/f+I+JQ6z8kQvIH3mrRSQAAAABJRU5ErkJggg==",
+};

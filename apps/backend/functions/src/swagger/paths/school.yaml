@@ -432,17 +432,26 @@ paths:
                   type: string
                   format: date-time
 
+                status:
+                  type: string
+                  enum:
+                    - open
+                    - closed
+                    - likely_open
+
                 startDate:
                   type: string
                   format: date-time
+                  nullable: true
 
                 deadline:
                   type: string
                   format: date-time
+                  nullable: true
+
               required:
                 - intake
-                - deadline
-                - startDate
+                - status
       responses:
         "201":
           description: The intake
@@ -517,21 +526,26 @@ paths:
             schema:
               type: object
               properties:
-                intake:
+                status:
                   type: string
-                  format: date-time
+                  enum:
+                    - open
+                    - closed
+                    - likely_open
 
                 startDate:
                   type: string
                   format: date-time
+                  nullable: true
 
                 deadline:
                   type: string
                   format: date-time
+                  nullable: true
+
               required:
                 - intake
-                - deadline
-                - startDate
+                - status
       responses:
         "200":
           description: The intake

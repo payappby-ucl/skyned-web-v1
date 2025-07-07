@@ -29,8 +29,7 @@ type TestInput = IELTS | TOEFL | PTE | Duolingo;
 const scores = [
   {
     name: "A1",
-    tags: ["English Basic User", "Beginner"],
-    classNames: "bg-red-200 text-red-600",
+    tags: ["Basic User", "Beginner"],
     scores: {
       ielts: [1.0, 2.5],
       toefl: [0, 31],
@@ -40,8 +39,7 @@ const scores = [
   },
   {
     name: "A2",
-    tags: ["English Basic User", "Elementary English"],
-    classNames: "bg-red-200 text-red-600",
+    tags: ["Basic User", "Pre-Intermediate"],
     scores: {
       ielts: [3.0, 3.5],
       toefl: [32, 41],
@@ -51,8 +49,7 @@ const scores = [
   },
   {
     name: "B1",
-    tags: ["English Independent User", "Intermediate English"],
-    classNames: "bg-amber-200 text-amber-600",
+    tags: ["Independent User", "Intermediate"],
     scores: {
       ielts: [4.0, 5.0],
       toefl: [42, 71],
@@ -62,8 +59,7 @@ const scores = [
   },
   {
     name: "B2",
-    tags: ["English Independent User", "Upper-Intermediate English"],
-    classNames: "bg-amber-200 text-amber-600",
+    tags: ["Independent User", "Upper-Intermediate"],
     scores: {
       ielts: [5.5, 6.5],
       toefl: [72, 94],
@@ -73,8 +69,7 @@ const scores = [
   },
   {
     name: "C1",
-    tags: ["Proficient English User", "Advanced English"],
-    classNames: "bg-lime-200 text-lime-600",
+    tags: ["Proficient User", "Advanced"],
     scores: {
       ielts: [7.0, 8.0],
       toefl: [95, 114],
@@ -84,8 +79,7 @@ const scores = [
   },
   {
     name: "C2",
-    tags: ["Proficient English User", "Proficiency"],
-    classNames: "bg-lime-200 text-lime-600",
+    tags: ["Proficient User", "Mastery"],
     scores: {
       ielts: [8.5, 9.0],
       toefl: [115, 120],

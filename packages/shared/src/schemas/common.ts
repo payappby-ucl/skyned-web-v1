@@ -1,8 +1,10 @@
 import { Country } from "country-state-city";
+import slugify from "slugify";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import parseDataURL from "data-urls";
 import { gender, socialMedia } from "../utils";
 import { z } from "zod";
+import sanitizeHtml from "sanitize-html";
 
 /** Common schema use in multiple places */
 export const CommonSchema = z.object({
@@ -54,6 +56,19 @@ export const CommonSchema = z.object({
     .string()
     .trim()
     .refine((val) => !!parseDataURL(val), "Image must be of type data-url"),
+
+  slug: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .nonempty("required")
+    .transform((val) => slugify(val, { lower: true, strict: true })),
+
+  html: z
+    .string()
+    .trim()
+    .nonempty("Required")
+    .transform((val) => (val ? sanitizeHtml(val) : val)),
 });
 
 /** Schema type */

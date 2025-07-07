@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.10.1
- * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
+ * Prisma Client JS version: 6.11.1
+ * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
  */
 Prisma.prismaVersion = {
-  client: "6.10.1",
-  engine: "9b628578b3b7cae625e8c927178f15a170e74a9c"
+  client: "6.11.1",
+  engine: "f40f79ec31188888a2e33acda0ecc8fd10a853a9"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -196,6 +196,7 @@ exports.Prisma.ActivityLogScalarFieldEnum = {
   resource: 'resource',
   resourceId: 'resourceId',
   action: 'action',
+  message: 'message',
   previousState: 'previousState',
   currentState: 'currentState',
   createdAt: 'createdAt',
@@ -243,6 +244,7 @@ exports.Prisma.ProgramScalarFieldEnum = {
   degreeType: 'degreeType',
   overview: 'overview',
   description: 'description',
+  requirements: 'requirements',
   applicationFee: 'applicationFee',
   applicationFeeDiscount: 'applicationFeeDiscount',
   tuitionFee: 'tuitionFee',
@@ -252,8 +254,6 @@ exports.Prisma.ProgramScalarFieldEnum = {
   minimumEducationLevel: 'minimumEducationLevel',
   minimumEducationDegree: 'minimumEducationDegree',
   minimumEligibilityGpa: 'minimumEligibilityGpa',
-  englishProficiency: 'englishProficiency',
-  minimumEnglishProficiencyScore: 'minimumEnglishProficiencyScore',
   pgwp: 'pgwp',
   active: 'active',
   createdById: 'createdById',
@@ -261,12 +261,51 @@ exports.Prisma.ProgramScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EnglishProficiencyScalarFieldEnum = {
+  test: 'test',
+  score: 'score',
+  programId: 'programId'
+};
+
 exports.Prisma.IntakeScalarFieldEnum = {
   id: 'id',
   intake: 'intake',
   startDate: 'startDate',
   deadline: 'deadline',
+  status: 'status',
   schoolId: 'schoolId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  blogPostId: 'blogPostId',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  coverImage: 'coverImage',
+  featured: 'featured',
+  status: 'status',
+  publishedAt: 'publishedAt',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -354,6 +393,19 @@ exports.Timeframe = exports.$Enums.Timeframe = {
   year: 'year'
 };
 
+exports.IntakeStatus = exports.$Enums.IntakeStatus = {
+  open: 'open',
+  closed: 'closed',
+  likely_open: 'likely_open'
+};
+
+exports.BlogStatus = exports.$Enums.BlogStatus = {
+  draft: 'draft',
+  scheduled: 'scheduled',
+  published: 'published',
+  unpublished: 'unpublished'
+};
+
 exports.Prisma.ModelName = {
   Token: 'Token',
   Admin: 'Admin',
@@ -365,7 +417,11 @@ exports.Prisma.ModelName = {
   School: 'School',
   Accommodation: 'Accommodation',
   Program: 'Program',
-  Intake: 'Intake'
+  EnglishProficiency: 'EnglishProficiency',
+  Intake: 'Intake',
+  BlogPost: 'BlogPost',
+  Tag: 'Tag',
+  Category: 'Category'
 };
 
 /**

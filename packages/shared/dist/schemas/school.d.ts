@@ -15,6 +15,8 @@ export declare const CreateSchoolSchema: z.ZodObject<Pick<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "country"> & {
     logo: z.ZodEffects<z.ZodString, string, string>;
     schoolImage: z.ZodEffects<z.ZodString, string, string>;
@@ -31,9 +33,9 @@ export declare const CreateSchoolSchema: z.ZodObject<Pick<{
 }, "strip", z.ZodTypeAny, {
     name: string;
     country: string;
+    slug: string;
     logo: string;
     schoolImage: string;
-    slug: string;
     state: string;
     city: string;
     address: string;
@@ -45,9 +47,9 @@ export declare const CreateSchoolSchema: z.ZodObject<Pick<{
 }, {
     name: string;
     country: string;
+    slug: string;
     logo: string;
     schoolImage: string;
-    slug: string;
     state: string;
     city: string;
     address: string;
@@ -74,6 +76,8 @@ export declare const UpdateSchoolSchema: z.ZodObject<Omit<Pick<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "country"> & {
     logo: z.ZodEffects<z.ZodString, string, string>;
     schoolImage: z.ZodEffects<z.ZodString, string, string>;

@@ -16,6 +16,8 @@ export declare const CommonSchema: z.ZodObject<{
         url: string;
     }>;
     image: z.ZodEffects<z.ZodString, string, string>;
+    slug: z.ZodEffects<z.ZodString, string, string>;
+    html: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     email: string;
     gender: "Male" | "Female" | "Others";
@@ -26,6 +28,8 @@ export declare const CommonSchema: z.ZodObject<{
         url: string;
     };
     image: string;
+    slug: string;
+    html: string;
 }, {
     email: string;
     gender: "Male" | "Female" | "Others";
@@ -36,6 +40,8 @@ export declare const CommonSchema: z.ZodObject<{
         url: string;
     };
     image: string;
+    slug: string;
+    html: string;
 }>;
 /** Schema type */
 export type CommonSchema = z.infer<typeof CommonSchema>;

@@ -49,8 +49,7 @@ export declare abstract class EnglishProficiency {
     }];
     static getCefr(name: (typeof EnglishProficiency.examinations)[number]["name"], totalScore: number): {
         readonly name: "A1";
-        readonly tags: readonly ["English Basic User", "Beginner"];
-        readonly classNames: "bg-red-200 text-red-600";
+        readonly tags: readonly ["Basic User", "Beginner"];
         readonly scores: {
             readonly ielts: readonly [1, 2.5];
             readonly toefl: readonly [0, 31];
@@ -59,8 +58,7 @@ export declare abstract class EnglishProficiency {
         };
     } | {
         readonly name: "A2";
-        readonly tags: readonly ["English Basic User", "Elementary English"];
-        readonly classNames: "bg-red-200 text-red-600";
+        readonly tags: readonly ["Basic User", "Pre-Intermediate"];
         readonly scores: {
             readonly ielts: readonly [3, 3.5];
             readonly toefl: readonly [32, 41];
@@ -69,8 +67,7 @@ export declare abstract class EnglishProficiency {
         };
     } | {
         readonly name: "B1";
-        readonly tags: readonly ["English Independent User", "Intermediate English"];
-        readonly classNames: "bg-amber-200 text-amber-600";
+        readonly tags: readonly ["Independent User", "Intermediate"];
         readonly scores: {
             readonly ielts: readonly [4, 5];
             readonly toefl: readonly [42, 71];
@@ -79,8 +76,7 @@ export declare abstract class EnglishProficiency {
         };
     } | {
         readonly name: "B2";
-        readonly tags: readonly ["English Independent User", "Upper-Intermediate English"];
-        readonly classNames: "bg-amber-200 text-amber-600";
+        readonly tags: readonly ["Independent User", "Upper-Intermediate"];
         readonly scores: {
             readonly ielts: readonly [5.5, 6.5];
             readonly toefl: readonly [72, 94];
@@ -89,8 +85,7 @@ export declare abstract class EnglishProficiency {
         };
     } | {
         readonly name: "C1";
-        readonly tags: readonly ["Proficient English User", "Advanced English"];
-        readonly classNames: "bg-lime-200 text-lime-600";
+        readonly tags: readonly ["Proficient User", "Advanced"];
         readonly scores: {
             readonly ielts: readonly [7, 8];
             readonly toefl: readonly [95, 114];
@@ -99,8 +94,7 @@ export declare abstract class EnglishProficiency {
         };
     } | {
         readonly name: "C2";
-        readonly tags: readonly ["Proficient English User", "Proficiency"];
-        readonly classNames: "bg-lime-200 text-lime-600";
+        readonly tags: readonly ["Proficient User", "Mastery"];
         readonly scores: {
             readonly ielts: readonly [8.5, 9];
             readonly toefl: readonly [115, 120];
@@ -112,8 +106,7 @@ export declare abstract class EnglishProficiency {
         total: number;
         cefr: {
             readonly name: "A1";
-            readonly tags: readonly ["English Basic User", "Beginner"];
-            readonly classNames: "bg-red-200 text-red-600";
+            readonly tags: readonly ["Basic User", "Beginner"];
             readonly scores: {
                 readonly ielts: readonly [1, 2.5];
                 readonly toefl: readonly [0, 31];
@@ -122,8 +115,7 @@ export declare abstract class EnglishProficiency {
             };
         } | {
             readonly name: "A2";
-            readonly tags: readonly ["English Basic User", "Elementary English"];
-            readonly classNames: "bg-red-200 text-red-600";
+            readonly tags: readonly ["Basic User", "Pre-Intermediate"];
             readonly scores: {
                 readonly ielts: readonly [3, 3.5];
                 readonly toefl: readonly [32, 41];
@@ -132,8 +124,7 @@ export declare abstract class EnglishProficiency {
             };
         } | {
             readonly name: "B1";
-            readonly tags: readonly ["English Independent User", "Intermediate English"];
-            readonly classNames: "bg-amber-200 text-amber-600";
+            readonly tags: readonly ["Independent User", "Intermediate"];
             readonly scores: {
                 readonly ielts: readonly [4, 5];
                 readonly toefl: readonly [42, 71];
@@ -142,8 +133,7 @@ export declare abstract class EnglishProficiency {
             };
         } | {
             readonly name: "B2";
-            readonly tags: readonly ["English Independent User", "Upper-Intermediate English"];
-            readonly classNames: "bg-amber-200 text-amber-600";
+            readonly tags: readonly ["Independent User", "Upper-Intermediate"];
             readonly scores: {
                 readonly ielts: readonly [5.5, 6.5];
                 readonly toefl: readonly [72, 94];
@@ -152,8 +142,7 @@ export declare abstract class EnglishProficiency {
             };
         } | {
             readonly name: "C1";
-            readonly tags: readonly ["Proficient English User", "Advanced English"];
-            readonly classNames: "bg-lime-200 text-lime-600";
+            readonly tags: readonly ["Proficient User", "Advanced"];
             readonly scores: {
                 readonly ielts: readonly [7, 8];
                 readonly toefl: readonly [95, 114];
@@ -162,8 +151,7 @@ export declare abstract class EnglishProficiency {
             };
         } | {
             readonly name: "C2";
-            readonly tags: readonly ["Proficient English User", "Proficiency"];
-            readonly classNames: "bg-lime-200 text-lime-600";
+            readonly tags: readonly ["Proficient User", "Mastery"];
             readonly scores: {
                 readonly ielts: readonly [8.5, 9];
                 readonly toefl: readonly [115, 120];
