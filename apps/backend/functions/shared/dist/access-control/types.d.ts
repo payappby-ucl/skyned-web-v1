@@ -1,8 +1,8 @@
-import { ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBulkProgramSchema, UpdateSchoolSchema } from "../schemas";
-import { IAccommodation, IAdmin, IDepartment, IFaq, IInquiry, IIntake, IProgram, ISchool, ITeam } from "../interfaces";
+import { BlogPostSchema, ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBlogPostSchema, UpdateBulkProgramSchema, UpdateSchoolSchema } from "../schemas";
+import { IAccommodation, IAdmin, IBlogPost, IDepartment, IFaq, IInquiry, IIntake, IProgram, ISchool, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 export type AuthClaim = AdminClaim | StudentClaim;
-export type ResourceType = "departments" | "teams" | "admins" | "faqs" | "inquiries" | "schools" | "accommodations" | "intakes" | "programs";
+export type ResourceType = "departments" | "teams" | "admins" | "faqs" | "inquiries" | "schools" | "accommodations" | "intakes" | "programs" | "blogs";
 export type PermissionType = {
     admins: {
         dataType: IAdmin;
@@ -57,6 +57,12 @@ export type PermissionType = {
         createDataType: CreateProgramSchema["data"];
         updateDataType: Partial<ProgramSchema> | UpdateBulkProgramSchema;
         action: "list" | "create" | "read" | "update" | "delete" | "activate" | "deactivate";
+    };
+    blogs: {
+        dataType: IBlogPost;
+        createDataType: BlogPostSchema;
+        updateDataType: UpdateBlogPostSchema;
+        action: "list" | "create" | "read" | "update" | "delete";
     };
 };
 export type PermissionCheckSingleResource<Key extends keyof PermissionType> = boolean | ((authClaim: AuthClaim, data: PermissionType[Key]["dataType"]) => boolean);

@@ -1,4 +1,5 @@
 import {
+  BlogPostSchema,
   ContactUsSchema,
   CreateAccommodationSchema,
   CreateAdminSchema,
@@ -8,12 +9,14 @@ import {
   CreateSchoolSchema,
   ProgramSchema,
   UpdateAdminSchema,
+  UpdateBlogPostSchema,
   UpdateBulkProgramSchema,
   UpdateSchoolSchema,
 } from "../schemas";
 import {
   IAccommodation,
   IAdmin,
+  IBlogPost,
   IDepartment,
   IFaq,
   IInquiry,
@@ -35,7 +38,8 @@ export type ResourceType =
   | "schools"
   | "accommodations"
   | "intakes"
-  | "programs";
+  | "programs"
+  | "blogs";
 
 export type PermissionType = {
   admins: {
@@ -106,6 +110,12 @@ export type PermissionType = {
       | "delete"
       | "activate"
       | "deactivate";
+  };
+  blogs: {
+    dataType: IBlogPost;
+    createDataType: BlogPostSchema;
+    updateDataType: UpdateBlogPostSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
   };
 };
 

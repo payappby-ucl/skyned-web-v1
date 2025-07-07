@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlogPostSchema = void 0;
+exports.UpdateBlogPostSchema = exports.BlogPostSchema = exports.BlogSchema = void 0;
 const zod_1 = require("zod");
 const common_1 = require("./common");
 const utils_1 = require("../utils");
-exports.BlogPostSchema = zod_1.z
-    .object({
+exports.BlogSchema = zod_1.z.object({
     title: zod_1.z.string().trim().nonempty("Required"),
     slug: common_1.CommonSchema.shape.slug,
     coverImage: common_1.CommonSchema.shape.image,
@@ -20,8 +19,8 @@ exports.BlogPostSchema = zod_1.z
     tags: zod_1.z
         .array(zod_1.z.string().trim().toLowerCase())
         .min(1, "At least one tag is required."),
-})
-    .superRefine((args, ctx) => {
+});
+exports.BlogPostSchema = exports.BlogSchema.superRefine((args, ctx) => {
     if (args.status === "scheduled" && !args.publishedAt) {
         ctx.addIssue({
             code: zod_1.z.ZodIssueCode.custom,
@@ -30,3 +29,4 @@ exports.BlogPostSchema = zod_1.z
         });
     }
 });
+exports.UpdateBlogPostSchema = exports.BlogSchema.partial();

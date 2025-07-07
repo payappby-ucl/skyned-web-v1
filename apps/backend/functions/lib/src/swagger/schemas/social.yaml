@@ -1,0 +1,19 @@
+components:
+  schemas:
+    Social:
+      type: object
+      properties:
+        url:
+          type: string
+        medium:
+          type: string
+          enum:
+            - Facebook
+            - X
+            - Instagram
+            - Linkedin
+            - Pinterest
+            - Tiktok
+      required:
+        - url
+        - medium

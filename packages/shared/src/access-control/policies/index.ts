@@ -1,6 +1,7 @@
 import { AccessControlType } from "../../access-control/types";
 import { accommodationPolicies } from "./accommodations";
 import { adminPolicies } from "./admins";
+import { blogPolicies } from "./blog";
 import { departmentPolicies } from "./department";
 import { faqPolicies } from "./faq";
 import { inquiryPolicies } from "./inquiry";
@@ -17,4 +18,5 @@ export const policies: AccessControlType = {
   ...accommodationPolicies,
   ...intakePolicies,
   ...programPolicies,
+  ...blogPolicies,
 };

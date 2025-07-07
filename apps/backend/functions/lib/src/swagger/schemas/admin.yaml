@@ -1,0 +1,111 @@
+components:
+  schemas:
+    Admin:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            adminId:
+              type: string
+            email:
+              type: string
+              format: email
+            firstName:
+              type: string
+            middleName:
+              type: string
+              nullable: true
+            lastName:
+              type: string
+            gender:
+              type: string
+              enum:
+                - Male
+                - Female
+                - Others
+            accountSuspended:
+              type: boolean
+            nationality:
+              type: string
+              example: "NG"
+            countryOfResidence:
+              type: string
+              example: "CA"
+            about:
+              type: string
+              nullable: true
+            primaryImage:
+              $ref: "#/components/schemas/Object"
+              nullable: true
+            secondaryImage:
+              $ref: "#/components/schemas/Object"
+              nullable: true
+            socials:
+              type: array
+              items:
+                $ref: "#/components/schemas/Social"
+              nullable: true
+            phoneNumber:
+              $ref: "#/components/schemas/PhoneNumber"
+              nullable: true
+            jobTitle:
+              type: string
+            createdById:
+              type: string
+              nullable: true
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+            created:
+              type: array
+              items:
+                $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+            departments:
+              type: array
+              items:
+                $ref: "#/components/schemas/Department"
+              nullable: true
+            departmentsLeading:
+              type: array
+              items:
+                $ref: "#/components/schemas/Department"
+              nullable: true
+            teams:
+              type: array
+              items:
+                $ref: "#/components/schemas/Team"
+              nullable: true
+            teamsLeading:
+              type: array
+              items:
+                $ref: "#/components/schemas/Team"
+              nullable: true
+            faqsCreated:
+              type: array
+              items:
+                $ref: "#/components/schemas/Faq"
+            intakesCreated:
+              type: array
+              items:
+                $ref: "#/components/schemas/Intake"
+              nullable: true
+            accommodationsCreated:
+              type: array
+              items:
+                $ref: "#/components/schemas/Accommodation"
+              nullable: true
+          required:
+            - id
+            - adminId
+            - email
+            - firstName
+            - lastName
+            - gender
+            - accountSuspended
+            - nationality
+            - countryOfResidence
+            - primaryImage
+            - jobTitle

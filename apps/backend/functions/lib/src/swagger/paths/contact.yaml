@@ -1,0 +1,131 @@
+paths:
+  /contacts:
+    summary: Represents Contact us function
+    description: Contains all functionalities that has to do with contact us
+
+    post:
+      summary: Send contact us message to admin
+      description: >
+        Saves and send contact us message to admin
+      tags:
+        - Contact
+      operationId: sendContactUsMessage
+      requestBody:
+        description: Data needed to access this route
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: bobslegend795@gmail.com
+                name:
+                  type: string
+                  example: Ahmed Adegoke
+                subject:
+                  type: string
+                message:
+                  type: string
+                phoneNumber:
+                  type: string
+                  example: "+2348136239706"
+      responses:
+        "200":
+          description: Contact us message created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "429":
+          $ref: "#/components/responses/RateLimit"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Get Contact us messages from database
+      description: >
+        Saves and Get Contact us messages from database
+      tags:
+        - Contact
+      operationId: getContactUsMessages
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+      responses:
+        "200":
+          description: The messages
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Inquiry"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /contacts/{id}:
+    summary: Contact us Resource
+    description: Handles all routes regarding a single contact
+
+    delete:
+      summary: Delete Contact us message
+      description: >
+        Deletes a Contact us messages from database
+      tags:
+        - Contact
+      operationId: deleteContactUsMessage
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: The messages
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"

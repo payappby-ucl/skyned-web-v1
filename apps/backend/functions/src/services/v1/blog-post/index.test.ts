@@ -33,6 +33,7 @@ describe("blogPostService", () => {
           authorId: adminId,
           blogPostId: idGeneratorService.id(),
           status: "published",
+          publishedAt: new Date(),
           coverImage: {
             path: "/schools",
             url: "https://gogle.com",

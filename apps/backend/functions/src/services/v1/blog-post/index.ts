@@ -68,7 +68,6 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
 
     if (authUser?.claim !== "admin") where.status = BlogStatus.published;
     if (whereQuery.f) where.featured = true;
-    if (whereQuery.slug) where.slug = whereQuery.slug;
     if (whereQuery.c) {
       where.categories = {
         some: {
@@ -94,12 +93,7 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
           ...coverImage,
         },
         status,
-        publishedAt:
-          status === "scheduled" && publishedAt
-            ? new Date(publishedAt)
-            : status === "published"
-              ? new Date()
-              : undefined,
+        publishedAt,
         categories: categories.length
           ? {
               connectOrCreate: categories.map((category) => ({
@@ -327,7 +321,7 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
             }
           : undefined,
         status,
-        publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+        publishedAt,
 
         categories: categories?.length
           ? {

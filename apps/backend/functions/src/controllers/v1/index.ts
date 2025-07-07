@@ -8,3 +8,4 @@ export * from "./department";
 export * from "./out-team";
 export * from "./school";
 export * from "./accommodation";
+export * from "./blog-post";

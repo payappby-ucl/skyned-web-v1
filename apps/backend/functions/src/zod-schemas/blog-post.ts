@@ -10,6 +10,5 @@ export const BlogPostQuerySchema = z.object({
   c: z.string().trim().toLowerCase().optional(),
   p: z.boolean().optional(),
   f: z.boolean().optional(),
-  slug: GeneralSchema.shape.slug.optional(),
 });
 export type BlogPostQuerySchema = z.infer<typeof BlogPostQuerySchema>;

@@ -38,8 +38,8 @@ export interface IBlogPostService {
         | "featured"
         | "excerpt"
         | "coverImage"
-        | "publishedAt"
       > & {
+        publishedAt?: Date | null;
         categories: string[];
         tags: string[];
       }

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.policies = void 0;
 const accommodations_1 = require("./accommodations");
 const admins_1 = require("./admins");
+const blog_1 = require("./blog");
 const department_1 = require("./department");
 const faq_1 = require("./faq");
 const inquiry_1 = require("./inquiry");
@@ -18,4 +19,5 @@ exports.policies = {
     ...accommodations_1.accommodationPolicies,
     ...intakes_1.intakePolicies,
     ...programs_1.programPolicies,
+    ...blog_1.blogPolicies,
 };
