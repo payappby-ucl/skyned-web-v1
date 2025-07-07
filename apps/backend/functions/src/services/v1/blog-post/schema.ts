@@ -10,7 +10,7 @@ export const CreateBlogPostSchema = z.object({
 
   featured: z.boolean().default(false),
   status: z.enum(blogPostStatus),
-  publishedAt: z.coerce.number().positive().int().optional(),
+  publishedAt: z.date().optional(),
 
   categories: z
     .array(z.string().trim().toLowerCase())

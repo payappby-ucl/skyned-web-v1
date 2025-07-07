@@ -66,6 +66,7 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
   ) {
     const where: Prisma.BlogPostWhereInput = {};
 
+    if (whereQuery.s) where.status = whereQuery.s;
     if (authUser?.claim !== "admin") where.status = BlogStatus.published;
     if (whereQuery.f) where.featured = true;
     if (whereQuery.c) {
