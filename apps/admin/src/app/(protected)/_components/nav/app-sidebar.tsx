@@ -13,6 +13,7 @@ import {
   LucideIcon,
   Map,
   MessageCircleQuestion,
+  NotebookText,
   PieChart,
   School,
   Settings2,
@@ -85,6 +86,13 @@ const data: {
       url: "/inquiries",
       icon: CircleHelp,
       resource: "inquiries",
+    },
+
+    {
+      title: "Blog",
+      url: "/blog",
+      icon: NotebookText,
+      resource: "blogs",
     },
 
     {

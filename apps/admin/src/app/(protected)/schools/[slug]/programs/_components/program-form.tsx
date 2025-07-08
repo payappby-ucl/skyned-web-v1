@@ -630,7 +630,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
                       const cefr = EnglishProficiency.getCefr(test, score);
 
                       return (
-                        <div className="flex items-center">
+                        <div className="flex items-center" key={test}>
                           <div className="flex-1">
                             <ProficiencyDisplay
                               key={test}

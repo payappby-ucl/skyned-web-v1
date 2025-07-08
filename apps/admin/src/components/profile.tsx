@@ -26,7 +26,7 @@ const ProfileInfo: React.FC<Omit<Props, "disabled">> = (props) => (
       </AvatarFallback>
     </Avatar>
     <div className="font-semibold">
-      <p>
+      <p className="text-sm">
         {props.firstName} {props.lastName}
       </p>
       <p className="text-xs">{props.jobTitle}</p>

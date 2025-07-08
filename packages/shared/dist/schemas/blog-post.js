@@ -1,9 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateBlogPostSchema = exports.BlogPostSchema = exports.BlogSchema = void 0;
 const zod_1 = require("zod");
 const common_1 = require("./common");
 const utils_1 = require("../utils");
+const data_urls_1 = __importDefault(require("data-urls"));
 exports.BlogSchema = zod_1.z.object({
     title: zod_1.z.string().trim().nonempty("Required"),
     slug: common_1.CommonSchema.shape.slug,
@@ -29,4 +33,14 @@ exports.BlogPostSchema = exports.BlogSchema.superRefine((args, ctx) => {
         });
     }
 });
-exports.UpdateBlogPostSchema = exports.BlogSchema.partial();
+exports.UpdateBlogPostSchema = exports.BlogSchema.omit({
+    coverImage: true,
+})
+    .partial()
+    .extend({
+    coverImage: zod_1.z
+        .string()
+        .trim()
+        .optional()
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Image must be of type data-url"),
+});

@@ -1,6 +1,6 @@
 import { brandServerApi, getErrorResponse } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { IFaq, IPaginatedResponse } from "@workspace/shared";
+import { IPaginatedResponse, ISchool } from "@workspace/shared";
 import { type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
     const urlConstruct = `/schools?${urlQuery.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
-      IPaginatedResponse<IFaq>
+      IPaginatedResponse<ISchool>
     >(urlConstruct, "GET", {
       next: {
         tags,

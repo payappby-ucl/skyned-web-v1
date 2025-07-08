@@ -111,6 +111,7 @@ export type PermissionType = {
       | "activate"
       | "deactivate";
   };
+
   blogs: {
     dataType: IBlogPost;
     createDataType: BlogPostSchema;
