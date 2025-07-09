@@ -3,11 +3,6 @@ import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { CreateFaqSchema, IFaq } from "@workspace/shared";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
 import { Button } from "@workspace/ui/components/button";
 import {
   Dialog,
@@ -26,7 +21,7 @@ import { deleteFaq } from "../_actions";
 import Profile from "@/src/components/profile";
 
 export const columns: ColumnDef<IFaq>[] = [
-   {
+  {
     id: "actions",
     header: "Actions",
     accessorFn: (row) => row,
@@ -189,5 +184,4 @@ export const columns: ColumnDef<IFaq>[] = [
       );
     },
   },
- 
 ];

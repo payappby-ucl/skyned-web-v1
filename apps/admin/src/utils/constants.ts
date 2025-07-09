@@ -8,4 +8,6 @@ export const serverCacheTags = {
   intakes: "intakes",
   programs: "programs",
   blogs: "blogs",
+  categories: "categories",
+  tags: "tags",
 } as const;

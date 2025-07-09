@@ -55,9 +55,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
       tags: post.tags?.map((tag) => tag.name) || [],
       categories: post.categories?.map((category) => category.name) || [],
       status: post.status,
-      publishedAt: post.publishedAt
-        ? (post.publishedAt as unknown as number)
-        : undefined,
+      publishedAt: post.publishedAt ? +new Date(post.publishedAt) : undefined,
     },
   });
 
@@ -236,7 +234,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
                       placeholder="Comma separated categories eg Canada, Announcement"
                       onChange={(e) => {
                         const val = e.target.value.toLowerCase();
-                        field.onChange([...new Set(val.split(", "))]);
+                        field.onChange([...new Set(val.split(","))]);
                       }}
                       value={(field.value || []).join(",")}
                       id="categories"
@@ -320,7 +318,13 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
                           field.value ? new Date(field.value) : new Date()
                         }
                         mode="single"
-                        onSelect={field.onChange}
+                        onSelect={(val) => {
+                          if (val) {
+                            field.onChange(+val);
+                          } else {
+                            field.onChange(val);
+                          }
+                        }}
                         captionLayout="dropdown"
                         fromDate={new Date()}
                         fromYear={new Date().getFullYear()}
@@ -357,7 +361,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
                       placeholder="Comma separated keywords"
                       onChange={(e) => {
                         const val = e.target.value.toLowerCase();
-                        field.onChange([...new Set(val.split(", "))]);
+                        field.onChange([...new Set(val.split(","))]);
                       }}
                       value={(field.value || []).join(",")}
                       id="tags"

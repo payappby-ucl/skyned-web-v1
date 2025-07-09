@@ -5,12 +5,11 @@ import HasPermission from "@/src/components/has-permission";
 import useGet from "@/src/hooks/use-get";
 import usePaginationQuery from "@/src/hooks/use-pagination-query";
 import { IBlogPost, IPaginatedResponse } from "@workspace/shared";
-import { Button } from "@workspace/ui/components/button";
 import { BrandPagination } from "@workspace/ui/components/brand-pagination";
 import { NotebookText } from "lucide-react";
-import Link from "next/link";
 import React from "react";
 import BlogPost from "./blog-post";
+import BlogLinks from "./blog-links";
 
 const BlogList: React.FC = () => {
   const { pagination, setPagination } = usePaginationQuery();
@@ -30,14 +29,7 @@ const BlogList: React.FC = () => {
     <section className="space-y-5 !p-0">
       <header className="flex items-center justify-between">
         <h1 className="!text-3xl">Blog Posts</h1>
-        <HasPermission resourceName="blogs" action="create" args={[{} as any]}>
-          <Button asChild variant={"outline"}>
-            <Link href="/blog/new">
-              {" "}
-              <NotebookText /> Create
-            </Link>
-          </Button>
-        </HasPermission>
+        <BlogLinks />
       </header>
       {data?.data.length ? (
         <div className="space-y-10">

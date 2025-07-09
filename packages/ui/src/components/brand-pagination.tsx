@@ -9,7 +9,7 @@ import {
   PaginationLink,
   PaginationEllipsis,
   PaginationNext,
-} from "./pagination.js";
+} from "./pagination";
 
 interface Props {
   goToPage(newPage: number): void;

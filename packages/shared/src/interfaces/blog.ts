@@ -5,7 +5,10 @@ import { IObject, ITimestamps } from "./utils";
 export interface ITag extends ITimestamps {
   id: number;
   name: string;
-  posts: IBlogPost[];
+  posts?: IBlogPost[];
+  _count?: {
+    posts: number;
+  };
   createdById: string;
   createdBy?: AdminProfile;
 }
@@ -13,7 +16,10 @@ export interface ITag extends ITimestamps {
 export interface ICategory extends ITimestamps {
   id: number;
   name: string;
-  posts: IBlogPost[];
+  posts?: IBlogPost[];
+  _count?: {
+    posts: number;
+  };
   createdById: string;
   createdBy?: AdminProfile;
 }
