@@ -121,6 +121,59 @@ describe("blogPostService", () => {
       });
     });
 
+    describe("findAllPostsDueToPublish", () => {
+      test("should pass", async () => {
+        await blogPostService.createBlogPost({
+          ...blogPostData,
+          title: "Cron test",
+          slug: "cron-test",
+          authorId: adminId,
+          blogPostId: idGeneratorService.id(),
+          status: "scheduled",
+          publishedAt: new Date(),
+          coverImage: {
+            path: "/schools",
+            url: "https://gogle.com",
+            mimeType: "image/png",
+          },
+
+          categories: ["Canada"],
+          tags: ["Canada"],
+        });
+
+        const posts = await blogPostService.findAllPostsDueToPublish();
+        expect(posts).not.toBeNull();
+        expect(posts).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.any(Number),
+              title: expect.any(String),
+              status: "scheduled",
+            }),
+          ]),
+        );
+      });
+    });
+
+    describe("publishPosts", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await blogPostService.publishPosts([]);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        try {
+          const posts = await blogPostService.findAllPostsDueToPublish();
+          await blogPostService.publishPosts(posts.map((post) => post.id));
+        } catch (error: any) {
+          expect(error.statusCode).toBeUndefined();
+        }
+      });
+    });
+
     describe("deleteBlogPost", () => {
       test("should fail if slug is not passed in", async () => {
         try {

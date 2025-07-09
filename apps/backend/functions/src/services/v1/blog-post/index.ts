@@ -14,7 +14,7 @@ import {
   BlogPostQuerySchema,
   IdSchema,
 } from "../../../zod-schemas";
-import { CreateBlogPostSchema } from "./schema";
+import { CreateBlogPostSchema, UpdatePostsServiceSchema } from "./schema";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/runtime/library";
 
@@ -350,6 +350,41 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
     });
 
     return this.deserialize(post);
+  };
+
+  findAllPostsDueToPublish: IBlogPostService["findAllPostsDueToPublish"] =
+    async () => {
+      const posts = await this.repository.db.blogPost.findMany({
+        where: {
+          status: "scheduled",
+          publishedAt: {
+            lte: new Date(),
+          },
+        },
+      });
+
+      return posts.map((post) => this.deserialize(post));
+    };
+
+  publishPosts: IBlogPostService["publishPosts"] = async (ids) => {
+    const { data } = this.validationUtility.validateInput({
+      schema: UpdatePostsServiceSchema,
+      inputData: {
+        data: ids,
+      },
+    });
+
+    await this.repository.db.blogPost.updateMany({
+      where: {
+        id: {
+          in: data,
+        },
+      },
+
+      data: {
+        status: "published",
+      },
+    });
   };
 }
 

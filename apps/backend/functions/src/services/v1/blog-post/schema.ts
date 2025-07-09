@@ -25,3 +25,7 @@ export const CreateBlogPostSchema = z.object({
   blogPostId: z.string().trim().nonempty("Required"),
 });
 export type CreateBlogPostSchema = z.infer<typeof CreateBlogPostSchema>;
+export const UpdatePostsServiceSchema = z.object({
+  data: z.array(z.coerce.number().positive().int()).min(1, "Minimum of one"),
+});
+export type UpdatePostsServiceSchema = z.infer<typeof UpdatePostsServiceSchema>;
