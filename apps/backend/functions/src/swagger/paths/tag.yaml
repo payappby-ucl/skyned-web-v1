@@ -1,0 +1,147 @@
+paths:
+  /tags:
+    summary: Tag Resource
+    description: All routes as it concerns tags
+
+    get:
+      summary: Get Tags
+      description: Gets all tags from database
+      operationId: getTags
+      tags:
+        - Blog
+        - Tag
+      responses:
+        "200":
+          description: Tags
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Tag"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Delete Tags
+      description: Deletes many tags from database
+      tags:
+        - Blog
+        - Tag
+      operationId: deleteManyTag
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data needed
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+      responses:
+        "200":
+          description: Tags deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /tags/{id}:
+    summary: Tag Resource
+    description: All routes as it concerns single tags
+
+    delete:
+      summary: Delete Tag
+      description: Deletes tag by id
+      operationId: deleteTag
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      tags:
+        - Blog
+        - Tag
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Message Response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /tags/list:
+    summary: Tag Resource
+    description: All routes as it concerns tags
+
+    get:
+      summary: Get Tags
+      description: Gets tags (Paginated)
+      operationId: getTagsPaginated
+      tags:
+        - Blog
+        - Tag
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+        - type: object
+          properties:
+            name:
+              type: string
+      responses:
+        "200":
+          description: The tags
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Tag"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"

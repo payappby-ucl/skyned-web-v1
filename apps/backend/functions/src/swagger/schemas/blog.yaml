@@ -9,6 +9,14 @@ components:
               type: integer
             name:
               type: string
+            posts:
+              $ref: "#/components/schemas/Blog"
+              nullable: true
+            _count:
+              type: object
+              properties:
+                posts:
+                  type: integer
             createdById:
               type: string
             createdBy:
@@ -23,6 +31,14 @@ components:
               type: integer
             name:
               type: string
+            posts:
+              $ref: "#/components/schemas/Blog"
+              nullable: true
+            _count:
+              type: object
+              properties:
+                posts:
+                  type: integer
             createdById:
               type: string
             createdBy:
@@ -74,7 +90,7 @@ components:
                 properties:
                   name:
                     type: string
-            
+
             authorId:
               type: string
             author:
