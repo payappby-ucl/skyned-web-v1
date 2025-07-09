@@ -18,3 +18,10 @@ export const CreateManyIntakeServiceSchema = z.object({
 export type CreateManyIntakeServiceSchema = z.infer<
   typeof CreateManyIntakeServiceSchema
 >;
+
+export const DeleteIntakeServiceSchema = z.object({
+  data: z.array(z.coerce.number().positive().int()).min(1, "Minimum of one"),
+});
+export type DeleteIntakeServiceSchema = z.infer<
+  typeof DeleteIntakeServiceSchema
+>;

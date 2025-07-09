@@ -41,4 +41,10 @@ export interface IIntakeService {
 
   /** update intake */
   updateIntake(id: number, data: CreateIntakeSchema): Promise<IIntake>;
+
+  /** Finds all intakes due to close */
+  findAllIntakesDueForClosure(): Promise<IIntake[]>;
+
+  /** Close Intakes */
+  closeIntakes(ids: number[]): Promise<void>;
 }

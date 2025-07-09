@@ -8,6 +8,7 @@ import { ServiceUtils } from "../utils";
 import {
   CreateIntakeServiceSchema,
   CreateManyIntakeServiceSchema,
+  DeleteIntakeServiceSchema,
 } from "./schema";
 
 /** Concrete implementation */
@@ -278,6 +279,43 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
     });
 
     return intake;
+  };
+
+  findAllIntakesDueForClosure: IIntakeService["findAllIntakesDueForClosure"] =
+    async () => {
+      const intakes = await this.repository.db.intake.findMany({
+        where: {
+          status: {
+            in: ["open", "likely_open"],
+          },
+          deadline: {
+            lte: new Date(),
+          },
+        },
+      });
+
+      return intakes;
+    };
+
+  closeIntakes: IIntakeService["closeIntakes"] = async (ids) => {
+    const { data } = this.validationUtility.validateInput({
+      schema: DeleteIntakeServiceSchema,
+      inputData: {
+        data: ids,
+      },
+    });
+
+    await this.repository.db.intake.updateMany({
+      where: {
+        id: {
+          in: data,
+        },
+      },
+
+      data: {
+        status: "closed",
+      },
+    });
   };
 }
 

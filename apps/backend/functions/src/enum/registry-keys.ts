@@ -135,6 +135,14 @@ export enum RegistryKeysEnum {
   /** Tag Service */
   TAG_SERVICE = "TagService",
 
+  // * CRON JOBS
+  /** Cron jobs */
+  CRON_JOBS = "SkynedCronJobs",
+  /** Intake Cron job */
+  INTAKE_CRON_JOB = "IntakeCronJob",
+  /** Blog post Cron job */
+  BLOG_POST_CRON_JOB = "BlogPostCronJob",
+
   // * Utilities
   /** Handles internal validations */
   VALIDATION_UTILITY = "ValidationUtility",

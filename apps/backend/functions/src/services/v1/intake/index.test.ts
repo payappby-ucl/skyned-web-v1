@@ -211,5 +211,39 @@ describe("IntakeService", () => {
         );
       });
     });
+
+    describe("findAllIntakesDueForClosure", () => {
+      test("should pass", async () => {
+        const intakes = await intakeService.findAllIntakesDueForClosure();
+        expect(intakes).not.toBeNull();
+        expect(intakes).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.any(Number),
+              intake: expect.any(String),
+            }),
+          ]),
+        );
+      });
+    });
+
+    describe("closeIntakes", () => {
+      test("should fail if invalid data is passed", async () => {
+        try {
+          await intakeService.closeIntakes([]);
+        } catch (error: any) {
+          expect(error.statusCode).toBe(StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+      });
+
+      test("should pass", async () => {
+        try {
+          const intakes = await intakeService.findAllIntakesDueForClosure();
+          await intakeService.closeIntakes(intakes.map((itk) => itk.id));
+        } catch (error: any) {
+          expect(error.statusCode).toBeUndefined();
+        }
+      });
+    });
   });
 });

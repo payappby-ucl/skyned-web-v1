@@ -66,4 +66,10 @@ export interface IBlogPostService {
     query: Partial<IQueryConstruct<BlogPostQuerySchema>>,
     authUser?: AuthClaim,
   ): Promise<number>;
+
+  /** Finds all posts due to publish */
+  findAllPostsDueToPublish(): Promise<IBlogPost[]>;
+
+  /** Publish posts */
+  publishPosts(ids: number[]): Promise<void>;
 }
