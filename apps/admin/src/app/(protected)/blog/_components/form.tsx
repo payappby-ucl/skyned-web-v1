@@ -222,7 +222,7 @@ const CreateBlogForm: React.FC = () => {
                         const val = e.target.value.toLowerCase();
                         field.onChange([...new Set(val.split(","))]);
                       }}
-                      value={field.value.join(", ")}
+                      value={field.value.join(",")}
                       id="categories"
                     />
                   </FormControl>
@@ -343,7 +343,7 @@ const CreateBlogForm: React.FC = () => {
                         const val = e.target.value.toLowerCase();
                         field.onChange([...new Set(val.split(","))]);
                       }}
-                      value={field.value.join(", ")}
+                      value={field.value.join(",")}
                       id="tags"
                       className="capitalize"
                     />

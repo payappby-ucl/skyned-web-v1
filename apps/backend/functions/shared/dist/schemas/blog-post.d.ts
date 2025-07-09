@@ -91,16 +91,17 @@ export declare const BlogPostSchema: z.ZodEffects<z.ZodObject<{
 }>;
 export type BlogPostSchema = z.infer<typeof BlogPostSchema>;
 export declare const UpdateBlogPostSchema: z.ZodObject<{
-    title: z.ZodOptional<z.ZodString>;
+    status: z.ZodOptional<z.ZodEnum<["draft", "scheduled", "published", "unpublished"]>>;
     slug: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
-    coverImage: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
+    title: z.ZodOptional<z.ZodString>;
     excerpt: z.ZodOptional<z.ZodString>;
     content: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
     featured: z.ZodOptional<z.ZodDefault<z.ZodBoolean>>;
-    status: z.ZodOptional<z.ZodEnum<["draft", "scheduled", "published", "unpublished"]>>;
     publishedAt: z.ZodOptional<z.ZodOptional<z.ZodNumber>>;
     categories: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
     tags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+} & {
+    coverImage: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
 }, "strip", z.ZodTypeAny, {
     status?: "draft" | "scheduled" | "published" | "unpublished" | undefined;
     slug?: string | undefined;

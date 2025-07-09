@@ -238,7 +238,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
                         const val = e.target.value.toLowerCase();
                         field.onChange([...new Set(val.split(", "))]);
                       }}
-                      value={(field.value || []).join(", ")}
+                      value={(field.value || []).join(",")}
                       id="categories"
                     />
                   </FormControl>
@@ -359,7 +359,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
                         const val = e.target.value.toLowerCase();
                         field.onChange([...new Set(val.split(", "))]);
                       }}
-                      value={(field.value || []).join(", ")}
+                      value={(field.value || []).join(",")}
                       id="tags"
                     />
                   </FormControl>

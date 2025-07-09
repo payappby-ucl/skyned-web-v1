@@ -17,12 +17,14 @@ import {
   IAccommodation,
   IAdmin,
   IBlogPost,
+  ICategory,
   IDepartment,
   IFaq,
   IInquiry,
   IIntake,
   IProgram,
   ISchool,
+  ITag,
   ITeam,
 } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
@@ -39,7 +41,9 @@ export type ResourceType =
   | "accommodations"
   | "intakes"
   | "programs"
-  | "blogs";
+  | "blogs"
+  | "categories"
+  | "tags";
 
 export type PermissionType = {
   admins: {
@@ -111,11 +115,26 @@ export type PermissionType = {
       | "activate"
       | "deactivate";
   };
+
   blogs: {
     dataType: IBlogPost;
     createDataType: BlogPostSchema;
     updateDataType: UpdateBlogPostSchema;
     action: "list" | "create" | "read" | "update" | "delete";
+  };
+
+  categories: {
+    dataType: ICategory;
+    createDataType: { name: string };
+    updateDataType: { name: string };
+    action: "delete" | "list";
+  };
+
+  tags: {
+    dataType: ITag;
+    createDataType: { name: string };
+    updateDataType: { name: string };
+    action: "delete" | "list";
   };
 };
 

@@ -113,6 +113,11 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
             }
           : undefined,
       },
+
+      include: {
+        categories: true,
+        tags: true,
+      },
     });
 
     return this.deserialize(blogPost);

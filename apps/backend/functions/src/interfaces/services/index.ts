@@ -14,3 +14,5 @@ export * from "./accommodation";
 export * from "./intake";
 export * from "./program";
 export * from "./blog-post";
+export * from "./category";
+export * from "./tag";

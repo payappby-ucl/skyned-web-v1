@@ -11,3 +11,5 @@ export * from "./school";
 export * from "./accommodation";
 export * from "./intake";
 export * from "./blog-post";
+export * from "./category";
+export * from "./tag";

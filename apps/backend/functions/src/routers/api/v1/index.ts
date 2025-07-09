@@ -12,6 +12,8 @@ import { ourTeamRouter } from "./our-team";
 import { schoolRouter } from "./school";
 import { accommodationRouter } from "./accommodation";
 import { blogRouter } from "./blog-post";
+import { categoryRouter } from "./categories";
+import { tagRouter } from "./tag";
 
 /** Dependencies required to create v1 router */
 export interface V1RouterDependencies {
@@ -35,6 +37,10 @@ export interface V1RouterDependencies {
   accommodationRouter: IRouter;
   /** Handles Blog */
   blogRouter: IRouter;
+  /** Handles Category */
+  categoryRouter: IRouter;
+  /** Handles Tag */
+  tagRouter: IRouter;
 }
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;
@@ -55,6 +61,8 @@ export class V1Router implements IRouter {
     schoolRouter: IRouter,
     accommodationRouter: IRouter,
     blogRouter: IRouter,
+    categoryRouter: IRouter,
+    tagRouter: IRouter,
   ) {
     this.router.use("/auth", authRouter.router);
     this.router.use("/admins", adminRouter.router);
@@ -66,6 +74,8 @@ export class V1Router implements IRouter {
     this.router.use("/schools", schoolRouter.router);
     this.router.use("/accommodations", accommodationRouter.router);
     this.router.use("/blogs", blogRouter.router);
+    this.router.use("/categories", categoryRouter.router);
+    this.router.use("/tags", tagRouter.router);
   }
 
   /**
@@ -83,6 +93,8 @@ export class V1Router implements IRouter {
     schoolRouter,
     accommodationRouter,
     blogRouter,
+    categoryRouter,
+    tagRouter,
   }: V1RouterDependencies) {
     if (!V1Router.instance) {
       V1Router.instance = new V1Router(
@@ -96,6 +108,8 @@ export class V1Router implements IRouter {
         schoolRouter,
         accommodationRouter,
         blogRouter,
+        categoryRouter,
+        tagRouter,
       );
     }
 
@@ -118,5 +132,7 @@ export const v1Router = SkynedRegistry.getSingleton(
       schoolRouter,
       accommodationRouter,
       blogRouter,
+      categoryRouter,
+      tagRouter,
     }),
 );

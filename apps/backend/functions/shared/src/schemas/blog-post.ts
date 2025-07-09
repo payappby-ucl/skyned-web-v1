@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { CommonSchema } from "./common";
 import { blogPostStatus } from "../utils";
+import parseDataURL from "data-urls";
 
 export const BlogSchema = z.object({
   title: z.string().trim().nonempty("Required"),
@@ -33,5 +34,18 @@ export const BlogPostSchema = BlogSchema.superRefine((args, ctx) => {
 });
 export type BlogPostSchema = z.infer<typeof BlogPostSchema>;
 
-export const UpdateBlogPostSchema = BlogSchema.partial();
+export const UpdateBlogPostSchema = BlogSchema.omit({
+  coverImage: true,
+})
+  .partial()
+  .extend({
+    coverImage: z
+      .string()
+      .trim()
+      .optional()
+      .refine(
+        (val) => (val ? !!parseDataURL(val) : true),
+        "Image must be of type data-url",
+      ),
+  });
 export type UpdateBlogPostSchema = z.infer<typeof UpdateBlogPostSchema>;

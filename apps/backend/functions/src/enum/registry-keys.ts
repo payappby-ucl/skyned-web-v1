@@ -58,6 +58,10 @@ export enum RegistryKeysEnum {
   INTAKE_ROUTER = "IntakeRouter",
   /** Blog Post Router */
   BLOG_POST_ROUTER = "BlogPostRouter",
+  /** Category Router */
+  CATEGORY_ROUTER = "CategoryRouter",
+  /** Tag Router */
+  TAG_ROUTER = "TagRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -88,6 +92,10 @@ export enum RegistryKeysEnum {
   PROGRAM_CONTROLLER = "ProgramController",
   /** Blog Post Controller */
   BLOG_POST_CONTROLLER = "BlogPostController",
+  /** Category Controller */
+  CATEGORY_CONTROLLER = "CategoryController",
+  /** Tag Controller */
+  TAG_CONTROLLER = "TagController",
 
   // * Services
   /** Email Service */
@@ -122,6 +130,10 @@ export enum RegistryKeysEnum {
   PROGRAM_SERVICE = "ProgramService",
   /** Blog Post Service */
   BLOG_POST_SERVICE = "BlogPostService",
+  /** Category Service */
+  CATEGORY_SERVICE = "CategoryService",
+  /** Tag Service */
+  TAG_SERVICE = "TagService",
 
   // * Utilities
   /** Handles internal validations */

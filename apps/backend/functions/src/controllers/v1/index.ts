@@ -9,3 +9,5 @@ export * from "./out-team";
 export * from "./school";
 export * from "./accommodation";
 export * from "./blog-post";
+export * from "./category";
+export * from "./tag";
