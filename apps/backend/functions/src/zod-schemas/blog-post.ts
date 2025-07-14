@@ -10,6 +10,6 @@ export type BlogPostParamsSchema = z.infer<typeof BlogPostParamsSchema>;
 export const BlogPostQuerySchema = z.object({
   c: z.string().trim().toLowerCase().optional(),
   s: z.enum(blogPostStatus).optional(),
-  f: z.boolean().optional(),
+  f: z.coerce.boolean().optional(),
 });
 export type BlogPostQuerySchema = z.infer<typeof BlogPostQuerySchema>;

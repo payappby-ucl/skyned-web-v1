@@ -2,7 +2,7 @@
 import DataFetchingHandler from "@/src/components/data-fetching-handler";
 import HasPermission from "@/src/components/has-permission";
 import useGet from "@/src/hooks/use-get";
-import usePaginationQuery from "@/src/hooks/use-pagination-query";
+import usePaginationQuery from "@workspace/ui/hooks/use-pagination-query";
 import { brandClientApi } from "@/src/lib/client";
 import { IPaginatedResponse, IProgram } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";

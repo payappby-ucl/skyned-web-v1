@@ -5,7 +5,7 @@ import useGet from "@/src/hooks/use-get";
 import { IPaginatedResponse, ISchool } from "@workspace/shared";
 import { DataTable } from "@workspace/ui/components/table/data-table";
 import React from "react";
-import usePaginationQuery from "@/src/hooks/use-pagination-query";
+import usePaginationQuery from "@workspace/ui/hooks/use-pagination-query";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import { FileClock, Plus } from "lucide-react";

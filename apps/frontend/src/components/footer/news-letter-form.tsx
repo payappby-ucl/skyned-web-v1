@@ -15,7 +15,10 @@ import { Input } from "@workspace/ui/components/input";
 import { FormButton } from "@workspace/ui/components/form-button";
 import { subscribeToNewsletter } from "./actions";
 
-const NewsLetterForm: React.FC = () => {
+interface Props {
+  label?: string;
+}
+const NewsLetterForm: React.FC<Props> = ({ label = "Subscribe" }) => {
   const form = useForm<NewsLetterFormSchema>({
     resolver: zodResolver(NewsLetterFormSchema),
     defaultValues: {
@@ -62,9 +65,9 @@ const NewsLetterForm: React.FC = () => {
         <FormButton
           isLoading={form.formState.isSubmitting}
           variant="brand"
-          className="rounded-full"
+          className="!rounded-full"
         >
-          Subscribe
+          {label}
         </FormButton>
       </form>
     </Form>

@@ -51,6 +51,7 @@ const EditBlogForm: React.FC<Props> = ({ post }) => {
       slug: post.slug,
       excerpt: post.excerpt,
       content: post.content,
+      featured: post.featured,
       coverImage: "",
       tags: post.tags?.map((tag) => tag.name) || [],
       categories: post.categories?.map((category) => category.name) || [],

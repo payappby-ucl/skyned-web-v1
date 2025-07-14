@@ -25,13 +25,13 @@ const unAuthData: (keyof IBlogPost)[] = [
   "excerpt",
   "coverImage",
   "publishedAt",
+  "createdAt",
+  "updatedAt",
   "featured",
 ];
 
 const adminData: (keyof IBlogPost)[] = [
   ...unAuthData,
-  "createdAt",
-  "updatedAt",
   "authorId",
   "status",
   "id",
@@ -238,13 +238,10 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
       },
 
       select: {
-        title: true,
-        slug: true,
-        excerpt: true,
-        coverImage: true,
-        publishedAt: true,
-        featured: true,
-        ...(authUser?.claim === "admin" ? { status: true } : {}),
+        ...SkynedUtils.select<
+          Prisma.BlogPostSelect<DefaultArgs>,
+          keyof Prisma.BlogPostSelect<DefaultArgs>
+        >(authUser?.claim !== "admin" ? unAuthData : adminData),
 
         categories:
           authUser?.claim !== "admin"

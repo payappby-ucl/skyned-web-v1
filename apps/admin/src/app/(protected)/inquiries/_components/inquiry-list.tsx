@@ -6,7 +6,7 @@ import { IInquiry, IPaginatedResponse } from "@workspace/shared";
 import { DataTable } from "@workspace/ui/components/table/data-table";
 import React from "react";
 import { columns } from "../_data/columns";
-import usePaginationQuery from "@/src/hooks/use-pagination-query";
+import usePaginationQuery from "@workspace/ui/hooks/use-pagination-query";
 
 const InquiryList: React.FC = () => {
   const { pagination, setPagination } = usePaginationQuery();

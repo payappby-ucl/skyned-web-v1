@@ -56,7 +56,7 @@ const BlogPosts: React.FC = () => {
       <div className="flex items-center justify-between">
         <h2>Recent Blog Post</h2>
         <Link
-          href="#"
+          href="/blog"
           aria-label="View all blog posts"
           className="text-brand text-md font-bold"
         >

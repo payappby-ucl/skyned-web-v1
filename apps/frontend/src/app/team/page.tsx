@@ -109,7 +109,6 @@ export default async function OurTeamPage() {
       </>
     );
   } catch (error) {
-    console.log(error);
     return <Alert message="Error" />;
   }
 }

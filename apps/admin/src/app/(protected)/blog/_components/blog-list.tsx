@@ -3,7 +3,7 @@
 import DataFetchingHandler from "@/src/components/data-fetching-handler";
 import HasPermission from "@/src/components/has-permission";
 import useGet from "@/src/hooks/use-get";
-import usePaginationQuery from "@/src/hooks/use-pagination-query";
+import usePaginationQuery from "@workspace/ui/hooks/use-pagination-query";
 import { IBlogPost, IPaginatedResponse } from "@workspace/shared";
 import { BrandPagination } from "@workspace/ui/components/brand-pagination";
 import { NotebookText } from "lucide-react";

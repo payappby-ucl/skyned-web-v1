@@ -16,7 +16,7 @@ const FormButton: React.FC<Props> = ({
 }) => {
   return (
     <Button
-      className={`flex items-center gap-2${className}`}
+      className={`flex items-center gap-2 ${className}`}
       {...props}
       disabled={isLoading}
     >
