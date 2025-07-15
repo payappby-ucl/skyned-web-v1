@@ -328,6 +328,7 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
 
         categories: categories?.length
           ? {
+              set: [],
               connectOrCreate: categories.map((category) => ({
                 where: { name: category },
                 create: { name: category, createdById: authorId },
@@ -337,6 +338,7 @@ export class BlogPostService extends ServiceUtils implements IBlogPostService {
 
         tags: tags?.length
           ? {
+              set: [],
               connectOrCreate: tags.map((tag) => ({
                 where: { name: tag },
                 create: { name: tag, createdById: authorId },
