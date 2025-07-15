@@ -1,3 +1,6 @@
+// export const dynamic = "force-dynamic";
+
+import Alert from "@/src/components/alert";
 import { brandServerApi } from "@/src/lib/server";
 import { ICategory } from "@workspace/shared";
 import Link from "next/link";
@@ -7,7 +10,6 @@ interface Props {
 }
 
 export default async function BrowseByCategories({ searchParams }: Props) {
-  console.log(searchParams);
   try {
     const { data } = await brandServerApi.httpClient.request<ICategory[]>(
       "/categories",
@@ -62,5 +64,7 @@ export default async function BrowseByCategories({ searchParams }: Props) {
         </nav>
       </aside>
     );
-  } catch (error) {}
+  } catch (error) {
+    return <Alert message="Error" />;
+  }
 }

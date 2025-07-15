@@ -16,7 +16,7 @@ export function LatestPosts({ data, searchParams }: Props) {
         <header>
           <h2>Latest Posts</h2>
         </header>
-        <div className="hide-scrollbar grid h-screen grid-cols-1 items-start gap-8 overflow-x-hidden overflow-y-scroll md:grid-cols-2 lg:grid-cols-3">
+        <div className="hide-scrollbar grid max-h-screen grid-cols-1 items-start gap-8 overflow-x-hidden overflow-y-scroll md:grid-cols-2 lg:grid-cols-3">
           {data.data.map((blogPost) => (
             <BlogPost post={blogPost} key={blogPost.slug} />
           ))}

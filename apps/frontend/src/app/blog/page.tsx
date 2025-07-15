@@ -1,16 +1,18 @@
+export const dynamic = "force-dynamic";
+
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { env } from "@/src/config";
 import { brandServerApi } from "@/src/lib/server";
 import { sharedMetadata } from "@/src/utils";
 import { IBlogPost, IPaginatedResponse } from "@workspace/shared";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import Script from "next/script";
 import { WithContext, Blog } from "schema-dts";
 import { LatestPosts } from "./_components/latest-posts";
 import { Badge } from "@workspace/ui/components/badge";
 import NewsLetterForm from "@/src/components/footer/news-letter-form";
 import { FeaturedBlogPosts } from "./_components/featured";
+import Alert from "@/src/components/alert";
 
 type Props = {
   searchParams: Promise<{ page?: string; limit?: string; c?: string }>;
@@ -30,6 +32,18 @@ export const metadata: Metadata = {
   keywords: [...(sharedMetadata.keywords || []), "Blog"],
 };
 
+// export async function generateMetadata() {
+//   return {
+//     ...sharedMetadata,
+//     title,
+//     description,
+//     alternates: {
+//       canonical: "/blog",
+//     },
+//     keywords: [...(sharedMetadata.keywords || []), "Blog"],
+//   } as Metadata;
+// }
+
 export default async function Blogs({ searchParams }: Props) {
   try {
     const { page, limit, c } = await searchParams;
@@ -45,7 +59,7 @@ export default async function Blogs({ searchParams }: Props) {
       IPaginatedResponse<IBlogPost>
     >(urlConstruct, "GET", {
       next: {
-        revalidate: 3600,
+        revalidate: 86400,
       },
     });
 
@@ -100,7 +114,6 @@ export default async function Blogs({ searchParams }: Props) {
       </>
     );
   } catch (error) {
-    console.log(error);
-    redirect("/");
+    return <Alert message="Error" />;
   }
 }

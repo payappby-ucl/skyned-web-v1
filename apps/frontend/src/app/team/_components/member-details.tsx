@@ -1,4 +1,3 @@
-import { teams } from "@/src/utils";
 import {
   Avatar,
   AvatarFallback,

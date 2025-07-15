@@ -1,6 +1,7 @@
+// export const dynamic = "force-dynamic";
+
 import { brandServerApi } from "@/src/lib/server";
 import { IPaginatedResponse, IBlogPost } from "@workspace/shared";
-import { redirect } from "next/navigation";
 import BlogPost from "./post";
 
 export async function FeaturedBlogPosts() {

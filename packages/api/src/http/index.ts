@@ -48,9 +48,12 @@ abstract class HTTPClient implements IHTTPClient {
         throw error;
       }
 
+      console.log(error.message);
+
       throw {
         statusCode: 408,
         success: false,
+        path: url,
         data: {
           message:
             "Something went wrong. Please check your network connection and try again.",
