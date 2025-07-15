@@ -57,3 +57,23 @@ export async function updateBlogPost(
     return brandServerApi.utils.createServerActionError(error);
   }
 }
+
+export async function deleteBlogPost(
+  slug: string,
+): Promise<ServerActionReturnType<IMessageResponse>> {
+  try {
+    const { data: res } =
+      await brandServerApi.httpClient.request<IMessageResponse>(
+        `/blogs/${slug}`,
+        "DELETE",
+      );
+
+    revalidateTag(serverCacheTags.blogs);
+    return {
+      success: true,
+      data: res,
+    };
+  } catch (error: any) {
+    return brandServerApi.utils.createServerActionError(error);
+  }
+}

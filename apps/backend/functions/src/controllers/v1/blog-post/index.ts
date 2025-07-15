@@ -154,15 +154,20 @@ export class BlogPostController
 
       let image;
       if (coverImage) {
-        image = await this.storageService.saveObject(
-          coverImage,
-          SkynedUtils.resolveStoragePath({
-            type: "coverImage",
-            data: {
-              blogPostId: blog.blogPostId,
-            },
-          }),
-        );
+        const storagePath = SkynedUtils.resolveStoragePath({
+          type: "coverImage",
+          data: {
+            blogPostId: blog.blogPostId,
+          },
+        });
+
+        // ? Overrides object on the blog cover image storage path
+        image = await this.storageService.saveObject(coverImage, storagePath);
+
+        // ? In a case storage path is changed
+        if (storagePath !== blog.coverImage.path) {
+          await this.storageService.deleteObject(blog.coverImage.path);
+        }
       }
 
       const update: Parameters<IBlogPostService["updateBlogPost"]>["2"] = {
@@ -224,6 +229,7 @@ export class BlogPostController
       }
       this._attributeBasedAccessControl(authUser, "blogs", "delete", blog);
 
+      await this.storageService.deleteObject(blog.coverImage.path);
       await this.blogService.deleteBlogPost(slug);
       res._success(StatusCodes.OK, { message: "Post Deleted" });
     } catch (error) {
