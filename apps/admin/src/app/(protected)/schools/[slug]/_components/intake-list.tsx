@@ -7,7 +7,7 @@ import { brandClientApi } from "@/src/lib/client";
 import { IIntake, IPaginatedResponse } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import { DataTable } from "@workspace/ui/components/table/data-table";
-import { Plus, FileClock } from "lucide-react";
+import { FileClock } from "lucide-react";
 import React, { useState } from "react";
 import { intakeColumns } from "../../_data/intake-columns";
 import Link from "next/link";

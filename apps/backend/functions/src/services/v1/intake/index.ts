@@ -116,7 +116,17 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
 
   count: IIntakeService["count"] = async (query) => {
     const count = await this.repository.intake.count({
-      where: query?.where || undefined,
+      where: query?.where
+        ? {
+            ...query.where,
+            status:
+              query.where.status === "active"
+                ? {
+                    in: ["likely_open", "open"],
+                  }
+                : undefined,
+          }
+        : undefined,
     });
 
     return count;
@@ -129,18 +139,19 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
     const intakes = await this.repository.intake.findMany({
       skip,
       take,
-      where: status
-        ? {
-            status: {
-              in: ["likely_open", "open"],
+      where:
+        status === "active"
+          ? {
+              status: {
+                in: ["likely_open", "open"],
+              },
+            }
+          : {
+              createdAt: {
+                gte: from,
+                lte: to,
+              },
             },
-          }
-        : {
-            createdAt: {
-              gte: from,
-              lte: to,
-            },
-          },
       orderBy: {
         [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
       },
@@ -195,20 +206,21 @@ export class IntakeService extends ServiceUtils implements IIntakeService {
     const intakes = await this.repository.intake.findMany({
       skip,
       take,
-      where: status
-        ? {
-            schoolId,
-            status: {
-              in: ["likely_open", "open"],
+      where:
+        status === "active"
+          ? {
+              schoolId,
+              status: {
+                in: ["likely_open", "open"],
+              },
+            }
+          : {
+              schoolId,
+              createdAt: {
+                gte: from,
+                lte: to,
+              },
             },
-          }
-        : {
-            schoolId,
-            createdAt: {
-              gte: from,
-              lte: to,
-            },
-          },
       orderBy: {
         [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
       },

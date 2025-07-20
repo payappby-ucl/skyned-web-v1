@@ -32,7 +32,6 @@ const authData: (keyof IProgram)[] = [
   "description",
   "requirements",
   "minimumEducationDegree",
-  "minimumEducationDegree",
   "minimumEducationLevel",
   "minimumEligibilityGpa",
   "timeframe",

@@ -1,3 +1,4 @@
+import { saveAs } from "file-saver";
 import { IFile } from "./interface";
 
 export * from "./interface";
@@ -12,5 +13,9 @@ export class FileService implements IFile {
     const dataURI = `data:${mimeType};base64,${base64}`;
 
     return dataURI;
+  };
+
+  saveFile: IFile["saveFile"] = (blob, name) => {
+    saveAs(blob, name);
   };
 }

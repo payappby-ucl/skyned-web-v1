@@ -15,6 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileService = void 0;
+const file_saver_1 = require("file-saver");
 __exportStar(require("./interface"), exports);
 class FileService {
     getDataUriFromFile = async (file) => {
@@ -24,6 +25,9 @@ class FileService {
         const mimeType = file.type;
         const dataURI = `data:${mimeType};base64,${base64}`;
         return dataURI;
+    };
+    saveFile = (blob, name) => {
+        (0, file_saver_1.saveAs)(blob, name);
     };
 }
 exports.FileService = FileService;

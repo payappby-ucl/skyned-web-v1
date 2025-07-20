@@ -7,7 +7,7 @@ import { brandClientApi } from "@/src/lib/client";
 import { IPaginatedResponse, IProgram } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import { DataTable } from "@workspace/ui/components/table/data-table";
-import { FileClock, Plus } from "lucide-react";
+import { FileClock, FileUp, Plus } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { columns } from "../../_data/program-columns";
@@ -54,11 +54,22 @@ const ProgramList: React.FC<Props> = ({ slug }) => {
               <Button asChild variant="outline">
                 <Link
                   href={`/schools/${slug}/programs/new`}
-                  aria-label="Link to create new school profile"
+                  aria-label="Link to create new program"
                   className="!text-sm"
                 >
                   <Plus />
                   Create Program
+                </Link>
+              </Button>
+
+              <Button asChild variant="outline">
+                <Link
+                  href={`/schools/${slug}/programs/upload`}
+                  aria-label="Link to upload bulk programs"
+                  className="!text-sm"
+                >
+                  <FileUp />
+                  Bulk Upload
                 </Link>
               </Button>
             </HasPermission>

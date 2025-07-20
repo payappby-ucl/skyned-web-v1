@@ -514,7 +514,7 @@ export class SchoolController
 
   getIntakes: ISchoolController["getIntakes"] = async (req, res, next) => {
     try {
-      const { from, to, limit, page } = req.query;
+      const { from, to, limit, page, status } = req.query;
       const { slug } = req.params;
       let authUser = this._validateUser(req);
 
@@ -537,6 +537,7 @@ export class SchoolController
       const total = await this.intakeService.count({
         where: {
           schoolId: school.schoolId,
+          status,
         },
       });
 
@@ -545,6 +546,7 @@ export class SchoolController
           ...SkynedUtils.pick(construct, ["skip", "take"]),
           from,
           to,
+          status,
         },
         school.schoolId,
         authUser,
