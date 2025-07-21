@@ -65,6 +65,7 @@ const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
             </li>
           </ul>
         </li>
+        <li>Make sure all empty rows are deleted before uploading</li>
       </ul>
       {children}
     </div>

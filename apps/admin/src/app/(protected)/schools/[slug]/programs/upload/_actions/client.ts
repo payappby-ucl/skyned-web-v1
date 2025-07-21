@@ -3,6 +3,7 @@
 import { brandClientApi } from "@/src/lib/client";
 import { DEFAULT_BULK_UPLOAD_WORKSHEET_NAME } from "@/src/utils";
 import {
+  CreateProgramSchema,
   degreeTypes,
   educationLevels,
   IIntake,
@@ -11,6 +12,9 @@ import {
   tuitionFeeType,
 } from "@workspace/shared";
 import ExcelJs from "exceljs";
+import slugify from "slugify";
+
+type BulkDataType = Extract<CreateProgramSchema["data"], any[]>;
 
 interface Props {
   creator: string;
@@ -385,7 +389,7 @@ export async function generateProgramUploadTemplate({
   });
 
   intakesColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
-    if (rowNumber !== 1) {
+    if (rowNumber > 3) {
       cell.value = intakes
         .map((intake) => `${intake.id} - ${intake.intake}`)
         .join(", ");
@@ -418,4 +422,102 @@ export async function generateProgramUploadTemplate({
     DEFAULT_BULK_UPLOAD_WORKSHEET_NAME.replaceAll(" ", "_").toLowerCase() +
       ".xlsx",
   );
+}
+
+export async function generateUploadFormData(file: File) {
+  const buffer = await brandClientApi.file.getBufferFromFile(file);
+  const workbook = new ExcelJs.Workbook();
+  await workbook.xlsx.load(buffer);
+
+  const colKeys = [
+    "name",
+    "faculty",
+    "degreeType",
+    "applicationFee",
+    "applicationFeeDiscount",
+    "tuitionFee",
+    "tuitionFeeType",
+    "timeframe",
+    "duration",
+    "minimumEducationLevel",
+    "minimumEducationDegree",
+    "minimumEligibilityGpa",
+    "pgwp",
+    "proficiencies",
+    "intakes",
+    "overview",
+    "requirements",
+    "description",
+  ] as const;
+
+  const colValues = workbook.worksheets.flatMap((sheet) =>
+    sheet.columns.map((column, index) => {
+      const key = colKeys[index];
+      if (key) {
+        const colValues = column.values;
+        if (colValues) {
+          const [empty, header, ...rest] = colValues;
+          return rest;
+        }
+      }
+    }),
+  );
+
+  const cleanedValues = colValues.filter((v) => v !== undefined);
+
+  let data = cleanedValues.reduce((cum, cur, index) => {
+    cur.forEach((value, idx) => {
+      const key = colKeys[index] as Exclude<
+        (typeof colKeys)[number],
+        undefined
+      >;
+
+      let v: any = value;
+
+      if (key === "intakes" && value) {
+        v = (value as string)
+          .split(",")
+          .map((itk) => parseInt(itk.split("-")[0]!.trim()));
+      }
+
+      if (key === "proficiencies") {
+        v = [];
+
+        if (value) {
+          v = (value as string).split(",").map((pro) => ({
+            test: pro.split("-")[0]!.trim().toLowerCase(),
+            score: Number(pro.split("-")[1]!.trim()),
+          }));
+        }
+      }
+
+      if (key === "pgwp") {
+        if (value === 1) {
+          v = true;
+        } else {
+          v = false;
+        }
+      }
+
+      if (cum[idx]) {
+        cum[idx] = {
+          ...cum[idx],
+          [key]: v,
+        };
+      } else {
+        cum[idx] = {
+          [key]: v,
+        } as unknown as BulkDataType[number];
+      }
+    });
+
+    return cum;
+  }, [] as BulkDataType);
+
+  data = data.map((d) => ({
+    ...d,
+    slug: slugify(d.name, { lower: true, strict: true }),
+  }));
+
+  return data;
 }

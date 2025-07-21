@@ -80,10 +80,10 @@ const ProficiencyDisplay: React.FC<Props> = ({
         ) : null}
 
         <div
-          className={`flex items-center justify-between uppercase font-semibold ${slim ? "text-sm" : "text-lg"}`}
+          className={`flex gap-2 items-center justify-between uppercase font-semibold ${slim ? "text-sm" : "text-lg"}`}
         >
           <p>{test}</p>
-          <p className="flex items-center">
+          <p className="flex items-center gap-1">
             {score} <ArrowBigRight className="size-4" /> {name}
           </p>
         </div>

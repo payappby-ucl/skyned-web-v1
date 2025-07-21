@@ -22,8 +22,6 @@ export async function getActiveIntakes(
       },
     });
 
-    console.log(res);
-
     return {
       success: true,
       data: res,

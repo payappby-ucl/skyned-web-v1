@@ -133,16 +133,6 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
   //   melDegree,
   // });
 
-  const {
-    append,
-    remove,
-    replace,
-    fields: proficiencyFields,
-  } = useFieldArray({
-    control: form.control,
-    name: "data.proficiencies",
-  });
-
   return (
     <Form {...form}>
       <form

@@ -75,9 +75,10 @@ export type ProgramSchema = z.infer<typeof ProgramSchema>;
 export const CreateProgramSchema = z
   .object({
     type: z.enum(["single", "bulk"]),
-    data: ProgramSchema.or(
+    data: z.union([
+      ProgramSchema,
       z.array(ProgramSchema).min(1, "Must have at least one program."),
-    ),
+    ]),
   })
   .superRefine(({ type, data }, ctx) => {
     if (type === "bulk" && !Array.isArray(data)) {

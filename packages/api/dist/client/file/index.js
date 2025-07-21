@@ -18,9 +18,13 @@ exports.FileService = void 0;
 const file_saver_1 = require("file-saver");
 __exportStar(require("./interface"), exports);
 class FileService {
-    getDataUriFromFile = async (file) => {
+    getBufferFromFile = async (file) => {
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
+        return buffer;
+    };
+    getDataUriFromFile = async (file) => {
+        const buffer = await this.getBufferFromFile(file);
         const base64 = buffer.toString("base64");
         const mimeType = file.type;
         const dataURI = `data:${mimeType};base64,${base64}`;

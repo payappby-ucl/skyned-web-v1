@@ -66,7 +66,10 @@ exports.ProgramSchema = zod_1.z.object({
 exports.CreateProgramSchema = zod_1.z
     .object({
     type: zod_1.z.enum(["single", "bulk"]),
-    data: exports.ProgramSchema.or(zod_1.z.array(exports.ProgramSchema).min(1, "Must have at least one program.")),
+    data: zod_1.z.union([
+        exports.ProgramSchema,
+        zod_1.z.array(exports.ProgramSchema).min(1, "Must have at least one program."),
+    ]),
 })
     .superRefine(({ type, data }, ctx) => {
     if (type === "bulk" && !Array.isArray(data)) {

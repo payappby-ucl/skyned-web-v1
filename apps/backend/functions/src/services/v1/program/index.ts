@@ -291,8 +291,16 @@ export class ProgramService extends ServiceUtils implements IProgramService {
     const txResponse = await this.repository.db.$transaction(
       d.map((d) => {
         d = SkynedUtils.formatDecimal(d);
-        return this.repository.db.program.create({
-          data: {
+
+        return this.repository.db.program.upsert({
+          where: {
+            schoolId_slug: {
+              schoolId: sid,
+              slug: d.slug,
+            },
+          },
+
+          create: {
             schoolId: sid,
             createdById: aid,
             ...SkynedUtils.exclude(d, ["intakes", "proficiencies"]),
@@ -307,6 +315,26 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             intakes: {
               connect: d.intakes.map((id) => ({ id, schoolId: sid })),
             },
+          },
+
+          update: {
+            ...SkynedUtils.exclude(d, [
+              "intakes",
+              "name",
+              "slug",
+              "proficiencies",
+            ]),
+            proficiencies: d.proficiencies?.length
+              ? {
+                  deleteMany: d.proficiencies.length ? {} : undefined,
+                  createMany: { data: d.proficiencies, skipDuplicates: true },
+                }
+              : undefined,
+            intakes: d.intakes?.length
+              ? {
+                  set: d.intakes.map((id) => ({ id, schoolId: sid })),
+                }
+              : undefined,
           },
         });
       }),
