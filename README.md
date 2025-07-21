@@ -76,12 +76,12 @@ pnpm i
 cd apps/backend/functions && pnpm run start:emulators
 ```
 
-3. **Start Test Server**: **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span>** Runs the backend test server for API testing
+3. **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span> Start Test Server**: Runs the backend test server for API testing
 ```bash
 cd apps/backend/functions && pnpm run start:test:server
 ```
 
-4. **Start Frontend Development Server**: **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span>**  Launches the frontend application in development mode with hot reload
+4. **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span> Start Frontend Development Server**: Launches the frontend application in development mode with hot reload
 ```bash
 cd apps/frontend && pnpm run dev
 ```
