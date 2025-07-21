@@ -65,6 +65,16 @@ This section provides instructions for setting up the development environment wi
 
 Each process should be run in a separate terminal tab to allow concurrent execution of all development services.
 
+### Prerequisites
+
+**Check and Install Firebase CLI**: Verify if Firebase CLI is installed globally, install if missing
+```bash
+npm list -g --depth=0 | grep firebase
+```
+If no Firebase packages are found, install Firebase CLI:
+```bash
+npm install -g firebase-tools
+```
 
 1. **Install Dependencies**: Installs all project dependencies using pnpm
 ```bash
