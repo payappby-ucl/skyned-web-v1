@@ -215,40 +215,51 @@ export class AnalyticsService
       dayBeforeKPI?.newPosts ?? 0,
     );
 
-    await this.repository.db.dailyStats.create({
-      data: {
+    const data = {
+      totalSchools: currentDayTotalSchools,
+      newSchools: currentDayNewSchools,
+      activeSchools: currentDayActiveSchools,
+      schoolGrowth: currentDaySchoolsGrowth,
+
+      totalPrograms: currentDayTotalPrograms,
+      newPrograms: currentDayNewPrograms,
+      activePrograms: currentDayActivePrograms,
+      programGrowth: currentDayProgramsGrowth,
+
+      totalAdmins: currentDayTotalAdmins,
+      newAdmins: currentDayNewAdmins,
+      activeAdmins: currentDayActiveAdmins,
+      adminGrowth: currentDayAdminsGrowth,
+
+      totalFaqs: currentDayTotalFaqs,
+      newFaqs: currentDayNewFaqs,
+      faqGrowth: currentDayFaqsGrowth,
+
+      totalInquiries: currentDayTotalInquires,
+      newInquiries: currentDayNewInquires,
+      inquiryGrowth: currentDayInquiresGrowth,
+
+      totalPosts: currentDayTotalPosts,
+      publishedPosts: currentDayPublishedPosts,
+      scheduledPosts: currentDayScheduledPosts,
+      draftPosts: currentDayDraftedPosts,
+      newPosts: currentDayNewPosts,
+      postGrowth: currentDayPostsGrowth,
+      unpublishedPosts: currentDayUnpublishedPosts,
+    };
+
+    await this.repository.db.dailyStats.upsert({
+      where: {
         date: startOfCurrentDay,
+      },
 
-        totalSchools: currentDayTotalSchools,
-        newSchools: currentDayNewSchools,
-        activeSchools: currentDayActiveSchools,
-        schoolGrowth: currentDaySchoolsGrowth,
+      create: {
+        date: startOfCurrentDay,
+        ...data,
+      },
 
-        totalPrograms: currentDayTotalPrograms,
-        newPrograms: currentDayNewPrograms,
-        activePrograms: currentDayActivePrograms,
-        programGrowth: currentDayProgramsGrowth,
-
-        totalAdmins: currentDayTotalAdmins,
-        newAdmins: currentDayNewAdmins,
-        activeAdmins: currentDayActiveAdmins,
-        adminGrowth: currentDayAdminsGrowth,
-
-        totalFaqs: currentDayTotalFaqs,
-        newFaqs: currentDayNewFaqs,
-        faqGrowth: currentDayFaqsGrowth,
-
-        totalInquiries: currentDayTotalInquires,
-        newInquiries: currentDayNewInquires,
-        inquiryGrowth: currentDayInquiresGrowth,
-
-        totalPosts: currentDayTotalPosts,
-        publishedPosts: currentDayPublishedPosts,
-        scheduledPosts: currentDayScheduledPosts,
-        draftPosts: currentDayDraftedPosts,
-        newPosts: currentDayNewPosts,
-        postGrowth: currentDayPostsGrowth,
-        unpublishedPosts: currentDayUnpublishedPosts,
+      update: {
+        ...data,
       },
     });
 
