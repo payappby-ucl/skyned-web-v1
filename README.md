@@ -59,24 +59,29 @@ touch .env.dev
 touch .env.local
 ```
 
-Start Server Locally
+## Loacl Development Setup
 
+This section provides instructions for setting up the development environment with three concurrent processes:
+
+Each process should be run in a separate terminal tab to allow concurrent execution of all development services.
+
+
+1. **Install Dependencies**: Installs all project dependencies using pnpm
 ```bash
 pnpm i
-cd apps/backend/functions
-pnpm run start:emulators
 ```
 
-Open another terminal
-
+2. **Start Firebase Emulators**: Launches local Firebase emulators for backend development and testing
 ```bash
-cd apps/backend/functions
-pnpm run start:test:server
+cd apps/backend/functions && pnpm run start:emulators
 ```
 
-Open another terminal tab
-
+3. **Start Test Server**: **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span>** Runs the backend test server for API testing
 ```bash
-cd apps/admin or apps/frontend
-pnpm run dev
+cd apps/backend/functions && pnpm run start:test:server
+```
+
+4. **Start Frontend Development Server**: **<span style="color: #ff6b35;">[ ⚠️ Open another terminal tab ]</span>**  Launches the frontend application in development mode with hot reload
+```bash
+cd apps/frontend && pnpm run dev
 ```
