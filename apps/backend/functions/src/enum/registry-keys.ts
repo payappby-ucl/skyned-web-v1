@@ -134,6 +134,8 @@ export enum RegistryKeysEnum {
   CATEGORY_SERVICE = "CategoryService",
   /** Tag Service */
   TAG_SERVICE = "TagService",
+  /** Analytics Service */
+  ANALYTICS_SERVICE = "AnalyticsService",
 
   // * CRON JOBS
   /** Cron jobs */

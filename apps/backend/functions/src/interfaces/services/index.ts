@@ -16,3 +16,4 @@ export * from "./program";
 export * from "./blog-post";
 export * from "./category";
 export * from "./tag";
+export * from "./analytics";

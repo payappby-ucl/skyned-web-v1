@@ -82,6 +82,56 @@ enum BlogStatus {
   unpublished
 }
 
+// * Daily Metrics
+model DailyStats {
+  id   Int      @default(autoincrement())
+  date DateTime @unique
+
+  // * Schools
+  totalSchools  Int     @default(0) @map("total_schools")
+  newSchools    Int     @default(0) @map("new_schools")
+  activeSchools Int     @default(0) @map("active_schools")
+  schoolGrowth  Decimal @default(0) @map("school_growth") @db.Decimal(10, 2)
+
+  // * Programs
+  totalPrograms  Int     @default(0) @map("total_programs")
+  newPrograms    Int     @default(0) @map("new_programs")
+  activePrograms Int     @default(0) @map("active_programs")
+  programGrowth  Decimal @default(0) @map("program_growth") @db.Decimal(10, 2)
+
+  // * FAQs
+  totalFaqs Int     @default(0) @map("total_faqs")
+  newFaqs   Int     @default(0) @map("new_faqs")
+  faqGrowth Decimal @default(0) @map("faq_growth") @db.Decimal(10, 2)
+
+  // * Inquiries
+  totalInquiries Int     @default(0) @map("total_inquiries")
+  newInquiries   Int     @default(0) @map("new_inquiries")
+  inquiryGrowth  Decimal @default(0) @map("inquiry_growth") @db.Decimal(10, 2)
+
+  // * Admins
+  totalAdmins  Int     @default(0) @map("total_admins")
+  newAdmins    Int     @default(0) @map("new_admins")
+  activeAdmins Int     @default(0) @map("active_admins")
+  adminGrowth  Decimal @default(0) @map("admin_growth") @db.Decimal(10, 2)
+
+  // * Blogs
+  totalPosts       Int     @default(0) @map("total_posts")
+  publishedPosts   Int     @default(0) @map("published_posts")
+  scheduledPosts   Int     @default(0) @map("scheduled_posts")
+  draftPosts       Int     @default(0) @map("draft_posts")
+  newPosts         Int     @default(0) @map("new_posts")
+  postGrowth       Decimal @default(0) @map("post_growth") @db.Decimal(10, 2)
+  unpublishedPosts Int     @default(0) @map("unpublished_posts")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([createdAt])
+  @@index([date])
+  @@map("daily_stats")
+}
+
 model Token {
   id        Int       @default(autoincrement())
   tokenId   String    @id @default(cuid()) @map("token_id")
@@ -322,8 +372,8 @@ model Program {
   description  String  @db.Text
   requirements String? @db.Text
 
-  applicationFee         Decimal @map("application_fee")
-  applicationFeeDiscount Decimal @default(0) @map("application_fee_discount")
+  applicationFee         Decimal @map("application_fee") @db.Decimal(10, 2)
+  applicationFeeDiscount Decimal @default(0) @map("application_fee_discount") @db.Decimal(5, 2)
 
   tuitionFee     Decimal        @map("tuition_fee")
   tuitionFeeType TuitionFeeType @default(per_year) @map("tuition_fee_type")

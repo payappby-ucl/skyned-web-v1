@@ -120,6 +120,38 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.DailyStatsScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  totalSchools: 'totalSchools',
+  newSchools: 'newSchools',
+  activeSchools: 'activeSchools',
+  schoolGrowth: 'schoolGrowth',
+  totalPrograms: 'totalPrograms',
+  newPrograms: 'newPrograms',
+  activePrograms: 'activePrograms',
+  programGrowth: 'programGrowth',
+  totalFaqs: 'totalFaqs',
+  newFaqs: 'newFaqs',
+  faqGrowth: 'faqGrowth',
+  totalInquiries: 'totalInquiries',
+  newInquiries: 'newInquiries',
+  inquiryGrowth: 'inquiryGrowth',
+  totalAdmins: 'totalAdmins',
+  newAdmins: 'newAdmins',
+  activeAdmins: 'activeAdmins',
+  adminGrowth: 'adminGrowth',
+  totalPosts: 'totalPosts',
+  publishedPosts: 'publishedPosts',
+  scheduledPosts: 'scheduledPosts',
+  draftPosts: 'draftPosts',
+  newPosts: 'newPosts',
+  postGrowth: 'postGrowth',
+  unpublishedPosts: 'unpublishedPosts',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.TokenScalarFieldEnum = {
   id: 'id',
   tokenId: 'tokenId',
@@ -407,6 +439,7 @@ exports.BlogStatus = exports.$Enums.BlogStatus = {
 };
 
 exports.Prisma.ModelName = {
+  DailyStats: 'DailyStats',
   Token: 'Token',
   Admin: 'Admin',
   Department: 'Department',

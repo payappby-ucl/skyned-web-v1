@@ -43,13 +43,31 @@ apps/frontend
 ### Run Locally
 
 Ensure you have Docker installed and running
+create the following files **Note there are example env files on each project**
 
 ```bash
+cd apps/backend/functions
+touch .env
+touch .env.test
+
+cd apps/admin
+touch .env.dev
+touch .env.local
+
+cd apps/frontend
+touch .env.dev
+touch .env.local
+```
+
+Start Server Locally
+
+```bash
+pnpm i
 cd apps/backend/functions
 pnpm run start:emulators
 ```
 
-Once the above command starts running, open another terminal
+Open another terminal
 
 ```bash
 cd apps/backend/functions
@@ -59,6 +77,6 @@ pnpm run start:test:server
 Open another terminal tab
 
 ```bash
-cd apps/admin
+cd apps/admin or apps/frontend
 pnpm run dev
 ```

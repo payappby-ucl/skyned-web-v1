@@ -32,8 +32,8 @@ const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
         <li>Ensure there are not programs with exact same names</li>
         <li>
           <p>
-            Minimum GPA expects a number between {mgpaMappings.min} and{" "}
-            {mgpaMappings.max} which are mapped as follows:{" "}
+            Minimum Education Degree expects a number between {mgpaMappings.min}{" "}
+            and {mgpaMappings.max} which are mapped as follows:
           </p>
           <ul>
             {mgpaMappings.options.map((mapping) => (
@@ -41,7 +41,7 @@ const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
             ))}
           </ul>
         </li>
-        <li>Ensure that minimum GPA matches education level</li>
+        <li>Ensure that Minimum Education Degree matches Education Level</li>
         <li>
           Intakes a display in the format{" "}
           <span className="font-semibold">"1 - JUN 2026, 2 - MAR 2026"</span>.

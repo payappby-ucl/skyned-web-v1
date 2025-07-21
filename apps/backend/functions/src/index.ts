@@ -15,3 +15,8 @@ exports.midNightCronJobs = onSchedule(
   "every day 00:00",
   cronJobs.midNightCronJobs,
 );
+
+exports.fiveMinPastMidNightCronJobs = onSchedule(
+  "5 0 * * *",
+  cronJobs.fiveMinPastMidNight,
+);

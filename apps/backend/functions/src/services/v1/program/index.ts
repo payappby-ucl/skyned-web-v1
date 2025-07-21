@@ -107,8 +107,8 @@ export class ProgramService extends ServiceUtils implements IProgramService {
 
     if (query.name) {
       where.OR = [
-        { name: { equals: query.name } },
-        { name: { contains: query.name } },
+        { name: { equals: query.name, mode: "insensitive" } },
+        { name: { contains: query.name, mode: "insensitive" } },
       ];
     }
 
@@ -116,13 +116,13 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       if (where.OR) {
         where.OR = [
           ...where.OR,
-          { faculty: { equals: query.faculty } },
-          { faculty: { contains: query.faculty } },
+          { faculty: { equals: query.faculty, mode: "insensitive" } },
+          { faculty: { contains: query.faculty, mode: "insensitive" } },
         ];
       } else {
         where.OR = [
-          { faculty: { equals: query.faculty } },
-          { faculty: { contains: query.faculty } },
+          { faculty: { equals: query.faculty, mode: "insensitive" } },
+          { faculty: { contains: query.faculty, mode: "insensitive" } },
         ];
       }
     }

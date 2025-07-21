@@ -3,6 +3,7 @@
 import { StatusCodes } from "http-status-codes";
 import { RegistryKeysEnum } from "../enum";
 import {
+  IAnalyticsCronJobs,
   IBlogPostCronJobs,
   IIntakeCronJobs,
   ILogger,
@@ -13,6 +14,7 @@ import { SkynedUtils } from "../utils";
 import { intakeCronJobs } from "./intake";
 import { logger } from "../infrastructure";
 import { blogPostCronJobs } from "./blog-post";
+import { analyticsCronJobs } from "./analytics";
 
 /** Dependencies needed to instantiate class */
 export interface ICronJobsDependencies {
@@ -22,6 +24,9 @@ export interface ICronJobsDependencies {
   logger: ILogger;
   /** Blog post jobs */
   blogPostCronJobs: IBlogPostCronJobs;
+
+  /** Analytics jobs */
+  analyticsCronJobs: IAnalyticsCronJobs;
 }
 
 /**
@@ -36,18 +41,21 @@ export class CronJobs implements ISkynedCronJobs {
     private readonly logger: ILogger,
     private readonly intakeCronJobs: IIntakeCronJobs,
     private readonly blogPostCronJobs: IBlogPostCronJobs,
+    private readonly analyticsCronJobs: IAnalyticsCronJobs,
   ) {}
 
   static factory({
     intakeCronJobs,
     logger,
     blogPostCronJobs,
+    analyticsCronJobs,
   }: ICronJobsDependencies) {
     if (!CronJobs.instance) {
       CronJobs.instance = new CronJobs(
         logger,
         intakeCronJobs,
         blogPostCronJobs,
+        analyticsCronJobs,
       );
     }
     return CronJobs.instance;
@@ -74,6 +82,25 @@ export class CronJobs implements ISkynedCronJobs {
       });
     }
   };
+
+  fiveMinPastMidNight: ISkynedCronJobs["fiveMinPastMidNight"] = async () => {
+    try {
+      // * Run KPIs
+      await this.analyticsCronJobs.computeKPIs();
+    } catch (error: any) {
+      const newError = SkynedUtils.createException(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        error.message,
+      );
+      newError.stack = error.stack;
+
+      this.logger.error(newError);
+      this.logger.log({
+        ...newError,
+        message: newError.message,
+      });
+    }
+  };
 }
 
 /** concrete instance of {CronJobs} */
@@ -84,5 +111,6 @@ export const cronJobs = SkynedRegistry.getSingleton(
       intakeCronJobs,
       logger,
       blogPostCronJobs,
+      analyticsCronJobs,
     }),
 );
