@@ -150,11 +150,22 @@ export class SkynedUtils {
         if (env.environment === "test") {
           process.env.FIREBASE_AUTH_EMULATOR_HOST = "127.0.0.1:9099";
           process.env.FIREBASE_STORAGE_EMULATOR_HOST = "127.0.0.1:9199";
+          process.env.PUBSUB_EMULATOR_HOST = "127.0.0.1:8085";
         }
       } else {
         admin.initializeApp();
       }
     }
+  }
+
+  /** Get ProjectId */
+
+  static getProjectId() {
+    if (env.environment === "test" || process.env.LOCAL === "local") {
+      return "skyned-test-31a2e";
+    }
+
+    return "";
   }
 
   /** Resolve path for storing objects */

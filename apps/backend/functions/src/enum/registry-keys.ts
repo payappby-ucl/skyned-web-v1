@@ -144,6 +144,12 @@ export enum RegistryKeysEnum {
   INTAKE_CRON_JOB = "IntakeCronJob",
   /** Blog post Cron job */
   BLOG_POST_CRON_JOB = "BlogPostCronJob",
+  /** Analytics */
+  ANALYTICS_CRON_JOB = "AnalyticsCronJob",
+
+  // * PUB/SUB
+  PUBLISHER = "Publisher",
+  SUBSCRIBER = "Subscriber",
 
   // * Utilities
   /** Handles internal validations */

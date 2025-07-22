@@ -7,7 +7,6 @@ import {
   IAdminService,
   IAuth,
   IDepartmentService,
-  IEvents,
   IIDGeneratorService,
   IPhoneNumberService,
   IStorageService,
@@ -21,9 +20,10 @@ import {
   phoneNumberService,
   storageService,
 } from "../../../services";
-import { auth, events } from "../../../infrastructure";
+import { auth } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
 import { env } from "../../../config";
+import { IPublisher, publisher } from "../../../publisher";
 
 /** Required dependencies to create AdminController instance */
 export interface AdminControllerDependencies {
@@ -33,7 +33,7 @@ export interface AdminControllerDependencies {
   storageService: IStorageService;
   idGeneratorService: IIDGeneratorService;
   phoneNumberService: IPhoneNumberService;
-  events: IEvents;
+  publisher: IPublisher;
 }
 
 /**
@@ -54,7 +54,7 @@ export class AdminController
     private readonly storageService: IStorageService,
     private readonly idGeneratorService: IIDGeneratorService,
     private readonly phoneNumberService: IPhoneNumberService,
-    private readonly events: IEvents,
+    private readonly publisher: IPublisher,
   ) {
     super();
   }
@@ -70,7 +70,7 @@ export class AdminController
     storageService,
     idGeneratorService,
     phoneNumberService,
-    events,
+    publisher,
   }: AdminControllerDependencies) {
     if (!AdminController.instance) {
       AdminController.instance = new AdminController(
@@ -80,7 +80,7 @@ export class AdminController
         storageService,
         idGeneratorService,
         phoneNumberService,
-        events,
+        publisher,
       );
     }
 
@@ -196,7 +196,7 @@ export class AdminController
       );
 
       if (!SkynedUtils.isEnvironment(["test"])) {
-        this.events.emitEvent({
+        this.publisher.publish({
           type: EventsEnum.SEND_EMAIL_EVENT,
           data: {
             from: {
@@ -378,11 +378,12 @@ export class AdminController
         secondaryImage,
       });
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           action: "update",
           adminId: authClaim.user.id,
+          message: "Updated an admin profile",
           resource: "admins",
           resourceId: admin.id,
           previousState: admin,
@@ -408,6 +409,6 @@ export const adminController = SkynedRegistry.getSingleton(
       storageService,
       idGeneratorService,
       phoneNumberService,
-      events,
+      publisher,
     }),
 );

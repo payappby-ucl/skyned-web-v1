@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1-185",
+  "version": "0.0.1-186",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "pnpm run cp:local && pnpm i && pnpm run generate && tsc && ./cp-yaml && typedoc",
@@ -28,6 +28,7 @@
   },
   "main": "lib/src/index.js",
   "dependencies": {
+    "@google-cloud/pubsub": "^5.1.0",
     "@prisma/client": "^6.5.0",
     "@react-email/components": "^0.0.33",
     "@react-email/render": "^1.0.5",

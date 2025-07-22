@@ -1,5 +1,4 @@
 import { EventsEnum } from "../../enum";
-import { Exception } from "../../lib";
 import { IActivityLogService, IEmailService } from "../services";
 import { IMarketing } from "./marketing";
 
@@ -26,15 +25,3 @@ export type EventTypes =
   | ICreateMarketingContactEvent
   | ISendEmailEvent
   | ICreateActivityLog;
-
-/** Represents Events */
-export interface IEvents {
-  emitEvent(data: EventTypes): void;
-  createContactForMarketing(
-    data: ICreateMarketingContactEvent["data"],
-  ): Promise<{ contactId: number } | Exception>;
-
-  sendMail(data: ISendEmailEvent["data"]): Promise<void>;
-
-  createActivityLog(data: ICreateActivityLog["data"]): Promise<void>;
-}

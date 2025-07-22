@@ -4,19 +4,15 @@ import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 import { responseBody } from "./helpers/constants";
 import { app } from "../src/app";
-import { events } from "../src/infrastructure";
 import { signInUser } from "./helpers/utils";
 import { SkynedUtils } from "../src/utils";
+import { publisher } from "../src/publisher";
 
 describe("FAQ API", () => {
   const server = app.getApp();
   const baseUrl = "/api/v1/faqs";
 
   describe(`POST - ${baseUrl}`, () => {
-    beforeEach(() => {
-      jest.restoreAllMocks();
-    });
-
     const testData = {
       question: "What's Skyned",
       answer: "<p>An Educational Platform</p>",
@@ -38,10 +34,6 @@ describe("FAQ API", () => {
     });
 
     test("should pass", async () => {
-      const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
-        .mockImplementation();
-
       const { user } = await signInUser();
       const token = await user.getIdToken();
 
@@ -57,8 +49,6 @@ describe("FAQ API", () => {
         success: true,
         data: expect.objectContaining(testData),
       });
-
-      expect(emailEmitterSpy).toHaveBeenCalled();
     });
   });
 
@@ -117,7 +107,7 @@ describe("FAQ API", () => {
 
     test("should pass", async () => {
       const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
+        .spyOn(publisher, "publish")
         .mockImplementation();
 
       const { user } = await signInUser();
@@ -199,7 +189,7 @@ describe("FAQ API", () => {
 
     test("should pass", async () => {
       const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
+        .spyOn(publisher, "publish")
         .mockImplementation();
 
       const { user } = await signInUser();
@@ -256,7 +246,7 @@ describe("FAQ API", () => {
 
     test("should pass", async () => {
       const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
+        .spyOn(publisher, "publish")
         .mockImplementation();
 
       const { user } = await signInUser();

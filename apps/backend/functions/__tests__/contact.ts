@@ -5,10 +5,10 @@ import request from "supertest";
 import { clientAuth, responseBody } from "./helpers/constants";
 import { app } from "../src/app";
 import { phoneNumberService } from "../src/services";
-import { events } from "../src/infrastructure";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { admin } from "../src/data";
 import { signInUser } from "./helpers/utils";
+import { publisher } from "../src/publisher";
 
 describe("Contact API", () => {
   const server = app.getApp();
@@ -51,7 +51,7 @@ describe("Contact API", () => {
 
     test("should pass", async () => {
       const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
+        .spyOn(publisher, "publish")
         .mockImplementation();
 
       const res = await request(server)
@@ -119,7 +119,7 @@ describe("Contact API", () => {
 
     test("should pass", async () => {
       const emailEmitterSpy = jest
-        .spyOn(events, "emitEvent")
+        .spyOn(publisher, "publish")
         .mockImplementation();
 
       const { user } = await signInUser();

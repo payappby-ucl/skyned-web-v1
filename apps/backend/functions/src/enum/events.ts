@@ -5,9 +5,9 @@
  */
 export enum EventsEnum {
   /** create contact for marketing */
-  CREATE_MARKETING_CONTACT_EVENT = "Marketing:CreateContact",
+  CREATE_MARKETING_CONTACT_EVENT = "create-contact",
   /** Send Email */
-  SEND_EMAIL_EVENT = "Email:Send",
+  SEND_EMAIL_EVENT = "send-email",
   /** Create Activity Log */
-  CREATE_ACTIVITY_LOG = "ActivityLog:Create",
+  CREATE_ACTIVITY_LOG = "create-activity-log",
 }

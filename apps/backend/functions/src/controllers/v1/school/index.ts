@@ -4,7 +4,6 @@ import { StatusCodes } from "http-status-codes";
 import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import {
   IAccommodationService,
-  IEvents,
   IIDGeneratorService,
   IIntakeService,
   IProgramService,
@@ -24,14 +23,14 @@ import {
 import { SkynedUtils } from "../../../utils";
 import { ControllerUtils } from "../utils";
 import { IObject } from "@workspace/shared";
-import { events } from "../../../infrastructure";
+import { IPublisher, publisher } from "../../../publisher";
 
 /** Represents dependencies needed to instantiate {SchoolController} */
 export interface ISchoolControllerDependencies {
   schoolService: ISchoolService;
   storageService: IStorageService;
   idGeneratorService: IIDGeneratorService;
-  events: IEvents;
+  publisher: IPublisher;
   accommodationService: IAccommodationService;
   intakeService: IIntakeService;
   programService: IProgramService;
@@ -52,7 +51,7 @@ export class SchoolController
     private readonly schoolService: ISchoolService,
     private readonly storageService: IStorageService,
     private readonly idGeneratorService: IIDGeneratorService,
-    private readonly events: IEvents,
+    private readonly publisher: IPublisher,
     private readonly accommodationService: IAccommodationService,
     private readonly intakeService: IIntakeService,
     private readonly programService: IProgramService,
@@ -66,7 +65,7 @@ export class SchoolController
     schoolService,
     storageService,
     idGeneratorService,
-    events,
+    publisher,
     accommodationService,
     intakeService,
     programService,
@@ -76,7 +75,7 @@ export class SchoolController
         schoolService,
         storageService,
         idGeneratorService,
-        events,
+        publisher,
         accommodationService,
         intakeService,
         programService,
@@ -274,13 +273,14 @@ export class SchoolController
         },
       );
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "schools",
           resourceId: school.id,
           adminId: authUser.user.id,
           action: "update",
+          message: "Updated a school profile",
           previousState: SkynedUtils.exclude(school, ["createdBy"]),
           currentState: SkynedUtils.exclude(updatedSchool, ["createdBy"]),
         },
@@ -401,11 +401,12 @@ export class SchoolController
           { description },
         );
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "accommodations",
           action: "update",
+          message: "Updated an accommodation info",
           adminId: adminUser.user.id,
           resourceId: accommodation.id,
           previousState: SkynedUtils.exclude(accommodation, [
@@ -456,13 +457,14 @@ export class SchoolController
       const deletedAccommodation =
         await this.accommodationService.deleteAccommodation(accommodation.id);
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "accommodations",
           action: "delete",
           adminId: adminUser.user.id,
           resourceId: accommodation.id,
+          message: "Deleted a school accommodation info",
           previousState: SkynedUtils.exclude(accommodation, [
             "school",
             "createdBy",
@@ -599,13 +601,14 @@ export class SchoolController
         req.body,
       );
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "intakes",
           resourceId: updatedIntake.id,
           adminId: adminUser.user.id,
           action: "update",
+          message: "Updated a school's intake",
           previousState: SkynedUtils.exclude(intake, ["createdBy", "school"]),
           currentState: SkynedUtils.exclude(updatedIntake, [
             "createdBy",
@@ -831,13 +834,14 @@ export class SchoolController
         req.body,
       );
 
-      this.events.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "programs",
           resourceId: program.id,
           adminId: adminUser.user.id,
           action: "update",
+          message: "Updated a school's program data",
           previousState: SkynedUtils.exclude(program, ["createdBy"]),
           currentState: SkynedUtils.exclude(updatedProgram, ["createdBy"]),
         },
@@ -987,7 +991,7 @@ export const schoolController = SkynedRegistry.getSingleton(
       schoolService,
       storageService,
       idGeneratorService,
-      events,
+      publisher,
       accommodationService,
       intakeService,
       programService,

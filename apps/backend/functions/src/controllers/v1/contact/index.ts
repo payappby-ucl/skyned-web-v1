@@ -4,22 +4,21 @@ import { StatusCodes } from "http-status-codes";
 import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import {
   IContactController,
-  IEvents,
   IInquiryService,
   IPhoneNumberService,
 } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { inquiryService, phoneNumberService } from "../../../services";
 import { env } from "../../../config";
-import { events } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
 import { ControllerUtils } from "../utils";
+import { IPublisher, publisher } from "../../../publisher";
 
 /** Required dependencies to create ContactController instance */
 export interface ContactControllerDependencies {
   phoneNumberService: IPhoneNumberService;
   inquiryService: IInquiryService;
-  event: IEvents;
+  publisher: IPublisher;
 }
 
 /**
@@ -34,9 +33,9 @@ export class ContactController
 {
   private static instance: IContactController | null = null;
   private constructor(
-    private readonly event: IEvents,
     private readonly inquiryService: IInquiryService,
     private readonly phoneNumberService: IPhoneNumberService,
+    private readonly publisher: IPublisher,
   ) {
     super();
   }
@@ -46,15 +45,15 @@ export class ContactController
    */
 
   static factory({
-    event,
     inquiryService,
     phoneNumberService,
+    publisher,
   }: ContactControllerDependencies) {
     if (!ContactController.instance) {
       ContactController.instance = new ContactController(
-        event,
         inquiryService,
         phoneNumberService,
+        publisher,
       );
     }
 
@@ -75,7 +74,7 @@ export class ContactController
         });
 
         // * Emit Send mail
-        this.event.emitEvent({
+        this.publisher.publish({
           type: EventsEnum.SEND_EMAIL_EVENT,
           data: {
             from: {
@@ -170,11 +169,12 @@ export class ContactController
 
       await this.inquiryService.delete(inquiry.id);
 
-      this.event.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "inquiries",
           resourceId: inquiry.id,
+          message: "Deleted an inquiry",
           action: "delete",
           previousState: inquiry,
           adminId: authUser.user.id,
@@ -195,8 +195,8 @@ export const contactController = SkynedRegistry.getSingleton(
   RegistryKeysEnum.CONTACT_CONTROLLER,
   () =>
     ContactController.factory({
-      event: events,
       inquiryService,
       phoneNumberService,
+      publisher,
     }),
 );

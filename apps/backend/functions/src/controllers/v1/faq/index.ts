@@ -1,29 +1,29 @@
 import { StatusCodes } from "http-status-codes";
-import { IEvents, IFaqController, IFaqService } from "../../../interfaces";
+import { IFaqController, IFaqService } from "../../../interfaces";
 import { ControllerUtils } from "../utils";
 import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import SkynedRegistry from "../../../registry";
 import { faqService } from "../../../services";
-import { events } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
+import { IPublisher, publisher } from "../../../publisher";
 
 export interface IFaqControllerDependencies {
   faqService: IFaqService;
-  event: IEvents;
+  publisher: IPublisher;
 }
 export class FaqController extends ControllerUtils implements IFaqController {
   private static instance: IFaqController | null = null;
 
   private constructor(
     private readonly faqService: IFaqService,
-    private readonly event: IEvents,
+    private readonly publisher: IPublisher,
   ) {
     super();
   }
 
-  static factory({ faqService, event }: IFaqControllerDependencies) {
+  static factory({ faqService, publisher }: IFaqControllerDependencies) {
     if (!FaqController.instance) {
-      FaqController.instance = new FaqController(faqService, event);
+      FaqController.instance = new FaqController(faqService, publisher);
     }
 
     return FaqController.instance;
@@ -41,16 +41,17 @@ export class FaqController extends ControllerUtils implements IFaqController {
         createdById: authUser.user.adminId,
       });
 
-      this.event.emitEvent({
-        type: EventsEnum.CREATE_ACTIVITY_LOG,
-        data: {
-          resource: "faqs",
-          resourceId: faq.id,
-          action: "create",
-          currentState: SkynedUtils.exclude(faq, ["createdBy"]),
-          adminId: authUser.user.id,
-        },
-      });
+      // this.publisher.publish({
+      //   type: EventsEnum.CREATE_ACTIVITY_LOG,
+      //   data: {
+      //     resource: "faqs",
+      //     resourceId: faq.id,
+      //     action: "create",
+      //     message: "Created an Faq",
+      //     currentState: SkynedUtils.exclude(faq, ["createdBy"]),
+      //     adminId: authUser.user.id,
+      //   },
+      // });
 
       res._success(StatusCodes.CREATED, faq);
     } catch (error) {
@@ -110,12 +111,13 @@ export class FaqController extends ControllerUtils implements IFaqController {
 
       await this.faqService.delete(faq.id);
 
-      this.event.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "faqs",
           resourceId: faq.id,
           action: "delete",
+          message: "Deleted an FAQ",
           previousState: SkynedUtils.exclude(faq, ["createdBy"]),
           adminId: authUser.user.id,
         },
@@ -159,11 +161,12 @@ export class FaqController extends ControllerUtils implements IFaqController {
       this._attributeBasedAccessControl(authUser, "faqs", "update", body, faq);
       const updatedFaq = await this.faqService.update(faq.id, body);
 
-      this.event.emitEvent({
+      this.publisher.publish({
         type: EventsEnum.CREATE_ACTIVITY_LOG,
         data: {
           resource: "faqs",
           action: "update",
+          message: "Updated an FAQ",
           previousState: SkynedUtils.exclude(faq, ["createdBy"]),
           currentState: SkynedUtils.exclude(updatedFaq, ["createdBy"]),
           adminId: authUser.user.id,
@@ -200,6 +203,6 @@ export const faqController = SkynedRegistry.getSingleton(
   () =>
     FaqController.factory({
       faqService,
-      event: events,
+      publisher,
     }),
 );

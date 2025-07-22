@@ -36,7 +36,7 @@ export class AnalyticsCronJobs implements IAnalyticsCronJobs {
 
 /** concrete instance of {AnalyticsCronJobs} */
 export const analyticsCronJobs = SkynedRegistry.getSingleton(
-  RegistryKeysEnum.BLOG_POST_CRON_JOB,
+  RegistryKeysEnum.ANALYTICS_CRON_JOB,
   () =>
     AnalyticsCronJobs.factory({
       analyticsService,
