@@ -18,12 +18,19 @@ exports.api = onRequest({ timeoutSeconds: 3600, memory: "1GiB" }, app.getApp());
 
 // * CRON JOBS
 exports.midNightCronJobs = onSchedule(
-  "every day 00:00",
+  {
+    schedule: "every day 00:00",
+    retryCount: 1,
+  },
   cronJobs.midNightCronJobs,
 );
 
 exports.fiveMinPastMidNightCronJobs = onSchedule(
-  "5 0 * * *",
+  {
+    schedule: "5 0 * * *",
+    memory: "1GiB",
+    retryCount: 3,
+  },
   cronJobs.fiveMinPastMidNight,
 );
 
