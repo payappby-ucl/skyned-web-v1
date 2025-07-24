@@ -203,6 +203,11 @@ model Admin {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdAt])
+  @@index([accountSuspended])
+  @@index([firstName])
+  @@index([lastName])
+  @@index([gender])
   @@map("admins")
 }
 
@@ -219,6 +224,8 @@ model Department {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([name])
+  @@index([createdAt])
   @@map("departments")
 }
 
@@ -241,6 +248,8 @@ model Team {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@unique([departmentId, name])
+  @@index([name])
+  @@index([createdAt])
   @@map("teams")
 }
 
@@ -257,6 +266,7 @@ model Faq {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdAt])
   @@map("faqs")
 }
 
@@ -273,6 +283,7 @@ model Inquiry {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdAt])
   @@map("inquiries")
 }
 
@@ -295,6 +306,9 @@ model ActivityLog {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdAt])
+  @@index([action])
+  @@index([resource])
   @@map("activity_logs")
 }
 
@@ -336,6 +350,8 @@ model School {
   @@index([ownershipType])
   @@index([name, active])
   @@index([country, active, institutionType, ownershipType])
+  @@index([createdAt])
+  @@index([currency])
   @@map("schools")
 }
 
@@ -353,6 +369,7 @@ model Accommodation {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdAt])
   @@map("accommodations")
 }
 
@@ -401,6 +418,11 @@ model Program {
   @@unique([schoolId, slug])
   @@index([name])
   @@index([name, active])
+  @@index([active])
+  @@index([createdAt])
+  @@index([tuitionFee])
+  @@index([tuitionFeeType])
+  @@index([applicationFee])
   @@map("programs")
 }
 
@@ -436,6 +458,7 @@ model Intake {
 
   @@unique([schoolId, intake, startDate, deadline])
   @@index([deadline])
+  @@index([createdAt])
   @@map("intakes")
 }
 
@@ -463,6 +486,7 @@ model BlogPost {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([title])
+  @@index([createdAt])
   @@map("blog_posts")
 }
 

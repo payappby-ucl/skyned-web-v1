@@ -54,10 +54,19 @@ export class AnalyticsService
       currentDayActiveSchools,
       currentDayNewSchools,
     ] = await Promise.all([
-      this.repository.db.school.count(),
+      this.repository.db.school.count({
+        where: {
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
+        },
+      }),
       this.repository.db.school.count({
         where: {
           active: true,
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
         },
       }),
       this.repository.db.school.count({
@@ -83,12 +92,21 @@ export class AnalyticsService
       currentDayActivePrograms,
       currentDayNewPrograms,
     ] = await Promise.all([
-      this.repository.db.program.count(),
+      this.repository.db.program.count({
+        where: {
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
+        },
+      }),
       this.repository.db.program.count({
         where: {
           active: true,
           school: {
             active: true,
+          },
+          createdAt: {
+            lte: endOfCurrentDay,
           },
         },
       }),
@@ -112,10 +130,19 @@ export class AnalyticsService
     // * Admins Computation
     const [currentDayTotalAdmins, currentDayActiveAdmins, currentDayNewAdmins] =
       await Promise.all([
-        this.repository.db.admin.count(),
+        this.repository.db.admin.count({
+          where: {
+            createdAt: {
+              lte: endOfCurrentDay,
+            },
+          },
+        }),
         this.repository.db.admin.count({
           where: {
             accountSuspended: false,
+            createdAt: {
+              lte: endOfCurrentDay,
+            },
           },
         }),
         this.repository.db.admin.count({
@@ -135,7 +162,13 @@ export class AnalyticsService
 
     // * FaQ Computation
     const [currentDayTotalFaqs, currentDayNewFaqs] = await Promise.all([
-      this.repository.db.faq.count(),
+      this.repository.db.faq.count({
+        where: {
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
+        },
+      }),
       this.repository.db.faq.count({
         where: {
           createdAt: {
@@ -153,7 +186,13 @@ export class AnalyticsService
 
     // * Inquiries Computation
     const [currentDayTotalInquires, currentDayNewInquires] = await Promise.all([
-      this.repository.db.inquiry.count(),
+      this.repository.db.inquiry.count({
+        where: {
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
+        },
+      }),
       this.repository.db.inquiry.count({
         where: {
           createdAt: {
@@ -179,7 +218,13 @@ export class AnalyticsService
       currentDayDraftedPosts,
       currentDayUnpublishedPosts,
     ] = await Promise.all([
-      this.repository.db.blogPost.count(),
+      this.repository.db.blogPost.count({
+        where: {
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
+        },
+      }),
       this.repository.db.blogPost.count({
         where: {
           createdAt: {
@@ -191,21 +236,33 @@ export class AnalyticsService
       this.repository.db.blogPost.count({
         where: {
           status: "published",
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
         },
       }),
       this.repository.db.blogPost.count({
         where: {
           status: "scheduled",
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
         },
       }),
       this.repository.db.blogPost.count({
         where: {
           status: "draft",
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
         },
       }),
       this.repository.db.blogPost.count({
         where: {
           status: "unpublished",
+          createdAt: {
+            lte: endOfCurrentDay,
+          },
         },
       }),
     ]);
