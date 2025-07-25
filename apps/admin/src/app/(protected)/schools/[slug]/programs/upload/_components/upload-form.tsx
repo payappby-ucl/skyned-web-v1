@@ -60,6 +60,7 @@ import { IntakeStatus } from "@workspace/ui/components/intake-status";
 import AddIntakesForm from "../../_components/add-intakes-form";
 import { useRouter } from "next/navigation";
 import { createProgram } from "../../../../_actions";
+import LoadingTemplateModal from "./loading-template";
 
 interface Props {
   school: ISchool;
@@ -69,6 +70,7 @@ const UploadForm: React.FC<Props> = ({ school }) => {
   const router = useRouter();
   const { auth } = useAuthContext();
   const [activeIntakes, setActiveIntakes] = useState<IIntake[] | null>(null);
+  const [loadingTemplate, setLoadingTemplate] = useState(false);
 
   const form = useForm<CreateProgramSchema>({
     resolver: zodResolver(CreateProgramSchema),
@@ -156,8 +158,6 @@ const UploadForm: React.FC<Props> = ({ school }) => {
       fetchActiveIntakes();
     }
   }, [school]);
-
-  console.log(form);
 
   return (
     <section className="h-full !p-0">
@@ -788,7 +788,7 @@ const UploadForm: React.FC<Props> = ({ school }) => {
                                             editable={
                                               !form.formState.isSubmitting
                                             }
-                                            className="max-h-[200px] !min-h-[200px]"
+                                            className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
                                           />
                                         </FormControl>
                                         <FormMessage />
@@ -812,7 +812,7 @@ const UploadForm: React.FC<Props> = ({ school }) => {
                                             editable={
                                               !form.formState.isSubmitting
                                             }
-                                            className="max-h-[200px] !min-h-[200px]"
+                                            className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
                                           />
                                         </FormControl>
                                         <FormMessage />
@@ -860,19 +860,28 @@ const UploadForm: React.FC<Props> = ({ school }) => {
                           form.clearErrors();
                         }}
                         handleFile={async (file) => {
-                          if (file) {
-                            const data = await generateUploadFormData(file);
+                          setLoadingTemplate(true);
+                          try {
+                            if (file) {
+                              const data = await generateUploadFormData(file);
 
-                            field.onChange(
-                              data.map((d) => ({
-                                ...d,
-                                intakes: d.intakes.filter((itk) =>
-                                  (activeIntakes || []).find(
-                                    (it) => it.id === itk,
+                              field.onChange(
+                                data.map((d) => ({
+                                  ...d,
+                                  intakes: d.intakes.filter((itk) =>
+                                    (activeIntakes || []).find(
+                                      (it) => it.id === itk,
+                                    ),
                                   ),
-                                ),
-                              })),
+                                })),
+                              );
+                            }
+                          } catch (error) {
+                            brandClientApi.utils.toast.error(
+                              "Something when wrong loading template. Please verify guidelines are followed properly. Contact admin if you're sure you did the right thing.",
                             );
+                          } finally {
+                            setLoadingTemplate(false);
                           }
                         }}
                       />
@@ -910,6 +919,8 @@ const UploadForm: React.FC<Props> = ({ school }) => {
           ) : null}
         </form>
       </Form>
+
+      <LoadingTemplateModal open={loadingTemplate} />
     </section>
   );
 };
