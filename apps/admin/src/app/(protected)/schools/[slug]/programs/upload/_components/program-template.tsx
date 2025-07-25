@@ -4,24 +4,6 @@ import { educationLevels } from "@workspace/shared";
 import React, { PropsWithChildren, useMemo } from "react";
 
 const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
-  const mgpaMappings = useMemo(() => {
-    const entries = Object.entries(educationLevels);
-    const options = entries.flatMap(([_, levels]) =>
-      levels.map((level) => level),
-    );
-
-    const values = options.map((op) => op.levelValue);
-
-    const max = Math.max(...values);
-    const min = Math.min(...values);
-
-    return {
-      min,
-      max,
-      options: options.map((opt) => `${opt.levelValue} - ${opt.level}`),
-    };
-  }, []);
-
   return (
     <div className="space-y-2 rounded-md border border-dashed border-blue-500 bg-blue-500/5 p-4">
       <h2 className="!text-xl">Upload Guidelines</h2>
@@ -30,17 +12,6 @@ const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
       </div>
       <ul className="ml-2 list-disc text-sm">
         <li>Ensure there are not programs with exact same names</li>
-        <li>
-          <p>
-            Minimum Education Degree expects a number between {mgpaMappings.min}{" "}
-            and {mgpaMappings.max} which are mapped as follows:
-          </p>
-          <ul>
-            {mgpaMappings.options.map((mapping) => (
-              <li key={mapping}>{mapping}</li>
-            ))}
-          </ul>
-        </li>
         <li>Ensure that Minimum Education Degree matches Education Level</li>
         <li>
           Intakes a display in the format{" "}

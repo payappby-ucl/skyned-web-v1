@@ -143,7 +143,7 @@ export async function generateProgramUploadTemplate({
     timeframe[2],
     10,
     "primary",
-    1,
+    "Grade 7",
     80,
     0,
     "IELTS - 9, DUOLINGO - 100",
@@ -164,7 +164,7 @@ export async function generateProgramUploadTemplate({
     timeframe[2],
     10,
     "primary",
-    1,
+    "Grade 7",
     80,
     0,
     "",
@@ -333,23 +333,18 @@ export async function generateProgramUploadTemplate({
     (cell, rowNumber) => {
       if (rowNumber !== 1) {
         const entries = Object.entries(educationLevels);
-        const options = entries.flatMap(([_, levels]) =>
-          levels.map((level) => level.levelValue),
+        const levels = entries.flatMap(([_, levels]) =>
+          levels.map((level) => level.level),
         );
 
-        const max = Math.max(...options);
-        const min = Math.min(...options);
-        const formulae = [min, max];
-
         cell.dataValidation = {
-          type: "whole",
-          operator: "between",
+          type: "list",
           allowBlank: false,
-          formulae,
+          formulae: [`"${levels.join(",")}"`],
           showErrorMessage: true,
           errorStyle: "error",
           errorTitle: "Minimum Education Degree",
-          error: `Must be a whole number between ${min} and ${max}. Please refer to the guidelines for mappings`,
+          error: "Please enter a valid value.",
         };
       }
     },
@@ -424,6 +419,26 @@ export async function generateProgramUploadTemplate({
   );
 }
 
+const entries = Object.entries(educationLevels);
+const options = entries.flatMap(([_, levels]) =>
+  levels.map((level) => ({
+    level: level.level,
+    levelValues: level.levelValue,
+  })),
+);
+
+const MEDMappings = options.reduce(
+  (cum, cur) => {
+    cum[cur.level] = cur.levelValues;
+
+    return cum;
+  },
+  {} as Record<
+    (typeof options)[number]["level"],
+    (typeof options)[number]["levelValues"]
+  >,
+);
+
 export async function generateUploadFormData(file: File) {
   const buffer = await brandClientApi.file.getBufferFromFile(file);
   const workbook = new ExcelJs.Workbook();
@@ -497,6 +512,10 @@ export async function generateUploadFormData(file: File) {
         } else {
           v = false;
         }
+      }
+
+      if (key === "minimumEducationDegree") {
+        v = MEDMappings[value as keyof typeof MEDMappings];
       }
 
       if (cum[idx]) {

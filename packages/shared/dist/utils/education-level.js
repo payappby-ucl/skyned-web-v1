@@ -253,7 +253,7 @@ exports.educationLevels = {
             levelValue: 20,
         },
         {
-            level: "Doctoral Degree (Phd, M.D., ...)",
+            level: "Doctoral Degree (PhD / MD / equivalent)",
             schemes: [exports.schemes["percentage"], exports.schemes["division"]],
             levelValue: 21,
         },
