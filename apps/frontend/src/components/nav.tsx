@@ -20,6 +20,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@workspace/ui/components/sheet";
+import { FringedEdge } from "./svg";
 
 const MobileNav: React.FC = () => {
   return (
@@ -34,27 +35,28 @@ const MobileNav: React.FC = () => {
 
 const Nav: React.FC = () => {
   return (
-    <header>
-      <div className="container mx-auto md:px-20">
-        <NavigationMenu className="!max-w-full items-center justify-between">
-          <NavigationMenuList className="py-4">
-            <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
+    <header className="fixed top-0 w-screen z-50">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 relative">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white w-[80%] h-full"/>
+        {/* Left */}
+        <div className="absolute top-0 left-[5%] w-[5%] h-full z-10 bg-white rounded-bl-2xl lg:rounded-bl-3xl">
+        <FringedEdge className="absolute top-[-1px] right-full h-1/4 md:h-1/2 z-[1] text-white rotate-90" />
+        </div>
+        {/* Right */}
+        <div className="absolute top-0 left-[90%] w-[5%] h-full z-10 bg-white rounded-br-2xl lg:rounded-br-3xl">
+        <FringedEdge className="absolute top-[-1px] left-full h-1/4 md:h-1/2 z-[1] text-white" />
+        </div>
+
+        <div className="flex items-center justify-between relative py-2 md:py-4 z-10">
+           <Link href="/">
                   <Image
                     src={logo}
                     alt={`${env.organization.name}'s Logo`}
-                    className="w-30"
+                    className="ml-4 w-20 md:w-24 lg:w-28"
                   />
-                </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
+
+                      <NavigationMenu>
           <NavigationMenuList className="hidden lg:flex lg:flex-1">
             <NavigationMenuItem>
               <NavigationMenuTrigger>Apply</NavigationMenuTrigger>
@@ -115,6 +117,9 @@ const Nav: React.FC = () => {
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
+        </NavigationMenu>
+
+
           <div className="hidden items-center gap-4 lg:flex">
             <search>
               <Button size="icon" variant="ghost">
@@ -130,10 +135,11 @@ const Nav: React.FC = () => {
               </Link>
             </Button>
           </div>
+
           <MobileNav />
-        </NavigationMenu>
+        </div>
       </div>
-    </header>
+    </header> 
   );
 };
 
