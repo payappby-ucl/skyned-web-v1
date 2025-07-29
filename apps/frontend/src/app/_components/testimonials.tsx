@@ -39,7 +39,7 @@ const testimonials = [
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="bg-foreground text-background space-y-5">
+    <section className="bg-[url(/assets/images/backgrounds/students-1.png)] text-background space-y-5">
       <div className="space-y-2 text-center md:flex md:items-center md:justify-between md:space-y-0 md:text-left">
         <h2 className="md:flex-1">Our clients testimonials</h2>
         <p className="md:flex-1">

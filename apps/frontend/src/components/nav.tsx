@@ -37,15 +37,19 @@ const Nav: React.FC = () => {
   return (
     <header className="fixed top-0 z-50 w-screen">
       <div className="container relative mx-auto px-4 md:px-10 lg:px-20">
-        <div className="absolute left-1/2 top-0 h-full w-[80%] -translate-x-1/2 bg-white" />
-        {/* Left */}
-        <div className="absolute left-[5%] top-0 z-10 h-full w-[5%] rounded-bl-2xl bg-white lg:rounded-bl-3xl">
-          <FringedEdge className="absolute right-full top-[-1px] z-[1] h-1/4 rotate-90 text-white md:h-1/2" />
-        </div>
-        {/* Right */}
-        <div className="absolute left-[90%] top-0 z-10 h-full w-[5%] rounded-br-2xl bg-white lg:rounded-br-3xl">
-          <FringedEdge className="absolute left-full top-[-1px] z-[1] h-1/4 text-white md:h-1/2" />
-        </div>
+          {/* Center */}
+          <div className="absolute top-0 left-1/2  -translate-x-1/2 z-[2] h-full w-[81%] bg-white"/>
+          <div className="absolute top-0 left-1/2  -translate-x-1/2 z-[1] h-full w-[80%] bg-white/50 drop-shadow-[0_4px_2px_rgba(0,0,0,0.15)] md:drop-shadow-[0_4px_6px_rgba(0,0,0,0.15)]"/>
+
+          {/* Left */}
+          <div className="absolute left-[5%] top-0 z-0 h-full w-[5%] rounded-bl-2xl bg-white drop-shadow-[-2px_2px_2px_rgba(0,0,0,0.15)] md:drop-shadow-[-4px_2px_6px_rgba(0,0,0,0.15)] lg:rounded-bl-3xl">
+            <FringedEdge className="absolute right-[99%] top-[-1px] z-[1] h-1/4 rotate-90 text-white md:h-1/2" />
+          </div>
+
+          {/* Right */}
+          <div className="absolute left-[90%] top-0 z-0 h-full w-[5%] rounded-br-2xl bg-white drop-shadow-[2px_2px_2px_rgba(0,0,0,0.15)] md:drop-shadow-[4px_2px_6px_rgba(0,0,0,0.15)] lg:rounded-br-3xl">
+            <FringedEdge className="absolute left-[99%] top-[-1px] z-[1] h-1/4 text-white md:h-1/2" />
+          </div>
 
         <div className="relative z-10 flex items-center justify-between py-2 md:py-4">
           <Link href="/">
