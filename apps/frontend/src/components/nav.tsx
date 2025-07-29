@@ -35,90 +35,89 @@ const MobileNav: React.FC = () => {
 
 const Nav: React.FC = () => {
   return (
-    <header className="fixed top-0 w-screen z-50">
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white w-[80%] h-full"/>
+    <header className="fixed top-0 z-50 w-screen">
+      <div className="container relative mx-auto px-4 md:px-10 lg:px-20">
+        <div className="absolute left-1/2 top-0 h-full w-[80%] -translate-x-1/2 bg-white" />
         {/* Left */}
-        <div className="absolute top-0 left-[5%] w-[5%] h-full z-10 bg-white rounded-bl-2xl lg:rounded-bl-3xl">
-        <FringedEdge className="absolute top-[-1px] right-full h-1/4 md:h-1/2 z-[1] text-white rotate-90" />
+        <div className="absolute left-[5%] top-0 z-10 h-full w-[5%] rounded-bl-2xl bg-white lg:rounded-bl-3xl">
+          <FringedEdge className="absolute right-full top-[-1px] z-[1] h-1/4 rotate-90 text-white md:h-1/2" />
         </div>
         {/* Right */}
-        <div className="absolute top-0 left-[90%] w-[5%] h-full z-10 bg-white rounded-br-2xl lg:rounded-br-3xl">
-        <FringedEdge className="absolute top-[-1px] left-full h-1/4 md:h-1/2 z-[1] text-white" />
+        <div className="absolute left-[90%] top-0 z-10 h-full w-[5%] rounded-br-2xl bg-white lg:rounded-br-3xl">
+          <FringedEdge className="absolute left-full top-[-1px] z-[1] h-1/4 text-white md:h-1/2" />
         </div>
 
-        <div className="flex items-center justify-between relative py-2 md:py-4 z-10">
-           <Link href="/">
-                  <Image
-                    src={logo}
-                    alt={`${env.organization.name}'s Logo`}
-                    className="ml-4 w-20 md:w-24 lg:w-28"
-                  />
-              </Link>
+        <div className="relative z-10 flex items-center justify-between py-2 md:py-4">
+          <Link href="/">
+            <Image
+              src={logo}
+              alt={`${env.organization.name}'s Logo`}
+              className="ml-4 w-20 md:w-24 lg:w-28"
+            />
+          </Link>
 
-                      <NavigationMenu>
-          <NavigationMenuList className="hidden lg:flex lg:flex-1">
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Apply</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+          <NavigationMenu>
+            <NavigationMenuList className="hidden lg:flex lg:flex-1">
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Apply</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>Link</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/country-of-choice" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  Country of choice
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/country-of-choice" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "hover:bg-transparent",
+                    )}
+                  >
+                    Country of choice
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/information-hub" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  Information Hub
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/information-hub" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "hover:bg-transparent",
+                    )}
+                  >
+                    Information Hub
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  About Us
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/about" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "hover:bg-transparent",
+                    )}
+                  >
+                    About Us
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "hover:bg-transparent",
-                  )}
-                >
-                  Contact Us
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-
+              <NavigationMenuItem>
+                <Link href="/contact" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "hover:bg-transparent",
+                    )}
+                  >
+                    Contact Us
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
 
           <div className="hidden items-center gap-4 lg:flex">
             <search>
@@ -139,7 +138,7 @@ const Nav: React.FC = () => {
           <MobileNav />
         </div>
       </div>
-    </header> 
+    </header>
   );
 };
 
