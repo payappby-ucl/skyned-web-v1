@@ -8,7 +8,9 @@ import Image from "next/image";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
+
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
+import Jumbotron from "../_components/jumbotron";
 
 const title = "About Us";
 const description =
@@ -41,13 +43,11 @@ export default async function About() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
       />
-      <section className="text-background dark:text-foreground space-y-4 bg-gray-700 bg-[url(/assets/images/about_us.jpg)] bg-cover bg-center bg-no-repeat text-center bg-blend-multiply">
-        <h1>About Us</h1>
-        <p className="mx-auto max-w-lg">
-          Our team of professionals will adequately guide you through your study
-          application journey.
-        </p>
-      </section>
+      <Jumbotron
+        title="About Us"
+        subtitle="Our team of professionals will adequately guide you through your study application journey."
+        backgroundImage="/assets/images/about_us.jpg"
+      />
       <CustomBreadCrumb className="bg-accent border-b" />
       <section className="bg-accent space-y-10">
         {missionVisionStatement.map(({ imageUrl, title, description }, i) => (

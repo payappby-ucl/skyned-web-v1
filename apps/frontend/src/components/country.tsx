@@ -8,6 +8,7 @@ import unitedStatesImage from "../../public/assets/images/countries/united_state
 import maltaImage from "../../public/assets/images/countries/malta.jpeg";
 import germanyImage from "../../public/assets/images/countries/germany.jpg";
 import franceImage from "../../public/assets/images/countries/france.jpg";
+import studentsImage from "../../public/assets/images/backgrounds/students.png";
 
 const countries = [
   {
@@ -59,29 +60,42 @@ const countries = [
     overview:
       "Experience world-class education at affordable prices. With top universities, vibrant student life, and a rich cultural scene. Explore diverse academic programs, gain global career prospects, and enjoy France's strategic location in the heart of Europe. Plus, with affordable tuition, scholarships, and the chance to learn French, it's an ideal destination for international students.",
   },
+  {
+    name: "Student",
+    image: studentsImage,
+    pageLink: "/",
+    overview:
+      "Overview of the student experience, including academic life, extracurricular activities, and support services.",
+  },
 ];
 
 const CountryOfChoice: React.FC = () => {
   return (
-    <section className="space-y-10">
+    <section className="space-y-10 bg-[#fcfcfc]">
       <h2 className="text-center">Country of Choice</h2>
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-8 lg:grid-cols-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
         {countries.map(({ name, image, pageLink, overview }) => (
-          <Link
+            <Link
             key={name}
             href={pageLink}
-            className="lg:nth-5:col-start-2 space-y-2 place-self-start md:col-span-4 md:last:col-start-3 lg:col-span-2 lg:last:col-start-6"
-          >
-            <Image
+            className="overflow-hidden rounded-md transition-shadow duration-300 hover:shadow-lg bg-white border border-muted/70 flex flex-col"
+            >
+            <div className="w-full h-56 relative">
+              <Image
               src={image}
               alt={`${name}'s random place image`}
-              className="w-full rounded-t-md object-cover"
-            />
-            <div className="space-y-2 px-2">
-              <h3 className="!text-lg underline">{name}</h3>
-              <p className="text-sm">{overview}</p>
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 25vw"
+              style={{ objectFit: "cover" }}
+              priority={name === "Student"}
+              />
             </div>
-          </Link>
+            <div className="p-4 flex-1 flex flex-col">
+              <h4 className="underline-offset-6 underline">{name}</h4>
+              <p className="mt-6 text-sm leading-relaxed">{overview}</p>
+            </div>
+            </Link>
         ))}
       </div>
     </section>
