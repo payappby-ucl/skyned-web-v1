@@ -10,6 +10,7 @@ import { brandServerApi } from "@/src/lib/server";
 import { IFaq } from "@workspace/shared";
 import FAQs from "./_components/faq/faqs";
 import Link from "next/link";
+import Jumbotron from "../_components/jumbotron";
 
 const title = "Frequently Asked Questions";
 const description = `These are the most commonly asked questions about ${env.organization.name}`;
@@ -59,8 +60,12 @@ export default async function Faqs() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-
-        <CustomBreadCrumb className="border-y" />
+        <Jumbotron
+          title={title}
+          subtitle={description}
+          backgroundImage="/assets/images/backgrounds/faqs.png"
+        />
+        
         <section>
           <div className="mx-auto max-w-2xl space-y-10">
             <div className="space-y-1 text-center">
