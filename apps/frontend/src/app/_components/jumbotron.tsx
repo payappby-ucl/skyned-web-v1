@@ -14,6 +14,7 @@ interface JumbotronProps {
   };
   className?: string;
   children?: React.ReactNode;
+  overlay?: boolean;
 }
 
 const Jumbotron: React.FC<JumbotronProps> = ({
@@ -23,20 +24,21 @@ const Jumbotron: React.FC<JumbotronProps> = ({
   className = "",
   children,
   cta,
+  overlay = false,
 }) => {
   return (
     <header
       role="banner"
       className={cn(
-        "text-background dark:text-foreground space-y-4 bg-gray-700 bg-cover bg-center bg-no-repeat !px-6 !pt-30 !pb-20 md:!pt-50 md:!pb-40 text-center relative",
+        "text-background dark:text-foreground !pt-30 md:!pt-50 relative space-y-4 bg-gray-700 bg-cover bg-center bg-no-repeat !px-6 !pb-20 text-center md:!pb-40",
         className,
       )}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <h1>{title}</h1>
-      {subtitle && <p className="mx-auto max-w-lg">{subtitle}</p>}
+      <h1 className="relative z-[1]">{title}</h1>
+      {subtitle && <p className="mx-auto max-w-lg relative z-[1]">{subtitle}</p>}
       {cta && (
-        <div className="mt-8">
+        <div className="mt-8 relative z-[1]">
           <Link
             href={cta.href}
             className={cn(
@@ -51,7 +53,8 @@ const Jumbotron: React.FC<JumbotronProps> = ({
           </Link>
         </div>
       )}
-      {children}
+      {children && <div className="relative z-[1]">{children}</div>}
+      {overlay && <div className="absolute inset-0 z-0 bg-black opacity-50"></div>}
     </header>
   );
 };

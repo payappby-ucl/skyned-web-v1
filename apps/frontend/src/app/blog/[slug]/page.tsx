@@ -8,7 +8,6 @@ import { organization, sharedMetadata } from "@/src/utils";
 import { IBlogPost } from "@workspace/shared";
 import { Metadata } from "next";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import Script from "next/script";
 import { cache } from "react";
 import { BlogPosting, WithContext } from "schema-dts";
