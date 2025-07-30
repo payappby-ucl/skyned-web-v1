@@ -113,3 +113,28 @@ export async function connectIntake(
     return brandServerApi.utils.createServerActionError(error);
   }
 }
+
+// Deactivate Or Activate
+export async function takeActionOnProgram(
+  schoolSlug: string,
+  programSlug: string,
+  action: "activate" | "deactivate",
+): Promise<ServerActionReturnType<IMessageResponse>> {
+  try {
+    const { data: res } =
+      await brandServerApi.httpClient.request<IMessageResponse>(
+        `/schools/${schoolSlug}/programs/${programSlug}/${action}`,
+        "PATCH",
+      );
+
+    revalidateTag(
+      `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
+    );
+    return {
+      success: true,
+      data: res,
+    };
+  } catch (error: any) {
+    return brandServerApi.utils.createServerActionError(error);
+  }
+}

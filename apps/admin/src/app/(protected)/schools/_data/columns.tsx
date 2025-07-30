@@ -89,8 +89,8 @@ export const columns: ColumnDef<ISchool>[] = [
           {school.active ? (
             <HasPermission
               resourceName="schools"
-              action="update"
-              args={[{} as any, school]}
+              action="deactivate"
+              args={[school]}
             >
               <DropdownMenuItem
                 className="text-destructive hover:!text-destructive"
@@ -103,8 +103,8 @@ export const columns: ColumnDef<ISchool>[] = [
           ) : (
             <HasPermission
               resourceName="schools"
-              action="update"
-              args={[{} as any, school]}
+              action="activate"
+              args={[school]}
             >
               <DropdownMenuItem
                 className="text-green-600 hover:!text-green-600"

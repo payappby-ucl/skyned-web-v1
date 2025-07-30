@@ -1,20 +1,16 @@
 import HasPermission from "@/src/components/has-permission";
 import { brandClientApi } from "@/src/lib/client";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  educationLevels,
-  EnglishProficiency,
-  IAdmin,
-  IFaq,
-  IProgram,
-} from "@workspace/shared";
+import { educationLevels, IAdmin, IFaq, IProgram } from "@workspace/shared";
 import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import { ArrowBigRight, Eye, SquarePen } from "lucide-react";
+import { Eye, EyeIcon, EyeOff, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import StatusView from "@/src/components/status-view";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { takeActionOnProgram } from "../_actions";
 
 export const columns: ColumnDef<IProgram>[] = [
   {
@@ -22,7 +18,43 @@ export const columns: ColumnDef<IProgram>[] = [
     header: "Actions",
     accessorFn: (row) => row,
     cell: (info) => {
+      const queryClient = useQueryClient();
       const program = info.getValue<IProgram>();
+
+      const actionOnProgramMutation = useMutation({
+        mutationFn: async () => {
+          try {
+            brandClientApi.utils.toast.promise(
+              async () => {
+                const res = await takeActionOnProgram(
+                  program.school?.slug || "",
+                  program.slug,
+                  program.active ? "deactivate" : "activate",
+                );
+
+                const resData =
+                  brandClientApi.utils.handleServerActionResponse(res);
+                return resData;
+              },
+              {
+                loading: `Please wait...`,
+                success(data) {
+                  queryClient.invalidateQueries({
+                    queryKey: [`programs-${program.school?.slug}`],
+                  });
+                  return data.message;
+                },
+                error(error) {
+                  brandClientApi.utils.alertError(error);
+                  return error;
+                },
+              },
+            );
+          } catch (error) {
+            brandClientApi.utils.alertError(error);
+          }
+        },
+      });
 
       return (
         <DataTableRowActions>
@@ -53,6 +85,36 @@ export const columns: ColumnDef<IProgram>[] = [
               </Link>
             </DropdownMenuItem>
           </HasPermission>
+
+          {program.active ? (
+            <HasPermission
+              resourceName="programs"
+              action="deactivate"
+              args={[program]}
+            >
+              <DropdownMenuItem
+                className="text-destructive hover:!text-destructive"
+                onClick={() => actionOnProgramMutation.mutate()}
+              >
+                <EyeOff className="text-destructive" />
+                <span>Deactivate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          ) : (
+            <HasPermission
+              resourceName="programs"
+              action="activate"
+              args={[program]}
+            >
+              <DropdownMenuItem
+                className="text-green-600 hover:!text-green-600"
+                onClick={() => actionOnProgramMutation.mutate()}
+              >
+                <EyeIcon className="text-green-600" />
+                <span>Activate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          )}
         </DataTableRowActions>
       );
     },
