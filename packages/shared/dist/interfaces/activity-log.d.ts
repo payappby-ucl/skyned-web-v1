@@ -8,7 +8,7 @@ export interface IActivityLog<Key extends keyof PermissionType> extends ITimesta
     admin: AdminProfile;
     resource: Key;
     resourceId: number;
-    action: ActivityActionType;
+    action: PermissionType[Key]["action"];
     message?: string;
     previousState?: PermissionType[Key]["dataType"];
     currentState?: PermissionType[Key]["dataType"];

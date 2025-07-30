@@ -249,6 +249,74 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
+  /schools/{slug}/activate:
+    patch:
+      summary: Activate/Releases a school
+      description: This ensures the this school and all associated programs are visible for everyone to access
+      operation: activateSchool
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/deactivate:
+    patch:
+      summary: Deactivate/Suspends a school
+      description: This ensures the this school and all associated programs are hidden from everyone other than the admins with access
+      operation: deactivateSchool
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
   /schools/{slug}/accommodation:
     summary: School Accommodation operation
 
@@ -893,6 +961,78 @@ paths:
                   type: array
                   items:
                     type: integer
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/programs/{programSlug}/activate:
+    patch:
+      summary: Activate/Releases a programs in a school
+      description: This ensures that the programs is visible for everyone to access
+      operation: activateSchoolProgram
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /schools/{slug}/programs/{programSlug}/deactivate:
+    patch:
+      summary: Deactivate/Suspends a program from a school
+      description: This ensures that the program is hidden from everyone other than the admins with access
+      operation: deactivateSchoolProgram
+      security:
+        - bearerAuth: []
+      tags:
+        - School
+        - Program
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+        - $ref: "#/components/parameters/ProgramSlug"
       responses:
         "200":
           description: Success Message

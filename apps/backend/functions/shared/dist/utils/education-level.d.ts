@@ -555,7 +555,7 @@ export declare const educationLevels: {
         }];
         readonly levelValue: 20;
     }, {
-        readonly level: "Doctoral Degree (Phd, M.D., ...)";
+        readonly level: "Doctoral Degree (PhD / MD / equivalent)";
         readonly schemes: readonly [{
             readonly name: "Higher Education Percentage Scale : 0-100";
             readonly max: 100;

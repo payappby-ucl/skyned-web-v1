@@ -211,6 +211,100 @@ describe("Schools API", () => {
     });
   });
 
+  describe(`Deactivate/Suspend school - ${url}/test-school`, () => {
+    const fullUrl = `${url}/test-school/deactivate`;
+    test("should fail if no authorization header is passed", async () => {
+      const res = await request(server)
+        .patch(fullUrl)
+        .send({
+          ...schoolData,
+          slug: "test-school",
+        });
+
+      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.body).toEqual({
+        statusCode: StatusCodes.UNAUTHORIZED,
+        success: false,
+        data: expect.objectContaining({
+          message: expect.any(String),
+        }),
+      });
+    });
+
+    test("should suspend the school school", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .patch(fullUrl)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body.data).toEqual(
+        expect.objectContaining({
+          message: expect.any(String),
+        }),
+      );
+
+      const schoolRes = await request(server)
+        .get(`${url}/test-school`)
+        .set("authorization", `bearer ${token}`);
+
+      expect(schoolRes.status).toBe(StatusCodes.OK);
+      expect(schoolRes.body.data.id).not.toBeNull();
+      expect(schoolRes.body.data.schoolId).not.toBeNull();
+      expect(schoolRes.body.data.slug).toBe("test-school");
+      expect(schoolRes.body.data.active).toBe(false);
+    });
+  });
+
+  describe(`Activate/Release school - ${url}/test-school`, () => {
+    const fullUrl = `${url}/test-school/activate`;
+    test("should fail if no authorization header is passed", async () => {
+      const res = await request(server)
+        .patch(fullUrl)
+        .send({
+          ...schoolData,
+          slug: "test-school",
+        });
+
+      expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+      expect(res.body).toEqual({
+        statusCode: StatusCodes.UNAUTHORIZED,
+        success: false,
+        data: expect.objectContaining({
+          message: expect.any(String),
+        }),
+      });
+    });
+
+    test("should release the school", async () => {
+      const { user } = await signInUser();
+      const token = await user.getIdToken();
+
+      const res = await request(server)
+        .patch(fullUrl)
+        .set("authorization", `bearer ${token}`);
+
+      expect(res.status).toBe(StatusCodes.OK);
+      expect(res.body.data).toEqual(
+        expect.objectContaining({
+          message: expect.any(String),
+        }),
+      );
+
+      const schoolRes = await request(server)
+        .get(`${url}/test-school`)
+        .set("authorization", `bearer ${token}`);
+
+      expect(schoolRes.status).toBe(StatusCodes.OK);
+      expect(schoolRes.body.data.id).not.toBeNull();
+      expect(schoolRes.body.data.schoolId).not.toBeNull();
+      expect(schoolRes.body.data.slug).toBe("test-school");
+      expect(schoolRes.body.data.active).toBe(true);
+    });
+  });
+
   describe(`POST Accommodation - ${url}/test-school/accommodation`, () => {
     test("should fail if no authorization header is passed", async () => {
       const res = await request(server)
@@ -965,6 +1059,84 @@ describe("Schools API", () => {
             message: expect.any(String),
           }),
         );
+      });
+    });
+
+    describe(`PATCH Deactivate Program - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/deactivate`;
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).patch(uri);
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should deactivate a program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .patch(uri)
+          .set("authorization", `bearer ${token}`);
+
+        const programRes = (await request(server)
+          .get(`${route}/school-update-single-program-one`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+        expect(programRes.body.data.active).toBe(false);
+      });
+    });
+
+    describe(`PATCH Activate Program - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/activate`;
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).patch(uri);
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should activate a program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .patch(uri)
+          .set("authorization", `bearer ${token}`);
+
+        const programRes = (await request(server)
+          .get(`${route}/school-update-single-program-one`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+        expect(programRes.body.data.active).toBe(true);
       });
     });
   });

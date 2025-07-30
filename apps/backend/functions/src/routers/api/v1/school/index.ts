@@ -85,6 +85,24 @@ export class SchoolRouter implements IRouter {
         schoolController.updateSchool,
       );
 
+    this.router.route("/:slug/deactivate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.deactivateSchool,
+    );
+
+    this.router.route("/:slug/activate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.activateSchool,
+    );
+
     this.router
       .route("/:slug/accommodation")
       .get(
@@ -208,6 +226,24 @@ export class SchoolRouter implements IRouter {
       )
       // TODO: Remember to implement
       .delete();
+
+    this.router.route("/:slug/programs/:programSlug/deactivate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema.merge(ProgramSlugSchema),
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.deactivateProgram,
+    );
+
+    this.router.route("/:slug/programs/:programSlug/activate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema.merge(ProgramSlugSchema),
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.activateProgram,
+    );
 
     this.router.route("/:slug/programs/:programSlug/disconnect-intakes").put(
       RequestValidationMiddleware.validate({
