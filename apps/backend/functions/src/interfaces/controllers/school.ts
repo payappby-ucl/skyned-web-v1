@@ -160,6 +160,18 @@ export interface ISchoolController {
     UpdateBulkProgramSchema
   >;
 
+  /** Deactivate/Suspends a program */
+  deactivateProgram: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Activate/Releases a program */
+  activateProgram: RequestHandler<
+    object & SchoolSlugSchema & ProgramSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
   /** Connect Intakes */
   connectIntakes: RequestHandler<
     object & SchoolSlugSchema & ProgramSlugSchema,

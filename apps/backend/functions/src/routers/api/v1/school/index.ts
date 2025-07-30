@@ -227,6 +227,24 @@ export class SchoolRouter implements IRouter {
       // TODO: Remember to implement
       .delete();
 
+    this.router.route("/:slug/programs/:programSlug/deactivate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema.merge(ProgramSlugSchema),
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.deactivateProgram,
+    );
+
+    this.router.route("/:slug/programs/:programSlug/activate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema.merge(ProgramSlugSchema),
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      schoolController.activateProgram,
+    );
+
     this.router.route("/:slug/programs/:programSlug/disconnect-intakes").put(
       RequestValidationMiddleware.validate({
         params: SchoolSlugSchema.merge(ProgramSlugSchema),

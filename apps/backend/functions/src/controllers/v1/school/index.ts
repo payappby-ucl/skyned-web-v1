@@ -339,7 +339,7 @@ export class SchoolController
           resource: "schools",
           resourceId: school.id,
           adminId: authUser.user.id,
-          action: "update",
+          action: "deactivate",
           message: `Deactivated/Suspended ${school.name}`,
           previousState: SkynedUtils.exclude(school, ["createdBy"]),
           currentState: SkynedUtils.exclude(updatedSchool, ["createdBy"]),
@@ -377,7 +377,7 @@ export class SchoolController
       this._attributeBasedAccessControl(
         authUser,
         "schools",
-        "deactivate",
+        "activate",
         school,
       );
 
@@ -399,7 +399,7 @@ export class SchoolController
           resource: "schools",
           resourceId: school.id,
           adminId: authUser.user.id,
-          action: "update",
+          action: "activate",
           message: `Activated/Released ${school.name}`,
           previousState: SkynedUtils.exclude(school, ["createdBy"]),
           currentState: SkynedUtils.exclude(updatedSchool, ["createdBy"]),
@@ -1097,6 +1097,156 @@ export class SchoolController
       );
 
       res._success(StatusCodes.OK, { message: "Updated." });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deactivateProgram: ISchoolController["deactivateProgram"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug, programSlug } = req.params;
+      const adminUser = this._validateAdmin(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        adminUser,
+      );
+
+      if (!program) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "programs",
+        "deactivate",
+        program,
+      );
+
+      if (!program.active) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${program.name} is already inactive`,
+        );
+      }
+
+      const updatedProgram = await this.programService.updateSingleProgram(
+        school.schoolId,
+        program.slug,
+        program.programId,
+        {
+          active: false,
+        },
+      );
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "programs",
+          resourceId: program.id,
+          adminId: adminUser.user.id,
+          action: "deactivate",
+          message: `Deactivated/Suspended ${program.name}`,
+          previousState: SkynedUtils.exclude(program, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedProgram, ["createdBy"]),
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: `${program.name} has been deactivated.`,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  activateProgram: ISchoolController["activateProgram"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug, programSlug } = req.params;
+      const adminUser = this._validateAdmin(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, adminUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      const program = await this.programService.findProgramBySlugAndSchoolId(
+        school.schoolId,
+        programSlug,
+        adminUser,
+      );
+
+      if (!program) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "programs",
+        "activate",
+        program,
+      );
+
+      if (program.active) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${program.name} is already active`,
+        );
+      }
+
+      const updatedProgram = await this.programService.updateSingleProgram(
+        school.schoolId,
+        program.slug,
+        program.programId,
+        {
+          active: true,
+        },
+      );
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "programs",
+          resourceId: program.id,
+          adminId: adminUser.user.id,
+          action: "activate",
+          message: `Activated/Released ${program.name}`,
+          previousState: SkynedUtils.exclude(program, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedProgram, ["createdBy"]),
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: `${program.name} has been activated/released.`,
+      });
     } catch (error) {
       next(error);
     }

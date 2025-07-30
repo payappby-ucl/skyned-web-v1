@@ -27,7 +27,7 @@ export interface IProgramService {
     schoolId: string,
     slug: string,
     programId: string,
-    data: Partial<ProgramSchema>,
+    data: Partial<ProgramSchema & { active?: boolean }>,
   ): Promise<IProgram>;
 
   /** Update bulk program */
