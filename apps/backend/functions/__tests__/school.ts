@@ -1061,5 +1061,83 @@ describe("Schools API", () => {
         );
       });
     });
+
+    describe(`PATCH Deactivate Program - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/deactivate`;
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).patch(uri);
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should deactivate a program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .patch(uri)
+          .set("authorization", `bearer ${token}`);
+
+        const programRes = (await request(server)
+          .get(`${route}/school-update-single-program-one`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+        expect(programRes.body.data.active).toBe(false);
+      });
+    });
+
+    describe(`PATCH Activate Program - ${route}/school-update-single-program-one`, () => {
+      const uri = `${route}/school-update-single-program-one/activate`;
+
+      test("should fail if no authorization header is passed", async () => {
+        const res = await request(server).patch(uri);
+
+        expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+        expect(res.body).toEqual({
+          statusCode: StatusCodes.UNAUTHORIZED,
+          success: false,
+          data: expect.objectContaining({
+            message: expect.any(String),
+          }),
+        });
+      });
+
+      test("should activate a program", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .patch(uri)
+          .set("authorization", `bearer ${token}`);
+
+        const programRes = (await request(server)
+          .get(`${route}/school-update-single-program-one`)
+          .set("authorization", `bearer ${token}`)) as any;
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body.data).not.toBeNull();
+        expect(res.body.data).toEqual(
+          expect.objectContaining({
+            message: expect.any(String),
+          }),
+        );
+        expect(programRes.body.data.active).toBe(true);
+      });
+    });
   });
 });
