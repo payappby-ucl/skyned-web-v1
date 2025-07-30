@@ -215,6 +215,17 @@ export const columns: ColumnDef<ISchool>[] = [
   },
 
   {
+    id: "programs",
+    accessorFn: (row) => row._count?.programs,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Programs" column={column} />
+    ),
+    cell: (info) => (
+      <p className="font-semibold capitalize">{info.getValue<number>()}</p>
+    ),
+  },
+
+  {
     id: "createdBy",
     accessorFn: (row) => row.createdBy,
     header: ({ column }) => (
