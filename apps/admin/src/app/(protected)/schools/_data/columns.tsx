@@ -5,11 +5,13 @@ import { IAdmin, IFaq, ISchool } from "@workspace/shared";
 import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import { Eye, SquarePen } from "lucide-react";
+import { Eye, EyeClosed, EyeIcon, EyeOff, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import SchoolProfile from "@/src/components/school-profile";
 import StatusView from "@/src/components/status-view";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { takeActionOnSchool } from "../_actions";
 
 export const columns: ColumnDef<ISchool>[] = [
   {
@@ -17,7 +19,42 @@ export const columns: ColumnDef<ISchool>[] = [
     header: "Actions",
     accessorFn: (row) => row,
     cell: (info) => {
+      const queryClient = useQueryClient();
       const school = info.getValue<ISchool>();
+
+      const actionOnSchoolMutation = useMutation({
+        mutationFn: async () => {
+          try {
+            brandClientApi.utils.toast.promise(
+              async () => {
+                const res = await takeActionOnSchool(
+                  school.slug,
+                  school.active ? "deactivate" : "activate",
+                );
+
+                const resData =
+                  brandClientApi.utils.handleServerActionResponse(res);
+                return resData;
+              },
+              {
+                loading: `Please wait...`,
+                success(data) {
+                  queryClient.invalidateQueries({
+                    queryKey: ["schools"],
+                  });
+                  return data.message;
+                },
+                error(error) {
+                  brandClientApi.utils.alertError(error);
+                  return error;
+                },
+              },
+            );
+          } catch (error) {
+            brandClientApi.utils.alertError(error);
+          }
+        },
+      });
 
       return (
         <DataTableRowActions>
@@ -48,6 +85,36 @@ export const columns: ColumnDef<ISchool>[] = [
               </Link>
             </DropdownMenuItem>
           </HasPermission>
+
+          {school.active ? (
+            <HasPermission
+              resourceName="schools"
+              action="update"
+              args={[{} as any, school]}
+            >
+              <DropdownMenuItem
+                className="text-destructive hover:!text-destructive"
+                onClick={() => actionOnSchoolMutation.mutate()}
+              >
+                <EyeOff className="text-destructive" />
+                <span>Deactivate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          ) : (
+            <HasPermission
+              resourceName="schools"
+              action="update"
+              args={[{} as any, school]}
+            >
+              <DropdownMenuItem
+                className="text-green-600 hover:!text-green-600"
+                onClick={() => actionOnSchoolMutation.mutate()}
+              >
+                <EyeIcon className="text-green-600" />
+                <span>Activate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          )}
         </DataTableRowActions>
       );
     },
