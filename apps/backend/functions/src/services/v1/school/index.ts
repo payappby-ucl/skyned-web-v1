@@ -75,10 +75,7 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
 
   updateSchool: ISchoolService["updateSchool"] = async (schoolId, data) => {
     const { schoolId: id, ...rest } = this.validationUtility.validateInput({
-      schema: UpdateSchoolServiceSchema.partial({
-        logo: true,
-        schoolImage: true,
-      }),
+      schema: UpdateSchoolServiceSchema.partial(),
       inputData: {
         ...data,
         schoolId,
