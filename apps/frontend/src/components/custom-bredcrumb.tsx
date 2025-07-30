@@ -29,8 +29,8 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
   const [last, ...middle] = others.reverse();
 
   return (
-    <Breadcrumb className={`mx-auto px-5 py-4 md:px-20 ${className}`}>
-      <BreadcrumbList className="mx-auto w-fit md:w-full">
+    <Breadcrumb className={`mx-auto px-6 py-4 lg:px-20 ${className}`}>
+      <BreadcrumbList className="w-full">
         <BreadcrumbItem>
           <BreadcrumbLink href={first || "/"} className="capitalize">
             Home

@@ -37,7 +37,7 @@ export default async function Schools({ searchParams }: Props) {
       c: c || null,
     });
 
-    const urlConstruct = `/blogs?${urlQuery.toString()}`;
+    const urlConstruct = `/schools?${urlQuery.toString()}`;
 
     const { data } = await brandServerApi.httpClient.request<
       IPaginatedResponse<ISchool>
