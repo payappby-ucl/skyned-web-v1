@@ -9,8 +9,8 @@ interface Props {
 }
 export function SchoolList({ data, searchParams }: Props) {
   return (
-    <section className="space-y-6">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {data.data.map((school) => (
         <SchoolCard school={school} key={school.slug} />
       ))}
@@ -22,6 +22,6 @@ export function SchoolList({ data, searchParams }: Props) {
           <p className="text-sm">No Data</p>
         </div>
       ) : null}
-    </section>
+    </>
   );
 }

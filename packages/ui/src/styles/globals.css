@@ -185,18 +185,8 @@
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  line-height: 1;
-}
-
 h1 {
-  @apply text-4xl md:text-5xl lg:text-6xl;
+  @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight;
 }
 h2 {
   font-size: 2.5rem;
@@ -222,20 +212,14 @@ textarea {
   font-family: var(--font-manrope);
 }
 
-main section,
-body > footer {
-  @apply py-20 px-5 md:px-20;
+p {
+  @apply leading-relaxed tracking-normal
 }
 
-/* input,
-textarea {
-  @apply !text-sm;
-} */
-
-/* .scrollbar {
-  scrollbar-width: "thin";
-  scrollbar-color: var(--color-brand) var(--color-background);
-} */
+main section,
+body > footer {
+  @apply px-6 py-10 lg:px-20 lg:py-16;
+}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {

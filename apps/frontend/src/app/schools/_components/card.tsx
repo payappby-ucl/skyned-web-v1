@@ -48,7 +48,7 @@ const SchoolCard: React.FC<Props> = ({ school }) => (
           </Badge>
         </div>
 
-        <p className="line-clamp-3 !text-sm text-slate-800 leading-relaxed tracking-normal">{school.overview}</p>
+        <p className="!text-sm line-clamp-3 text-slate-800">{school.overview}</p>
       </div>
 
       {/* Action Button */}
