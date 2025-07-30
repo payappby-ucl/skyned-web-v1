@@ -3,13 +3,10 @@ import { organization, sharedMetadata } from "@/src/utils";
 import { Metadata } from "next";
 import Script from "next/script";
 import { WithContext, WebPage } from "schema-dts";
-import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
-import { addresses, contacts } from "@/src/utils";
 import { redirect } from "next/navigation";
 import { brandServerApi } from "@/src/lib/server";
 import { IFaq } from "@workspace/shared";
 import FAQs from "./_components/faqs";
-import Link from "next/link";
 import Jumbotron from "../_components/jumbotron";
 import Image from "next/image";
 

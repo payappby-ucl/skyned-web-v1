@@ -46,7 +46,7 @@ export default async function About() {
       <Jumbotron
         title="About Us"
         subtitle="Our team of professionals will adequately guide you through your study application journey."
-        backgroundImage="/assets/images/about_us.jpg"
+        backgroundImage="/assets/images/backgrounds/about-bg.png"
       />
       <CustomBreadCrumb className="bg-accent border-b" />
       <section className="bg-accent space-y-10">
