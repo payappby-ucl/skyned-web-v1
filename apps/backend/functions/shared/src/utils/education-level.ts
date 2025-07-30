@@ -257,7 +257,7 @@ export const educationLevels = {
       levelValue: 20,
     },
     {
-      level: "Doctoral Degree (Phd, M.D., ...)",
+      level: "Doctoral Degree (PhD / MD / equivalent)",
       schemes: [schemes["percentage"], schemes["division"]],
       levelValue: 21,
     },

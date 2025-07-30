@@ -50,7 +50,14 @@ export type PermissionType = {
     dataType: IAdmin;
     createDataType: CreateAdminSchema;
     updateDataType: UpdateAdminSchema;
-    action: "list" | "create" | "read" | "update" | "delete";
+    action:
+      | "list"
+      | "create"
+      | "read"
+      | "update"
+      | "delete"
+      | "deactivate"
+      | "activate";
   };
 
   departments: {
@@ -85,7 +92,14 @@ export type PermissionType = {
     dataType: ISchool;
     createDataType: CreateSchoolSchema;
     updateDataType: UpdateSchoolSchema;
-    action: "list" | "create" | "read" | "update" | "delete";
+    action:
+      | "list"
+      | "create"
+      | "read"
+      | "update"
+      | "delete"
+      | "deactivate"
+      | "activate";
   };
 
   accommodations: {

@@ -148,6 +148,12 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
           },
         },
 
+        _count: {
+          select: {
+            programs: true,
+          },
+        },
+
         createdBy:
           authUser?.claim === "admin"
             ? {
@@ -229,6 +235,12 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
                 select: SkynedUtils.select(adminProfileKeys),
               }
             : undefined,
+
+        _count: {
+          select: {
+            programs: true,
+          },
+        },
       },
     });
 

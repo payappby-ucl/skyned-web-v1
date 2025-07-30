@@ -77,5 +77,21 @@ exports.adminPolicies = {
         delete() {
             return false;
         },
+        deactivate(authClaim, data) {
+            if (!authClaim)
+                return false;
+            const { claim, user } = authClaim;
+            if (claim !== "admin")
+                return false;
+            return true;
+        },
+        activate(authClaim, data) {
+            if (!authClaim)
+                return false;
+            const { claim, user } = authClaim;
+            if (claim !== "admin")
+                return false;
+            return true;
+        },
     },
 };

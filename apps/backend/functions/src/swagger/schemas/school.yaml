@@ -65,6 +65,12 @@ components:
             accommodation:
               $ref: "#/components/schemas/Accommodation"
               nullable: true
+
+            _count:
+              type: object
+              properties:
+                programs:
+                  type: integer
           required:
             - id
             - schoolId
