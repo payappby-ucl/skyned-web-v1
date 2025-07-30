@@ -52,6 +52,18 @@ export interface ISchoolController {
     UpdateSchoolSchema
   >;
 
+  /** Deactivates/Suspends a school */
+  deactivateSchool: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Activates/Release a school */
+  activateSchool: RequestHandler<
+    object & SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
   /** Get Accommodation */
   getAccommodation: RequestHandler<
     object & SchoolSlugSchema,

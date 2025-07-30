@@ -44,6 +44,7 @@ export interface ISchoolService {
       Omit<CreateSchoolSchema, "logo" | "schoolImage"> & {
         logo: IObject;
         schoolImage: IObject;
+        active: boolean;
       }
     >,
   ): Promise<ISchool>;

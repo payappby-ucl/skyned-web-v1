@@ -5,7 +5,7 @@ import { ISchoolService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { ServiceUtils } from "../utils";
-import { CreateSchoolServiceSchema } from "./schema";
+import { CreateSchoolServiceSchema, UpdateSchoolServiceSchema } from "./schema";
 import { GeneralSchema } from "../../../zod-schemas";
 
 const generalSchoolData: (keyof ISchool)[] = [
@@ -75,7 +75,7 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
 
   updateSchool: ISchoolService["updateSchool"] = async (schoolId, data) => {
     const { schoolId: id, ...rest } = this.validationUtility.validateInput({
-      schema: CreateSchoolServiceSchema.partial({
+      schema: UpdateSchoolServiceSchema.partial({
         logo: true,
         schoolImage: true,
       }),

@@ -295,6 +295,126 @@ export class SchoolController
     }
   };
 
+  deactivateSchool: ISchoolController["deactivateSchool"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+
+      const authUser = this._validateAdmin(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        authUser,
+        "schools",
+        "deactivate",
+        school,
+      );
+
+      if (!school.active) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${school.name} is currently inactive`,
+        );
+      }
+
+      const updatedSchool = await this.schoolService.updateSchool(
+        school.schoolId,
+        { active: false },
+      );
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "schools",
+          resourceId: school.id,
+          adminId: authUser.user.id,
+          action: "update",
+          message: `Deactivated/Suspended ${school.name}`,
+          previousState: SkynedUtils.exclude(school, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedSchool, ["createdBy"]),
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: `${school.name} has been deactivated`,
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  activateSchool: ISchoolController["activateSchool"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { slug } = req.params;
+
+      const authUser = this._validateAdmin(req);
+
+      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+
+      if (!school) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        authUser,
+        "schools",
+        "deactivate",
+        school,
+      );
+
+      if (school.active) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${school.name} is currently active`,
+        );
+      }
+
+      const updatedSchool = await this.schoolService.updateSchool(
+        school.schoolId,
+        { active: true },
+      );
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          resource: "schools",
+          resourceId: school.id,
+          adminId: authUser.user.id,
+          action: "update",
+          message: `Activated/Released ${school.name}`,
+          previousState: SkynedUtils.exclude(school, ["createdBy"]),
+          currentState: SkynedUtils.exclude(updatedSchool, ["createdBy"]),
+        },
+      });
+
+      res._success(StatusCodes.OK, {
+        message: `${school.name} has been activated`,
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
   getAccommodation: ISchoolController["getAccommodation"] = async (
     req,
     res,

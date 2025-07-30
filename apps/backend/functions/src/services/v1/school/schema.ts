@@ -14,3 +14,17 @@ export const CreateSchoolServiceSchema = CreateSchoolSchema.omit({
 export type CreateSchoolServiceSchema = z.infer<
   typeof CreateSchoolServiceSchema
 >;
+
+export const UpdateSchoolServiceSchema = CreateSchoolSchema.omit({
+  logo: true,
+  schoolImage: true,
+}).extend({
+  logo: GeneralSchema.shape.object,
+  schoolImage: GeneralSchema.shape.object,
+  schoolId: GeneralSchema.shape.schoolId,
+  active: z.boolean().optional(),
+});
+
+export type UpdateSchoolServiceSchema = z.infer<
+  typeof UpdateSchoolServiceSchema
+>;
