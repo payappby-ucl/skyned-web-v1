@@ -25,9 +25,10 @@ const Jumbotron: React.FC<JumbotronProps> = ({
   cta,
 }) => {
   return (
-    <section
+    <header
+      role="banner"
       className={cn(
-        "text-background dark:text-foreground space-y-4 bg-gray-700 bg-cover bg-center bg-no-repeat !pt-20 md:!pt-50 md:!pb-40 text-center",
+        "text-background dark:text-foreground space-y-4 bg-gray-700 bg-cover bg-center bg-no-repeat !px-6 !pt-30 !pb-20 md:!pt-50 md:!pb-40 text-center relative",
         className,
       )}
       style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -51,7 +52,7 @@ const Jumbotron: React.FC<JumbotronProps> = ({
         </div>
       )}
       {children}
-    </section>
+    </header>
   );
 };
 

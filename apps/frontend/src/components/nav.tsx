@@ -14,6 +14,7 @@ import logo from "../../public/assets/images/brand/logo.png";
 import { Button } from "@workspace/ui/components/button";
 import {
   BuildingIcon,
+  CalendarIcon,
   HomeIcon,
   InfoIcon,
   LucideIcon,
@@ -24,6 +25,7 @@ import {
   ScaleIcon,
   SearchIcon,
   ShieldQuestionIcon,
+  TreePineIcon,
 } from "lucide-react";
 import React from "react";
 import {
@@ -79,6 +81,18 @@ const menuItems: MenuItem[] = [
       alt: "Explore our resources",
     },
     subMenu: [
+      {
+        title: "Consultations",
+        description: "Book a consultation with us",
+        icon: CalendarIcon,
+        href: "/consultation",
+      },
+      {
+        title: "Our Village",
+        description: "Join our community",
+        icon: TreePineIcon,
+        href: "/our-village",
+      },
       {
         title: "FAQs",
         description: "Frequently Asked Questions",

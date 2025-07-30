@@ -196,7 +196,7 @@ h6 {
 }
 
 h1 {
-  font-size: 3rem;
+  @apply text-4xl md:text-5xl lg:text-6xl;
 }
 h2 {
   font-size: 2.5rem;

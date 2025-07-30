@@ -13,6 +13,8 @@ import { Badge } from "@workspace/ui/components/badge";
 import NewsLetterForm from "@/src/components/footer/news-letter-form";
 import { FeaturedBlogPosts } from "./_components/featured";
 import Alert from "@/src/components/alert";
+import Jumbotron from "../_components/jumbotron";
+import { SparkleIcon, SparklesIcon } from "lucide-react";
 
 type Props = {
   searchParams: Promise<{ page?: string; limit?: string; c?: string }>;
@@ -94,20 +96,28 @@ export default async function Blogs({ searchParams }: Props) {
             __html: JSON.stringify(blogPageJsonLd),
           }}
         />
-        <CustomBreadCrumb className="border-y" />
-        <section className="space-y-20">
-          <header className="mx-auto max-w-lg space-y-3 text-center">
-            <Badge variant="outline">Your gateway to global education.</Badge>
-            <h1>Browser Our Blog</h1>
-            <p>
-              Stay informed with insights, scholarship updates, and expert
-              advice tailored for students chasing international opportunities.
-            </p>
-          </header>
-          <div className="mx-auto max-w-lg space-y-3 text-center md:max-w-sm">
+        <Jumbotron
+          title="Browse Our Blog"
+          subtitle="Stay informed with insights, scholarship updates, and expert advice tailored for students chasing international opportunities."
+          backgroundImage="/assets/images/backgrounds/blog-bg.png"
+        >
+          <small
+            className="absolute left-1/2 top-20 md:top-40 flex -translate-x-1/2 items-center gap-2 rounded-full border-1 border-transparent bg-clip-padding px-3 py-1.5 text-white backdrop-blur whitespace-nowrap"
+            style={{
+              borderImage: "linear-gradient(90deg, rgb(255 255 255 / 2%) 0%, rgb(240 240 240 / 9%) 40%, rgb(255 255 255 / 0%) 100%) 1 / 1 / 0 stretch",
+              background: "linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(173,216,230,0.10) 100%)",
+              clipPath: "border-box",
+            }}
+          >
+            <SparklesIcon size={14} /> Your gateway to global education.
+          </small>
+          <div className="mx-auto max-w-lg space-y-3 text-center md:max-w-sm mt-6">
             <p>Join to our newsletter</p>
             <NewsLetterForm label="Join" />
           </div>
+        </Jumbotron>
+        <CustomBreadCrumb className="border-y" />
+        <section className="bg-accent space-y-10">
           <FeaturedBlogPosts />
           <LatestPosts data={data} searchParams={urlQuery} />
         </section>

@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
+import Jumbotron from "../_components/jumbotron";
 
 const title = "Book an Appointment With a Study Abroad Rep";
 const description =
@@ -79,10 +80,12 @@ export default function Consultation() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <section className="text-background dark:text-foreground space-y-4 bg-gray-700 bg-[url(/assets/images/consultation.jpg)] bg-cover bg-center bg-no-repeat text-center bg-blend-multiply">
-        <h1 className="mx-auto max-w-xl">{title}</h1>
-        <p className="mx-auto max-w-lg">{description}</p>
-      </section>
+      <Jumbotron
+        title={"Book Consultation"}
+        subtitle={description}
+        backgroundImage="/assets/images/backgrounds/consultation-bg.png"
+      />
+
       <CustomBreadCrumb className="bg-accent border-b" />
       <section className="bg-accent">
         <div className="bg-background shadow-xs grid grid-cols-1 gap-5 rounded-md p-5 md:p-10">
