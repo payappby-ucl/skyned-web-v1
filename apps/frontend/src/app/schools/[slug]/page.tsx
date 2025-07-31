@@ -1,11 +1,9 @@
-import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
-import Profile from "@/src/components/profile";
+import CustomBreadCrumb from "@/src/components/custom-bredcrumb"
 import { env } from "@/src/config";
 import { brandServerApi } from "@/src/lib/server";
 import { organization, sharedMetadata } from "@/src/utils";
-import { IBlogPost, ISchool } from "@workspace/shared";
+import { ISchool } from "@workspace/shared";
 import { Metadata } from "next";
-import Image from "next/image";
 import Script from "next/script";
 import { cache } from "react";
 import { BlogPosting, WithContext } from "schema-dts";
