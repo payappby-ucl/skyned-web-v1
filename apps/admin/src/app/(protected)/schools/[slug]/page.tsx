@@ -1,4 +1,4 @@
-import Alert from "@/src/components/alert";
+import BrandAlert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
@@ -13,6 +13,12 @@ import SchoolLocation from "../_components/location";
 import Image from "next/image";
 import SchoolMenu from "./_components/school-menu";
 import ProgramList from "./_components/program-list";
+import {
+  AlertTitle,
+  AlertDescription,
+  Alert,
+} from "@workspace/ui/components/alert";
+import { AlertCircleIcon } from "lucide-react";
 
 export default async function SchoolPage({
   params,
@@ -78,7 +84,25 @@ export default async function SchoolPage({
           </div>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-5 flex flex-col gap-5">
+          {/* Deactivation Alert */}
+          {!school.active ? (
+            <Alert variant="destructive" className="w-fit">
+              <AlertCircleIcon />
+              <AlertTitle>School is inactive</AlertTitle>
+              <AlertDescription>
+                <p>What does this mean?</p>
+                <ul className="list-inside list-disc text-sm">
+                  <li>Only staffs with necessary permissions can access.</li>
+                  <li>
+                    All Programs associated with this school will no longer be
+                    visible to the public.
+                  </li>
+                  <li>Application to associated programs will be denied</li>
+                </ul>
+              </AlertDescription>
+            </Alert>
+          ) : null}
           <HasPermission
             resourceName="programs"
             action="list"
@@ -91,6 +115,6 @@ export default async function SchoolPage({
       </HasPermission>
     );
   } catch (error) {
-    return <Alert message="Error" />;
+    return <BrandAlert message="Error" />;
   }
 }

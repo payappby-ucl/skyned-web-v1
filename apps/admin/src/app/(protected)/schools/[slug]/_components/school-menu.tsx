@@ -1,5 +1,6 @@
 "use client";
 
+import HasPermission from "@/src/components/has-permission";
 import { ISchool } from "@workspace/shared";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -8,15 +9,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@workspace/ui/components/dropdown-menu";
-import { ChevronDown, House, NotebookPen, SquarePen } from "lucide-react";
+import {
+  ChevronDown,
+  Eye,
+  EyeOff,
+  House,
+  NotebookPen,
+  SquarePen,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useSchool } from "../../_hooks";
 
 interface Props {
   school: ISchool;
 }
 
 const SchoolMenu: React.FC<Props> = ({ school }) => {
+  const { actionOnSchoolMutation } = useSchool();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,6 +64,42 @@ const SchoolMenu: React.FC<Props> = ({ school }) => {
             <House />
             <span>Accommodation</span>
           </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
+          {school.active ? (
+            <HasPermission
+              resourceName="schools"
+              action="deactivate"
+              args={[school]}
+            >
+              <Button
+                variant="ghost"
+                className="text-destructive hover:!text-destructive w-full justify-start rounded-sm !text-sm hover:!outline-0 hover:!ring-0"
+                aria-label={`Deactivate ${school.name}`}
+                onClick={() => actionOnSchoolMutation.mutate(school)}
+              >
+                <EyeOff className="text-destructive" />
+                <span>Deactivate</span>
+              </Button>
+            </HasPermission>
+          ) : (
+            <HasPermission
+              resourceName="schools"
+              action="activate"
+              args={[school]}
+            >
+              <Button
+                variant="ghost"
+                className="w-full justify-start rounded-sm !text-sm text-green-600 hover:!text-green-600 hover:!outline-0 hover:!ring-0"
+                aria-label={`Activate ${school.name}`}
+                onClick={() => actionOnSchoolMutation.mutate(school)}
+              >
+                <Eye className="text-green-600" />
+                <span>Activate</span>
+              </Button>
+            </HasPermission>
+          )}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
