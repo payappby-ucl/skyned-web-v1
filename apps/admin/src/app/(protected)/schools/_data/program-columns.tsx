@@ -9,8 +9,7 @@ import { Eye, EyeIcon, EyeOff, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import StatusView from "@/src/components/status-view";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { takeActionOnProgram } from "../_actions";
+import { useProgram } from "../_hooks";
 
 export const columns: ColumnDef<IProgram>[] = [
   {
@@ -18,43 +17,8 @@ export const columns: ColumnDef<IProgram>[] = [
     header: "Actions",
     accessorFn: (row) => row,
     cell: (info) => {
-      const queryClient = useQueryClient();
+      const { actionOnProgramMutation } = useProgram();
       const program = info.getValue<IProgram>();
-
-      const actionOnProgramMutation = useMutation({
-        mutationFn: async () => {
-          try {
-            brandClientApi.utils.toast.promise(
-              async () => {
-                const res = await takeActionOnProgram(
-                  program.school?.slug || "",
-                  program.slug,
-                  program.active ? "deactivate" : "activate",
-                );
-
-                const resData =
-                  brandClientApi.utils.handleServerActionResponse(res);
-                return resData;
-              },
-              {
-                loading: `Please wait...`,
-                success(data) {
-                  queryClient.invalidateQueries({
-                    queryKey: [`programs-${program.school?.slug}`],
-                  });
-                  return data.message;
-                },
-                error(error) {
-                  brandClientApi.utils.alertError(error);
-                  return error;
-                },
-              },
-            );
-          } catch (error) {
-            brandClientApi.utils.alertError(error);
-          }
-        },
-      });
 
       return (
         <DataTableRowActions>
@@ -94,7 +58,7 @@ export const columns: ColumnDef<IProgram>[] = [
             >
               <DropdownMenuItem
                 className="text-destructive hover:!text-destructive"
-                onClick={() => actionOnProgramMutation.mutate()}
+                onClick={() => actionOnProgramMutation.mutate(program)}
               >
                 <EyeOff className="text-destructive" />
                 <span>Deactivate</span>
@@ -108,7 +72,7 @@ export const columns: ColumnDef<IProgram>[] = [
             >
               <DropdownMenuItem
                 className="text-green-600 hover:!text-green-600"
-                onClick={() => actionOnProgramMutation.mutate()}
+                onClick={() => actionOnProgramMutation.mutate(program)}
               >
                 <EyeIcon className="text-green-600" />
                 <span>Activate</span>

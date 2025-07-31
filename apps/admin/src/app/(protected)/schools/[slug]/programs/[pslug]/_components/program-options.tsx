@@ -13,11 +13,13 @@ import {
 import { ChevronDown, Eye, EyeOff, SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useProgram } from "../../../../_hooks";
 
 interface Props {
   program: IProgram;
 }
 const ProgramOptions: React.FC<Props> = ({ program }) => {
+  const { actionOnProgramMutation } = useProgram();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,47 +48,43 @@ const ProgramOptions: React.FC<Props> = ({ program }) => {
               </Link>
             </Button>
           </DropdownMenuItem>
-
-          <DropdownMenuItem asChild>
-            {program.active ? (
-              <HasPermission
-                resourceName="programs"
-                action="deactivate"
-                args={[program]}
-              >
-                <Button
-                  variant="ghost"
-                  className="text-destructive hover:!text-destructive !text-sm hover:!outline-0 hover:!ring-0"
-                  aria-label={`Deactivate ${program.name}`}
-                  onClick={() =>
-                    brandClientApi.utils.toast.info("Under Construction")
-                  }
-                >
-                  <EyeOff className="text-destructive" />
-                  <span>Deactivate Program</span>
-                </Button>
-              </HasPermission>
-            ) : (
-              <HasPermission
-                resourceName="programs"
-                action="activate"
-                args={[program]}
-              >
-                <Button
-                  variant="ghost"
-                  className="text-green-600 hover:!text-green-600 hover:!outline-0 hover:!ring-0"
-                  aria-label={`Activate ${program.name}`}
-                  onClick={() =>
-                    brandClientApi.utils.toast.info("Under Construction")
-                  }
-                >
-                  <Eye className="text-green-600" />
-                  <span>Activate Program</span>
-                </Button>
-              </HasPermission>
-            )}
-          </DropdownMenuItem>
         </HasPermission>
+
+        <DropdownMenuItem asChild>
+          {program.active ? (
+            <HasPermission
+              resourceName="programs"
+              action="deactivate"
+              args={[program]}
+            >
+              <Button
+                variant="ghost"
+                className="text-destructive hover:!text-destructive w-full justify-start rounded-sm !text-sm hover:!outline-0 hover:!ring-0"
+                aria-label={`Deactivate ${program.name}`}
+                onClick={() => actionOnProgramMutation.mutate(program)}
+              >
+                <EyeOff className="text-destructive" />
+                <span>Deactivate</span>
+              </Button>
+            </HasPermission>
+          ) : (
+            <HasPermission
+              resourceName="programs"
+              action="activate"
+              args={[program]}
+            >
+              <Button
+                variant="ghost"
+                className="w-full justify-start rounded-sm !text-sm text-green-600 hover:!text-green-600 hover:!outline-0 hover:!ring-0"
+                aria-label={`Activate ${program.name}`}
+                onClick={() => actionOnProgramMutation.mutate(program)}
+              >
+                <Eye className="text-green-600" />
+                <span>Activate</span>
+              </Button>
+            </HasPermission>
+          )}
+        </DropdownMenuItem>
 
         <HasPermission resourceName="programs" action="delete" args={[program]}>
           <DropdownMenuItem asChild>
@@ -99,7 +97,7 @@ const ProgramOptions: React.FC<Props> = ({ program }) => {
               }
             >
               <Trash2 className="text-destructive" />
-              <span>Delete Program</span>
+              <span>Delete</span>
             </Button>
           </DropdownMenuItem>
         </HasPermission>

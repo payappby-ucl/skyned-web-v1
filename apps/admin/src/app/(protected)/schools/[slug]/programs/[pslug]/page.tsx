@@ -1,4 +1,4 @@
-import Alert from "@/src/components/alert";
+import BrandAlert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
@@ -9,6 +9,7 @@ import {
   AvatarImage,
 } from "@workspace/ui/components/avatar";
 import {
+  AlertCircleIcon,
   Award,
   Banknote,
   CalendarDays,
@@ -16,7 +17,6 @@ import {
   FileText,
   GraduationCap,
   HandCoins,
-  Speech,
 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -29,13 +29,17 @@ import {
 } from "@workspace/ui/components/tabs";
 import { Separator } from "@workspace/ui/components/separator";
 import EducationLevel from "../_components/education-level";
-import EnglishProficiencyDetails from "../_components/english-proficiency";
 import Fee from "../_components/fee";
 import ProgramIntakes from "../_components/intakes";
 import FormatDate from "@/src/components/format-date";
 import ProgramOptions from "./_components/program-options";
 import Image from "next/image";
 import { ProficiencyDisplay } from "@workspace/ui/components/proficiency-display";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@workspace/ui/components/alert";
 
 export default async function SchoolProgramPage({
   params,
@@ -127,6 +131,21 @@ export default async function SchoolProgramPage({
           </div>
           {/* Main Body */}
           <div className="grid grid-cols-1 items-start gap-2 lg:grid-cols-3">
+            {/* Deactivation Alert */}
+            {!program.active ? (
+              <Alert variant="destructive" className="col-span-1 lg:col-span-3">
+                <AlertCircleIcon />
+                <AlertTitle>Program is inactive</AlertTitle>
+                <AlertDescription>
+                  <p>What does this mean?</p>
+                  <ul className="list-inside list-disc text-sm">
+                    <li>Only staffs with necessary permissions can access.</li>
+                    <li>Program will no longer be visible to the public.</li>
+                    <li>Application to this program will be denied</li>
+                  </ul>
+                </AlertDescription>
+              </Alert>
+            ) : null}
             <Tabs
               defaultValue="overview"
               className="w-full rounded-md border p-4 lg:col-span-2"
@@ -273,6 +292,6 @@ export default async function SchoolProgramPage({
     );
   } catch (error) {
     console.log(error);
-    return <Alert message="Error" />;
+    return <BrandAlert message="Error" />;
   }
 }

@@ -130,6 +130,7 @@ export async function takeActionOnProgram(
     revalidateTag(
       `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
     );
+
     return {
       success: true,
       data: res,
