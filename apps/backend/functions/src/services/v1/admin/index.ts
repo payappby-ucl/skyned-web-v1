@@ -167,7 +167,7 @@ export class AdminService extends ServiceUtils implements IAdminService {
   };
 
   updateAdmin: IAdminService["updateAdmin"] = async (adminId, data) => {
-    this.validationUtility.validateInput({
+    const { adminId: id, ...rest } = this.validationUtility.validateInput({
       schema: UpdateAdminServiceSchema,
       inputData: {
         adminId,
@@ -177,11 +177,11 @@ export class AdminService extends ServiceUtils implements IAdminService {
 
     const admin = await this.repository.admin.update({
       where: {
-        adminId,
+        adminId: id as string,
       },
 
       data: {
-        ...data,
+        ...rest,
       },
     });
 

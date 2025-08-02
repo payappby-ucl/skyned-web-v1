@@ -81,7 +81,7 @@ exports.adminPolicies = {
             if (!authClaim)
                 return false;
             const { claim, user } = authClaim;
-            if (claim !== "admin")
+            if (claim !== "admin" || user.adminId === data.adminId)
                 return false;
             return true;
         },
@@ -89,7 +89,7 @@ exports.adminPolicies = {
             if (!authClaim)
                 return false;
             const { claim, user } = authClaim;
-            if (claim !== "admin")
+            if (claim !== "admin" || user.adminId === data.adminId)
                 return false;
             return true;
         },

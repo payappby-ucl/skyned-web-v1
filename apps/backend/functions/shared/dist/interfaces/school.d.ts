@@ -20,6 +20,9 @@ export interface ISchool extends ITimestamps {
     currency: CurrencyType;
     active: boolean;
     accommodation?: IAccommodation;
+    _count?: {
+        programs: number;
+    };
     createdById: string;
     createdBy?: AdminProfile;
 }

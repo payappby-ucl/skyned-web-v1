@@ -358,10 +358,22 @@ describe("Admin API", () => {
   });
 
   describe("Admin Account Actions", () => {
+    let adminId = "";
     describe("Suspend Account", () => {
       test("should fail if not an authorized user", async () => {
         const res = await request(server).patch(baseUrl + "/wwwooe/deactivate");
         expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+      });
+
+      test("should fail if admin tries to suspend themselves", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
+
+        const res = await request(server)
+          .patch(baseUrl + "/" + user.uid + "/deactivate")
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.FORBIDDEN);
       });
 
       test("should suspend admin account", async () => {
@@ -369,6 +381,8 @@ describe("Admin API", () => {
           "tobi@skynedconsults.com",
           "12345678",
         );
+
+        adminId = user.uid;
 
         const { user: authUser } = await signInUser();
         const token = await authUser.getIdToken();
@@ -397,27 +411,33 @@ describe("Admin API", () => {
         expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
       });
 
-      test("should release admin account", async () => {
-        const { user } = await signInUser(
-          "tobi@skynedconsults.com",
-          "12345678",
-        );
+      test("should fail if admin tries to release themselves", async () => {
+        const { user } = await signInUser();
+        const token = await user.getIdToken();
 
+        const res = await request(server)
+          .patch(baseUrl + "/" + user.uid + "/activate")
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.FORBIDDEN);
+      });
+
+      test("should release admin account", async () => {
         const { user: authUser } = await signInUser();
         const token = await authUser.getIdToken();
 
         const beforeAdminRes = await request(server)
-          .get(baseUrl + "/" + user.uid)
+          .get(baseUrl + "/" + adminId)
           .set("authorization", `bearer ${token}`);
 
         expect(beforeAdminRes.body.data.accountSuspended).toBe(true);
 
         await request(server)
-          .patch(baseUrl + "/" + user.uid + "/activate")
+          .patch(baseUrl + "/" + adminId + "/activate")
           .set("authorization", `bearer ${token}`);
 
         const afterAdminRes = await request(server)
-          .get(baseUrl + "/" + user.uid)
+          .get(baseUrl + "/" + adminId)
           .set("authorization", `bearer ${token}`);
 
         expect(afterAdminRes.body.data.accountSuspended).toBe(false);

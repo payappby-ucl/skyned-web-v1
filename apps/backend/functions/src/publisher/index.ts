@@ -31,9 +31,7 @@ export class Publisher implements IPublisher {
   publish: IPublisher["publish"] = async ({ type, data }) => {
     try {
       const dataBuffer = Buffer.from(JSON.stringify(data));
-      this.logger.log(["Publishing " + type]);
       await this.pubsub.topic(type).publishMessage({ data: dataBuffer });
-      this.logger.log([type + " Published"]);
     } catch (error: any) {
       const newError = SkynedUtils.createException(
         StatusCodes.INTERNAL_SERVER_ERROR,

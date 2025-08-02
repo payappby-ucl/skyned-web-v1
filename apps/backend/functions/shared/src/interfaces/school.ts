@@ -24,6 +24,10 @@ export interface ISchool extends ITimestamps {
 
   accommodation?: IAccommodation;
 
+  _count?: {
+    programs: number;
+  };
+
   createdById: string;
   createdBy?: AdminProfile;
 }

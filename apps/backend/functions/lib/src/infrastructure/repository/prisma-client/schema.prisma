@@ -208,6 +208,7 @@ model Admin {
   @@index([firstName])
   @@index([lastName])
   @@index([gender])
+  @@index([createdById])
   @@map("admins")
 }
 
@@ -226,6 +227,7 @@ model Department {
 
   @@index([name])
   @@index([createdAt])
+  @@index([leadId])
   @@map("departments")
 }
 
@@ -250,6 +252,9 @@ model Team {
   @@unique([departmentId, name])
   @@index([name])
   @@index([createdAt])
+  @@index([departmentId])
+  @@index([createdById])
+  @@index([leadId])
   @@map("teams")
 }
 
@@ -267,6 +272,7 @@ model Faq {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([createdAt])
+  @@index([createdById])
   @@map("faqs")
 }
 
@@ -309,6 +315,8 @@ model ActivityLog {
   @@index([createdAt])
   @@index([action])
   @@index([resource])
+  @@index([resourceId])
+  @@index([adminId])
   @@map("activity_logs")
 }
 
@@ -352,6 +360,7 @@ model School {
   @@index([country, active, institutionType, ownershipType])
   @@index([createdAt])
   @@index([currency])
+  @@index([createdById])
   @@map("schools")
 }
 
@@ -370,6 +379,7 @@ model Accommodation {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([createdAt])
+  @@index([createdById])
   @@map("accommodations")
 }
 
@@ -423,6 +433,8 @@ model Program {
   @@index([tuitionFee])
   @@index([tuitionFeeType])
   @@index([applicationFee])
+  @@index([schoolId])
+  @@index([createdById])
   @@map("programs")
 }
 
@@ -434,6 +446,7 @@ model EnglishProficiency {
   program   Program @relation(fields: [programId], references: [programId], onDelete: Cascade)
 
   @@unique(name: "proficiency", [test, programId])
+  @@index([programId])
   @@map("english_proficiencies")
 }
 
@@ -459,6 +472,8 @@ model Intake {
   @@unique([schoolId, intake, startDate, deadline])
   @@index([deadline])
   @@index([createdAt])
+  @@index([schoolId])
+  @@index([createdById])
   @@map("intakes")
 }
 
@@ -487,6 +502,11 @@ model BlogPost {
 
   @@index([title])
   @@index([createdAt])
+  @@index([updatedAt])
+  @@index([featured])
+  @@index([status])
+  @@index([authorId])
+  @@index([publishedAt])
   @@map("blog_posts")
 }
 
@@ -502,6 +522,9 @@ model Tag {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdById])
+  @@index([createdAt])
+  @@index([updatedAt])
   @@map("tags")
 }
 
@@ -517,6 +540,9 @@ model Category {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@index([createdById])
+  @@index([createdAt])
+  @@index([updatedAt])
   @@map("categories")
 }
 

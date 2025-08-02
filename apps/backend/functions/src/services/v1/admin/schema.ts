@@ -26,12 +26,15 @@ export const CreateAdminServiceSchema = CreateAdminSchema.pick({
 
 export type CreateAdminServiceSchema = z.infer<typeof CreateAdminServiceSchema>;
 
-export const UpdateAdminServiceSchema = CreateAdminServiceSchema.partial({
-  primaryImage: true,
-  departments: true,
-}).omit({
-  createdById: true,
-  departments: true,
-});
+export const UpdateAdminServiceSchema = CreateAdminServiceSchema.partial()
+  .omit({
+    createdById: true,
+    departments: true,
+    adminId: true,
+  })
+  .extend({
+    accountSuspended: z.boolean().optional(),
+    adminId: CreateAdminServiceSchema.shape.adminId,
+  });
 
 export type UpdateAdminServiceSchema = z.infer<typeof UpdateAdminServiceSchema>;
