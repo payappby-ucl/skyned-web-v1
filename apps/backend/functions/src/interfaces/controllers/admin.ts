@@ -46,4 +46,16 @@ export interface IAdminController {
     ISuccessResponse<IMessageResponse>,
     UpdateAdminSchema
   >;
+
+  /** Suspend Admin Account */
+  deactivateAccount: RequestHandler<
+    AdminIdSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Release Admin Account */
+  activateAccount: RequestHandler<
+    AdminIdSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
 }

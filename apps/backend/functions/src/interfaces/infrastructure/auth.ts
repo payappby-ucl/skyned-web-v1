@@ -23,6 +23,7 @@ export interface IAuth {
     data: Partial<{
       email: string;
       password: string;
+      disabled: boolean;
     }>,
   ): Promise<void>;
 }

@@ -79,6 +79,25 @@ export class AdminRouter implements IRouter {
         authMiddleware.hasRole(["admin"]),
         adminController.updateAdminProfile,
       );
+
+    // * Suspend / Release Admin
+    this.router.route("/:adminId/activate").patch(
+      RequestValidationMiddleware.validate({
+        params: AdminIdSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      adminController.activateAccount,
+    );
+
+    this.router.route("/:adminId/deactivate").patch(
+      RequestValidationMiddleware.validate({
+        params: AdminIdSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      adminController.deactivateAccount,
+    );
   }
 
   /**

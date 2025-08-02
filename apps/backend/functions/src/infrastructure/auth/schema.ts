@@ -21,10 +21,12 @@ export const AuthUpdateSchema = AuthCreationSchema.pick({
 })
   .extend({
     adminId: AdminIdSchema.shape.adminId,
+    disabled: z.boolean(),
   })
   .partial({
     email: true,
     password: true,
+    disabled: true,
   });
 export type AuthUpdateSchema = z.infer<typeof AuthUpdateSchema>;
 

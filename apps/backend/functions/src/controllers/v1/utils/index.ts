@@ -20,7 +20,7 @@ export abstract class ControllerUtils {
     return undefined;
   }
   protected _validateAdmin(req: Express.Request) {
-    if (!req.skynedAuth.admin) {
+    if (!req.skynedAuth.admin || req.skynedAuth.admin.accountSuspended) {
       throw SkynedUtils.createException(StatusCodes.UNAUTHORIZED);
     }
 

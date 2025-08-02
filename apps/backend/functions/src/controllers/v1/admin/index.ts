@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable operator-linebreak */
 /* eslint-disable brace-style */
 import { StatusCodes } from "http-status-codes";
@@ -392,6 +393,144 @@ export class AdminController
       });
 
       res._success(StatusCodes.OK, { message: "Profile Updated" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deactivateAccount: IAdminController["deactivateAccount"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const adminUser = this._validateAdmin(req);
+      const { adminId } = req.params;
+
+      const adminToSuspend = await this.adminService.getAdminProfile(
+        adminUser.user,
+        adminId,
+      );
+
+      if (!adminToSuspend) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "admins",
+        "deactivate",
+        adminToSuspend,
+      );
+
+      if (adminToSuspend.accountSuspended) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${adminToSuspend.firstName} ${adminToSuspend.lastName}'s account is already inactive`,
+        );
+      }
+
+      const updatedData = await this.adminService.updateAdmin(
+        adminToSuspend.adminId,
+        {
+          accountSuspended: true,
+        },
+      );
+
+      await this.auth.updateAuth(adminToSuspend.adminId, {
+        disabled: true,
+      });
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          action: "deactivate",
+          message: `Deactivated / Suspended ${adminToSuspend.firstName} ${adminToSuspend.lastName}'s Account`,
+          resource: "admins",
+          adminId: adminUser.user.id,
+          resourceId: adminToSuspend.id,
+          previousState: adminToSuspend,
+          currentState: updatedData,
+        },
+      });
+
+      // TODO: Publish a suspended email to the suspended admin
+
+      res._success(StatusCodes.OK, {
+        message: `${adminToSuspend.firstName} ${adminToSuspend.lastName}'s account has been deactivated.`,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  activateAccount: IAdminController["activateAccount"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const adminUser = this._validateAdmin(req);
+      const { adminId } = req.params;
+
+      const adminToSuspend = await this.adminService.getAdminProfile(
+        adminUser.user,
+        adminId,
+      );
+
+      if (!adminToSuspend) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      this._attributeBasedAccessControl(
+        adminUser,
+        "admins",
+        "activate",
+        adminToSuspend,
+      );
+
+      if (!adminToSuspend.accountSuspended) {
+        throw SkynedUtils.createException(
+          StatusCodes.BAD_REQUEST,
+          `${adminToSuspend.firstName} ${adminToSuspend.lastName}'s account is already active`,
+        );
+      }
+
+      const updatedData = await this.adminService.updateAdmin(
+        adminToSuspend.adminId,
+        {
+          accountSuspended: false,
+        },
+      );
+
+      await this.auth.updateAuth(adminToSuspend.adminId, {
+        disabled: false,
+      });
+
+      this.publisher.publish({
+        type: EventsEnum.CREATE_ACTIVITY_LOG,
+        data: {
+          action: "activate",
+          message: `Activated / Released ${adminToSuspend.firstName} ${adminToSuspend.lastName}'s Account`,
+          resource: "admins",
+          adminId: adminUser.user.id,
+          resourceId: adminToSuspend.id,
+          previousState: adminToSuspend,
+          currentState: updatedData,
+        },
+      });
+
+      // TODO: Publish a release email to the admin
+
+      res._success(StatusCodes.OK, {
+        message: `${adminToSuspend.firstName} ${adminToSuspend.lastName}'s account has been activated.`,
+      });
     } catch (error) {
       next(error);
     }
