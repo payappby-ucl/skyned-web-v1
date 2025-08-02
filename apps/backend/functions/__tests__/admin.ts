@@ -356,4 +356,72 @@ describe("Admin API", () => {
       );
     });
   });
+
+  describe("Admin Account Actions", () => {
+    describe("Suspend Account", () => {
+      test("should fail if not an authorized user", async () => {
+        const res = await request(server).patch(baseUrl + "/wwwooe/deactivate");
+        expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+      });
+
+      test("should suspend admin account", async () => {
+        const { user } = await signInUser(
+          "tobi@skynedconsults.com",
+          "12345678",
+        );
+
+        const { user: authUser } = await signInUser();
+        const token = await authUser.getIdToken();
+
+        const beforeAdminRes = await request(server)
+          .get(baseUrl + "/" + user.uid)
+          .set("authorization", `bearer ${token}`);
+
+        expect(beforeAdminRes.body.data.accountSuspended).toBe(false);
+
+        await request(server)
+          .patch(baseUrl + "/" + user.uid + "/deactivate")
+          .set("authorization", `bearer ${token}`);
+
+        const afterAdminRes = await request(server)
+          .get(baseUrl + "/" + user.uid)
+          .set("authorization", `bearer ${token}`);
+
+        expect(afterAdminRes.body.data.accountSuspended).toBe(true);
+      });
+    });
+
+    describe("Release Account", () => {
+      test("should fail if not an authorized user", async () => {
+        const res = await request(server).patch(baseUrl + "/wwwooe/activate");
+        expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+      });
+
+      test("should release admin account", async () => {
+        const { user } = await signInUser(
+          "tobi@skynedconsults.com",
+          "12345678",
+        );
+
+        const { user: authUser } = await signInUser();
+        const token = await authUser.getIdToken();
+
+        const beforeAdminRes = await request(server)
+          .get(baseUrl + "/" + user.uid)
+          .set("authorization", `bearer ${token}`);
+
+        expect(beforeAdminRes.body.data.accountSuspended).toBe(true);
+
+        await request(server)
+          .patch(baseUrl + "/" + user.uid + "/activate")
+          .set("authorization", `bearer ${token}`);
+
+        const afterAdminRes = await request(server)
+          .get(baseUrl + "/" + user.uid)
+          .set("authorization", `bearer ${token}`);
+
+        expect(afterAdminRes.body.data.accountSuspended).toBe(false);
+      });
+    });
+  });
 });
