@@ -16,7 +16,7 @@ export const useAdmin = () => {
           async () => {
             const res = await takeActionOnAdmin(
               admin.adminId,
-              admin.accountSuspended ? "deactivate" : "activate",
+              admin.accountSuspended ? "activate" : "deactivate",
             );
 
             const resData =
