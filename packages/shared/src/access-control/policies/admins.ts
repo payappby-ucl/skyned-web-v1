@@ -98,7 +98,7 @@ export const adminPolicies: AccessControlType = {
     deactivate(authClaim, data) {
       if (!authClaim) return false;
       const { claim, user } = authClaim;
-      if (claim !== "admin") return false;
+      if (claim !== "admin" || user.adminId === data.adminId) return false;
 
       return true;
     },
@@ -106,7 +106,7 @@ export const adminPolicies: AccessControlType = {
     activate(authClaim, data) {
       if (!authClaim) return false;
       const { claim, user } = authClaim;
-      if (claim !== "admin") return false;
+      if (claim !== "admin" || user.adminId === data.adminId) return false;
 
       return true;
     },
