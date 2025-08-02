@@ -5,13 +5,14 @@ import { IAdmin, IFaq } from "@workspace/shared";
 import { DropdownMenuItem } from "@workspace/ui/components/dropdown-menu";
 import { DataTableColumnHeader } from "@workspace/ui/components/table/data-table-column-header";
 import { DataTableRowActions } from "@workspace/ui/components/table/data-table-row-actions";
-import { SquarePen } from "lucide-react";
+import { EyeIcon, EyeOff, SquarePen } from "lucide-react";
 import Link from "next/link";
 import Profile from "@/src/components/profile";
 import { AdminListType } from "../_components/admin-list";
 import TextCopy from "@/src/components/text-copy";
 import CountryDisplay from "@/src/components/country-display";
 import StatusView from "@/src/components/status-view";
+import { useAdmin } from "../_hooks";
 
 export const columns: ColumnDef<AdminListType>[] = [
   {
@@ -19,6 +20,7 @@ export const columns: ColumnDef<AdminListType>[] = [
     header: "Actions",
     accessorFn: (row) => row,
     cell: (info) => {
+      const { actionOnAdminMutation } = useAdmin();
       const admin = info.getValue<IAdmin>();
 
       return (
@@ -38,6 +40,38 @@ export const columns: ColumnDef<AdminListType>[] = [
               </Link>
             </DropdownMenuItem>
           </HasPermission>
+
+          {admin.accountSuspended ? (
+            <HasPermission
+              resourceName="admins"
+              action="activate"
+              args={[admin]}
+            >
+              <DropdownMenuItem
+                className="text-green-600 hover:!text-green-600"
+                disabled={actionOnAdminMutation.isPending}
+                onClick={() => actionOnAdminMutation.mutate(admin)}
+              >
+                <EyeIcon className="text-green-600" />
+                <span>Activate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          ) : (
+            <HasPermission
+              resourceName="admins"
+              action="deactivate"
+              args={[admin]}
+            >
+              <DropdownMenuItem
+                className="text-destructive hover:!text-destructive"
+                disabled={actionOnAdminMutation.isPending}
+                onClick={() => actionOnAdminMutation.mutate(admin)}
+              >
+                <EyeOff className="text-destructive" />
+                <span>Deactivate</span>
+              </DropdownMenuItem>
+            </HasPermission>
+          )}
         </DataTableRowActions>
       );
     },

@@ -38,8 +38,7 @@ export const columns: ColumnDef<ITag>[] = [
                   return data.message;
                 },
                 error(error) {
-                  brandClientApi.utils.alertError(error);
-                  return error;
+                  return brandClientApi.utils.handleError(error);
                 },
               },
             );

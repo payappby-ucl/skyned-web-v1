@@ -40,15 +40,17 @@ export class Utils implements IUtils {
           return "Oops! something went wrong please try again.";
       }
     }
+
     return (
-      error?.data?.message ||
       error?.message ||
+      error?.data?.message ||
       "Oops! something went wrong please try again."
     );
   };
 
   alertError: IUtils["alertError"] = (err) => {
-    this.toast.error(this.handleError(err));
+    const message = this.handleError(err);
+    this.toast.error(message);
   };
 
   handleServerActionResponse: IUtils["handleServerActionResponse"] = (data) => {

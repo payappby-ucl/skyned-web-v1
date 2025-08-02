@@ -53,12 +53,13 @@ class Utils {
                     return "Oops! something went wrong please try again.";
             }
         }
-        return (error?.data?.message ||
-            error?.message ||
+        return (error?.message ||
+            error?.data?.message ||
             "Oops! something went wrong please try again.");
     };
     alertError = (err) => {
-        this.toast.error(this.handleError(err));
+        const message = this.handleError(err);
+        this.toast.error("Error");
     };
     handleServerActionResponse = (data) => {
         if (data.success === false) {

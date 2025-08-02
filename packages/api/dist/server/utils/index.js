@@ -20,7 +20,8 @@ class ServerUtils {
     createServerActionError = (error) => {
         return {
             success: false,
-            message: error?.data?.message ||
+            message: error?.message ||
+                error?.data?.message ||
                 "Something went wrong, Please check your connection and try again.",
         };
         // return new Error(error?.data?.message || "", {

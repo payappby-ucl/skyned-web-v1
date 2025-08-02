@@ -8,6 +8,7 @@ export class ServerUtils implements IServerUtils {
     return {
       success: false,
       message:
+        error?.message ||
         error?.data?.message ||
         "Something went wrong, Please check your connection and try again.",
     };

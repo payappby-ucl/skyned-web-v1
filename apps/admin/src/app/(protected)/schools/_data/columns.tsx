@@ -59,6 +59,7 @@ export const columns: ColumnDef<ISchool>[] = [
             >
               <DropdownMenuItem
                 className="text-destructive hover:!text-destructive"
+                disabled={actionOnSchoolMutation.isPending}
                 onClick={() => actionOnSchoolMutation.mutate(school)}
               >
                 <EyeOff className="text-destructive" />
@@ -73,6 +74,7 @@ export const columns: ColumnDef<ISchool>[] = [
             >
               <DropdownMenuItem
                 className="text-green-600 hover:!text-green-600"
+                disabled={actionOnSchoolMutation.isPending}
                 onClick={() => actionOnSchoolMutation.mutate(school)}
               >
                 <EyeIcon className="text-green-600" />

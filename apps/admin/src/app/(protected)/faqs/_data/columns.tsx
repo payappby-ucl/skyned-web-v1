@@ -47,8 +47,7 @@ export const columns: ColumnDef<IFaq>[] = [
                   return data.message;
                 },
                 error(error) {
-                  brandClientApi.utils.alertError(error);
-                  return error;
+                  return brandClientApi.utils.handleError(error);
                 },
               },
             );

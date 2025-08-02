@@ -38,8 +38,7 @@ const BlogPost: React.FC<Props> = ({ post }) => {
               return data.message;
             },
             error(error) {
-              brandClientApi.utils.alertError(error);
-              return error;
+              return brandClientApi.utils.handleError(error);
             },
           },
         );

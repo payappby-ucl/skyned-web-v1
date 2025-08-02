@@ -4,6 +4,7 @@ import { brandClientApi } from "@/src/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { takeActionOnProgram } from "../_actions";
 import { IProgram } from "@workspace/shared";
+import { IMessageResponse } from "@workspace/shared";
 
 export const useProgram = () => {
   const queryClient = useQueryClient();
@@ -32,8 +33,7 @@ export const useProgram = () => {
               return data.message;
             },
             error(error) {
-              brandClientApi.utils.alertError(error);
-              return error;
+              return brandClientApi.utils.handleError(error);
             },
           },
         );
