@@ -64,7 +64,7 @@ export class DepartmentController
         await this.departmentService.getDepartmentsForNavigation();
 
       departments = departments.filter((department) =>
-        this._attributeBasedAccessControl(
+        this._hasAttributeBasedAccessControl(
           authUser,
           "departments",
           "read",

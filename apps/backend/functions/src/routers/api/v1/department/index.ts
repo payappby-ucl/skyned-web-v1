@@ -28,11 +28,13 @@ export class DepartmentRouter implements IRouter {
     authMiddleware: IAuthMiddleware,
     departmentController: IDepartmentController,
   ) {
-    this.router.route("/").get(
-      authMiddleware.authenticate,
-      authMiddleware.hasRole(["admin"]),
-      // TODO: Add Controller
-    );
+    this.router
+      .route("/")
+      .get(
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        departmentController.getDepartments,
+      );
 
     this.router
       .route("/create")

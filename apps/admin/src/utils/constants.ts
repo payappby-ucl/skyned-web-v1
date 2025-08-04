@@ -10,6 +10,7 @@ export const serverCacheTags = {
   blogs: "blogs",
   categories: "categories",
   tags: "tags",
+  departments: "departments",
 } as const;
 
 export const DEFAULT_BULK_UPLOAD_WORKSHEET_NAME = "Bulk Upload Template";

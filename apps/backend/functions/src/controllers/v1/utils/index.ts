@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { StatusCodes } from "http-status-codes";
 import { DEFAULT_QUERY_LIMIT, SkynedUtils } from "../../../utils";
 import { PageQuerySchema } from "../../../zod-schemas";
@@ -72,5 +73,11 @@ export abstract class ControllerUtils {
       }
 
       return true;
+    };
+
+  protected _hasAttributeBasedAccessControl: (typeof accessControl)["attribute"] =
+    (...args) => {
+      const hasAccess = accessControl.attribute(...args);
+      return hasAccess;
     };
 }

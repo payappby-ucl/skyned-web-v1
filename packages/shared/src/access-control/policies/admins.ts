@@ -12,6 +12,7 @@ export const adminPolicies: AccessControlType = {
         department.Human_Resource,
       ]);
     },
+
     read(authClaim, data) {
       if (!authClaim) return false;
       const { claim, user } = authClaim;

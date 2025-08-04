@@ -1,4 +1,4 @@
-import { isInDepartment } from "utils";
+import { isInDepartment } from "../../utils";
 import { AccessControlType } from "../../access-control/types";
 
 export const departmentPolicies: AccessControlType = {
@@ -20,10 +20,10 @@ export const departmentPolicies: AccessControlType = {
         (department) => department.name === data.name,
       );
 
-      if (!isInDepartment(user, ["Executive", "Human_Resource"])) return false;
-      if (department?.leadId !== user.adminId) return false;
+      if (isInDepartment(user, ["Executive", "Human_Resource"])) return true;
+      if (department?.leadId === user.adminId) return true;
 
-      return true;
+      return false;
     },
 
     create() {

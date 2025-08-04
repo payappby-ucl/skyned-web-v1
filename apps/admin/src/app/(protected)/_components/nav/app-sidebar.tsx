@@ -2,23 +2,14 @@
 
 import * as React from "react";
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
   CircleHelp,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
   LayoutDashboard,
   LucideIcon,
-  Map,
   MessageCircleQuestion,
   NotebookText,
-  PieChart,
   School,
   Settings2,
   Split,
-  SquareTerminal,
   UserIcon,
 } from "lucide-react";
 import {
@@ -32,120 +23,130 @@ import { NavMain } from "./main-nav";
 // import { NavProjects } from "./nav-projects";
 import { NavUser } from "./nav-user";
 import { NavTitle } from "./nav-title";
-import { department, ResourceType } from "@workspace/shared";
+import { IDepartment, ResourceType } from "@workspace/shared";
 
-// This is sample data.
-const data: {
-  navMain: {
-    title: string;
-    url: string;
-    resource?: ResourceType;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
+export function AppSidebar({
+  departments,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { departments: IDepartment[] }) {
+  const data: {
+    navMain: {
       title: string;
       url: string;
+      resource?: ResourceType;
+      icon?: LucideIcon;
+      isActive?: boolean;
+      items?: {
+        title: string;
+        url: string;
+      }[];
     }[];
-  }[];
-} = {
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/",
-      icon: LayoutDashboard,
-    },
-    {
-      title: "Schools",
-      url: "/schools",
-      icon: School,
-      resource: "schools",
-    },
+  } = React.useMemo(
+    () => ({
+      navMain: [
+        {
+          title: "Dashboard",
+          url: "/",
+          icon: LayoutDashboard,
+        },
+        {
+          title: "Schools",
+          url: "/schools",
+          icon: School,
+          resource: "schools",
+        },
 
-    {
-      title: "Departments",
-      url: "/departments",
-      icon: Split,
-      resource: "departments",
-      items: [
-        ...Object.values(department).map((name) => ({
-          title: name.replace("_", " "),
-          url: `/departments/${name.toLowerCase().replace("_", "-")}`,
-        })),
+        ...(departments?.length
+          ? [
+              {
+                title: "Departments",
+                url: "/departments",
+                icon: Split,
+                resource: "departments" as "departments",
+                items: [
+                  ...departments.map((department) => ({
+                    department,
+                    title: department.name.replace("_", " "),
+                    url: `/departments/${department.name.toLowerCase().replace("_", "-")}`,
+                  })),
+                ],
+              },
+            ]
+          : []),
+
+        {
+          title: "Faqs",
+          url: "/faqs",
+          icon: MessageCircleQuestion,
+          resource: "faqs",
+        },
+
+        {
+          title: "Inquiries",
+          url: "/inquiries",
+          icon: CircleHelp,
+          resource: "inquiries",
+        },
+
+        {
+          title: "Blog",
+          url: "/blog",
+          icon: NotebookText,
+          resource: "blogs",
+        },
+
+        {
+          title: "Accounts",
+          url: "/admins",
+          icon: UserIcon,
+          resource: "admins",
+        },
+
+        {
+          title: "Settings",
+          url: "#",
+          icon: Settings2,
+          items: [
+            {
+              title: "General",
+              url: "#",
+            },
+            {
+              title: "Team",
+              url: "#",
+            },
+            {
+              title: "Billing",
+              url: "#",
+            },
+            {
+              title: "Limits",
+              url: "#",
+            },
+          ],
+        },
       ],
-    },
+      // projects: [
+      //   {
+      //     name: "Design Engineering",
+      //     url: "#",
+      //     icon: Frame,
+      //   },
+      //   {
+      //     name: "Sales & Marketing",
+      //     url: "#",
+      //     icon: PieChart,
+      //   },
+      //   {
+      //     name: "Travel",
+      //     url: "#",
+      //     icon: Map,
+      //   },
+      // ],
+    }),
+    [],
+  );
 
-    {
-      title: "Faqs",
-      url: "/faqs",
-      icon: MessageCircleQuestion,
-      resource: "faqs",
-    },
-
-    {
-      title: "Inquiries",
-      url: "/inquiries",
-      icon: CircleHelp,
-      resource: "inquiries",
-    },
-
-    {
-      title: "Blog",
-      url: "/blog",
-      icon: NotebookText,
-      resource: "blogs",
-    },
-
-    {
-      title: "Accounts",
-      url: "/admins",
-      icon: UserIcon,
-      resource: "admins",
-    },
-
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  // projects: [
-  //   {
-  //     name: "Design Engineering",
-  //     url: "#",
-  //     icon: Frame,
-  //   },
-  //   {
-  //     name: "Sales & Marketing",
-  //     url: "#",
-  //     icon: PieChart,
-  //   },
-  //   {
-  //     name: "Travel",
-  //     url: "#",
-  //     icon: Map,
-  //   },
-  // ],
-};
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
