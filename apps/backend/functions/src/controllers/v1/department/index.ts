@@ -52,6 +52,31 @@ export class DepartmentController
         next(error);
       }
     };
+
+  getDepartments: IDepartmentController["getDepartments"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      let departments =
+        await this.departmentService.getDepartmentsForNavigation();
+
+      departments = departments.filter((department) =>
+        this._attributeBasedAccessControl(
+          authUser,
+          "departments",
+          "read",
+          department,
+        ),
+      );
+
+      res._success(StatusCodes.OK, departments);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Instance of {DepartmentController} */

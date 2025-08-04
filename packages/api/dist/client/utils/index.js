@@ -59,7 +59,7 @@ class Utils {
     };
     alertError = (err) => {
         const message = this.handleError(err);
-        this.toast.error("Error");
+        this.toast.error(message);
     };
     handleServerActionResponse = (data) => {
         if (data.success === false) {

@@ -1,3 +1,14 @@
+import { Badge } from "@workspace/ui/components/badge";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
+import { School } from "lucide-react";
 import React from "react";
 
 const KPI: React.FC = () => {
@@ -40,6 +51,28 @@ const KPI: React.FC = () => {
       growth: 10,
     },
   };
-  return <></>;
+  return (
+    <div className="columns-1">
+      <Card>
+        <CardHeader>
+          <CardDescription>Total Schools</CardDescription>
+          <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+            200
+          </CardTitle>
+          <CardAction>
+            <School className="text-muted-foreground" />
+          </CardAction>
+        </CardHeader>
+        <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          <div className="line-clamp-1 flex gap-2 font-medium">
+            {/* Trending up this month <IconTrendingUp className="size-4" /> */}
+          </div>
+          <div className="text-muted-foreground">
+            Visitors for the last 6 months
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
+  );
 };
 export default KPI;

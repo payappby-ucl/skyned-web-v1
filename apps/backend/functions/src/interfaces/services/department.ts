@@ -15,4 +15,7 @@ export interface IDepartmentService {
 
   /** Fetch departments in list */
   fetchDepartmentsInArrayListWithIds(ids: number[]): Promise<IDepartment[]>;
+
+  /** Get Departments for nav */
+  getDepartmentsForNavigation(): Promise<IDepartment[]>;
 }

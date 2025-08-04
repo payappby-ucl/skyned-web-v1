@@ -21,6 +21,8 @@ export default async function AuthLayout({
     redirect("/login");
   }
 
+  // * Fetch All Departments
+
   return (
     <SidebarProvider>
       <AppSidebar />

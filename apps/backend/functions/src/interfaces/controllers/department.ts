@@ -9,4 +9,7 @@ export interface IDepartmentController {
     object,
     ISuccessResponse<Pick<IDepartment, "id" | "name">[]>
   >;
+
+  /** Get Departments  */
+  getDepartments: RequestHandler<object, ISuccessResponse<IDepartment[]>>;
 }

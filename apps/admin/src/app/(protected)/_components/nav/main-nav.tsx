@@ -126,7 +126,13 @@ export function NavMain({ items }: { items: IItem[] }) {
               key={item.title}
             >
               {item.items?.length ? (
-                <NavWithItems item={item} />
+                <HasPermission
+                  resourceName={item.resource}
+                  action="read"
+                  args={[{} as any]}
+                >
+                  <NavWithItems item={item} />
+                </HasPermission>
               ) : (
                 <NavWithoutItems item={item} />
               )}

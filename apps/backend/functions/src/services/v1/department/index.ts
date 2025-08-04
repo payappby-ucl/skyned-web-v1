@@ -92,6 +92,29 @@ export class DepartmentService
 
       return departments;
     };
+
+  getDepartmentsForNavigation: IDepartmentService["getDepartmentsForNavigation"] =
+    async () => {
+      const departments = await this.repository.db.department.findMany({
+        select: {
+          name: true,
+          leadId: true,
+
+          lead: {
+            select: SkynedUtils.select(adminProfileKeys),
+          },
+
+          _count: {
+            select: {
+              members: true,
+              teams: true,
+            },
+          },
+        },
+      });
+
+      return departments.map((department) => this.deserialize(department));
+    };
 }
 
 /** Instance of {DepartmentService} */
