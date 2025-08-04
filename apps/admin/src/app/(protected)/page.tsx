@@ -19,7 +19,7 @@ export default function AdminDashboard() {
     {
       title: "Total Students",
       value: "2,847",
-      change: "+12.5%",
+      change: "+12",
       icon: Users,
       color: "text-blue-600",
     },
@@ -40,7 +40,7 @@ export default function AdminDashboard() {
     {
       title: "Team Members",
       value: "50",
-      change: "+8.2%",
+      change: "+8",
       icon: HeadsetIcon,
       color: "text-emerald-600",
     },
@@ -63,7 +63,7 @@ export default function AdminDashboard() {
       time: "2 minutes ago",
     },
     {
-      action: "Course completed",
+      action: "Tasks completed",
       department: "Marketing",
       time: "15 minutes ago",
     },
