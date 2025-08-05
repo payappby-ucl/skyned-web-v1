@@ -24,6 +24,7 @@ export default async function AuthLayout({
     if (!token) {
       redirect("/login");
     }
+
     // * Fetch All Departments
     const { data: departments } = await brandServerApi.httpClient.request<
       IDepartment[]

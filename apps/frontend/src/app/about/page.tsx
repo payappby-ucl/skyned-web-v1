@@ -59,7 +59,12 @@ export default async function About() {
               className={`space-y-4 ${(i + 1) % 2 === 0 ? "md:order-2" : ""}`}
             >
               <h2>{title}</h2>
-              <p>{description}</p>
+              <div
+                className="space-y-4"
+                dangerouslySetInnerHTML={{
+                  __html: description,
+                }}
+              />
             </div>
             <Image
               src={imageUrl}

@@ -81,7 +81,7 @@ export default function Consultation() {
       />
 
       <Jumbotron
-        title={"Book Consultation"}
+        title={title}
         subtitle={description}
         backgroundImage="/assets/images/backgrounds/consultation-bg.png"
       />

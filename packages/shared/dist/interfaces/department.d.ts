@@ -9,4 +9,8 @@ export interface IDepartment extends ITimestamps {
     lead?: AdminProfile;
     members?: AdminProfile[];
     teams?: ITeam[];
+    _count?: {
+        members: number;
+        teams: number;
+    };
 }

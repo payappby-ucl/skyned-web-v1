@@ -12,4 +12,9 @@ export interface IDepartment extends ITimestamps {
 
   members?: AdminProfile[];
   teams?: ITeam[];
+
+  _count?: {
+    members: number;
+    teams: number;
+  };
 }
