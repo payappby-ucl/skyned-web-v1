@@ -16,14 +16,14 @@ const countries = [
     image: australiaImage,
     pageLink: "#",
     overview:
-      "Study at top-ranked universities in Australia, gain real-world experience, and build a future that goes beyond graduation. With post-study work visas, international students can work in Australia after completing their programs, opening doors to career growth and even permanent residency. Add in scholarships, hands-on learning, and a vibrant lifestyle, and Australia becomes more than a study destination.",
+      "Study at top-ranked universities in Australia, gain real-world experience, and build a future that goes beyond graduation. With post-study work visas, international students can work in Australia after completing their programs, opening doors to career growth and even permanent residency.",
   },
   {
     name: "Canada",
     image: canadaImage,
     pageLink: "#",
     overview:
-      "Get a globally recognized education, real work experience in Canada, and a fast track to permanent residency, all in one of the world's safest, most welcoming countries. Canada offers affordable tuition, post-graduation work permits of up to three years, and clear pathways to PR and citizenship. With strong job prospects in tech, healthcare, and skilled trades, studying in Canada sets you up for long-term success.",
+      "Get a globally recognized education, real work experience in Canada, and a fast track to permanent residency, all in one of the world's safest, most welcoming countries. Canada offers affordable tuition, post-graduation work permits of up to three years, and clear pathways to PR and citizenship.",
   },
   {
     name: "Malta",
@@ -37,14 +37,14 @@ const countries = [
     image: unitedKingdomImage,
     pageLink: "#",
     overview:
-      "Earn a globally respected degree from top-ranked universities and unlock post-study work opportunities in one of the world's most diverse and historic countries. The UK offers shorter degree programs, strong career pathways, and a clear route to permanent residency (ILR). The UK is a smart, future-forward choice.",
+      "Earn a globally respected degree from top-ranked universities and unlock post-study work opportunities in one of the world’s most diverse and historic countries. The UK offers shorter degree programs, strong career pathways, and a clear route to permanent residency (ILR). The UK is a smart, future-forward choice.",
   },
   {
     name: "USA",
     image: unitedStatesImage,
     pageLink: "#",
     overview:
-      "Get a globally respected degree, explore a vibrant mix of cultures, and gain career-boosting experience at some of the world's best universities. From cutting-edge research to real-world internships, the U.S. offers unmatched academic and professional opportunities. The US is a top choice for ambitious international students ready to stand out.",
+      "Get a globally respected degree, explore a vibrant mix of cultures, and gain career-boosting experience at some of the world’s best universities. From cutting-edge research to real-world internships, the U.S. offers unmatched academic and professional opportunities. The US is a top choice for ambitious international students ready to stand out.",
   },
   {
     name: "Germany",
@@ -73,29 +73,29 @@ const CountryOfChoice: React.FC = () => {
   return (
     <section className="space-y-10 bg-[#fcfcfc]">
       <h2 className="text-center">Country of Choice</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+      <div className="columns-1 gap-4 space-y-4 md:columns-2 lg:columns-3">
         {countries.map(({ name, image, pageLink, overview }) => (
-            <Link
+          <Link
             key={name}
             href={pageLink}
-            className="overflow-hidden rounded-md transition-shadow duration-300 hover:shadow-lg bg-white border border-muted/70 flex flex-col"
-            >
-            <div className="w-full h-56 relative">
+            className="border-muted/70 flex flex-col overflow-hidden rounded-md border bg-white transition-shadow duration-300 hover:shadow-lg"
+          >
+            <div className="relative h-56 w-full">
               <Image
-              src={image}
-              alt={`${name}'s random place image`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 25vw"
-              style={{ objectFit: "cover" }}
-              priority={name === "Student"}
+                src={image}
+                alt={`${name}'s random place image`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 25vw"
+                style={{ objectFit: "cover" }}
+                priority={name === "Student"}
               />
             </div>
-            <div className="p-4 flex-1 flex flex-col">
+            <div className="flex flex-1 flex-col p-4">
               <h4 className="underline-offset-6 underline">{name}</h4>
-              <p className="mt-6 text-sm leading-relaxed">{overview}</p>
+              <p className="text-md mt-6 leading-relaxed">{overview}</p>
             </div>
-            </Link>
+          </Link>
         ))}
       </div>
     </section>

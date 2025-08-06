@@ -11,9 +11,9 @@ import Testimonials from "./_components/testimonials";
 import { Metadata } from "next";
 import { organization, sharedMetadata } from "../utils";
 
-const title = "Achieve Your Dreams of Moving Abroad.";
+const title = "Your Next Big Move, Study Abroad";
 const description =
-  "We offer free and seamless international study application support into bachelors, postgraduate diploma, postbaccalaureate, graduate certificates and masters programs";
+  "We've guided 1000+ students who wanted more, more opportunities, more future. Get free support for applications to international schools.";
 
 export const metadata: Metadata = {
   ...sharedMetadata,

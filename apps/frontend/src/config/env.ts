@@ -13,7 +13,7 @@ export const env = {
     keywords:
       "Skyned Consults, Skyned educational consults, Study Abroad Consultants, Study Visa Assistance, Study in Canada, Study in the UK, Study in Australia, Study in the USA, International Student Services, Study Abroad, Student Visa, Student Visa Consultants, Education Consultancy Services, University Admission Assistance, Scholarships for International Students, Study and Work Abroad",
     description:
-      "We offer free expert support for international study applications into bachelor's, master's & diploma programs. Get guidance on admissions, visas, and study funding.",
+      "Skyned Consults Corporation is a trusted international education platform dedicated to helping students achieve their study-abroad dreams. With a strong online presence and a team of experienced consultants, we connect aspiring students with the right schools and programs across the globe.",
     hoursAvailable: {
       dayOfWeek: [
         "Monday",
