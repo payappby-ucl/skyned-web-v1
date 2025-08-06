@@ -24,45 +24,46 @@ export const contacts = [
 
 export const addresses = [
   {
-    location: "Lagos Office",
+    location: "Nigeria",
     streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
     addressLocality: "Ikate",
     addressRegion: "Lagos",
     consultationLink: "#",
   },
   {
-    location: "Abuja Office",
+    location: "Nigeria",
+    streetAddress:
+      "Novare Central Mall, 2nd Floor, Plot 502 Dalaba Street, Off Michael Okpara Street",
+    addressLocality: "Wuse Zone 5",
+    addressRegion: "Abuja",
+    consultationLink: "#",
+  },
+  {
+    location: "Nigeria",
+    streetAddress: "Unit 25, Westbrook Mall, 4th Roundabout, Chisco",
+    addressLocality: "Ikate",
+    addressRegion: "Lagos",
+    consultationLink: "#",
+  },
+  {
+    location: "Nigeria",
+    streetAddress: "Pyale Work Hub - No 21 Bekwere Wosu Street",
+    addressLocality: "D-Line",
+    addressRegion: "Port-Harcourt",
+    consultationLink: "#",
+  },
+  {
+    location: "Canada",
     streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
     addressLocality: "Ikate",
     addressRegion: "Lagos",
     consultationLink: "#",
   },
   {
-    location: "Lagos Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-    consultationLink: "#",
-  },
-  {
-    location: "Port Harcourt Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-    consultationLink: "#",
-  },
-  {
-    location: "Canada Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-    consultationLink: "#",
-  },
-  {
-    location: "Kenya Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
+    location: "Kenya",
+    streetAddress: "D16 (2nd Floor)",
+    addressLocality: "Woodvale Groove",
+    addressRegion: "Nairobi",
     consultationLink: "#",
   },
   {

@@ -49,7 +49,7 @@ export default async function About() {
         backgroundImage="/assets/images/backgrounds/about-bg.png"
       />
       <CustomBreadCrumb className="bg-accent border-b" />
-      <section className="bg-accent space-y-10">
+      <section className="bg-accent space-y-10 md:space-y-20">
         {missionVisionStatement.map(({ imageUrl, title, description }, i) => (
           <div
             className="grid grid-cols-1 items-center gap-5 md:grid-cols-2"

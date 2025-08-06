@@ -12,10 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
+import Jumbotron from "../../_components/jumbotron";
 
-const title = "Expert Guidance for Your Visa & Immigration Needs";
+const title = "Connect with our immigration experts";
 const description =
-  "Get professional advice on visa applications, immigration policies, and travel documentation.";
+  "Whether you're applying to study, join a spouse, or relocate permanently, our licensed immigration officers provide trusted support every step of the way.";
 
 const url = "/consultation/visa-consultation";
 
@@ -55,10 +56,12 @@ export default function VisaConsultation() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <section className="text-background dark:text-foreground space-y-4 bg-gray-700 bg-[url(/assets/images/visa_consultation.jpg)] bg-cover bg-center bg-no-repeat text-center bg-blend-multiply">
-        <h1 className="mx-auto md:max-w-2xl">{title}</h1>
-        <p className="mx-auto max-w-lg">{description}</p>
-      </section>
+      <Jumbotron
+        title={title}
+        subtitle={description}
+        backgroundImage="/assets/images/visa_consultation.jpg"
+      />
+
       <CustomBreadCrumb className="bg-accent border-b" />
       <section className="bg-accent space-y-10">
         <div className="text-center">
@@ -104,13 +107,13 @@ export default function VisaConsultation() {
       </section>
       <section className="space-y-10">
         <div className="text-center">
-          <h2>Visa Immigration Officers</h2>
-          <p className="text-md">
+          <h2>Speak with an Immigration Experts</h2>
+          {/* <p className="text-md">
             Consult with experienced immigration officers for accurate guidance
-          </p>
+          </p> */}
         </div>
         {visaImmigrationExperts.map(
-          ({ firstName, lastName, about, link, imageUrl }, i) => (
+          ({ firstName, lastName, about, sub, link, imageUrl }, i) => (
             <div
               className="grid grid-cols-1 gap-4 md:grid-cols-2"
               key={`Legal Expert - ${i}`}
@@ -123,10 +126,16 @@ export default function VisaConsultation() {
                 className="w-md max-h-[300px] place-self-center rounded-lg object-cover md:rounded-l-lg md:rounded-br-lg md:rounded-tr-none"
               />
               <div className="space-y-1 place-self-center">
-                <h3 className="text-brand !text-xl">
-                  {firstName} {lastName}
-                </h3>
-                <p className="text-md">{about}</p>
+                <header>
+                  <h3 className="text-brand !text-xl">
+                    {firstName} {lastName}
+                  </h3>
+                  {sub ? <p className="text-muted-foreground">{sub}</p> : null}
+                </header>
+                <div
+                  dangerouslySetInnerHTML={{ __html: about }}
+                  className="text-md space-y-3"
+                />
                 <Button
                   asChild
                   variant="brand"
@@ -136,7 +145,7 @@ export default function VisaConsultation() {
                     href={link}
                     arial-label={`Link to book a consultation with ${firstName} ${lastName}`}
                   >
-                    Book Consultation
+                    Book a consultation with {firstName} {lastName}
                   </Link>
                 </Button>
               </div>

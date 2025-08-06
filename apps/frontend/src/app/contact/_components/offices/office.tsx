@@ -32,7 +32,7 @@ const Office: React.FC<Props> = ({ office, consultation }) => {
             aria-label={`Our ${office.location} physical consultation booking page`}
             target="_blank"
           >
-            Book Consultation
+            Book a Visit
           </Link>
         </Button>
       ) : (

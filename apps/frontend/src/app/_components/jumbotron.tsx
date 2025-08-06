@@ -35,10 +35,12 @@ const Jumbotron: React.FC<JumbotronProps> = ({
       )}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <h1 className="relative z-[1]">{title}</h1>
-      {subtitle && <p className="mx-auto max-w-lg relative z-[1]">{subtitle}</p>}
+      <h1 className="relative z-[1] mx-auto max-w-3xl">{title}</h1>
+      {subtitle && (
+        <p className="relative z-[1] mx-auto max-w-lg">{subtitle}</p>
+      )}
       {cta && (
-        <div className="mt-8 relative z-[1]">
+        <div className="relative z-[1] mt-8">
           <Link
             href={cta.href}
             className={cn(
@@ -54,7 +56,9 @@ const Jumbotron: React.FC<JumbotronProps> = ({
         </div>
       )}
       {children && <div className="relative z-[1]">{children}</div>}
-      {overlay && <div className="absolute inset-0 z-0 bg-black opacity-50"></div>}
+      {overlay && (
+        <div className="absolute inset-0 z-0 bg-black opacity-50"></div>
+      )}
     </header>
   );
 };

@@ -1,23 +1,15 @@
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { env } from "@/src/config";
-import {
-  addresses,
-  legalExperts,
-  organization,
-  sharedMetadata,
-  visaImmigrationExperts,
-} from "@/src/utils";
-import { Button } from "@workspace/ui/components/button";
+import { addresses, organization, sharedMetadata } from "@/src/utils";
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import Office from "../../contact/_components/offices/office";
+import Jumbotron from "../../_components/jumbotron";
 
-const title = "Meet Our Admission Coordinators for a One-on-One Consultation";
+const title = "Get expert advice in person at our office.";
 const description =
-  "Visit any of our offices for expert guidance on admissions and academic processes";
+  "Visit us to get the clarity and confidence you need, straight from a trusted professional.";
 
 const url = "/consultation/physical-consultation";
 
@@ -59,15 +51,16 @@ export default function VisaConsultation() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <section className="text-background dark:text-foreground space-y-4 bg-gray-700 bg-[url(/assets/images/visa_consultation.jpg)] bg-cover bg-center bg-no-repeat text-center bg-blend-multiply">
-        <h1 className="mx-auto md:max-w-2xl">{title}</h1>
-        <p className="mx-auto max-w-lg">{description}</p>
-      </section>
+      <Jumbotron
+        title={title}
+        subtitle={description}
+        backgroundImage="/assets/images/visa_consultation.jpg"
+      />
       <CustomBreadCrumb className="bg-accent border-b" />
       <section className="bg-accent">
         <div className="text-center">
-          <h2>Our Office Locations</h2>
-          <p>One-on-One Consultation</p>
+          <h2>Meet with an expert at our office today</h2>
+          {/* <p>One-on-One Consultation</p> */}
         </div>
         <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-8">
           {addresses.map((office, i) => (

@@ -47,7 +47,7 @@ const consultations = [
     title: "Visa Consultations",
     subtitle: "Let's make the visa process simpler",
     description:
-      "Whether it's your first application or you've faced a rejection, we'll guide you.",
+      "Get expert advice on visa applications, immigration policies, and travel documentation. Consult with: Visa Immigration Officers, Legal Experts.",
     link: {
       href: "/consultation/visa-consultation",
       buttonText: "Start Your Visa Session",
@@ -98,9 +98,7 @@ export default function Consultation() {
                 <div>
                   <h2 className="!text-lg">{title}</h2>
                   {subtitle ? (
-                    <p className="text-muted-foreground text-sm">
-                      Meet an Admission Coordinator in Person
-                    </p>
+                    <p className="text-muted-foreground text-sm">{subtitle}</p>
                   ) : null}
                 </div>
                 <div className="w-full max-w-xl space-y-2 rounded-md border p-4">
