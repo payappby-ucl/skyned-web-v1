@@ -13,6 +13,8 @@ import {
   HeadsetIcon,
   MessageCircleQuestionIcon,
 } from "lucide-react";
+import KPI from "./_components/dashboard/kpi";
+import Trends from "./_components/dashboard/trends";
 
 export default function AdminDashboard() {
   const stats = [
@@ -82,12 +84,18 @@ export default function AdminDashboard() {
 
   return (
     <section className="space-y-6 !p-0">
-      <div className="space-y-1 border-b pb-3">
+      <div className="space-y-1">
         <h1 className="!text-2xl">Dashboard</h1>
         <p className="text-muted-foreground text-sm">
           Welcome back! Here's what's happening at Skyned Consults Education.
         </p>
       </div>
+
+      {/* KPI's */}
+      <KPI />
+
+      {/* Trends Graph */}
+      <Trends />
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

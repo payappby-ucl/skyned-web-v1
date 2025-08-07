@@ -10,19 +10,24 @@ import { DayPicker } from "react-day-picker";
 const DatePicker: React.FC<
   React.ComponentProps<typeof DayPicker> & {
     display?: string;
+    usePortal?: boolean;
   }
-> = ({ display, ...props }) => {
+> = ({ display, usePortal, ...props }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button type="button" variant={"outline"}>
+        <Button type="button" variant={"outline"} className={"rounded-sm"}>
           <span className="text-sm font-medium">
             {display || "Pick a date"}
           </span>
           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="!w-full p-0" align="start">
+      <PopoverContent
+        className="!w-full p-0"
+        align="start"
+        usePortal={usePortal}
+      >
         <Calendar {...props} initialFocus />
       </PopoverContent>
     </Popover>
