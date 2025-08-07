@@ -15,6 +15,12 @@ const decimalKeys = [
   "duration",
   "minimumEligibilityGpa",
   "score",
+  "schoolGrowth",
+  "programGrowth",
+  "faqGrowth",
+  "inquiryGrowth",
+  "adminGrowth",
+  "postGrowth",
 ];
 
 /**

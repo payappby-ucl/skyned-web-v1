@@ -322,6 +322,22 @@ export class AnalyticsService
 
     // END
   };
+
+  getAdminKPIs: IAnalyticsService["getAdminKPIs"] = async (authUser) => {
+    const [kpis] = await this.repository.db.dailyStats.findMany({
+      take: 1,
+      omit: {
+        id: true,
+      },
+      orderBy: {
+        date: "desc",
+      },
+    });
+
+    if (!kpis) return null;
+
+    return this.deserialize(kpis);
+  };
 }
 
 /** Concrete instance of AnalyticsService */

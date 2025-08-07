@@ -8,7 +8,7 @@ import {
 } from "@workspace/shared";
 import { RequestHandler } from "express";
 import { AdminIdSchema, PageQuerySchema } from "../../zod-schemas";
-import { IAdminService } from "../services";
+import { IAdminService, IAnalyticsService } from "../services";
 
 /** Represents interface for admin controller */
 export interface IAdminController {
@@ -57,5 +57,11 @@ export interface IAdminController {
   activateAccount: RequestHandler<
     AdminIdSchema,
     ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Get KPIs */
+  getKPIs: RequestHandler<
+    object,
+    ISuccessResponse<Awaited<ReturnType<IAnalyticsService["getAdminKPIs"]>>>
   >;
 }

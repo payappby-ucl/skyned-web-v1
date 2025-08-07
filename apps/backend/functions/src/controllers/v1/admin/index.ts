@@ -6,6 +6,7 @@ import { EventsEnum, RegistryKeysEnum } from "../../../enum";
 import {
   IAdminController,
   IAdminService,
+  IAnalyticsService,
   IAuth,
   IDepartmentService,
   IIDGeneratorService,
@@ -16,6 +17,7 @@ import SkynedRegistry from "../../../registry";
 import { ControllerUtils } from "../utils";
 import {
   adminService,
+  analyticsService,
   departmentService,
   idGeneratorService,
   phoneNumberService,
@@ -35,6 +37,7 @@ export interface AdminControllerDependencies {
   idGeneratorService: IIDGeneratorService;
   phoneNumberService: IPhoneNumberService;
   publisher: IPublisher;
+  analyticsService: IAnalyticsService;
 }
 
 /**
@@ -56,6 +59,7 @@ export class AdminController
     private readonly idGeneratorService: IIDGeneratorService,
     private readonly phoneNumberService: IPhoneNumberService,
     private readonly publisher: IPublisher,
+    private readonly analyticsService: IAnalyticsService,
   ) {
     super();
   }
@@ -72,6 +76,7 @@ export class AdminController
     idGeneratorService,
     phoneNumberService,
     publisher,
+    analyticsService,
   }: AdminControllerDependencies) {
     if (!AdminController.instance) {
       AdminController.instance = new AdminController(
@@ -82,6 +87,7 @@ export class AdminController
         idGeneratorService,
         phoneNumberService,
         publisher,
+        analyticsService,
       );
     }
 
@@ -535,6 +541,16 @@ export class AdminController
       next(error);
     }
   };
+
+  getKPIs: IAdminController["getKPIs"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const kpis = await this.analyticsService.getAdminKPIs(authUser);
+      res._success(StatusCodes.OK, kpis);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** AdminController instance */
@@ -549,5 +565,6 @@ export const adminController = SkynedRegistry.getSingleton(
       idGeneratorService,
       phoneNumberService,
       publisher,
+      analyticsService,
     }),
 );

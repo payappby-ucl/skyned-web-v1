@@ -60,6 +60,15 @@ export class AdminRouter implements IRouter {
         adminController.getMe,
       );
 
+    // * Analytics
+    this.router
+      .route("/dashboard/kpis")
+      .get(
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        adminController.getKPIs,
+      );
+
     this.router
       .route("/:adminId")
       .get(
