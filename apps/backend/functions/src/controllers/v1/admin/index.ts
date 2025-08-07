@@ -27,6 +27,8 @@ import { auth } from "../../../infrastructure";
 import { SkynedUtils } from "../../../utils";
 import { env } from "../../../config";
 import { IPublisher, publisher } from "../../../publisher";
+import dayjs from "dayjs";
+import { ITrends } from "@workspace/shared";
 
 /** Required dependencies to create AdminController instance */
 export interface AdminControllerDependencies {
@@ -547,6 +549,35 @@ export class AdminController
       const authUser = this._validateAdmin(req);
       const kpis = await this.analyticsService.getAdminKPIs(authUser);
       res._success(StatusCodes.OK, kpis);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getTrends: IAdminController["getTrends"] = async (req, res, next) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { from, to } = req.query;
+
+      const fromDate = from
+        ? dayjs(from).startOf("day")
+        : dayjs().subtract(1, "month").startOf("day");
+
+      const toDate = to ? dayjs(to).endOf("day") : dayjs().endOf("day");
+
+      let type: ITrends["type"] = "years";
+
+      if (toDate.diff(fromDate, "days") <= 90) type = "days";
+      else if (toDate.diff(fromDate, "year") <= 1) type = "months";
+
+      const trends = await this.analyticsService.getAdminTrends(
+        type,
+        fromDate.toDate(),
+        toDate.toDate(),
+        authUser,
+      );
+
+      res._success(StatusCodes.OK, trends);
     } catch (error) {
       next(error);
     }

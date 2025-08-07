@@ -7,7 +7,11 @@ import {
   UpdateAdminSchema,
 } from "@workspace/shared";
 import { RequestHandler } from "express";
-import { AdminIdSchema, PageQuerySchema } from "../../zod-schemas";
+import {
+  AdminIdSchema,
+  DateRangeSchema,
+  PageQuerySchema,
+} from "../../zod-schemas";
 import { IAdminService, IAnalyticsService } from "../services";
 
 /** Represents interface for admin controller */
@@ -63,5 +67,13 @@ export interface IAdminController {
   getKPIs: RequestHandler<
     object,
     ISuccessResponse<Awaited<ReturnType<IAnalyticsService["getAdminKPIs"]>>>
+  >;
+
+  /** Get Trends */
+  getTrends: RequestHandler<
+    object,
+    ISuccessResponse<Awaited<ReturnType<IAnalyticsService["getAdminTrends"]>>>,
+    void,
+    DateRangeSchema
   >;
 }

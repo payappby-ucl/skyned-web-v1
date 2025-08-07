@@ -1,4 +1,4 @@
-import { AuthClaim, IKPI } from "@workspace/shared";
+import { AuthClaim, IKPI, ITrends } from "@workspace/shared";
 
 /** Represents Analytics Service */
 export interface IAnalyticsService {
@@ -9,4 +9,12 @@ export interface IAnalyticsService {
   getAdminKPIs(
     authUser: AuthClaim,
   ): Promise<(Partial<Omit<IKPI, "id" | "date">> & { date: Date }) | null>;
+
+  /** Get Trends */
+  getAdminTrends(
+    type: "days" | "months" | "years",
+    from: Date,
+    to: Date,
+    authUser: AuthClaim,
+  ): Promise<ITrends[]>;
 }

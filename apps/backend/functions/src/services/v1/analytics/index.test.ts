@@ -37,5 +37,26 @@ describe("AnalyticsService", () => {
         }
       });
     });
+
+    describe("getAdminTrends", () => {
+      test("should pass", async () => {
+        try {
+          const { user } = await signInUser();
+          const admin = await repository.admin.findAdminByAdminId(user.uid);
+
+          await analyticsService.getAdminTrends(
+            "days",
+            new Date(),
+            new Date(Date.now() + 1000),
+            {
+              user: admin!,
+              claim: "admin",
+            },
+          );
+        } catch (error: any) {
+          expect(error.statusCode).toBeUndefined();
+        }
+      });
+    });
   });
 });

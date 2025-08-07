@@ -5,6 +5,7 @@ import { RegistryKeysEnum } from "../../../enum";
 import { IAnalyticsService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { ServiceUtils } from "../utils";
+import { ITrends } from "@workspace/shared";
 
 /** Concrete implementation of IAnalyticsService */
 
@@ -337,6 +338,165 @@ export class AnalyticsService
     if (!kpis) return null;
 
     return this.deserialize(kpis);
+  };
+
+  private async _getTrendByDays(from: Date, to: Date) {
+    const data = await this.repository.db.$queryRaw<ITrends[]>`
+      SELECT
+        'days' AS type,
+        date AS period,
+
+        total_schools AS "totalSchools",
+        new_schools AS "newSchools",
+        active_schools AS "activeSchools",
+        school_growth AS "schoolGrowth",
+
+        total_programs AS "totalPrograms",
+        new_programs AS "newPrograms",
+        active_programs AS "activePrograms",
+        program_growth AS "programGrowth",
+
+        total_faqs AS "totalFaqs",
+        new_faqs AS "newFaqs",
+        faq_growth AS "faqGrowth",
+
+        total_inquiries AS "totalInquiries",
+        new_inquiries AS "newInquiries",
+        inquiry_growth AS "inquiryGrowth",
+
+        total_admins AS "totalAdmins",
+        new_admins AS "newAdmins",
+        active_admins AS "activeAdmins",
+        admin_growth AS "adminGrowth",
+
+        total_posts AS "totalPosts",
+        new_posts AS "newPosts",
+        published_posts AS "publishedPosts",
+        draft_posts AS "draftPosts",
+        scheduled_posts AS "scheduledPosts",
+        unpublished_posts AS "unpublishedPosts",
+        post_growth AS "postGrowth"
+
+      FROM daily_stats
+      WHERE date BETWEEN ${from} AND ${to}
+      ORDER BY period ASC
+      `;
+
+    return data;
+  }
+
+  private async _getTrendByMonths(from: Date, to: Date) {
+    const data = await this.repository.db.$queryRaw<ITrends[]>`
+      SELECT
+        'months' AS type,
+        DATE_TRUNC("month", date) AS period,
+
+        MAX(total_schools) AS "totalSchools",
+        SUM(new_schools) AS "newSchools",
+        MAX(active_schools) AS "activeSchools",
+        SUM(school_growth) AS "schoolGrowth",
+
+        MAX(total_programs) AS "totalPrograms",
+        SUM(new_programs) AS "newPrograms",
+        MAX(active_programs) AS "activePrograms",
+        SUM(program_growth) AS "programGrowth",
+
+        MAX(total_faqs) AS "totalFaqs",
+        SUM(new_faqs) AS "newFaqs",
+        SUM(faq_growth) AS "faqGrowth",
+
+        MAX(total_inquiries) AS "totalInquiries",
+        SUM(new_inquiries) AS "newInquiries",
+        SUM(inquiry_growth) AS "inquiryGrowth",
+
+        MAX(total_admins) AS "totalAdmins",
+        SUM(new_admins) AS "newAdmins",
+        MAX(active_admins) AS "activeAdmins",
+        SUM(admin_growth) AS "adminGrowth",
+
+        MAX(total_posts) AS "totalPosts",
+        SUM(new_posts) AS "newPosts",
+        MAX(published_posts) AS "publishedPosts",
+        MAX(draft_posts) AS "draftPosts",
+        MAX(scheduled_posts) AS "scheduledPosts",
+        MAX(unpublished_posts) AS "unpublishedPosts",
+        SUM(post_growth) AS "postGrowth"
+
+      FROM daily_stats
+      WHERE date BETWEEN ${from} AND ${to}
+      GROUP BY period
+      ORDER BY period ASC
+      `;
+
+    return data;
+  }
+
+  private async _getTrendByYears(from: Date, to: Date) {
+    const data = await this.repository.db.$queryRaw<ITrends[]>`
+      SELECT
+        'years' AS type,
+        DATE_TRUNC("year", date) AS period,
+
+        MAX(total_schools) AS "totalSchools",
+        SUM(new_schools) AS "newSchools",
+        MAX(active_schools) AS "activeSchools",
+        SUM(school_growth) AS "schoolGrowth",
+
+        MAX(total_programs) AS "totalPrograms",
+        SUM(new_programs) AS "newPrograms",
+        MAX(active_programs) AS "activePrograms",
+        SUM(program_growth) AS "programGrowth",
+
+        MAX(total_faqs) AS "totalFaqs",
+        SUM(new_faqs) AS "newFaqs",
+        SUM(faq_growth) AS "faqGrowth",
+
+        MAX(total_inquiries) AS "totalInquiries",
+        SUM(new_inquiries) AS "newInquiries",
+        SUM(inquiry_growth) AS "inquiryGrowth",
+
+        MAX(total_admins) AS "totalAdmins",
+        SUM(new_admins) AS "newAdmins",
+        MAX(active_admins) AS "activeAdmins",
+        SUM(admin_growth) AS "adminGrowth",
+
+        MAX(total_posts) AS "totalPosts",
+        SUM(new_posts) AS "newPosts",
+        MAX(published_posts) AS "publishedPosts",
+        MAX(draft_posts) AS "draftPosts",
+        MAX(scheduled_posts) AS "scheduledPosts",
+        MAX(unpublished_posts) AS "unpublishedPosts",
+        SUM(post_growth) AS "postGrowth"
+
+      FROM daily_stats
+      WHERE date BETWEEN ${from} AND ${to}
+      GROUP BY period
+      ORDER BY period ASC
+      `;
+
+    return data;
+  }
+
+  getAdminTrends: IAnalyticsService["getAdminTrends"] = async (
+    type,
+    from,
+    to,
+    // authUser,
+  ) => {
+    switch (type) {
+      case "days": {
+        const data = await this._getTrendByDays(from, to);
+        return data.map((d) => this.deserialize(d));
+      }
+      case "months": {
+        const data = await this._getTrendByMonths(from, to);
+        return data.map((d) => this.deserialize(d));
+      }
+      default: {
+        const data = await this._getTrendByYears(from, to);
+        return data.map((d) => this.deserialize(d));
+      }
+    }
   };
 }
 

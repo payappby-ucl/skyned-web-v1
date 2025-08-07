@@ -12,7 +12,11 @@ import {
 } from "../../../../middleware";
 import { adminController } from "../../../../controllers";
 import { CreateAdminSchema, UpdateAdminSchema } from "@workspace/shared";
-import { AdminIdSchema, PageQuerySchema } from "../../../../zod-schemas";
+import {
+  AdminIdSchema,
+  DateRangeSchema,
+  PageQuerySchema,
+} from "../../../../zod-schemas";
 
 /** Required dependencies for admin router initialization */
 export interface AdminRouterDependencies {
@@ -68,6 +72,15 @@ export class AdminRouter implements IRouter {
         authMiddleware.hasRole(["admin"]),
         adminController.getKPIs,
       );
+
+    this.router.route("/dashboard/trends").get(
+      RequestValidationMiddleware.validate({
+        query: DateRangeSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      adminController.getTrends,
+    );
 
     this.router
       .route("/:adminId")

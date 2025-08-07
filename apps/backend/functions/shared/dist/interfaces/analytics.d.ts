@@ -28,3 +28,7 @@ export interface IKPI extends ITimestamps {
     newPosts: number;
     postGrowth: number;
 }
+export interface ITrends extends Omit<IKPI, "id" | "date"> {
+    type: "days" | "months" | "years";
+    period: string;
+}

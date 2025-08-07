@@ -444,4 +444,42 @@ describe("Admin API", () => {
       });
     });
   });
+
+  describe(`GET - ${baseUrl}/dashboard`, () => {
+    describe("KPI", () => {
+      test("should pass", async () => {
+        const { user } = await signInUser();
+
+        const token = await user.getIdToken();
+        const res = await request(server)
+          .get(`${baseUrl}/dashboard/kpis`)
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: null,
+        });
+      });
+    });
+
+    describe("Trends", () => {
+      test("should pass", async () => {
+        const { user } = await signInUser();
+
+        const token = await user.getIdToken();
+        const res = await request(server)
+          .get(`${baseUrl}/dashboard/trends`)
+          .set("authorization", `bearer ${token}`);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: [],
+        });
+      });
+    });
+  });
 });
