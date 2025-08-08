@@ -90,5 +90,10 @@ class Utils {
             ...rest,
         }).format(amount);
     };
+    formatNumber = ({ value, ...rest }) => {
+        return new Intl.NumberFormat("en-Us", {
+            ...rest,
+        }).format(value);
+    };
 }
 exports.Utils = Utils;

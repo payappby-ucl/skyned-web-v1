@@ -16,6 +16,7 @@ export async function deleteFaq(
       );
 
     revalidateTag(serverCacheTags.faqs);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: responseData,

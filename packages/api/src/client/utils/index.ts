@@ -106,4 +106,10 @@ export class Utils implements IUtils {
       ...rest,
     }).format(amount);
   };
+
+  formatNumber: IUtils["formatNumber"] = ({ value, ...rest }) => {
+    return new Intl.NumberFormat("en-Us", {
+      ...rest,
+    }).format(value);
+  };
 }

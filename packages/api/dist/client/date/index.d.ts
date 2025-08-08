@@ -10,4 +10,5 @@ export declare class DateService implements IDateService {
     isAfter: IDateService["isAfter"];
     isBefore: IDateService["isBefore"];
     isEqual: IDateService["isEqual"];
+    fromNow: IDateService["fromNow"];
 }

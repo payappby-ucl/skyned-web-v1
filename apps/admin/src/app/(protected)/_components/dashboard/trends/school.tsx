@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import {
   ChartConfig,
   ChartContainer,
@@ -10,95 +10,101 @@ import {
   ChartTooltipContent,
 } from "@workspace/ui/components/chart";
 import { CartesianGrid, XAxis, Area, AreaChart } from "recharts";
-
-const chartData = [
-  { date: "2024-04-01", desktop: 222, mobile: 150 },
-  { date: "2024-04-02", desktop: 97, mobile: 180 },
-  { date: "2024-04-03", desktop: 167, mobile: 120 },
-  { date: "2024-04-04", desktop: 242, mobile: 260 },
-  { date: "2024-04-05", desktop: 373, mobile: 290 },
-  { date: "2024-04-06", desktop: 301, mobile: 340 },
-  { date: "2024-04-07", desktop: 245, mobile: 180 },
-  { date: "2024-04-08", desktop: 409, mobile: 320 },
-  { date: "2024-04-09", desktop: 59, mobile: 110 },
-  { date: "2024-04-10", desktop: 261, mobile: 190 },
-  { date: "2024-04-11", desktop: 327, mobile: 350 },
-  { date: "2024-04-12", desktop: 292, mobile: 210 },
-  { date: "2024-04-13", desktop: 342, mobile: 380 },
-  { date: "2024-04-14", desktop: 137, mobile: 220 },
-  { date: "2024-04-15", desktop: 120, mobile: 170 },
-  { date: "2024-04-16", desktop: 138, mobile: 190 },
-  { date: "2024-04-17", desktop: 446, mobile: 360 },
-  { date: "2024-04-18", desktop: 364, mobile: 410 },
-  { date: "2024-04-19", desktop: 243, mobile: 180 },
-  { date: "2024-04-20", desktop: 89, mobile: 150 },
-  { date: "2024-04-21", desktop: 137, mobile: 200 },
-  { date: "2024-04-22", desktop: 224, mobile: 170 },
-  { date: "2024-04-23", desktop: 138, mobile: 230 },
-  { date: "2024-04-24", desktop: 387, mobile: 290 },
-  { date: "2024-04-25", desktop: 215, mobile: 250 },
-];
+import { ITrends } from "@workspace/shared";
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  totalSchools: {
+    label: "Total Schools",
+    color: "var(--chart-3)",
   },
-  desktop: {
-    label: "Desktop",
+  activeSchools: {
+    label: "Active Schools",
     color: "var(--chart-1)",
   },
-  mobile: {
-    label: "Mobile",
+  newSchools: {
+    label: "New Schools",
     color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
-const SchoolTrends: React.FC = () => {
+const SchoolTrends: React.FC<{
+  trends: ITrends[];
+}> = ({ trends }) => {
+  const getDateTimeFormatOptions = useCallback(() => {
+    const type = trends[0]?.type || "days";
+    const options: Intl.DateTimeFormatOptions =
+      type === "days"
+        ? {
+            month: "short",
+            day: "numeric",
+          }
+        : type === "months"
+          ? {
+              month: "long",
+            }
+          : {
+              year: "numeric",
+            };
+
+    return options;
+  }, [trends]);
+
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-auto h-[250px] w-full"
+      className={"aspect-auto h-[250px] w-full rounded-lg border p-2"}
     >
-      <AreaChart data={chartData}>
+      <AreaChart data={trends}>
         <defs>
-          <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="fillTotalSchools" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="5%"
-              stopColor="var(--color-desktop)"
+              stopColor="var(--color-totalSchools)"
               stopOpacity={0.8}
             />
             <stop
               offset="95%"
-              stopColor="var(--color-desktop)"
+              stopColor="var(--color-totalSchools)"
               stopOpacity={0.1}
             />
           </linearGradient>
-          <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="fillActiveSchools" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="5%"
-              stopColor="var(--color-mobile)"
+              stopColor="var(--color-activeSchools)"
               stopOpacity={0.8}
             />
             <stop
               offset="95%"
-              stopColor="var(--color-mobile)"
+              stopColor="var(--color-activeSchools)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+          <linearGradient id="fillNewSchools" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-newSchools)"
+              stopOpacity={0.8}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-newSchools)"
               stopOpacity={0.1}
             />
           </linearGradient>
         </defs>
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey="date"
+          dataKey="period"
           tickLine={false}
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
-          tickFormatter={(value) => {
+          tickFormatter={(value, index) => {
             const date = new Date(value);
-            return date.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            });
+            const options = getDateTimeFormatOptions();
+
+            return date.toLocaleDateString("en-US", options);
           }}
         />
         <ChartTooltip
@@ -106,27 +112,33 @@ const SchoolTrends: React.FC = () => {
           content={
             <ChartTooltipContent
               labelFormatter={(value) => {
-                return new Date(value).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
+                const options = getDateTimeFormatOptions();
+
+                return new Date(value).toLocaleDateString("en-US", options);
               }}
               indicator="dot"
             />
           }
         />
         <Area
-          dataKey="mobile"
+          dataKey="totalSchools"
           type="natural"
-          fill="url(#fillMobile)"
-          stroke="var(--color-mobile)"
-          stackId="a"
+          fill="url(#fillTotalSchools)"
+          stroke="var(--color-totalSchools)"
+          stackId="c"
         />
         <Area
-          dataKey="desktop"
+          dataKey="activeSchools"
           type="natural"
-          fill="url(#fillDesktop)"
-          stroke="var(--color-desktop)"
+          fill="url(#fillActiveSchools)"
+          stroke="var(--color-activeSchools)"
+          stackId="b"
+        />
+        <Area
+          dataKey="newSchools"
+          type="natural"
+          fill="url(#fillNewSchools)"
+          stroke="var(--color-newSchools)"
           stackId="a"
         />
         <ChartLegend content={<ChartLegendContent />} />

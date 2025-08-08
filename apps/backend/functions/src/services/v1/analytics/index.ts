@@ -389,7 +389,7 @@ export class AnalyticsService
     const data = await this.repository.db.$queryRaw<ITrends[]>`
       SELECT
         'months' AS type,
-        DATE_TRUNC("month", date) AS period,
+        DATE_TRUNC('month', date) AS period,
 
         MAX(total_schools) AS "totalSchools",
         SUM(new_schools) AS "newSchools",
@@ -435,7 +435,7 @@ export class AnalyticsService
     const data = await this.repository.db.$queryRaw<ITrends[]>`
       SELECT
         'years' AS type,
-        DATE_TRUNC("year", date) AS period,
+        DATE_TRUNC('year', date) AS period,
 
         MAX(total_schools) AS "totalSchools",
         SUM(new_schools) AS "newSchools",

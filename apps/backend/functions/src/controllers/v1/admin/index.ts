@@ -568,7 +568,7 @@ export class AdminController
       let type: ITrends["type"] = "years";
 
       if (toDate.diff(fromDate, "days") <= 90) type = "days";
-      else if (toDate.diff(fromDate, "year") <= 1) type = "months";
+      else if (toDate.diff(fromDate, "month") <= 12) type = "months";
 
       const trends = await this.analyticsService.getAdminTrends(
         type,

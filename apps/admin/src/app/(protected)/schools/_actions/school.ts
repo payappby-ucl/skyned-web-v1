@@ -25,6 +25,7 @@ export async function createSchool(
       );
 
     revalidateTag(serverCacheTags.schools);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,
@@ -74,6 +75,7 @@ export async function takeActionOnSchool(
 
     revalidateTag(serverCacheTags.schools);
     revalidateTag(`${serverCacheTags.schools}-slug-${slug}`);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,

@@ -2,6 +2,11 @@
  * @author Beantech Designs <info@beantech.co>
  */
 
+// eslint-disable-next-line space-before-function-paren
+(BigInt.prototype as any).toJSON = function () {
+  return Number.parseInt(this.toString()) ?? this.toString();
+};
+
 import { onRequest } from "firebase-functions/https";
 import { app } from "./app";
 import { SkynedUtils } from "./utils";

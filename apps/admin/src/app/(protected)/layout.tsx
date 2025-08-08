@@ -50,7 +50,6 @@ export default async function AuthLayout({
       </SidebarProvider>
     );
   } catch (error: any) {
-    console.log(error);
     return (
       <section className="flex h-screen items-center justify-center">
         <Alert message={error.message as string} />;

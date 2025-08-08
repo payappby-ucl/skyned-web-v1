@@ -24,6 +24,7 @@ export async function createBlogPost(
       );
 
     revalidateTag(serverCacheTags.blogs);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,
@@ -49,6 +50,7 @@ export async function updateBlogPost(
 
     revalidateTag(serverCacheTags.blogs);
     revalidateTag(`${serverCacheTags.blogs}-slug-${slug}`);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,
@@ -69,6 +71,7 @@ export async function deleteBlogPost(
       );
 
     revalidateTag(serverCacheTags.blogs);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,

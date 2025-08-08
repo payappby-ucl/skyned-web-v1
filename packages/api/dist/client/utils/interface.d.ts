@@ -17,4 +17,7 @@ export interface IUtils {
     formatCurrency(options: {
         amount: number;
     } & Intl.NumberFormatOptions): string;
+    formatNumber(options: {
+        value: number;
+    } & Intl.NumberFormatOptions): string;
 }

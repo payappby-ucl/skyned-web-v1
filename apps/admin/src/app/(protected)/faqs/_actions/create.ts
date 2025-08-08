@@ -19,6 +19,7 @@ export async function createFaq(
       });
 
     revalidateTag(serverCacheTags.faqs);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: responseData,

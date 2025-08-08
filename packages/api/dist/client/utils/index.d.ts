@@ -10,4 +10,5 @@ export declare class Utils implements IUtils {
     exclude: IUtils["exclude"];
     copyToClipboard: IUtils["copyToClipboard"];
     formatCurrency: IUtils["formatCurrency"];
+    formatNumber: IUtils["formatNumber"];
 }

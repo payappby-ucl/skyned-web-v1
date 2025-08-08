@@ -49,5 +49,6 @@ class DateService {
     isAfter = (first, second) => (0, dayjs_1.default)(first).isAfter(second);
     isBefore = (first, second) => (0, dayjs_1.default)(first).isBefore(second);
     isEqual = (first, second) => (0, dayjs_1.default)(first).isSame(second);
+    fromNow = (date) => (0, dayjs_1.default)(date).fromNow();
 }
 exports.DateService = DateService;

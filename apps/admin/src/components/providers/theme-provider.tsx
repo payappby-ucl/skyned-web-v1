@@ -11,7 +11,7 @@ export function ThemeProviders({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
       enableColorScheme
-      forcedTheme="dark"
+      forcedTheme="light"
     >
       {children}
     </NextThemesProvider>

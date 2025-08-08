@@ -21,4 +21,5 @@ export interface IDateService {
   isAfter(first: Date, second: Date): boolean;
   isBefore(first: Date, second: Date): boolean;
   isEqual(first: Date, second: Date): boolean;
+  fromNow(date: Date): string;
 }

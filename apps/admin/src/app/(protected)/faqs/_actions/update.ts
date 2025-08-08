@@ -21,6 +21,7 @@ export async function updateFaq(
 
     revalidateTag(serverCacheTags.faqs);
     revalidateTag(`${serverCacheTags.faqs}-id-${id}`);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: responseData,

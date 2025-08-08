@@ -1,87 +1,12 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
-import { Badge } from "@workspace/ui/components/badge";
-import { Progress } from "@workspace/ui/components/progress";
-import {
-  Users,
-  GraduationCap,
-  HeadsetIcon,
-  MessageCircleQuestionIcon,
-} from "lucide-react";
 import KPI from "./_components/dashboard/kpi";
 import Trends from "./_components/dashboard/trends";
+import ActivityLogs from "./_components/dashboard/activitv-logs";
+import StudentPie from "./_components/dashboard/students-pie";
+import ApplicationPie from "./_components/dashboard/applications-pie";
+import DepartmentsPie from "./_components/dashboard/staff-pie";
+import StudentsByNationality from "./_components/dashboard/students-by-nationality";
 
 export default function AdminDashboard() {
-  const stats = [
-    {
-      title: "Total Students",
-      value: "2,847",
-      change: "+12",
-      icon: Users,
-      color: "text-blue-600",
-    },
-    {
-      title: "Active Schools",
-      value: "24",
-      change: "+2",
-      icon: GraduationCap,
-      color: "text-green-600",
-    },
-    {
-      title: "Inquiries",
-      value: "8",
-      change: "0",
-      icon: MessageCircleQuestionIcon,
-      color: "text-purple-600",
-    },
-    {
-      title: "Team Members",
-      value: "50",
-      change: "+8",
-      icon: HeadsetIcon,
-      color: "text-emerald-600",
-    },
-  ];
-
-  const departmentStats = [
-    { name: "Executive", members: 342, progress: 85 },
-    { name: "Marketing", members: 298, progress: 74 },
-    { name: "Admissions", members: 456, progress: 91 },
-    { name: "Communications", members: 234, progress: 58 },
-    { name: "Technical", members: 567, progress: 95 },
-    { name: "Human Resource", members: 189, progress: 47 },
-    { name: "Quality Assurance", members: 123, progress: 31 },
-  ];
-
-  const recentActivities = [
-    {
-      action: "New student enrolled",
-      department: "Technical",
-      time: "2 minutes ago",
-    },
-    {
-      action: "Tasks completed",
-      department: "Marketing",
-      time: "15 minutes ago",
-    },
-    {
-      action: "New inquiry received",
-      department: "Admissions",
-      time: "1 hour ago",
-    },
-    {
-      action: "Blog post published",
-      department: "Communications",
-      time: "2 hours ago",
-    },
-    { action: "Account updated", department: "Executive", time: "3 hours ago" },
-  ];
-
   return (
     <section className="space-y-6 !p-0">
       <div className="space-y-1">
@@ -97,82 +22,26 @@ export default function AdminDashboard() {
       {/* Trends Graph */}
       <Trends />
 
-      {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <Card key={stat.title}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                {stat.title}
-              </CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-muted-foreground text-xs">
-                <span className="text-green-600">{stat.change}</span> from last
-                month
-              </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <div className="grid grid-cols-1 items-start gap-2 lg:grid-cols-3">
+        <div className="grid gap-2">
+          {/* Student Pie */}
+          <StudentPie />
+          {/* Application Pie */}
+          <ApplicationPie />
+        </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        {/* Department Performance */}
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Department Performance</CardTitle>
-            <CardDescription>Member distribution by department</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {departmentStats.map((dept) => (
-              <div key={dept.name} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="font-medium">{dept.name}</div>
-                  <div className="text-muted-foreground text-sm">
-                    {dept.members} members
-                  </div>
-                </div>
-                <Progress value={dept.progress} />
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+        <div className="grid gap-2">
+          {/* Students by nationality */}
+          <StudentsByNationality />
+        </div>
 
-        {/* Recent Activity */}
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Activity Logs</CardTitle>
-            <CardDescription>
-              Latest updates across all departments
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentActivities.map((activity, index) => (
-                <div
-                  key={index}
-                  className="border-l-3 border-brand hover:bg-brand-50/50 flex items-center space-x-4 px-2 pb-2 pl-3 text-xs transition-colors"
-                >
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {activity.action}
-                    </p>
-                    <div className="flex items-center space-x-2">
-                      <Badge variant="secondary" className="text-xs">
-                        {activity.department}
-                      </Badge>
-                      <p className="text-muted-foreground text-xs">
-                        {activity.time}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid gap-2">
+          {/* Departments Pie */}
+          <DepartmentsPie />
+
+          {/* Activity Logs */}
+          <ActivityLogs />
+        </div>
       </div>
     </section>
   );

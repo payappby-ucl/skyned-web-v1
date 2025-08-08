@@ -19,6 +19,7 @@ export async function takeActionOnAdmin(
 
     revalidateTag(serverCacheTags.admins);
     revalidateTag(`${serverCacheTags.admins}-${adminId}`);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,

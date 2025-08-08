@@ -24,6 +24,7 @@ export async function createProgram(
       );
 
     revalidateTag(`${serverCacheTags.programs}-${schoolSlug}`);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,
@@ -51,6 +52,7 @@ export async function updateProgram(
     revalidateTag(
       `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
     );
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,
@@ -130,7 +132,7 @@ export async function takeActionOnProgram(
     revalidateTag(
       `${serverCacheTags.schools}-${schoolSlug}-programs-${programSlug}`,
     );
-
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: res,

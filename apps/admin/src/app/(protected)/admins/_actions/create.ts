@@ -22,6 +22,7 @@ export async function createAdmin(
     );
 
     revalidateTag(serverCacheTags.admins);
+    revalidateTag(serverCacheTags.kpi);
     return {
       success: true,
       data: admin,

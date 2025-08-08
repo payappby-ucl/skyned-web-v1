@@ -80,4 +80,6 @@ export abstract class ControllerUtils {
       const hasAccess = accessControl.attribute(...args);
       return hasAccess;
     };
+
+  protected exclude = SkynedUtils.exclude;
 }

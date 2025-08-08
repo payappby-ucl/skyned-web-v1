@@ -48,4 +48,6 @@ export class DateService implements IDateService {
 
   isEqual: IDateService["isEqual"] = (first, second) =>
     dayjs(first).isSame(second);
+
+  fromNow: IDateService["fromNow"] = (date) => dayjs(date).fromNow();
 }
