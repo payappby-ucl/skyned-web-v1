@@ -1,7 +1,7 @@
 import { env } from "@/src/config";
 import { organization, sharedMetadata } from "@/src/utils";
 import Script from "next/script";
-import { WebPage, WithContext } from "schema-dts";
+import { ItemList, ListItem, WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
 import { brandServerApi } from "@/src/lib/server";
@@ -17,16 +17,42 @@ const title = "Schools";
 const description =
   "Search for schools and universities in the UK, USA, Canada, Australia, and Europe.";
 
-export async function generateMetadata() {
-  return {
-    ...sharedMetadata,
-    title,
-    description,
-    alternates: {
-      canonical: "/schools",
+export const metadata: Metadata = {
+  ...sharedMetadata,
+  title,
+  description,
+  alternates: {
+    canonical: "/schools",
+  },
+  keywords: [
+    ...new Set([
+      ...(sharedMetadata.keywords || []),
+      "schools",
+      "programs",
+      "apply",
+      "study",
+      "study abroad",
+    ]),
+  ],
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    images: [
+      {
+        url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
+        width: 1200,
+        height: 630,
+        alt: `${env.organization.name} - International Study Application Support`,
+      },
+    ],
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    images: {
+      url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
+      alt: `Our partner schools`,
     },
-  } as Metadata;
-}
+  },
+};
 
 export default async function Schools({ searchParams }: Props) {
   try {
@@ -46,13 +72,32 @@ export default async function Schools({ searchParams }: Props) {
         revalidate: 86400,
       },
     });
-    const schoolsPageJsonLd: WithContext<WebPage> = {
+
+    console.log(data);
+
+    const schoolsPageJsonLd: WithContext<ItemList> = {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: title,
+      "@type": "ItemList",
+      name: "Partner Schools",
       description,
       url: `${env.client.baseUrl}/schools`,
-      reviewedBy: organization,
+      numberOfItems: data.total,
+      itemListElement: data.data.map((school, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${env.client.baseUrl}/schools/${school.slug}`,
+        item: {
+          "@type": "School",
+          name: school.name,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: school.address,
+            addressLocality: school.city,
+            addressRegion: school.state,
+            addressCountry: school.country,
+          },
+        },
+      })),
     };
 
     return (

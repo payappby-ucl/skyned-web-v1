@@ -33,18 +33,6 @@ export const metadata: Metadata = {
   keywords: [...(sharedMetadata.keywords || []), "Blog"],
 };
 
-// export async function generateMetadata() {
-//   return {
-//     ...sharedMetadata,
-//     title,
-//     description,
-//     alternates: {
-//       canonical: "/blog",
-//     },
-//     keywords: [...(sharedMetadata.keywords || []), "Blog"],
-//   } as Metadata;
-// }
-
 export default async function Blogs({ searchParams }: Props) {
   try {
     const { page, limit, c } = await searchParams;
