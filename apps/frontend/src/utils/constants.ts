@@ -11,3 +11,6 @@ export const serverCacheTags = {
   categories: "categories",
   tags: "tags",
 } as const;
+
+/** Default Page Limit */
+export const DEFAULT_PAGINATION_LIMIT = 50;

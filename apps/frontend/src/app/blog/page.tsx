@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { env } from "@/src/config";
 import { brandServerApi } from "@/src/lib/server";
-import { sharedMetadata } from "@/src/utils";
+import { DEFAULT_PAGINATION_LIMIT, sharedMetadata } from "@/src/utils";
 import { IBlogPost, IPaginatedResponse } from "@workspace/shared";
 import { Metadata } from "next";
 import Script from "next/script";
@@ -37,9 +37,9 @@ export default async function Blogs({ searchParams }: Props) {
   try {
     const { page, limit, c } = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
-      page: page || null,
-      limit: limit || null,
-      c: c || null,
+      page: page || "1",
+      limit: limit || `${DEFAULT_PAGINATION_LIMIT}`,
+      c: c || null /** c stands for category */,
     });
 
     const urlConstruct = `/blogs?${urlQuery.toString()}`;

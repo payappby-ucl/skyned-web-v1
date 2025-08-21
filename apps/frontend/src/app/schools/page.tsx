@@ -1,5 +1,9 @@
 import { env } from "@/src/config";
-import { organization, sharedMetadata } from "@/src/utils";
+import {
+  DEFAULT_PAGINATION_LIMIT,
+  organization,
+  sharedMetadata,
+} from "@/src/utils";
 import Script from "next/script";
 import { ItemList, ListItem, WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
@@ -56,11 +60,11 @@ export const metadata: Metadata = {
 
 export default async function Schools({ searchParams }: Props) {
   try {
-    const { page, limit, c } = await searchParams;
+    // TODO: Implement search filters
+    const { page, limit } = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
-      page: page || null,
-      limit: limit || "2",
-      c: c || null,
+      page: page || "1",
+      limit: limit || `${DEFAULT_PAGINATION_LIMIT}`,
     });
 
     const urlConstruct = `/schools?${urlQuery.toString()}`;
@@ -72,8 +76,6 @@ export default async function Schools({ searchParams }: Props) {
         revalidate: 86400,
       },
     });
-
-    console.log(data);
 
     const schoolsPageJsonLd: WithContext<ItemList> = {
       "@context": "https://schema.org",
