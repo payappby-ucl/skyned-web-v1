@@ -47,7 +47,9 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
                   {middle?.map((link, i) => {
-                    const linkTitle = link.replace("/", "").replace("-", " ");
+                    const linkTitle = link
+                      .replaceAll("/", "")
+                      .replaceAll("-", " ");
 
                     return (
                       <DropdownMenuItem key={link} asChild>
@@ -79,7 +81,7 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
                 }
                 className="capitalize"
               >
-                {second?.replace("/", "").replace("-", " ")}
+                {second?.replaceAll("/", "").replaceAll("-", " ")}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </>
@@ -89,7 +91,7 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
 
         <BreadcrumbItem>
           <BreadcrumbPage className="capitalize">
-            {(last || second)?.replace("/", "").replace("-", " ")}
+            {(last || second)?.replaceAll("/", "").replaceAll("-", " ")}
           </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>

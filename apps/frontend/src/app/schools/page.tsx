@@ -90,7 +90,12 @@ export default async function Schools({ searchParams }: Props) {
         url: `${env.client.baseUrl}/schools/${school.slug}`,
         item: {
           "@type": "School",
+          "@id": `${env.client.baseUrl}/schools/${school.slug}`,
           name: school.name,
+          description: school.overview,
+          image: school.schoolImage.url,
+          url: `${env.client.baseUrl}/schools/${school.slug}`,
+          logo: school.logo.url,
           address: {
             "@type": "PostalAddress",
             streetAddress: school.address,
@@ -98,6 +103,7 @@ export default async function Schools({ searchParams }: Props) {
             addressRegion: school.state,
             addressCountry: school.country,
           },
+          sameAs: [school.link],
         },
       })),
     };

@@ -1,4 +1,4 @@
-import CustomBreadCrumb from "@/src/components/custom-bredcrumb"
+import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import { env } from "@/src/config";
 import { brandServerApi } from "@/src/lib/server";
 import { organization, sharedMetadata } from "@/src/utils";
@@ -6,7 +6,7 @@ import { ISchool } from "@workspace/shared";
 import { Metadata } from "next";
 import Script from "next/script";
 import { cache } from "react";
-import { BlogPosting, WithContext } from "schema-dts";
+import { BlogPosting, School, WithContext } from "schema-dts";
 import DateDisplay from "@/src/components/date-display";
 import Alert from "@/src/components/alert";
 import Jumbotron from "../../_components/jumbotron";
@@ -67,27 +67,32 @@ export default async function SchoolDetails({ params }: Props) {
     const { slug } = await params;
     const school = await getSchool(slug);
 
-    const blogPostJsonLd: WithContext<BlogPosting> = {
+    console.log(school);
+
+    const schoolJsonLd: WithContext<School> = {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: school.name,
+      "@type": "School",
+      "@id": `${env.client.baseUrl}/schools/${school.slug}`,
+      name: school.name,
       description: school.overview,
       image: school.schoolImage.url,
       url: `${env.client.baseUrl}/schools/${school.slug}`,
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": "https://example.com/blog/my-awesome-post",
+      logo: school.logo.url,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: school.address,
+        addressLocality: school.city,
+        addressRegion: school.state,
+        addressCountry: school.country,
       },
-      publisher: organization,
-      dateModified: `${school.updatedAt}`,
-      datePublished: `${school.createdAt}`,
+      sameAs: [school.link],
     };
 
     return (
       <>
         <Script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schoolJsonLd) }}
         />
 
         <Jumbotron
@@ -99,7 +104,7 @@ export default async function SchoolDetails({ params }: Props) {
           overlay
         />
 
-        <CustomBreadCrumb className="border-y"/>
+        <CustomBreadCrumb className="border-y" />
 
         <section>
           <div
