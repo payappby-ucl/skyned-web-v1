@@ -212,7 +212,7 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
       skip,
       take,
       where: {
-        active: authUser?.claim !== "admin" ? true : undefined,
+        active: !authUser || authUser.claim !== "admin" ? true : undefined,
         createdAt: {
           gte: from,
           lte: to,
