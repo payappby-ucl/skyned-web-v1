@@ -17,7 +17,7 @@ const SchoolPagination: React.FC<Props> = ({ data, searchParams }) => {
     (newPage: number) => {
       const urlSearchParams = new URLSearchParams(searchParams);
       urlSearchParams.set("page", `${newPage}`);
-      router.push(`/schools/${urlSearchParams.toString()}`);
+      router.push(`/schools?${urlSearchParams.toString()}`);
     },
     [searchParams],
   );

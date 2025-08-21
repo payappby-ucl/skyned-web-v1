@@ -13,9 +13,9 @@ type Props = {
   searchParams: Promise<{ page?: string; limit?: string; c?: string }>;
 };
 
-const title = "Schools";
+const title = "Our Partner Schools";
 const description =
-  "Search for schools and universities in the UK, USA, Canada, Australia, and Europe.";
+  "Explore our network of partner schools and universities across the UK, USA, Canada, Australia, and Europe. Discover the right institution for your academic journey.";
 
 export const metadata: Metadata = {
   ...sharedMetadata,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
         width: 1200,
         height: 630,
-        alt: `${env.organization.name} - International Study Application Support`,
+        alt: title,
       },
     ],
   },
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     ...sharedMetadata.twitter,
     images: {
       url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
-      alt: `Our partner schools`,
+      alt: title,
     },
   },
 };
@@ -59,7 +59,7 @@ export default async function Schools({ searchParams }: Props) {
     const { page, limit, c } = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
       page: page || null,
-      limit: limit || null,
+      limit: limit || "2",
       c: c || null,
     });
 
@@ -110,8 +110,8 @@ export default async function Schools({ searchParams }: Props) {
         />
 
         <Jumbotron
-          title="Our Partner Schools"
-          subtitle="Explore our network of partner schools and universities across the UK, USA, Canada, Australia, and Europe. Discover the right institution for your academic journey."
+          title={title}
+          subtitle={description}
           backgroundImage="/assets/images/backgrounds/school-bg.png"
         />
 
