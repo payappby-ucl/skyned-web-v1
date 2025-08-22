@@ -9,6 +9,11 @@ import { Button } from "@workspace/ui/components/button";
 import { Card, CardContent } from "@workspace/ui/components/card";
 import { Badge } from "@workspace/ui/components/badge";
 import { brandClientApi } from "@/src/lib/client";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@workspace/ui/components/avatar";
 
 interface Props {
   school: ISchool;
@@ -22,8 +27,17 @@ const SchoolCard: React.FC<Props> = ({ school }) => {
     <Card className="shadow-none">
       <CardContent className="flex h-full flex-col space-y-4">
         {/* Header Section */}
-        <div className="flex items-center gap-4">
-          <div className="relative h-10 w-10 shrink-0 rounded-full border p-2">
+        <div className="flex gap-4">
+          <Avatar>
+            <AvatarFallback>{school.name[0]?.toUpperCase()}</AvatarFallback>
+            <AvatarImage
+              src={school.logo.url}
+              alt={school.name}
+              width={40}
+              height={40}
+            />
+          </Avatar>
+          {/* <div className="relative h-10 w-10 shrink-0 rounded-full border p-2">
             <Image
               src={school.logo.url}
               alt={school.name}
@@ -32,9 +46,9 @@ const SchoolCard: React.FC<Props> = ({ school }) => {
               priority
               className="object-contain"
             />
-          </div>
+          </div> */}
 
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-2 self-start">
             <h4>{school.name}</h4>
             <div className="flex items-center gap-4 text-gray-500">
               <div className="flex items-center gap-1 text-gray-500">
@@ -63,9 +77,7 @@ const SchoolCard: React.FC<Props> = ({ school }) => {
             </div>
           </div>
 
-          <p className="line-clamp-3 !text-sm text-slate-800">
-            {school.overview}
-          </p>
+          <p className="text-md line-clamp-4">{school.overview}</p>
         </div>
 
         {/* Action Button */}

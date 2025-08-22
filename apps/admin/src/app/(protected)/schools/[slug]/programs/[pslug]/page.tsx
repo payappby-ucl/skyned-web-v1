@@ -207,7 +207,7 @@ export default async function SchoolProgramPage({
                   {/* Minimum Education Level */}
                   <div className="flex items-center gap-4">
                     <div className="bg-accent rounded-lg p-2">
-                      <CalendarDays />
+                      <GraduationCap />
                     </div>
                     <div>
                       <p className="text-md font-semibold">
@@ -218,6 +218,22 @@ export default async function SchoolProgramPage({
                       </p>
                       <small className="text-muted-foreground">
                         Minimum Education Level
+                      </small>
+                    </div>
+                  </div>
+
+                  {/* Program Duration */}
+                  <div className="flex items-center gap-4">
+                    <div className="bg-accent rounded-lg p-2">
+                      <CalendarDays />
+                    </div>
+                    <div>
+                      <p className="text-md font-semibold capitalize">
+                        {program.duration} {program.timeframe}
+                        {program.duration > 1 ? "'s" : ""}
+                      </p>
+                      <small className="text-muted-foreground">
+                        Program Duration
                       </small>
                     </div>
                   </div>

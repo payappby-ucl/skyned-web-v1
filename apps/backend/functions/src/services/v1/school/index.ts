@@ -22,6 +22,7 @@ const generalSchoolData: (keyof ISchool)[] = [
   "logo",
   "schoolImage",
   "overview",
+  "updatedAt",
 ];
 
 const adminSchoolData: (keyof ISchool)[] = [
@@ -29,7 +30,6 @@ const adminSchoolData: (keyof ISchool)[] = [
   "id",
   "schoolId",
   "createdAt",
-  "updatedAt",
   "active",
 ];
 

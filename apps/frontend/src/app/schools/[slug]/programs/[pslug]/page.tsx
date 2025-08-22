@@ -141,7 +141,10 @@ export default async function ProgramDetails({ params }: Props) {
         <CustomBreadCrumb className="border-y" />
 
         {/* Brief Details */}
-        <section className="bg-background sticky top-0 z-50 flex gap-4 !py-5">
+        <section
+          id="sticky-main"
+          className="bg-background sticky top-0 z-50 flex gap-4 !py-5"
+        >
           <Avatar>
             <AvatarFallback>
               {program.school?.name[0]?.toUpperCase()}
@@ -152,7 +155,7 @@ export default async function ProgramDetails({ params }: Props) {
             />
           </Avatar>
 
-          <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
+          <div className="flex flex-1 flex-col items-center gap-4 md:flex-row md:justify-between">
             <div>
               <h1 className="!text-xl md:!text-2xl">{program.name}</h1>
               <div className="text-muted-foreground hidden items-center gap-1 divide-x text-sm md:flex">
@@ -191,8 +194,7 @@ export default async function ProgramDetails({ params }: Props) {
             </div>
 
             {/* CTA's */}
-
-            <div className="flex w-full items-center gap-5 md:w-fit">
+            <div className="flex w-full items-center gap-4 md:w-fit">
               {/* Share Button */}
               <Button
                 size="icon"
@@ -274,7 +276,7 @@ export default async function ProgramDetails({ params }: Props) {
                 {/* Minimum Education Level */}
                 <div className="flex items-center gap-4">
                   <div className="bg-accent rounded-lg p-2">
-                    <CalendarDays />
+                    <GraduationCap />
                   </div>
                   <div>
                     <p className="text-md font-semibold">
@@ -285,6 +287,22 @@ export default async function ProgramDetails({ params }: Props) {
                     </p>
                     <small className="text-muted-foreground">
                       Minimum Education Level
+                    </small>
+                  </div>
+                </div>
+
+                {/* Program Duration */}
+                <div className="flex items-center gap-4">
+                  <div className="bg-accent rounded-lg p-2">
+                    <CalendarDays />
+                  </div>
+                  <div>
+                    <p className="text-md font-semibold capitalize">
+                      {program.duration} {program.timeframe}
+                      {program.duration > 1 ? "'s" : ""}
+                    </p>
+                    <small className="text-muted-foreground">
+                      Program Duration
                     </small>
                   </div>
                 </div>
@@ -312,12 +330,29 @@ export default async function ProgramDetails({ params }: Props) {
                     <HandCoins />
                   </div>
                   <div>
-                    <p className="text-md flex items-center font-semibold">
-                      <Fee
-                        currency={program.school?.currency!}
-                        amount={program.applicationFee}
-                      />
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p
+                        className={`text-md flex items-center font-semibold ${program.applicationFeeDiscount > 0 ? "line-through" : ""}`}
+                      >
+                        <Fee
+                          currency={program.school?.currency!}
+                          amount={program.applicationFee}
+                        />
+                      </p>
+
+                      {program.applicationFeeDiscount ? (
+                        <p className="text-md flex items-center font-semibold">
+                          <Fee
+                            currency={program.school?.currency!}
+                            amount={
+                              program.applicationFee -
+                              program.applicationFee *
+                                (program.applicationFeeDiscount / 100)
+                            }
+                          />
+                        </p>
+                      ) : null}
+                    </div>
                     <small className="text-muted-foreground">
                       Application Fee
                     </small>
