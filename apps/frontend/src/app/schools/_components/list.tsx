@@ -10,9 +10,11 @@ interface Props {
 export function SchoolList({ data, searchParams }: Props) {
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="columns-1 gap-4 md:columns-2 lg:columns-3">
         {data.data.map((school) => (
-          <SchoolCard school={school} key={school.slug} />
+          <div key={school.slug} className="mb-4 break-inside-avoid-column">
+            <SchoolCard school={school} />
+          </div>
         ))}
       </div>
       <SchoolPagination data={data} searchParams={searchParams} />

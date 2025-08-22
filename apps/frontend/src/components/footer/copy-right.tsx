@@ -16,6 +16,7 @@ const CopyRight: React.FC = () => {
           alt="Unicollegelink's Logo"
           width={150}
           height={80}
+          className="h-auto w-32"
         />
       </Link>
     </div>

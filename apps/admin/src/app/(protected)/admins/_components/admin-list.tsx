@@ -20,12 +20,6 @@ export type AdminListType = IAdmin & {
   };
 };
 
-// console.log(
-//   brandClientApi.date.humanizeDuration(
-//     brandClientApi.date.createDuration(40, "months"),
-//   ),
-// );
-
 const AdminList: React.FC = () => {
   const { pagination, setPagination } = usePaginationQuery();
 

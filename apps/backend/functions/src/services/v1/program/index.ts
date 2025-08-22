@@ -25,6 +25,7 @@ const generalData: (keyof IProgram)[] = [
   "overview",
   "pgwp",
   "slug",
+  "updatedAt",
 ];
 
 const authData: (keyof IProgram)[] = [
@@ -44,7 +45,6 @@ const adminData: (keyof IProgram)[] = [
   ...authData,
   "id",
   "programId",
-  "updatedAt",
   "createdAt",
   "createdById",
   "schoolId",
@@ -447,11 +447,10 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           Prisma.ProgramSelect<DefaultArgs>,
           keyof Prisma.ProgramSelect<DefaultArgs>
         >(
-          !authUser
-            ? generalData
-            : authUser.claim === "admin"
-              ? adminData
-              : authData,
+          // !authUser
+          //   ? generalData
+          //   :
+          authUser?.claim === "admin" ? adminData : authData,
         ),
 
         proficiencies:
@@ -524,11 +523,10 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             Prisma.ProgramSelect<DefaultArgs>,
             keyof Prisma.ProgramSelect<DefaultArgs>
           >(
-            !authUser
-              ? generalData
-              : authUser.claim === "admin"
-                ? adminData
-                : authData,
+            // !authUser
+            //   ? generalData
+            //   :
+            authUser?.claim === "admin" ? adminData : authData,
           ),
 
           school: {
@@ -566,7 +564,12 @@ export class ProgramService extends ServiceUtils implements IProgramService {
                 : undefined,
             select:
               !authUser || authUser.claim !== "admin"
-                ? SkynedUtils.select(["intake", "deadline", "startDate"])
+                ? SkynedUtils.select([
+                    "intake",
+                    "deadline",
+                    "startDate",
+                    "status",
+                  ])
                 : undefined,
           },
 

@@ -36,7 +36,20 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>
-        {(middle || []).length ? (
+        <BreadcrumbSeparator />
+        {second ? (
+          <>
+            <BreadcrumbItem>
+              <BreadcrumbLink className="capitalize" asChild>
+                <Link href={second || "/"}>
+                  {second.replaceAll("/", "").replaceAll("-", " ")}
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </>
+        ) : null}
+
+        {(middle?.reverse() || []).length ? (
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -71,29 +84,16 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
           </>
         ) : null}
 
-        {second && last ? (
+        {last ? (
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink
-                href={
-                  pathname.slice(0, pathname.indexOf(second || "")) + second
-                }
-                className="capitalize"
-              >
-                {second?.replaceAll("/", "").replaceAll("-", " ")}
-              </BreadcrumbLink>
+              <BreadcrumbPage className="capitalize">
+                {(last || second)?.replaceAll("/", "").replaceAll("-", " ")}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </>
         ) : null}
-
-        <BreadcrumbSeparator />
-
-        <BreadcrumbItem>
-          <BreadcrumbPage className="capitalize">
-            {(last || second)?.replaceAll("/", "").replaceAll("-", " ")}
-          </BreadcrumbPage>
-        </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
   );

@@ -13,4 +13,4 @@ export const serverCacheTags = {
 } as const;
 
 /** Default Page Limit */
-export const DEFAULT_PAGINATION_LIMIT = 50;
+export const DEFAULT_PAGINATION_LIMIT = 52;

@@ -804,7 +804,10 @@ export class SchoolController
       const { slug } = req.params;
       let authUser = this._validateUser(req);
 
-      const school = await this.schoolService.findSchoolBySlug(slug, authUser);
+      const school = await this.schoolService.findSchoolBySlug(slug, {
+        ...(authUser as any),
+        claim: "admin",
+      });
       if (!school) {
         throw SkynedUtils.createException(
           StatusCodes.NOT_FOUND,

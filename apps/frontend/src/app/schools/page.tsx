@@ -1,11 +1,7 @@
 import { env } from "@/src/config";
-import {
-  DEFAULT_PAGINATION_LIMIT,
-  organization,
-  sharedMetadata,
-} from "@/src/utils";
+import { DEFAULT_PAGINATION_LIMIT, sharedMetadata } from "@/src/utils";
 import Script from "next/script";
-import { ItemList, ListItem, WebPage, WithContext } from "schema-dts";
+import { ItemList, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
 import { brandServerApi } from "@/src/lib/server";

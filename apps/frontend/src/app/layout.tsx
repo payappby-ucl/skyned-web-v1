@@ -13,6 +13,7 @@ import Footer from "../components/footer/footer";
 import { CookieContextProvider } from "../components/providers/cookie-consent";
 import Analytics from "./_components/analytics";
 import CookieBanner from "./_components/cookie/cookie-banner";
+import TanstackQueryProvider from "../components/providers/tanstack-provider";
 // import WhatsAppWidget from "../components/chats/whatsapp";
 
 const poppins = Poppins({
@@ -72,20 +73,22 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <CookieContextProvider>
         <Analytics />
         <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
-          <ThemeProviders>
-            <AuthProvider>
-              <Nav />
-              <main>{children}</main>
-              <Footer />
-            </AuthProvider>
-            <Toaster richColors closeButton />
-            <CookieBanner />
-          </ThemeProviders>
-          {/* <WhatsAppWidget /> */}
+          <TanstackQueryProvider>
+            <ThemeProviders>
+              <AuthProvider>
+                <Nav />
+                <main>{children}</main>
+                <Footer />
+              </AuthProvider>
+              <Toaster richColors closeButton />
+              <CookieBanner />
+            </ThemeProviders>
+            {/* <WhatsAppWidget /> */}
+          </TanstackQueryProvider>
         </body>
       </CookieContextProvider>
 

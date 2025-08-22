@@ -22,6 +22,7 @@ const Footer: React.FC = () => {
                   src="/assets/images/brand/logo_white.png"
                   width={150}
                   height={80}
+                  className="h-auto w-32"
                 />
               </Link>
               <p>
@@ -39,6 +40,8 @@ const Footer: React.FC = () => {
                 <Image
                   src={icefBadgeImage}
                   alt="ICEF accreditation badge"
+                  width={200}
+                  height={200}
                   className="w-24"
                 />
               </Link>

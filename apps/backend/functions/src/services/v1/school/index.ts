@@ -147,7 +147,14 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
 
         _count: {
           select: {
-            programs: true,
+            programs:
+              authUser?.claim === "admin"
+                ? true
+                : {
+                    where: {
+                      active: true,
+                    },
+                  },
           },
         },
 

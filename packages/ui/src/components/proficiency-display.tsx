@@ -9,6 +9,7 @@ interface Props {
   test: string;
   score: number;
   slim?: boolean;
+  publicUser?: boolean;
 }
 const ProficiencyDisplay: React.FC<Props> = ({
   slim,
@@ -16,6 +17,7 @@ const ProficiencyDisplay: React.FC<Props> = ({
   test,
   score,
   tags,
+  publicUser,
 }) => {
   const style = useMemo(() => {
     const sty = {
@@ -84,11 +86,16 @@ const ProficiencyDisplay: React.FC<Props> = ({
         >
           <p>{test}</p>
           <p className="flex items-center gap-1">
-            {score} <ArrowBigRight className="size-4" /> {name}
+            {score}{" "}
+            {!publicUser ? (
+              <>
+                <ArrowBigRight className="size-4" /> {name}
+              </>
+            ) : null}
           </p>
         </div>
       </div>
-      {!slim ? (
+      {!slim && !publicUser ? (
         <p className={`text-center text-sm p-1 font-semibold ${style.fbg}`}>
           {tags[1]}
         </p>
