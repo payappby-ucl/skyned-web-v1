@@ -13,3 +13,4 @@ export * from "./intake";
 export * from "./blog-post";
 export * from "./category";
 export * from "./tag";
+export * from "./program";

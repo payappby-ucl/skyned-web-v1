@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 
-const usePaginationQuery = () => {
+const usePaginationQuery = (data?: {
+  pageIndex?: number;
+  pageSize?: number;
+}) => {
   const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: data?.pageIndex || 0,
+    pageSize: data?.pageSize || 10,
   });
 
   return {

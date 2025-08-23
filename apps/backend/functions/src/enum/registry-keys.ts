@@ -52,6 +52,8 @@ export enum RegistryKeysEnum {
   OUR_TEAM_ROUTER = "OurTeamRouter",
   /** School Router */
   SCHOOL_ROUTER = "SchoolRouter",
+  /** Program Router */
+  PROGRAM_ROUTER = "ProgramRouter",
   /** Accommodation Router */
   ACCOMMODATION_ROUTER = "AccommodationRouter",
   /** Intake Router */

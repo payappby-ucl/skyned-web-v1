@@ -9,20 +9,23 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@workspace/ui/components/breadcrumb";
+import { Button } from "@workspace/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@workspace/ui/components/dropdown-menu";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 interface Props {
   className?: string;
 }
 const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
+  const router = useRouter();
   const pathname = usePathname();
   const links = pathname.split("/").map((v) => `/${v}`);
   const [first, second, ...others] = links;
@@ -31,6 +34,17 @@ const CustomBreadCrumb: React.FC<Props> = ({ className = "" }) => {
   return (
     <Breadcrumb className={`mx-auto px-6 py-4 lg:px-20 ${className}`}>
       <BreadcrumbList className="w-full">
+        {pathname.split("/").length > 2 ? (
+          <BreadcrumbItem>
+            <Button
+              variant="ghost"
+              className="!size-8 !rounded-md"
+              onClick={() => router.back()}
+            >
+              <ArrowLeft />
+            </Button>
+          </BreadcrumbItem>
+        ) : null}
         <BreadcrumbItem>
           <BreadcrumbLink href={first || "/"} className="capitalize">
             Home

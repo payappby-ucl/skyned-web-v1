@@ -1,36 +1,17 @@
 import { brandServerApi, getErrorResponse } from "@/src/lib/server";
-import { serverCacheTags } from "@/src/utils";
 import { IPaginatedResponse, IProgram } from "@workspace/shared";
 import { type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const page = searchParams.get("page");
-    const limit = searchParams.get("limit");
-
-    const urlQuery = brandServerApi.utils.constructQuery({ page, limit });
-    const tags: string[] = brandServerApi.utils.constructTags(
-      {
-        page: {
-          prefix: `${serverCacheTags.programs}-page`,
-          value: page,
-        },
-        limit: {
-          prefix: `${serverCacheTags.programs}-limit`,
-          value: limit,
-        },
-      },
-      [`${serverCacheTags.programs}`],
-    );
-
-    const urlConstruct = `/programs?${urlQuery.toString()}`;
+    const urlConstruct = `/programs?${searchParams.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
       IPaginatedResponse<IProgram>
     >(urlConstruct, "GET", {
       next: {
-        tags,
+        tags: [urlConstruct],
       },
     });
 

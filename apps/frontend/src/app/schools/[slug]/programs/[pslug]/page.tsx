@@ -96,8 +96,6 @@ export default async function ProgramDetails({ params }: Props) {
     const { slug, pslug } = await params;
     const program = await getProgram(slug, pslug);
 
-    console.log(program);
-
     const programJsonLd: WithContext<EducationalOccupationalProgram> = {
       "@context": "https://schema.org",
       "@type": "EducationalOccupationalProgram",

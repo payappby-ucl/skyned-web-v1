@@ -5,10 +5,13 @@ import Jumbotron from "../_components/jumbotron";
 import { Metadata } from "next";
 import Script from "next/script";
 import { brandServerApi } from "@/src/lib/server";
-import { IPaginatedResponse } from "@workspace/shared";
+import { IPaginatedResponse, IProgram } from "@workspace/shared";
+import { ItemList, WithContext } from "schema-dts";
+import ProgramList from "./_components/list";
+import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 
 type Props = {
-  searchParams: Promise<{ page?: string; limit?: string; c?: string }>;
+  searchParams: Promise<{ term?: string; country?: string }>;
 };
 
 const title = "Search Programs";
@@ -53,53 +56,62 @@ export const metadata: Metadata = {
 };
 export default async function SearchPage({ searchParams }: Props) {
   try {
-    // TODO: Implement search filters
-    const { page, limit } = await searchParams;
+    const { term, country } = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
-      page: page || "1",
-      limit: limit || `${DEFAULT_PAGINATION_LIMIT}`,
+      page: "1",
+      limit: `${DEFAULT_PAGINATION_LIMIT}`,
+      term: term || null,
+      country: country || null,
+    });
+    const urlConstruct = `/programs?${urlQuery.toString()}`;
+    const { data } = await brandServerApi.httpClient.request<
+      IPaginatedResponse<IProgram>
+    >(urlConstruct, "GET", {
+      next: {
+        tags: [urlConstruct],
+      },
     });
 
-    // const urlConstruct = `/schools?${urlQuery.toString()}`;
-
-    // const { data } = await brandServerApi.httpClient.request<
-    //   IPaginatedResponse<ISchool>
-    // >(urlConstruct, "GET", {
-    //   next: {
-    //     revalidate: 86400,
-    //   },
-    // });
+    console.log("Herr1");
 
     // const searchPageJsonLd: WithContext<ItemList> = {
     //   "@context": "https://schema.org",
     //   "@type": "ItemList",
-    //   name: "Partner Schools",
+    //   name: "Programs",
     //   description,
     //   url: `${env.client.baseUrl}/schools`,
-    //   numberOfItems: data.total,
-    //   itemListElement: data.data.map((school, index) => ({
+    //   numberOfItems: data.data.length,
+    //   itemListElement: data.data.map((program, index) => ({
     //     "@type": "ListItem",
     //     position: index + 1,
-    //     url: `${env.client.baseUrl}/schools/${school.slug}`,
+    //     url: `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
     //     item: {
-    //       "@type": "School",
-    //       "@id": `${env.client.baseUrl}/schools/${school.slug}`,
-    //       name: school.name,
-    //       description: school.overview,
-    //       image: school.schoolImage.url,
-    //       url: `${env.client.baseUrl}/schools/${school.slug}`,
-    //       logo: school.logo.url,
-    //       address: {
-    //         "@type": "PostalAddress",
-    //         streetAddress: school.address,
-    //         addressLocality: school.city,
-    //         addressRegion: school.state,
-    //         addressCountry: school.country,
+    //       "@type": "EducationalOccupationalProgram",
+    //       "@id": `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
+    //       name: program.name,
+    //       description: program.overview,
+    //       timeToComplete: `${program.duration} ${program.timeframe}`,
+    //       provider: {
+    //         "@type": "CollegeOrUniversity",
+    //         name: program.school?.name,
+    //         description: program.school?.overview,
+    //         image: program.school?.schoolImage.url,
+    //         url: `${env.client.baseUrl}/schools/${program.school?.slug}`,
+    //         logo: program.school?.logo.url,
+    //         address: {
+    //           "@type": "PostalAddress",
+    //           streetAddress: program.school?.address,
+    //           addressLocality: program.school?.city,
+    //           addressRegion: program.school?.state,
+    //           addressCountry: program.school?.country,
+    //         },
+    //         sameAs: [program.school!.link],
     //       },
-    //       sameAs: [school.link],
     //     },
     //   })),
     // };
+
+    console.log("Herr");
 
     return (
       <>
@@ -110,9 +122,16 @@ export default async function SearchPage({ searchParams }: Props) {
           }}
         /> */}
 
-        <section className="bg-accent space-y-10">
-          {/* Partner schools list or grid goes here */}
-          {/* <SchoolList data={data} searchParams={urlQuery} /> */}
+        <Jumbotron
+          title={title}
+          subtitle={description}
+          backgroundImage="/assets/images/backgrounds/school-bg.png"
+        />
+
+        <CustomBreadCrumb className="border-y" />
+        <section className="!py-10" id="programs-list">
+          {/* Programs list */}
+          <ProgramList data={data} searchParams={urlQuery} />
         </section>
       </>
     );
