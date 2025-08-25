@@ -39,7 +39,7 @@ export class ProgramController
 
   listPrograms: IProgramController["listPrograms"] = async (req, res, next) => {
     try {
-      const { from, to, limit, page } = req.query;
+      const { from, to, limit, page, ...rest } = req.query;
       let authUser = this._validateUser(req);
 
       if (authUser?.claim === "admin") {
@@ -47,7 +47,7 @@ export class ProgramController
         this._attributeBasedAccessControl(authUser, "programs", "list");
       }
 
-      const construct = this._constructPaginationData({ limit, page });
+      const construct = this._constructPaginationData({ limit, page, ...rest });
 
       const total = await this.programService.count(
         {
@@ -62,6 +62,7 @@ export class ProgramController
           ...SkynedUtils.pick(construct, ["skip", "take"]),
           from,
           to,
+          ...rest,
         },
         authUser,
       );

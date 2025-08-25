@@ -8,7 +8,7 @@ import { brandClientApi } from "@/src/lib/client";
 import { DEFAULT_PAGINATION_LIMIT } from "@/src/utils";
 import { IPaginatedResponse, IProgram } from "@workspace/shared";
 import { BrandPagination } from "@workspace/ui/components/brand-pagination";
-import { BookText } from "lucide-react";
+import { BookText, GraduationCap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 
@@ -33,6 +33,8 @@ const ProgramList: React.FC<Props> = ({
     ...Object.entries(searchParams.entries),
     page: Number(sParams.get("page") || 0),
     limit: Number(sParams.get("limit") || DEFAULT_PAGINATION_LIMIT),
+    term: sParams.get("term") || "",
+    country: sParams.get("country") || "",
   });
 
   const searchParamsString = useMemo(() => {
@@ -57,6 +59,13 @@ const ProgramList: React.FC<Props> = ({
 
   return (
     <div className="space-y-10">
+      {/* Filters */}
+      <div>
+        <div className="flex items-center gap-2">
+          <GraduationCap className="font-semibold" />
+          <p className="font-semibold">Courses</p>
+        </div>
+      </div>
       {isPending && !initial ? <Loading slim /> : null}
       {(data || firstPageData)?.data?.length ? (
         <div className="columns-1 gap-4 md:columns-2 lg:columns-3">

@@ -252,6 +252,7 @@ exports.Prisma.SchoolScalarFieldEnum = {
   currency: 'currency',
   overview: 'overview',
   active: 'active',
+  randomKey: 'randomKey',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -270,6 +271,7 @@ exports.Prisma.ProgramScalarFieldEnum = {
   id: 'id',
   programId: 'programId',
   schoolId: 'schoolId',
+  randomKey: 'randomKey',
   name: 'name',
   slug: 'slug',
   faculty: 'faculty',
@@ -362,6 +364,11 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.TokenOrderByRelevanceFieldEnum = {
+  tokenId: 'tokenId',
+  token: 'token'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
@@ -371,6 +378,111 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.AdminOrderByRelevanceFieldEnum = {
+  adminId: 'adminId',
+  email: 'email',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  middleName: 'middleName',
+  nationality: 'nationality',
+  countryOfResidence: 'countryOfResidence',
+  about: 'about',
+  jobTitle: 'jobTitle',
+  createdById: 'createdById'
+};
+
+exports.Prisma.DepartmentOrderByRelevanceFieldEnum = {
+  leadId: 'leadId'
+};
+
+exports.Prisma.TeamOrderByRelevanceFieldEnum = {
+  name: 'name',
+  leadId: 'leadId',
+  createdById: 'createdById'
+};
+
+exports.Prisma.FaqOrderByRelevanceFieldEnum = {
+  question: 'question',
+  answer: 'answer',
+  createdById: 'createdById'
+};
+
+exports.Prisma.InquiryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  email: 'email',
+  message: 'message',
+  subject: 'subject'
+};
+
+exports.Prisma.ActivityLogOrderByRelevanceFieldEnum = {
+  resource: 'resource',
+  action: 'action',
+  message: 'message'
+};
+
+exports.Prisma.SchoolOrderByRelevanceFieldEnum = {
+  schoolId: 'schoolId',
+  name: 'name',
+  slug: 'slug',
+  state: 'state',
+  country: 'country',
+  city: 'city',
+  address: 'address',
+  link: 'link',
+  overview: 'overview',
+  createdById: 'createdById'
+};
+
+exports.Prisma.AccommodationOrderByRelevanceFieldEnum = {
+  description: 'description',
+  schoolId: 'schoolId',
+  createdById: 'createdById'
+};
+
+exports.Prisma.ProgramOrderByRelevanceFieldEnum = {
+  programId: 'programId',
+  schoolId: 'schoolId',
+  name: 'name',
+  slug: 'slug',
+  faculty: 'faculty',
+  degreeType: 'degreeType',
+  overview: 'overview',
+  description: 'description',
+  requirements: 'requirements',
+  minimumEducationLevel: 'minimumEducationLevel',
+  createdById: 'createdById'
+};
+
+exports.Prisma.EnglishProficiencyOrderByRelevanceFieldEnum = {
+  test: 'test',
+  programId: 'programId'
+};
+
+exports.Prisma.IntakeOrderByRelevanceFieldEnum = {
+  intake: 'intake',
+  schoolId: 'schoolId',
+  createdById: 'createdById'
+};
+
+exports.Prisma.BlogPostOrderByRelevanceFieldEnum = {
+  blogPostId: 'blogPostId',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  authorId: 'authorId'
+};
+
+exports.Prisma.TagOrderByRelevanceFieldEnum = {
+  name: 'name',
+  createdById: 'createdById'
+};
+
+exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  createdById: 'createdById'
 };
 exports.TokenType = exports.$Enums.TokenType = {
   verify: 'verify',

@@ -15,6 +15,7 @@ import {
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { Prisma } from "../../../infrastructure/repository/prisma-client";
 import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/runtime/library";
+import { ProgramQuerySchema } from "../../../zod-schemas";
 
 const generalData: (keyof IProgram)[] = [
   "applicationFee",
@@ -71,32 +72,11 @@ export class ProgramService extends ServiceUtils implements IProgramService {
 
   _constructWhereQuery(
     query: Partial<
-      IQueryConstruct<Omit<IProgram, "_count" | "proficiencies">>["where"]
+      IQueryConstruct<Omit<ProgramQuerySchema, "orderBy">>["where"]
     >,
     authUser?: AuthClaim,
   ) {
     const where: Prisma.ProgramWhereInput | undefined = {};
-    const equalInput: (keyof typeof query)[] = [
-      "schoolId",
-      "degreeType",
-      "pgwp",
-      "slug",
-      "timeframe",
-      "minimumEducationLevel",
-      "tuitionFeeType",
-    ];
-
-    const numberGreaterInput: (keyof typeof query)[] = [
-      "applicationFeeDiscount",
-      "minimumEligibilityGpa",
-      "minimumEducationDegree",
-    ];
-
-    const numberLessInput: (keyof typeof query)[] = [
-      "applicationFee",
-      "tuitionFee",
-      "duration",
-    ];
 
     if (!authUser || authUser.claim !== "admin") {
       where.active = true;
@@ -105,55 +85,33 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       };
     }
 
-    if (query.name) {
-      where.OR = [
-        { name: { equals: query.name, mode: "insensitive" } },
-        { name: { contains: query.name, mode: "insensitive" } },
-      ];
+    if (query.schoolId) {
+      where["schoolId"] = query.schoolId;
     }
 
-    if (query.faculty) {
-      if (where.OR) {
-        where.OR = [
-          ...where.OR,
-          { faculty: { equals: query.faculty, mode: "insensitive" } },
-          { faculty: { contains: query.faculty, mode: "insensitive" } },
-        ];
-      } else {
-        where.OR = [
-          { faculty: { equals: query.faculty, mode: "insensitive" } },
-          { faculty: { contains: query.faculty, mode: "insensitive" } },
-        ];
+    if (query.country || query.state) {
+      where.school = {};
+
+      if (query.country) {
+        where.school.country = {
+          in: query.country,
+        };
+      }
+
+      if (query.state) {
+        where.school.state = {
+          in: query.state,
+        };
       }
     }
 
-    const queryKeys = Object.keys(query) as (keyof typeof query)[];
-
-    const equalsKeys = queryKeys.filter((key) => equalInput.includes(key));
-    if (equalsKeys.length) {
-      queryKeys.forEach((key) => {
-        where[key] = query[key];
-      });
-    }
-
-    const greaterKeys = queryKeys.filter((key) =>
-      numberGreaterInput.includes(key),
-    );
-    if (greaterKeys.length) {
-      queryKeys.forEach((key) => {
-        where[key] = {
-          gte: query[key],
-        };
-      });
-    }
-
-    const lesserKeys = queryKeys.filter((key) => numberLessInput.includes(key));
-    if (lesserKeys.length) {
-      queryKeys.forEach((key) => {
-        where[key] = {
-          lte: query[key],
-        };
-      });
+    if (query.term) {
+      where.OR = [
+        { name: { contains: query.term, mode: "insensitive" } },
+        { faculty: { contains: query.term, mode: "insensitive" } },
+        { overview: { contains: query.term, mode: "insensitive" } },
+        { description: { contains: query.term, mode: "insensitive" } },
+      ];
     }
 
     return where;
@@ -438,9 +396,12 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           lte: to,
         },
       },
-      orderBy: {
-        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
-      },
+      orderBy:
+        authUser?.claim === "admin"
+          ? {
+              [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+            }
+          : where?.orderBy || { randomKey: "asc" },
 
       select: {
         ...SkynedUtils.select<
@@ -473,6 +434,8 @@ export class ProgramService extends ServiceUtils implements IProgramService {
             currency: true,
             logo: true,
             accommodation: true,
+            address: true,
+            schoolImage: true,
           },
         },
 
@@ -540,6 +503,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
               logo: true,
               accommodation: true,
               schoolImage: true,
+              address: true,
             },
           },
 

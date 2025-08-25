@@ -63,6 +63,8 @@ export default async function SearchPage({ searchParams }: Props) {
       term: term || null,
       country: country || null,
     });
+
+    console.log(urlQuery.toString());
     const urlConstruct = `/programs?${urlQuery.toString()}`;
     const { data } = await brandServerApi.httpClient.request<
       IPaginatedResponse<IProgram>
@@ -72,55 +74,51 @@ export default async function SearchPage({ searchParams }: Props) {
       },
     });
 
-    console.log("Herr1");
-
-    // const searchPageJsonLd: WithContext<ItemList> = {
-    //   "@context": "https://schema.org",
-    //   "@type": "ItemList",
-    //   name: "Programs",
-    //   description,
-    //   url: `${env.client.baseUrl}/schools`,
-    //   numberOfItems: data.data.length,
-    //   itemListElement: data.data.map((program, index) => ({
-    //     "@type": "ListItem",
-    //     position: index + 1,
-    //     url: `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
-    //     item: {
-    //       "@type": "EducationalOccupationalProgram",
-    //       "@id": `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
-    //       name: program.name,
-    //       description: program.overview,
-    //       timeToComplete: `${program.duration} ${program.timeframe}`,
-    //       provider: {
-    //         "@type": "CollegeOrUniversity",
-    //         name: program.school?.name,
-    //         description: program.school?.overview,
-    //         image: program.school?.schoolImage.url,
-    //         url: `${env.client.baseUrl}/schools/${program.school?.slug}`,
-    //         logo: program.school?.logo.url,
-    //         address: {
-    //           "@type": "PostalAddress",
-    //           streetAddress: program.school?.address,
-    //           addressLocality: program.school?.city,
-    //           addressRegion: program.school?.state,
-    //           addressCountry: program.school?.country,
-    //         },
-    //         sameAs: [program.school!.link],
-    //       },
-    //     },
-    //   })),
-    // };
-
-    console.log("Herr");
+    const searchPageJsonLd: WithContext<ItemList> = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Programs",
+      description,
+      url: `${env.client.baseUrl}/search`,
+      numberOfItems: data.data.length,
+      itemListElement: data.data.map((program, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
+        item: {
+          "@type": "EducationalOccupationalProgram",
+          "@id": `${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`,
+          name: program.name,
+          description: program.overview,
+          timeToComplete: `${program.duration} ${program.timeframe}`,
+          provider: {
+            "@type": "CollegeOrUniversity",
+            name: program.school?.name,
+            description: program.school?.overview,
+            image: program.school?.schoolImage.url,
+            url: `${env.client.baseUrl}/schools/${program.school?.slug}`,
+            logo: program.school?.logo.url,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: program.school?.address,
+              addressLocality: program.school?.city,
+              addressRegion: program.school?.state,
+              addressCountry: program.school?.country,
+            },
+            sameAs: [program.school!.link],
+          },
+        },
+      })),
+    };
 
     return (
       <>
-        {/* <Script
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(searchPageJsonLd),
           }}
-        /> */}
+        />
 
         <Jumbotron
           title={title}

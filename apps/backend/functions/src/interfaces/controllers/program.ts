@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { PageQuerySchema } from "../../zod-schemas";
+import { PageQuerySchema, ProgramQuerySchema } from "../../zod-schemas";
 import { ISuccessResponse, IPaginatedResponse } from "@workspace/shared";
 import { IProgramService } from "../services";
 
@@ -13,6 +13,6 @@ export interface IProgramController {
       >
     >,
     object,
-    Partial<PageQuerySchema>
+    Partial<PageQuerySchema & ProgramQuerySchema>
   >;
 }

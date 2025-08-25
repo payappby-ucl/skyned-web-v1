@@ -12,7 +12,7 @@ import {
   authMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
-import { PageQuerySchema } from "../../../../zod-schemas";
+import { PageQuerySchema, ProgramQuerySchema } from "../../../../zod-schemas";
 
 /** Required dependencies for router initialization */
 export interface ProgramRouterDependencies {
@@ -35,7 +35,7 @@ export class ProgramRouter implements IRouter {
   ) {
     this.router.route("/").get(
       RequestValidationMiddleware.validate({
-        query: PageQuerySchema.partial(),
+        query: PageQuerySchema.merge(ProgramQuerySchema).partial(),
       }),
       authMiddleware.safeAuthenticate,
       controller.listPrograms,

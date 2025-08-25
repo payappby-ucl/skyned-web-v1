@@ -5,6 +5,7 @@ import {
   UpdateBulkProgramSchema,
 } from "@workspace/shared";
 import { IQueryConstruct } from "../utils";
+import { ProgramQuerySchema } from "../../zod-schemas";
 
 /** Represents program service */
 export interface IProgramService {
@@ -38,13 +39,13 @@ export interface IProgramService {
 
   /** Count Programs */
   count(
-    query: Partial<IQueryConstruct<IProgram>>,
+    query: Partial<IQueryConstruct<ProgramQuerySchema>>,
     authUser?: AuthClaim,
   ): Promise<number>;
 
   /** List programs */
   listPrograms(
-    query: Partial<IQueryConstruct<IProgram>>,
+    query: Partial<IQueryConstruct<ProgramQuerySchema>>,
     authUser?: AuthClaim,
   ): Promise<Partial<IProgram>[]>;
 

@@ -12693,10 +12693,12 @@ export namespace Prisma {
 
   export type SchoolAvgAggregateOutputType = {
     id: number | null
+    randomKey: number | null
   }
 
   export type SchoolSumAggregateOutputType = {
     id: number | null
+    randomKey: number | null
   }
 
   export type SchoolMinAggregateOutputType = {
@@ -12714,6 +12716,7 @@ export namespace Prisma {
     currency: $Enums.Currency | null
     overview: string | null
     active: boolean | null
+    randomKey: number | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12734,6 +12737,7 @@ export namespace Prisma {
     currency: $Enums.Currency | null
     overview: string | null
     active: boolean | null
+    randomKey: number | null
     createdById: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12756,6 +12760,7 @@ export namespace Prisma {
     currency: number
     overview: number
     active: number
+    randomKey: number
     createdById: number
     createdAt: number
     updatedAt: number
@@ -12765,10 +12770,12 @@ export namespace Prisma {
 
   export type SchoolAvgAggregateInputType = {
     id?: true
+    randomKey?: true
   }
 
   export type SchoolSumAggregateInputType = {
     id?: true
+    randomKey?: true
   }
 
   export type SchoolMinAggregateInputType = {
@@ -12786,6 +12793,7 @@ export namespace Prisma {
     currency?: true
     overview?: true
     active?: true
+    randomKey?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -12806,6 +12814,7 @@ export namespace Prisma {
     currency?: true
     overview?: true
     active?: true
+    randomKey?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -12828,6 +12837,7 @@ export namespace Prisma {
     currency?: true
     overview?: true
     active?: true
+    randomKey?: true
     createdById?: true
     createdAt?: true
     updatedAt?: true
@@ -12937,6 +12947,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active: boolean
+    randomKey: number
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -12978,6 +12989,7 @@ export namespace Prisma {
     currency?: boolean
     overview?: boolean
     active?: boolean
+    randomKey?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13005,6 +13017,7 @@ export namespace Prisma {
     currency?: boolean
     overview?: boolean
     active?: boolean
+    randomKey?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13028,6 +13041,7 @@ export namespace Prisma {
     currency?: boolean
     overview?: boolean
     active?: boolean
+    randomKey?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13051,12 +13065,13 @@ export namespace Prisma {
     currency?: boolean
     overview?: boolean
     active?: boolean
+    randomKey?: boolean
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
+  export type SchoolOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "logo" | "schoolImage" | "name" | "slug" | "state" | "country" | "city" | "address" | "link" | "institutionType" | "ownershipType" | "currency" | "overview" | "active" | "randomKey" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
   export type SchoolInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
     accommodation?: boolean | School$accommodationArgs<ExtArgs>
@@ -13096,6 +13111,7 @@ export namespace Prisma {
       currency: $Enums.Currency
       overview: string
       active: boolean
+      randomKey: number
       createdById: string
       createdAt: Date
       updatedAt: Date
@@ -13542,6 +13558,7 @@ export namespace Prisma {
     readonly currency: FieldRef<"School", 'Currency'>
     readonly overview: FieldRef<"School", 'String'>
     readonly active: FieldRef<"School", 'Boolean'>
+    readonly randomKey: FieldRef<"School", 'Float'>
     readonly createdById: FieldRef<"School", 'String'>
     readonly createdAt: FieldRef<"School", 'DateTime'>
     readonly updatedAt: FieldRef<"School", 'DateTime'>
@@ -15153,6 +15170,7 @@ export namespace Prisma {
 
   export type ProgramAvgAggregateOutputType = {
     id: number | null
+    randomKey: number | null
     applicationFee: Decimal | null
     applicationFeeDiscount: Decimal | null
     tuitionFee: Decimal | null
@@ -15163,6 +15181,7 @@ export namespace Prisma {
 
   export type ProgramSumAggregateOutputType = {
     id: number | null
+    randomKey: number | null
     applicationFee: Decimal | null
     applicationFeeDiscount: Decimal | null
     tuitionFee: Decimal | null
@@ -15175,6 +15194,7 @@ export namespace Prisma {
     id: number | null
     programId: string | null
     schoolId: string | null
+    randomKey: number | null
     name: string | null
     slug: string | null
     faculty: string | null
@@ -15202,6 +15222,7 @@ export namespace Prisma {
     id: number | null
     programId: string | null
     schoolId: string | null
+    randomKey: number | null
     name: string | null
     slug: string | null
     faculty: string | null
@@ -15229,6 +15250,7 @@ export namespace Prisma {
     id: number
     programId: number
     schoolId: number
+    randomKey: number
     name: number
     slug: number
     faculty: number
@@ -15256,6 +15278,7 @@ export namespace Prisma {
 
   export type ProgramAvgAggregateInputType = {
     id?: true
+    randomKey?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -15266,6 +15289,7 @@ export namespace Prisma {
 
   export type ProgramSumAggregateInputType = {
     id?: true
+    randomKey?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -15278,6 +15302,7 @@ export namespace Prisma {
     id?: true
     programId?: true
     schoolId?: true
+    randomKey?: true
     name?: true
     slug?: true
     faculty?: true
@@ -15305,6 +15330,7 @@ export namespace Prisma {
     id?: true
     programId?: true
     schoolId?: true
+    randomKey?: true
     name?: true
     slug?: true
     faculty?: true
@@ -15332,6 +15358,7 @@ export namespace Prisma {
     id?: true
     programId?: true
     schoolId?: true
+    randomKey?: true
     name?: true
     slug?: true
     faculty?: true
@@ -15446,6 +15473,7 @@ export namespace Prisma {
     id: number
     programId: string
     schoolId: string
+    randomKey: number
     name: string
     slug: string
     faculty: string
@@ -15492,6 +15520,7 @@ export namespace Prisma {
     id?: boolean
     programId?: boolean
     schoolId?: boolean
+    randomKey?: boolean
     name?: boolean
     slug?: boolean
     faculty?: boolean
@@ -15524,6 +15553,7 @@ export namespace Prisma {
     id?: boolean
     programId?: boolean
     schoolId?: boolean
+    randomKey?: boolean
     name?: boolean
     slug?: boolean
     faculty?: boolean
@@ -15553,6 +15583,7 @@ export namespace Prisma {
     id?: boolean
     programId?: boolean
     schoolId?: boolean
+    randomKey?: boolean
     name?: boolean
     slug?: boolean
     faculty?: boolean
@@ -15582,6 +15613,7 @@ export namespace Prisma {
     id?: boolean
     programId?: boolean
     schoolId?: boolean
+    randomKey?: boolean
     name?: boolean
     slug?: boolean
     faculty?: boolean
@@ -15605,7 +15637,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "requirements" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
+  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "randomKey" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "requirements" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
   export type ProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     intakes?: boolean | Program$intakesArgs<ExtArgs>
@@ -15634,6 +15666,7 @@ export namespace Prisma {
       id: number
       programId: string
       schoolId: string
+      randomKey: number
       name: string
       slug: string
       faculty: string
@@ -16085,6 +16118,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Program", 'Int'>
     readonly programId: FieldRef<"Program", 'String'>
     readonly schoolId: FieldRef<"Program", 'String'>
+    readonly randomKey: FieldRef<"Program", 'Float'>
     readonly name: FieldRef<"Program", 'String'>
     readonly slug: FieldRef<"Program", 'String'>
     readonly faculty: FieldRef<"Program", 'String'>
@@ -22480,6 +22514,7 @@ export namespace Prisma {
     currency: 'currency',
     overview: 'overview',
     active: 'active',
+    randomKey: 'randomKey',
     createdById: 'createdById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -22504,6 +22539,7 @@ export namespace Prisma {
     id: 'id',
     programId: 'programId',
     schoolId: 'schoolId',
+    randomKey: 'randomKey',
     name: 'name',
     slug: 'slug',
     faculty: 'faculty',
@@ -22626,6 +22662,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const TokenOrderByRelevanceFieldEnum: {
+    tokenId: 'tokenId',
+    token: 'token'
+  };
+
+  export type TokenOrderByRelevanceFieldEnum = (typeof TokenOrderByRelevanceFieldEnum)[keyof typeof TokenOrderByRelevanceFieldEnum]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -22641,6 +22685,153 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const AdminOrderByRelevanceFieldEnum: {
+    adminId: 'adminId',
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    middleName: 'middleName',
+    nationality: 'nationality',
+    countryOfResidence: 'countryOfResidence',
+    about: 'about',
+    jobTitle: 'jobTitle',
+    createdById: 'createdById'
+  };
+
+  export type AdminOrderByRelevanceFieldEnum = (typeof AdminOrderByRelevanceFieldEnum)[keyof typeof AdminOrderByRelevanceFieldEnum]
+
+
+  export const DepartmentOrderByRelevanceFieldEnum: {
+    leadId: 'leadId'
+  };
+
+  export type DepartmentOrderByRelevanceFieldEnum = (typeof DepartmentOrderByRelevanceFieldEnum)[keyof typeof DepartmentOrderByRelevanceFieldEnum]
+
+
+  export const TeamOrderByRelevanceFieldEnum: {
+    name: 'name',
+    leadId: 'leadId',
+    createdById: 'createdById'
+  };
+
+  export type TeamOrderByRelevanceFieldEnum = (typeof TeamOrderByRelevanceFieldEnum)[keyof typeof TeamOrderByRelevanceFieldEnum]
+
+
+  export const FaqOrderByRelevanceFieldEnum: {
+    question: 'question',
+    answer: 'answer',
+    createdById: 'createdById'
+  };
+
+  export type FaqOrderByRelevanceFieldEnum = (typeof FaqOrderByRelevanceFieldEnum)[keyof typeof FaqOrderByRelevanceFieldEnum]
+
+
+  export const InquiryOrderByRelevanceFieldEnum: {
+    name: 'name',
+    email: 'email',
+    message: 'message',
+    subject: 'subject'
+  };
+
+  export type InquiryOrderByRelevanceFieldEnum = (typeof InquiryOrderByRelevanceFieldEnum)[keyof typeof InquiryOrderByRelevanceFieldEnum]
+
+
+  export const ActivityLogOrderByRelevanceFieldEnum: {
+    resource: 'resource',
+    action: 'action',
+    message: 'message'
+  };
+
+  export type ActivityLogOrderByRelevanceFieldEnum = (typeof ActivityLogOrderByRelevanceFieldEnum)[keyof typeof ActivityLogOrderByRelevanceFieldEnum]
+
+
+  export const SchoolOrderByRelevanceFieldEnum: {
+    schoolId: 'schoolId',
+    name: 'name',
+    slug: 'slug',
+    state: 'state',
+    country: 'country',
+    city: 'city',
+    address: 'address',
+    link: 'link',
+    overview: 'overview',
+    createdById: 'createdById'
+  };
+
+  export type SchoolOrderByRelevanceFieldEnum = (typeof SchoolOrderByRelevanceFieldEnum)[keyof typeof SchoolOrderByRelevanceFieldEnum]
+
+
+  export const AccommodationOrderByRelevanceFieldEnum: {
+    description: 'description',
+    schoolId: 'schoolId',
+    createdById: 'createdById'
+  };
+
+  export type AccommodationOrderByRelevanceFieldEnum = (typeof AccommodationOrderByRelevanceFieldEnum)[keyof typeof AccommodationOrderByRelevanceFieldEnum]
+
+
+  export const ProgramOrderByRelevanceFieldEnum: {
+    programId: 'programId',
+    schoolId: 'schoolId',
+    name: 'name',
+    slug: 'slug',
+    faculty: 'faculty',
+    degreeType: 'degreeType',
+    overview: 'overview',
+    description: 'description',
+    requirements: 'requirements',
+    minimumEducationLevel: 'minimumEducationLevel',
+    createdById: 'createdById'
+  };
+
+  export type ProgramOrderByRelevanceFieldEnum = (typeof ProgramOrderByRelevanceFieldEnum)[keyof typeof ProgramOrderByRelevanceFieldEnum]
+
+
+  export const EnglishProficiencyOrderByRelevanceFieldEnum: {
+    test: 'test',
+    programId: 'programId'
+  };
+
+  export type EnglishProficiencyOrderByRelevanceFieldEnum = (typeof EnglishProficiencyOrderByRelevanceFieldEnum)[keyof typeof EnglishProficiencyOrderByRelevanceFieldEnum]
+
+
+  export const IntakeOrderByRelevanceFieldEnum: {
+    intake: 'intake',
+    schoolId: 'schoolId',
+    createdById: 'createdById'
+  };
+
+  export type IntakeOrderByRelevanceFieldEnum = (typeof IntakeOrderByRelevanceFieldEnum)[keyof typeof IntakeOrderByRelevanceFieldEnum]
+
+
+  export const BlogPostOrderByRelevanceFieldEnum: {
+    blogPostId: 'blogPostId',
+    title: 'title',
+    slug: 'slug',
+    excerpt: 'excerpt',
+    content: 'content',
+    authorId: 'authorId'
+  };
+
+  export type BlogPostOrderByRelevanceFieldEnum = (typeof BlogPostOrderByRelevanceFieldEnum)[keyof typeof BlogPostOrderByRelevanceFieldEnum]
+
+
+  export const TagOrderByRelevanceFieldEnum: {
+    name: 'name',
+    createdById: 'createdById'
+  };
+
+  export type TagOrderByRelevanceFieldEnum = (typeof TagOrderByRelevanceFieldEnum)[keyof typeof TagOrderByRelevanceFieldEnum]
+
+
+  export const CategoryOrderByRelevanceFieldEnum: {
+    name: 'name',
+    createdById: 'createdById'
+  };
+
+  export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
 
 
   /**
@@ -22810,6 +23001,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'TuitionFeeType'
    */
   export type EnumTuitionFeeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TuitionFeeType'>
@@ -22862,20 +23067,6 @@ export namespace Prisma {
    * Reference to a field of type 'BlogStatus[]'
    */
   export type ListEnumBlogStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlogStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -23077,6 +23268,7 @@ export namespace Prisma {
     expiresIn?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    _relevance?: TokenOrderByRelevanceInput
   }
 
   export type TokenWhereUniqueInput = Prisma.AtLeast<{
@@ -23197,6 +23389,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostOrderByRelationAggregateInput
     tagsCreated?: TagOrderByRelationAggregateInput
     categoriesCreated?: CategoryOrderByRelationAggregateInput
+    _relevance?: AdminOrderByRelevanceInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -23315,6 +23508,7 @@ export namespace Prisma {
     lead?: AdminOrderByWithRelationInput
     members?: AdminOrderByRelationAggregateInput
     teams?: TeamOrderByRelationAggregateInput
+    _relevance?: DepartmentOrderByRelevanceInput
   }
 
   export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
@@ -23384,6 +23578,7 @@ export namespace Prisma {
     department?: DepartmentOrderByWithRelationInput
     createdBy?: AdminOrderByWithRelationInput
     members?: AdminOrderByRelationAggregateInput
+    _relevance?: TeamOrderByRelevanceInput
   }
 
   export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -23453,6 +23648,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: FaqOrderByRelevanceInput
   }
 
   export type FaqWhereUniqueInput = Prisma.AtLeast<{
@@ -23517,6 +23713,7 @@ export namespace Prisma {
     subject?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    _relevance?: InquiryOrderByRelevanceInput
   }
 
   export type InquiryWhereUniqueInput = Prisma.AtLeast<{
@@ -23592,6 +23789,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     admin?: AdminOrderByWithRelationInput
+    _relevance?: ActivityLogOrderByRelevanceInput
   }
 
   export type ActivityLogWhereUniqueInput = Prisma.AtLeast<{
@@ -23665,6 +23863,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
     active?: BoolFilter<"School"> | boolean
+    randomKey?: FloatFilter<"School"> | number
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
@@ -23691,6 +23890,7 @@ export namespace Prisma {
     currency?: SortOrder
     overview?: SortOrder
     active?: SortOrder
+    randomKey?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23698,6 +23898,7 @@ export namespace Prisma {
     accommodation?: AccommodationOrderByWithRelationInput
     intakes?: IntakeOrderByRelationAggregateInput
     programs?: ProgramOrderByRelationAggregateInput
+    _relevance?: SchoolOrderByRelevanceInput
   }
 
   export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -23720,6 +23921,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
     active?: BoolFilter<"School"> | boolean
+    randomKey?: FloatFilter<"School"> | number
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
@@ -23746,6 +23948,7 @@ export namespace Prisma {
     currency?: SortOrder
     overview?: SortOrder
     active?: SortOrder
+    randomKey?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23776,6 +23979,7 @@ export namespace Prisma {
     currency?: EnumCurrencyWithAggregatesFilter<"School"> | $Enums.Currency
     overview?: StringWithAggregatesFilter<"School"> | string
     active?: BoolWithAggregatesFilter<"School"> | boolean
+    randomKey?: FloatWithAggregatesFilter<"School"> | number
     createdById?: StringWithAggregatesFilter<"School"> | string
     createdAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"School"> | Date | string
@@ -23804,6 +24008,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     school?: SchoolOrderByWithRelationInput
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: AccommodationOrderByRelevanceInput
   }
 
   export type AccommodationWhereUniqueInput = Prisma.AtLeast<{
@@ -23853,6 +24058,7 @@ export namespace Prisma {
     id?: IntFilter<"Program"> | number
     programId?: StringFilter<"Program"> | string
     schoolId?: StringFilter<"Program"> | string
+    randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
     faculty?: StringFilter<"Program"> | string
@@ -23884,6 +24090,7 @@ export namespace Prisma {
     id?: SortOrder
     programId?: SortOrder
     schoolId?: SortOrder
+    randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
     faculty?: SortOrder
@@ -23909,6 +24116,7 @@ export namespace Prisma {
     intakes?: IntakeOrderByRelationAggregateInput
     proficiencies?: EnglishProficiencyOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: ProgramOrderByRelevanceInput
   }
 
   export type ProgramWhereUniqueInput = Prisma.AtLeast<{
@@ -23919,6 +24127,7 @@ export namespace Prisma {
     OR?: ProgramWhereInput[]
     NOT?: ProgramWhereInput | ProgramWhereInput[]
     schoolId?: StringFilter<"Program"> | string
+    randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
     faculty?: StringFilter<"Program"> | string
@@ -23950,6 +24159,7 @@ export namespace Prisma {
     id?: SortOrder
     programId?: SortOrder
     schoolId?: SortOrder
+    randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
     faculty?: SortOrder
@@ -23985,6 +24195,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Program"> | number
     programId?: StringWithAggregatesFilter<"Program"> | string
     schoolId?: StringWithAggregatesFilter<"Program"> | string
+    randomKey?: FloatWithAggregatesFilter<"Program"> | number
     name?: StringWithAggregatesFilter<"Program"> | string
     slug?: StringWithAggregatesFilter<"Program"> | string
     faculty?: StringWithAggregatesFilter<"Program"> | string
@@ -24023,6 +24234,7 @@ export namespace Prisma {
     score?: SortOrder
     programId?: SortOrder
     program?: ProgramOrderByWithRelationInput
+    _relevance?: EnglishProficiencyOrderByRelevanceInput
   }
 
   export type EnglishProficiencyWhereUniqueInput = Prisma.AtLeast<{
@@ -24087,6 +24299,7 @@ export namespace Prisma {
     school?: SchoolOrderByWithRelationInput
     programs?: ProgramOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: IntakeOrderByRelevanceInput
   }
 
   export type IntakeWhereUniqueInput = Prisma.AtLeast<{
@@ -24179,6 +24392,7 @@ export namespace Prisma {
     tags?: TagOrderByRelationAggregateInput
     categories?: CategoryOrderByRelationAggregateInput
     author?: AdminOrderByWithRelationInput
+    _relevance?: BlogPostOrderByRelevanceInput
   }
 
   export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
@@ -24264,6 +24478,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     posts?: BlogPostOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: TagOrderByRelevanceInput
   }
 
   export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -24324,6 +24539,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     posts?: BlogPostOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
+    _relevance?: CategoryOrderByRelevanceInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -25233,6 +25449,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
@@ -25258,6 +25475,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25282,6 +25500,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
@@ -25307,6 +25526,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25332,6 +25552,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25353,6 +25574,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25374,6 +25596,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25440,6 +25663,7 @@ export namespace Prisma {
   export type ProgramCreateInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -25470,6 +25694,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -25497,6 +25722,7 @@ export namespace Prisma {
 
   export type ProgramUpdateInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -25527,6 +25753,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -25556,6 +25783,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -25581,6 +25809,7 @@ export namespace Prisma {
 
   export type ProgramUpdateManyMutationInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -25607,6 +25836,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -26226,6 +26456,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
@@ -26235,6 +26466,12 @@ export namespace Prisma {
     in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumTokenTypeFilter<$PrismaModel> | $Enums.TokenType
+  }
+
+  export type TokenOrderByRelevanceInput = {
+    fields: TokenOrderByRelevanceFieldEnum | TokenOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type TokenCountOrderByAggregateInput = {
@@ -26286,6 +26523,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
@@ -26314,6 +26552,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
@@ -26506,6 +26745,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type AdminOrderByRelevanceInput = {
+    fields: AdminOrderByRelevanceFieldEnum | AdminOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type AdminCountOrderByAggregateInput = {
     id?: SortOrder
     adminId?: SortOrder
@@ -26583,6 +26828,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
@@ -26667,6 +26913,12 @@ export namespace Prisma {
     not?: NestedEnumDepartmentNameFilter<$PrismaModel> | $Enums.DepartmentName
   }
 
+  export type DepartmentOrderByRelevanceInput = {
+    fields: DepartmentOrderByRelevanceFieldEnum | DepartmentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type DepartmentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -26719,6 +26971,12 @@ export namespace Prisma {
     isNot?: AdminWhereInput
   }
 
+  export type TeamOrderByRelevanceInput = {
+    fields: TeamOrderByRelevanceFieldEnum | TeamOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type TeamDepartmentIdNameCompoundUniqueInput = {
     departmentId: number
     name: string
@@ -26764,6 +27022,12 @@ export namespace Prisma {
     departmentId?: SortOrder
   }
 
+  export type FaqOrderByRelevanceInput = {
+    fields: FaqOrderByRelevanceFieldEnum | FaqOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type FaqCountOrderByAggregateInput = {
     id?: SortOrder
     question?: SortOrder
@@ -26797,6 +27061,12 @@ export namespace Prisma {
 
   export type FaqSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type InquiryOrderByRelevanceInput = {
+    fields: InquiryOrderByRelevanceFieldEnum | InquiryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type InquiryCountOrderByAggregateInput = {
@@ -26836,6 +27106,12 @@ export namespace Prisma {
 
   export type InquirySumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type ActivityLogOrderByRelevanceInput = {
+    fields: ActivityLogOrderByRelevanceFieldEnum | ActivityLogOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type ActivityLogCountOrderByAggregateInput = {
@@ -26906,9 +27182,26 @@ export namespace Prisma {
     not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type AccommodationNullableScalarRelationFilter = {
     is?: AccommodationWhereInput | null
     isNot?: AccommodationWhereInput | null
+  }
+
+  export type SchoolOrderByRelevanceInput = {
+    fields: SchoolOrderByRelevanceFieldEnum | SchoolOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type SchoolCountOrderByAggregateInput = {
@@ -26928,6 +27221,7 @@ export namespace Prisma {
     currency?: SortOrder
     overview?: SortOrder
     active?: SortOrder
+    randomKey?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26935,6 +27229,7 @@ export namespace Prisma {
 
   export type SchoolAvgOrderByAggregateInput = {
     id?: SortOrder
+    randomKey?: SortOrder
   }
 
   export type SchoolMaxOrderByAggregateInput = {
@@ -26952,6 +27247,7 @@ export namespace Prisma {
     currency?: SortOrder
     overview?: SortOrder
     active?: SortOrder
+    randomKey?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26972,6 +27268,7 @@ export namespace Prisma {
     currency?: SortOrder
     overview?: SortOrder
     active?: SortOrder
+    randomKey?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26979,6 +27276,7 @@ export namespace Prisma {
 
   export type SchoolSumOrderByAggregateInput = {
     id?: SortOrder
+    randomKey?: SortOrder
   }
 
   export type EnumInstitutionTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -27011,9 +27309,31 @@ export namespace Prisma {
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type SchoolScalarRelationFilter = {
     is?: SchoolWhereInput
     isNot?: SchoolWhereInput
+  }
+
+  export type AccommodationOrderByRelevanceInput = {
+    fields: AccommodationOrderByRelevanceFieldEnum | AccommodationOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type AccommodationCountOrderByAggregateInput = {
@@ -27075,6 +27395,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type ProgramOrderByRelevanceInput = {
+    fields: ProgramOrderByRelevanceFieldEnum | ProgramOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type ProgramSchoolIdSlugCompoundUniqueInput = {
     schoolId: string
     slug: string
@@ -27084,6 +27410,7 @@ export namespace Prisma {
     id?: SortOrder
     programId?: SortOrder
     schoolId?: SortOrder
+    randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
     faculty?: SortOrder
@@ -27109,6 +27436,7 @@ export namespace Prisma {
 
   export type ProgramAvgOrderByAggregateInput = {
     id?: SortOrder
+    randomKey?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -27121,6 +27449,7 @@ export namespace Prisma {
     id?: SortOrder
     programId?: SortOrder
     schoolId?: SortOrder
+    randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
     faculty?: SortOrder
@@ -27148,6 +27477,7 @@ export namespace Prisma {
     id?: SortOrder
     programId?: SortOrder
     schoolId?: SortOrder
+    randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
     faculty?: SortOrder
@@ -27173,6 +27503,7 @@ export namespace Prisma {
 
   export type ProgramSumOrderByAggregateInput = {
     id?: SortOrder
+    randomKey?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -27204,6 +27535,12 @@ export namespace Prisma {
   export type ProgramScalarRelationFilter = {
     is?: ProgramWhereInput
     isNot?: ProgramWhereInput
+  }
+
+  export type EnglishProficiencyOrderByRelevanceInput = {
+    fields: EnglishProficiencyOrderByRelevanceFieldEnum | EnglishProficiencyOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type EnglishProficiencyProficiencyCompoundUniqueInput = {
@@ -27253,6 +27590,12 @@ export namespace Prisma {
     in?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.IntakeStatus[] | ListEnumIntakeStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumIntakeStatusFilter<$PrismaModel> | $Enums.IntakeStatus
+  }
+
+  export type IntakeOrderByRelevanceInput = {
+    fields: IntakeOrderByRelevanceFieldEnum | IntakeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type IntakeSchoolIdIntakeStartDateDeadlineCompoundUniqueInput = {
@@ -27337,6 +27680,12 @@ export namespace Prisma {
     not?: NestedEnumBlogStatusFilter<$PrismaModel> | $Enums.BlogStatus
   }
 
+  export type BlogPostOrderByRelevanceInput = {
+    fields: BlogPostOrderByRelevanceFieldEnum | BlogPostOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type BlogPostCountOrderByAggregateInput = {
     id?: SortOrder
     blogPostId?: SortOrder
@@ -27401,6 +27750,12 @@ export namespace Prisma {
     _max?: NestedEnumBlogStatusFilter<$PrismaModel>
   }
 
+  export type TagOrderByRelevanceInput = {
+    fields: TagOrderByRelevanceFieldEnum | TagOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type TagCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -27431,6 +27786,12 @@ export namespace Prisma {
 
   export type TagSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type CategoryOrderByRelevanceInput = {
+    fields: CategoryOrderByRelevanceFieldEnum | CategoryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -28411,6 +28772,14 @@ export namespace Prisma {
     set?: $Enums.Currency
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput = {
     create?: XOR<AdminCreateWithoutSchoolsCreatedInput, AdminUncheckedCreateWithoutSchoolsCreatedInput>
     connectOrCreate?: AdminCreateOrConnectWithoutSchoolsCreatedInput
@@ -29026,6 +29395,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -29047,6 +29417,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -29074,6 +29445,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -29100,6 +29472,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -29247,6 +29620,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCurrencyFilter<$PrismaModel>
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedEnumTuitionFeeTypeFilter<$PrismaModel = never> = {
@@ -29707,6 +30096,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationCreateNestedOneWithoutSchoolInput
@@ -29731,6 +30121,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     accommodation?: AccommodationUncheckedCreateNestedOneWithoutSchoolInput
@@ -29809,6 +30200,7 @@ export namespace Prisma {
   export type ProgramCreateWithoutCreatedByInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -29838,6 +30230,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -30288,6 +30681,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFilter<"School"> | $Enums.Currency
     overview?: StringFilter<"School"> | string
     active?: BoolFilter<"School"> | boolean
+    randomKey?: FloatFilter<"School"> | number
     createdById?: StringFilter<"School"> | string
     createdAt?: DateTimeFilter<"School"> | Date | string
     updatedAt?: DateTimeFilter<"School"> | Date | string
@@ -30375,6 +30769,7 @@ export namespace Prisma {
     id?: IntFilter<"Program"> | number
     programId?: StringFilter<"Program"> | string
     schoolId?: StringFilter<"Program"> | string
+    randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
     faculty?: StringFilter<"Program"> | string
@@ -31696,6 +32091,7 @@ export namespace Prisma {
   export type ProgramCreateWithoutSchoolInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -31724,6 +32120,7 @@ export namespace Prisma {
   export type ProgramUncheckedCreateWithoutSchoolInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -31916,6 +32313,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
@@ -31940,6 +32338,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32056,6 +32455,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
@@ -32080,6 +32480,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32186,6 +32587,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
@@ -32210,6 +32612,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32374,6 +32777,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
@@ -32398,6 +32802,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32531,6 +32936,7 @@ export namespace Prisma {
   export type ProgramCreateWithoutProficienciesInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -32560,6 +32966,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -32602,6 +33009,7 @@ export namespace Prisma {
 
   export type ProgramUpdateWithoutProficienciesInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -32631,6 +33039,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -32672,6 +33081,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: AdminCreateNestedOneWithoutSchoolsCreatedInput
@@ -32696,6 +33106,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32711,6 +33122,7 @@ export namespace Prisma {
   export type ProgramCreateWithoutIntakesInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -32740,6 +33152,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -32873,6 +33286,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: AdminUpdateOneRequiredWithoutSchoolsCreatedNestedInput
@@ -32897,6 +33311,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33742,6 +34157,7 @@ export namespace Prisma {
     currency: $Enums.Currency
     overview: string
     active?: boolean
+    randomKey?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33769,6 +34185,7 @@ export namespace Prisma {
     id?: number
     programId?: string
     schoolId: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -34120,6 +34537,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUpdateOneWithoutSchoolNestedInput
@@ -34144,6 +34562,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accommodation?: AccommodationUncheckedUpdateOneWithoutSchoolNestedInput
@@ -34168,6 +34587,7 @@ export namespace Prisma {
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     overview?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    randomKey?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34231,6 +34651,7 @@ export namespace Prisma {
 
   export type ProgramUpdateWithoutCreatedByInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34260,6 +34681,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34288,6 +34710,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34639,6 +35062,7 @@ export namespace Prisma {
   export type ProgramCreateManySchoolInput = {
     id?: number
     programId?: string
+    randomKey?: number
     name: string
     slug: string
     faculty: string
@@ -34698,6 +35122,7 @@ export namespace Prisma {
 
   export type ProgramUpdateWithoutSchoolInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34726,6 +35151,7 @@ export namespace Prisma {
   export type ProgramUncheckedUpdateWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34754,6 +35180,7 @@ export namespace Prisma {
   export type ProgramUncheckedUpdateManyWithoutSchoolInput = {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34834,6 +35261,7 @@ export namespace Prisma {
 
   export type ProgramUpdateWithoutIntakesInput = {
     programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34863,6 +35291,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
@@ -34891,6 +35320,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     programId?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     faculty?: StringFieldUpdateOperationsInput | string
