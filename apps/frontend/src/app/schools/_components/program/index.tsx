@@ -35,9 +35,9 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
   return (
     <div className="space-y-5">
       {data?.data?.length ? (
-        <div className="columns-1 gap-4 md:columns-2 lg:columns-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {data.data.map((program) => (
-            <div key={program.slug} className="mb-4 break-inside-avoid-column">
+            <div key={program.slug}>
               <ProgramCard program={program} />
             </div>
           ))}

@@ -71,9 +71,7 @@ export class ProgramService extends ServiceUtils implements IProgramService {
   }
 
   _constructWhereQuery(
-    query: Partial<
-      IQueryConstruct<Omit<ProgramQuerySchema, "orderBy">>["where"]
-    >,
+    query: IQueryConstruct<Omit<ProgramQuerySchema, "orderBy">>["where"],
     authUser?: AuthClaim,
   ) {
     const where: Prisma.ProgramWhereInput | undefined = {};
@@ -106,11 +104,34 @@ export class ProgramService extends ServiceUtils implements IProgramService {
     }
 
     if (query.term) {
+      // where.OR = [
+      //   { name: { search: query.term } },
+      //   { faculty: { search: query.term } },
+      //   { overview: { search: query.term } },
+      //   { description: { search: query.term } },
+      //   { name: { contains: query.term, mode: "insensitive" } },
+      //   { faculty: { contains: query.term, mode: "insensitive" } },
+      //   { overview: { contains: query.term, mode: "insensitive" } },
+      //   { description: { contains: query.term, mode: "insensitive" } },
+      // ];
+
+      const terms = query.term.split(" ");
+
       where.OR = [
+        // { name: { search: query.term } },
+        // { faculty: { search: query.term } },
+        // { overview: { search: query.term } },
+        // { description: { search: query.term } },
         { name: { contains: query.term, mode: "insensitive" } },
         { faculty: { contains: query.term, mode: "insensitive" } },
         { overview: { contains: query.term, mode: "insensitive" } },
         { description: { contains: query.term, mode: "insensitive" } },
+        ...terms.flatMap((term: string) => [
+          { name: { contains: term, mode: "insensitive" } },
+          { faculty: { contains: term, mode: "insensitive" } },
+          { overview: { contains: term, mode: "insensitive" } },
+          { description: { contains: term, mode: "insensitive" } },
+        ]),
       ];
     }
 

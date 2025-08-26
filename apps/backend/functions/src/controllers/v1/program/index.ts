@@ -47,12 +47,15 @@ export class ProgramController
         this._attributeBasedAccessControl(authUser, "programs", "list");
       }
 
-      const construct = this._constructPaginationData({ limit, page, ...rest });
+      const construct = this._constructPaginationData({ limit, page });
 
       const total = await this.programService.count(
         {
           from,
           to,
+          where: {
+            ...rest,
+          },
         },
         authUser,
       );
@@ -62,7 +65,9 @@ export class ProgramController
           ...SkynedUtils.pick(construct, ["skip", "take"]),
           from,
           to,
-          ...rest,
+          where: {
+            ...rest,
+          },
         },
         authUser,
       );

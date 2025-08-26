@@ -24,10 +24,10 @@ const SchoolCard: React.FC<Props> = ({ school }) => {
     [school],
   );
   return (
-    <Card className="shadow-none">
+    <Card className="h-full">
       <CardContent className="flex h-full flex-col space-y-4">
         {/* Header Section */}
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           <Avatar>
             <AvatarFallback>{school.name[0]?.toUpperCase()}</AvatarFallback>
             <AvatarImage
@@ -77,7 +77,7 @@ const SchoolCard: React.FC<Props> = ({ school }) => {
             </div>
           </div>
 
-          <p className="text-md line-clamp-4">{school.overview}</p>
+          <p className="text-md line-clamp-3">{school.overview}</p>
         </div>
 
         {/* Action Button */}

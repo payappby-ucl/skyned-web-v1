@@ -124,11 +124,11 @@ const HeroSearch: React.FC = () => {
                       <PopoverContent className="w-[200px] p-0">
                         <Command>
                           <CommandInput
-                            placeholder="Search framework..."
+                            placeholder="Search country..."
                             className="h-9"
                           />
                           <CommandList>
-                            <CommandEmpty>No framework found.</CommandEmpty>
+                            <CommandEmpty>No country found.</CommandEmpty>
                             <CommandGroup>
                               {countries.map((country) => (
                                 <CommandItem

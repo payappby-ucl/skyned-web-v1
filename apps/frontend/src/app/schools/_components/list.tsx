@@ -10,9 +10,9 @@ interface Props {
 export function SchoolList({ data, searchParams }: Props) {
   return (
     <>
-      <div className="columns-1 gap-4 md:columns-2 lg:columns-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {data.data.map((school) => (
-          <div key={school.slug} className="mb-4 break-inside-avoid-column">
+          <div key={school.slug}>
             <SchoolCard school={school} />
           </div>
         ))}

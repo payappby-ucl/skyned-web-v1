@@ -119,7 +119,7 @@ export default async function Schools({ searchParams }: Props) {
           backgroundImage="/assets/images/backgrounds/school-bg.png"
         />
 
-        <section className="bg-accent space-y-10">
+        <section className="space-y-10">
           {/* Partner schools list or grid goes here */}
           <SchoolList data={data} searchParams={urlQuery} />
         </section>

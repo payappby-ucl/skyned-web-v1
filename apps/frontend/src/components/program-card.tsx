@@ -28,8 +28,8 @@ interface Props {
 const ProgramCard: React.FC<Props> = ({ program }) => {
   const discount = useMemo(() => program.applicationFeeDiscount, [program]);
   return (
-    <article>
-      <Card>
+    <article className="h-full">
+      <Card className="h-full">
         <CardHeader>
           <div className="flex gap-2">
             <Avatar>
@@ -72,7 +72,7 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
           </div>
 
           {/* Overview */}
-          <p className="text-md text-ellipsis whitespace-pre-line">
+          <p className="text-md line-clamp-3 text-ellipsis whitespace-pre-line">
             {program.overview}
           </p>
 
