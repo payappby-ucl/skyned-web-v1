@@ -64,7 +64,6 @@ export default async function SearchPage({ searchParams }: Props) {
       country: country || null,
     });
 
-    console.log(urlQuery.toString());
     const urlConstruct = `/programs?${urlQuery.toString()}`;
     const { data } = await brandServerApi.httpClient.request<
       IPaginatedResponse<IProgram>

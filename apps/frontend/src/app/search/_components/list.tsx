@@ -3,6 +3,7 @@
 import Alert from "@/src/components/alert";
 import Loading from "@/src/components/loading";
 import ProgramCard from "@/src/components/program-card";
+import { SearchFilters } from "@/src/components/search-filters";
 import useGet from "@/src/hooks/use-get";
 import { brandClientApi } from "@/src/lib/client";
 import { DEFAULT_PAGINATION_LIMIT } from "@/src/utils";
@@ -47,26 +48,31 @@ const ProgramList: React.FC<Props> = ({
     return queries.toString();
   }, [filters]);
 
-  const { data, isPending, error } = useGet<
+  const { data, isPending, error, isLoading } = useGet<
     IPaginatedResponse<ProgramListType>
   >({
-    queryKey: ["programs", searchParamsString],
+    queryKey: [`programs-${searchParamsString}`],
     url: `/search?${searchParamsString}`,
-    enabled: !initial,
+    enabled: initial ? false : true,
   });
 
-  console.log(filters);
 
   return (
     <div className="space-y-10">
       {/* Filters */}
-      <div>
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <GraduationCap className="font-semibold" />
           <p className="font-semibold">Courses</p>
         </div>
+
+        <SearchFilters
+          filters={filters}
+          setFilters={setFilters}
+          setInitial={setInitial}
+        />
       </div>
-      {isPending && !initial ? <Loading slim /> : null}
+      {(isPending || isLoading) && !initial ? <Loading slim /> : null}
       {(data || firstPageData)?.data?.length ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {(data || firstPageData).data.map((program, index) => (

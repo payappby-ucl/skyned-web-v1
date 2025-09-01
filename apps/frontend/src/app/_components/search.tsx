@@ -27,22 +27,11 @@ import {
 } from "@workspace/ui/components/popover";
 import { ChevronsUpDown, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { supportedCountries } from "@/src/utils";
 
 const HeroSearch: React.FC = () => {
   const router = useRouter();
-  const countries = useMemo(
-    () =>
-      [
-        { label: "Australia 🇦🇺", value: "AU" },
-        { label: "United Kingdom 🇬🇧", value: "GB" },
-        { label: "Germany 🇩🇪", value: "DE" },
-        { label: "Canada 🇨🇦", value: "CA" },
-        { label: "France 🇫🇷", value: "FR" },
-        { label: "United States 🇺🇸", value: "US" },
-        { label: "Malta 🇲🇹", value: "MT" },
-      ] as const,
-    [],
-  );
+  const countries = useMemo(() => supportedCountries, []);
 
   const form = useForm<HeroSearchSchema>({
     resolver: zodResolver(HeroSearchSchema),

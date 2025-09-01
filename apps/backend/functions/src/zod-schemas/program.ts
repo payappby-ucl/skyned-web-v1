@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Country } from "country-state-city";
+import { Country, State } from "country-state-city";
 
 export const ProgramQuerySchema = z.object({
   country: z
@@ -10,7 +10,7 @@ export const ProgramQuerySchema = z.object({
 
   state: z
     .string()
-    .refine((val) => val.split(",").every((v) => !!Country.getCountryByCode(v)))
+    .refine((val) => val.split(",").every((v) => !!State.getStateByCode(v)))
     .optional()
     .transform((val) => val && val.split(",")),
 

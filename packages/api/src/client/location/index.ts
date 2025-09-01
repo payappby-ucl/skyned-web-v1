@@ -13,6 +13,11 @@ export class Location implements ILocation {
     return country ?? null;
   };
 
+  getStatesOfCountry: ILocation["getStatesOfCountry"] = (countryIsoCode) => {
+    const states = State.getStatesOfCountry(countryIsoCode);
+    return states;
+  };
+
   getCitiesOfState: ILocation["getCitiesOfState"] = (
     stateCode,
     countryCode,

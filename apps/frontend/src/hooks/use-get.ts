@@ -8,7 +8,7 @@ interface Props {
 }
 
 function useGet<RT>({ queryKey, url, enabled = true }: Props) {
-  const { data, isPending, error, isError } = useQuery({
+  const { data, isPending, error, isError, isLoading } = useQuery({
     queryKey,
     queryFn: async () => {
       try {
@@ -27,6 +27,7 @@ function useGet<RT>({ queryKey, url, enabled = true }: Props) {
     isPending,
     error,
     isError,
+    isLoading,
   };
 }
 export default useGet;
