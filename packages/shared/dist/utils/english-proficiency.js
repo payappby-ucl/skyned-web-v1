@@ -95,8 +95,14 @@ class EnglishProficiency {
         },
     ];
     static getCefr(name, totalScore) {
-        const cefr = scores.find((score) => totalScore >= score.scores[name][0] &&
-            totalScore <= score.scores[name][1]);
+        console.log(name, totalScore, name.length, name.trim().length);
+        console.log(scores.find((score) => {
+            Object.keys(score.scores).forEach((key) => console.log(key, key.length));
+            console.log(score.scores[name]);
+            return totalScore >= score.scores[name]?.[0];
+        }));
+        const cefr = scores.find((score) => totalScore >= score.scores[name]?.[0] &&
+            totalScore <= score.scores[name]?.[1]);
         if (!cefr)
             throw new Error("Invalid input for CEFR");
         return cefr;

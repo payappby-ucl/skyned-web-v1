@@ -500,7 +500,7 @@ export async function generateUploadFormData(file: File) {
 
         if (value) {
           v = (value as string).split(",").map((pro) => ({
-            test: pro.split("-")[0]!.trim().toLowerCase(),
+            test: pro.split("-")[0]!.toLowerCase().trim(),
             score: Number(pro.split("-")[1]!.trim()),
           }));
         }
