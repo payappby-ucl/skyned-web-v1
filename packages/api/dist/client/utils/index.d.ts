@@ -11,4 +11,5 @@ export declare class Utils implements IUtils {
     copyToClipboard: IUtils["copyToClipboard"];
     formatCurrency: IUtils["formatCurrency"];
     formatNumber: IUtils["formatNumber"];
+    getSearchParamsString: IUtils["getSearchParamsString"];
 }

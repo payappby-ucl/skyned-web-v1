@@ -17,6 +17,7 @@ import { IIntakeService, IProgramService, ISchoolService } from "../services";
 import {
   IntakeQuery,
   PageQuerySchema,
+  ProgramQuerySchema,
   ProgramSlugSchema,
   SchoolSlugSchema,
 } from "../../zod-schemas";
@@ -135,7 +136,7 @@ export interface ISchoolController {
       >
     >,
     object,
-    Partial<PageQuerySchema>
+    Partial<PageQuerySchema & ProgramQuerySchema>
   >;
 
   /** Get a program */

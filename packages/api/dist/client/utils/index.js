@@ -95,5 +95,14 @@ class Utils {
             ...rest,
         }).format(value);
     };
+    getSearchParamsString = (filters) => {
+        const queries = new URLSearchParams();
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value) {
+                queries.append(key, value);
+            }
+        });
+        return queries.toString();
+    };
 }
 exports.Utils = Utils;

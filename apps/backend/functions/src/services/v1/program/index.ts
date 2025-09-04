@@ -87,7 +87,13 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       where["schoolId"] = query.schoolId;
     }
 
-    if (query.country || query.state) {
+    if (
+      query.country ||
+      query.state ||
+      query.institutionType ||
+      query.ownershipType ||
+      query.accommodation
+    ) {
       where.school = {};
 
       if (query.country) {
@@ -101,27 +107,54 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           in: query.state,
         };
       }
+
+      if (query.institutionType) {
+        where.school.institutionType = {
+          in: query.institutionType,
+        };
+      }
+
+      if (query.ownershipType) {
+        where.school.ownershipType = {
+          in: query.ownershipType,
+        };
+      }
+
+      if (query.accommodation) {
+        where.school.accommodation = {
+          isNot: null,
+        };
+      }
+    }
+
+    if (query.degreeType) {
+      where.degreeType = {
+        in: query.degreeType,
+      };
+    }
+
+    if (query.pgwp) {
+      where.pgwp = {
+        equals: true,
+      };
+    }
+
+    if (query.minimumEducationLevel) {
+      where.minimumEducationLevel = {
+        in: query.minimumEducationLevel,
+      };
+    }
+
+    if (query.tuitionFeeType) {
+      where.tuitionFeeType = {
+        in: query.tuitionFeeType,
+      };
     }
 
     if (query.term) {
-      // where.OR = [
-      //   { name: { search: query.term } },
-      //   { faculty: { search: query.term } },
-      //   { overview: { search: query.term } },
-      //   { description: { search: query.term } },
-      //   { name: { contains: query.term, mode: "insensitive" } },
-      //   { faculty: { contains: query.term, mode: "insensitive" } },
-      //   { overview: { contains: query.term, mode: "insensitive" } },
-      //   { description: { contains: query.term, mode: "insensitive" } },
-      // ];
-
       const terms = query.term.split(" ");
 
       where.OR = [
-        // { name: { search: query.term } },
-        // { faculty: { search: query.term } },
-        // { overview: { search: query.term } },
-        // { description: { search: query.term } },
         { name: { contains: query.term, mode: "insensitive" } },
         { faculty: { contains: query.term, mode: "insensitive" } },
         { overview: { contains: query.term, mode: "insensitive" } },

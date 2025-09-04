@@ -112,4 +112,14 @@ export class Utils implements IUtils {
       ...rest,
     }).format(value);
   };
+
+  getSearchParamsString: IUtils["getSearchParamsString"] = (filters) => {
+    const queries = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) {
+        queries.append(key, value);
+      }
+    });
+    return queries.toString();
+  };
 }

@@ -19,7 +19,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@workspace/ui/components/tooltip";
-import { BookTextIcon, ListFilterPlus, Share } from "lucide-react";
+import { BookTextIcon, Share } from "lucide-react";
 import FormatNumber from "@/src/components/format-number";
 import { Button } from "@workspace/ui/components/button";
 import CountryDisplay from "@/src/components/country-display";
@@ -197,11 +197,6 @@ export default async function SchoolProgramsDetails({ params }: Props) {
         </section>
 
         <section id="school-programs-list" className="space-y-5 !py-5">
-          <div className="flex items-center justify-end">
-            <Button variant="outline">
-              <ListFilterPlus /> Filters
-            </Button>
-          </div>
           <SchoolProgramsList school={school} />
         </section>
       </>

@@ -11,7 +11,7 @@ import ProgramList from "./_components/list";
 import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 
 type Props = {
-  searchParams: Promise<{ term?: string; country?: string }>;
+  searchParams: Promise<Record<string, any>>;
 };
 
 const title = "Search Programs";
@@ -56,12 +56,11 @@ export const metadata: Metadata = {
 };
 export default async function SearchPage({ searchParams }: Props) {
   try {
-    const { term, country } = await searchParams;
+    const sParams = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
       page: "1",
       limit: `${DEFAULT_PAGINATION_LIMIT}`,
-      term: term || null,
-      country: country || null,
+      ...sParams,
     });
 
     const urlConstruct = `/programs?${urlQuery.toString()}`;

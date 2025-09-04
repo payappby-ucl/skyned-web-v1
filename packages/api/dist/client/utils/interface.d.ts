@@ -20,4 +20,5 @@ export interface IUtils {
     formatNumber(options: {
         value: number;
     } & Intl.NumberFormatOptions): string;
+    getSearchParamsString(filters: Record<string, any>): string;
 }

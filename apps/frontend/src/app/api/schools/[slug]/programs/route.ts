@@ -14,31 +14,17 @@ export async function GET(
   try {
     const searchParams = request.nextUrl.searchParams;
     const { slug } = await params;
-    const page = searchParams.get("page");
-    const limit = searchParams.get("limit");
 
-    const urlQuery = brandServerApi.utils.constructQuery({ page, limit });
-    const tags: string[] = brandServerApi.utils.constructTags(
-      {
-        page: {
-          prefix: `${serverCacheTags.programs}-${slug}-page`,
-          value: page,
-        },
-        limit: {
-          prefix: `${serverCacheTags.programs}-${slug}-limit`,
-          value: limit,
-        },
-      },
-      [`${serverCacheTags.programs}-${slug}`],
-    );
-
+    const urlQuery = brandServerApi.utils.constructQuery({
+      ...Object.fromEntries(searchParams),
+    });
     const urlConstruct = `/schools/${slug}/programs?${urlQuery.toString()}`;
 
     const response = await brandServerApi.httpClient.request<
       IPaginatedResponse<IProgram>
     >(urlConstruct, "GET", {
       next: {
-        tags,
+        tags: [`${urlConstruct}`],
       },
     });
 

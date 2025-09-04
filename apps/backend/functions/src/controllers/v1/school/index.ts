@@ -800,7 +800,7 @@ export class SchoolController
 
   listPrograms: ISchoolController["listPrograms"] = async (req, res, next) => {
     try {
-      const { from, to, limit, page } = req.query;
+      const { from, to, limit, page, ...rest } = req.query;
       const { slug } = req.params;
       let authUser = this._validateUser(req);
 
@@ -808,6 +808,7 @@ export class SchoolController
         ...(authUser as any),
         claim: "admin",
       });
+
       if (!school) {
         throw SkynedUtils.createException(
           StatusCodes.NOT_FOUND,
@@ -829,6 +830,7 @@ export class SchoolController
           to,
           where: {
             schoolId: school.schoolId,
+            ...rest,
           },
         },
         authUser,
@@ -841,6 +843,7 @@ export class SchoolController
           to,
           where: {
             schoolId: school.schoolId,
+            ...rest,
           },
         },
         authUser,

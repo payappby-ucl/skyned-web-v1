@@ -31,21 +31,15 @@ const ProgramList: React.FC<Props> = ({
 
   const router = useRouter();
   const [filters, setFilters] = useState<Record<string, any>>({
-    ...Object.entries(searchParams.entries),
     page: Number(sParams.get("page") || 0),
     limit: Number(sParams.get("limit") || DEFAULT_PAGINATION_LIMIT),
     term: sParams.get("term") || "",
     country: sParams.get("country") || "",
+    ...Object.fromEntries(searchParams),
   });
 
   const searchParamsString = useMemo(() => {
-    const queries = new URLSearchParams();
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value) {
-        queries.append(key, value);
-      }
-    });
-    return queries.toString();
+    return brandClientApi.utils.getSearchParamsString(filters);
   }, [filters]);
 
   const { data, isPending, error, isLoading } = useGet<
@@ -53,9 +47,8 @@ const ProgramList: React.FC<Props> = ({
   >({
     queryKey: [`programs-${searchParamsString}`],
     url: `/search?${searchParamsString}`,
-    enabled: initial ? false : true,
+    enabled: !initial,
   });
-
 
   return (
     <div className="space-y-10">
@@ -63,7 +56,9 @@ const ProgramList: React.FC<Props> = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <GraduationCap className="font-semibold" />
-          <p className="font-semibold">Courses</p>
+          <p className="font-semibold">
+            {(data || firstPageData)?.total} Programs
+          </p>
         </div>
 
         <SearchFilters

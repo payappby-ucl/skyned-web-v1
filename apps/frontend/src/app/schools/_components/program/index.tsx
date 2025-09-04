@@ -7,10 +7,11 @@ import { brandClientApi } from "@/src/lib/client";
 import { IPaginatedResponse, IProgram, ISchool } from "@workspace/shared";
 import { BrandPagination } from "@workspace/ui/components/brand-pagination";
 import usePaginationQuery from "@workspace/ui/hooks/use-pagination-query";
-import React from "react";
-import { BookText } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { BookText, GraduationCap } from "lucide-react";
 import ProgramCard from "@/src/components/program-card";
 import { useRouter } from "next/navigation";
+import { SearchFilters } from "@/src/components/search-filters";
 
 export type SchoolProgramListType = IProgram;
 interface Props {
@@ -18,22 +19,46 @@ interface Props {
 }
 
 const SchoolProgramsList: React.FC<Props> = ({ school }) => {
-  const { pagination, setPagination } = usePaginationQuery();
+  const { pagination } = usePaginationQuery();
   const router = useRouter();
+
+  const [filters, setFilters] = useState<Record<string, any>>({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize + 2,
+  });
+
+  const searchParamsString = useMemo(() => {
+    return brandClientApi.utils.getSearchParamsString({
+      ...filters,
+    });
+  }, [filters]);
+
+  console.log(searchParamsString);
+  console.log(filters);
 
   const { data, isPending, error } = useGet<
     IPaginatedResponse<SchoolProgramListType>
   >({
-    queryKey: [
-      "school-programs",
-      `school-programs-page-${pagination.pageIndex}`,
-      `school-programs-limit-${pagination.pageSize}`,
-    ],
-    url: `/schools/${school.slug}/programs?page=${pagination.pageIndex + 1}&limit=${pagination.pageSize + 2}`,
+    queryKey: [`school-programs-${searchParamsString}`],
+    url: `/schools/${school.slug}/programs?${searchParamsString}`,
   });
 
   return (
     <div className="space-y-5">
+      {/* Filters */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <GraduationCap className="font-semibold" />
+          <p className="font-semibold">{data?.total} Programs</p>
+        </div>
+
+        <SearchFilters filters={filters} setFilters={setFilters} schoolLevel />
+      </div>
+
+      {!isPending && !data?.data?.length ? (
+        <Alert Icon={BookText} message="No Programs" />
+      ) : null}
+
       {data?.data?.length ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {data.data.map((program) => (
@@ -44,10 +69,6 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
         </div>
       ) : null}
 
-      {!isPending && !data?.data?.length ? (
-        <Alert Icon={BookText} message="No Programs" />
-      ) : null}
-
       {error ? (
         <Alert message={brandClientApi.utils.handleError(error)} />
       ) : null}
@@ -55,10 +76,11 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
       {data?.data.length ? (
         <BrandPagination
           goToPage={(newPage) => {
-            setPagination((prevState) => ({
+            setFilters((prevState) => ({
               ...prevState,
-              pageIndex: newPage - 1,
+              page: newPage,
             }));
+
             router.push("#school-programs-list");
           }}
           currentPage={data.currentPage}
