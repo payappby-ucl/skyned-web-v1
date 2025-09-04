@@ -42,7 +42,7 @@ const ProgramList: React.FC<Props> = ({
     return brandClientApi.utils.getSearchParamsString(filters);
   }, [filters]);
 
-  const { data, isPending, error, isLoading } = useGet<
+  const { data, error, isFetching } = useGet<
     IPaginatedResponse<ProgramListType>
   >({
     queryKey: [`programs-${searchParamsString}`],
@@ -65,9 +65,10 @@ const ProgramList: React.FC<Props> = ({
           filters={filters}
           setFilters={setFilters}
           setInitial={setInitial}
+          scrollTo="#programs-list"
         />
       </div>
-      {(isPending || isLoading) && !initial ? <Loading slim /> : null}
+      {isFetching && !initial ? <Loading slim /> : null}
       {(data || firstPageData)?.data?.length ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {(data || firstPageData).data.map((program, index) => (
@@ -81,7 +82,7 @@ const ProgramList: React.FC<Props> = ({
         </div>
       ) : null}
 
-      {!isPending && !(data || firstPageData)?.data?.length ? (
+      {!isFetching && !(data || firstPageData)?.data?.length ? (
         <Alert Icon={BookText} message="No Programs" />
       ) : null}
 

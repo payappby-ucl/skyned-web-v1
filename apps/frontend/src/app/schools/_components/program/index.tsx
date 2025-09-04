@@ -33,14 +33,12 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
     });
   }, [filters]);
 
-  console.log(searchParamsString);
-  console.log(filters);
-
-  const { data, isPending, error } = useGet<
+  const { data, isFetching, error } = useGet<
     IPaginatedResponse<SchoolProgramListType>
   >({
     queryKey: [`school-programs-${searchParamsString}`],
     url: `/schools/${school.slug}/programs?${searchParamsString}`,
+    // enabled: false,
   });
 
   return (
@@ -52,10 +50,15 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
           <p className="font-semibold">{data?.total} Programs</p>
         </div>
 
-        <SearchFilters filters={filters} setFilters={setFilters} schoolLevel />
+        <SearchFilters
+          filters={filters}
+          setFilters={setFilters}
+          schoolLevel
+          scrollTo="#school-programs-list"
+        />
       </div>
 
-      {!isPending && !data?.data?.length ? (
+      {!isFetching && !data?.data?.length ? (
         <Alert Icon={BookText} message="No Programs" />
       ) : null}
 
@@ -72,7 +75,7 @@ const SchoolProgramsList: React.FC<Props> = ({ school }) => {
       {error ? (
         <Alert message={brandClientApi.utils.handleError(error)} />
       ) : null}
-      {isPending ? <Loading /> : null}
+      {isFetching ? <Loading slim /> : null}
       {data?.data.length ? (
         <BrandPagination
           goToPage={(newPage) => {

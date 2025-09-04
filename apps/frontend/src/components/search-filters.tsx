@@ -44,7 +44,7 @@ import { brandClientApi } from "../lib/client";
 import { degreeTypes, institutionType, ownershipType } from "@workspace/shared";
 import { Switch } from "@workspace/ui/components/switch";
 import { Badge } from "@workspace/ui/components/badge";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import dayjs from "dayjs";
 
 // * Reuseable Command Filter
@@ -633,6 +633,7 @@ interface Props {
   setFilters: React.Dispatch<React.SetStateAction<Record<string, any>>>;
   schoolLevel?: boolean;
   setInitial?: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollTo?: string;
 }
 
 const SearchFilters: React.FC<Props> = ({
@@ -640,8 +641,10 @@ const SearchFilters: React.FC<Props> = ({
   setFilters,
   setInitial,
   schoolLevel,
+  scrollTo,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const [countryAndStateFilter, setCountryAndStateFilter] = useState<{
@@ -701,15 +704,6 @@ const SearchFilters: React.FC<Props> = ({
       flts = brandClientApi.utils.exclude(flts, ["pgwp"]);
     }
 
-    const queries = new URLSearchParams();
-    Object.entries(flts).forEach(([key, value]) => {
-      if (value) {
-        queries.append(key, value);
-      }
-    });
-
-    // router.push(`/search?${queries.toString()}`);
-
     setFilters((prev) => {
       let flts: Partial<typeof filters> = {
         ...prev,
@@ -732,6 +726,18 @@ const SearchFilters: React.FC<Props> = ({
 
       return flts;
     });
+
+    // const queries = new URLSearchParams();
+    // Object.entries(flts).forEach(([key, value]) => {
+    //   if (value) {
+    //     queries.append(key, value);
+    //   }
+    // });
+
+    // router.push(`${pathname}?${queries.toString()}${scrollTo || ""}`);
+    // router.replace(`${pathname}?${queries.toString()}${scrollTo || ""}`);
+
+    // window.history.pushState({}, "", `${pathname}?${queries.toString()}`);
 
     setOpen(false);
   }, [
