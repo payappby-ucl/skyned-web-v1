@@ -401,7 +401,7 @@ model Program {
 
   name         String
   slug         String
-  faculty      String
+  faculty      String?
   degreeType   String  @map("degree_type")
   overview     String
   description  String  @db.Text

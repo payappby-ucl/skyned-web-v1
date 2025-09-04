@@ -2,7 +2,7 @@ import { z } from "zod";
 export declare const ProgramSchema: z.ZodObject<{
     name: z.ZodString;
     slug: z.ZodEffects<z.ZodString, string, string>;
-    faculty: z.ZodString;
+    faculty: z.ZodOptional<z.ZodString>;
     degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
     overview: z.ZodString;
     description: z.ZodEffects<z.ZodString, string, string>;
@@ -33,7 +33,6 @@ export declare const ProgramSchema: z.ZodObject<{
     slug: string;
     overview: string;
     description: string;
-    faculty: string;
     degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
     applicationFee: number;
     applicationFeeDiscount: number;
@@ -50,13 +49,13 @@ export declare const ProgramSchema: z.ZodObject<{
     }[];
     pgwp: boolean;
     intakes: number[];
+    faculty?: string | undefined;
     requirements?: string | undefined;
 }, {
     name: string;
     slug: string;
     overview: string;
     description: string;
-    faculty: string;
     degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
     applicationFee: number;
     applicationFeeDiscount: number;
@@ -72,6 +71,7 @@ export declare const ProgramSchema: z.ZodObject<{
         score: number;
     }[];
     intakes: number[];
+    faculty?: string | undefined;
     requirements?: string | undefined;
     pgwp?: boolean | undefined;
 }>;
@@ -81,7 +81,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
     data: z.ZodUnion<[z.ZodObject<{
         name: z.ZodString;
         slug: z.ZodEffects<z.ZodString, string, string>;
-        faculty: z.ZodString;
+        faculty: z.ZodOptional<z.ZodString>;
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
         description: z.ZodEffects<z.ZodString, string, string>;
@@ -112,7 +112,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -129,13 +128,13 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     }, {
         name: string;
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -151,12 +150,13 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     }>, z.ZodArray<z.ZodObject<{
         name: z.ZodString;
         slug: z.ZodEffects<z.ZodString, string, string>;
-        faculty: z.ZodString;
+        faculty: z.ZodOptional<z.ZodString>;
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
         description: z.ZodEffects<z.ZodString, string, string>;
@@ -187,7 +187,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -204,13 +203,13 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     }, {
         name: string;
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -226,6 +225,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     }>, "many">]>;
@@ -236,7 +236,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -253,13 +252,13 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     } | {
         name: string;
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -276,6 +275,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     }[];
 }, {
@@ -285,7 +285,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -301,6 +300,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     } | {
@@ -308,7 +308,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -324,6 +323,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     }[];
@@ -334,7 +334,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -351,13 +350,13 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     } | {
         name: string;
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -374,6 +373,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         }[];
         pgwp: boolean;
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
     }[];
 }, {
@@ -383,7 +383,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -399,6 +398,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     } | {
@@ -406,7 +406,6 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         slug: string;
         overview: string;
         description: string;
-        faculty: string;
         degreeType: "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | "Master's Degree";
         applicationFee: number;
         applicationFeeDiscount: number;
@@ -422,6 +421,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
             score: number;
         }[];
         intakes: number[];
+        faculty?: string | undefined;
         requirements?: string | undefined;
         pgwp?: boolean | undefined;
     }[];
@@ -433,7 +433,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
         data: z.ZodObject<{
             name: z.ZodOptional<z.ZodString>;
             slug: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
-            faculty: z.ZodOptional<z.ZodString>;
+            faculty: z.ZodOptional<z.ZodOptional<z.ZodString>>;
             degreeType: z.ZodOptional<z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>>;
             overview: z.ZodOptional<z.ZodString>;
             description: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;

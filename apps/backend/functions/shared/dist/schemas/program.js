@@ -16,7 +16,7 @@ exports.ProgramSchema = zod_1.z.object({
         .toLowerCase()
         .nonempty("required")
         .transform((val) => (0, slugify_1.default)(val, { lower: true, strict: true })),
-    faculty: zod_1.z.string().trim().nonempty("Required"),
+    faculty: zod_1.z.string().trim().optional(),
     degreeType: zod_1.z.enum(utils_1.degreeTypes),
     overview: zod_1.z.string().trim().nonempty("Required"),
     description: zod_1.z

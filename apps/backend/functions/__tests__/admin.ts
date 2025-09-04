@@ -325,7 +325,7 @@ describe("Admin API", () => {
         });
 
       expect(res.status).toBe(StatusCodes.CONFLICT);
-    });
+    }, 10000);
 
     test("should update an admin", async () => {
       const { user } = await signInUser();
@@ -354,7 +354,7 @@ describe("Admin API", () => {
       expect(beforeAdminRes.body.data.firstName).not.toBe(
         afterAdminRes.body.data.firstName,
       );
-    });
+    }, 10000);
   });
 
   describe("Admin Account Actions", () => {

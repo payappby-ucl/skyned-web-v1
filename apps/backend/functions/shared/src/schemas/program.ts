@@ -11,7 +11,7 @@ export const ProgramSchema = z.object({
     .toLowerCase()
     .nonempty("required")
     .transform((val) => slugify(val, { lower: true, strict: true })),
-  faculty: z.string().trim().nonempty("Required"),
+  faculty: z.string().trim().optional(),
   degreeType: z.enum(degreeTypes),
   overview: z.string().trim().nonempty("Required"),
   description: z

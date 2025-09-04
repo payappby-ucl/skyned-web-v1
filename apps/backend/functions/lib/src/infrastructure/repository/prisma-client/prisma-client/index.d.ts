@@ -15476,7 +15476,7 @@ export namespace Prisma {
     randomKey: number
     name: string
     slug: string
-    faculty: string
+    faculty: string | null
     degreeType: string
     overview: string
     description: string
@@ -15669,7 +15669,7 @@ export namespace Prisma {
       randomKey: number
       name: string
       slug: string
-      faculty: string
+      faculty: string | null
       degreeType: string
       overview: string
       description: string
@@ -24061,7 +24061,7 @@ export namespace Prisma {
     randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
-    faculty?: StringFilter<"Program"> | string
+    faculty?: StringNullableFilter<"Program"> | string | null
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
@@ -24093,7 +24093,7 @@ export namespace Prisma {
     randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
-    faculty?: SortOrder
+    faculty?: SortOrderInput | SortOrder
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
@@ -24130,7 +24130,7 @@ export namespace Prisma {
     randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
-    faculty?: StringFilter<"Program"> | string
+    faculty?: StringNullableFilter<"Program"> | string | null
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
@@ -24162,7 +24162,7 @@ export namespace Prisma {
     randomKey?: SortOrder
     name?: SortOrder
     slug?: SortOrder
-    faculty?: SortOrder
+    faculty?: SortOrderInput | SortOrder
     degreeType?: SortOrder
     overview?: SortOrder
     description?: SortOrder
@@ -24198,7 +24198,7 @@ export namespace Prisma {
     randomKey?: FloatWithAggregatesFilter<"Program"> | number
     name?: StringWithAggregatesFilter<"Program"> | string
     slug?: StringWithAggregatesFilter<"Program"> | string
-    faculty?: StringWithAggregatesFilter<"Program"> | string
+    faculty?: StringNullableWithAggregatesFilter<"Program"> | string | null
     degreeType?: StringWithAggregatesFilter<"Program"> | string
     overview?: StringWithAggregatesFilter<"Program"> | string
     description?: StringWithAggregatesFilter<"Program"> | string
@@ -25666,7 +25666,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -25697,7 +25697,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -25725,7 +25725,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -25756,7 +25756,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -25786,7 +25786,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -25812,7 +25812,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -25839,7 +25839,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -30203,7 +30203,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -30233,7 +30233,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -30772,7 +30772,7 @@ export namespace Prisma {
     randomKey?: FloatFilter<"Program"> | number
     name?: StringFilter<"Program"> | string
     slug?: StringFilter<"Program"> | string
-    faculty?: StringFilter<"Program"> | string
+    faculty?: StringNullableFilter<"Program"> | string | null
     degreeType?: StringFilter<"Program"> | string
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
@@ -32094,7 +32094,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -32123,7 +32123,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -32939,7 +32939,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -32969,7 +32969,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -33012,7 +33012,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -33042,7 +33042,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -33125,7 +33125,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -33155,7 +33155,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -34188,7 +34188,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -34654,7 +34654,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -34684,7 +34684,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -34713,7 +34713,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35065,7 +35065,7 @@ export namespace Prisma {
     randomKey?: number
     name: string
     slug: string
-    faculty: string
+    faculty?: string | null
     degreeType: string
     overview: string
     description: string
@@ -35125,7 +35125,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35154,7 +35154,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35183,7 +35183,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35264,7 +35264,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35294,7 +35294,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35323,7 +35323,7 @@ export namespace Prisma {
     randomKey?: FloatFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    faculty?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
     degreeType?: StringFieldUpdateOperationsInput | string
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
