@@ -50,12 +50,10 @@ export default async function SchoolPage({
         redirect
       >
         <div className="space-y-2">
-          <Image
+          <img
             src={school.schoolImage.url}
-            width={200}
-            height={200}
             alt={`${school.name}'s cover image`}
-            className="h-[250px] w-full rounded-sm object-cover"
+            className="h-[250px] w-full rounded-sm object-cover object-center"
           />
           <div className="space-y-2 border-b pb-3">
             <div className="flex items-center gap-2">
