@@ -151,6 +151,19 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       };
     }
 
+    if (query.intakes) {
+      where.intakes = {
+        some: {
+          intake: {
+            in: query.intakes,
+          },
+          status: {
+            in: ["likely_open", "open"],
+          },
+        },
+      };
+    }
+
     if (query.term) {
       const terms = query.term.split(" ");
 

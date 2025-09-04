@@ -19,6 +19,7 @@ import {
 import {
   AwardIcon,
   BadgeCheck,
+  BellElectric,
   Check,
   Earth,
   GlobeLock,
@@ -44,6 +45,7 @@ import { degreeTypes, institutionType, ownershipType } from "@workspace/shared";
 import { Switch } from "@workspace/ui/components/switch";
 import { Badge } from "@workspace/ui/components/badge";
 import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
 
 // * Reuseable Command Filter
 interface WithName {
@@ -213,6 +215,48 @@ function BooleanFilter({
     </div>
   );
 }
+
+// * Reusable Multi-select Filter
+
+interface MultiSelectProps {
+  title: string;
+  Icon: LucideIcon;
+  list: ReadonlyArray<AList>;
+  selected?: ReadonlyArray<AList>;
+  update(item: AList): void;
+}
+
+function MultiselectFilter({
+  title,
+  Icon,
+  list,
+  selected,
+  update,
+}: MultiSelectProps) {
+  return (
+    <div className="border-border/40 space-y-5 rounded-lg border p-4 shadow-sm">
+      <div className="text-muted-foreground text-md flex items-center gap-2 font-semibold">
+        <Icon size={20} />
+        <p>{title}</p>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        {list.map((item) => (
+          <Button
+            key={item.label}
+            variant={`${selected?.find((s) => s.value === item.label) ? "secondary" : "outline"}`}
+            className="text-sm font-semibold"
+            onClick={() => update(item)}
+          >
+            {item.value}
+          </Button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// *COMPONENTS
 
 // * Country and State Filters
 const CountryAndState: React.FC<{
@@ -521,6 +565,69 @@ const MelAndDegreeType: React.FC<{
   );
 };
 
+// * Intakes Filter
+const IntakesFilter: React.FC<{
+  intakesFilter: {
+    intakes: string;
+  };
+  setIntakesFilter: React.Dispatch<
+    React.SetStateAction<{
+      intakes: string;
+    }>
+  >;
+}> = ({ intakesFilter, setIntakesFilter }) => {
+  const intakeList = useMemo(() => {
+    const list = [];
+
+    for (let i = 0; i <= 11; i++) {
+      list.push(dayjs().add(i, "month").format("MMM YYYY").toUpperCase());
+    }
+
+    return list.map((intake) => ({
+      label: intake,
+      value: intake,
+    }));
+  }, []);
+
+  const selected = useMemo(() => {
+    return intakesFilter.intakes.split(",").map((intake) => ({
+      label: intake,
+      value: intake,
+    }));
+  }, [intakesFilter]);
+
+  const update = useCallback(
+    (val: (typeof intakeList)[number]) => {
+      let intakes = [
+        ...new Set([
+          ...(intakesFilter.intakes ? intakesFilter.intakes.split(",") : []),
+        ]),
+      ];
+
+      if (intakes.includes(val.value)) {
+        intakes = intakes.filter((v) => v !== val.value);
+      } else {
+        intakes.push(val.value);
+      }
+
+      setIntakesFilter({
+        intakes: intakes.join(","),
+      });
+    },
+    [intakesFilter],
+  );
+
+  return (
+    <MultiselectFilter
+      title="Intakes"
+      Icon={BellElectric}
+      list={intakeList}
+      selected={selected}
+      update={update}
+    />
+  );
+};
+
 interface Props {
   filters: Record<string, any>;
   setFilters: React.Dispatch<React.SetStateAction<Record<string, any>>>;
@@ -568,6 +675,12 @@ const SearchFilters: React.FC<Props> = ({
 
   const [pgwpFilter, setPgwpFilter] = useState(filters["pgwp"] ? true : false);
 
+  const [intakesFilter, setIntakesFilter] = useState<{
+    intakes: string;
+  }>({
+    intakes: filters["intakes"] || "",
+  });
+
   const applyFilters = useCallback(() => {
     setInitial?.(false);
     let flts: Partial<typeof filters> = {
@@ -577,6 +690,7 @@ const SearchFilters: React.FC<Props> = ({
       ...{ accommodation: accommodationFilter },
       ...{ pgwp: pgwpFilter },
       ...melAndDegreeTypeFilter,
+      ...intakesFilter,
     };
 
     if (!accommodationFilter) {
@@ -605,6 +719,7 @@ const SearchFilters: React.FC<Props> = ({
         ...{ accommodation: accommodationFilter },
         ...{ pgwp: pgwpFilter },
         ...melAndDegreeTypeFilter,
+        ...intakesFilter,
       };
 
       if (!accommodationFilter) {
@@ -625,6 +740,7 @@ const SearchFilters: React.FC<Props> = ({
     accommodationFilter,
     pgwpFilter,
     melAndDegreeTypeFilter,
+    intakesFilter,
     filters,
   ]);
 
@@ -643,6 +759,9 @@ const SearchFilters: React.FC<Props> = ({
       minimumEducationLevel: "",
       degreeType: "",
     });
+    setIntakesFilter({
+      intakes: "",
+    });
     setFilters({
       limit: filters["limit"],
       page: 0,
@@ -653,6 +772,7 @@ const SearchFilters: React.FC<Props> = ({
     accommodationFilter,
     pgwpFilter,
     melAndDegreeTypeFilter,
+    intakesFilter,
     filters,
   ]);
 
@@ -732,6 +852,12 @@ const SearchFilters: React.FC<Props> = ({
               onChange={setPgwpFilter}
             />
           </div>
+
+          {/* Intakes */}
+          <IntakesFilter
+            intakesFilter={intakesFilter}
+            setIntakesFilter={setIntakesFilter}
+          />
         </div>
 
         <SheetFooter className="flex flex-row items-center gap-2 border-t">

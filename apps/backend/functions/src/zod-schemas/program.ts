@@ -94,6 +94,12 @@ export const ProgramQuerySchema = z.object({
     .optional()
     .transform((val) => val && val.split(",")),
 
+  intakes: z
+    .string()
+    .toUpperCase()
+    .optional()
+    .transform((val) => val && val.split(",")),
+
   orderBy: z
     .string()
     .trim()
