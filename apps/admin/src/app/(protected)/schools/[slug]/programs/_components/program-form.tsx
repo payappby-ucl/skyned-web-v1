@@ -1,6 +1,5 @@
 "use client";
 
-import ComputeEnglishProficiency from "@/src/components/compute-proficiency";
 import {
   CreateProgramSchema,
   degreeTypes,
