@@ -3,6 +3,7 @@
 import { brandClientApi } from "@/src/lib/client";
 import {
   CreateProgramSchema,
+  CreateProgramsSchema,
   degreeTypes,
   educationLevels,
   EnglishProficiency,
@@ -21,8 +22,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@workspace/ui/components/form";
-import { useForm, zodResolver } from "@workspace/ui/lib/utils";
-import React, { useCallback, useEffect, useState } from "react";
+import {
+  useFieldArray,
+  useForm,
+  UseFormReturn,
+  useWatch,
+  zodResolver,
+} from "@workspace/ui/lib/utils";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import UploadGuideline from "./program-template";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormButton } from "@workspace/ui/components/form-button";
@@ -61,6 +68,567 @@ import AddIntakesForm from "../../_components/add-intakes-form";
 import { useRouter } from "next/navigation";
 import { createProgram } from "../../../../_actions";
 import LoadingTemplateModal from "./loading-template";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { Badge } from "@workspace/ui/components/badge";
+
+// * Memoized Row
+const ProgramRow: React.FC<{
+  control: UseFormReturn<CreateProgramsSchema>["control"];
+  idx: number;
+  activeIntakes: IIntake[] | null;
+  setActiveIntakes: React.Dispatch<React.SetStateAction<IIntake[] | null>>;
+  schoolSlug: string;
+  setValue: UseFormReturn<CreateProgramsSchema>["setValue"];
+}> = React.memo(
+  ({ control, idx, activeIntakes, setActiveIntakes, schoolSlug, setValue }) => {
+    const mel = useWatch({
+      control,
+      name: `data.${idx}.minimumEducationLevel`,
+    });
+
+    return (
+      <>
+        {/* Serial Number */}
+        <TableCell>
+          <Badge variant="outline">{idx + 1}</Badge>
+        </TableCell>
+
+        {/* Name */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.name`}
+            render={({ field }) => (
+              <FormItem className="min-w-[300px]">
+                <FormControl>
+                  <Input
+                    {...field}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.onChange(val);
+                      setValue(`data.${idx}.slug`, val);
+                    }}
+                    placeholder="Program Name"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Faculty */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.faculty`}
+            render={({ field }) => (
+              <FormItem className="min-w-[300px]">
+                <FormControl>
+                  <Input
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Faculty"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Degree */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.degreeType`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger
+                        id="degreeType"
+                        className="w-full capitalize"
+                      >
+                        <SelectValue placeholder="Select a degree" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {degreeTypes.map((type) => (
+                        <SelectItem
+                          key={type}
+                          value={type}
+                          className="capitalize"
+                        >
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Application Fee */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.applicationFee`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="number" step={0.01} min={0} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Application Fee Discount */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.applicationFeeDiscount`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="number"
+                    step={0.01}
+                    min={0}
+                    max={100}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Tuition Fee */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.tuitionFee`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="number" step={0.01} min={0} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Tuition Fee Coverage */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.tuitionFeeType`}
+            render={({ field }) => (
+              <FormItem>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger
+                      id="tuitionFeeType"
+                      className="w-full capitalize"
+                    >
+                      <SelectValue placeholder="Select a coverage" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {tuitionFeeType.map((type) => (
+                      <SelectItem
+                        key={type}
+                        value={type}
+                        className="capitalize"
+                      >
+                        {type.replaceAll("_", " ")}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Timeframe */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.timeframe`}
+            render={({ field }) => (
+              <FormItem>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger id="timeframe" className="w-full capitalize">
+                      <SelectValue placeholder="Select a timeframe" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {timeframe.map((type) => (
+                      <SelectItem
+                        key={type}
+                        value={type}
+                        className="capitalize"
+                      >
+                        {type + "'s"}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Duration*/}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.duration`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} type="number" step={0.1} min={1} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Minimum Education Level */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.minimumEducationLevel`}
+            render={({ field }) => (
+              <FormItem>
+                <Select
+                  onValueChange={(val) => {
+                    field.onChange(val);
+                    setValue(`data.${idx}.minimumEducationDegree`, 0);
+                    // setSelectedGradingScheme("");
+                  }}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      id="minimumEducationLevel"
+                      className="w-full capitalize"
+                    >
+                      <SelectValue placeholder="Select a MEL" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {[
+                      "primary",
+                      "secondary",
+                      "undergraduate",
+                      "postgraduate",
+                    ].map((type) => (
+                      <SelectItem
+                        key={type}
+                        value={type}
+                        className="capitalize"
+                      >
+                        {type.replaceAll("_", " ")}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Minimum Education Degree */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.minimumEducationDegree`}
+            render={({ field }) => (
+              <FormItem>
+                <Select
+                  onValueChange={(val) => {
+                    field.onChange(val);
+                    // setSelectedGradingScheme("");
+                  }}
+                  value={`${field.value}`}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      id="minimumEducationLevel"
+                      className="w-full capitalize"
+                    >
+                      <SelectValue placeholder="Select a MEL Degree" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {educationLevels[mel].map(({ level, levelValue }) => (
+                      <SelectItem
+                        key={level}
+                        value={`${levelValue}`}
+                        className="capitalize"
+                      >
+                        {level}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Grade Point Average */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.minimumEligibilityGpa`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="number"
+                    step={0.1}
+                    max={100}
+                    min={1}
+                    placeholder="Minimum GPA"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/*PGWP */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.pgwp`}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+                    <div className="flex-1">
+                      <FormDescription>
+                        Does this program offer Post Graduate Work Permit?
+                      </FormDescription>
+                    </div>
+
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Proficiencies */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.proficiencies`}
+            render={({ field }) => (
+              <FormItem className="min-w-[200px]">
+                <FormControl>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {field.value.length ? (
+                      field.value.map(({ test, score }) => {
+                        const cefr = EnglishProficiency.getCefr(test, score);
+
+                        return (
+                          <div className="flex items-center" key={test}>
+                            <div className="flex-1">
+                              <ProficiencyDisplay
+                                key={test}
+                                test={test}
+                                name={cefr.name}
+                                tags={cefr.tags}
+                                score={score}
+                                slim
+                              />
+                            </div>
+
+                            <Button
+                              type="button"
+                              role="button"
+                              variant="ghost"
+                              onClick={() =>
+                                field.onChange(
+                                  field.value.filter((v) => v.test !== test),
+                                )
+                              }
+                            >
+                              <Trash2 className="text-destructive" />
+                            </Button>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="flex items-center justify-center gap-2 md:col-span-2 lg:col-span-4">
+                        <p className="text-sm">No Proficiency Added</p>
+                      </div>
+                    )}
+                  </div>
+                </FormControl>
+                <ProgramProficiencyForm
+                  proficiencies={field.value}
+                  onChange={(data) => field.onChange([...field.value, data])}
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/*Intakes */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.intakes`}
+            render={({ field }) => (
+              <FormItem className="min-w-[200px]">
+                <div className="flex max-h-[200px] flex-wrap items-center gap-2 overflow-y-scroll">
+                  {field.value.length ? (
+                    field.value.map((id) => {
+                      const intake = (activeIntakes || []).find(
+                        (itk) => itk.id === id,
+                      );
+
+                      return intake ? (
+                        <div
+                          key={`${id}`}
+                          className="flex w-full items-center justify-between rounded-lg border px-4 py-2"
+                        >
+                          <p className="text-sm font-semibold">
+                            {intake.intake}
+                          </p>
+                          <IntakeStatus
+                            status={intake.status}
+                            classNames="text-xs !px-2"
+                          />
+                        </div>
+                      ) : null;
+                    })
+                  ) : (
+                    <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+                      <p className="text-sm">No Intake Added</p>
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <AddIntakesForm
+                    schoolSlug={schoolSlug}
+                    selectedIntakes={(activeIntakes || []).filter((itk) =>
+                      field.value.includes(itk.id),
+                    )}
+                    onChange={(isSelected, intake) => {
+                      if (!activeIntakes?.find((it) => it.id === intake.id)) {
+                        setActiveIntakes((prev) => [...(prev || []), intake]);
+                      }
+
+                      if (isSelected) {
+                        field.onChange([...field.value, intake.id]);
+                      } else {
+                        field.onChange(
+                          field.value.filter((id) => id !== intake.id),
+                        );
+                      }
+                    }}
+                  />
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Overview */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.overview`}
+            render={({ field }) => (
+              <FormItem className="min-w-[500px]">
+                <FormControl>
+                  <Textarea
+                    placeholder={`Brief overview about this program`}
+                    {...field}
+                    className="h-[235px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Requirements */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.requirements`}
+            render={({ field, fieldState }) => (
+              <FormItem className="min-w-[800px]">
+                <FormControl>
+                  <Editor
+                    onChange={field.onChange}
+                    invalid={fieldState.invalid}
+                    content={field.value}
+                    className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Description */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.description`}
+            render={({ field, fieldState }) => (
+              <FormItem className="min-w-[800px]">
+                <FormControl>
+                  <Editor
+                    onChange={field.onChange}
+                    invalid={fieldState.invalid}
+                    content={field.value}
+                    className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+      </>
+    );
+  },
+);
 
 interface Props {
   school: ISchool;
@@ -72,15 +640,16 @@ const UploadForm: React.FC<Props> = ({ school }) => {
   const [activeIntakes, setActiveIntakes] = useState<IIntake[] | null>(null);
   const [loadingTemplate, setLoadingTemplate] = useState(false);
 
-  const form = useForm<CreateProgramSchema>({
-    resolver: zodResolver(CreateProgramSchema),
+  const form = useForm<CreateProgramsSchema>({
+    resolver: zodResolver(CreateProgramsSchema),
+    mode: "onSubmit",
     defaultValues: {
       type: "bulk",
       data: [],
     },
   });
 
-  const onSubmit = useCallback(async (data: CreateProgramSchema) => {
+  const onSubmit = useCallback(async (data: CreateProgramsSchema) => {
     try {
       const programs = data.data as Extract<CreateProgramSchema["data"], any[]>;
       while (programs.length) {
@@ -113,8 +682,13 @@ const UploadForm: React.FC<Props> = ({ school }) => {
     }
   }, []);
 
+  const { fields, insert } = useFieldArray({
+    control: form.control,
+    name: "data",
+  });
+
   // * Watched
-  const programData = form.watch("data");
+  // const programData = form.watch("data");
 
   // * Template Operations
   const downloadTemplateMutation = useMutation({
@@ -159,22 +733,47 @@ const UploadForm: React.FC<Props> = ({ school }) => {
     }
   }, [school]);
 
+  console.log(form);
+
+  // * Virtualizer
+  const parentRef = useRef<HTMLDivElement>(null);
+  const virtualizer = useVirtualizer({
+    count: fields.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 200,
+    // overscan: 5,
+  });
+
   return (
     <section className="h-full !p-0">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          <FormField
-            control={form.control}
-            name="data"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                {Array.isArray(field.value) && field.value.length ? (
+          {fields.length ? (
+            <div
+              ref={parentRef}
+              style={{
+                height: "90vh",
+                overflow: "auto",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  height: `${virtualizer.getTotalSize()}px`,
+                }}
+              >
+                <div
+                  style={{
+                    transform: `translateY(${virtualizer.getVirtualItems()[0]?.start ?? 0}px)`,
+                  }}
+                >
                   <Table>
                     <TableCaption>
                       Please Review carefully before uploading.
                     </TableCaption>
                     <TableHeader>
                       <TableRow>
+                        <TableHead>S/N</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Faculty</TableHead>
                         <TableHead>Degree</TableHead>
@@ -197,704 +796,103 @@ const UploadForm: React.FC<Props> = ({ school }) => {
                         <TableHead>Description</TableHead>
                       </TableRow>
                     </TableHeader>
+
                     <TableBody>
-                      {field.value.map((v, idx) => {
-                        // * Watch
-                        const mel = form.watch(
-                          `data.${idx}.minimumEducationLevel`,
-                        );
-
-                        return (
-                          <FormField
-                            key={`program_item_${idx}`}
-                            control={form.control}
-                            name={`data.${idx}`}
-                            render={({ field }) => (
-                              <TableRow>
-                                {/* Name */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.name`}
-                                    render={({ field }) => (
-                                      <FormItem className="min-w-[300px]">
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            onChange={(e) => {
-                                              const val = e.target.value;
-                                              field.onChange(val);
-                                              form.setValue(
-                                                `data.${idx}.slug`,
-                                                val,
-                                              );
-                                            }}
-                                            placeholder="Program Name"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Faculty */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.faculty`}
-                                    render={({ field }) => (
-                                      <FormItem className="min-w-[300px]">
-                                        <FormControl>
-                                          <Input
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            placeholder="Faculty"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Degree */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.degreeType`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Select
-                                            onValueChange={field.onChange}
-                                            value={field.value}
-                                          >
-                                            <FormControl>
-                                              <SelectTrigger
-                                                id="degreeType"
-                                                className="w-full capitalize"
-                                              >
-                                                <SelectValue placeholder="Select a degree" />
-                                              </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                              {degreeTypes.map((type) => (
-                                                <SelectItem
-                                                  key={type}
-                                                  value={type}
-                                                  className="capitalize"
-                                                >
-                                                  {type}
-                                                </SelectItem>
-                                              ))}
-                                            </SelectContent>
-                                          </Select>
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Application Fee */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.applicationFee`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            type="number"
-                                            step={0.01}
-                                            min={0}
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Application Fee Discount */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.applicationFeeDiscount`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            type="number"
-                                            step={0.01}
-                                            min={0}
-                                            max={100}
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Tuition Fee */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.tuitionFee`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            type="number"
-                                            step={0.01}
-                                            min={0}
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Tuition Fee Coverage */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.tuitionFeeType`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <Select
-                                          onValueChange={field.onChange}
-                                          value={field.value}
-                                        >
-                                          <FormControl>
-                                            <SelectTrigger
-                                              id="tuitionFeeType"
-                                              className="w-full capitalize"
-                                            >
-                                              <SelectValue placeholder="Select a coverage" />
-                                            </SelectTrigger>
-                                          </FormControl>
-                                          <SelectContent>
-                                            {tuitionFeeType.map((type) => (
-                                              <SelectItem
-                                                key={type}
-                                                value={type}
-                                                className="capitalize"
-                                              >
-                                                {type.replaceAll("_", " ")}
-                                              </SelectItem>
-                                            ))}
-                                          </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Timeframe */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.timeframe`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <Select
-                                          onValueChange={field.onChange}
-                                          value={field.value}
-                                        >
-                                          <FormControl>
-                                            <SelectTrigger
-                                              id="timeframe"
-                                              className="w-full capitalize"
-                                            >
-                                              <SelectValue placeholder="Select a timeframe" />
-                                            </SelectTrigger>
-                                          </FormControl>
-                                          <SelectContent>
-                                            {timeframe.map((type) => (
-                                              <SelectItem
-                                                key={type}
-                                                value={type}
-                                                className="capitalize"
-                                              >
-                                                {type + "'s"}
-                                              </SelectItem>
-                                            ))}
-                                          </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Duration*/}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.duration`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            type="number"
-                                            step={0.1}
-                                            min={1}
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Minimum Education Level */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.minimumEducationLevel`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <Select
-                                          onValueChange={(val) => {
-                                            field.onChange(val);
-                                            form.setValue(
-                                              `data.${idx}.minimumEducationDegree`,
-                                              0,
-                                            );
-                                            // setSelectedGradingScheme("");
-                                          }}
-                                          value={field.value}
-                                        >
-                                          <FormControl>
-                                            <SelectTrigger
-                                              id="minimumEducationLevel"
-                                              className="w-full capitalize"
-                                            >
-                                              <SelectValue placeholder="Select a MEL" />
-                                            </SelectTrigger>
-                                          </FormControl>
-                                          <SelectContent>
-                                            {[
-                                              "primary",
-                                              "secondary",
-                                              "undergraduate",
-                                              "postgraduate",
-                                            ].map((type) => (
-                                              <SelectItem
-                                                key={type}
-                                                value={type}
-                                                className="capitalize"
-                                              >
-                                                {type.replaceAll("_", " ")}
-                                              </SelectItem>
-                                            ))}
-                                          </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Minimum Education Degree */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.minimumEducationDegree`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <Select
-                                          onValueChange={(val) => {
-                                            field.onChange(val);
-                                            // setSelectedGradingScheme("");
-                                          }}
-                                          value={`${field.value}`}
-                                        >
-                                          <FormControl>
-                                            <SelectTrigger
-                                              id="minimumEducationLevel"
-                                              className="w-full capitalize"
-                                            >
-                                              <SelectValue placeholder="Select a MEL Degree" />
-                                            </SelectTrigger>
-                                          </FormControl>
-                                          <SelectContent>
-                                            {educationLevels[mel].map(
-                                              ({ level, levelValue }) => (
-                                                <SelectItem
-                                                  key={level}
-                                                  value={`${levelValue}`}
-                                                  className="capitalize"
-                                                >
-                                                  {level}
-                                                </SelectItem>
-                                              ),
-                                            )}
-                                          </SelectContent>
-                                        </Select>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Grade Point Average */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.minimumEligibilityGpa`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <Input
-                                            {...field}
-                                            type="number"
-                                            step={0.1}
-                                            max={100}
-                                            min={1}
-                                            placeholder="Minimum GPA"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/*PGWP */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.pgwp`}
-                                    render={({ field }) => (
-                                      <FormItem>
-                                        <FormControl>
-                                          <div className="flex items-center gap-2 rounded-md border px-3 py-2">
-                                            <div className="flex-1">
-                                              <FormDescription>
-                                                Does this program offer Post
-                                                Graduate Work Permit?
-                                              </FormDescription>
-                                            </div>
-
-                                            <Switch
-                                              checked={field.value}
-                                              onCheckedChange={field.onChange}
-                                            />
-                                          </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Proficiencies */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.proficiencies`}
-                                    render={({ field }) => (
-                                      <FormItem className="min-w-[200px]">
-                                        <FormControl>
-                                          <div className="flex flex-wrap items-center gap-2">
-                                            {field.value.length ? (
-                                              field.value.map(
-                                                ({ test, score }) => {
-                                                  const cefr =
-                                                    EnglishProficiency.getCefr(
-                                                      test,
-                                                      score,
-                                                    );
-
-                                                  return (
-                                                    <div
-                                                      className="flex items-center"
-                                                      key={test}
-                                                    >
-                                                      <div className="flex-1">
-                                                        <ProficiencyDisplay
-                                                          key={test}
-                                                          test={test}
-                                                          name={cefr.name}
-                                                          tags={cefr.tags}
-                                                          score={score}
-                                                          slim
-                                                        />
-                                                      </div>
-
-                                                      <Button
-                                                        type="button"
-                                                        role="button"
-                                                        variant="ghost"
-                                                        onClick={() =>
-                                                          field.onChange(
-                                                            field.value.filter(
-                                                              (v) =>
-                                                                v.test !== test,
-                                                            ),
-                                                          )
-                                                        }
-                                                      >
-                                                        <Trash2 className="text-destructive" />
-                                                      </Button>
-                                                    </div>
-                                                  );
-                                                },
-                                              )
-                                            ) : (
-                                              <div className="flex items-center justify-center gap-2 md:col-span-2 lg:col-span-4">
-                                                <p className="text-sm">
-                                                  No Proficiency Added
-                                                </p>
-                                              </div>
-                                            )}
-                                          </div>
-                                        </FormControl>
-                                        <ProgramProficiencyForm
-                                          proficiencies={field.value}
-                                          onChange={(data) =>
-                                            field.onChange([
-                                              ...field.value,
-                                              data,
-                                            ])
-                                          }
-                                        />
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/*Intakes */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.intakes`}
-                                    render={({ field }) => (
-                                      <FormItem className="min-w-[200px]">
-                                        <div className="flex max-h-[200px] flex-wrap items-center gap-2 overflow-y-scroll">
-                                          {field.value.length ? (
-                                            field.value.map((id) => {
-                                              const intake = (
-                                                activeIntakes || []
-                                              ).find((itk) => itk.id === id);
-
-                                              return intake ? (
-                                                <div
-                                                  key={`${id}`}
-                                                  className="flex w-full items-center justify-between rounded-lg border px-4 py-2"
-                                                >
-                                                  <p className="text-sm font-semibold">
-                                                    {intake.intake}
-                                                  </p>
-                                                  <IntakeStatus
-                                                    status={intake.status}
-                                                    classNames="text-xs !px-2"
-                                                  />
-                                                </div>
-                                              ) : null;
-                                            })
-                                          ) : (
-                                            <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
-                                              <p className="text-sm">
-                                                No Intake Added
-                                              </p>
-                                            </div>
-                                          )}
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                          <AddIntakesForm
-                                            schoolSlug={school.slug}
-                                            selectedIntakes={(
-                                              activeIntakes || []
-                                            ).filter((itk) =>
-                                              field.value.includes(itk.id),
-                                            )}
-                                            onChange={(isSelected, intake) => {
-                                              if (
-                                                !activeIntakes?.find(
-                                                  (it) => it.id === intake.id,
-                                                )
-                                              ) {
-                                                setActiveIntakes((prev) => [
-                                                  ...(prev || []),
-                                                  intake,
-                                                ]);
-                                              }
-
-                                              if (isSelected) {
-                                                field.onChange([
-                                                  ...field.value,
-                                                  intake.id,
-                                                ]);
-                                              } else {
-                                                field.onChange(
-                                                  field.value.filter(
-                                                    (id) => id !== intake.id,
-                                                  ),
-                                                );
-                                              }
-                                            }}
-                                          />
-                                        </div>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Overview */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.overview`}
-                                    render={({ field }) => (
-                                      <FormItem className="min-w-[500px]">
-                                        <FormControl>
-                                          <Textarea
-                                            placeholder={`Brief overview about this program`}
-                                            {...field}
-                                            className="h-[235px]"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Requirements */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.requirements`}
-                                    render={({ field, fieldState }) => (
-                                      <FormItem className="min-w-[800px]">
-                                        <FormControl>
-                                          <Editor
-                                            onChange={field.onChange}
-                                            invalid={fieldState.invalid}
-                                            content={field.value}
-                                            editable={
-                                              !form.formState.isSubmitting
-                                            }
-                                            className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-
-                                {/* Description */}
-                                <TableCell>
-                                  <FormField
-                                    control={form.control}
-                                    name={`${field.name}.description`}
-                                    render={({ field, fieldState }) => (
-                                      <FormItem className="min-w-[800px]">
-                                        <FormControl>
-                                          <Editor
-                                            onChange={field.onChange}
-                                            invalid={fieldState.invalid}
-                                            content={field.value}
-                                            editable={
-                                              !form.formState.isSubmitting
-                                            }
-                                            className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                    )}
-                                  />
-                                </TableCell>
-                              </TableRow>
-                            )}
-                          />
-                        );
-                      })}
+                      {virtualizer
+                        .getVirtualItems()
+                        .map((virtualRow, index) => {
+                          const field = fields[virtualRow.index];
+                          return (
+                            <TableRow
+                              key={field?.id}
+                              data-index={index}
+                              ref={virtualizer.measureElement}
+                              className={
+                                form.formState.errors.data?.[virtualRow.index]
+                                  ? "border-destructive border bg-red-600/10"
+                                  : ""
+                              }
+                            >
+                              <ProgramRow
+                                control={form.control}
+                                setValue={form.setValue}
+                                activeIntakes={activeIntakes}
+                                setActiveIntakes={setActiveIntakes}
+                                schoolSlug={school.slug}
+                                idx={virtualRow.index}
+                              />
+                            </TableRow>
+                          );
+                        })}
                     </TableBody>
                   </Table>
-                ) : (
-                  <div className="grid grid-cols-1 gap-2">
-                    <UploadGuideline>
-                      <FormButton
-                        type="button"
-                        role="button"
-                        variant="outline"
-                        className="text-sm"
-                        isLoading={downloadTemplateMutation.isPending}
-                        onClick={() => downloadTemplateMutation.mutate()}
-                      >
-                        <Download /> Download Template
-                      </FormButton>
-                    </UploadGuideline>
-                    <FormControl>
-                      <FileInput
-                        isInvalid={fieldState.invalid}
-                        accept={{
-                          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-                            [".xlsx"],
-                          "application/vnd.ms-excel": [".xls"],
-                        }}
-                        extensions={[".xlsx", ".xls"]}
-                        maxSize={10}
-                        setError={(message) =>
-                          form.setError("data", {
-                            message,
-                          })
-                        }
-                        clearError={() => {
-                          form.clearErrors();
-                        }}
-                        handleFile={async (file) => {
-                          setLoadingTemplate(true);
-                          try {
-                            if (file) {
-                              const data = await generateUploadFormData(file);
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-2">
+              <UploadGuideline>
+                <FormButton
+                  type="button"
+                  role="button"
+                  variant="outline"
+                  className="text-sm"
+                  isLoading={downloadTemplateMutation.isPending}
+                  onClick={() => downloadTemplateMutation.mutate()}
+                >
+                  <Download /> Download Template
+                </FormButton>
+              </UploadGuideline>
+              <FormControl>
+                <FileInput
+                  isInvalid={form.getFieldState("data").invalid}
+                  accept={{
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                      [".xlsx"],
+                    "application/vnd.ms-excel": [".xls"],
+                  }}
+                  extensions={[".xlsx", ".xls"]}
+                  maxSize={10}
+                  setError={(message) =>
+                    form.setError("data", {
+                      message,
+                    })
+                  }
+                  clearError={() => {
+                    form.clearErrors();
+                  }}
+                  handleFile={async (file) => {
+                    setLoadingTemplate(true);
+                    try {
+                      if (file) {
+                        const data = (await generateUploadFormData(file)).map(
+                          (d) => ({
+                            ...d,
+                            intakes: d.intakes.filter((itk) =>
+                              (activeIntakes || []).find((it) => it.id === itk),
+                            ),
+                          }),
+                        );
 
-                              field.onChange(
-                                data.map((d) => ({
-                                  ...d,
-                                  intakes: d.intakes.filter((itk) =>
-                                    (activeIntakes || []).find(
-                                      (it) => it.id === itk,
-                                    ),
-                                  ),
-                                })),
-                              );
-                            }
-                          } catch (error) {
-                            brandClientApi.utils.toast.error(
-                              "Something when wrong loading template. Please verify guidelines are followed properly. Contact admin if you're sure you did the right thing.",
-                            );
-                          } finally {
-                            setLoadingTemplate(false);
-                          }
-                        }}
-                      />
-                    </FormControl>
-                  </div>
-                )}
+                        insert(0, data);
+                      }
+                    } catch (error) {
+                      brandClientApi.utils.toast.error(
+                        "Something when wrong loading template. Please verify guidelines are followed properly. Contact admin if you're sure you did the right thing.",
+                      );
+                    } finally {
+                      setLoadingTemplate(false);
+                    }
+                  }}
+                />
+              </FormControl>
+            </div>
+          )}
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {Array.isArray(programData) && programData.length ? (
-            <div className="flex items-center gap-4">
+          {/* Add Here */}
+
+          {fields.length ? (
+            <div className="flex w-full items-center gap-4">
               <FormButton
                 variant="brand"
                 isLoading={form.formState.isSubmitting}
@@ -925,3 +923,734 @@ const UploadForm: React.FC<Props> = ({ school }) => {
   );
 };
 export default UploadForm;
+
+// <FormField
+//           control={form.control}
+//           name="data"
+//           render={({ field, fieldState }) => (
+//             <FormItem>
+//               {Array.isArray(field.value) && field.value.length ? (
+//                 <Table>
+//                   <TableCaption>
+//                     Please Review carefully before uploading.
+//                   </TableCaption>
+//                   <TableHeader>
+//                     <TableRow>
+//                       <TableHead>Name</TableHead>
+//                       <TableHead>Faculty</TableHead>
+//                       <TableHead>Degree</TableHead>
+//                       <TableHead>
+//                         Application Fee ({school.currency})
+//                       </TableHead>
+//                       <TableHead>Application Fee Discount (%)</TableHead>
+//                       <TableHead>Tuition Fee ({school.currency})</TableHead>
+//                       <TableHead>Tuition Fee Coverage</TableHead>
+//                       <TableHead>Timeframe</TableHead>
+//                       <TableHead>Program Length</TableHead>
+//                       <TableHead>Minimum Education Level</TableHead>
+//                       <TableHead>Minimum Education Degree</TableHead>
+//                       <TableHead>Minimum Grading Point Average</TableHead>
+//                       <TableHead>PGWP</TableHead>
+//                       <TableHead>English Proficiencies</TableHead>
+//                       <TableHead>Intakes</TableHead>
+//                       <TableHead>Overview</TableHead>
+//                       <TableHead>Program Requirements</TableHead>
+//                       <TableHead>Description</TableHead>
+//                     </TableRow>
+//                   </TableHeader>
+//                   <TableBody>
+//                     {field.value.map((v, idx) => {
+//                       // * Watch
+//                       const mel = form.watch(
+//                         `data.${idx}.minimumEducationLevel`,
+//                       );
+
+//                       return (
+//                         <FormField
+//                           key={`program_item_${idx}`}
+//                           control={form.control}
+//                           name={`data.${idx}`}
+//                           render={({ field }) => (
+//                             <TableRow>
+//                               {/* Name */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.name`}
+//                                   render={({ field }) => (
+//                                     <FormItem className="min-w-[300px]">
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           onChange={(e) => {
+//                                             const val = e.target.value;
+//                                             field.onChange(val);
+//                                             form.setValue(
+//                                               `data.${idx}.slug`,
+//                                               val,
+//                                             );
+//                                           }}
+//                                           placeholder="Program Name"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Faculty */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.faculty`}
+//                                   render={({ field }) => (
+//                                     <FormItem className="min-w-[300px]">
+//                                       <FormControl>
+//                                         <Input
+//                                           value={field.value}
+//                                           onChange={field.onChange}
+//                                           placeholder="Faculty"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Degree */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.degreeType`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Select
+//                                           onValueChange={field.onChange}
+//                                           value={field.value}
+//                                         >
+//                                           <FormControl>
+//                                             <SelectTrigger
+//                                               id="degreeType"
+//                                               className="w-full capitalize"
+//                                             >
+//                                               <SelectValue placeholder="Select a degree" />
+//                                             </SelectTrigger>
+//                                           </FormControl>
+//                                           <SelectContent>
+//                                             {degreeTypes.map((type) => (
+//                                               <SelectItem
+//                                                 key={type}
+//                                                 value={type}
+//                                                 className="capitalize"
+//                                               >
+//                                                 {type}
+//                                               </SelectItem>
+//                                             ))}
+//                                           </SelectContent>
+//                                         </Select>
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Application Fee */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.applicationFee`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           type="number"
+//                                           step={0.01}
+//                                           min={0}
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Application Fee Discount */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.applicationFeeDiscount`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           type="number"
+//                                           step={0.01}
+//                                           min={0}
+//                                           max={100}
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Tuition Fee */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.tuitionFee`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           type="number"
+//                                           step={0.01}
+//                                           min={0}
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Tuition Fee Coverage */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.tuitionFeeType`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <Select
+//                                         onValueChange={field.onChange}
+//                                         value={field.value}
+//                                       >
+//                                         <FormControl>
+//                                           <SelectTrigger
+//                                             id="tuitionFeeType"
+//                                             className="w-full capitalize"
+//                                           >
+//                                             <SelectValue placeholder="Select a coverage" />
+//                                           </SelectTrigger>
+//                                         </FormControl>
+//                                         <SelectContent>
+//                                           {tuitionFeeType.map((type) => (
+//                                             <SelectItem
+//                                               key={type}
+//                                               value={type}
+//                                               className="capitalize"
+//                                             >
+//                                               {type.replaceAll("_", " ")}
+//                                             </SelectItem>
+//                                           ))}
+//                                         </SelectContent>
+//                                       </Select>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Timeframe */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.timeframe`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <Select
+//                                         onValueChange={field.onChange}
+//                                         value={field.value}
+//                                       >
+//                                         <FormControl>
+//                                           <SelectTrigger
+//                                             id="timeframe"
+//                                             className="w-full capitalize"
+//                                           >
+//                                             <SelectValue placeholder="Select a timeframe" />
+//                                           </SelectTrigger>
+//                                         </FormControl>
+//                                         <SelectContent>
+//                                           {timeframe.map((type) => (
+//                                             <SelectItem
+//                                               key={type}
+//                                               value={type}
+//                                               className="capitalize"
+//                                             >
+//                                               {type + "'s"}
+//                                             </SelectItem>
+//                                           ))}
+//                                         </SelectContent>
+//                                       </Select>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Duration*/}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.duration`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           type="number"
+//                                           step={0.1}
+//                                           min={1}
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Minimum Education Level */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.minimumEducationLevel`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <Select
+//                                         onValueChange={(val) => {
+//                                           field.onChange(val);
+//                                           form.setValue(
+//                                             `data.${idx}.minimumEducationDegree`,
+//                                             0,
+//                                           );
+//                                           // setSelectedGradingScheme("");
+//                                         }}
+//                                         value={field.value}
+//                                       >
+//                                         <FormControl>
+//                                           <SelectTrigger
+//                                             id="minimumEducationLevel"
+//                                             className="w-full capitalize"
+//                                           >
+//                                             <SelectValue placeholder="Select a MEL" />
+//                                           </SelectTrigger>
+//                                         </FormControl>
+//                                         <SelectContent>
+//                                           {[
+//                                             "primary",
+//                                             "secondary",
+//                                             "undergraduate",
+//                                             "postgraduate",
+//                                           ].map((type) => (
+//                                             <SelectItem
+//                                               key={type}
+//                                               value={type}
+//                                               className="capitalize"
+//                                             >
+//                                               {type.replaceAll("_", " ")}
+//                                             </SelectItem>
+//                                           ))}
+//                                         </SelectContent>
+//                                       </Select>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Minimum Education Degree */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.minimumEducationDegree`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <Select
+//                                         onValueChange={(val) => {
+//                                           field.onChange(val);
+//                                           // setSelectedGradingScheme("");
+//                                         }}
+//                                         value={`${field.value}`}
+//                                       >
+//                                         <FormControl>
+//                                           <SelectTrigger
+//                                             id="minimumEducationLevel"
+//                                             className="w-full capitalize"
+//                                           >
+//                                             <SelectValue placeholder="Select a MEL Degree" />
+//                                           </SelectTrigger>
+//                                         </FormControl>
+//                                         <SelectContent>
+//                                           {educationLevels[mel].map(
+//                                             ({ level, levelValue }) => (
+//                                               <SelectItem
+//                                                 key={level}
+//                                                 value={`${levelValue}`}
+//                                                 className="capitalize"
+//                                               >
+//                                                 {level}
+//                                               </SelectItem>
+//                                             ),
+//                                           )}
+//                                         </SelectContent>
+//                                       </Select>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Grade Point Average */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.minimumEligibilityGpa`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <Input
+//                                           {...field}
+//                                           type="number"
+//                                           step={0.1}
+//                                           max={100}
+//                                           min={1}
+//                                           placeholder="Minimum GPA"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/*PGWP */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.pgwp`}
+//                                   render={({ field }) => (
+//                                     <FormItem>
+//                                       <FormControl>
+//                                         <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+//                                           <div className="flex-1">
+//                                             <FormDescription>
+//                                               Does this program offer Post
+//                                               Graduate Work Permit?
+//                                             </FormDescription>
+//                                           </div>
+
+//                                           <Switch
+//                                             checked={field.value}
+//                                             onCheckedChange={field.onChange}
+//                                           />
+//                                         </div>
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Proficiencies */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.proficiencies`}
+//                                   render={({ field }) => (
+//                                     <FormItem className="min-w-[200px]">
+//                                       <FormControl>
+//                                         <div className="flex flex-wrap items-center gap-2">
+//                                           {field.value.length ? (
+//                                             field.value.map(
+//                                               ({ test, score }) => {
+//                                                 const cefr =
+//                                                   EnglishProficiency.getCefr(
+//                                                     test,
+//                                                     score,
+//                                                   );
+
+//                                                 return (
+//                                                   <div
+//                                                     className="flex items-center"
+//                                                     key={test}
+//                                                   >
+//                                                     <div className="flex-1">
+//                                                       <ProficiencyDisplay
+//                                                         key={test}
+//                                                         test={test}
+//                                                         name={cefr.name}
+//                                                         tags={cefr.tags}
+//                                                         score={score}
+//                                                         slim
+//                                                       />
+//                                                     </div>
+
+//                                                     <Button
+//                                                       type="button"
+//                                                       role="button"
+//                                                       variant="ghost"
+//                                                       onClick={() =>
+//                                                         field.onChange(
+//                                                           field.value.filter(
+//                                                             (v) =>
+//                                                               v.test !== test,
+//                                                           ),
+//                                                         )
+//                                                       }
+//                                                     >
+//                                                       <Trash2 className="text-destructive" />
+//                                                     </Button>
+//                                                   </div>
+//                                                 );
+//                                               },
+//                                             )
+//                                           ) : (
+//                                             <div className="flex items-center justify-center gap-2 md:col-span-2 lg:col-span-4">
+//                                               <p className="text-sm">
+//                                                 No Proficiency Added
+//                                               </p>
+//                                             </div>
+//                                           )}
+//                                         </div>
+//                                       </FormControl>
+//                                       <ProgramProficiencyForm
+//                                         proficiencies={field.value}
+//                                         onChange={(data) =>
+//                                           field.onChange([
+//                                             ...field.value,
+//                                             data,
+//                                           ])
+//                                         }
+//                                       />
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/*Intakes */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.intakes`}
+//                                   render={({ field }) => (
+//                                     <FormItem className="min-w-[200px]">
+//                                       <div className="flex max-h-[200px] flex-wrap items-center gap-2 overflow-y-scroll">
+//                                         {field.value.length ? (
+//                                           field.value.map((id) => {
+//                                             const intake = (
+//                                               activeIntakes || []
+//                                             ).find((itk) => itk.id === id);
+
+//                                             return intake ? (
+//                                               <div
+//                                                 key={`${id}`}
+//                                                 className="flex w-full items-center justify-between rounded-lg border px-4 py-2"
+//                                               >
+//                                                 <p className="text-sm font-semibold">
+//                                                   {intake.intake}
+//                                                 </p>
+//                                                 <IntakeStatus
+//                                                   status={intake.status}
+//                                                   classNames="text-xs !px-2"
+//                                                 />
+//                                               </div>
+//                                             ) : null;
+//                                           })
+//                                         ) : (
+//                                           <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+//                                             <p className="text-sm">
+//                                               No Intake Added
+//                                             </p>
+//                                           </div>
+//                                         )}
+//                                       </div>
+//                                       <div className="flex items-center gap-2">
+//                                         <AddIntakesForm
+//                                           schoolSlug={school.slug}
+//                                           selectedIntakes={(
+//                                             activeIntakes || []
+//                                           ).filter((itk) =>
+//                                             field.value.includes(itk.id),
+//                                           )}
+//                                           onChange={(isSelected, intake) => {
+//                                             if (
+//                                               !activeIntakes?.find(
+//                                                 (it) => it.id === intake.id,
+//                                               )
+//                                             ) {
+//                                               setActiveIntakes((prev) => [
+//                                                 ...(prev || []),
+//                                                 intake,
+//                                               ]);
+//                                             }
+
+//                                             if (isSelected) {
+//                                               field.onChange([
+//                                                 ...field.value,
+//                                                 intake.id,
+//                                               ]);
+//                                             } else {
+//                                               field.onChange(
+//                                                 field.value.filter(
+//                                                   (id) => id !== intake.id,
+//                                                 ),
+//                                               );
+//                                             }
+//                                           }}
+//                                         />
+//                                       </div>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Overview */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.overview`}
+//                                   render={({ field }) => (
+//                                     <FormItem className="min-w-[500px]">
+//                                       <FormControl>
+//                                         <Textarea
+//                                           placeholder={`Brief overview about this program`}
+//                                           {...field}
+//                                           className="h-[235px]"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Requirements */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.requirements`}
+//                                   render={({ field, fieldState }) => (
+//                                     <FormItem className="min-w-[800px]">
+//                                       <FormControl>
+//                                         <Editor
+//                                           onChange={field.onChange}
+//                                           invalid={fieldState.invalid}
+//                                           content={field.value}
+//                                           editable={
+//                                             !form.formState.isSubmitting
+//                                           }
+//                                           className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+
+//                               {/* Description */}
+//                               <TableCell>
+//                                 <FormField
+//                                   control={form.control}
+//                                   name={`${field.name}.description`}
+//                                   render={({ field, fieldState }) => (
+//                                     <FormItem className="min-w-[800px]">
+//                                       <FormControl>
+//                                         <Editor
+//                                           onChange={field.onChange}
+//                                           invalid={fieldState.invalid}
+//                                           content={field.value}
+//                                           editable={
+//                                             !form.formState.isSubmitting
+//                                           }
+//                                           className="max-h-[200px] !min-h-[200px] whitespace-pre-line"
+//                                         />
+//                                       </FormControl>
+//                                       <FormMessage />
+//                                     </FormItem>
+//                                   )}
+//                                 />
+//                               </TableCell>
+//                             </TableRow>
+//                           )}
+//                         />
+//                       );
+//                     })}
+//                   </TableBody>
+//                 </Table>
+//               ) : (
+//                 <div className="grid grid-cols-1 gap-2">
+//                   <UploadGuideline>
+//                     <FormButton
+//                       type="button"
+//                       role="button"
+//                       variant="outline"
+//                       className="text-sm"
+//                       isLoading={downloadTemplateMutation.isPending}
+//                       onClick={() => downloadTemplateMutation.mutate()}
+//                     >
+//                       <Download /> Download Template
+//                     </FormButton>
+//                   </UploadGuideline>
+//                   <FormControl>
+//                     <FileInput
+//                       isInvalid={fieldState.invalid}
+//                       accept={{
+//                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+//                           [".xlsx"],
+//                         "application/vnd.ms-excel": [".xls"],
+//                       }}
+//                       extensions={[".xlsx", ".xls"]}
+//                       maxSize={10}
+//                       setError={(message) =>
+//                         form.setError("data", {
+//                           message,
+//                         })
+//                       }
+//                       clearError={() => {
+//                         form.clearErrors();
+//                       }}
+//                       handleFile={async (file) => {
+//                         setLoadingTemplate(true);
+//                         try {
+//                           if (file) {
+//                             const data = await generateUploadFormData(file);
+
+//                             field.onChange(
+//                               data.map((d) => ({
+//                                 ...d,
+//                                 intakes: d.intakes.filter((itk) =>
+//                                   (activeIntakes || []).find(
+//                                     (it) => it.id === itk,
+//                                   ),
+//                                 ),
+//                               })),
+//                             );
+//                           }
+//                         } catch (error) {
+//                           brandClientApi.utils.toast.error(
+//                             "Something when wrong loading template. Please verify guidelines are followed properly. Contact admin if you're sure you did the right thing.",
+//                           );
+//                         } finally {
+//                           setLoadingTemplate(false);
+//                         }
+//                       }}
+//                     />
+//                   </FormControl>
+//                 </div>
+//               )}
+
+//               <FormMessage />
+//             </FormItem>
+//           )}
+//         />

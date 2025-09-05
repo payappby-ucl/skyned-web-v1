@@ -477,7 +477,6 @@ export async function generateUploadFormData(file: File) {
       }
     }),
   );
-
   const cleanedValues = colValues.filter((v) => v !== undefined);
 
   let data = cleanedValues.reduce((cum, cur, index) => {

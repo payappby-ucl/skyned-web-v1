@@ -13,6 +13,7 @@
     "@icons-pack/react-simple-icons": "^12.3.0",
     "@tanstack/react-query": "^5.74.4",
     "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.12",
     "@workspace/api": "workspace:*",
     "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
