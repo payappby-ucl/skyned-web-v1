@@ -26,8 +26,6 @@ export default async function KPI() {
       },
     );
 
-    console.log(data);
-
     return (
       <Card className="gap-2 shadow-none">
         <CardHeader>

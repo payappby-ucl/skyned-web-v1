@@ -23,8 +23,6 @@ function useGet<RT>({ queryKey, url, enabled = true }: Props) {
       enabled,
     });
 
-  console.log(status);
-
   return {
     data,
     isPending,

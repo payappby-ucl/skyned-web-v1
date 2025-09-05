@@ -23,7 +23,6 @@ interface Props {
   department: IDepartment;
 }
 const DepartmentCard: React.FC<Props> = ({ department }) => {
-  console.log(department._count);
   return (
     <Card
       key={department.name}

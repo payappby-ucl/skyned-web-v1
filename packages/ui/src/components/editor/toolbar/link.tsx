@@ -32,7 +32,6 @@ const LinkForm: React.FC<
   }
 > = ({ editor, url, setOpen }) => {
   const [link, setLink] = useState(url || "");
-  console.log(link);
   const isValid = useMemo(() => LinkSchema.safeParse({ link }).success, [link]);
 
   const onSubmit = useCallback(

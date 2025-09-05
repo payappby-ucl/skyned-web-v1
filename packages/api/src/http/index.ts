@@ -18,7 +18,6 @@ abstract class HTTPClient implements IHTTPClient {
   ): Promise<ISuccessResponse<T>> {
     try {
       const headers = new Headers(options?.headers);
-      console.log(url);
       await this.setAuthHeader(headers);
       if (!["GET", "DELETE"].includes(method)) {
         headers.append("Content-Type", "application/json");

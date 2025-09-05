@@ -733,8 +733,6 @@ const UploadForm: React.FC<Props> = ({ school }) => {
     }
   }, [school]);
 
-  console.log(form);
-
   // * Virtualizer
   const parentRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({
