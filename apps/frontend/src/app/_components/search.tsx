@@ -43,6 +43,9 @@ const HeroSearch: React.FC = () => {
 
   const onSubmit = useCallback(async (data: HeroSearchSchema) => {
     try {
+      if (!data.course && !data.country)
+        throw new Error("At least one of courses or country is required.");
+
       const searchParams = new URLSearchParams();
       if (data.country) {
         searchParams.set("country", data.country);

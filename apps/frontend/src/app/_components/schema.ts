@@ -1,9 +1,9 @@
-import { CommonSchema } from "@workspace/shared";
 import { z } from "@workspace/ui/lib/utils";
 
-export const HeroSearchSchema = CommonSchema.pick({ country: true })
-  .partial()
-  .extend({
+export const HeroSearchSchema = z
+  .object({
+    country: z.string().trim().optional(),
     course: z.string().trim().optional(),
-  });
+  })
+  .partial();
 export type HeroSearchSchema = z.infer<typeof HeroSearchSchema>;
