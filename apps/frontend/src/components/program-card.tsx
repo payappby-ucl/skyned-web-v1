@@ -45,7 +45,8 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
               <CardTitle>
                 <Link
                   href={`/schools/${program.school?.slug}/programs/${program.slug}`}
-                  className="hover:underline"
+                  className="text-md hover:underline md:text-base"
+                  // target="_blank"
                 >
                   {program.name}
                 </Link>
@@ -54,6 +55,7 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
                 <Link
                   href={`/schools/${program.school?.slug}`}
                   className="flex items-center gap-2 hover:underline"
+                  // target="_blank"
                 >
                   <School className="!size-4" /> {program.school?.name}
                 </Link>
@@ -72,17 +74,17 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
           </div>
 
           {/* Overview */}
-          <p className="text-md line-clamp-3 text-ellipsis whitespace-pre-line">
+          <p className="md:text-md line-clamp-3 text-ellipsis whitespace-pre-line text-sm">
             {program.overview}
           </p>
 
           {/* Fees */}
           <div className="grid grid-cols-3 items-center justify-center gap-1 border-t pt-3">
             <div className="text-center">
-              <p className="text-brand dark:text-foreground text-[8px] font-bold uppercase md:text-[9px]">
+              <p className="text-brand dark:text-foreground text-[6px] font-bold uppercase md:text-[9px]">
                 Tuition Fee ({program.tuitionFeeType.replaceAll("_", " ")})
               </p>
-              <p className="text-md font-bold">
+              <p className="md:text-md text-sm font-bold">
                 <FormatCurrency
                   amount={program.tuitionFee}
                   currency={program.school?.currency}
@@ -92,10 +94,10 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
             </div>
 
             <div className="text-center">
-              <p className="text-brand dark:text-foreground text-[8px] font-bold uppercase md:text-[9px]">
+              <p className="text-brand dark:text-foreground text-[6px] font-bold uppercase md:text-[9px]">
                 Application Fee
               </p>
-              <p className="text-md font-bold">
+              <p className="md:text-md text-sm font-bold">
                 <FormatCurrency
                   amount={program.applicationFee}
                   currency={program.school?.currency}
@@ -105,11 +107,11 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
             </div>
 
             <div className="text-center">
-              <p className="text-brand dark:text-foreground text-[8px] font-bold uppercase md:text-[9px]">
+              <p className="text-brand dark:text-foreground text-[6px] font-bold uppercase md:text-[9px]">
                 Discount*
               </p>
               <p
-                className={`${discount > 0 ? "bg-brand rounded-md px-4 py-1 !text-sm text-white" : ""} text-md mx-auto w-fit font-bold`}
+                className={`${discount > 0 ? "bg-brand rounded-md px-4 py-1 !text-sm text-white" : ""} md:text-md mx-auto w-fit text-sm font-bold`}
               >
                 {discount}%
               </p>

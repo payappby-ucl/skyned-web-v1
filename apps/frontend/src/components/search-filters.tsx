@@ -646,6 +646,7 @@ const SearchFilters: React.FC<Props> = ({
   scrollTo,
 }) => {
   const router = useRouter();
+
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -735,17 +736,14 @@ const SearchFilters: React.FC<Props> = ({
       return flts;
     });
 
-    // const queries = new URLSearchParams();
-    // Object.entries(flts).forEach(([key, value]) => {
-    //   if (value) {
-    //     queries.append(key, value);
-    //   }
-    // });
+    const queries = new URLSearchParams();
+    Object.entries(flts).forEach(([key, value]) => {
+      if (value) {
+        queries.append(key, value);
+      }
+    });
 
-    // router.push(`${pathname}?${queries.toString()}${scrollTo || ""}`);
-    // router.replace(`${pathname}?${queries.toString()}${scrollTo || ""}`);
-
-    // window.history.pushState({}, "", `${pathname}?${queries.toString()}`);
+    window.history.pushState({}, "", `${pathname}?${queries.toString()}`);
 
     setOpen(false);
   }, [
