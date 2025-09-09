@@ -36,7 +36,7 @@ const HeroSearch: React.FC = () => {
   const form = useForm<HeroSearchSchema>({
     resolver: zodResolver(HeroSearchSchema),
     defaultValues: {
-      country: "",
+      country: "CA",
       course: "",
     },
   });

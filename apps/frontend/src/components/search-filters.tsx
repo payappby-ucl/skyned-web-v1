@@ -20,6 +20,7 @@ import {
   AwardIcon,
   BadgeCheck,
   BellElectric,
+  Book,
   Check,
   Earth,
   GlobeLock,
@@ -46,6 +47,7 @@ import { Switch } from "@workspace/ui/components/switch";
 import { Badge } from "@workspace/ui/components/badge";
 import { usePathname, useRouter } from "next/navigation";
 import dayjs from "dayjs";
+import { Input } from "@workspace/ui/components/input";
 
 // * Reuseable Command Filter
 interface WithName {
@@ -647,6 +649,10 @@ const SearchFilters: React.FC<Props> = ({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const [termFilter, setTermFilter] = useState({
+    term: filters["term"] || "",
+  });
+
   const [countryAndStateFilter, setCountryAndStateFilter] = useState<{
     country: string;
     state: string;
@@ -688,6 +694,7 @@ const SearchFilters: React.FC<Props> = ({
     setInitial?.(false);
     let flts: Partial<typeof filters> = {
       ...filters,
+      ...termFilter,
       ...countryAndStateFilter,
       ...institutionAndOwnershipFilter,
       ...{ accommodation: accommodationFilter },
@@ -708,6 +715,7 @@ const SearchFilters: React.FC<Props> = ({
       let flts: Partial<typeof filters> = {
         ...prev,
         page: 1,
+        ...termFilter,
         ...countryAndStateFilter,
         ...institutionAndOwnershipFilter,
         ...{ accommodation: accommodationFilter },
@@ -741,6 +749,7 @@ const SearchFilters: React.FC<Props> = ({
 
     setOpen(false);
   }, [
+    termFilter,
     countryAndStateFilter,
     institutionAndOwnershipFilter,
     accommodationFilter,
@@ -751,6 +760,9 @@ const SearchFilters: React.FC<Props> = ({
   ]);
 
   const resetFilters = useCallback(() => {
+    setTermFilter({
+      term: "",
+    });
     setCountryAndStateFilter({
       country: "",
       state: "",
@@ -773,6 +785,7 @@ const SearchFilters: React.FC<Props> = ({
       page: 0,
     });
   }, [
+    termFilter,
     countryAndStateFilter,
     institutionAndOwnershipFilter,
     accommodationFilter,
@@ -813,6 +826,24 @@ const SearchFilters: React.FC<Props> = ({
         </SheetHeader>
 
         <div className="h-full space-y-5 overflow-y-scroll px-4">
+          <div className="border-border/40 space-y-5 rounded-lg border p-4 py-5 shadow-sm">
+            <p className="text-muted-foreground text-md flex flex-1 items-center gap-2 font-semibold">
+              <Book size={20} /> Interest
+            </p>
+
+            <Input
+              name="term"
+              placeholder="What do you want to study?"
+              value={termFilter.term}
+              onChange={(e) =>
+                setTermFilter({
+                  term: e.target.value,
+                })
+              }
+              className="bg-accent selection:text-foreground border-0 !ring-0 selection:bg-inherit"
+            />
+          </div>
+
           {!schoolLevel ? (
             <>
               {/* Country and State Filters */}
