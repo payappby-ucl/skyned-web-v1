@@ -20,20 +20,26 @@
     "exceljs": "^4.4.0",
     "firebase": "^11.2.0",
     "lucide-react": "^0.475.0",
-    "next": "^15.2.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "15.5.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "recharts": "2.15.4",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.1.12",
+      "@types/react-dom": "19.1.9"
+    }
   }
 }
