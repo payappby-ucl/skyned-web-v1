@@ -91,6 +91,12 @@ export const CreateProgramSchema = z
   });
 export type CreateProgramSchema = z.infer<typeof CreateProgramSchema>;
 
+export const CreateProgramsSchema = z.object({
+  type: z.enum(["bulk"]),
+  data: z.array(ProgramSchema).min(1, "Must have at least one program."),
+});
+export type CreateProgramsSchema = z.infer<typeof CreateProgramsSchema>;
+
 export const UpdateBulkProgramSchema = z.object({
   data: z.array(
     z.object({

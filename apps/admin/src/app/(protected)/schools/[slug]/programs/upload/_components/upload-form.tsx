@@ -33,7 +33,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import UploadGuideline from "./program-template";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormButton } from "@workspace/ui/components/form-button";
-import { Download, Trash2, Upload } from "lucide-react";
+import { Download, Trash2, TriangleAlert, Upload } from "lucide-react";
 import { getActiveIntakes } from "../_actions/server";
 import {
   generateProgramUploadTemplate,
@@ -70,6 +70,11 @@ import { createProgram } from "../../../../_actions";
 import LoadingTemplateModal from "./loading-template";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Badge } from "@workspace/ui/components/badge";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@workspace/ui/components/alert";
 
 // * Memoized Row
 const ProgramRow: React.FC<{
@@ -377,7 +382,7 @@ const ProgramRow: React.FC<{
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {educationLevels[mel].map(({ level, levelValue }) => (
+                    {educationLevels[mel]?.map(({ level, levelValue }) => (
                       <SelectItem
                         key={level}
                         value={`${levelValue}`}
@@ -807,7 +812,7 @@ const UploadForm: React.FC<Props> = ({ school }) => {
                               ref={virtualizer.measureElement}
                               className={
                                 form.formState.errors.data?.[virtualRow.index]
-                                  ? "border-destructive border bg-red-600/10"
+                                  ? "border-destructive hover:border-destructive border bg-red-600/10 hover:bg-red-600/10"
                                   : ""
                               }
                             >
@@ -887,30 +892,47 @@ const UploadForm: React.FC<Props> = ({ school }) => {
             </div>
           )}
 
-          {/* Add Here */}
-
           {fields.length ? (
-            <div className="flex w-full items-center gap-4">
-              <FormButton
-                variant="brand"
-                isLoading={form.formState.isSubmitting}
-              >
-                <Upload />
-                Upload Programs
-              </FormButton>
-              <Button
-                type="button"
-                role="button"
-                variant="outline"
-                disabled={form.formState.isSubmitting}
-                onClick={() => {
-                  form.reset();
-                }}
-                className="text-muted-foreground"
-              >
-                <Trash2 />
-                Clear Form
-              </Button>
+            <div className="space-y-5">
+              {Object.keys(form.formState.errors.data || {}).length ? (
+                <Alert variant="destructive">
+                  <TriangleAlert />
+                  <AlertTitle>
+                    {Object.keys(form.formState.errors.data || {}).length}{" "}
+                    Errors
+                  </AlertTitle>
+                  <AlertDescription className="flex flex-wrap items-center">
+                    <span className="font-semibold">Row Numbers:</span>
+                    {Object.keys(form.formState.errors.data || {}).map(
+                      (key) => (
+                        <span key={key}>{Number(key) + 1},</span>
+                      ),
+                    )}
+                  </AlertDescription>
+                </Alert>
+              ) : null}
+              <div className="flex w-full items-center gap-4">
+                <FormButton
+                  variant="brand"
+                  isLoading={form.formState.isSubmitting}
+                >
+                  <Upload />
+                  Upload Programs
+                </FormButton>
+                <Button
+                  type="button"
+                  role="button"
+                  variant="outline"
+                  disabled={form.formState.isSubmitting}
+                  onClick={() => {
+                    form.reset();
+                  }}
+                  className="text-muted-foreground"
+                >
+                  <Trash2 />
+                  Clear Form
+                </Button>
+              </div>
             </div>
           ) : null}
         </form>

@@ -385,7 +385,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {educationLevels[mel].map(({ level, levelValue }) => (
+                  {educationLevels[mel]?.map(({ level, levelValue }) => (
                     <SelectItem
                       key={level}
                       value={`${levelValue}`}

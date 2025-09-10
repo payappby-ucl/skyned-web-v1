@@ -448,7 +448,7 @@ model Program {
   @@index([duration])
   @@index([timeframe])
   @@index([faculty])
-  @@index([overview])
+  // @@index([overview])
   @@index([pgwp])
   @@index([minimumEducationLevel])
   @@index([minimumEducationDegree])
