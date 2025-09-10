@@ -5,13 +5,28 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientInitializationError,
+  PrismaClientValidationError,
+  getPrismaClient,
+  sqltag,
+  empty,
+  join,
+  raw,
+  skip,
   Decimal,
+  Debug,
   objectEnumValues,
   makeStrictEnum,
+  Extensions,
+  warnOnce,
+  defineDmmfProperty,
   Public,
   getRuntime,
-  skip
-} = require('./runtime/index-browser.js')
+  createParam,
+} = require('./runtime/wasm-engine-edge.js')
 
 
 const Prisma = {}
@@ -20,79 +35,35 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.15.0
- * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
+ * Prisma Client JS version: 6.16.0
+ * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.15.0",
-  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
+  client: "6.16.0",
+  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
-Prisma.PrismaClientKnownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)};
-Prisma.PrismaClientUnknownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientRustPanicError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientInitializationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientValidationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
+Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
+Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
+Prisma.PrismaClientInitializationError = PrismaClientInitializationError
+Prisma.PrismaClientValidationError = PrismaClientValidationError
 Prisma.Decimal = Decimal
 
 /**
  * Re-export of sql-template-tag
  */
-Prisma.sql = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.empty = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.join = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.raw = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.sql = sqltag
+Prisma.empty = empty
+Prisma.join = join
+Prisma.raw = raw
 Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
-Prisma.getExtensionContext = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.defineExtension = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.getExtensionContext = Extensions.getExtensionContext
+Prisma.defineExtension = Extensions.defineExtension
 
 /**
  * Shorthand utilities for JSON filtering
@@ -109,10 +80,11 @@ Prisma.NullTypes = {
 
 
 
+
+
 /**
  * Enums
  */
-
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -484,17 +456,6 @@ exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
   name: 'name',
   createdById: 'createdById'
 };
-exports.TokenType = exports.$Enums.TokenType = {
-  verify: 'verify',
-  reset: 'reset'
-};
-
-exports.Gender = exports.$Enums.Gender = {
-  Male: 'Male',
-  Female: 'Female',
-  Others: 'Others'
-};
-
 exports.DepartmentName = exports.$Enums.DepartmentName = {
   Executive: 'Executive',
   Marketing: 'Marketing',
@@ -503,6 +464,17 @@ exports.DepartmentName = exports.$Enums.DepartmentName = {
   Technical: 'Technical',
   Human_Resource: 'Human_Resource',
   Quality_Assurance: 'Quality_Assurance'
+};
+
+exports.Gender = exports.$Enums.Gender = {
+  Male: 'Male',
+  Female: 'Female',
+  Others: 'Others'
+};
+
+exports.TokenType = exports.$Enums.TokenType = {
+  verify: 'verify',
+  reset: 'reset'
 };
 
 exports.InstitutionType = exports.$Enums.InstitutionType = {
@@ -568,34 +540,89 @@ exports.Prisma.ModelName = {
   Tag: 'Tag',
   Category: 'Category'
 };
-
 /**
- * This is a stub Prisma Client that will error at runtime if called.
+ * Create the Client
  */
-class PrismaClient {
-  constructor() {
-    return new Proxy(this, {
-      get(target, prop) {
-        let message
-        const runtime = getRuntime()
-        if (runtime.isEdge) {
-          message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
-- Use Prisma Accelerate: https://pris.ly/d/accelerate
-- Use Driver Adapters: https://pris.ly/d/driver-adapters
-`;
-        } else {
-          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
-        }
-
-        message += `
-If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
-
-        throw new Error(message)
+const config = {
+  "generator": {
+    "name": "client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client-js"
+    },
+    "output": {
+      "value": "/Users/macbookair/projects/beantech/skyned/apps/backend/functions/src/infrastructure/repository/prisma-client",
+      "fromEnvVar": null
+    },
+    "config": {
+      "engineType": "library"
+    },
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "darwin-arm64",
+        "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
-    })
+    ],
+    "previewFeatures": [
+      "fullTextSearchPostgres"
+    ],
+    "sourceFilePath": "/Users/macbookair/projects/beantech/skyned/apps/backend/functions/prisma/schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativeEnvPaths": {
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../../.env"
+  },
+  "relativePath": "../../../../prisma",
+  "clientVersion": "6.16.0",
+  "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
+  "datasourceNames": [
+    "db"
+  ],
+  "activeProvider": "postgresql",
+  "postinstall": false,
+  "inlineDatasources": {
+    "db": {
+      "url": {
+        "fromEnvVar": "DATABASE_URL",
+        "value": null
+      }
+    }
+  },
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"fullTextSearchPostgres\"]\n  binaryTargets   = [\"native\", \"debian-openssl-3.0.x\"]\n  output          = \"../src/infrastructure/repository/prisma-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// * ENUMS\nenum DepartmentName {\n  Executive\n  Marketing\n  Admissions\n  Communications\n  Technical\n  Human_Resource\n  Quality_Assurance\n}\n\nenum Gender {\n  Male\n  Female\n  Others\n}\n\nenum TokenType {\n  verify\n  reset\n}\n\nenum InstitutionType {\n  university\n  college\n}\n\nenum OwnershipType {\n  private\n  public\n}\n\nenum Currency {\n  USD\n  CAD\n  AUD\n  NGN\n  EUR\n  GBP\n}\n\nenum TuitionFeeType {\n  per_year\n  per_semester\n  full\n}\n\nenum Timeframe {\n  day\n  week\n  month\n  year\n}\n\nenum IntakeStatus {\n  open\n  closed\n  likely_open\n}\n\nenum BlogStatus {\n  draft\n  scheduled\n  published\n  unpublished\n}\n\n// * Daily Metrics\nmodel DailyStats {\n  id   Int      @default(autoincrement())\n  date DateTime @unique\n\n  // * Schools\n  totalSchools  Int     @default(0) @map(\"total_schools\")\n  newSchools    Int     @default(0) @map(\"new_schools\")\n  activeSchools Int     @default(0) @map(\"active_schools\")\n  schoolGrowth  Decimal @default(0) @map(\"school_growth\") @db.Decimal(10, 2)\n\n  // * Programs\n  totalPrograms  Int     @default(0) @map(\"total_programs\")\n  newPrograms    Int     @default(0) @map(\"new_programs\")\n  activePrograms Int     @default(0) @map(\"active_programs\")\n  programGrowth  Decimal @default(0) @map(\"program_growth\") @db.Decimal(10, 2)\n\n  // * FAQs\n  totalFaqs Int     @default(0) @map(\"total_faqs\")\n  newFaqs   Int     @default(0) @map(\"new_faqs\")\n  faqGrowth Decimal @default(0) @map(\"faq_growth\") @db.Decimal(10, 2)\n\n  // * Inquiries\n  totalInquiries Int     @default(0) @map(\"total_inquiries\")\n  newInquiries   Int     @default(0) @map(\"new_inquiries\")\n  inquiryGrowth  Decimal @default(0) @map(\"inquiry_growth\") @db.Decimal(10, 2)\n\n  // * Admins\n  totalAdmins  Int     @default(0) @map(\"total_admins\")\n  newAdmins    Int     @default(0) @map(\"new_admins\")\n  activeAdmins Int     @default(0) @map(\"active_admins\")\n  adminGrowth  Decimal @default(0) @map(\"admin_growth\") @db.Decimal(10, 2)\n\n  // * Blogs\n  totalPosts       Int     @default(0) @map(\"total_posts\")\n  publishedPosts   Int     @default(0) @map(\"published_posts\")\n  scheduledPosts   Int     @default(0) @map(\"scheduled_posts\")\n  draftPosts       Int     @default(0) @map(\"draft_posts\")\n  newPosts         Int     @default(0) @map(\"new_posts\")\n  postGrowth       Decimal @default(0) @map(\"post_growth\") @db.Decimal(10, 2)\n  unpublishedPosts Int     @default(0) @map(\"unpublished_posts\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@index([date])\n  @@map(\"daily_stats\")\n}\n\nmodel Token {\n  id        Int       @default(autoincrement())\n  tokenId   String    @id @default(cuid()) @map(\"token_id\")\n  token     String    @db.Text\n  type      TokenType\n  expiresIn DateTime  @map(\"expires_in\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"tokens\")\n}\n\nmodel Admin {\n  id                 Int     @unique @default(autoincrement())\n  adminId            String  @id @unique @map(\"admin_id\") @db.VarChar(256)\n  email              String  @unique\n  firstName          String  @map(\"first_name\") @db.VarChar(50)\n  lastName           String  @map(\"last_name\") @db.VarChar(50)\n  middleName         String? @map(\"middle_name\") @db.VarChar(50)\n  gender             Gender\n  accountSuspended   Boolean @default(false) @map(\"account_suspended\")\n  nationality        String  @db.VarChar(3)\n  countryOfResidence String  @map(\"country_of_residence\") @db.VarChar(3)\n  about              String? @db.Text\n  primaryImage       Json    @map(\"primary_image\")\n  secondaryImage     Json?   @map(\"secondary_image\")\n  socials            Json?\n  phoneNumber        Json?   @map(\"phone_number\")\n  jobTitle           String  @map(\"job_title\")\n\n  // * Admin Creation\n  createdById String? @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin?  @relation(\"adminCreatedBy\", fields: [createdById], references: [adminId])\n  created     Admin[] @relation(\"adminCreatedBy\")\n\n  // * Department membership and Departments leading\n  departments        Department[]\n  departmentsLeading Department[] @relation(\"departmentLead\")\n\n  // * Team membership and Teams leading an created\n  teams        Team[]\n  teamsLeading Team[] @relation(\"teamLead\")\n  teamsCreated Team[] @relation(\"created\")\n\n  // * FAQs created\n  faqsCreated Faq[]\n\n  // * Activity Logs\n  activityLogs ActivityLog[]\n\n  // * Schools created\n  schoolsCreated School[]\n\n  // * Accommodations Created\n  accommodationsCreated Accommodation[]\n\n  // * Intakes Created\n  intakesCreated Intake[]\n\n  // * Programs Created\n  programsCreated Program[]\n\n  // * Blogs Created\n  blogsCreated      BlogPost[]\n  tagsCreated       Tag[]\n  categoriesCreated Category[]\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@index([accountSuspended])\n  @@index([firstName])\n  @@index([lastName])\n  @@index([gender])\n  @@index([createdById])\n  @@map(\"admins\")\n}\n\nmodel Department {\n  id   Int            @id @default(autoincrement())\n  name DepartmentName @unique\n\n  leadId String? @map(\"lead_id\") @db.VarChar(256)\n  lead   Admin?  @relation(\"departmentLead\", fields: [leadId], references: [adminId])\n\n  members Admin[]\n  teams   Team[]\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([name])\n  @@index([createdAt])\n  @@index([leadId])\n  @@map(\"departments\")\n}\n\nmodel Team {\n  id   Int    @id @default(autoincrement())\n  name String @db.VarChar(256)\n\n  leadId String? @map(\"lead_id\") @db.VarChar(256)\n  lead   Admin?  @relation(\"teamLead\", fields: [leadId], references: [adminId])\n\n  departmentId Int        @map(\"department_id\")\n  department   Department @relation(fields: [departmentId], references: [id])\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(\"created\", fields: [createdById], references: [adminId])\n\n  members Admin[]\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([departmentId, name])\n  @@index([name])\n  @@index([createdAt])\n  @@index([departmentId])\n  @@index([createdById])\n  @@index([leadId])\n  @@map(\"teams\")\n}\n\n// * FAQ\nmodel Faq {\n  id Int @id @default(autoincrement())\n\n  question String\n  answer   String @db.Text\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@index([createdById])\n  @@map(\"faqs\")\n}\n\n// * Inquiry\nmodel Inquiry {\n  id Int @id @default(autoincrement())\n\n  name        String\n  phoneNumber Json\n  email       String\n  message     String\n  subject     String\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@map(\"inquiries\")\n}\n\n// * Admin Activity log\nmodel ActivityLog {\n  id Int @id @default(autoincrement())\n\n  adminId Int   @map(\"admin_id\")\n  admin   Admin @relation(fields: [adminId], references: [id])\n\n  resource   String\n  resourceId Int    @map(\"resource_id\")\n\n  action  String\n  message String?\n\n  previousState Json? @map(\"previous_state\")\n  currentState  Json? @map(\"current_state\")\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@index([action])\n  @@index([resource])\n  @@index([resourceId])\n  @@index([adminId])\n  @@map(\"activity_logs\")\n}\n\n// * Schools\nmodel School {\n  id       Int    @unique @default(autoincrement())\n  schoolId String @id @unique @map(\"school_id\")\n\n  logo            Json\n  schoolImage     Json            @map(\"school_image\")\n  name            String\n  slug            String          @unique\n  state           String          @db.VarChar(10)\n  country         String          @db.VarChar(3)\n  city            String\n  address         String\n  link            String\n  institutionType InstitutionType @map(\"institution_type\")\n  ownershipType   OwnershipType   @map(\"ownership_type\")\n  currency        Currency\n  overview        String\n  active          Boolean         @default(true)\n\n  // * Used for random generation\n  randomKey Float @default(dbgenerated(\"RANDOM()\"))\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  accommodation Accommodation?\n  intakes       Intake[]\n  programs      Program[]\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([name])\n  @@index([country])\n  @@index([state])\n  @@index([active])\n  @@index([institutionType])\n  @@index([ownershipType])\n  @@index([name, active])\n  @@index([overview])\n  @@index([country, active, institutionType, ownershipType])\n  @@index([createdAt])\n  @@index([currency])\n  @@index([createdById])\n  @@map(\"schools\")\n}\n\nmodel Accommodation {\n  id Int @id @default(autoincrement())\n\n  description String @db.Text\n\n  schoolId String @unique @map(\"school_id\")\n  school   School @relation(fields: [schoolId], references: [schoolId])\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdAt])\n  @@index([createdById])\n  @@map(\"accommodations\")\n}\n\n// * Programs\nmodel Program {\n  id        Int    @unique @default(autoincrement())\n  programId String @id @default(cuid()) @map(\"program_id\")\n\n  schoolId String @map(\"school_id\")\n  school   School @relation(fields: [schoolId], references: [schoolId], onDelete: Cascade)\n\n  // * Used for random generation\n  randomKey Float @default(dbgenerated(\"RANDOM()\"))\n\n  name         String\n  slug         String\n  faculty      String?\n  degreeType   String  @map(\"degree_type\")\n  overview     String\n  description  String  @db.Text\n  requirements String? @db.Text\n\n  applicationFee         Decimal @map(\"application_fee\") @db.Decimal(10, 2)\n  applicationFeeDiscount Decimal @default(0) @map(\"application_fee_discount\") @db.Decimal(5, 2)\n\n  tuitionFee     Decimal        @map(\"tuition_fee\")\n  tuitionFeeType TuitionFeeType @default(per_year) @map(\"tuition_fee_type\")\n\n  timeframe Timeframe @default(month)\n  duration  Decimal\n\n  minimumEducationLevel  String  @map(\"minimum_education_level\")\n  minimumEducationDegree Int     @map(\"minimum_education_degree\")\n  minimumEligibilityGpa  Decimal @map(\"minimum_education_gpa\")\n\n  // * Boolean values\n  pgwp   Boolean @default(false)\n  active Boolean @default(true)\n\n  intakes       Intake[]\n  proficiencies EnglishProficiency[]\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([schoolId, slug])\n  @@index([name])\n  @@index([name, active])\n  @@index([active])\n  @@index([slug])\n  @@index([createdAt])\n  @@index([tuitionFee])\n  @@index([tuitionFeeType])\n  @@index([applicationFee])\n  @@index([applicationFeeDiscount])\n  @@index([schoolId])\n  @@index([createdById])\n  @@index([duration])\n  @@index([timeframe])\n  @@index([faculty])\n  // @@index([overview])\n  @@index([pgwp])\n  @@index([minimumEducationLevel])\n  @@index([minimumEducationDegree])\n  @@index([minimumEligibilityGpa])\n  @@index([randomKey])\n  @@map(\"programs\")\n}\n\nmodel EnglishProficiency {\n  test  String\n  score Decimal\n\n  programId String\n  program   Program @relation(fields: [programId], references: [programId], onDelete: Cascade)\n\n  @@unique(name: \"proficiency\", [test, programId])\n  @@index([programId])\n  @@map(\"english_proficiencies\")\n}\n\nmodel Intake {\n  id Int @id @default(autoincrement())\n\n  intake    String\n  startDate DateTime?    @map(\"start_date\")\n  deadline  DateTime?\n  status    IntakeStatus @default(open)\n\n  schoolId String @map(\"school_id\")\n  school   School @relation(fields: [schoolId], references: [schoolId], onDelete: Cascade)\n\n  programs Program[]\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([schoolId, intake, startDate, deadline])\n  @@index([deadline])\n  @@index([createdAt])\n  @@index([schoolId])\n  @@index([createdById])\n  @@map(\"intakes\")\n}\n\nmodel BlogPost {\n  id         Int    @id @default(autoincrement())\n  blogPostId String @unique @map(\"blog_post_id\")\n\n  title      String\n  slug       String @unique\n  excerpt    String\n  content    String @db.Text\n  coverImage Json   @map(\"cover_image\")\n\n  featured    Boolean    @default(false)\n  status      BlogStatus @default(draft)\n  publishedAt DateTime?  @map(\"published_at\")\n\n  tags       Tag[]\n  categories Category[]\n\n  authorId String @map(\"author_id\") @db.VarChar(256)\n  author   Admin  @relation(fields: [authorId], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([title])\n  @@index([createdAt])\n  @@index([updatedAt])\n  @@index([featured])\n  @@index([status])\n  @@index([authorId])\n  @@index([publishedAt])\n  @@map(\"blog_posts\")\n}\n\nmodel Tag {\n  id   Int    @id @default(autoincrement())\n  name String @unique\n\n  posts BlogPost[]\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdById])\n  @@index([createdAt])\n  @@index([updatedAt])\n  @@map(\"tags\")\n}\n\nmodel Category {\n  id   Int    @id @default(autoincrement())\n  name String @unique\n\n  posts BlogPost[]\n\n  createdById String @map(\"created_by_id\") @db.VarChar(256)\n  createdBy   Admin  @relation(fields: [createdById], references: [adminId])\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@index([createdById])\n  @@index([createdAt])\n  @@index([updatedAt])\n  @@map(\"categories\")\n}\n\n// model Student {\n//   id                 Int      @default(autoincrement())\n//   studentId          String   @id @map(\"student_id\")\n//   email              String   @db.VarChar(100)\n//   firstName          String   @map(\"first_name\") @db.VarChar(100)\n//   middleName         String?  @map(\"middle_name\") @db.VarChar(100)\n//   lastName           String   @map(\"last_name\") @db.VarChar(100)\n//   accountSuspended   Boolean  @default(false) @map(\"account_suspended\")\n//   countryOfResidence String   @map(\"country_of_residence\") @db.VarChar(3)\n//   nationality        String   @db.VarChar(3)\n//   gender             Gender\n//   dateOfBirth        DateTime @map(\"date_of_birth\")\n//   phoneNumber        String   @map(\"phone_number\") @db.VarChar(100)\n\n//   studyPreference       StudyPreference?\n//   educationalBackground EducationalBackground?\n//   workExperience        WorkExperience?\n\n//   createdAt DateTime @default(now()) @map(\"created_at\")\n//   updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n//   @@map(\"students\")\n// }\n\n// model StudyPreference {\n//   id Int @id @default(autoincrement())\n\n//   studentId String  @unique @map(\"student_id\")\n//   student   Student @relation(fields: [studentId], references: [studentId])\n\n//   desiredCountry          String      @map(\"desired_country\") @db.VarChar(3)\n//   preferredProgramOfStudy String      @map(\"preferred_program_of_study\")\n//   degreeLevel             DegreeLevel @map(\"degree_level\")\n//   preferredIntake         Intakes     @map(\"preferred_intake\")\n\n//   createdAt DateTime @default(now()) @map(\"created_at\")\n//   updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n//   @@map(\"study_preferences\")\n// }\n\n// model EducationalBackground {\n//   id Int @id @default(autoincrement())\n\n//   studentId String  @unique @map(\"student_id\")\n//   student   Student @relation(fields: [studentId], references: [studentId])\n\n//   highestLevelOfEducation DegreeLevel @map(\"highest_level_of_education\")\n//   institutionName         String      @map(\"institution_name\")\n//   yearOfGraduation        Int         @map(\"year_of_graduation\")\n//   cgpa                    Decimal\n//   fieldOfStudy            String      @map(\"field_of_study\")\n\n//   createdAt DateTime @default(now()) @map(\"created_at\")\n//   updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n//   @@map(\"educational_backgrounds\")\n// }\n\n// model WorkExperience {\n//   id Int @id @default(autoincrement())\n\n//   studentId String  @unique @map(\"student_id\")\n//   student   Student @relation(fields: [studentId], references: [studentId])\n\n//   yearsOfExperience Int    @map(\"years_of_experience\")\n//   industry          String\n//   currentJobTitle   String @map(\"current_job_title\")\n\n//   createdAt DateTime @default(now()) @map(\"created_at\")\n//   updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n//   @@map(\"work_experience\")\n// }\n",
+  "inlineSchemaHash": "ab8e9dbf1f8c1deec763450ceaba0efd39a20c6056a2497354b71fe7bf0c9c8d",
+  "copyEngine": true
+}
+config.dirname = '/'
+
+config.runtimeDataModel = JSON.parse("{\"models\":{\"DailyStats\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"totalSchools\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_schools\"},{\"name\":\"newSchools\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_schools\"},{\"name\":\"activeSchools\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"active_schools\"},{\"name\":\"schoolGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"school_growth\"},{\"name\":\"totalPrograms\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_programs\"},{\"name\":\"newPrograms\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_programs\"},{\"name\":\"activePrograms\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"active_programs\"},{\"name\":\"programGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"program_growth\"},{\"name\":\"totalFaqs\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_faqs\"},{\"name\":\"newFaqs\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_faqs\"},{\"name\":\"faqGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"faq_growth\"},{\"name\":\"totalInquiries\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_inquiries\"},{\"name\":\"newInquiries\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_inquiries\"},{\"name\":\"inquiryGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"inquiry_growth\"},{\"name\":\"totalAdmins\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_admins\"},{\"name\":\"newAdmins\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_admins\"},{\"name\":\"activeAdmins\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"active_admins\"},{\"name\":\"adminGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"admin_growth\"},{\"name\":\"totalPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_posts\"},{\"name\":\"publishedPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"published_posts\"},{\"name\":\"scheduledPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"scheduled_posts\"},{\"name\":\"draftPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"draft_posts\"},{\"name\":\"newPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_posts\"},{\"name\":\"postGrowth\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"post_growth\"},{\"name\":\"unpublishedPosts\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"unpublished_posts\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"daily_stats\"},\"Token\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"tokenId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"token_id\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TokenType\"},{\"name\":\"expiresIn\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"expires_in\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"tokens\"},\"Admin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"adminId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"admin_id\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"first_name\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"last_name\"},{\"name\":\"middleName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"middle_name\"},{\"name\":\"gender\",\"kind\":\"enum\",\"type\":\"Gender\"},{\"name\":\"accountSuspended\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"account_suspended\"},{\"name\":\"nationality\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"countryOfResidence\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"country_of_residence\"},{\"name\":\"about\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"primaryImage\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"primary_image\"},{\"name\":\"secondaryImage\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"secondary_image\"},{\"name\":\"socials\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"phone_number\"},{\"name\":\"jobTitle\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"job_title\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"adminCreatedBy\"},{\"name\":\"created\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"adminCreatedBy\"},{\"name\":\"departments\",\"kind\":\"object\",\"type\":\"Department\",\"relationName\":\"AdminToDepartment\"},{\"name\":\"departmentsLeading\",\"kind\":\"object\",\"type\":\"Department\",\"relationName\":\"departmentLead\"},{\"name\":\"teams\",\"kind\":\"object\",\"type\":\"Team\",\"relationName\":\"AdminToTeam\"},{\"name\":\"teamsLeading\",\"kind\":\"object\",\"type\":\"Team\",\"relationName\":\"teamLead\"},{\"name\":\"teamsCreated\",\"kind\":\"object\",\"type\":\"Team\",\"relationName\":\"created\"},{\"name\":\"faqsCreated\",\"kind\":\"object\",\"type\":\"Faq\",\"relationName\":\"AdminToFaq\"},{\"name\":\"activityLogs\",\"kind\":\"object\",\"type\":\"ActivityLog\",\"relationName\":\"ActivityLogToAdmin\"},{\"name\":\"schoolsCreated\",\"kind\":\"object\",\"type\":\"School\",\"relationName\":\"AdminToSchool\"},{\"name\":\"accommodationsCreated\",\"kind\":\"object\",\"type\":\"Accommodation\",\"relationName\":\"AccommodationToAdmin\"},{\"name\":\"intakesCreated\",\"kind\":\"object\",\"type\":\"Intake\",\"relationName\":\"AdminToIntake\"},{\"name\":\"programsCreated\",\"kind\":\"object\",\"type\":\"Program\",\"relationName\":\"AdminToProgram\"},{\"name\":\"blogsCreated\",\"kind\":\"object\",\"type\":\"BlogPost\",\"relationName\":\"AdminToBlogPost\"},{\"name\":\"tagsCreated\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"AdminToTag\"},{\"name\":\"categoriesCreated\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"AdminToCategory\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"admins\"},\"Department\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"enum\",\"type\":\"DepartmentName\"},{\"name\":\"leadId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"lead_id\"},{\"name\":\"lead\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"departmentLead\"},{\"name\":\"members\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToDepartment\"},{\"name\":\"teams\",\"kind\":\"object\",\"type\":\"Team\",\"relationName\":\"DepartmentToTeam\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"departments\"},\"Team\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"leadId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"lead_id\"},{\"name\":\"lead\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"teamLead\"},{\"name\":\"departmentId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"department_id\"},{\"name\":\"department\",\"kind\":\"object\",\"type\":\"Department\",\"relationName\":\"DepartmentToTeam\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"created\"},{\"name\":\"members\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToTeam\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"teams\"},\"Faq\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"question\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"answer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToFaq\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"faqs\"},\"Inquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"inquiries\"},\"ActivityLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"adminId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"admin_id\"},{\"name\":\"admin\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"ActivityLogToAdmin\"},{\"name\":\"resource\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"resourceId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"resource_id\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"previousState\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"previous_state\"},{\"name\":\"currentState\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"current_state\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"activity_logs\"},\"School\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"schoolId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"school_id\"},{\"name\":\"logo\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"schoolImage\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"school_image\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"country\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"link\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"institutionType\",\"kind\":\"enum\",\"type\":\"InstitutionType\",\"dbName\":\"institution_type\"},{\"name\":\"ownershipType\",\"kind\":\"enum\",\"type\":\"OwnershipType\",\"dbName\":\"ownership_type\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"overview\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"active\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"randomKey\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToSchool\"},{\"name\":\"accommodation\",\"kind\":\"object\",\"type\":\"Accommodation\",\"relationName\":\"AccommodationToSchool\"},{\"name\":\"intakes\",\"kind\":\"object\",\"type\":\"Intake\",\"relationName\":\"IntakeToSchool\"},{\"name\":\"programs\",\"kind\":\"object\",\"type\":\"Program\",\"relationName\":\"ProgramToSchool\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"schools\"},\"Accommodation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"schoolId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"school_id\"},{\"name\":\"school\",\"kind\":\"object\",\"type\":\"School\",\"relationName\":\"AccommodationToSchool\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AccommodationToAdmin\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"accommodations\"},\"Program\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"programId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"program_id\"},{\"name\":\"schoolId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"school_id\"},{\"name\":\"school\",\"kind\":\"object\",\"type\":\"School\",\"relationName\":\"ProgramToSchool\"},{\"name\":\"randomKey\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"faculty\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"degreeType\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"degree_type\"},{\"name\":\"overview\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"requirements\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"applicationFee\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"application_fee\"},{\"name\":\"applicationFeeDiscount\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"application_fee_discount\"},{\"name\":\"tuitionFee\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"tuition_fee\"},{\"name\":\"tuitionFeeType\",\"kind\":\"enum\",\"type\":\"TuitionFeeType\",\"dbName\":\"tuition_fee_type\"},{\"name\":\"timeframe\",\"kind\":\"enum\",\"type\":\"Timeframe\"},{\"name\":\"duration\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"minimumEducationLevel\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"minimum_education_level\"},{\"name\":\"minimumEducationDegree\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"minimum_education_degree\"},{\"name\":\"minimumEligibilityGpa\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"minimum_education_gpa\"},{\"name\":\"pgwp\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"active\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"intakes\",\"kind\":\"object\",\"type\":\"Intake\",\"relationName\":\"IntakeToProgram\"},{\"name\":\"proficiencies\",\"kind\":\"object\",\"type\":\"EnglishProficiency\",\"relationName\":\"EnglishProficiencyToProgram\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToProgram\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"programs\"},\"EnglishProficiency\":{\"fields\":[{\"name\":\"test\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"programId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"program\",\"kind\":\"object\",\"type\":\"Program\",\"relationName\":\"EnglishProficiencyToProgram\"}],\"dbName\":\"english_proficiencies\"},\"Intake\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"intake\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"start_date\"},{\"name\":\"deadline\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"IntakeStatus\"},{\"name\":\"schoolId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"school_id\"},{\"name\":\"school\",\"kind\":\"object\",\"type\":\"School\",\"relationName\":\"IntakeToSchool\"},{\"name\":\"programs\",\"kind\":\"object\",\"type\":\"Program\",\"relationName\":\"IntakeToProgram\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToIntake\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"intakes\"},\"BlogPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"blogPostId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"blog_post_id\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"excerpt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"coverImage\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"cover_image\"},{\"name\":\"featured\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"BlogStatus\"},{\"name\":\"publishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"published_at\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"BlogPostToTag\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"BlogPostToCategory\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"author_id\"},{\"name\":\"author\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToBlogPost\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"blog_posts\"},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"BlogPost\",\"relationName\":\"BlogPostToTag\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToTag\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"tags\"},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"BlogPost\",\"relationName\":\"BlogPostToCategory\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"created_by_id\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"Admin\",\"relationName\":\"AdminToCategory\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"categories\"}},\"enums\":{},\"types\":{}}")
+defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
+config.engineWasm = {
+  getRuntime: async () => require('./query_engine_bg.js'),
+  getQueryEngineWasmModule: async () => {
+    const loader = (await import('#wasm-engine-loader')).default
+    const engine = (await loader).default
+    return engine
   }
 }
+config.compilerWasm = undefined
 
+config.injectableEdgeEnv = () => ({
+  parsed: {
+    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+  }
+})
+
+if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
+  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
+}
+
+const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
-
 Object.assign(exports, Prisma)
+

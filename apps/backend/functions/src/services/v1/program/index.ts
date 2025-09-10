@@ -468,7 +468,17 @@ export class ProgramService extends ServiceUtils implements IProgramService {
           ? {
               [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
             }
-          : where?.orderBy || { randomKey: "asc" },
+          : where?.orderBy
+            ? where.orderBy
+            : where?.term
+              ? {
+                  _relevance: {
+                    fields: ["name"],
+                    search: where.term.trim().split(" ").join(" & "),
+                    sort: "desc",
+                  },
+                }
+              : { randomKey: "asc" },
 
       select: {
         ...SkynedUtils.select<
