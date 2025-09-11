@@ -2,10 +2,9 @@
 
 import CountryDisplay from "@/src/components/country-display";
 import DateDisplay from "@/src/components/date-display";
-import FormatNumber from "@/src/components/format-number";
+import { SocialShare } from "@/src/components/social-share";
 import StateDisplay from "@/src/components/state-display";
 import { env } from "@/src/config";
-import { brandClientApi } from "@/src/lib/client";
 import { IProgram } from "@workspace/shared";
 import {
   Avatar,
@@ -13,8 +12,7 @@ import {
   AvatarImage,
 } from "@workspace/ui/components/avatar";
 import { Button } from "@workspace/ui/components/button";
-import { Share } from "@workspace/ui/components/share";
-import { GraduationCap, MapPinCheck, FileText, Clock } from "lucide-react";
+import { GraduationCap, MapPinCheck, Clock } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -79,13 +77,12 @@ export const ProgramHeader: React.FC<Props> = ({ program, applyHidden }) => {
         {/* CTA's */}
         <div className="flex w-full flex-col gap-4 md:w-fit md:flex-row md:items-center">
           {/* Share Button */}
-          <Share
+          <SocialShare
             title={`Check out ${program.name}`}
             text={`I found a great program at ${program.school?.name}`}
             url={`${env.client.baseUrl}/schools/${program.school?.slug}/programs/${program.slug}`}
             context="Program"
             imageUrl={`${program.school?.logo.url || env.client.baseUrl + "/assets/images/brand/logo.png"}`}
-            copyToClipboard={brandClientApi.utils.copyToClipboard}
           />
 
           {/* Apply Button */}

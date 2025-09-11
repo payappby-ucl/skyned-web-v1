@@ -21,12 +21,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@workspace/ui/components/tooltip";
-import { BookTextIcon, Share } from "lucide-react";
+import { BookTextIcon } from "lucide-react";
 import FormatNumber from "@/src/components/format-number";
-import { Button } from "@workspace/ui/components/button";
 import CountryDisplay from "@/src/components/country-display";
 import StateDisplay from "@/src/components/state-display";
 import SchoolProgramsList from "../_components/program";
+import { SocialShare } from "@/src/components/social-share";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -158,13 +158,14 @@ export default async function SchoolDetails({ params }: Props) {
                 </div>
               </div>
 
-              <Button
-                size="icon"
-                variant="outline"
-                className="hidden md:inline-flex"
-              >
-                <Share />
-              </Button>
+              {/* Share Button */}
+              <SocialShare
+                title={`Check out ${school.name}`}
+                text={`Checkout ${school.name} on ${env.organization.name}`}
+                url={`${env.client.baseUrl}/schools/${school.slug}`}
+                context="School"
+                imageUrl={`${school.logo.url || env.client.baseUrl + "/assets/images/brand/logo.png"}`}
+              />
             </div>
             <div className="flex items-center gap-2">
               {/* Institution Type */}

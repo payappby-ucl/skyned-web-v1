@@ -25,6 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./dialog";
+import { toast } from "./sonner";
 
 interface Props {
   title: string;
@@ -32,7 +33,7 @@ interface Props {
   url: string;
   context: "Program" | "School";
   imageUrl: string;
-  copyToClipboard?: (text: string, alertMessage?: string) => void;
+  copyToClipboard: (text: string, alertMessage?: string) => void;
 }
 export const Share: React.FC<Props> = ({
   title,
@@ -130,7 +131,7 @@ export const Share: React.FC<Props> = ({
                   <Button
                     variant="ghost"
                     className="text-sm text-brand p-0 hover:bg-inherit"
-                    onClick={() => copyToClipboard?.(url, "Link")}
+                    onClick={() => copyToClipboard(url, "Link")}
                   >
                     Copy
                   </Button>
