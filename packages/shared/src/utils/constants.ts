@@ -73,3 +73,13 @@ export const blogPostStatus = [
   "published",
   "unpublished",
 ] as const;
+
+/** Highest Level Of Education */
+export const highestLevelOfEducation = [
+  "Bachelor's Degree",
+  "Secondary School Diploma",
+  "Master's Degree",
+  "Highest National Diploma",
+  "Ordinary National Diploma",
+  "Others",
+] as const;

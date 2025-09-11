@@ -31,6 +31,16 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   keywords: [...(sharedMetadata.keywords || []), "Blog"],
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 export default async function Blogs({ searchParams }: Props) {

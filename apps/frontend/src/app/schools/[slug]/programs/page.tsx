@@ -45,7 +45,7 @@ const getSchool = cache(async (slug: string) => {
   return school;
 });
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const school = await getSchool(slug);
 
@@ -59,6 +59,8 @@ export async function generateMetadata({ params }: Props) {
     keywords: school.name.split(" "),
     openGraph: {
       ...sharedMetadata.openGraph,
+      title: school.name,
+      description: school.overview,
       images: [
         {
           url: school.logo.url,
@@ -70,6 +72,8 @@ export async function generateMetadata({ params }: Props) {
     },
     twitter: {
       ...sharedMetadata.twitter,
+      title: school.name,
+      description: school.overview,
       images: {
         url: school.logo.url,
         alt: `School logo for ${school.name}`,

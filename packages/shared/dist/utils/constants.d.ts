@@ -54,3 +54,5 @@ export declare const timeframe: readonly ["day", "week", "month", "year"];
 export declare const intakeStatus: readonly ["open", "closed", "likely_open"];
 /** Blog Post Status */
 export declare const blogPostStatus: readonly ["draft", "scheduled", "published", "unpublished"];
+/** Highest Level Of Education */
+export declare const highestLevelOfEducation: readonly ["Bachelor's Degree", "Secondary School Diploma", "Master's Degree", "Highest National Diploma", "Ordinary National Diploma", "Others"];

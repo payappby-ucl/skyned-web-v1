@@ -36,6 +36,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     ...sharedMetadata.openGraph,
+    title,
+    description,
     images: [
       {
         url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
@@ -47,6 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     ...sharedMetadata.twitter,
+    title,
+    description,
     images: {
       url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
       alt: title,
@@ -56,7 +60,6 @@ export const metadata: Metadata = {
 
 export default async function Schools({ searchParams }: Props) {
   try {
-    // TODO: Implement search filters
     const { page, limit } = await searchParams;
     const urlQuery = brandServerApi.utils.constructQuery({
       page: page || "1",

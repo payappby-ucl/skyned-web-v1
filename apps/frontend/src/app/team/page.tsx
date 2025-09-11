@@ -40,7 +40,7 @@ const title = "Meet Our Team";
 const description =
   "Our team of professionals will adequately guide you through your study application journey.";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const teams = await getOurTeam();
 
   const ceo = teams[0];
@@ -53,6 +53,8 @@ export async function generateMetadata() {
     },
     openGraph: {
       ...sharedMetadata.openGraph,
+      title,
+      description,
       images: [
         {
           url: ceo?.primaryImage.url,
@@ -64,6 +66,8 @@ export async function generateMetadata() {
     },
     twitter: {
       ...sharedMetadata.twitter,
+      title,
+      description,
       images: {
         url: ceo?.primaryImage.url,
         alt: `${env.organization.name} CEO's picture`,

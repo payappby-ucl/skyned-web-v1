@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.blogPostStatus = exports.intakeStatus = exports.timeframe = exports.tuitionFeeType = exports.currencies = exports.ownershipType = exports.institutionType = exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
+exports.highestLevelOfEducation = exports.blogPostStatus = exports.intakeStatus = exports.timeframe = exports.tuitionFeeType = exports.currencies = exports.ownershipType = exports.institutionType = exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
 /** Email domains users are not supposed to use because it belongs to internal staff */
 exports.PROHIBITED_USER_EMAIL_DOMAINS = [
     "skynedconsults.com",
@@ -64,4 +64,13 @@ exports.blogPostStatus = [
     "scheduled",
     "published",
     "unpublished",
+];
+/** Highest Level Of Education */
+exports.highestLevelOfEducation = [
+    "Bachelor's Degree",
+    "Secondary School Diploma",
+    "Master's Degree",
+    "Highest National Diploma",
+    "Ordinary National Diploma",
+    "Others",
 ];

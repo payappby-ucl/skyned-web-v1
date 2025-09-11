@@ -16,13 +16,23 @@ const title = "About Us";
 const description =
   "Our team of professionals will adequately guide you through your study application journey.";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     ...sharedMetadata,
     title,
     description,
     alternates: {
       canonical: "/about",
+    },
+    openGraph: {
+      ...sharedMetadata.openGraph,
+      title,
+      description,
+    },
+    twitter: {
+      ...sharedMetadata.twitter,
+      title,
+      description,
     },
   } as Metadata;
 }

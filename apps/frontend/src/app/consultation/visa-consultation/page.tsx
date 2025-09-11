@@ -27,6 +27,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: url,
   },
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 const experts = [...legalExperts, ...visaImmigrationExperts];

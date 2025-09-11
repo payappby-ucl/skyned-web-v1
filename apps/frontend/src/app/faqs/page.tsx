@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/faqs",
   },
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 export default async function Faqs() {
@@ -69,12 +79,9 @@ export default async function Faqs() {
           }}
         />
 
-        <section
-          className="bg-[#fafafa]"
-          aria-labelledby="equipment-heading"
-        >
+        <section className="bg-[#fafafa]" aria-labelledby="equipment-heading">
           <div className="container px-6">
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-14">
+            <div className="grid gap-6 lg:grid-cols-2 lg:gap-14">
               <article>
                 <header>
                   <h2
@@ -89,7 +96,7 @@ export default async function Faqs() {
                 </div>
               </article>
 
-              <div className="hidden lg:grid grid-cols-1 gap-4">
+              <div className="hidden grid-cols-1 gap-4 lg:grid">
                 <Image
                   src="/assets/images/backgrounds/faq-1.png"
                   alt="Frequently Asked Questions"
@@ -108,7 +115,7 @@ export default async function Faqs() {
                     width={300}
                     height={200}
                     sizes="(max-width: 768px) 50vw, 300px"
-                    className="h-full w-full rounded-lg shadow-md object-cover"
+                    className="h-full w-full rounded-lg object-cover shadow-md"
                     loading="lazy"
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
@@ -119,7 +126,7 @@ export default async function Faqs() {
                     width={300}
                     height={200}
                     sizes="(max-width: 768px) 50vw, 300px"
-                    className="h-full w-full rounded-lg shadow-md object-cover"
+                    className="h-full w-full rounded-lg object-cover shadow-md"
                     loading="lazy"
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="

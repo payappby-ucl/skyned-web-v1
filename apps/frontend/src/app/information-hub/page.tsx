@@ -1,23 +1,31 @@
 import { env } from "@/src/config";
-import {
-  organization,
-  sharedMetadata,
-} from "@/src/utils";
+import { organization, sharedMetadata } from "@/src/utils";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
 
 const title = "Information Hub";
-const description = "We offer free and seamless international study application support into bachelors, postgraduate diploma, postbaccalaureate, graduate certificates and masters programs.";
+const description =
+  "We offer free and seamless international study application support into bachelors, postgraduate diploma, postbaccalaureate, graduate certificates and masters programs.";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     ...sharedMetadata,
     title,
     description,
     alternates: {
       canonical: "/information-hub",
+    },
+    openGraph: {
+      ...sharedMetadata.openGraph,
+      title,
+      description,
+    },
+    twitter: {
+      ...sharedMetadata.twitter,
+      title,
+      description,
     },
   } as Metadata;
 }
@@ -36,7 +44,9 @@ export default async function InformationHub() {
     <>
       <Script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(informationHubPageJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(informationHubPageJsonLd),
+        }}
       />
 
       <Jumbotron

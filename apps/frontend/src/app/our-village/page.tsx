@@ -1,23 +1,31 @@
 import { env } from "@/src/config";
-import {
-  organization,
-  sharedMetadata,
-} from "@/src/utils";
+import { organization, sharedMetadata } from "@/src/utils";
 import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
 
 const title = "Our Village";
-const description = "Join our community and explore the resources available to you.";
+const description =
+  "Join our community and explore the resources available to you.";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     ...sharedMetadata,
     title,
     description,
     alternates: {
       canonical: "/our-village",
+    },
+    openGraph: {
+      ...sharedMetadata.openGraph,
+      title,
+      description,
+    },
+    twitter: {
+      ...sharedMetadata.twitter,
+      title,
+      description,
     },
   } as Metadata;
 }
@@ -36,7 +44,9 @@ export default async function OurVillage() {
     <>
       <Script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ourVillagePageJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ourVillagePageJsonLd),
+        }}
       />
 
       <Jumbotron
@@ -48,7 +58,8 @@ export default async function OurVillage() {
       <section className="bg-accent space-y-10">
         {/* Content for the Our Village page goes here */}
         <p className="text-center text-lg">
-          Welcome to our village! Here, you can find resources, connect with others, and share your experiences.
+          Welcome to our village! Here, you can find resources, connect with
+          others, and share your experiences.
         </p>
       </section>
     </>

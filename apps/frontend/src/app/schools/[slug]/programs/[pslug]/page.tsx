@@ -9,43 +9,30 @@ import { cache } from "react";
 import { EducationalOccupationalProgram, WithContext } from "schema-dts";
 import Alert from "@/src/components/alert";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
-import {
   Award,
   Banknote,
   CalendarDays,
-  Clock,
-  FileText,
   GraduationCap,
   HandCoins,
-  MapPinCheck,
   NotebookPen,
   NotebookText,
-  Share,
 } from "lucide-react";
-import { Button } from "@workspace/ui/components/button";
 import Image from "next/image";
-import Link from "next/link";
-import StateDisplay from "@/src/components/state-display";
-import CountryDisplay from "@/src/components/country-display";
-import FormatNumber from "@/src/components/format-number";
-import DateDisplay from "@/src/components/date-display";
 import TabWatcher from "./_components/tab-watcher";
 import { Separator } from "@workspace/ui/components/separator";
 import { ProficiencyDisplay } from "@workspace/ui/components/proficiency-display";
 import ProgramIntakes from "./_components/intakes";
 import Fee from "./_components/fee";
 import EducationLevel from "./_components/education-level";
+import { ProgramHeader } from "./_components/program-header";
+import { title } from "process";
 
 type Props = {
   params: Promise<{ slug: string; pslug: string }>;
 };
 
 const getProgram = cache(async (slug: string, pslug: string) => {
-  const { data: school } = await brandServerApi.httpClient.request<IProgram>(
+  const { data: program } = await brandServerApi.httpClient.request<IProgram>(
     `/schools/${slug}/programs/${pslug}`,
     "GET",
     {
@@ -55,10 +42,10 @@ const getProgram = cache(async (slug: string, pslug: string) => {
     },
   );
 
-  return school;
+  return program;
 });
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, pslug } = await params;
   const program = await getProgram(slug, pslug);
 
@@ -139,76 +126,7 @@ export default async function ProgramDetails({ params }: Props) {
         <CustomBreadCrumb className="border-y" />
 
         {/* Brief Details */}
-        <section
-          id="sticky-main"
-          className="bg-background sticky top-0 z-50 flex gap-4 !py-5"
-        >
-          <Avatar>
-            <AvatarFallback>
-              {program.school?.name[0]?.toUpperCase()}
-            </AvatarFallback>
-            <AvatarImage
-              src={program.school?.logo.url}
-              alt={`${program.school?.name}'s logo`}
-            />
-          </Avatar>
-
-          <div className="flex flex-1 flex-col items-center gap-4 md:flex-row md:justify-between">
-            <div>
-              <h1 className="!text-xl md:!text-2xl">{program.name}</h1>
-              <div className="text-muted-foreground hidden items-center gap-1 divide-x text-sm md:flex">
-                {/* School Name */}
-                <Link
-                  href={`/schools/${slug}`}
-                  className="flex items-center gap-1 pr-2 hover:underline"
-                >
-                  <GraduationCap size={15} />
-                  {program.school?.name}
-                </Link>
-
-                {/* Location */}
-                <div className="flex items-center gap-1 px-2">
-                  <MapPinCheck size={15} />
-                  <StateDisplay
-                    stateIsoCode={program.school?.state || ""}
-                    countryIsoCode={program.school?.country || ""}
-                  />
-
-                  <CountryDisplay isoCode={program.school?.country || ""} />
-                </div>
-
-                {/* Application Count */}
-                <div className="flex items-center gap-1 px-2">
-                  <FileText size={15} />
-                  <FormatNumber value={2500} />
-                </div>
-
-                {/* Last Updated */}
-                <div className="flex items-center gap-1 px-2">
-                  <Clock size={15} />
-                  <DateDisplay date={program.updatedAt} className="!text-sm" />
-                </div>
-              </div>
-            </div>
-
-            {/* CTA's */}
-            <div className="flex w-full items-center gap-4 md:w-fit">
-              {/* Share Button */}
-              <Button
-                size="icon"
-                variant="outline"
-                className="hidden md:inline-flex"
-              >
-                <Share />
-              </Button>
-
-              {/* Apply Button */}
-              <Button variant="brand" className="!w-full md:w-fit">
-                Apply Now
-              </Button>
-            </div>
-          </div>
-        </section>
+        <ProgramHeader program={program} />
 
         <section className="grid grid-cols-1 gap-4 scroll-smooth !py-5 md:grid-cols-3">
           <div className="space-y-6 md:col-span-2">

@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
   },
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 export default function Contact() {
@@ -54,7 +64,7 @@ export default function Contact() {
         subtitle={description}
         backgroundImage="/assets/images/backgrounds/about-bg.png"
       >
-        <div className="grid grid-cols-1 place-content-end gap-4 self-end md:grid-cols-3 mt-10">
+        <div className="mt-10 grid grid-cols-1 place-content-end gap-4 self-end md:grid-cols-3">
           {contacts.map(({ Icon, description, title, href }, i) => (
             <div
               className="bg-background dark:bg-foreground text-foreground dark:text-background flex gap-2 rounded-md p-3"
@@ -64,7 +74,9 @@ export default function Contact() {
                 <Icon size={15} className="text-brand font-bold" />
               </div>
               <div>
-                <p className="text-muted-foreground text-sm text-left">{title}</p>
+                <p className="text-muted-foreground text-left text-sm">
+                  {title}
+                </p>
                 <a
                   href={href}
                   target="_blank"

@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/consultation",
   },
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 const consultations = [

@@ -22,6 +22,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    ...sharedMetadata.openGraph,
+    title,
+    description,
+  },
+  twitter: {
+    ...sharedMetadata.twitter,
+    title,
+    description,
+  },
 };
 
 export default async function Home() {

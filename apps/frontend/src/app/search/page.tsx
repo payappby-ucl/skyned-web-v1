@@ -37,6 +37,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     ...sharedMetadata.openGraph,
+    title,
+    description,
     images: [
       {
         url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
@@ -48,6 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     ...sharedMetadata.twitter,
+    title,
+    description,
     images: {
       url: `${env.client.baseUrl}/assets/images/backgrounds/school-bg.png`,
       alt: title,

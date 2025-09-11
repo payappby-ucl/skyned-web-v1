@@ -33,7 +33,7 @@ const getBlogPost = cache(async (slug: string) => {
   return blogPost;
 });
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPost(slug);
 
@@ -47,6 +47,8 @@ export async function generateMetadata({ params }: Props) {
     keywords: post.categories.map((category) => category.name),
     openGraph: {
       ...sharedMetadata.openGraph,
+      title: post.title,
+      description: post.excerpt,
       images: [
         {
           url: post.coverImage.url,
@@ -58,6 +60,8 @@ export async function generateMetadata({ params }: Props) {
     },
     twitter: {
       ...sharedMetadata.twitter,
+      title: post.title,
+      description: post.excerpt,
       images: {
         url: post.coverImage.url,
         alt: `Blog post thumbnail`,
