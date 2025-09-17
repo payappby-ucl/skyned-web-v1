@@ -20,6 +20,7 @@ import {
   ProgramSchema,
   UpdateBulkProgramSchema,
   UpdateSchoolSchema,
+  ApplyFormSchema,
 } from "@workspace/shared";
 import {
   IdSchema,
@@ -268,6 +269,16 @@ export class SchoolRouter implements IRouter {
       authMiddleware.authenticate,
       authMiddleware.hasRole(["admin"]),
       schoolController.connectIntakes,
+    );
+
+    // * Apply for program
+    this.router.route("/:slug/programs/:programSlug/apply").post(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema.merge(ProgramSlugSchema),
+        body: ApplyFormSchema,
+      }),
+      authMiddleware.safeAuthenticate,
+      schoolController.applyForProgram,
     );
   }
 

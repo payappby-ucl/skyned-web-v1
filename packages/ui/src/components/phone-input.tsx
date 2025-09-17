@@ -138,7 +138,7 @@ function PhoneInput(
       <Input
         {...props}
         value={new AsYouType().input(value as string)}
-        className="border-0 rounded-none rounded-r-md focus:!ring-0 aria-invalid:ring-0"
+        className="border-0 rounded-none rounded-r-md focus:!ring-0 aria-invalid:ring-0 text-sm"
       />
     </div>
   );

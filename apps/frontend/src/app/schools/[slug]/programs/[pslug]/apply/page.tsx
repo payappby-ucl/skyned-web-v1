@@ -8,26 +8,15 @@ import Script from "next/script";
 import { cache } from "react";
 import { EducationalOccupationalProgram, WithContext } from "schema-dts";
 import Alert from "@/src/components/alert";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
-import {
-  Clock,
-  FileText,
-  GraduationCap,
-  MapPinCheck,
-  Share,
-} from "lucide-react";
-import { Button } from "@workspace/ui/components/button";
+import { AlertCircle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import StateDisplay from "@/src/components/state-display";
-import CountryDisplay from "@/src/components/country-display";
-import FormatNumber from "@/src/components/format-number";
-import DateDisplay from "@/src/components/date-display";
 import { ProgramHeader } from "../_components/program-header";
+import { ApplyForm } from "../_components/apply-form";
+import {
+  AlertDescription,
+  AlertTitle,
+  Alert as FormAlert,
+} from "@workspace/ui/components/alert";
 
 type Props = {
   params: Promise<{ slug: string; pslug: string }>;
@@ -134,7 +123,16 @@ export default async function ProgramDetails({ params }: Props) {
         {/* Brief Details */}
         <ProgramHeader program={program} applyHidden />
 
-        <section>Apply</section>
+        <section className="space-y-10">
+          <FormAlert className="mx-auto max-w-2xl">
+            <AlertTitle>Apply</AlertTitle>
+            <AlertDescription>
+              Thank you for your interest in {program.name}. Please fill the
+              form below and we'll reach out to you
+            </AlertDescription>
+          </FormAlert>
+          <ApplyForm program={program} />
+        </section>
       </>
     );
   } catch (error) {
