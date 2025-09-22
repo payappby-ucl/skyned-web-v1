@@ -72,37 +72,37 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         hasBudget: z.ZodEnum<["Yes", "No"]>;
         budget: z.ZodOptional<z.ZodObject<{
             currency: z.ZodEnum<["AUD", "CAD", "EUR", "GBP", "NGN", "USD"]>;
-            amount: z.ZodNumber;
+            amount: z.ZodOptional<z.ZodNumber>;
         }, "strip", z.ZodTypeAny, {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         }, {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         }>>;
     }, "strip", z.ZodTypeAny, {
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     }, {
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     }>, {
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     }, {
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     }>;
 }, "strip", z.ZodTypeAny, {
@@ -128,7 +128,7 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     };
     countryOfInterest?: string[] | undefined;
@@ -155,7 +155,7 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         hasBudget: "Yes" | "No";
         budget?: {
             currency: "USD" | "CAD" | "AUD" | "NGN" | "EUR" | "GBP";
-            amount: number;
+            amount?: number | undefined;
         } | undefined;
     };
     countryOfInterest?: string[] | undefined;

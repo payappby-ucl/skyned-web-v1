@@ -21,7 +21,7 @@ export const ProgramGateModal: React.FC<Props> = ({ program }) => {
 
   useEffect(() => {
     const pGate = brandClientApi.storage.localStorage.getItem("gate");
-    if (!pGate) setOpen(true);
+    if (!pGate || pGate !== "true") setOpen(true);
   }, [open]);
 
   return (
@@ -38,7 +38,7 @@ export const ProgramGateModal: React.FC<Props> = ({ program }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <ApplyForm program={program} />
+        <ApplyForm program={program} setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   );

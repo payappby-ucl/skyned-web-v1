@@ -33,12 +33,14 @@ import {
 import { useForm, useWatch, zodResolver } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 import React, { useCallback } from "react";
+import { submitLead } from "../_actions.ts";
 
 interface Props {
   program: IProgram;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ApplyForm: React.FC<Props> = ({ program }) => {
+export const ApplyForm: React.FC<Props> = ({ program, setOpen }) => {
   const form = useForm<ApplyFormSchema>({
     resolver: zodResolver(ApplyFormSchema),
     defaultValues: {
@@ -73,10 +75,18 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
 
   const onSubmit = useCallback(async (data: ApplyFormSchema) => {
     try {
+      const res = await submitLead(data);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
+      form.reset();
+      brandClientApi.storage.localStorage.setItem("gate", "true");
+      setOpen(false);
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
   }, []);
+
+  console.log(form);
 
   const [hel, isEmployed, hasBudget, countryOfInterest] = useWatch({
     control: form.control,
@@ -434,7 +444,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
           </AlertDescription>
         </Alert>
 
-        <FormButton disabled={form.formState.isSubmitting} variant="brand">
+        <FormButton isLoading={form.formState.isSubmitting} variant="brand">
           Submit
         </FormButton>
       </form>
