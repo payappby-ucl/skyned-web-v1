@@ -9,19 +9,18 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { env } from "../config";
-import { cn } from "@workspace/ui/lib/utils";
 import logo from "../../public/assets/images/brand/logo.png";
 import { Button } from "@workspace/ui/components/button";
 import {
   BuildingIcon,
   CalendarIcon,
-  HomeIcon,
   InfoIcon,
   LucideIcon,
   MailIcon,
   MenuIcon,
   NewspaperIcon,
   PhoneOutgoingIcon,
+  PiggyBankIcon,
   ScaleIcon,
   SearchIcon,
   ShieldQuestionIcon,
@@ -69,7 +68,7 @@ type MenuItem =
     };
 
 const menuItems: MenuItem[] = [
-  { title: "Home", href: "/", description: "Go to homepage", icon: HomeIcon },
+  { title: "Apply Loan", href: "/loans", description: "Explore flexible study loan options", icon: PiggyBankIcon },
   { title: "About Us", href: "/about", description: "Learn more about us", icon: InfoIcon },
   { title: "Information Hub", href: "/information-hub", description: "Access our information hub", icon: NewspaperIcon },
   { title: "Contact Us", href: "/contact", description: "Get in touch with us", icon: MailIcon },
