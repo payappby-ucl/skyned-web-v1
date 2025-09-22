@@ -173,7 +173,7 @@ export default async function Loans() {
       {/* Loan Application Form */}
       <section className="bg-accent/60 py-20" id="loan-application">
         <div className="grid grid-cols-1 gap-10">
-          <div className="text-center lg:text-left">
+          <div className="">
             <div className="mb-6 flex items-center gap-3">
               <div className="bg-primary h-px w-8"></div>
               <span className="text-primary text-sm font-medium uppercase tracking-wider">
@@ -189,7 +189,7 @@ export default async function Loans() {
             </p>
           </div>
           <div className="bg-brand-900/10 rounded-lg">
-          <div className="container mx-auto max-w-5xl p-10">
+          <div className="container mx-auto max-w-5xl p-4 lg:p-10">
             <LoanApplication />
           </div>
           </div>
