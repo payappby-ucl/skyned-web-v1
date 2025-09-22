@@ -22,7 +22,7 @@ import {
 } from "../../../services";
 import { SkynedUtils } from "../../../utils";
 import { ControllerUtils } from "../utils";
-import { AuthClaim, IObject } from "@workspace/shared";
+import { IObject } from "@workspace/shared";
 import { IPublisher, publisher } from "../../../publisher";
 
 /** Represents dependencies needed to instantiate {SchoolController} */
@@ -1253,53 +1253,6 @@ export class SchoolController
       res._success(StatusCodes.OK, {
         message: `${program.name} has been activated/released.`,
       });
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  applyForProgram: ISchoolController["applyForProgram"] = async (
-    req,
-    res,
-    next,
-  ) => {
-    try {
-      const { program: programDetails, ...rest } = req.body;
-
-      const school = await this.schoolService.findSchoolBySlug(
-        programDetails.schoolSlug,
-        {
-          claim: "admin",
-        } as AuthClaim,
-      );
-
-      if (!school || !school.active) {
-        throw SkynedUtils.createException(
-          StatusCodes.NOT_FOUND,
-          "School not found",
-        );
-      }
-
-      const program = await this.programService.findProgramBySlugAndSchoolId(
-        school.schoolId,
-        programDetails.slug,
-      );
-
-      if (!program || !program.active) {
-        throw SkynedUtils.createException(
-          StatusCodes.NOT_FOUND,
-          "Program not found",
-        );
-      }
-
-      if (!program.intakes.find((intake) => intake.intake === rest.intake)) {
-        throw SkynedUtils.createException(
-          StatusCodes.NOT_FOUND,
-          "Please select a valid intake",
-        );
-      }
-
-      // TODO: send email
     } catch (error) {
       next(error);
     }

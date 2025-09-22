@@ -12,3 +12,4 @@ export * from "./blog-post";
 export * from "./category";
 export * from "./tag";
 export * from "./program";
+export * from "./lead";

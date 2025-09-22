@@ -86,7 +86,7 @@ export const ProgramHeader: React.FC<Props> = ({ program, applyHidden }) => {
           />
 
           {/* Apply Button */}
-          {!applyHidden ? (
+          {/* {!applyHidden ? (
             <Button asChild variant="brand" className="!w-full md:w-fit">
               <Link
                 href={`/schools/${program.school?.slug}/programs/${program.slug}/apply`}
@@ -94,7 +94,7 @@ export const ProgramHeader: React.FC<Props> = ({ program, applyHidden }) => {
                 Apply Now
               </Link>
             </Button>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     </section>

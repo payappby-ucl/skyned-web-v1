@@ -14,7 +14,6 @@ export const ApplyFormSchema = CommonSchema.pick({
     slug: z.string().nonempty("required"),
     schoolSlug: z.string().nonempty("required"),
   }),
-  intake: z.string().nonempty(),
   education: z
     .object({
       highestLevelOfEducation: z.enum(highestLevelOfEducation),

@@ -16,7 +16,6 @@ exports.ApplyFormSchema = common_1.CommonSchema.pick({
         slug: zod_1.z.string().nonempty("required"),
         schoolSlug: zod_1.z.string().nonempty("required"),
     }),
-    intake: zod_1.z.string().nonempty(),
     education: zod_1.z
         .object({
         highestLevelOfEducation: zod_1.z.enum(utils_1.highestLevelOfEducation),

@@ -1,6 +1,7 @@
 import {
   AdminAccountCreationEmailProps,
   ContactUsEmailTemplateProps,
+  LeadCollectionNotificationEmailProps,
 } from "../../services";
 import { IEmail } from "../infrastructure";
 
@@ -30,11 +31,18 @@ export interface IContactUsEmailProps {
   data: ContactUsEmailTemplateProps;
 }
 
+/** Interface for lead collection */
+export interface ILeadCollectionEmailProps {
+  type: "lead-collection";
+  data: LeadCollectionNotificationEmailProps;
+}
+
 /** Represents email template type */
 export type TemplateDataType =
   | IVerifyEmail
   | IAdminAccountCreationEmailProps
-  | IContactUsEmailProps;
+  | IContactUsEmailProps
+  | ILeadCollectionEmailProps;
 
 /**
  * Email Service interface

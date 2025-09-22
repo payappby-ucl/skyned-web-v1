@@ -60,7 +60,6 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
         job: "",
         yearsOfExperience: 1,
       },
-
       countryOfInterest: [],
       budget: {
         hasBudget: "No",
@@ -131,7 +130,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="flex-1">
+              <FormItem className="flex-1 md:col-span-2">
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <FormControl>
                   <Input
@@ -189,35 +188,6 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
                 <FormDescription>
                   We'll reach out to you via phone number
                 </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Program Intake */}
-          <FormField
-            control={form.control}
-            name="intake"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="intake">Program Intake</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full" id="intake">
-                      <SelectValue placeholder="Select intake" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {program.intakes.map((intake, index) => (
-                      <SelectItem
-                        key={`${intake.intake}-${index}`}
-                        value={intake.intake}
-                      >
-                        {intake.intake}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -439,7 +409,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
         <Alert>
           <AlertDescription>
             <div>
-              By submitting the information above, you agree to out{" "}
+              By submitting the information above, you agree to our{" "}
               <Link
                 href="/terms"
                 aria-label="Link to our terms and conditions"

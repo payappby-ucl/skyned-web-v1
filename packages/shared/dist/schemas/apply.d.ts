@@ -30,7 +30,6 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         slug: string;
         schoolSlug: string;
     }>;
-    intake: z.ZodString;
     education: z.ZodEffects<z.ZodObject<{
         highestLevelOfEducation: z.ZodEnum<["Bachelor's Degree", "Secondary School Diploma", "Master's Degree", "Highest National Diploma", "Ordinary National Diploma", "Others"]>;
         value: z.ZodOptional<z.ZodString>;
@@ -116,7 +115,6 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         highestLevelOfEducation: "Others" | "Bachelor's Degree" | "Secondary School Diploma" | "Master's Degree" | "Highest National Diploma" | "Ordinary National Diploma";
         value?: string | undefined;
     };
-    intake: string;
     program: {
         slug: string;
         schoolSlug: string;
@@ -144,7 +142,6 @@ export declare const ApplyFormSchema: z.ZodObject<Pick<{
         highestLevelOfEducation: "Others" | "Bachelor's Degree" | "Secondary School Diploma" | "Master's Degree" | "Highest National Diploma" | "Ordinary National Diploma";
         value?: string | undefined;
     };
-    intake: string;
     program: {
         slug: string;
         schoolSlug: string;
