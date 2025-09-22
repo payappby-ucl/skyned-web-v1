@@ -121,11 +121,19 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
         <CardFooter>
           <Button asChild variant="brand" className="!w-full md:w-fit">
             <Link
+              href={`/schools/${program.school?.slug}/programs/${program.slug}`}
+            >
+              View More
+            </Link>
+          </Button>
+
+          {/* <Button asChild variant="brand" className="!w-full md:w-fit">
+            <Link
               href={`/schools/${program.school?.slug}/programs/${program.slug}/apply`}
             >
               Apply Now
             </Link>
-          </Button>
+          </Button> */}
         </CardFooter>
       </Card>
     </article>

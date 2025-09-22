@@ -33,12 +33,14 @@ import {
 import { useForm, useWatch, zodResolver } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 import React, { useCallback } from "react";
+import { submitLead } from "../_actions.ts";
 
 interface Props {
   program: IProgram;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ApplyForm: React.FC<Props> = ({ program }) => {
+export const ApplyForm: React.FC<Props> = ({ program, setOpen }) => {
   const form = useForm<ApplyFormSchema>({
     resolver: zodResolver(ApplyFormSchema),
     defaultValues: {
@@ -60,7 +62,6 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
         job: "",
         yearsOfExperience: 1,
       },
-
       countryOfInterest: [],
       budget: {
         hasBudget: "No",
@@ -74,10 +75,18 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
 
   const onSubmit = useCallback(async (data: ApplyFormSchema) => {
     try {
+      const res = await submitLead(data);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
+      form.reset();
+      brandClientApi.storage.localStorage.setItem("gate", "true");
+      setOpen(false);
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
   }, []);
+
+  console.log(form);
 
   const [hel, isEmployed, hasBudget, countryOfInterest] = useWatch({
     control: form.control,
@@ -131,7 +140,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="flex-1">
+              <FormItem className="flex-1 md:col-span-2">
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <FormControl>
                   <Input
@@ -189,35 +198,6 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
                 <FormDescription>
                   We'll reach out to you via phone number
                 </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Program Intake */}
-          <FormField
-            control={form.control}
-            name="intake"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="intake">Program Intake</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full" id="intake">
-                      <SelectValue placeholder="Select intake" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {program.intakes.map((intake, index) => (
-                      <SelectItem
-                        key={`${intake.intake}-${index}`}
-                        value={intake.intake}
-                      >
-                        {intake.intake}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -439,7 +419,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
         <Alert>
           <AlertDescription>
             <div>
-              By submitting the information above, you agree to out{" "}
+              By submitting the information above, you agree to our{" "}
               <Link
                 href="/terms"
                 aria-label="Link to our terms and conditions"
@@ -464,7 +444,7 @@ export const ApplyForm: React.FC<Props> = ({ program }) => {
           </AlertDescription>
         </Alert>
 
-        <FormButton disabled={form.formState.isSubmitting} variant="brand">
+        <FormButton isLoading={form.formState.isSubmitting} variant="brand">
           Submit
         </FormButton>
       </form>

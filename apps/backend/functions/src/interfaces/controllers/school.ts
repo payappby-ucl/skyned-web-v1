@@ -12,7 +12,6 @@ import {
   CreateProgramSchema,
   ProgramSchema,
   UpdateBulkProgramSchema,
-  ApplyFormSchema,
 } from "@workspace/shared";
 import { IIntakeService, IProgramService, ISchoolService } from "../services";
 import {
@@ -186,12 +185,5 @@ export interface ISchoolController {
     object & SchoolSlugSchema & ProgramSlugSchema,
     ISuccessResponse<IMessageResponse>,
     Pick<ProgramSchema, "intakes">
-  >;
-
-  /** Apply for program */
-  applyForProgram: RequestHandler<
-    object,
-    ISuccessResponse<IMessageResponse>,
-    ApplyFormSchema
   >;
 }

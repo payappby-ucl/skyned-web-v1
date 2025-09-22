@@ -16,7 +16,6 @@ exports.ApplyFormSchema = common_1.CommonSchema.pick({
         slug: zod_1.z.string().nonempty("required"),
         schoolSlug: zod_1.z.string().nonempty("required"),
     }),
-    intake: zod_1.z.string().nonempty(),
     education: zod_1.z
         .object({
         highestLevelOfEducation: zod_1.z.enum(utils_1.highestLevelOfEducation),
@@ -60,17 +59,26 @@ exports.ApplyFormSchema = common_1.CommonSchema.pick({
         budget: zod_1.z
             .object({
             currency: school_1.CreateSchoolSchema.shape.currency,
-            amount: zod_1.z.coerce.number().min(1, "Minimum of 1"),
+            amount: zod_1.z.coerce.number().optional(),
         })
             .optional(),
     })
-        .superRefine((data, ctx) => {
-        if (data.hasBudget === "Yes" && !data.budget) {
-            ctx.addIssue({
-                code: zod_1.z.ZodIssueCode.custom,
-                message: "Please input your budget",
-                path: ["budget"],
-            });
+        .superRefine(({ hasBudget, budget }, ctx) => {
+        if (hasBudget === "Yes") {
+            if (!budget) {
+                ctx.addIssue({
+                    code: zod_1.z.ZodIssueCode.custom,
+                    message: "Please input your budget",
+                    path: ["budget"],
+                });
+            }
+            if (budget && (!budget.amount || budget.amount < 1)) {
+                ctx.addIssue({
+                    code: zod_1.z.ZodIssueCode.custom,
+                    message: "Enter a valid amount",
+                    path: ["budget.amount"],
+                });
+            }
         }
     }),
 });

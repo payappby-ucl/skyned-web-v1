@@ -64,6 +64,8 @@ export enum RegistryKeysEnum {
   CATEGORY_ROUTER = "CategoryRouter",
   /** Tag Router */
   TAG_ROUTER = "TagRouter",
+  /** Lead Router */
+  LEAD_ROUTER = "LeadRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -98,6 +100,8 @@ export enum RegistryKeysEnum {
   CATEGORY_CONTROLLER = "CategoryController",
   /** Tag Controller */
   TAG_CONTROLLER = "TagController",
+  /** Lead Controller */
+  LEAD_CONTROLLER = "LeadController",
 
   // * Services
   /** Email Service */
@@ -138,6 +142,8 @@ export enum RegistryKeysEnum {
   TAG_SERVICE = "TagService",
   /** Analytics Service */
   ANALYTICS_SERVICE = "AnalyticsService",
+  /** Lead Service */
+  LEAD_SERVICE = "LeadService",
 
   // * CRON JOBS
   /** Cron jobs */

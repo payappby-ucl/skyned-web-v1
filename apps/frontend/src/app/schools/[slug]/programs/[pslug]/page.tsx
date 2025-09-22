@@ -26,6 +26,7 @@ import Fee from "./_components/fee";
 import EducationLevel from "./_components/education-level";
 import { ProgramHeader } from "./_components/program-header";
 import { title } from "process";
+import { ProgramGateModal } from "./_components/program-gate-modal";
 
 type Props = {
   params: Promise<{ slug: string; pslug: string }>;
@@ -114,6 +115,9 @@ export default async function ProgramDetails({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(programJsonLd) }}
         />
+
+        {/* Collects user information */}
+        <ProgramGateModal program={program} />
 
         <Image
           src={program.school?.schoolImage.url || ""}

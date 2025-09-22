@@ -14,7 +14,6 @@ export const ApplyFormSchema = CommonSchema.pick({
     slug: z.string().nonempty("required"),
     schoolSlug: z.string().nonempty("required"),
   }),
-  intake: z.string().nonempty(),
   education: z
     .object({
       highestLevelOfEducation: z.enum(highestLevelOfEducation),
@@ -62,17 +61,27 @@ export const ApplyFormSchema = CommonSchema.pick({
       budget: z
         .object({
           currency: CreateSchoolSchema.shape.currency,
-          amount: z.coerce.number().min(1, "Minimum of 1"),
+          amount: z.coerce.number().optional(),
         })
         .optional(),
     })
-    .superRefine((data, ctx) => {
-      if (data.hasBudget === "Yes" && !data.budget) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Please input your budget",
-          path: ["budget"],
-        });
+    .superRefine(({ hasBudget, budget }, ctx) => {
+      if (hasBudget === "Yes") {
+        if (!budget) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Please input your budget",
+            path: ["budget"],
+          });
+        }
+
+        if (budget && (!budget.amount || budget.amount < 1)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Enter a valid amount",
+            path: ["budget.amount"],
+          });
+        }
       }
     }),
 });
