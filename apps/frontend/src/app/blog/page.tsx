@@ -97,22 +97,10 @@ export default async function Blogs({ searchParams }: Props) {
           title="Browse Our Blog"
           subtitle="Stay informed with insights, scholarship updates, and expert advice tailored for students chasing international opportunities."
           backgroundImage="/assets/images/backgrounds/blog-bg.png"
+          badge={{icon: SparklesIcon, text: "Your gateway to global education."}}
         >
-          <small
-            className="border-1 absolute left-1/2 top-20 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border-transparent bg-clip-padding px-3 py-1.5 text-white backdrop-blur md:top-40"
-            style={{
-              borderImage:
-                "linear-gradient(90deg, rgb(255 255 255 / 2%) 0%, rgb(240 240 240 / 9%) 40%, rgb(255 255 255 / 0%) 100%) 1 / 1 / 0 stretch",
-              background:
-                "linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(173,216,230,0.10) 100%)",
-              clipPath: "border-box",
-            }}
-          >
-            <SparklesIcon size={14} /> Your gateway to global education.
-          </small>
           <div className="mx-auto mt-6 max-w-lg space-y-3 text-center md:max-w-sm">
-            <p>Join to our newsletter</p>
-            <NewsLetterForm label="Join" />
+            <NewsLetterForm label="Join Newsletter" />
           </div>
         </Jumbotron>
         <CustomBreadCrumb className="border-y" />

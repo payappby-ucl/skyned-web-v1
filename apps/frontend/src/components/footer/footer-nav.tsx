@@ -1,7 +1,4 @@
 import React from "react";
-import { env } from "@/src/config";
-import { Button } from "@workspace/ui/components/button";
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import NewsLetter from "./news-letter";
@@ -17,8 +14,8 @@ const navLinks = [
   },
 
   {
-    title: "Village",
-    href: "/village",
+    title: "Our Village",
+    href: "/our-village",
   },
   {
     title: "Cookie Policy",

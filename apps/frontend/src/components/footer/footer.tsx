@@ -6,7 +6,6 @@ import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import Image from "next/image";
 import Socials from "./socials";
-import Accreditation from "./accreditation";
 import icefBadgeImage from "../../../public/assets/images/icef_badge.png";
 
 const Footer: React.FC = () => {
