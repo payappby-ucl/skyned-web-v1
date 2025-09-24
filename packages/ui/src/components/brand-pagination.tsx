@@ -46,7 +46,12 @@ const BrandPagination: React.FC<Props> = ({
 
   return (
     <Pagination>
-      <PaginationContent className="flex items-center justify-between md:justify-center w-full">
+      <PaginationContent className="flex items-center justify-between  w-full">
+        <div className="lg:flex items-center hidden">
+          <p className="text-md font-semibold">
+            {currentPage} of {totalPages} pages
+          </p>
+        </div>
         <div className="flex items-center">
           {pageArray.map((pageNumber) => (
             <PaginationItem
