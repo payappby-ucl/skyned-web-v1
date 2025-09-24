@@ -4,6 +4,7 @@ import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
+import DateDisplay from "@/src/components/date-display";
 
 const title = "Privacy Policy & Cookie Policy";
 const description =
@@ -354,6 +355,10 @@ export default async function PrivacyPolicy() {
             identifying your browser and internet device. If you do not allow
             these cookies, you will experience less targeted advertising.
           </p>
+          <div className="flex items-center gap-2">
+            <p className="text-xs">Last Updated</p>
+            <DateDisplay date={new Date(2025, 8, 24, 1, 7)} />
+          </div>
         </div>
       </section>
     </>

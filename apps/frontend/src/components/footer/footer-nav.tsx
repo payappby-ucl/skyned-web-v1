@@ -17,10 +17,10 @@ const navLinks = [
     title: "Our Village",
     href: "/our-village",
   },
-  {
-    title: "Cookie Policy",
-    href: "/cookies",
-  },
+  // {
+  //   title: "Cookie Policy",
+  //   href: "/cookies",
+  // },
   {
     title: "Privacy Policy",
     href: "/privacy-policy",

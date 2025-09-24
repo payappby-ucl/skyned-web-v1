@@ -14,6 +14,7 @@ import { CookieContextProvider } from "../components/providers/cookie-consent";
 import Analytics from "./_components/analytics";
 import CookieBanner from "./_components/cookie/cookie-banner";
 import TanstackQueryProvider from "../components/providers/tanstack-provider";
+import WhatsAppWidget from "../components/chats/whatsapp";
 // import WhatsAppWidget from "../components/chats/whatsapp";
 
 const poppins = Poppins({
@@ -87,7 +88,7 @@ export default function RootLayout({
               <Toaster richColors closeButton />
               <CookieBanner />
             </ThemeProviders>
-            {/* <WhatsAppWidget /> */}
+            <WhatsAppWidget />
           </TanstackQueryProvider>
         </body>
       </CookieContextProvider>

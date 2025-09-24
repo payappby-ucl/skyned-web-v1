@@ -42,7 +42,7 @@ const consentSettingOptions: {
   {
     title: "Strictly Necessary Cookies",
     description:
-      "These cookies are essential for enabling core functionality of our website. Without these cookies, services you have requested cannot be provided. They help make our website usable by enabling basic functions like page navigation, secure areas, and remembering your preferences. Strictly necessary cookies cannot be disabled through our cookie preferences tool as our website cannot function properly without them. You can set your browser to block these cookies, but some parts of the site will not work as intended.",
+      "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information.",
     required: true,
     name: "necessary",
   },
@@ -56,14 +56,14 @@ const consentSettingOptions: {
   {
     title: "Functional Cookies",
     description:
-      "These cookies enable enhanced functionality and personalization on our website. They may be set by us or by third-party providers whose services we have added to our pages. These cookies remember choices you make (such as your username, language, or region) and provide enhanced, more personal features. If you disable these cookies, some or all of these services may not function properly.",
+      "These cookies enable the website to provide enhanced functionality and personalization. They may be set by us or by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly.",
     required: false,
     name: "functional",
   },
   {
     title: "Marketing Cookies",
     description:
-      "These cookies are used to track visitors across websites. They are set to display targeted advertisements based on your interests and online behavior. Marketing cookies help us and our advertising partners deliver ads that are relevant to you, limit the number of times you see an ad, and measure the effectiveness of advertising campaigns. They may also be used to build a profile of your interests to show you relevant content on other sites.",
+      "These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.",
     required: false,
     name: "marketing",
   },
