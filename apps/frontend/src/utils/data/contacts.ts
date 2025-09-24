@@ -24,18 +24,17 @@ export const contacts = [
 
 export const addresses = [
   {
-    location: "Nigeria",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
+    location: "Kenya",
+    streetAddress: "D16 (2nd Floor)",
+    addressLocality: "Woodvale Groove",
+    addressRegion: "Nairobi",
     consultationLink: "#",
   },
   {
-    location: "Nigeria",
-    streetAddress:
-      "Novare Central Mall, 2nd Floor, Plot 502 Dalaba Street, Off Michael Okpara Street",
-    addressLocality: "Wuse Zone 5",
-    addressRegion: "Abuja",
+    location: "Canada",
+    streetAddress: "403 Westwood Drive",
+    addressLocality: "ON, N2M 0B5,",
+    addressRegion: "Kitchener",
     consultationLink: "#",
   },
   {
@@ -53,24 +52,11 @@ export const addresses = [
     consultationLink: "#",
   },
   {
-    location: "Canada",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
-    consultationLink: "#",
-  },
-  {
-    location: "Kenya",
-    streetAddress: "D16 (2nd Floor)",
-    addressLocality: "Woodvale Groove",
-    addressRegion: "Nairobi",
-    consultationLink: "#",
-  },
-  {
-    location: "Ghana Office",
-    streetAddress: "DIS - 70b Kusenla Road, Behind Medplus Pharmacy, 2nd Floor",
-    addressLocality: "Ikate",
-    addressRegion: "Lagos",
+    location: "Nigeria",
+    streetAddress:
+      "Novare Central Mall, 2nd Floor, Plot 502 Dalaba Street, Off Michael Okpara Street",
+    addressLocality: "Wuse Zone 5",
+    addressRegion: "Abuja",
     consultationLink: "#",
   },
 ];

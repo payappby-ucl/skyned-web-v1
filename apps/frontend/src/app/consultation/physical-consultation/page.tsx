@@ -72,7 +72,7 @@ export default function VisaConsultation() {
           <h2>Meet with an expert at our office today</h2>
           {/* <p>One-on-One Consultation</p> */}
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-8">
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-4 md:grid-cols-2">
           {addresses.map((office, i) => (
             <Office
               office={office}

@@ -11,9 +11,7 @@ interface Props {
 }
 const Office: React.FC<Props> = ({ office, consultation }) => {
   return (
-    <address
-      className={`bg-background lg:nth-5:col-start-2 flex flex-col gap-3 rounded-md p-4 md:last:col-start-2 lg:col-span-2 lg:last:col-start-6`}
-    >
+    <address className={`bg-background flex flex-col gap-3 rounded-md p-4`}>
       <div className="bg-accent w-fit rounded-sm p-2">
         <MapPinIcon size={14} className="text-brand" />
       </div>
