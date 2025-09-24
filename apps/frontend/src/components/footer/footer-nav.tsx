@@ -28,7 +28,7 @@ const navLinks = [
 
   {
     title: "Privacy Policy",
-    href: "/privacy",
+    href: "/privacy-policy",
   },
 
   {
@@ -37,7 +37,7 @@ const navLinks = [
   },
   {
     title: "Terms of service",
-    href: "/terms",
+    href: "/terms-of-service",
   },
   {
     title: "Meet the team",
