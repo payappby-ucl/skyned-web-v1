@@ -22,11 +22,6 @@ const navLinks = [
     href: "/cookies",
   },
   {
-    title: "Resources",
-    href: "/resources",
-  },
-
-  {
     title: "Privacy Policy",
     href: "/privacy-policy",
   },

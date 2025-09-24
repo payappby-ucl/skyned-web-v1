@@ -1,5 +1,5 @@
 import { cn } from "@workspace/ui/lib/utils";
-import { LucideIcon, SparklesIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
