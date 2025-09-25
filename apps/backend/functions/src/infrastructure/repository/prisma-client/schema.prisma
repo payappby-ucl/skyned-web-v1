@@ -450,6 +450,7 @@ model Program {
   @@index([duration])
   @@index([timeframe])
   @@index([faculty])
+  @@index([financialAids])
   // @@index([overview])
   @@index([pgwp])
   @@index([minimumEducationLevel])

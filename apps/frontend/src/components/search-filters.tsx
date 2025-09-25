@@ -42,7 +42,12 @@ import {
   CommandItem,
 } from "@workspace/ui/components/command";
 import { brandClientApi } from "../lib/client";
-import { degreeTypes, institutionType, ownershipType } from "@workspace/shared";
+import {
+  degreeTypes,
+  financialAids,
+  institutionType,
+  ownershipType,
+} from "@workspace/shared";
 import { Switch } from "@workspace/ui/components/switch";
 import { Badge } from "@workspace/ui/components/badge";
 import { usePathname, useRouter } from "next/navigation";
@@ -194,7 +199,9 @@ interface BooleanProps {
   description?: string;
   Icon: LucideIcon;
   value: boolean;
-  onChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onChange:
+    | React.Dispatch<React.SetStateAction<boolean>>
+    | ((checked: boolean) => void);
 }
 function BooleanFilter({
   title,
@@ -630,6 +637,8 @@ const IntakesFilter: React.FC<{
   );
 };
 
+// * Financial Aids Filter
+
 interface Props {
   filters: Record<string, any>;
   setFilters: React.Dispatch<React.SetStateAction<Record<string, any>>>;
@@ -685,6 +694,10 @@ const SearchFilters: React.FC<Props> = ({
 
   const [pgwpFilter, setPgwpFilter] = useState(filters["pgwp"] ? true : false);
 
+  const [financialAidsFilter, setFinancialAidsFilter] = useState(
+    filters["financialAids"] || "",
+  );
+
   const [intakesFilter, setIntakesFilter] = useState<{
     intakes: string;
   }>({
@@ -700,6 +713,7 @@ const SearchFilters: React.FC<Props> = ({
       ...institutionAndOwnershipFilter,
       ...{ accommodation: accommodationFilter },
       ...{ pgwp: pgwpFilter },
+      ...{ financialAids: financialAidsFilter },
       ...melAndDegreeTypeFilter,
       ...intakesFilter,
     };
@@ -712,6 +726,10 @@ const SearchFilters: React.FC<Props> = ({
       flts = brandClientApi.utils.exclude(flts, ["pgwp"]);
     }
 
+    if (!financialAidsFilter) {
+      flts = brandClientApi.utils.exclude(flts, ["financialAids"]);
+    }
+
     setFilters((prev) => {
       let flts: Partial<typeof filters> = {
         ...prev,
@@ -721,6 +739,7 @@ const SearchFilters: React.FC<Props> = ({
         ...institutionAndOwnershipFilter,
         ...{ accommodation: accommodationFilter },
         ...{ pgwp: pgwpFilter },
+        ...{ financialAids: financialAidsFilter },
         ...melAndDegreeTypeFilter,
         ...intakesFilter,
       };
@@ -731,6 +750,10 @@ const SearchFilters: React.FC<Props> = ({
 
       if (!pgwpFilter) {
         flts = brandClientApi.utils.exclude(flts, ["pgwp"]);
+      }
+
+      if (!financialAidsFilter) {
+        flts = brandClientApi.utils.exclude(flts, ["financialAids"]);
       }
 
       return flts;
@@ -752,6 +775,7 @@ const SearchFilters: React.FC<Props> = ({
     institutionAndOwnershipFilter,
     accommodationFilter,
     pgwpFilter,
+    financialAidsFilter,
     melAndDegreeTypeFilter,
     intakesFilter,
     filters,
@@ -771,6 +795,7 @@ const SearchFilters: React.FC<Props> = ({
     });
     setAccommodationFilter(false);
     setPgwpFilter(false);
+    setFinancialAidsFilter("");
     setMelAndDegreeTypeFilter({
       minimumEducationLevel: "",
       degreeType: "",
@@ -788,6 +813,7 @@ const SearchFilters: React.FC<Props> = ({
     institutionAndOwnershipFilter,
     accommodationFilter,
     pgwpFilter,
+    financialAidsFilter,
     melAndDegreeTypeFilter,
     intakesFilter,
     filters,
@@ -885,6 +911,23 @@ const SearchFilters: React.FC<Props> = ({
                     distinctio."
               value={pgwpFilter}
               onChange={setPgwpFilter}
+            />
+          </div>
+
+          {/* Financial Aid Filter */}
+          <div className="border-border/40 divide-y rounded-lg border p-4 shadow-sm">
+            <BooleanFilter
+              title="Financial Aids"
+              Icon={BadgeCheck}
+              description="Programs with financial aids support"
+              value={financialAidsFilter ? true : false}
+              onChange={(checked: boolean) => {
+                if (checked) {
+                  setFinancialAidsFilter(financialAids.join(","));
+                } else {
+                  setFinancialAidsFilter("");
+                }
+              }}
             />
           </div>
 
