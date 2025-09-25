@@ -9,6 +9,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@workspace/ui/components/avatar";
+import { Badge } from "@workspace/ui/components/badge";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -31,6 +32,14 @@ const ProgramCard: React.FC<Props> = ({ program }) => {
     <article className="h-full">
       <Card className="h-full">
         <CardHeader>
+          {program.financialAids.length ? (
+            <Badge
+              className="mb-1 !text-xs font-semibold uppercase"
+              variant="outline"
+            >
+              Financial Aid
+            </Badge>
+          ) : null}
           <div className="flex gap-2">
             <Avatar>
               <AvatarFallback>
