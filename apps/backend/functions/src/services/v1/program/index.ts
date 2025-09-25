@@ -27,6 +27,7 @@ const generalData: (keyof IProgram)[] = [
   "pgwp",
   "slug",
   "updatedAt",
+  "financialAids",
 ];
 
 const authData: (keyof IProgram)[] = [
@@ -133,14 +134,10 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       };
     }
 
-    if (query.financialAids) {
-      where.financialAids = query.financialAids.length
-        ? {
-            hasSome: query.financialAids,
-          }
-        : {
-            isEmpty: true,
-          };
+    if (query.financialAids?.length) {
+      where.financialAids = {
+        hasSome: query.financialAids,
+      };
     }
 
     if (query.pgwp) {

@@ -23,6 +23,8 @@ const decimalKeys = [
   "postGrowth",
 ];
 
+const skipKeys = ["previousState", "currentState", "financialAids"];
+
 /**
  * Utility Class
  *
@@ -217,7 +219,7 @@ export class SkynedUtils {
           return [key, value as unknown as IPhoneNumber];
         }
 
-        if (key === "previousState" || key === "currentState") {
+        if (skipKeys.includes(key)) {
           return [key, value as any];
         }
 

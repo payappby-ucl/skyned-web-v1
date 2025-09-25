@@ -2,7 +2,7 @@ import BrandAlert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { EnglishProficiency, IProgram } from "@workspace/shared";
+import { EnglishProficiency, financialAids, IProgram } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -40,6 +40,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@workspace/ui/components/alert";
+import { FinancialAidPartner } from "@workspace/ui/components/financial-aid-partner";
 
 export default async function SchoolProgramPage({
   params,
@@ -157,6 +158,11 @@ export default async function SchoolProgramPage({
                   {program.requirements ? (
                     <TabsTrigger value="requirements">Requirements</TabsTrigger>
                   ) : null}
+                  {program.financialAids?.length ? (
+                    <TabsTrigger value="financial-aids">
+                      Financial Aids
+                    </TabsTrigger>
+                  ) : null}
                   <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
                 </TabsList>
               </div>
@@ -178,6 +184,20 @@ export default async function SchoolProgramPage({
                   />
                 </TabsContent>
               ) : null}
+
+              {program.financialAids.length ? (
+                <TabsContent
+                  value="financial-aids"
+                  className="flex items-center gap-2"
+                >
+                  {financialAids.map((aid) => (
+                    <div className="rounded-md border px-4 py-2" key={aid}>
+                      <FinancialAidPartner name={aid} />
+                    </div>
+                  ))}
+                </TabsContent>
+              ) : null}
+
               <TabsContent value="scholarships" className="text-md font-normal">
                 Under Construction
               </TabsContent>

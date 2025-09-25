@@ -32,7 +32,7 @@ export interface IProgram extends ITimestamps {
   description: string;
   requirements?: string;
 
-  financialAids: typeof financialAids;
+  financialAids: (typeof financialAids)[number][];
 
   applicationFee: number;
   applicationFeeDiscount: number;

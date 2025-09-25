@@ -284,6 +284,19 @@ export const columns: ColumnDef<IProgram>[] = [
   },
 
   {
+    id: "financialAids",
+    accessorFn: (row) => row.financialAids.length,
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Financial Aids" column={column} />
+    ),
+    cell: (info) => {
+      return (
+        <p className="font-semibold capitalize">{info.getValue<number>()}</p>
+      );
+    },
+  },
+
+  {
     id: "duration",
     accessorFn: (row) => ({
       duration: row.duration,

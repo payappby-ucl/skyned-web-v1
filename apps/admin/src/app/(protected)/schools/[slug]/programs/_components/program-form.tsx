@@ -88,35 +88,42 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
     },
   });
 
-  const onSubmit = useCallback(async (data: CreateProgramSchema) => {
-    try {
-      let res;
-      if (program) {
-        // * Update
-        const serverRes = await updateProgram(school.slug, program.slug, data);
-        res = brandClientApi.utils.handleServerActionResponse(serverRes);
-      } else {
-        // * Create
-        const serverRes = await createProgram(school.slug, data);
-        res = brandClientApi.utils.handleServerActionResponse(serverRes);
-      }
-      brandClientApi.utils.toast.success(res.message);
+  const onSubmit = useCallback(
+    async (data: CreateProgramSchema) => {
+      try {
+        let res;
+        if (program) {
+          // * Update
+          const serverRes = await updateProgram(
+            school.slug,
+            program.slug,
+            data,
+          );
+          res = brandClientApi.utils.handleServerActionResponse(serverRes);
+        } else {
+          // * Create
+          const serverRes = await createProgram(school.slug, data);
+          res = brandClientApi.utils.handleServerActionResponse(serverRes);
+        }
+        brandClientApi.utils.toast.success(res.message);
 
-      if (!program) {
-        queryClient.invalidateQueries({
-          queryKey: [`programs-${school.slug}`],
-        });
-      } else {
-        queryClient.invalidateQueries({
-          queryKey: [`schools-${school.slug}-programs-${program.slug}`],
-        });
-      }
+        if (!program) {
+          queryClient.invalidateQueries({
+            queryKey: [`programs-${school.slug}`],
+          });
+        } else {
+          queryClient.invalidateQueries({
+            queryKey: [`schools-${school.slug}-programs-${program.slug}`],
+          });
+        }
 
-      router.back();
-    } catch (error) {
-      brandClientApi.utils.alertError(error);
-    }
-  }, []);
+        router.back();
+      } catch (error) {
+        brandClientApi.utils.alertError(error);
+      }
+    },
+    [program],
+  );
 
   // * Watch
   const mel = form.watch("data.minimumEducationLevel");
