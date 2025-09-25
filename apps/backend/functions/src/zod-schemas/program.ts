@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Country, State } from "country-state-city";
 import {
   degreeTypes,
+  financialAids,
   institutionType,
   ownershipType,
   tuitionFeeType,
@@ -52,6 +53,21 @@ export const ProgramQuerySchema = z.object({
     .transform((val) => val && val.split(",")),
 
   accommodation: z.coerce.boolean().optional(),
+
+  financialAids: z
+    .string()
+    .toLowerCase()
+    .refine(
+      (val) =>
+        val &&
+        val
+          .split(",")
+          .every((val) =>
+            financialAids.includes(val as (typeof financialAids)[number]),
+          ),
+    )
+    .optional()
+    .transform((val) => val && val.split(",")),
 
   // * Programs Specific Filters
   degreeType: z

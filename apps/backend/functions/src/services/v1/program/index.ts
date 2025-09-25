@@ -133,6 +133,16 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       };
     }
 
+    if (query.financialAids) {
+      where.financialAids = query.financialAids.length
+        ? {
+            hasSome: query.financialAids,
+          }
+        : {
+            isEmpty: true,
+          };
+    }
+
     if (query.pgwp) {
       where.pgwp = {
         equals: true,
