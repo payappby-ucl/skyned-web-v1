@@ -407,6 +407,8 @@ model Program {
   description  String  @db.Text
   requirements String? @db.Text
 
+  financialAids String[] @default([]) @map("financial_aids")
+
   applicationFee         Decimal @map("application_fee") @db.Decimal(10, 2)
   applicationFeeDiscount Decimal @default(0) @map("application_fee_discount") @db.Decimal(5, 2)
 

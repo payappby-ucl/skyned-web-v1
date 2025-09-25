@@ -12,6 +12,8 @@ export const programData = {
   applicationFee: 100,
   applicationFeeDiscount: 0,
 
+  financialAids: [],
+
   tuitionFee: 32345.92,
   tuitionFeeType: tuitionFeeType[0],
 

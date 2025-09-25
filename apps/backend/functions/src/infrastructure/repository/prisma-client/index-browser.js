@@ -279,6 +279,7 @@ exports.Prisma.ProgramScalarFieldEnum = {
   overview: 'overview',
   description: 'description',
   requirements: 'requirements',
+  financialAids: 'financialAids',
   applicationFee: 'applicationFee',
   applicationFeeDiscount: 'applicationFeeDiscount',
   tuitionFee: 'tuitionFee',
@@ -451,6 +452,7 @@ exports.Prisma.ProgramOrderByRelevanceFieldEnum = {
   overview: 'overview',
   description: 'description',
   requirements: 'requirements',
+  financialAids: 'financialAids',
   minimumEducationLevel: 'minimumEducationLevel',
   createdById: 'createdById'
 };

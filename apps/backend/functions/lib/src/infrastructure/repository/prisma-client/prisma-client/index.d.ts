@@ -15262,6 +15262,7 @@ export namespace Prisma {
     overview: number
     description: number
     requirements: number
+    financialAids: number
     applicationFee: number
     applicationFeeDiscount: number
     tuitionFee: number
@@ -15370,6 +15371,7 @@ export namespace Prisma {
     overview?: true
     description?: true
     requirements?: true
+    financialAids?: true
     applicationFee?: true
     applicationFeeDiscount?: true
     tuitionFee?: true
@@ -15485,6 +15487,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements: string | null
+    financialAids: string[]
     applicationFee: Decimal
     applicationFeeDiscount: Decimal
     tuitionFee: Decimal
@@ -15532,6 +15535,7 @@ export namespace Prisma {
     overview?: boolean
     description?: boolean
     requirements?: boolean
+    financialAids?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -15565,6 +15569,7 @@ export namespace Prisma {
     overview?: boolean
     description?: boolean
     requirements?: boolean
+    financialAids?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -15595,6 +15600,7 @@ export namespace Prisma {
     overview?: boolean
     description?: boolean
     requirements?: boolean
+    financialAids?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -15625,6 +15631,7 @@ export namespace Prisma {
     overview?: boolean
     description?: boolean
     requirements?: boolean
+    financialAids?: boolean
     applicationFee?: boolean
     applicationFeeDiscount?: boolean
     tuitionFee?: boolean
@@ -15641,7 +15648,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "randomKey" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "requirements" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
+  export type ProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "programId" | "schoolId" | "randomKey" | "name" | "slug" | "faculty" | "degreeType" | "overview" | "description" | "requirements" | "financialAids" | "applicationFee" | "applicationFeeDiscount" | "tuitionFee" | "tuitionFeeType" | "timeframe" | "duration" | "minimumEducationLevel" | "minimumEducationDegree" | "minimumEligibilityGpa" | "pgwp" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["program"]>
   export type ProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     intakes?: boolean | Program$intakesArgs<ExtArgs>
@@ -15678,6 +15685,7 @@ export namespace Prisma {
       overview: string
       description: string
       requirements: string | null
+      financialAids: string[]
       applicationFee: Prisma.Decimal
       applicationFeeDiscount: Prisma.Decimal
       tuitionFee: Prisma.Decimal
@@ -16130,6 +16138,7 @@ export namespace Prisma {
     readonly overview: FieldRef<"Program", 'String'>
     readonly description: FieldRef<"Program", 'String'>
     readonly requirements: FieldRef<"Program", 'String'>
+    readonly financialAids: FieldRef<"Program", 'String[]'>
     readonly applicationFee: FieldRef<"Program", 'Decimal'>
     readonly applicationFeeDiscount: FieldRef<"Program", 'Decimal'>
     readonly tuitionFee: FieldRef<"Program", 'Decimal'>
@@ -22551,6 +22560,7 @@ export namespace Prisma {
     overview: 'overview',
     description: 'description',
     requirements: 'requirements',
+    financialAids: 'financialAids',
     applicationFee: 'applicationFee',
     applicationFeeDiscount: 'applicationFeeDiscount',
     tuitionFee: 'tuitionFee',
@@ -22786,6 +22796,7 @@ export namespace Prisma {
     overview: 'overview',
     description: 'description',
     requirements: 'requirements',
+    financialAids: 'financialAids',
     minimumEducationLevel: 'minimumEducationLevel',
     createdById: 'createdById'
   };
@@ -24070,6 +24081,7 @@ export namespace Prisma {
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
     requirements?: StringNullableFilter<"Program"> | string | null
+    financialAids?: StringNullableListFilter<"Program">
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -24102,6 +24114,7 @@ export namespace Prisma {
     overview?: SortOrder
     description?: SortOrder
     requirements?: SortOrderInput | SortOrder
+    financialAids?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -24139,6 +24152,7 @@ export namespace Prisma {
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
     requirements?: StringNullableFilter<"Program"> | string | null
+    financialAids?: StringNullableListFilter<"Program">
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -24171,6 +24185,7 @@ export namespace Prisma {
     overview?: SortOrder
     description?: SortOrder
     requirements?: SortOrderInput | SortOrder
+    financialAids?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -24207,6 +24222,7 @@ export namespace Prisma {
     overview?: StringWithAggregatesFilter<"Program"> | string
     description?: StringWithAggregatesFilter<"Program"> | string
     requirements?: StringNullableWithAggregatesFilter<"Program"> | string | null
+    financialAids?: StringNullableListFilter<"Program">
     applicationFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalWithAggregatesFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -25675,6 +25691,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -25706,6 +25723,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -25734,6 +25752,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25765,6 +25784,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25795,6 +25815,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -25821,6 +25842,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25848,6 +25870,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27375,6 +27398,14 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type EnumTuitionFeeTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TuitionFeeType | EnumTuitionFeeTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TuitionFeeType[] | ListEnumTuitionFeeTypeFieldRefInput<$PrismaModel>
@@ -27422,6 +27453,7 @@ export namespace Prisma {
     overview?: SortOrder
     description?: SortOrder
     requirements?: SortOrder
+    financialAids?: SortOrder
     applicationFee?: SortOrder
     applicationFeeDiscount?: SortOrder
     tuitionFee?: SortOrder
@@ -28896,6 +28928,10 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutAccommodationsCreatedInput, AdminUpdateWithoutAccommodationsCreatedInput>, AdminUncheckedUpdateWithoutAccommodationsCreatedInput>
   }
 
+  export type ProgramCreatefinancialAidsInput = {
+    set: string[]
+  }
+
   export type SchoolCreateNestedOneWithoutProgramsInput = {
     create?: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
     connectOrCreate?: SchoolCreateOrConnectWithoutProgramsInput
@@ -28932,6 +28968,11 @@ export namespace Prisma {
     connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
     createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
     connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+  }
+
+  export type ProgramUpdatefinancialAidsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type EnumTuitionFeeTypeFieldUpdateOperationsInput = {
@@ -30212,6 +30253,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -30242,6 +30284,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -30781,6 +30824,7 @@ export namespace Prisma {
     overview?: StringFilter<"Program"> | string
     description?: StringFilter<"Program"> | string
     requirements?: StringNullableFilter<"Program"> | string | null
+    financialAids?: StringNullableListFilter<"Program">
     applicationFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFilter<"Program"> | Decimal | DecimalJsLike | number | string
@@ -32103,6 +32147,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -32132,6 +32177,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -32948,6 +32994,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -32978,6 +33025,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -33021,6 +33069,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33051,6 +33100,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33134,6 +33184,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -33164,6 +33215,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -34197,6 +34249,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -34663,6 +34716,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -34693,6 +34747,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -34722,6 +34777,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35074,6 +35130,7 @@ export namespace Prisma {
     overview: string
     description: string
     requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
     applicationFee: Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
     tuitionFee: Decimal | DecimalJsLike | number | string
@@ -35134,6 +35191,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35163,6 +35221,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35192,6 +35251,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35273,6 +35333,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35303,6 +35364,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -35332,6 +35394,7 @@ export namespace Prisma {
     overview?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
     applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string

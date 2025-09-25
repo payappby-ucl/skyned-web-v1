@@ -66,6 +66,9 @@ export const timeframe = ["day", "week", "month", "year"] as const;
 /** Intake Status */
 export const intakeStatus = ["open", "closed", "likely_open"] as const;
 
+/** Financial Aids */
+export const financialAids = ["mpower", "passage"] as const;
+
 /** Blog Post Status */
 export const blogPostStatus = [
   "draft",

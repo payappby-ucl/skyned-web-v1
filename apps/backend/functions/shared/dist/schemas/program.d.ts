@@ -6,6 +6,7 @@ export declare const ProgramSchema: z.ZodObject<{
     degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
     overview: z.ZodString;
     description: z.ZodEffects<z.ZodString, string, string>;
+    financialAids: z.ZodArray<z.ZodEnum<["mpower", "passage"]>, "many">;
     requirements: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
     applicationFee: z.ZodNumber;
     applicationFeeDiscount: z.ZodNumber;
@@ -34,6 +35,7 @@ export declare const ProgramSchema: z.ZodObject<{
     overview: string;
     description: string;
     degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+    financialAids: ("mpower" | "passage")[];
     applicationFee: number;
     applicationFeeDiscount: number;
     tuitionFee: number;
@@ -57,6 +59,7 @@ export declare const ProgramSchema: z.ZodObject<{
     overview: string;
     description: string;
     degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+    financialAids: ("mpower" | "passage")[];
     applicationFee: number;
     applicationFeeDiscount: number;
     tuitionFee: number;
@@ -85,6 +88,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
         description: z.ZodEffects<z.ZodString, string, string>;
+        financialAids: z.ZodArray<z.ZodEnum<["mpower", "passage"]>, "many">;
         requirements: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
         applicationFee: z.ZodNumber;
         applicationFeeDiscount: z.ZodNumber;
@@ -113,6 +117,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -136,6 +141,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -160,6 +166,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
         description: z.ZodEffects<z.ZodString, string, string>;
+        financialAids: z.ZodArray<z.ZodEnum<["mpower", "passage"]>, "many">;
         requirements: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
         applicationFee: z.ZodNumber;
         applicationFeeDiscount: z.ZodNumber;
@@ -188,6 +195,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -211,6 +219,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -237,6 +246,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -260,6 +270,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -286,6 +297,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -309,6 +321,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -335,6 +348,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -358,6 +372,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -384,6 +399,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -407,6 +423,7 @@ export declare const CreateProgramSchema: z.ZodEffects<z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -436,6 +453,7 @@ export declare const CreateProgramsSchema: z.ZodObject<{
         degreeType: z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>;
         overview: z.ZodString;
         description: z.ZodEffects<z.ZodString, string, string>;
+        financialAids: z.ZodArray<z.ZodEnum<["mpower", "passage"]>, "many">;
         requirements: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
         applicationFee: z.ZodNumber;
         applicationFeeDiscount: z.ZodNumber;
@@ -464,6 +482,7 @@ export declare const CreateProgramsSchema: z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -487,6 +506,7 @@ export declare const CreateProgramsSchema: z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -513,6 +533,7 @@ export declare const CreateProgramsSchema: z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -539,6 +560,7 @@ export declare const CreateProgramsSchema: z.ZodObject<{
         overview: string;
         description: string;
         degreeType: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma";
+        financialAids: ("mpower" | "passage")[];
         applicationFee: number;
         applicationFeeDiscount: number;
         tuitionFee: number;
@@ -569,6 +591,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             degreeType: z.ZodOptional<z.ZodEnum<["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "A Level", "English as Second Language (ESL)", "1-year Post-Secondary School Certificate", "2-year Undergraduate Diploma", "3-year Undergraduate Advanced Diploma", "3-year Bachelor's Degree", "Top-Up Degree", "4-year Bachelor's Degree", "Integrated Masters", "Postgraduate Certificate", "Postgraduate Diploma", "Master's Degree"]>>;
             overview: z.ZodOptional<z.ZodString>;
             description: z.ZodOptional<z.ZodEffects<z.ZodString, string, string>>;
+            financialAids: z.ZodOptional<z.ZodArray<z.ZodEnum<["mpower", "passage"]>, "many">>;
             requirements: z.ZodOptional<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>>;
             applicationFee: z.ZodOptional<z.ZodNumber>;
             applicationFeeDiscount: z.ZodOptional<z.ZodNumber>;
@@ -598,6 +621,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;
@@ -621,6 +645,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;
@@ -646,6 +671,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;
@@ -672,6 +698,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;
@@ -700,6 +727,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;
@@ -728,6 +756,7 @@ export declare const UpdateBulkProgramSchema: z.ZodObject<{
             description?: string | undefined;
             faculty?: string | undefined;
             degreeType?: "Master's Degree" | "Grade 7" | "Grade 8" | "Grade 9" | "Grade 10" | "Grade 11" | "Grade 12" | "A Level" | "English as Second Language (ESL)" | "1-year Post-Secondary School Certificate" | "2-year Undergraduate Diploma" | "3-year Undergraduate Advanced Diploma" | "3-year Bachelor's Degree" | "Top-Up Degree" | "4-year Bachelor's Degree" | "Integrated Masters" | "Postgraduate Certificate" | "Postgraduate Diploma" | undefined;
+            financialAids?: ("mpower" | "passage")[] | undefined;
             requirements?: string | undefined;
             applicationFee?: number | undefined;
             applicationFeeDiscount?: number | undefined;

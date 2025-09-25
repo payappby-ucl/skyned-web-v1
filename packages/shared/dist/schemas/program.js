@@ -24,6 +24,7 @@ exports.ProgramSchema = zod_1.z.object({
         .trim()
         .nonempty("Required")
         .transform((val) => (val ? (0, sanitize_html_1.default)(val) : val)),
+    financialAids: zod_1.z.array(zod_1.z.enum(utils_1.financialAids)),
     requirements: zod_1.z
         .string()
         .trim()

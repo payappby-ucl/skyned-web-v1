@@ -1,4 +1,4 @@
-import { degreeTypes, educationLevels, EnglishProficiency, timeframe, tuitionFeeType } from "../utils";
+import { degreeTypes, educationLevels, EnglishProficiency, financialAids, timeframe, tuitionFeeType } from "../utils";
 import { AdminProfile } from "./admin";
 import { IIntake } from "./intake";
 import { ISchool } from "./school";
@@ -20,6 +20,7 @@ export interface IProgram extends ITimestamps {
     overview: string;
     description: string;
     requirements?: string;
+    financialAids: typeof financialAids;
     applicationFee: number;
     applicationFeeDiscount: number;
     tuitionFee: number;

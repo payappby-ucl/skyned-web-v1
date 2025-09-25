@@ -52,6 +52,8 @@ export declare const tuitionFeeType: readonly ["per_year", "per_semester", "full
 export declare const timeframe: readonly ["day", "week", "month", "year"];
 /** Intake Status */
 export declare const intakeStatus: readonly ["open", "closed", "likely_open"];
+/** Financial Aids */
+export declare const financialAids: readonly ["mpower", "passage"];
 /** Blog Post Status */
 export declare const blogPostStatus: readonly ["draft", "scheduled", "published", "unpublished"];
 /** Highest Level Of Education */

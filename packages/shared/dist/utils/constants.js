@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.highestLevelOfEducation = exports.blogPostStatus = exports.intakeStatus = exports.timeframe = exports.tuitionFeeType = exports.currencies = exports.ownershipType = exports.institutionType = exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
+exports.highestLevelOfEducation = exports.blogPostStatus = exports.financialAids = exports.intakeStatus = exports.timeframe = exports.tuitionFeeType = exports.currencies = exports.ownershipType = exports.institutionType = exports.socialMedia = exports.department = exports.gender = exports.DEFAULT_COUNTRY_CODE = exports.DEFAULT_PHONE_NUMBER_COUNTRY_CODE = exports.PROHIBITED_USER_EMAIL_DOMAINS = void 0;
 /** Email domains users are not supposed to use because it belongs to internal staff */
 exports.PROHIBITED_USER_EMAIL_DOMAINS = [
     "skynedconsults.com",
@@ -58,6 +58,8 @@ exports.tuitionFeeType = ["per_year", "per_semester", "full"];
 exports.timeframe = ["day", "week", "month", "year"];
 /** Intake Status */
 exports.intakeStatus = ["open", "closed", "likely_open"];
+/** Financial Aids */
+exports.financialAids = ["mpower", "passage"];
 /** Blog Post Status */
 exports.blogPostStatus = [
     "draft",

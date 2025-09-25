@@ -2,6 +2,7 @@ import {
   degreeTypes,
   educationLevels,
   EnglishProficiency,
+  financialAids,
   timeframe,
   tuitionFeeType,
 } from "../utils";
@@ -30,6 +31,8 @@ export interface IProgram extends ITimestamps {
   overview: string;
   description: string;
   requirements?: string;
+
+  financialAids: typeof financialAids;
 
   applicationFee: number;
   applicationFeeDiscount: number;

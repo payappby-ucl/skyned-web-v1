@@ -1,5 +1,10 @@
 import slugify from "slugify";
-import { degreeTypes, timeframe, tuitionFeeType } from "../utils";
+import {
+  degreeTypes,
+  financialAids,
+  timeframe,
+  tuitionFeeType,
+} from "../utils";
 import { z } from "zod";
 import sanitizeHtml from "sanitize-html";
 
@@ -19,6 +24,8 @@ export const ProgramSchema = z.object({
     .trim()
     .nonempty("Required")
     .transform((val) => (val ? sanitizeHtml(val) : val)),
+
+  financialAids: z.array(z.enum(financialAids)),
 
   requirements: z
     .string()
@@ -45,6 +52,7 @@ export const ProgramSchema = z.object({
     "undergraduate",
     "postgraduate",
   ]),
+
   minimumEducationDegree: z.coerce
     .number()
     .positive("Must be positive")
