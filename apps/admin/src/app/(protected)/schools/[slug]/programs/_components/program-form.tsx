@@ -44,6 +44,8 @@ import ProgramProficiencyForm from "./program-proficiency-form";
 import { ProficiencyDisplay } from "@workspace/ui/components/proficiency-display";
 import { Button } from "@workspace/ui/components/button";
 import { Trash2 } from "lucide-react";
+import FinancialAidsForm from "./financial-aids-form";
+import { FinancialAidPartner } from "@workspace/ui/components/financial-aid-partner";
 
 interface Props {
   /** School slug */
@@ -75,6 +77,7 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
         minimumEducationLevel: program?.minimumEducationLevel || "primary",
         minimumEducationDegree: program?.minimumEducationDegree || 1,
         minimumEligibilityGpa: program?.minimumEligibilityGpa || 1,
+        financialAids: program?.financialAids || [],
         proficiencies: program?.proficiencies || [],
         intakes: program?.intakes.map((itk) => itk.id) || [],
         overview: program?.overview || "",
@@ -599,6 +602,80 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
           )
         ) : null} */}
 
+        {/* Financial Aids */}
+        <FormField
+          control={form.control}
+          name="data.financialAids"
+          render={({ field }) => (
+            <FormItem className="md:col-span-2 lg:col-span-3">
+              <div className="flex items-center gap-2">
+                <FormLabel>Financial Aids</FormLabel>
+                <FinancialAidsForm
+                  aids={field.value}
+                  onChange={field.onChange}
+                />
+              </div>
+              <FormControl>
+                <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+                  {field.value.length ? (
+                    field.value.map((aid) => (
+                      <div
+                        className="flex items-center rounded-md border px-4 py-1"
+                        key={aid}
+                      >
+                        <div className="flex-1">
+                          <FinancialAidPartner name={aid} />
+                        </div>
+
+                        <Button
+                          type="button"
+                          role="button"
+                          variant="ghost"
+                          onClick={() =>
+                            field.onChange(field.value.filter((v) => v !== aid))
+                          }
+                        >
+                          <Trash2 className="text-destructive" />
+                        </Button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+                      <p className="text-sm">No Financial Aid </p>
+                    </div>
+                  )}
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* PGWP */}
+        <FormField
+          control={form.control}
+          name="data.pgwp"
+          render={({ field }) => (
+            <FormItem className="md:col-span-2 lg:col-span-3">
+              <FormLabel>PGWP</FormLabel>
+              <FormControl>
+                <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+                  <div className="flex-1">
+                    <FormDescription>
+                      Does this program offer Post Graduate Work Permit?
+                    </FormDescription>
+                  </div>
+
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </div>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
         {/* Proficiencies */}
         <FormField
           control={form.control}
@@ -654,31 +731,6 @@ const ProgramForm: React.FC<Props> = ({ program, school }) => {
                 </div>
               </FormControl>
               <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* PGWP */}
-        <FormField
-          control={form.control}
-          name="data.pgwp"
-          render={({ field }) => (
-            <FormItem className="md:col-span-2 lg:col-span-3">
-              <FormLabel>PGWP</FormLabel>
-              <FormControl>
-                <div className="flex items-center gap-2 rounded-md border px-3 py-2">
-                  <div className="flex-1">
-                    <FormDescription>
-                      Does this program offer Post Graduate Work Permit?
-                    </FormDescription>
-                  </div>
-
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </div>
-              </FormControl>
             </FormItem>
           )}
         />
