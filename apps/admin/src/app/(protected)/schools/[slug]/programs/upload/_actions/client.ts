@@ -101,6 +101,11 @@ export async function generateProgramUploadTemplate({
       width: "Minimum Grading Point Average".length + added,
     },
     {
+      header: "Financial Aids",
+      key: "financialAids",
+      width: "Financial Aids".length + added,
+    },
+    {
       header: "PGWP",
       key: "pgwp",
       width: "PGWP".length + added,
@@ -145,6 +150,7 @@ export async function generateProgramUploadTemplate({
     "primary",
     "Grade 7",
     80,
+    "mpower, passage",
     0,
     "IELTS - 9, DUOLINGO - 100",
     intakes.map((intake) => `${intake.id} - ${intake.intake}`).join(", "),
@@ -166,6 +172,7 @@ export async function generateProgramUploadTemplate({
     "primary",
     "Grade 7",
     80,
+    "",
     0,
     "",
     intakes.map((intake) => `${intake.id} - ${intake.intake}`).join(", "),
@@ -197,6 +204,7 @@ export async function generateProgramUploadTemplate({
   const minimumEligibilityGpaColumn = worksheet.getColumn(
     "minimumEligibilityGpa",
   );
+  const financialAidsColumn = worksheet.getColumn("financialAids");
   const pgwpColumn = worksheet.getColumn("pgwp");
   const intakesColumn = worksheet.getColumn("intakes");
   const proficienciesColumn = worksheet.getColumn("proficiencies");
@@ -368,6 +376,12 @@ export async function generateProgramUploadTemplate({
     },
   );
 
+  financialAidsColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
+    if (rowNumber > 3) {
+      cell.value = "mpower";
+    }
+  });
+
   pgwpColumn.eachCell({ includeEmpty: true }, (cell, rowNumber) => {
     if (rowNumber !== 1) {
       cell.dataValidation = {
@@ -457,6 +471,7 @@ export async function generateUploadFormData(file: File) {
     "minimumEducationLevel",
     "minimumEducationDegree",
     "minimumEligibilityGpa",
+    "financialAids",
     "pgwp",
     "proficiencies",
     "intakes",
@@ -502,6 +517,14 @@ export async function generateUploadFormData(file: File) {
             test: pro.split("-")[0]!.toLowerCase().trim(),
             score: Number(pro.split("-")[1]!.trim()),
           }));
+        }
+      }
+
+      if (key === "financialAids") {
+        v = [];
+
+        if (value) {
+          v = (value as string).split(",");
         }
       }
 

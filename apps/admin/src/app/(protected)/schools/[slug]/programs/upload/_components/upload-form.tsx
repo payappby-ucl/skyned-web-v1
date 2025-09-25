@@ -19,7 +19,6 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@workspace/ui/components/form";
 import {
@@ -75,6 +74,8 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@workspace/ui/components/alert";
+import FinancialAidsForm from "../../_components/financial-aids-form";
+import { FinancialAidPartner } from "@workspace/ui/components/financial-aid-partner";
 
 // * Memoized Row
 const ProgramRow: React.FC<{
@@ -416,6 +417,56 @@ const ProgramRow: React.FC<{
                     placeholder="Minimum GPA"
                   />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </TableCell>
+
+        {/* Financial Aids */}
+        <TableCell>
+          <FormField
+            control={control}
+            name={`data.${idx}.financialAids`}
+            render={({ field }) => (
+              <FormItem className="min-w-[200px]">
+                <FormControl>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {field.value.length ? (
+                      field.value.map((aid) => (
+                        <div
+                          className="flex items-center rounded-md border px-4 py-1"
+                          key={aid}
+                        >
+                          <div className="flex-1">
+                            <FinancialAidPartner name={aid} />
+                          </div>
+
+                          <Button
+                            type="button"
+                            role="button"
+                            variant="ghost"
+                            onClick={() =>
+                              field.onChange(
+                                field.value.filter((v) => v !== aid),
+                              )
+                            }
+                          >
+                            <Trash2 className="text-destructive" />
+                          </Button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="flex items-center justify-center md:col-span-2 lg:col-span-4">
+                        <p className="text-sm">No Financial Aid </p>
+                      </div>
+                    )}
+                  </div>
+                </FormControl>
+                <FinancialAidsForm
+                  aids={field.value}
+                  onChange={field.onChange}
+                />
                 <FormMessage />
               </FormItem>
             )}

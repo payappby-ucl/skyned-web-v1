@@ -19,12 +19,24 @@ const UploadGuideline: React.FC<PropsWithChildren> = ({ children }) => {
           Do not rearrange or add to what's displayed. However, you can remove
           an intake but each items should be comma separated.
         </li>
+        <li>
+          <h2 className="!text-sm">Financial Aids</h2>
+          <ul className="list-inside list-disc">
+            <li>Allowed values are mpower, passage</li>
+            <li>An example format has be populated on the fields</li>
+            <li>Each items should be separated by a comma</li>
+            <li>
+              You can leave the cell blank if you do not want a financial aid on
+              the program
+            </li>
+          </ul>
+        </li>
         <li>PGWP is represented by 0(False) and 1(True)</li>
         <li>
           <h2 className="!text-sm">English Proficiencies</h2>
           <ul className="list-inside list-disc">
             <li>Allowed test scores are IELTS, PTE, DUOLINGO, TOEFL</li>
-            <li>An example format has be populated onn the fields</li>
+            <li>An example format has be populated on the fields</li>
             <li>Each items should be separated by a comma</li>
             <li>
               You can leave the cell blank if you do not want a test proficiency
