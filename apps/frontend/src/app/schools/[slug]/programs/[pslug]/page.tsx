@@ -27,6 +27,7 @@ import EducationLevel from "./_components/education-level";
 import { ProgramHeader } from "./_components/program-header";
 import { title } from "process";
 import { ProgramGateModal } from "./_components/program-gate-modal";
+import { Badge } from "@workspace/ui/components/badge";
 
 type Props = {
   params: Promise<{ slug: string; pslug: string }>;
@@ -134,6 +135,14 @@ export default async function ProgramDetails({ params }: Props) {
 
         <section className="grid grid-cols-1 gap-4 scroll-smooth !py-5 md:grid-cols-3">
           <div className="space-y-6 md:col-span-2">
+            {program.financialAids.length ? (
+              <Badge
+                className="mb-1 !text-xs font-semibold uppercase"
+                variant="outline"
+              >
+                Financial Aid
+              </Badge>
+            ) : null}
             {/* Overview */}
             <p className="whitespace-pre-wrap">{program.overview}</p>
 
