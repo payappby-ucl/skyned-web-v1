@@ -59,6 +59,10 @@ export class ScholarshipRouter implements IRouter {
       );
 
     this.router
+      .route("/summary")
+      .get(authMiddleware.safeAuthenticate, controller.getSummary);
+
+    this.router
       .route("/:slug")
       .get(
         RequestValidationMiddleware.validate({

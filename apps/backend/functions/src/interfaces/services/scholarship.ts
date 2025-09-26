@@ -48,4 +48,14 @@ export interface IScholarshipService {
     slug: string,
     data: Prisma.ScholarshipUpdateInput,
   ): Promise<IScholarship>;
+
+  /** Get Summary */
+  getSummary(): Promise<
+    {
+      category: string;
+      _count: {
+        _all: number;
+      };
+    }[]
+  >;
 }

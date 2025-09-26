@@ -211,6 +211,17 @@ export class ScholarshipService
 
     return this.deserialize(scholarship);
   };
+
+  getSummary: IScholarshipService["getSummary"] = async () => {
+    const scholarshipSummary = await this.repository.db.scholarship.groupBy({
+      by: ["category"],
+      _count: {
+        _all: true,
+      },
+    });
+
+    return scholarshipSummary;
+  };
 }
 
 /** Concrete instance of ScholarshipService */

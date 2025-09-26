@@ -367,6 +367,15 @@ export class ScholarshipController
       next(error);
     }
   };
+
+  getSummary: IScholarshipController["getSummary"] = async (req, res, next) => {
+    try {
+      const summary = await this.scholarshipService.getSummary();
+      res._success(StatusCodes.OK, summary);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Controller instance */

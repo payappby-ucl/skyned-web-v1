@@ -8,6 +8,7 @@ import {
 } from "@workspace/shared";
 import { RequestHandler } from "express";
 import { ScholarshipQuerySchema, SchoolSlugSchema } from "../../zod-schemas";
+import { IScholarshipService } from "../services";
 
 export interface IScholarshipController {
   /** Creates a scholarship */
@@ -54,5 +55,11 @@ export interface IScholarshipController {
   activateScholarship: RequestHandler<
     SchoolSlugSchema,
     ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Get Summary */
+  getSummary: RequestHandler<
+    object,
+    ISuccessResponse<Awaited<ReturnType<IScholarshipService["getSummary"]>>>
   >;
 }
