@@ -5,20 +5,20 @@ import { scholarshipData } from "../src/data";
 import { StatusCodes } from "http-status-codes";
 import { signInUser } from "./helpers/utils";
 import { responseBody } from "./helpers/constants";
+import { SkynedUtils } from "../src/utils";
 
 describe("Scholarship API", () => {
   const server = app.getApp();
   const url = "/api/v1/scholarships";
+  const data = {
+    ...scholarshipData,
+    slug: "test-scholarship",
+  };
 
   describe("Scholarship", () => {
     describe(`POST Scholarships - ${url}`, () => {
       test("should fail if no authorization header is passed", async () => {
-        const res = await request(server)
-          .post(url)
-          .send({
-            ...scholarshipData,
-            slug: "test-scholarship",
-          });
+        const res = await request(server).post(url).send(data);
 
         expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
         expect(res.body).toEqual({
@@ -39,7 +39,7 @@ describe("Scholarship API", () => {
           .set("authorization", `bearer ${token}`)
           .send({
             ...scholarshipData,
-            slug: "test-scholarship",
+            slug: data.slug,
             banner: "12345",
           });
 
@@ -54,7 +54,7 @@ describe("Scholarship API", () => {
           .set("authorization", `bearer ${token}`)
           .send({
             ...scholarshipData,
-            slug: "test-scholarship",
+            slug: data.slug,
           });
 
         expect(res.status).toBe(StatusCodes.CREATED);
@@ -75,7 +75,7 @@ describe("Scholarship API", () => {
           .set("authorization", `bearer ${token}`)
           .send({
             ...scholarshipData,
-            slug: "test-scholarship",
+            slug: data.slug,
           });
 
         expect(res.status).toBe(StatusCodes.CONFLICT);
@@ -121,6 +121,115 @@ describe("Scholarship API", () => {
             nextPage: 2,
             prevPage: 1,
           }),
+        });
+      });
+    });
+
+    describe("Single Scholarship Endpoint", () => {
+      const sUrl = `${url}/${data.slug}`;
+
+      describe(`GET single Scholarships - ${sUrl}`, () => {
+        test("should return the scholarship", async () => {
+          const res = await request(server).get(sUrl);
+
+          expect(res.status).toBe(StatusCodes.OK);
+          expect(res.body).not.toBeNull();
+          expect(res.body).toEqual({
+            ...responseBody,
+            success: true,
+            data: expect.objectContaining({
+              title: data.title,
+              subtitle: data.subtitle,
+              slug: data.slug,
+              overview: data.overview,
+            }),
+          });
+        });
+      });
+
+      describe(`Update single Scholarships - ${sUrl}`, () => {
+        test("should return the scholarship", async () => {
+          const { user } = await signInUser();
+          const token = await user.getIdToken();
+
+          await request(server)
+            .put(sUrl)
+            .set("authorization", `bearer ${token}`)
+            .send({
+              ...SkynedUtils.exclude(data, ["banner"]),
+              overview: "New Overview",
+            });
+
+          const res = await request(server).get(sUrl);
+
+          expect(res.status).toBe(StatusCodes.OK);
+          expect(res.body).not.toBeNull();
+          expect(res.body).toEqual({
+            ...responseBody,
+            success: true,
+            data: expect.objectContaining({
+              title: data.title,
+              subtitle: data.subtitle,
+              slug: data.slug,
+              overview: "New Overview",
+            }),
+          });
+        });
+      });
+
+      describe(`Activate single Scholarships - ${sUrl}/deactivate`, () => {
+        test("should return the scholarship", async () => {
+          const { user } = await signInUser();
+          const token = await user.getIdToken();
+
+          await request(server)
+            .patch(sUrl + "/deactivate")
+            .set("authorization", `bearer ${token}`);
+
+          const res = await request(server)
+            .get(sUrl)
+            .set("authorization", `bearer ${token}`);
+
+          expect(res.status).toBe(StatusCodes.OK);
+          expect(res.body).not.toBeNull();
+          expect(res.body).toEqual({
+            ...responseBody,
+            success: true,
+            data: expect.objectContaining({
+              title: data.title,
+              subtitle: data.subtitle,
+              slug: data.slug,
+              active: false,
+            }),
+          });
+        });
+      });
+
+      describe(`Activate single Scholarships - ${sUrl}/activate`, () => {
+        test("should return the scholarship", async () => {
+          const { user } = await signInUser();
+          const token = await user.getIdToken();
+
+          await request(server)
+            .patch(sUrl + "/activate")
+            .set("authorization", `bearer ${token}`);
+
+          const res = await request(server)
+            .get(sUrl)
+            .set("authorization", `bearer ${token}`);
+
+          expect(res.status).toBe(StatusCodes.OK);
+          expect(res.body).not.toBeNull();
+          expect(res.body).toEqual({
+            ...responseBody,
+            success: true,
+            data: expect.objectContaining({
+              title: data.title,
+              subtitle: data.subtitle,
+              slug: data.slug,
+              active: true,
+            }),
+          });
         });
       });
     });
