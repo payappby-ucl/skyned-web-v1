@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { ScholarshipService, scholarshipService } from ".";
 import { signInUser } from "../../../../__tests__/helpers/utils";
 import { scholarshipData } from "../../../data";
@@ -61,60 +62,38 @@ describe("scholarshipService", () => {
     });
 
     describe("listScholarships", () => {
-      test("should return list of programs with limited data for unauthenticated auth user", async () => {
-        const programs = await programService.listPrograms({});
-        expect(programs).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              name: expect.any(String),
-              slug: expect.any(String),
-              school: expect.objectContaining({
-                name: expect.any(String),
-                slug: expect.any(String),
-                currency: expect.any(String),
-              }),
-            }),
-          ]),
-        );
-      });
-
-      test("should return list of programs with limited data for auth user (not admin)", async () => {
-        const programs = await programService.listPrograms({}, {
+      test("should return list of scholarships with limited data users that are not admins", async () => {
+        const scholarships = await scholarshipService.listScholarships({}, {
           claim: "student",
         } as any);
-        expect(programs).toEqual(
+
+        expect(scholarships).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
-              name: expect.any(String),
+              title: expect.any(String),
               slug: expect.any(String),
-              school: expect.objectContaining({
-                name: expect.any(String),
-                slug: expect.any(String),
-                currency: expect.any(String),
-              }),
+              subtitle: expect.any(String),
               description: expect.any(String),
             }),
           ]),
         );
+
+        expect(scholarships[0].active).toBeUndefined();
       });
 
-      test("should return list of programs with limited data for auth user (admin)", async () => {
-        const programs = await programService.listPrograms({}, {
+      test("should return list of scholarships for admin", async () => {
+        const scholarships = await scholarshipService.listScholarships({}, {
           claim: "admin",
         } as any);
 
-        expect(programs).toEqual(
+        expect(scholarships).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
-              name: expect.any(String),
+              title: expect.any(String),
               slug: expect.any(String),
-              school: expect.objectContaining({
-                name: expect.any(String),
-                slug: expect.any(String),
-                currency: expect.any(String),
-              }),
+              subtitle: expect.any(String),
               description: expect.any(String),
-              schoolId: expect.any(String),
+              active: true,
             }),
           ]),
         );
