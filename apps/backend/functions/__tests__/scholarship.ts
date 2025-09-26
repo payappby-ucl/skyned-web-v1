@@ -127,7 +127,7 @@ describe("Scholarship API", () => {
 
     describe(`Get scholarship summary - ${url}`, () => {
       test("should return the scholarship summary", async () => {
-        const res = await request(server).get(url);
+        const res = await request(server).get(url + "/summary");
 
         expect(res.status).toBe(StatusCodes.OK);
         expect(res.body).not.toBeNull();
