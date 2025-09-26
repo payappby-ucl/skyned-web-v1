@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  Award,
   CircleHelp,
   LayoutDashboard,
   LucideIcon,
@@ -93,6 +94,13 @@ export function AppSidebar({
           url: "/blog",
           icon: NotebookText,
           resource: "blogs",
+        },
+
+        {
+          title: "Scholarships & Awards",
+          url: "/scholarships",
+          icon: Award,
+          resource: "scholarships",
         },
 
         {

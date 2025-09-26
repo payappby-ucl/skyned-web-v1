@@ -129,40 +129,40 @@ paths:
 
   /scholarships/summary:
     get:
-    summary: Get Scholarships Summary
-    description: Get Scholarships Summary
-    tags:
-      - Scholarship
-    operationId: getScholarshipsSummary
-    responses:
-      "200":
-        description: The scholarships summary
-        content:
-          application/json:
-            schema:
-              allOf:
-                - $ref: "#/components/schemas/SuccessResponse"
-                - type: object
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          category:
-                            type: string
-                            enum:
-                              - accommodation
-                              - tuition
-                              - application fees
-                              - others
-                          _count:
-                            type: object
-                            properties:
-                              _all:
-                                type: integer
-      "500":
-        $ref: "#/components/responses/ServerError"
+      summary: Get Scholarships Summary
+      description: Get Scholarships Summary
+      tags:
+        - Scholarship
+      operationId: getScholarshipsSummary
+      responses:
+        "200":
+          description: The scholarships summary
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            category:
+                              type: string
+                              enum:
+                                - accommodation
+                                - tuition
+                                - application fees
+                                - others
+                            _count:
+                              type: object
+                              properties:
+                                _all:
+                                  type: integer
+        "500":
+          $ref: "#/components/responses/ServerError"
 
   /scholarships/{slug}:
     summary: Single scholarship resource
