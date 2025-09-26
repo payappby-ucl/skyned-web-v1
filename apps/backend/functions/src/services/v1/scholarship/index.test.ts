@@ -11,7 +11,7 @@ describe("scholarshipService", () => {
   });
 
   describe("Methods", () => {
-    describe("findBySlug", () => {
+    describe("create", () => {
       test("should pass", async () => {
         const userAuth = await signInUser();
 
@@ -97,6 +97,32 @@ describe("scholarshipService", () => {
             }),
           ]),
         );
+      });
+    });
+
+    describe("update", () => {
+      test("should pass", async () => {
+        const scholarship = await scholarshipService.update(
+          scholarshipData.slug,
+          {
+            overview: "New Overview",
+          },
+        );
+
+        expect(scholarship).not.toBeNull();
+        expect(scholarship.overview).toBe("New Overview");
+      });
+    });
+
+    describe("delete", () => {
+      test("should pass", async () => {
+        await scholarshipService.delete(scholarshipData.slug);
+
+        const scholarship = await scholarshipService.findBySlug(
+          scholarshipData.slug,
+        );
+
+        expect(scholarship).toBeNull();
       });
     });
   });
