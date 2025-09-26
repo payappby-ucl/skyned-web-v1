@@ -125,6 +125,27 @@ describe("Scholarship API", () => {
       });
     });
 
+    describe(`Get scholarship summary - ${url}`, () => {
+      test("should return the scholarship summary", async () => {
+        const res = await request(server).get(url);
+
+        expect(res.status).toBe(StatusCodes.OK);
+        expect(res.body).not.toBeNull();
+        expect(res.body).toEqual({
+          ...responseBody,
+          success: true,
+          data: expect.arrayContaining([
+            expect.objectContaining({
+              category: expect.any(String),
+              _count: {
+                _all: expect.any(Number),
+              },
+            }),
+          ]),
+        });
+      });
+    });
+
     describe("Single Scholarship Endpoint", () => {
       const sUrl = `${url}/${data.slug}`;
 

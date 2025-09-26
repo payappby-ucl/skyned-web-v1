@@ -114,6 +114,24 @@ describe("scholarshipService", () => {
       });
     });
 
+    describe("getSummary", () => {
+      test("should pass", async () => {
+        const summary = await scholarshipService.getSummary();
+
+        expect(summary).not.toBeNull();
+        expect(summary).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              category: expect.any(String),
+              _count: {
+                _all: expect.any(Number),
+              },
+            }),
+          ]),
+        );
+      });
+    });
+
     describe("delete", () => {
       test("should pass", async () => {
         await scholarshipService.delete(scholarshipData.slug);
