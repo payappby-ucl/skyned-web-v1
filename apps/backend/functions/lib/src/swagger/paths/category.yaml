@@ -118,10 +118,11 @@ paths:
         - $ref: "#/components/parameters/OffsetParam"
         - $ref: "#/components/parameters/From"
         - $ref: "#/components/parameters/To"
-        - type: object
-          properties:
-            name:
-              type: string
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: The categories

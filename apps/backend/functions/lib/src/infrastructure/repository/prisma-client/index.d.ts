@@ -93,6 +93,11 @@ export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
  * 
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
+/**
+ * Model Scholarship
+ * 
+ */
+export type Scholarship = $Result.DefaultSelection<Prisma.$ScholarshipPayload>
 
 /**
  * Enums
@@ -512,6 +517,16 @@ export class PrismaClient<
     * ```
     */
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.scholarship`: Exposes CRUD operations for the **Scholarship** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Scholarships
+    * const scholarships = await prisma.scholarship.findMany()
+    * ```
+    */
+  get scholarship(): Prisma.ScholarshipDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -967,7 +982,8 @@ export namespace Prisma {
     Intake: 'Intake',
     BlogPost: 'BlogPost',
     Tag: 'Tag',
-    Category: 'Category'
+    Category: 'Category',
+    Scholarship: 'Scholarship'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -986,7 +1002,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "dailyStats" | "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "englishProficiency" | "intake" | "blogPost" | "tag" | "category"
+      modelProps: "dailyStats" | "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "englishProficiency" | "intake" | "blogPost" | "tag" | "category" | "scholarship"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2174,6 +2190,80 @@ export namespace Prisma {
           }
         }
       }
+      Scholarship: {
+        payload: Prisma.$ScholarshipPayload<ExtArgs>
+        fields: Prisma.ScholarshipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ScholarshipFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ScholarshipFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          findFirst: {
+            args: Prisma.ScholarshipFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ScholarshipFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          findMany: {
+            args: Prisma.ScholarshipFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>[]
+          }
+          create: {
+            args: Prisma.ScholarshipCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          createMany: {
+            args: Prisma.ScholarshipCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ScholarshipCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>[]
+          }
+          delete: {
+            args: Prisma.ScholarshipDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          update: {
+            args: Prisma.ScholarshipUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          deleteMany: {
+            args: Prisma.ScholarshipDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ScholarshipUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ScholarshipUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>[]
+          }
+          upsert: {
+            args: Prisma.ScholarshipUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScholarshipPayload>
+          }
+          aggregate: {
+            args: Prisma.ScholarshipAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateScholarship>
+          }
+          groupBy: {
+            args: Prisma.ScholarshipGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ScholarshipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ScholarshipCountArgs<ExtArgs>
+            result: $Utils.Optional<ScholarshipCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2286,6 +2376,7 @@ export namespace Prisma {
     blogPost?: BlogPostOmit
     tag?: TagOmit
     category?: CategoryOmit
+    scholarship?: ScholarshipOmit
   }
 
   /* Types for Logging */
@@ -2381,6 +2472,7 @@ export namespace Prisma {
     blogsCreated: number
     tagsCreated: number
     categoriesCreated: number
+    scholarshipsCreated: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2399,6 +2491,7 @@ export namespace Prisma {
     blogsCreated?: boolean | AdminCountOutputTypeCountBlogsCreatedArgs
     tagsCreated?: boolean | AdminCountOutputTypeCountTagsCreatedArgs
     categoriesCreated?: boolean | AdminCountOutputTypeCountCategoriesCreatedArgs
+    scholarshipsCreated?: boolean | AdminCountOutputTypeCountScholarshipsCreatedArgs
   }
 
   // Custom InputTypes
@@ -2515,6 +2608,13 @@ export namespace Prisma {
    */
   export type AdminCountOutputTypeCountCategoriesCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CategoryWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountScholarshipsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScholarshipWhereInput
   }
 
 
@@ -5612,6 +5712,7 @@ export namespace Prisma {
     blogsCreated?: boolean | Admin$blogsCreatedArgs<ExtArgs>
     tagsCreated?: boolean | Admin$tagsCreatedArgs<ExtArgs>
     categoriesCreated?: boolean | Admin$categoriesCreatedArgs<ExtArgs>
+    scholarshipsCreated?: boolean | Admin$scholarshipsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -5701,6 +5802,7 @@ export namespace Prisma {
     blogsCreated?: boolean | Admin$blogsCreatedArgs<ExtArgs>
     tagsCreated?: boolean | Admin$tagsCreatedArgs<ExtArgs>
     categoriesCreated?: boolean | Admin$categoriesCreatedArgs<ExtArgs>
+    scholarshipsCreated?: boolean | Admin$scholarshipsCreatedArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5729,6 +5831,7 @@ export namespace Prisma {
       blogsCreated: Prisma.$BlogPostPayload<ExtArgs>[]
       tagsCreated: Prisma.$TagPayload<ExtArgs>[]
       categoriesCreated: Prisma.$CategoryPayload<ExtArgs>[]
+      scholarshipsCreated: Prisma.$ScholarshipPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6160,6 +6263,7 @@ export namespace Prisma {
     blogsCreated<T extends Admin$blogsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$blogsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tagsCreated<T extends Admin$tagsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$tagsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categoriesCreated<T extends Admin$categoriesCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$categoriesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    scholarshipsCreated<T extends Admin$scholarshipsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, Admin$scholarshipsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6980,6 +7084,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.scholarshipsCreated
+   */
+  export type Admin$scholarshipsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    where?: ScholarshipWhereInput
+    orderBy?: ScholarshipOrderByWithRelationInput | ScholarshipOrderByWithRelationInput[]
+    cursor?: ScholarshipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScholarshipScalarFieldEnum | ScholarshipScalarFieldEnum[]
   }
 
   /**
@@ -22358,6 +22486,1220 @@ export namespace Prisma {
 
 
   /**
+   * Model Scholarship
+   */
+
+  export type AggregateScholarship = {
+    _count: ScholarshipCountAggregateOutputType | null
+    _avg: ScholarshipAvgAggregateOutputType | null
+    _sum: ScholarshipSumAggregateOutputType | null
+    _min: ScholarshipMinAggregateOutputType | null
+    _max: ScholarshipMaxAggregateOutputType | null
+  }
+
+  export type ScholarshipAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ScholarshipSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ScholarshipMinAggregateOutputType = {
+    id: number | null
+    scholarshipId: string | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    overview: string | null
+    description: string | null
+    category: string | null
+    featured: boolean | null
+    active: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ScholarshipMaxAggregateOutputType = {
+    id: number | null
+    scholarshipId: string | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    overview: string | null
+    description: string | null
+    category: string | null
+    featured: boolean | null
+    active: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ScholarshipCountAggregateOutputType = {
+    id: number
+    scholarshipId: number
+    title: number
+    slug: number
+    subtitle: number
+    banner: number
+    overview: number
+    description: number
+    category: number
+    featured: number
+    eligibilityRequirements: number
+    active: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ScholarshipAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ScholarshipSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ScholarshipMinAggregateInputType = {
+    id?: true
+    scholarshipId?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    overview?: true
+    description?: true
+    category?: true
+    featured?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ScholarshipMaxAggregateInputType = {
+    id?: true
+    scholarshipId?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    overview?: true
+    description?: true
+    category?: true
+    featured?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ScholarshipCountAggregateInputType = {
+    id?: true
+    scholarshipId?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    banner?: true
+    overview?: true
+    description?: true
+    category?: true
+    featured?: true
+    eligibilityRequirements?: true
+    active?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ScholarshipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Scholarship to aggregate.
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Scholarships to fetch.
+     */
+    orderBy?: ScholarshipOrderByWithRelationInput | ScholarshipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ScholarshipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Scholarships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Scholarships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Scholarships
+    **/
+    _count?: true | ScholarshipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ScholarshipAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ScholarshipSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ScholarshipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ScholarshipMaxAggregateInputType
+  }
+
+  export type GetScholarshipAggregateType<T extends ScholarshipAggregateArgs> = {
+        [P in keyof T & keyof AggregateScholarship]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateScholarship[P]>
+      : GetScalarType<T[P], AggregateScholarship[P]>
+  }
+
+
+
+
+  export type ScholarshipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScholarshipWhereInput
+    orderBy?: ScholarshipOrderByWithAggregationInput | ScholarshipOrderByWithAggregationInput[]
+    by: ScholarshipScalarFieldEnum[] | ScholarshipScalarFieldEnum
+    having?: ScholarshipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ScholarshipCountAggregateInputType | true
+    _avg?: ScholarshipAvgAggregateInputType
+    _sum?: ScholarshipSumAggregateInputType
+    _min?: ScholarshipMinAggregateInputType
+    _max?: ScholarshipMaxAggregateInputType
+  }
+
+  export type ScholarshipGroupByOutputType = {
+    id: number
+    scholarshipId: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonValue
+    overview: string
+    description: string
+    category: string
+    featured: boolean
+    eligibilityRequirements: string[]
+    active: boolean
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ScholarshipCountAggregateOutputType | null
+    _avg: ScholarshipAvgAggregateOutputType | null
+    _sum: ScholarshipSumAggregateOutputType | null
+    _min: ScholarshipMinAggregateOutputType | null
+    _max: ScholarshipMaxAggregateOutputType | null
+  }
+
+  type GetScholarshipGroupByPayload<T extends ScholarshipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ScholarshipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ScholarshipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ScholarshipGroupByOutputType[P]>
+            : GetScalarType<T[P], ScholarshipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ScholarshipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scholarshipId?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    banner?: boolean
+    overview?: boolean
+    description?: boolean
+    category?: boolean
+    featured?: boolean
+    eligibilityRequirements?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scholarship"]>
+
+  export type ScholarshipSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scholarshipId?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    banner?: boolean
+    overview?: boolean
+    description?: boolean
+    category?: boolean
+    featured?: boolean
+    eligibilityRequirements?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scholarship"]>
+
+  export type ScholarshipSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scholarshipId?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    banner?: boolean
+    overview?: boolean
+    description?: boolean
+    category?: boolean
+    featured?: boolean
+    eligibilityRequirements?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scholarship"]>
+
+  export type ScholarshipSelectScalar = {
+    id?: boolean
+    scholarshipId?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    banner?: boolean
+    overview?: boolean
+    description?: boolean
+    category?: boolean
+    featured?: boolean
+    eligibilityRequirements?: boolean
+    active?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ScholarshipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scholarshipId" | "title" | "slug" | "subtitle" | "banner" | "overview" | "description" | "category" | "featured" | "eligibilityRequirements" | "active" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["scholarship"]>
+  export type ScholarshipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type ScholarshipIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type ScholarshipIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $ScholarshipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Scholarship"
+    objects: {
+      createdBy: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      scholarshipId: string
+      title: string
+      slug: string
+      subtitle: string
+      banner: Prisma.JsonValue
+      overview: string
+      description: string
+      category: string
+      featured: boolean
+      eligibilityRequirements: string[]
+      active: boolean
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["scholarship"]>
+    composites: {}
+  }
+
+  type ScholarshipGetPayload<S extends boolean | null | undefined | ScholarshipDefaultArgs> = $Result.GetResult<Prisma.$ScholarshipPayload, S>
+
+  type ScholarshipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ScholarshipFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ScholarshipCountAggregateInputType | true
+    }
+
+  export interface ScholarshipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Scholarship'], meta: { name: 'Scholarship' } }
+    /**
+     * Find zero or one Scholarship that matches the filter.
+     * @param {ScholarshipFindUniqueArgs} args - Arguments to find a Scholarship
+     * @example
+     * // Get one Scholarship
+     * const scholarship = await prisma.scholarship.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ScholarshipFindUniqueArgs>(args: SelectSubset<T, ScholarshipFindUniqueArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Scholarship that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ScholarshipFindUniqueOrThrowArgs} args - Arguments to find a Scholarship
+     * @example
+     * // Get one Scholarship
+     * const scholarship = await prisma.scholarship.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ScholarshipFindUniqueOrThrowArgs>(args: SelectSubset<T, ScholarshipFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Scholarship that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipFindFirstArgs} args - Arguments to find a Scholarship
+     * @example
+     * // Get one Scholarship
+     * const scholarship = await prisma.scholarship.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ScholarshipFindFirstArgs>(args?: SelectSubset<T, ScholarshipFindFirstArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Scholarship that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipFindFirstOrThrowArgs} args - Arguments to find a Scholarship
+     * @example
+     * // Get one Scholarship
+     * const scholarship = await prisma.scholarship.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ScholarshipFindFirstOrThrowArgs>(args?: SelectSubset<T, ScholarshipFindFirstOrThrowArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Scholarships that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Scholarships
+     * const scholarships = await prisma.scholarship.findMany()
+     * 
+     * // Get first 10 Scholarships
+     * const scholarships = await prisma.scholarship.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const scholarshipWithIdOnly = await prisma.scholarship.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ScholarshipFindManyArgs>(args?: SelectSubset<T, ScholarshipFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Scholarship.
+     * @param {ScholarshipCreateArgs} args - Arguments to create a Scholarship.
+     * @example
+     * // Create one Scholarship
+     * const Scholarship = await prisma.scholarship.create({
+     *   data: {
+     *     // ... data to create a Scholarship
+     *   }
+     * })
+     * 
+     */
+    create<T extends ScholarshipCreateArgs>(args: SelectSubset<T, ScholarshipCreateArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Scholarships.
+     * @param {ScholarshipCreateManyArgs} args - Arguments to create many Scholarships.
+     * @example
+     * // Create many Scholarships
+     * const scholarship = await prisma.scholarship.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ScholarshipCreateManyArgs>(args?: SelectSubset<T, ScholarshipCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Scholarships and returns the data saved in the database.
+     * @param {ScholarshipCreateManyAndReturnArgs} args - Arguments to create many Scholarships.
+     * @example
+     * // Create many Scholarships
+     * const scholarship = await prisma.scholarship.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Scholarships and only return the `id`
+     * const scholarshipWithIdOnly = await prisma.scholarship.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ScholarshipCreateManyAndReturnArgs>(args?: SelectSubset<T, ScholarshipCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Scholarship.
+     * @param {ScholarshipDeleteArgs} args - Arguments to delete one Scholarship.
+     * @example
+     * // Delete one Scholarship
+     * const Scholarship = await prisma.scholarship.delete({
+     *   where: {
+     *     // ... filter to delete one Scholarship
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ScholarshipDeleteArgs>(args: SelectSubset<T, ScholarshipDeleteArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Scholarship.
+     * @param {ScholarshipUpdateArgs} args - Arguments to update one Scholarship.
+     * @example
+     * // Update one Scholarship
+     * const scholarship = await prisma.scholarship.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ScholarshipUpdateArgs>(args: SelectSubset<T, ScholarshipUpdateArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Scholarships.
+     * @param {ScholarshipDeleteManyArgs} args - Arguments to filter Scholarships to delete.
+     * @example
+     * // Delete a few Scholarships
+     * const { count } = await prisma.scholarship.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ScholarshipDeleteManyArgs>(args?: SelectSubset<T, ScholarshipDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Scholarships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Scholarships
+     * const scholarship = await prisma.scholarship.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ScholarshipUpdateManyArgs>(args: SelectSubset<T, ScholarshipUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Scholarships and returns the data updated in the database.
+     * @param {ScholarshipUpdateManyAndReturnArgs} args - Arguments to update many Scholarships.
+     * @example
+     * // Update many Scholarships
+     * const scholarship = await prisma.scholarship.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Scholarships and only return the `id`
+     * const scholarshipWithIdOnly = await prisma.scholarship.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ScholarshipUpdateManyAndReturnArgs>(args: SelectSubset<T, ScholarshipUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Scholarship.
+     * @param {ScholarshipUpsertArgs} args - Arguments to update or create a Scholarship.
+     * @example
+     * // Update or create a Scholarship
+     * const scholarship = await prisma.scholarship.upsert({
+     *   create: {
+     *     // ... data to create a Scholarship
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Scholarship we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ScholarshipUpsertArgs>(args: SelectSubset<T, ScholarshipUpsertArgs<ExtArgs>>): Prisma__ScholarshipClient<$Result.GetResult<Prisma.$ScholarshipPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Scholarships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipCountArgs} args - Arguments to filter Scholarships to count.
+     * @example
+     * // Count the number of Scholarships
+     * const count = await prisma.scholarship.count({
+     *   where: {
+     *     // ... the filter for the Scholarships we want to count
+     *   }
+     * })
+    **/
+    count<T extends ScholarshipCountArgs>(
+      args?: Subset<T, ScholarshipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ScholarshipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Scholarship.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ScholarshipAggregateArgs>(args: Subset<T, ScholarshipAggregateArgs>): Prisma.PrismaPromise<GetScholarshipAggregateType<T>>
+
+    /**
+     * Group by Scholarship.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScholarshipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ScholarshipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ScholarshipGroupByArgs['orderBy'] }
+        : { orderBy?: ScholarshipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ScholarshipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetScholarshipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Scholarship model
+   */
+  readonly fields: ScholarshipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Scholarship.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ScholarshipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Scholarship model
+   */
+  interface ScholarshipFieldRefs {
+    readonly id: FieldRef<"Scholarship", 'Int'>
+    readonly scholarshipId: FieldRef<"Scholarship", 'String'>
+    readonly title: FieldRef<"Scholarship", 'String'>
+    readonly slug: FieldRef<"Scholarship", 'String'>
+    readonly subtitle: FieldRef<"Scholarship", 'String'>
+    readonly banner: FieldRef<"Scholarship", 'Json'>
+    readonly overview: FieldRef<"Scholarship", 'String'>
+    readonly description: FieldRef<"Scholarship", 'String'>
+    readonly category: FieldRef<"Scholarship", 'String'>
+    readonly featured: FieldRef<"Scholarship", 'Boolean'>
+    readonly eligibilityRequirements: FieldRef<"Scholarship", 'String[]'>
+    readonly active: FieldRef<"Scholarship", 'Boolean'>
+    readonly createdById: FieldRef<"Scholarship", 'String'>
+    readonly createdAt: FieldRef<"Scholarship", 'DateTime'>
+    readonly updatedAt: FieldRef<"Scholarship", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Scholarship findUnique
+   */
+  export type ScholarshipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter, which Scholarship to fetch.
+     */
+    where: ScholarshipWhereUniqueInput
+  }
+
+  /**
+   * Scholarship findUniqueOrThrow
+   */
+  export type ScholarshipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter, which Scholarship to fetch.
+     */
+    where: ScholarshipWhereUniqueInput
+  }
+
+  /**
+   * Scholarship findFirst
+   */
+  export type ScholarshipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter, which Scholarship to fetch.
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Scholarships to fetch.
+     */
+    orderBy?: ScholarshipOrderByWithRelationInput | ScholarshipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Scholarships.
+     */
+    cursor?: ScholarshipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Scholarships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Scholarships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Scholarships.
+     */
+    distinct?: ScholarshipScalarFieldEnum | ScholarshipScalarFieldEnum[]
+  }
+
+  /**
+   * Scholarship findFirstOrThrow
+   */
+  export type ScholarshipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter, which Scholarship to fetch.
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Scholarships to fetch.
+     */
+    orderBy?: ScholarshipOrderByWithRelationInput | ScholarshipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Scholarships.
+     */
+    cursor?: ScholarshipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Scholarships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Scholarships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Scholarships.
+     */
+    distinct?: ScholarshipScalarFieldEnum | ScholarshipScalarFieldEnum[]
+  }
+
+  /**
+   * Scholarship findMany
+   */
+  export type ScholarshipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter, which Scholarships to fetch.
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Scholarships to fetch.
+     */
+    orderBy?: ScholarshipOrderByWithRelationInput | ScholarshipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Scholarships.
+     */
+    cursor?: ScholarshipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Scholarships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Scholarships.
+     */
+    skip?: number
+    distinct?: ScholarshipScalarFieldEnum | ScholarshipScalarFieldEnum[]
+  }
+
+  /**
+   * Scholarship create
+   */
+  export type ScholarshipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Scholarship.
+     */
+    data: XOR<ScholarshipCreateInput, ScholarshipUncheckedCreateInput>
+  }
+
+  /**
+   * Scholarship createMany
+   */
+  export type ScholarshipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Scholarships.
+     */
+    data: ScholarshipCreateManyInput | ScholarshipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Scholarship createManyAndReturn
+   */
+  export type ScholarshipCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * The data used to create many Scholarships.
+     */
+    data: ScholarshipCreateManyInput | ScholarshipCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Scholarship update
+   */
+  export type ScholarshipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Scholarship.
+     */
+    data: XOR<ScholarshipUpdateInput, ScholarshipUncheckedUpdateInput>
+    /**
+     * Choose, which Scholarship to update.
+     */
+    where: ScholarshipWhereUniqueInput
+  }
+
+  /**
+   * Scholarship updateMany
+   */
+  export type ScholarshipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Scholarships.
+     */
+    data: XOR<ScholarshipUpdateManyMutationInput, ScholarshipUncheckedUpdateManyInput>
+    /**
+     * Filter which Scholarships to update
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * Limit how many Scholarships to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Scholarship updateManyAndReturn
+   */
+  export type ScholarshipUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * The data used to update Scholarships.
+     */
+    data: XOR<ScholarshipUpdateManyMutationInput, ScholarshipUncheckedUpdateManyInput>
+    /**
+     * Filter which Scholarships to update
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * Limit how many Scholarships to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Scholarship upsert
+   */
+  export type ScholarshipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Scholarship to update in case it exists.
+     */
+    where: ScholarshipWhereUniqueInput
+    /**
+     * In case the Scholarship found by the `where` argument doesn't exist, create a new Scholarship with this data.
+     */
+    create: XOR<ScholarshipCreateInput, ScholarshipUncheckedCreateInput>
+    /**
+     * In case the Scholarship was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ScholarshipUpdateInput, ScholarshipUncheckedUpdateInput>
+  }
+
+  /**
+   * Scholarship delete
+   */
+  export type ScholarshipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+    /**
+     * Filter which Scholarship to delete.
+     */
+    where: ScholarshipWhereUniqueInput
+  }
+
+  /**
+   * Scholarship deleteMany
+   */
+  export type ScholarshipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Scholarships to delete
+     */
+    where?: ScholarshipWhereInput
+    /**
+     * Limit how many Scholarships to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Scholarship without action
+   */
+  export type ScholarshipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scholarship
+     */
+    select?: ScholarshipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scholarship
+     */
+    omit?: ScholarshipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScholarshipInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22645,6 +23987,27 @@ export namespace Prisma {
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
+  export const ScholarshipScalarFieldEnum: {
+    id: 'id',
+    scholarshipId: 'scholarshipId',
+    title: 'title',
+    slug: 'slug',
+    subtitle: 'subtitle',
+    banner: 'banner',
+    overview: 'overview',
+    description: 'description',
+    category: 'category',
+    featured: 'featured',
+    eligibilityRequirements: 'eligibilityRequirements',
+    active: 'active',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ScholarshipScalarFieldEnum = (typeof ScholarshipScalarFieldEnum)[keyof typeof ScholarshipScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -22847,6 +24210,21 @@ export namespace Prisma {
   };
 
   export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
+
+
+  export const ScholarshipOrderByRelevanceFieldEnum: {
+    scholarshipId: 'scholarshipId',
+    title: 'title',
+    slug: 'slug',
+    subtitle: 'subtitle',
+    overview: 'overview',
+    description: 'description',
+    category: 'category',
+    eligibilityRequirements: 'eligibilityRequirements',
+    createdById: 'createdById'
+  };
+
+  export type ScholarshipOrderByRelevanceFieldEnum = (typeof ScholarshipOrderByRelevanceFieldEnum)[keyof typeof ScholarshipOrderByRelevanceFieldEnum]
 
 
   /**
@@ -23366,6 +24744,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostListRelationFilter
     tagsCreated?: TagListRelationFilter
     categoriesCreated?: CategoryListRelationFilter
+    scholarshipsCreated?: ScholarshipListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -23404,6 +24783,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostOrderByRelationAggregateInput
     tagsCreated?: TagOrderByRelationAggregateInput
     categoriesCreated?: CategoryOrderByRelationAggregateInput
+    scholarshipsCreated?: ScholarshipOrderByRelationAggregateInput
     _relevance?: AdminOrderByRelevanceInput
   }
 
@@ -23446,6 +24826,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostListRelationFilter
     tagsCreated?: TagListRelationFilter
     categoriesCreated?: CategoryListRelationFilter
+    scholarshipsCreated?: ScholarshipListRelationFilter
   }, "adminId" | "id" | "adminId" | "email">
 
   export type AdminOrderByWithAggregationInput = {
@@ -24599,6 +25980,114 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
+  export type ScholarshipWhereInput = {
+    AND?: ScholarshipWhereInput | ScholarshipWhereInput[]
+    OR?: ScholarshipWhereInput[]
+    NOT?: ScholarshipWhereInput | ScholarshipWhereInput[]
+    id?: IntFilter<"Scholarship"> | number
+    scholarshipId?: StringFilter<"Scholarship"> | string
+    title?: StringFilter<"Scholarship"> | string
+    slug?: StringFilter<"Scholarship"> | string
+    subtitle?: StringFilter<"Scholarship"> | string
+    banner?: JsonFilter<"Scholarship">
+    overview?: StringFilter<"Scholarship"> | string
+    description?: StringFilter<"Scholarship"> | string
+    category?: StringFilter<"Scholarship"> | string
+    featured?: BoolFilter<"Scholarship"> | boolean
+    eligibilityRequirements?: StringNullableListFilter<"Scholarship">
+    active?: BoolFilter<"Scholarship"> | boolean
+    createdById?: StringFilter<"Scholarship"> | string
+    createdAt?: DateTimeFilter<"Scholarship"> | Date | string
+    updatedAt?: DateTimeFilter<"Scholarship"> | Date | string
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type ScholarshipOrderByWithRelationInput = {
+    id?: SortOrder
+    scholarshipId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    banner?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    featured?: SortOrder
+    eligibilityRequirements?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: AdminOrderByWithRelationInput
+    _relevance?: ScholarshipOrderByRelevanceInput
+  }
+
+  export type ScholarshipWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: ScholarshipWhereInput | ScholarshipWhereInput[]
+    OR?: ScholarshipWhereInput[]
+    NOT?: ScholarshipWhereInput | ScholarshipWhereInput[]
+    scholarshipId?: StringFilter<"Scholarship"> | string
+    title?: StringFilter<"Scholarship"> | string
+    subtitle?: StringFilter<"Scholarship"> | string
+    banner?: JsonFilter<"Scholarship">
+    overview?: StringFilter<"Scholarship"> | string
+    description?: StringFilter<"Scholarship"> | string
+    category?: StringFilter<"Scholarship"> | string
+    featured?: BoolFilter<"Scholarship"> | boolean
+    eligibilityRequirements?: StringNullableListFilter<"Scholarship">
+    active?: BoolFilter<"Scholarship"> | boolean
+    createdById?: StringFilter<"Scholarship"> | string
+    createdAt?: DateTimeFilter<"Scholarship"> | Date | string
+    updatedAt?: DateTimeFilter<"Scholarship"> | Date | string
+    createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "slug">
+
+  export type ScholarshipOrderByWithAggregationInput = {
+    id?: SortOrder
+    scholarshipId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    banner?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    featured?: SortOrder
+    eligibilityRequirements?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ScholarshipCountOrderByAggregateInput
+    _avg?: ScholarshipAvgOrderByAggregateInput
+    _max?: ScholarshipMaxOrderByAggregateInput
+    _min?: ScholarshipMinOrderByAggregateInput
+    _sum?: ScholarshipSumOrderByAggregateInput
+  }
+
+  export type ScholarshipScalarWhereWithAggregatesInput = {
+    AND?: ScholarshipScalarWhereWithAggregatesInput | ScholarshipScalarWhereWithAggregatesInput[]
+    OR?: ScholarshipScalarWhereWithAggregatesInput[]
+    NOT?: ScholarshipScalarWhereWithAggregatesInput | ScholarshipScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Scholarship"> | number
+    scholarshipId?: StringWithAggregatesFilter<"Scholarship"> | string
+    title?: StringWithAggregatesFilter<"Scholarship"> | string
+    slug?: StringWithAggregatesFilter<"Scholarship"> | string
+    subtitle?: StringWithAggregatesFilter<"Scholarship"> | string
+    banner?: JsonWithAggregatesFilter<"Scholarship">
+    overview?: StringWithAggregatesFilter<"Scholarship"> | string
+    description?: StringWithAggregatesFilter<"Scholarship"> | string
+    category?: StringWithAggregatesFilter<"Scholarship"> | string
+    featured?: BoolWithAggregatesFilter<"Scholarship"> | boolean
+    eligibilityRequirements?: StringNullableListFilter<"Scholarship">
+    active?: BoolWithAggregatesFilter<"Scholarship"> | boolean
+    createdById?: StringWithAggregatesFilter<"Scholarship"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Scholarship"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Scholarship"> | Date | string
+  }
+
   export type DailyStatsCreateInput = {
     id?: number
     date: Date | string
@@ -24928,6 +26417,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -24965,6 +26455,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -25001,6 +26492,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -25038,6 +26530,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -26239,6 +27732,128 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ScholarshipCreateInput = {
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: AdminCreateNestedOneWithoutScholarshipsCreatedInput
+  }
+
+  export type ScholarshipUncheckedCreateInput = {
+    id?: number
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScholarshipUpdateInput = {
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneRequiredWithoutScholarshipsCreatedNestedInput
+  }
+
+  export type ScholarshipUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScholarshipCreateManyInput = {
+    id?: number
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScholarshipUpdateManyMutationInput = {
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScholarshipUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -26719,6 +28334,12 @@ export namespace Prisma {
     none?: CategoryWhereInput
   }
 
+  export type ScholarshipListRelationFilter = {
+    every?: ScholarshipWhereInput
+    some?: ScholarshipWhereInput
+    none?: ScholarshipWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -26769,6 +28390,10 @@ export namespace Prisma {
   }
 
   export type CategoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ScholarshipOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27862,6 +29487,70 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type ScholarshipOrderByRelevanceInput = {
+    fields: ScholarshipOrderByRelevanceFieldEnum | ScholarshipOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ScholarshipCountOrderByAggregateInput = {
+    id?: SortOrder
+    scholarshipId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    banner?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    featured?: SortOrder
+    eligibilityRequirements?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ScholarshipAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ScholarshipMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scholarshipId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    featured?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ScholarshipMinOrderByAggregateInput = {
+    id?: SortOrder
+    scholarshipId?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    overview?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    featured?: SortOrder
+    active?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ScholarshipSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -27999,6 +29688,13 @@ export namespace Prisma {
     connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
   }
 
+  export type ScholarshipCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput> | ScholarshipCreateWithoutCreatedByInput[] | ScholarshipUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ScholarshipCreateOrConnectWithoutCreatedByInput | ScholarshipCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ScholarshipCreateManyCreatedByInputEnvelope
+    connect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -28100,6 +29796,13 @@ export namespace Prisma {
     connectOrCreate?: CategoryCreateOrConnectWithoutCreatedByInput | CategoryCreateOrConnectWithoutCreatedByInput[]
     createMany?: CategoryCreateManyCreatedByInputEnvelope
     connect?: CategoryWhereUniqueInput | CategoryWhereUniqueInput[]
+  }
+
+  export type ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput> | ScholarshipCreateWithoutCreatedByInput[] | ScholarshipUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ScholarshipCreateOrConnectWithoutCreatedByInput | ScholarshipCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ScholarshipCreateManyCreatedByInputEnvelope
+    connect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -28332,6 +30035,20 @@ export namespace Prisma {
     deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
   }
 
+  export type ScholarshipUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput> | ScholarshipCreateWithoutCreatedByInput[] | ScholarshipUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ScholarshipCreateOrConnectWithoutCreatedByInput | ScholarshipCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ScholarshipUpsertWithWhereUniqueWithoutCreatedByInput | ScholarshipUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ScholarshipCreateManyCreatedByInputEnvelope
+    set?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    disconnect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    delete?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    connect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    update?: ScholarshipUpdateWithWhereUniqueWithoutCreatedByInput | ScholarshipUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ScholarshipUpdateManyWithWhereWithoutCreatedByInput | ScholarshipUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ScholarshipScalarWhereInput | ScholarshipScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<AdminCreateWithoutCreatedByInput, AdminUncheckedCreateWithoutCreatedByInput> | AdminCreateWithoutCreatedByInput[] | AdminUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: AdminCreateOrConnectWithoutCreatedByInput | AdminCreateOrConnectWithoutCreatedByInput[]
@@ -28538,6 +30255,20 @@ export namespace Prisma {
     update?: CategoryUpdateWithWhereUniqueWithoutCreatedByInput | CategoryUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: CategoryUpdateManyWithWhereWithoutCreatedByInput | CategoryUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: CategoryScalarWhereInput | CategoryScalarWhereInput[]
+  }
+
+  export type ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput> | ScholarshipCreateWithoutCreatedByInput[] | ScholarshipUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ScholarshipCreateOrConnectWithoutCreatedByInput | ScholarshipCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ScholarshipUpsertWithWhereUniqueWithoutCreatedByInput | ScholarshipUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ScholarshipCreateManyCreatedByInputEnvelope
+    set?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    disconnect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    delete?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    connect?: ScholarshipWhereUniqueInput | ScholarshipWhereUniqueInput[]
+    update?: ScholarshipUpdateWithWhereUniqueWithoutCreatedByInput | ScholarshipUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ScholarshipUpdateManyWithWhereWithoutCreatedByInput | ScholarshipUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ScholarshipScalarWhereInput | ScholarshipScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutDepartmentsLeadingInput = {
@@ -29339,6 +31070,29 @@ export namespace Prisma {
     deleteMany?: BlogPostScalarWhereInput | BlogPostScalarWhereInput[]
   }
 
+  export type ScholarshipCreateeligibilityRequirementsInput = {
+    set: string[]
+  }
+
+  export type AdminCreateNestedOneWithoutScholarshipsCreatedInput = {
+    create?: XOR<AdminCreateWithoutScholarshipsCreatedInput, AdminUncheckedCreateWithoutScholarshipsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutScholarshipsCreatedInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type ScholarshipUpdateeligibilityRequirementsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutScholarshipsCreatedNestedInput = {
+    create?: XOR<AdminCreateWithoutScholarshipsCreatedInput, AdminUncheckedCreateWithoutScholarshipsCreatedInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutScholarshipsCreatedInput
+    upsert?: AdminUpsertWithoutScholarshipsCreatedInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutScholarshipsCreatedInput, AdminUpdateWithoutScholarshipsCreatedInput>, AdminUncheckedUpdateWithoutScholarshipsCreatedInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -29810,6 +31564,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedInput = {
@@ -29846,6 +31601,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedInput = {
@@ -29887,6 +31643,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCreatedByInput = {
@@ -29923,6 +31680,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCreatedByInput = {
@@ -30405,6 +32163,49 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ScholarshipCreateWithoutCreatedByInput = {
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScholarshipUncheckedCreateWithoutCreatedByInput = {
+    id?: number
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScholarshipCreateOrConnectWithoutCreatedByInput = {
+    where: ScholarshipWhereUniqueInput
+    create: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ScholarshipCreateManyCreatedByInputEnvelope = {
+    data: ScholarshipCreateManyCreatedByInput | ScholarshipCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AdminUpsertWithoutCreatedInput = {
     update: XOR<AdminUpdateWithoutCreatedInput, AdminUncheckedUpdateWithoutCreatedInput>
     create: XOR<AdminCreateWithoutCreatedInput, AdminUncheckedCreateWithoutCreatedInput>
@@ -30449,6 +32250,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedInput = {
@@ -30485,6 +32287,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -30930,6 +32733,43 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Category"> | Date | string
   }
 
+  export type ScholarshipUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ScholarshipWhereUniqueInput
+    update: XOR<ScholarshipUpdateWithoutCreatedByInput, ScholarshipUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ScholarshipCreateWithoutCreatedByInput, ScholarshipUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ScholarshipUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ScholarshipWhereUniqueInput
+    data: XOR<ScholarshipUpdateWithoutCreatedByInput, ScholarshipUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ScholarshipUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ScholarshipScalarWhereInput
+    data: XOR<ScholarshipUpdateManyMutationInput, ScholarshipUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ScholarshipScalarWhereInput = {
+    AND?: ScholarshipScalarWhereInput | ScholarshipScalarWhereInput[]
+    OR?: ScholarshipScalarWhereInput[]
+    NOT?: ScholarshipScalarWhereInput | ScholarshipScalarWhereInput[]
+    id?: IntFilter<"Scholarship"> | number
+    scholarshipId?: StringFilter<"Scholarship"> | string
+    title?: StringFilter<"Scholarship"> | string
+    slug?: StringFilter<"Scholarship"> | string
+    subtitle?: StringFilter<"Scholarship"> | string
+    banner?: JsonFilter<"Scholarship">
+    overview?: StringFilter<"Scholarship"> | string
+    description?: StringFilter<"Scholarship"> | string
+    category?: StringFilter<"Scholarship"> | string
+    featured?: BoolFilter<"Scholarship"> | boolean
+    eligibilityRequirements?: StringNullableListFilter<"Scholarship">
+    active?: BoolFilter<"Scholarship"> | boolean
+    createdById?: StringFilter<"Scholarship"> | string
+    createdAt?: DateTimeFilter<"Scholarship"> | Date | string
+    updatedAt?: DateTimeFilter<"Scholarship"> | Date | string
+  }
+
   export type AdminCreateWithoutDepartmentsLeadingInput = {
     id?: number
     adminId: string
@@ -30964,6 +32804,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsLeadingInput = {
@@ -31000,6 +32841,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsLeadingInput = {
@@ -31041,6 +32883,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutDepartmentsInput = {
@@ -31077,6 +32920,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutDepartmentsInput = {
@@ -31157,6 +33001,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsLeadingInput = {
@@ -31193,6 +33038,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutDepartmentsInput = {
@@ -31261,6 +33107,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsLeadingInput = {
@@ -31297,6 +33144,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsLeadingInput = {
@@ -31360,6 +33208,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsCreatedInput = {
@@ -31396,6 +33245,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsCreatedInput = {
@@ -31437,6 +33287,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTeamsInput = {
@@ -31473,6 +33324,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTeamsInput = {
@@ -31524,6 +33376,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsLeadingInput = {
@@ -31560,6 +33413,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type DepartmentUpsertWithoutTeamsInput = {
@@ -31634,6 +33488,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsCreatedInput = {
@@ -31670,6 +33525,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUpsertWithWhereUniqueWithoutTeamsInput = {
@@ -31722,6 +33578,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutFaqsCreatedInput = {
@@ -31758,6 +33615,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutFaqsCreatedInput = {
@@ -31809,6 +33667,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutFaqsCreatedInput = {
@@ -31845,6 +33704,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutActivityLogsInput = {
@@ -31881,6 +33741,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutActivityLogsInput = {
@@ -31917,6 +33778,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutActivityLogsInput = {
@@ -31968,6 +33830,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutActivityLogsInput = {
@@ -32004,6 +33867,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateWithoutSchoolsCreatedInput = {
@@ -32040,6 +33904,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutSchoolsCreatedInput = {
@@ -32076,6 +33941,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutSchoolsCreatedInput = {
@@ -32250,6 +34116,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutSchoolsCreatedInput = {
@@ -32286,6 +34153,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AccommodationUpsertWithoutSchoolInput = {
@@ -32435,6 +34303,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutAccommodationsCreatedInput = {
@@ -32471,6 +34340,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutAccommodationsCreatedInput = {
@@ -32582,6 +34452,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutAccommodationsCreatedInput = {
@@ -32618,6 +34489,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type SchoolCreateWithoutProgramsInput = {
@@ -32757,6 +34629,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutProgramsCreatedInput = {
@@ -32793,6 +34666,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutProgramsCreatedInput = {
@@ -32945,6 +34819,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutProgramsCreatedInput = {
@@ -32981,6 +34856,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ProgramCreateWithoutProficienciesInput = {
@@ -33272,6 +35148,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutIntakesCreatedInput = {
@@ -33308,6 +35185,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutIntakesCreatedInput = {
@@ -33435,6 +35313,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutIntakesCreatedInput = {
@@ -33471,6 +35350,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type TagCreateWithoutPostsInput = {
@@ -33547,6 +35427,7 @@ export namespace Prisma {
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutBlogsCreatedInput = {
@@ -33583,6 +35464,7 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutBlogsCreatedInput = {
@@ -33666,6 +35548,7 @@ export namespace Prisma {
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutBlogsCreatedInput = {
@@ -33702,6 +35585,7 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type BlogPostCreateWithoutTagsInput = {
@@ -33776,6 +35660,7 @@ export namespace Prisma {
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutTagsCreatedInput = {
@@ -33812,6 +35697,7 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutTagsCreatedInput = {
@@ -33879,6 +35765,7 @@ export namespace Prisma {
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTagsCreatedInput = {
@@ -33915,6 +35802,7 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type BlogPostCreateWithoutCategoriesInput = {
@@ -33989,6 +35877,7 @@ export namespace Prisma {
     programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
     blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminUncheckedCreateWithoutCategoriesCreatedInput = {
@@ -34025,6 +35914,7 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
     blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
     tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    scholarshipsCreated?: ScholarshipUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type AdminCreateOrConnectWithoutCategoriesCreatedInput = {
@@ -34092,6 +35982,7 @@ export namespace Prisma {
     programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCategoriesCreatedInput = {
@@ -34128,6 +36019,170 @@ export namespace Prisma {
     programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminCreateWithoutScholarshipsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: AdminCreateNestedOneWithoutCreatedInput
+    created?: AdminCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentCreateNestedManyWithoutLeadInput
+    teams?: TeamCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminUncheckedCreateWithoutScholarshipsCreatedInput = {
+    id?: number
+    adminId: string
+    email: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    gender: $Enums.Gender
+    accountSuspended?: boolean
+    nationality: string
+    countryOfResidence: string
+    about?: string | null
+    primaryImage: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle: string
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    created?: AdminUncheckedCreateNestedManyWithoutCreatedByInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutMembersInput
+    departmentsLeading?: DepartmentUncheckedCreateNestedManyWithoutLeadInput
+    teams?: TeamUncheckedCreateNestedManyWithoutMembersInput
+    teamsLeading?: TeamUncheckedCreateNestedManyWithoutLeadInput
+    teamsCreated?: TeamUncheckedCreateNestedManyWithoutCreatedByInput
+    faqsCreated?: FaqUncheckedCreateNestedManyWithoutCreatedByInput
+    activityLogs?: ActivityLogUncheckedCreateNestedManyWithoutAdminInput
+    schoolsCreated?: SchoolUncheckedCreateNestedManyWithoutCreatedByInput
+    accommodationsCreated?: AccommodationUncheckedCreateNestedManyWithoutCreatedByInput
+    intakesCreated?: IntakeUncheckedCreateNestedManyWithoutCreatedByInput
+    programsCreated?: ProgramUncheckedCreateNestedManyWithoutCreatedByInput
+    blogsCreated?: BlogPostUncheckedCreateNestedManyWithoutAuthorInput
+    tagsCreated?: TagUncheckedCreateNestedManyWithoutCreatedByInput
+    categoriesCreated?: CategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type AdminCreateOrConnectWithoutScholarshipsCreatedInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutScholarshipsCreatedInput, AdminUncheckedCreateWithoutScholarshipsCreatedInput>
+  }
+
+  export type AdminUpsertWithoutScholarshipsCreatedInput = {
+    update: XOR<AdminUpdateWithoutScholarshipsCreatedInput, AdminUncheckedUpdateWithoutScholarshipsCreatedInput>
+    create: XOR<AdminCreateWithoutScholarshipsCreatedInput, AdminUncheckedCreateWithoutScholarshipsCreatedInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutScholarshipsCreatedInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutScholarshipsCreatedInput, AdminUncheckedUpdateWithoutScholarshipsCreatedInput>
+  }
+
+  export type AdminUpdateWithoutScholarshipsCreatedInput = {
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: AdminUpdateOneWithoutCreatedNestedInput
+    created?: AdminUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUpdateManyWithoutLeadNestedInput
+    teams?: TeamUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutScholarshipsCreatedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    accountSuspended?: BoolFieldUpdateOperationsInput | boolean
+    nationality?: StringFieldUpdateOperationsInput | string
+    countryOfResidence?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryImage?: JsonNullValueInput | InputJsonValue
+    secondaryImage?: NullableJsonNullValueInput | InputJsonValue
+    socials?: NullableJsonNullValueInput | InputJsonValue
+    phoneNumber?: NullableJsonNullValueInput | InputJsonValue
+    jobTitle?: StringFieldUpdateOperationsInput | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created?: AdminUncheckedUpdateManyWithoutCreatedByNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutMembersNestedInput
+    departmentsLeading?: DepartmentUncheckedUpdateManyWithoutLeadNestedInput
+    teams?: TeamUncheckedUpdateManyWithoutMembersNestedInput
+    teamsLeading?: TeamUncheckedUpdateManyWithoutLeadNestedInput
+    teamsCreated?: TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+    faqsCreated?: FaqUncheckedUpdateManyWithoutCreatedByNestedInput
+    activityLogs?: ActivityLogUncheckedUpdateManyWithoutAdminNestedInput
+    schoolsCreated?: SchoolUncheckedUpdateManyWithoutCreatedByNestedInput
+    accommodationsCreated?: AccommodationUncheckedUpdateManyWithoutCreatedByNestedInput
+    intakesCreated?: IntakeUncheckedUpdateManyWithoutCreatedByNestedInput
+    programsCreated?: ProgramUncheckedUpdateManyWithoutCreatedByNestedInput
+    blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
+    tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
+    categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminCreateManyCreatedByInput = {
@@ -34294,6 +36349,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ScholarshipCreateManyCreatedByInput = {
+    id?: number
+    scholarshipId?: string
+    title: string
+    slug: string
+    subtitle: string
+    banner: JsonNullValueInput | InputJsonValue
+    overview: string
+    description: string
+    category: string
+    featured?: boolean
+    eligibilityRequirements?: ScholarshipCreateeligibilityRequirementsInput | string[]
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AdminUpdateWithoutCreatedByInput = {
     adminId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -34327,6 +36399,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutCreatedByInput = {
@@ -34363,6 +36436,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutCreatedByInput = {
@@ -34885,6 +36959,56 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ScholarshipUpdateWithoutCreatedByInput = {
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScholarshipUncheckedUpdateWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScholarshipUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    scholarshipId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    banner?: JsonNullValueInput | InputJsonValue
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
+    eligibilityRequirements?: ScholarshipUpdateeligibilityRequirementsInput | string[]
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TeamCreateManyDepartmentInput = {
     id?: number
     name: string
@@ -34927,6 +37051,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutDepartmentsInput = {
@@ -34963,6 +37088,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutDepartmentsInput = {
@@ -35048,6 +37174,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutTeamsInput = {
@@ -35084,6 +37211,7 @@ export namespace Prisma {
     blogsCreated?: BlogPostUncheckedUpdateManyWithoutAuthorNestedInput
     tagsCreated?: TagUncheckedUpdateManyWithoutCreatedByNestedInput
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+    scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type AdminUncheckedUpdateManyWithoutTeamsInput = {

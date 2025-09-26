@@ -148,7 +148,7 @@ describe("Scholarship API", () => {
       });
 
       describe(`Update single Scholarships - ${sUrl}`, () => {
-        test("should return the scholarship", async () => {
+        test("should activate the scholarship", async () => {
           const { user } = await signInUser();
           const token = await user.getIdToken();
 
@@ -177,8 +177,8 @@ describe("Scholarship API", () => {
         });
       });
 
-      describe(`Activate single Scholarships - ${sUrl}/deactivate`, () => {
-        test("should return the scholarship", async () => {
+      describe(`Deactivate single Scholarships - ${sUrl}/deactivate`, () => {
+        test("should deactivate the scholarship", async () => {
           const { user } = await signInUser();
           const token = await user.getIdToken();
 
@@ -230,6 +230,21 @@ describe("Scholarship API", () => {
               active: true,
             }),
           });
+        });
+      });
+
+      describe(`Delete Scholarship - ${url}`, () => {
+        test("should delete the scholarship", async () => {
+          const { user } = await signInUser();
+          const token = await user.getIdToken();
+
+          await request(server)
+            .delete(sUrl)
+            .set("authorization", `bearer ${token}`);
+
+          const res = await request(server).get(sUrl);
+
+          expect(res.status).toBe(StatusCodes.NOT_FOUND);
         });
       });
     });

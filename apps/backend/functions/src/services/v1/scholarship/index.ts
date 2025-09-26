@@ -8,7 +8,7 @@ import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/ru
 import { IScholarshipService, IQueryConstruct } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
-import { IdSchema, ScholarshipQuerySchema } from "../../../zod-schemas";
+import { ScholarshipQuerySchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
 
 const fillOthers: (keyof IScholarship)[] = [

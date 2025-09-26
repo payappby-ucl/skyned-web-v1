@@ -266,7 +266,10 @@ export class ScholarshipController
       const authUser = this._validateAdmin(req);
       const { slug } = req.params;
 
-      const scholarship = await this.scholarshipService.findBySlug(slug);
+      const scholarship = await this.scholarshipService.findBySlug(
+        slug,
+        authUser,
+      );
       if (!scholarship) {
         throw SkynedUtils.createException(
           StatusCodes.NOT_FOUND,
@@ -299,7 +302,10 @@ export class ScholarshipController
         const authUser = this._validateAdmin(req);
         const { slug } = req.params;
 
-        const scholarship = await this.scholarshipService.findBySlug(slug);
+        const scholarship = await this.scholarshipService.findBySlug(
+          slug,
+          authUser,
+        );
         if (!scholarship) {
           throw SkynedUtils.createException(
             StatusCodes.NOT_FOUND,

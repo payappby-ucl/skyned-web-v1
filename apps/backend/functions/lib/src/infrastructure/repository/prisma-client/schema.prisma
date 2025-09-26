@@ -201,6 +201,9 @@ model Admin {
   tagsCreated       Tag[]
   categoriesCreated Category[]
 
+  // * Scholarships Created
+  scholarshipsCreated Scholarship[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -566,6 +569,33 @@ model Category {
   @@index([createdAt])
   @@index([updatedAt])
   @@map("categories")
+}
+
+model Scholarship {
+  id                      Int      @id @default(autoincrement())
+  scholarshipId           String   @default(cuid()) @map("scholarship_id")
+  title                   String
+  slug                    String   @unique
+  subtitle                String
+  banner                  Json
+  overview                String
+  description             String   @db.Text
+  category                String
+  featured                Boolean  @default(false)
+  eligibilityRequirements String[] @map("eligibility_requirements")
+  active                  Boolean  @default(true)
+
+  createdById String @map("created_by_id") @db.VarChar(256)
+  createdBy   Admin  @relation(fields: [createdById], references: [adminId])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@index([slug])
+  @@index([createdAt])
+  @@index([updatedAt])
+  @@map("scholarships")
 }
 
 // model Student {
