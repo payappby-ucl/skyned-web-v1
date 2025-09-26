@@ -31,5 +31,19 @@ export const scholarshipPolicies: AccessControlType = {
       if (claim !== "admin") return false;
       return isInDepartment(user, [department.Executive, department.Marketing]);
     },
+
+    activate(authClaim, scholarship) {
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+      return isInDepartment(user, [department.Executive, department.Marketing]);
+    },
+
+    deactivate(authClaim, scholarship) {
+      if (!authClaim) return false;
+      const { claim, user } = authClaim;
+      if (claim !== "admin") return false;
+      return isInDepartment(user, [department.Executive, department.Marketing]);
+    },
   },
 };

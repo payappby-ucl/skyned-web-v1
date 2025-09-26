@@ -14,6 +14,7 @@ export interface IScholarship extends ITimestamps {
   category: string;
   featured: boolean;
   eligibilityRequirements: string[];
+  active: boolean;
 
   createdById: string;
   createdBy: AdminProfile;

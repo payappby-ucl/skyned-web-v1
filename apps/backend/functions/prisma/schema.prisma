@@ -583,6 +583,7 @@ model Scholarship {
   category                String
   featured                Boolean  @default(false)
   eligibilityRequirements String[] @map("eligibility_requirements")
+  active                  Boolean  @default(true)
 
   createdById String @map("created_by_id") @db.VarChar(256)
   createdBy   Admin  @relation(fields: [createdById], references: [adminId])

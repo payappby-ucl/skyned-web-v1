@@ -158,7 +158,14 @@ export type PermissionType = {
     dataType: IScholarship;
     createDataType: CreateScholarshipSchema;
     updateDataType: CreateScholarshipSchema;
-    action: "list" | "create" | "read" | "update" | "delete";
+    action:
+      | "list"
+      | "create"
+      | "read"
+      | "update"
+      | "delete"
+      | "activate"
+      | "deactivate";
   };
 };
 
