@@ -19,4 +19,15 @@ interface BlogImage {
   };
 }
 
-export type ResolveStoragePathType = ProfileImage | SchoolImage | BlogImage;
+interface ScholarshipBanner {
+  type: "banner";
+  data: {
+    slug: string;
+  };
+}
+
+export type ResolveStoragePathType =
+  | ProfileImage
+  | SchoolImage
+  | BlogImage
+  | ScholarshipBanner;

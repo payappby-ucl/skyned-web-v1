@@ -8,6 +8,7 @@ import { faqPolicies } from "./faq";
 import { inquiryPolicies } from "./inquiry";
 import { intakePolicies } from "./intakes";
 import { programPolicies } from "./programs";
+import { scholarshipPolicies } from "./scholarship";
 import { schoolPolicies } from "./schools";
 import { tagPolicies } from "./tag";
 
@@ -23,4 +24,5 @@ export const policies: AccessControlType = {
   ...blogPolicies,
   ...categoryPolicies,
   ...tagPolicies,
+  ...scholarshipPolicies,
 };

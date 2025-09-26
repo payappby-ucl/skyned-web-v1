@@ -10,3 +10,4 @@ export * from "./program";
 export * from "./english-proficiency";
 export * from "./blog-post";
 export * from "./apply";
+export * from "./scholarship";

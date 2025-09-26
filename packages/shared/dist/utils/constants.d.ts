@@ -58,3 +58,5 @@ export declare const financialAids: readonly ["mpower", "passage"];
 export declare const blogPostStatus: readonly ["draft", "scheduled", "published", "unpublished"];
 /** Highest Level Of Education */
 export declare const highestLevelOfEducation: readonly ["Bachelor's Degree", "Secondary School Diploma", "Master's Degree", "Highest National Diploma", "Ordinary National Diploma", "Others"];
+/** Scholarship Categories */
+export declare const scholarshipCategories: readonly ["accommodation", "tuition", "application fees", "others"];

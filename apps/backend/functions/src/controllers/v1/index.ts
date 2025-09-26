@@ -13,3 +13,4 @@ export * from "./category";
 export * from "./tag";
 export * from "./program";
 export * from "./lead";
+export * from "./scholarship";

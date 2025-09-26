@@ -346,6 +346,24 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ScholarshipScalarFieldEnum = {
+  id: 'id',
+  scholarshipId: 'scholarshipId',
+  title: 'title',
+  slug: 'slug',
+  subtitle: 'subtitle',
+  banner: 'banner',
+  overview: 'overview',
+  description: 'description',
+  category: 'category',
+  featured: 'featured',
+  eligibilityRequirements: 'eligibilityRequirements',
+  active: 'active',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -486,6 +504,18 @@ exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
   name: 'name',
   createdById: 'createdById'
 };
+
+exports.Prisma.ScholarshipOrderByRelevanceFieldEnum = {
+  scholarshipId: 'scholarshipId',
+  title: 'title',
+  slug: 'slug',
+  subtitle: 'subtitle',
+  overview: 'overview',
+  description: 'description',
+  category: 'category',
+  eligibilityRequirements: 'eligibilityRequirements',
+  createdById: 'createdById'
+};
 exports.TokenType = exports.$Enums.TokenType = {
   verify: 'verify',
   reset: 'reset'
@@ -568,7 +598,8 @@ exports.Prisma.ModelName = {
   Intake: 'Intake',
   BlogPost: 'BlogPost',
   Tag: 'Tag',
-  Category: 'Category'
+  Category: 'Category',
+  Scholarship: 'Scholarship'
 };
 
 /**

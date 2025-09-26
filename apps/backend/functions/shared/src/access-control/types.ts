@@ -6,6 +6,7 @@ import {
   CreateFaqSchema,
   CreateIntakeSchema,
   CreateProgramSchema,
+  CreateScholarshipSchema,
   CreateSchoolSchema,
   ProgramSchema,
   UpdateAdminSchema,
@@ -28,6 +29,7 @@ import {
   ITeam,
 } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
+import { IScholarship } from "interfaces/scholarship";
 
 export type AuthClaim = AdminClaim | StudentClaim;
 
@@ -43,7 +45,8 @@ export type ResourceType =
   | "programs"
   | "blogs"
   | "categories"
-  | "tags";
+  | "tags"
+  | "scholarships";
 
 export type PermissionType = {
   admins: {
@@ -149,6 +152,20 @@ export type PermissionType = {
     createDataType: { name: string };
     updateDataType: { name: string };
     action: "delete" | "list";
+  };
+
+  scholarships: {
+    dataType: IScholarship;
+    createDataType: CreateScholarshipSchema;
+    updateDataType: CreateScholarshipSchema;
+    action:
+      | "list"
+      | "create"
+      | "read"
+      | "update"
+      | "delete"
+      | "activate"
+      | "deactivate";
   };
 };
 

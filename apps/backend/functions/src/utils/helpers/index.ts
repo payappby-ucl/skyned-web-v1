@@ -23,7 +23,12 @@ const decimalKeys = [
   "postGrowth",
 ];
 
-const skipKeys = ["previousState", "currentState", "financialAids"];
+const skipKeys = [
+  "previousState",
+  "currentState",
+  "financialAids",
+  "eligibilityRequirements",
+];
 
 /**
  * Utility Class
@@ -188,6 +193,8 @@ export class SkynedUtils {
         return `schools/${data.schoolId}/${type}`;
       case "coverImage":
         return `blogs/${data.blogPostId}`;
+      case "banner":
+        return `scholarships/${data.slug}/${type}`;
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,
@@ -210,6 +217,7 @@ export class SkynedUtils {
             "logo",
             "schoolImage",
             "coverImage",
+            "banner",
           ].includes(key)
         ) {
           return [key, value as unknown as IObject];

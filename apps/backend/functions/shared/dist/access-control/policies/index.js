@@ -10,6 +10,7 @@ const faq_1 = require("./faq");
 const inquiry_1 = require("./inquiry");
 const intakes_1 = require("./intakes");
 const programs_1 = require("./programs");
+const scholarship_1 = require("./scholarship");
 const schools_1 = require("./schools");
 const tag_1 = require("./tag");
 exports.policies = {
@@ -24,4 +25,5 @@ exports.policies = {
     ...blog_1.blogPolicies,
     ...category_1.categoryPolicies,
     ...tag_1.tagPolicies,
+    ...scholarship_1.scholarshipPolicies,
 };

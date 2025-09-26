@@ -86,3 +86,11 @@ export const highestLevelOfEducation = [
   "Ordinary National Diploma",
   "Others",
 ] as const;
+
+/** Scholarship Categories */
+export const scholarshipCategories = [
+  "accommodation",
+  "tuition",
+  "application fees",
+  "others",
+] as const;

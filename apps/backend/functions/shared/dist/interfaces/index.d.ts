@@ -12,3 +12,4 @@ export * from "./intake";
 export * from "./program";
 export * from "./blog";
 export * from "./analytics";
+export * from "./scholarship";
