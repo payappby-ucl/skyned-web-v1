@@ -4,9 +4,10 @@ import {
   IPaginatedResponse,
   IScholarship,
   ISuccessResponse,
+  UpdateScholarshipSchema,
 } from "@workspace/shared";
 import { RequestHandler } from "express";
-import { ScholarshipQuerySchema } from "../../zod-schemas";
+import { ScholarshipQuerySchema, SchoolSlugSchema } from "../../zod-schemas";
 
 export interface IScholarshipController {
   /** Creates a scholarship */
@@ -22,5 +23,36 @@ export interface IScholarshipController {
     ISuccessResponse<IPaginatedResponse<IScholarship>>,
     void,
     ScholarshipQuerySchema
+  >;
+
+  /** Get a single scholarship information */
+  getScholarship: RequestHandler<
+    SchoolSlugSchema,
+    ISuccessResponse<IScholarship>
+  >;
+
+  /** Update a scholarship date */
+  updateScholarship: RequestHandler<
+    SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>,
+    UpdateScholarshipSchema
+  >;
+
+  /** Delete Scholarship */
+  deleteScholarship: RequestHandler<
+    SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Deactivate Scholarship */
+  deactivateScholarship: RequestHandler<
+    SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
+  >;
+
+  /** Activate Scholarship */
+  activateScholarship: RequestHandler<
+    SchoolSlugSchema,
+    ISuccessResponse<IMessageResponse>
   >;
 }

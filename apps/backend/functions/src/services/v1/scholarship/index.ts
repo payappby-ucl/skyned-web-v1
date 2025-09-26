@@ -11,22 +11,23 @@ import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { IdSchema, ScholarshipQuerySchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
 
+const fillOthers: (keyof IScholarship)[] = [
+  "description",
+  "eligibilityRequirements",
+];
+
 const otherUsersData: (keyof IScholarship)[] = [
   "banner",
   "title",
   "subtitle",
   "overview",
-  "description",
   "featured",
-  "eligibilityRequirements",
   "slug",
   "banner",
 ];
 
 const adminUserData: (keyof IScholarship)[] = [
   ...otherUsersData,
-  "id",
-  "scholarshipId",
   "active",
   "createdAt",
   "updatedAt",
@@ -85,7 +86,11 @@ export class ScholarshipService
         ...SkynedUtils.select<
           Prisma.ScholarshipSelect<DefaultArgs>,
           keyof Prisma.ScholarshipSelect<DefaultArgs>
-        >(authUser?.claim === "admin" ? adminUserData : otherUsersData),
+        >(
+          authUser?.claim === "admin"
+            ? [...adminUserData, ...fillOthers]
+            : [...otherUsersData, ...fillOthers],
+        ),
 
         createdBy:
           authUser?.claim === "admin"
@@ -186,158 +191,26 @@ export class ScholarshipService
     return scholarships.map((scholarship) => this.deserialize(scholarship));
   };
 
-  // deleteScholarship: IScholarshipService["deleteScholarship"] = async (id) => {
-  //   const { id: scholarshipId } = this.validationUtility.validateInput({
-  //     schema: IdSchema,
-  //     inputData: {
-  //       id,
-  //     },
-  //   });
+  delete: IScholarshipService["delete"] = async (slug) => {
+    const scholarship = await this.repository.db.scholarship.delete({
+      where: {
+        slug,
+      },
+    });
 
-  //   const scholarship = await this.repository.db.scholarship.delete({
-  //     where: {
-  //       id: scholarshipId,
-  //     },
-  //   });
+    return this.deserialize(scholarship);
+  };
 
-  //   return this.deserialize(scholarship);
-  // };
+  update: IScholarshipService["update"] = async (slug, data) => {
+    const scholarship = await this.repository.db.scholarship.update({
+      where: {
+        slug,
+      },
+      data,
+    });
 
-  // deleteScholarships: IScholarshipService["deleteScholarships"] = async (
-  //   ids,
-  // ) => {
-  //   const { data } = this.validationUtility.validateInput({
-  //     schema: DeleteScholarshipsSchema,
-  //     inputData: {
-  //       data: ids.map((id) => ({ id })),
-  //     },
-  //   });
-
-  //   await this.repository.db.scholarship.deleteMany({
-  //     where: {
-  //       id: {
-  //         in: data.map(({ id }) => id),
-  //       },
-  //     },
-  //   });
-  // };
-
-  // getAllScholarships: IScholarshipService["getAllScholarships"] = async (
-  //   query,
-  //   authUser,
-  // ) => {
-  //   const where = this._constructQuery(query || {});
-  //   const scholarships = await this.repository.db.scholarship.findMany({
-  //     where,
-  //     select: {
-  //       ...SkynedUtils.select<
-  //         Prisma.ScholarshipSelect<DefaultArgs>,
-  //         keyof Prisma.ScholarshipSelect<DefaultArgs>
-  //       >(
-  //         authUser?.claim === "admin"
-  //           ? ["name", "id", "createdById", "updatedAt", "createdAt"]
-  //           : ["name"],
-  //       ),
-
-  //       createdBy:
-  //         authUser?.claim === "admin"
-  //           ? {
-  //               select: SkynedUtils.select(adminProfileKeys),
-  //             }
-  //           : undefined,
-
-  //       _count: {
-  //         select: {
-  //           posts: true,
-  //         },
-  //       },
-  //     },
-  //   });
-
-  //   return scholarships.map((c) => this.deserialize(c));
-  // };
-
-  // count: IScholarshipService["count"] = async ({ from, to, where }) => {
-  //   const whereQuery = this._constructQuery(where || {});
-
-  //   const count = await this.repository.db.scholarship.count({
-  //     where: {
-  //       ...whereQuery,
-  //       createdAt: {
-  //         gte: from,
-  //         lte: to,
-  //       },
-  //     },
-  //   });
-
-  //   return count;
-  // };
-
-  // findScholarships: IScholarshipService["findScholarships"] = async (
-  //   { from, to, order, where, take, skip },
-  //   authUser,
-  // ) => {
-  //   const whereConstruct = this._constructQuery(where || {});
-  //   const scholarships = await this.repository.db.scholarship.findMany({
-  //     skip,
-  //     take,
-  //     where: {
-  //       ...whereConstruct,
-  //       createdAt: {
-  //         gte: from,
-  //         lte: to,
-  //       },
-  //     },
-
-  //     orderBy: {
-  //       [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
-  //     },
-
-  //     select: {
-  //       ...SkynedUtils.select<
-  //         Prisma.CategorySelect<DefaultArgs>,
-  //         keyof Prisma.CategorySelect<DefaultArgs>
-  //       >(
-  //         authUser?.claim === "admin"
-  //           ? ["name", "id", "createdById", "updatedAt", "createdAt"]
-  //           : ["name"],
-  //       ),
-
-  //       createdBy:
-  //         authUser?.claim === "admin"
-  //           ? {
-  //               select: SkynedUtils.select(adminProfileKeys),
-  //             }
-  //           : undefined,
-
-  //       _count: {
-  //         select: {
-  //           posts: true,
-  //         },
-  //       },
-  //     },
-  //   });
-
-  //   return scholarships.map((scholarship) => this.deserialize(scholarship));
-  // };
-
-  // findById: IScholarshipService["findById"] = async (id) => {
-  //   const { id: scholarshipId } = this.validationUtility.validateInput({
-  //     schema: IdSchema,
-  //     inputData: {
-  //       id,
-  //     },
-  //   });
-
-  //   const scholarship = await this.repository.db.scholarship.findUnique({
-  //     where: {
-  //       id: scholarshipId,
-  //     },
-  //   });
-
-  //   if (!scholarship) return null;
-  //   return this.deserialize(scholarship);
-  // };
+    return this.deserialize(scholarship);
+  };
 }
 
 /** Concrete instance of ScholarshipService */

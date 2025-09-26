@@ -156,104 +156,211 @@ export class ScholarshipController
     }
   };
 
-  // deleteScholarship: IScholarshipController["deleteScholarship"] = async (req, res, next) => {
-  //   try {
-  //     const authUser = this._validateAdmin(req);
-  //     const { id } = req.params;
+  updateScholarship: IScholarshipController["updateScholarship"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { slug } = req.params;
+      const { banner, slug: newSlug, ...rest } = req.body;
 
-  //     const scholarship = await this.scholarshipService.findById(parseInt(id));
-  //     if (!scholarship) {
-  //       throw SkynedUtils.createException(
-  //         StatusCodes.NOT_FOUND,
-  //         "Resource not found",
-  //       );
-  //     }
+      const scholarship = await this.scholarshipService.findBySlug(slug);
+      if (!scholarship) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
 
-  //     this._attributeBasedAccessControl(authUser, "scholarships", "delete", scholarship);
+      this._attributeBasedAccessControl(
+        authUser,
+        "scholarships",
+        "update",
+        req.body,
+        scholarship,
+      );
 
-  //     await this.scholarshipService.deleteScholarship(scholarship.id);
-  //     res._success(StatusCodes.OK, { message: "Scholarship Deleted" });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      if (newSlug && scholarship.slug !== newSlug) {
+        const scholarshipCheck =
+          await this.scholarshipService.findBySlug(newSlug);
 
-  // deleteManyScholarships: IScholarshipController["deleteManyScholarships"] = async (req, res, next) => {
-  //   try {
-  //     const authUser = this._validateAdmin(req);
-  //     const { data } = req.body;
+        if (scholarshipCheck) {
+          throw SkynedUtils.createException(
+            StatusCodes.CONFLICT,
+            `${rest.title} already exist.`,
+          );
+        }
+      }
 
-  //     const scholarships = await this.scholarshipService.getAllScholarships({
-  //       ids: data.map((d) => d.id),
-  //     });
+      let bannerStorageData:
+        | Awaited<ReturnType<typeof this.storageService.saveObject>>
+        | undefined = undefined;
 
-  //     for (const scholarship of scholarships) {
-  //       this._attributeBasedAccessControl(authUser, "scholarships", "delete", scholarship);
-  //     }
+      if (banner) {
+        bannerStorageData = await this.storageService.saveObject(
+          banner,
+          SkynedUtils.resolveStoragePath({
+            type: "banner",
+            data: {
+              slug: newSlug,
+            },
+          }),
+        );
 
-  //     await this.scholarshipService.deleteScholarships(data.map((d) => d.id));
-  //     res._success(StatusCodes.OK, { message: "Scholarships Deleted" });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+        if (scholarship.slug !== newSlug) {
+          await this.storageService.deleteObject(scholarship.banner.path);
+        }
+      }
 
-  // listAllScholarships: IScholarshipController["listAllScholarships"] = async (req, res, next) => {
-  //   try {
-  //     const authUser = this._validateUser(req);
-  //     if (authUser) {
-  //       this._attributeBasedAccessControl(authUser, "scholarships", "list");
-  //     }
+      await this.scholarshipService.update(slug, {
+        ...rest,
+        slug: newSlug || scholarship.slug,
+        banner: bannerStorageData,
+      });
 
-  //     const scholarships = await this.scholarshipService.getAllScholarships({}, authUser);
+      res._success(StatusCodes.OK, { message: "Resource Updated" });
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  //     res._success(StatusCodes.OK, scholarships);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+  deleteScholarship: IScholarshipController["deleteScholarship"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { slug } = req.params;
 
-  // listScholarships: IScholarshipController["listScholarships"] = async (req, res, next) => {
-  //   try {
-  //     const { from, to, limit, page, ...rest } = req.query;
+      const scholarship = await this.scholarshipService.findBySlug(slug);
+      if (!scholarship) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
 
-  //     const authUser = this._validateUser(req);
+      this._attributeBasedAccessControl(
+        authUser,
+        "scholarships",
+        "delete",
+        scholarship,
+      );
 
-  //     if (authUser) {
-  //       this._attributeBasedAccessControl(authUser, "scholarships", "list");
-  //     }
+      await this.scholarshipService.delete(scholarship.slug);
+      res._success(StatusCodes.OK, { message: "Scholarship Deleted" });
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  //     const construct = this._constructPaginationData({ limit, page });
+  activateScholarship: IScholarshipController["activateScholarship"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateAdmin(req);
+      const { slug } = req.params;
 
-  //     const total = await this.scholarshipService.count({
-  //       from,
-  //       to,
-  //       where: {
-  //         ...rest,
-  //       },
-  //     });
+      const scholarship = await this.scholarshipService.findBySlug(slug);
+      if (!scholarship) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
 
-  //     const scholarships = await this.scholarshipService.findScholarships(
-  //       {
-  //         ...SkynedUtils.pick(construct, ["skip", "take"]),
-  //         from,
-  //         to,
-  //         where: {
-  //           ...rest,
-  //         },
-  //       },
-  //       authUser,
-  //     );
+      this._attributeBasedAccessControl(
+        authUser,
+        "scholarships",
+        "activate",
+        scholarship,
+      );
 
-  //     res._success(StatusCodes.OK, {
-  //       ...SkynedUtils.exclude(construct, ["skip", "take"]),
-  //       total,
-  //       data: scholarships,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      if (!scholarship.active) {
+        await this.scholarshipService.update(scholarship.slug, {
+          active: true,
+        });
+      }
+
+      res._success(StatusCodes.OK, { message: "Resource Activated" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deactivateScholarship: IScholarshipController["deactivateScholarship"] =
+    async (req, res, next) => {
+      try {
+        const authUser = this._validateAdmin(req);
+        const { slug } = req.params;
+
+        const scholarship = await this.scholarshipService.findBySlug(slug);
+        if (!scholarship) {
+          throw SkynedUtils.createException(
+            StatusCodes.NOT_FOUND,
+            "Resource not found",
+          );
+        }
+
+        this._attributeBasedAccessControl(
+          authUser,
+          "scholarships",
+          "deactivate",
+          scholarship,
+        );
+
+        if (scholarship.active) {
+          await this.scholarshipService.update(scholarship.slug, {
+            active: false,
+          });
+        }
+
+        res._success(StatusCodes.OK, { message: "Resource Deactivated" });
+      } catch (error) {
+        next(error);
+      }
+    };
+
+  getScholarship: IScholarshipController["getScholarship"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const authUser = this._validateUser(req);
+      const { slug } = req.params;
+
+      const scholarship = await this.scholarshipService.findBySlug(
+        slug,
+        authUser,
+      );
+
+      if (!scholarship) {
+        throw SkynedUtils.createException(
+          StatusCodes.NOT_FOUND,
+          "Resource not found",
+        );
+      }
+
+      if (authUser) {
+        this._attributeBasedAccessControl(
+          authUser,
+          "scholarships",
+          "read",
+          scholarship,
+        );
+      }
+
+      res._success(StatusCodes.OK, scholarship);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /** Controller instance */

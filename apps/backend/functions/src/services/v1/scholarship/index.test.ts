@@ -73,7 +73,7 @@ describe("scholarshipService", () => {
               title: expect.any(String),
               slug: expect.any(String),
               subtitle: expect.any(String),
-              description: expect.any(String),
+              overview: expect.any(String),
             }),
           ]),
         );
@@ -92,7 +92,7 @@ describe("scholarshipService", () => {
               title: expect.any(String),
               slug: expect.any(String),
               subtitle: expect.any(String),
-              description: expect.any(String),
+              overview: expect.any(String),
               active: true,
             }),
           ]),

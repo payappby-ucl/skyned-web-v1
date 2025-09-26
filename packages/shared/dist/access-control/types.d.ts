@@ -1,4 +1,4 @@
-import { BlogPostSchema, ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateScholarshipSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBlogPostSchema, UpdateBulkProgramSchema, UpdateSchoolSchema } from "../schemas";
+import { BlogPostSchema, ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateScholarshipSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBlogPostSchema, UpdateBulkProgramSchema, UpdateScholarshipSchema, UpdateSchoolSchema } from "../schemas";
 import { IAccommodation, IAdmin, IBlogPost, ICategory, IDepartment, IFaq, IInquiry, IIntake, IProgram, ISchool, ITag, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 import { IScholarship } from "interfaces/scholarship";
@@ -88,7 +88,7 @@ export type PermissionType = {
     scholarships: {
         dataType: IScholarship;
         createDataType: CreateScholarshipSchema;
-        updateDataType: CreateScholarshipSchema;
+        updateDataType: UpdateScholarshipSchema;
         action: "list" | "create" | "read" | "update" | "delete" | "activate" | "deactivate";
     };
 };

@@ -12,8 +12,14 @@ import {
   authMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
-import { ScholarshipQuerySchema } from "../../../../zod-schemas";
-import { CreateScholarshipSchema } from "@workspace/shared";
+import {
+  ScholarshipQuerySchema,
+  SchoolSlugSchema,
+} from "../../../../zod-schemas";
+import {
+  CreateScholarshipSchema,
+  UpdateScholarshipSchema,
+} from "@workspace/shared";
 
 /** Required dependencies for our team router initialization */
 export interface ScholarshipRouterDependencies {
@@ -51,6 +57,51 @@ export class ScholarshipRouter implements IRouter {
         authMiddleware.safeAuthenticate,
         controller.listScholarships,
       );
+
+    this.router
+      .route("/:slug")
+      .get(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.safeAuthenticate,
+        controller.getScholarship,
+      )
+      .put(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+          body: UpdateScholarshipSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        controller.updateScholarship,
+      )
+      .delete(
+        RequestValidationMiddleware.validate({
+          params: SchoolSlugSchema,
+        }),
+        authMiddleware.authenticate,
+        authMiddleware.hasRole(["admin"]),
+        controller.deleteScholarship,
+      );
+
+    this.router.route("/:slug/activate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      controller.activateScholarship,
+    );
+
+    this.router.route("/:slug/deactivate").patch(
+      RequestValidationMiddleware.validate({
+        params: SchoolSlugSchema,
+      }),
+      authMiddleware.authenticate,
+      authMiddleware.hasRole(["admin"]),
+      controller.deactivateScholarship,
+    );
   }
 
   static factory({

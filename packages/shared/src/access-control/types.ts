@@ -12,6 +12,7 @@ import {
   UpdateAdminSchema,
   UpdateBlogPostSchema,
   UpdateBulkProgramSchema,
+  UpdateScholarshipSchema,
   UpdateSchoolSchema,
 } from "../schemas";
 import {
@@ -157,7 +158,7 @@ export type PermissionType = {
   scholarships: {
     dataType: IScholarship;
     createDataType: CreateScholarshipSchema;
-    updateDataType: CreateScholarshipSchema;
+    updateDataType: UpdateScholarshipSchema;
     action:
       | "list"
       | "create"

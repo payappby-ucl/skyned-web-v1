@@ -1,6 +1,7 @@
 import { AuthClaim, IScholarship } from "@workspace/shared";
 import { ScholarshipQuerySchema } from "../../zod-schemas";
 import { IQueryConstruct } from "../utils";
+import { Prisma } from "../../infrastructure/repository/prisma-client";
 
 export interface IScholarshipService {
   /** Find scholarship by slug */
@@ -38,4 +39,13 @@ export interface IScholarshipService {
     >,
     authUser?: AuthClaim,
   ): Promise<IScholarship[]>;
+
+  /** Deletes Scholarship */
+  delete(slug: string): Promise<IScholarship>;
+
+  /** Update Scholarship */
+  update(
+    slug: string,
+    data: Prisma.ScholarshipUpdateInput,
+  ): Promise<IScholarship>;
 }

@@ -3,6 +3,7 @@ import slugify from "slugify";
 import sanitizeHtml from "sanitize-html";
 import { CommonSchema } from "./common";
 import { scholarshipCategories } from "../utils";
+import parseDataURL from "data-urls";
 
 export const CreateScholarshipSchema = z.object({
   title: z.string().trim().nonempty("Required"),
@@ -27,3 +28,17 @@ export const CreateScholarshipSchema = z.object({
     .min(1, "Please add at least one eligibility requirement"),
 });
 export type CreateScholarshipSchema = z.infer<typeof CreateScholarshipSchema>;
+
+export const UpdateScholarshipSchema = CreateScholarshipSchema.omit({
+  banner: true,
+}).extend({
+  banner: z
+    .string()
+    .trim()
+    .optional()
+    .refine(
+      (val) => (val ? !!parseDataURL(val) : true),
+      "Image must be of type data-url",
+    ),
+});
+export type UpdateScholarshipSchema = z.infer<typeof UpdateScholarshipSchema>;
