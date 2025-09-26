@@ -7,3 +7,4 @@ export * from "./category";
 export * from "./tag";
 export * from "./analytics";
 export * from "./program";
+export * from "./scholarship";

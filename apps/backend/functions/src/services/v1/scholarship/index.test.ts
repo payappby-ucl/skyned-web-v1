@@ -52,5 +52,73 @@ describe("scholarshipService", () => {
         expect(scholarship).not.toBeNull();
       });
     });
+
+    describe("count", () => {
+      test("should count scholarships", async () => {
+        const count = await scholarshipService.count({});
+        expect(count).toEqual(expect.any(Number));
+      });
+    });
+
+    describe("listScholarships", () => {
+      test("should return list of programs with limited data for unauthenticated auth user", async () => {
+        const programs = await programService.listPrograms({});
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+            }),
+          ]),
+        );
+      });
+
+      test("should return list of programs with limited data for auth user (not admin)", async () => {
+        const programs = await programService.listPrograms({}, {
+          claim: "student",
+        } as any);
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+              description: expect.any(String),
+            }),
+          ]),
+        );
+      });
+
+      test("should return list of programs with limited data for auth user (admin)", async () => {
+        const programs = await programService.listPrograms({}, {
+          claim: "admin",
+        } as any);
+
+        expect(programs).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: expect.any(String),
+              slug: expect.any(String),
+              school: expect.objectContaining({
+                name: expect.any(String),
+                slug: expect.any(String),
+                currency: expect.any(String),
+              }),
+              description: expect.any(String),
+              schoolId: expect.any(String),
+            }),
+          ]),
+        );
+      });
+    });
   });
 });

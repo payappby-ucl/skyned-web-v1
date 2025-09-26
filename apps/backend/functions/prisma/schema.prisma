@@ -593,6 +593,8 @@ model Scholarship {
 
   @@index([category])
   @@index([slug])
+  @@index([createdAt])
+  @@index([updatedAt])
   @@map("scholarships")
 }
 

@@ -1,14 +1,14 @@
 /* eslint-disable brace-style */
 /* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
-import { IScholarship } from "@workspace/shared";
+import { AuthClaim, IScholarship } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
 import { Prisma } from "../../../infrastructure/repository/prisma-client";
 import { DefaultArgs } from "../../../infrastructure/repository/prisma-client/runtime/library";
 import { IScholarshipService, IQueryConstruct } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
-import { IdSchema } from "../../../zod-schemas";
+import { IdSchema, ScholarshipQuerySchema } from "../../../zod-schemas";
 import { ServiceUtils } from "../utils";
 
 const otherUsersData: (keyof IScholarship)[] = [
@@ -53,23 +53,23 @@ export class ScholarshipService
   }
 
   private _constructQuery(
-    whereQuery: IQueryConstruct<{
-      name: string;
-      id: number;
-      ids: number[];
-    }>["where"],
+    query: IQueryConstruct<
+      Pick<ScholarshipQuerySchema, "category" | "featured">
+    >["where"],
+    authUser?: AuthClaim,
   ) {
     const where: Prisma.ScholarshipWhereInput = {};
 
-    if (whereQuery.name) {
-      where.name = whereQuery.name;
+    if (!authUser || authUser.claim !== "admin") {
+      where.active = true;
     }
 
-    if (whereQuery.id) where.id = whereQuery.id;
-    if (whereQuery.ids) {
-      where.id = {
-        in: whereQuery.ids,
-      };
+    if (query.category) {
+      where.category = query.category;
+    }
+
+    if (query.featured) {
+      where.featured = true;
     }
 
     return where;
@@ -122,6 +122,68 @@ export class ScholarshipService
     });
 
     return this.deserialize(scholarship);
+  };
+
+  count: IScholarshipService["count"] = async (
+    { where, from, to },
+    authUser,
+  ) => {
+    const whereConstruct = this._constructQuery(where || {}, authUser);
+
+    const count = await this.repository.db.scholarship.count({
+      where: {
+        ...whereConstruct,
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+    });
+
+    return count;
+  };
+
+  listScholarships: IScholarshipService["listScholarships"] = async (
+    { skip, take, from, to, where },
+    authUser,
+  ) => {
+    const whereConstruct = this._constructQuery(where || {}, authUser);
+
+    const scholarships = await this.repository.db.scholarship.findMany({
+      skip,
+      take,
+      where: {
+        ...whereConstruct,
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+      orderBy:
+        from && to
+          ? {
+              createdAt: "desc",
+            }
+          : {
+              updatedAt: "desc",
+            },
+
+      select: {
+        ...SkynedUtils.select<
+          Prisma.ScholarshipSelect<DefaultArgs>,
+          keyof Prisma.ScholarshipSelect<DefaultArgs>
+        >(authUser?.claim === "admin" ? adminUserData : otherUsersData),
+
+        createdBy:
+          authUser?.claim === "admin"
+            ? {
+                select: SkynedUtils.select(adminProfileKeys),
+              }
+            : undefined,
+      },
+    });
+
+    return scholarships.map((scholarship) => this.deserialize(scholarship));
   };
 
   // deleteScholarship: IScholarshipService["deleteScholarship"] = async (id) => {

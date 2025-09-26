@@ -109,6 +109,53 @@ export class ScholarshipController
     }
   };
 
+  listScholarships: IScholarshipController["listScholarships"] = async (
+    req,
+    res,
+    next,
+  ) => {
+    try {
+      const { from, to, limit, page, ...rest } = req.query;
+      const authUser = this._validateUser(req);
+
+      if (authUser) {
+        this._attributeBasedAccessControl(authUser, "scholarships", "list");
+      }
+
+      const construct = this._constructPaginationData({ limit, page });
+      const total = await this.scholarshipService.count(
+        {
+          from,
+          to,
+          where: {
+            ...rest,
+          },
+        },
+        authUser,
+      );
+
+      const scholarships = await this.scholarshipService.listScholarships(
+        {
+          ...SkynedUtils.pick(construct, ["skip", "take"]),
+          from,
+          to,
+          where: {
+            ...rest,
+          },
+        },
+        authUser,
+      );
+
+      res._success(StatusCodes.OK, {
+        ...SkynedUtils.exclude(construct, ["skip", "take"]),
+        total,
+        data: scholarships,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   // deleteScholarship: IScholarshipController["deleteScholarship"] = async (req, res, next) => {
   //   try {
   //     const authUser = this._validateAdmin(req);

@@ -12,7 +12,7 @@ import {
   authMiddleware,
   RequestValidationMiddleware,
 } from "../../../../middleware";
-import { PageQuerySchema } from "../../../../zod-schemas";
+import { ScholarshipQuerySchema } from "../../../../zod-schemas";
 import { CreateScholarshipSchema } from "@workspace/shared";
 
 /** Required dependencies for our team router initialization */
@@ -46,11 +46,10 @@ export class ScholarshipRouter implements IRouter {
       )
       .get(
         RequestValidationMiddleware.validate({
-          query: PageQuerySchema.pick({
-            limit: true,
-          }).partial(),
+          query: ScholarshipQuerySchema,
         }),
-        controller.getScholarship,
+        authMiddleware.safeAuthenticate,
+        controller.listScholarships,
       );
   }
 
