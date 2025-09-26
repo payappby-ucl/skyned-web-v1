@@ -75,40 +75,58 @@ paths:
         "500":
           $ref: "#/components/responses/ServerError"
 
-  #   get:
-  #     summary: Get Scholarships
-  #     description: List of scholarships for admins
-  #     tags:
-  #       - Scholarship
-  #     operationId: listScholarships
-  #     parameters:
-  #       - $ref: "#/components/parameters/LimitParam"
-  #       - $ref: "#/components/parameters/OffsetParam"
-  #       - $ref: "#/components/parameters/From"
-  #       - $ref: "#/components/parameters/To"
-  #     responses:
-  #       "200":
-  #         description: The scholarships
-  #         content:
-  #           application/json:
-  #             schema:
-  #               allOf:
-  #                 - $ref: "#/components/schemas/SuccessResponse"
-  #                 - type: object
-  #                   properties:
-  #                     data:
-  #                       allOf:
-  #                         - $ref: "#/components/schemas/PaginatedResponse"
-  #                         - type: object
-  #                           properties:
-  #                             data:
-  #                               type: array
-  #                               items:
-  #                                 $ref: "#/components/schemas/Scholarship"
-  #       "400":
-  #         $ref: "#/components/responses/BadRequest"
-  #       "500":
-  #         $ref: "#/components/responses/ServerError"
+    get:
+      summary: Get Scholarships
+      description: List of scholarships
+      tags:
+        - Scholarship
+      operationId: listScholarships
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+        - in: query
+          name: featured
+          required: false
+          schema:
+            type: string
+            enum:
+              - true
+        - in: query
+          name: category
+          required: false
+          schema:
+            type: string
+            enum:
+              - accommodation
+              - tuition
+              - application fees
+              - others
+      responses:
+        "200":
+          description: The scholarships
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Scholarship"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
   # /scholarships/{slug}:
   #   summary: Single scholarship resource
   #   description: Routes for a single scholarship resource
