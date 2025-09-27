@@ -31,7 +31,7 @@ interface Props {
   title: string;
   text: string;
   url: string;
-  context: "Program" | "School";
+  context: "Program" | "School" | "Scholarship" | (string & {});
   imageUrl: string;
   copyToClipboard: (text: string, alertMessage?: string) => void;
 }

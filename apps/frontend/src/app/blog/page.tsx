@@ -97,7 +97,10 @@ export default async function Blogs({ searchParams }: Props) {
           title="Browse Our Blog"
           subtitle="Stay informed with insights, scholarship updates, and expert advice tailored for students chasing international opportunities."
           backgroundImage="/assets/images/backgrounds/blog-bg.png"
-          badge={{icon: SparklesIcon, text: "Your gateway to global education."}}
+          badge={{
+            icon: SparklesIcon,
+            text: "Your gateway to global education.",
+          }}
         >
           <div className="mx-auto mt-6 max-w-lg space-y-3 text-center md:max-w-sm">
             <NewsLetterForm label="Join Newsletter" />

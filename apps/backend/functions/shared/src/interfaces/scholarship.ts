@@ -1,3 +1,4 @@
+import { scholarshipCategories } from "utils";
 import { AdminProfile } from "./admin";
 import { IObject, ITimestamps } from "./utils";
 
@@ -18,4 +19,11 @@ export interface IScholarship extends ITimestamps {
 
   createdById: string;
   createdBy: AdminProfile;
+}
+
+export interface IScholarshipSummary {
+  category: (typeof scholarshipCategories)[number];
+  _count: {
+    _all: number;
+  };
 }

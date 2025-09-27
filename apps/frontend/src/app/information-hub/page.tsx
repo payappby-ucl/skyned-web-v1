@@ -4,6 +4,7 @@ import Script from "next/script";
 import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
+import ScholarshipSummary from "./_components/scholarship/scholarship-summary";
 
 const title = "Information Hub";
 const description =
@@ -55,8 +56,10 @@ export default async function InformationHub() {
         backgroundImage="/assets/images/backgrounds/infohub-bg.png"
       />
 
-      <section className="bg-accent space-y-10">
+      <section className="space-y-10">
         {/* Information hub content goes here */}
+        {/* Scholarship Summary */}
+        <ScholarshipSummary />
       </section>
     </>
   );

@@ -216,6 +216,7 @@ export class ScholarshipService
   getSummary: IScholarshipService["getSummary"] = async () => {
     const scholarshipSummary = await this.repository.db.scholarship.groupBy({
       by: ["category"],
+      where: { active: true },
       _count: {
         _all: true,
       },

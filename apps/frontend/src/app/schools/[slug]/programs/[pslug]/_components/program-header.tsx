@@ -11,7 +11,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@workspace/ui/components/avatar";
-import { Button } from "@workspace/ui/components/button";
 import { GraduationCap, MapPinCheck, Clock } from "lucide-react";
 import Link from "next/link";
 import React from "react";

@@ -10,6 +10,7 @@ export const serverCacheTags = {
   blogs: "blogs",
   categories: "categories",
   tags: "tags",
+  scholarships: "scholarships",
 } as const;
 
 /** Default Page Limit */
