@@ -13,6 +13,7 @@ export const serverCacheTags = {
   departments: "departments",
   kpi: "kpis",
   trends: "trends",
+  scholarships: "scholarships",
 } as const;
 
 export const DEFAULT_BULK_UPLOAD_WORKSHEET_NAME = "Bulk Upload Template";
