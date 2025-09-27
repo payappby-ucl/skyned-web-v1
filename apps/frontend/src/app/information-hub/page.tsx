@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { env } from "@/src/config";
 import { organization, sharedMetadata } from "@/src/utils";
 import Script from "next/script";
