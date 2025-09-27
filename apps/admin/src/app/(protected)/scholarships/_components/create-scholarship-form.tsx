@@ -29,7 +29,7 @@ import {
 } from "@workspace/ui/components/select";
 import { Switch } from "@workspace/ui/components/switch";
 import { Textarea } from "@workspace/ui/components/textarea";
-import { useFieldArray, useForm, zodResolver } from "@workspace/ui/lib/utils";
+import { useForm, zodResolver } from "@workspace/ui/lib/utils";
 import { Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -57,7 +57,6 @@ const CreateScholarshipForm: React.FC = () => {
 
   const onSubmit = useCallback(async (data: CreateScholarshipSchema) => {
     try {
-      console.log(data);
       const serverRes = await createScholarship(data);
       const res = brandClientApi.utils.handleServerActionResponse(serverRes);
       brandClientApi.utils.toast.success(res.message);
@@ -70,8 +69,6 @@ const CreateScholarshipForm: React.FC = () => {
       brandClientApi.utils.alertError(error);
     }
   }, []);
-
-  console.log(form);
 
   // * Watch
   const [banner, eligibilityRequirements] = form.watch([

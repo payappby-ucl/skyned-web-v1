@@ -20,6 +20,7 @@ interface Props {
   action(): void;
   Icon?: React.ReactNode;
   triggerText?: string;
+  actionButtonClassName?: string;
 }
 
 const ActionAlert: React.FC<Props> = ({
@@ -29,6 +30,7 @@ const ActionAlert: React.FC<Props> = ({
   action,
   Icon,
   triggerText,
+  actionButtonClassName,
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -54,6 +56,7 @@ const ActionAlert: React.FC<Props> = ({
             type="button"
             role="button"
             variant="destructive"
+            className={actionButtonClassName}
             onClick={() => {
               action();
               setOpen(false);

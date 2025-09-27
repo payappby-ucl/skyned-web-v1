@@ -78,3 +78,24 @@ export async function deleteScholarship(
     return brandServerApi.utils.createServerActionError(error);
   }
 }
+
+export async function scholarshipAction(
+  slug: string,
+  action: "activate" | "deactivate",
+): Promise<ServerActionReturnType<IMessageResponse>> {
+  try {
+    const { data: res } =
+      await brandServerApi.httpClient.request<IMessageResponse>(
+        `/scholarships/${slug}/${action}`,
+        "PATCH",
+      );
+
+    revalidateTag(serverCacheTags.scholarships);
+    return {
+      success: true,
+      data: res,
+    };
+  } catch (error: any) {
+    return brandServerApi.utils.createServerActionError(error);
+  }
+}

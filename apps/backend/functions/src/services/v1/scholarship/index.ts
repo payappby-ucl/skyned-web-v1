@@ -24,6 +24,7 @@ const otherUsersData: (keyof IScholarship)[] = [
   "featured",
   "slug",
   "banner",
+  "category",
 ];
 
 const adminUserData: (keyof IScholarship)[] = [

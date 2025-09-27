@@ -29,7 +29,7 @@ exports.CreateScholarshipSchema = zod_1.z.object({
     featured: zod_1.z.boolean().default(false),
     category: zod_1.z.enum(utils_1.scholarshipCategories),
     eligibilityRequirements: zod_1.z
-        .array(zod_1.z.string().trim().nonempty("Required"))
+        .array(zod_1.z.string().trim().nonempty("Field cannot be empty"))
         .min(1, "Please add at least one eligibility requirement"),
 });
 exports.UpdateScholarshipSchema = exports.CreateScholarshipSchema.omit({

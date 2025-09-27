@@ -16,6 +16,7 @@ function useGet<RT>({ queryKey, url, enabled = true }: Props) {
         return res.data;
       } catch (error) {
         brandClientApi.utils.alertError(error);
+        return null;
       }
     },
     placeholderData: keepPreviousData,

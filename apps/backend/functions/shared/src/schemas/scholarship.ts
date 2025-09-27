@@ -24,7 +24,7 @@ export const CreateScholarshipSchema = z.object({
   featured: z.boolean().default(false),
   category: z.enum(scholarshipCategories),
   eligibilityRequirements: z
-    .array(z.string().trim().nonempty("Required"))
+    .array(z.string().trim().nonempty("Field cannot be empty"))
     .min(1, "Please add at least one eligibility requirement"),
 });
 export type CreateScholarshipSchema = z.infer<typeof CreateScholarshipSchema>;
