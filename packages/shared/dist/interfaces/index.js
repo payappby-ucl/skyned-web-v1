@@ -29,3 +29,4 @@ __exportStar(require("./program"), exports);
 __exportStar(require("./blog"), exports);
 __exportStar(require("./analytics"), exports);
 __exportStar(require("./scholarship"), exports);
+__exportStar(require("./loan"), exports);

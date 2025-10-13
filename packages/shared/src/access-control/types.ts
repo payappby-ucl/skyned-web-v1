@@ -24,6 +24,7 @@ import {
   IFaq,
   IInquiry,
   IIntake,
+  ILoan,
   IProgram,
   ISchool,
   ITag,
@@ -47,7 +48,8 @@ export type ResourceType =
   | "blogs"
   | "categories"
   | "tags"
-  | "scholarships";
+  | "scholarships"
+  | "loans";
 
 export type PermissionType = {
   admins: {
@@ -167,6 +169,13 @@ export type PermissionType = {
       | "delete"
       | "activate"
       | "deactivate";
+  };
+
+  loans: {
+    dataType: ILoan;
+    createDataType: "";
+    updateDataType: "";
+    action: "list" | "create" | "read" | "update" | "delete";
   };
 };
 

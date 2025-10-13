@@ -49,7 +49,8 @@ export const addresses = [
     streetAddress: "Pyale Work Hub - No 21 Bekwere Wosu Street",
     addressLocality: "D-Line",
     addressRegion: "Port-Harcourt",
-    consultationLink: "#",
+    consultationLink:
+      "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1IWQAGJ21AHCw_0hZGkmQUUaOhGi7lAj-H71aMhdwJmopm_9tWLH6d1JCJsrahYiYxydgwVaCs",
   },
   {
     location: "Nigeria",
@@ -57,6 +58,6 @@ export const addresses = [
       "Novare Central Mall, 2nd Floor, Plot 502 Dalaba Street, Off Michael Okpara Street",
     addressLocality: "Wuse Zone 5",
     addressRegion: "Abuja",
-    consultationLink: "#",
+    consultationLink: "https://calendly.com/skynedabuja/30min",
   },
 ];
