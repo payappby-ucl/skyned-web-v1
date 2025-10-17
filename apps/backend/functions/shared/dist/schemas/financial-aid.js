@@ -24,7 +24,7 @@ exports.FinancialAidSchema = zod_1.z
     loanType: zod_1.z.enum(["tuition", "tuition + living expenses"]),
     livingExpensesCoverage: zod_1.z.enum(["yes", "no"]).optional(),
     programStarted: zod_1.z.enum(["yes", "no"]),
-    gpa: zod_1.z.number().positive().optional(),
+    gpa: zod_1.z.coerce.number().min(0, "Minimum of 0").optional(),
     nextSchoolTerm: zod_1.z.coerce.number().positive().int(),
     partner: zod_1.z.enum(utils_1.financialAids),
     proofOfAddress: common_1.CommonSchema.shape.image,

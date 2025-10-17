@@ -8,7 +8,8 @@ class LocalStorage {
         localStorage.setItem(name, value);
     };
     getItem = (name) => {
-        // if (typeof window === "undefined") return null;
+        if (typeof window === "undefined")
+            return null;
         return localStorage.getItem(name);
     };
     deleteItem = (name) => {

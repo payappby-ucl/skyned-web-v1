@@ -35,22 +35,40 @@ exports.fiveMinPastMidNightCronJobs = onSchedule(
     schedule: "5 0 * * *",
     memory: "1GiB",
     retryCount: 3,
+    timeoutSeconds: 300,
   },
   cronJobs.fiveMinPastMidNight,
 );
 
 // * PUB/SUBs
 exports.sendMailSubscriber = onMessagePublished(
-  EventsEnum.SEND_EMAIL_EVENT,
+  {
+    topic: EventsEnum.SEND_EMAIL_EVENT,
+    memory: "1GiB",
+    concurrency: 5,
+    timeoutSeconds: 300,
+    retry: true,
+  },
   subscriber.sendMail,
 );
 
 exports.marketingSubscriber = onMessagePublished(
-  EventsEnum.CREATE_MARKETING_CONTACT_EVENT,
+  {
+    topic: EventsEnum.CREATE_MARKETING_CONTACT_EVENT,
+    concurrency: 5,
+    timeoutSeconds: 300,
+    retry: true,
+  },
   subscriber.createContactForMarketing,
 );
 
 exports.activityLogSubscriber = onMessagePublished(
-  EventsEnum.CREATE_ACTIVITY_LOG,
+  {
+    topic: EventsEnum.CREATE_ACTIVITY_LOG,
+    concurrency: 5,
+    timeoutSeconds: 300,
+    retry: true,
+  },
+
   subscriber.createActivityLog,
 );

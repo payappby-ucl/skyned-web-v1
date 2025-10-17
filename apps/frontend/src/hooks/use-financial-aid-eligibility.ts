@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { brandClientApi } from "../lib/client";
 import { FinancialAidSchema } from "@workspace/shared";
 
@@ -12,22 +12,6 @@ const useFinancialAidEligibility = () => {
     if (!data) return null;
     return JSON.parse(data) as FinancialAidSchema;
   }, []);
-  // const [financialAidEligibility, setFinancialAidEligibility] =
-  //   useState<FinancialAidSchema | null>(null);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (typeof window !== "undefined") {
-  //     const data = brandClientApi.storage.localStorage.getItem(storageKeyName);
-  //     if (!data) {
-  //       setFinancialAidEligibility(null);
-  //       setLoading(false);
-  //     } else {
-  //       setFinancialAidEligibility(JSON.parse(data) as FinancialAidSchema);
-  //       setLoading(false);
-  //     }
-  //   }
-  // }, []);
 
   const saveFinancialAidEligibility = useCallback(
     (data: FinancialAidSchema) => {
