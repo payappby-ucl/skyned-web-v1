@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
-  images: {
-    experimental: {
-      serverActions: {
-        bodySizeLimit: "4mb",
-      },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "4mb",
     },
+  },
+  images: {
     remotePatterns: [
       {
         protocol: "https",
