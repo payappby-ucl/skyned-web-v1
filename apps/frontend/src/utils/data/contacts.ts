@@ -49,8 +49,7 @@ export const addresses = [
     streetAddress: "Pyale Work Hub - No 21 Bekwere Wosu Street",
     addressLocality: "D-Line",
     addressRegion: "Port-Harcourt",
-    consultationLink:
-      "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1IWQAGJ21AHCw_0hZGkmQUUaOhGi7lAj-H71aMhdwJmopm_9tWLH6d1JCJsrahYiYxydgwVaCs",
+    consultationLink: "https://calendar.app.google/BUibkA6R86rUyRER9",
   },
   {
     location: "Nigeria",

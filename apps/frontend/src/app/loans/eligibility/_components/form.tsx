@@ -835,7 +835,13 @@ const FinancialAidEligibilityForm: React.FC = () => {
                         field.value ? new Date(field.value) : new Date()
                       }
                       mode="single"
-                      onSelect={field.onChange}
+                      onSelect={(val) => {
+                        if (val) {
+                          field.onChange(+val);
+                        } else {
+                          field.onChange(Date.now());
+                        }
+                      }}
                       captionLayout="dropdown"
                       fromDate={new Date()}
                       fromYear={new Date().getFullYear()}
@@ -1064,7 +1070,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={5}
+                          maxSize={2}
                           setError={(message) =>
                             form.setError("identification", {
                               message,
@@ -1127,7 +1133,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={5}
+                          maxSize={2}
                           setError={(message) =>
                             form.setError("proofOfAddress", {
                               message,
@@ -1186,7 +1192,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={5}
+                          maxSize={2}
                           setError={(message) =>
                             form.setError("resume", {
                               message,
@@ -1247,7 +1253,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={5}
+                          maxSize={2}
                           setError={(message) =>
                             form.setError("transcript", {
                               message,
@@ -1309,7 +1315,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                               "application/pdf": [".pdf"],
                             }}
                             extensions={[".pdf"]}
-                            maxSize={5}
+                            maxSize={2}
                             setError={(message) =>
                               form.setError("bankStatement", {
                                 message,
@@ -1373,7 +1379,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={5}
+                          maxSize={2}
                           setError={(message) =>
                             form.setError("immigrationDocument", {
                               message,
