@@ -122,8 +122,31 @@ export class FinancialAidService
   findMany: IFinancialAidService["findMany"] = async (query) => {
     const queryArgs = this._constructQuery(query);
 
-    const financialAids =
-      await this.repository.db.financialAid.findMany(queryArgs);
+    const financialAids = await this.repository.db.financialAid.findMany({
+      ...queryArgs,
+      include: {
+        program: {
+          select: {
+            name: true,
+            slug: true,
+            school: {
+              select: {
+                slug: true,
+                name: true,
+                country: true,
+                state: true,
+                city: true,
+                currency: true,
+                logo: true,
+                accommodation: true,
+                address: true,
+                schoolImage: true,
+              },
+            },
+          },
+        },
+      },
+    });
 
     return financialAids.map((financialAid) => this.deserialize(financialAid));
   };

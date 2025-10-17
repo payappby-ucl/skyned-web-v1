@@ -1,3 +1,5 @@
+import { IProgram } from "./program";
+import { ISchool } from "./school";
 import { IObject, IPhoneNumber, ITimestamps } from "./utils";
 
 export interface IFinancialAid extends ITimestamps {
@@ -27,4 +29,9 @@ export interface IFinancialAid extends ITimestamps {
   transcript: IObject;
   bankStatement?: IObject;
   immigrationDocument: IObject;
+
+  programId: string;
+  program: Pick<IProgram, "name" | "slug"> & {
+    school: ISchool;
+  };
 }

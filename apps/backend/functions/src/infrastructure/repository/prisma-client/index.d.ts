@@ -2827,11 +2827,13 @@ export namespace Prisma {
   export type ProgramCountOutputType = {
     intakes: number
     proficiencies: number
+    financialAidApplications: number
   }
 
   export type ProgramCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     intakes?: boolean | ProgramCountOutputTypeCountIntakesArgs
     proficiencies?: boolean | ProgramCountOutputTypeCountProficienciesArgs
+    financialAidApplications?: boolean | ProgramCountOutputTypeCountFinancialAidApplicationsArgs
   }
 
   // Custom InputTypes
@@ -2857,6 +2859,13 @@ export namespace Prisma {
    */
   export type ProgramCountOutputTypeCountProficienciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EnglishProficiencyWhereInput
+  }
+
+  /**
+   * ProgramCountOutputType without action
+   */
+  export type ProgramCountOutputTypeCountFinancialAidApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinancialAidWhereInput
   }
 
 
@@ -15773,6 +15782,7 @@ export namespace Prisma {
     intakes?: boolean | Program$intakesArgs<ExtArgs>
     proficiencies?: boolean | Program$proficienciesArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    financialAidApplications?: boolean | Program$financialAidApplicationsArgs<ExtArgs>
     _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["program"]>
 
@@ -15873,6 +15883,7 @@ export namespace Prisma {
     intakes?: boolean | Program$intakesArgs<ExtArgs>
     proficiencies?: boolean | Program$proficienciesArgs<ExtArgs>
     createdBy?: boolean | AdminDefaultArgs<ExtArgs>
+    financialAidApplications?: boolean | Program$financialAidApplicationsArgs<ExtArgs>
     _count?: boolean | ProgramCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProgramIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15891,6 +15902,7 @@ export namespace Prisma {
       intakes: Prisma.$IntakePayload<ExtArgs>[]
       proficiencies: Prisma.$EnglishProficiencyPayload<ExtArgs>[]
       createdBy: Prisma.$AdminPayload<ExtArgs>
+      financialAidApplications: Prisma.$FinancialAidPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -16317,6 +16329,7 @@ export namespace Prisma {
     intakes<T extends Program$intakesArgs<ExtArgs> = {}>(args?: Subset<T, Program$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     proficiencies<T extends Program$proficienciesArgs<ExtArgs> = {}>(args?: Subset<T, Program$proficienciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishProficiencyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    financialAidApplications<T extends Program$financialAidApplicationsArgs<ExtArgs> = {}>(args?: Subset<T, Program$financialAidApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16813,6 +16826,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EnglishProficiencyScalarFieldEnum | EnglishProficiencyScalarFieldEnum[]
+  }
+
+  /**
+   * Program.financialAidApplications
+   */
+  export type Program$financialAidApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
+    where?: FinancialAidWhereInput
+    orderBy?: FinancialAidOrderByWithRelationInput | FinancialAidOrderByWithRelationInput[]
+    cursor?: FinancialAidWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FinancialAidScalarFieldEnum | FinancialAidScalarFieldEnum[]
   }
 
   /**
@@ -23833,6 +23870,7 @@ export namespace Prisma {
     partner: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    programId: string | null
   }
 
   export type FinancialAidMaxAggregateOutputType = {
@@ -23856,6 +23894,7 @@ export namespace Prisma {
     partner: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    programId: string | null
   }
 
   export type FinancialAidCountAggregateOutputType = {
@@ -23886,6 +23925,7 @@ export namespace Prisma {
     immigrationDocument: number
     createdAt: number
     updatedAt: number
+    programId: number
     _all: number
   }
 
@@ -23921,6 +23961,7 @@ export namespace Prisma {
     partner?: true
     createdAt?: true
     updatedAt?: true
+    programId?: true
   }
 
   export type FinancialAidMaxAggregateInputType = {
@@ -23944,6 +23985,7 @@ export namespace Prisma {
     partner?: true
     createdAt?: true
     updatedAt?: true
+    programId?: true
   }
 
   export type FinancialAidCountAggregateInputType = {
@@ -23974,6 +24016,7 @@ export namespace Prisma {
     immigrationDocument?: true
     createdAt?: true
     updatedAt?: true
+    programId?: true
     _all?: true
   }
 
@@ -24091,6 +24134,7 @@ export namespace Prisma {
     immigrationDocument: JsonValue
     createdAt: Date
     updatedAt: Date
+    programId: string
     _count: FinancialAidCountAggregateOutputType | null
     _avg: FinancialAidAvgAggregateOutputType | null
     _sum: FinancialAidSumAggregateOutputType | null
@@ -24140,6 +24184,8 @@ export namespace Prisma {
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["financialAid"]>
 
   export type FinancialAidSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24170,6 +24216,8 @@ export namespace Prisma {
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["financialAid"]>
 
   export type FinancialAidSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24200,6 +24248,8 @@ export namespace Prisma {
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    programId?: boolean
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["financialAid"]>
 
   export type FinancialAidSelectScalar = {
@@ -24230,13 +24280,25 @@ export namespace Prisma {
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    programId?: boolean
   }
 
-  export type FinancialAidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "financialAidId" | "citizenship" | "canadianResident" | "firstName" | "lastName" | "email" | "phoneNumber" | "schoolSlug" | "programSlug" | "studyLevel" | "pgwp" | "hasOfferLetter" | "loanType" | "livingExpensesCoverage" | "programStarted" | "gpa" | "nextSchoolTerm" | "partner" | "proofOfAddress" | "identification" | "resume" | "transcript" | "bankStatement" | "immigrationDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["financialAid"]>
+  export type FinancialAidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "financialAidId" | "citizenship" | "canadianResident" | "firstName" | "lastName" | "email" | "phoneNumber" | "schoolSlug" | "programSlug" | "studyLevel" | "pgwp" | "hasOfferLetter" | "loanType" | "livingExpensesCoverage" | "programStarted" | "gpa" | "nextSchoolTerm" | "partner" | "proofOfAddress" | "identification" | "resume" | "transcript" | "bankStatement" | "immigrationDocument" | "createdAt" | "updatedAt" | "programId", ExtArgs["result"]["financialAid"]>
+  export type FinancialAidInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
+  export type FinancialAidIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
+  export type FinancialAidIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    program?: boolean | ProgramDefaultArgs<ExtArgs>
+  }
 
   export type $FinancialAidPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FinancialAid"
-    objects: {}
+    objects: {
+      program: Prisma.$ProgramPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       financialAidId: string
@@ -24265,6 +24327,7 @@ export namespace Prisma {
       immigrationDocument: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
+      programId: string
     }, ExtArgs["result"]["financialAid"]>
     composites: {}
   }
@@ -24659,6 +24722,7 @@ export namespace Prisma {
    */
   export interface Prisma__FinancialAidClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    program<T extends ProgramDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProgramDefaultArgs<ExtArgs>>): Prisma__ProgramClient<$Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24715,6 +24779,7 @@ export namespace Prisma {
     readonly immigrationDocument: FieldRef<"FinancialAid", 'Json'>
     readonly createdAt: FieldRef<"FinancialAid", 'DateTime'>
     readonly updatedAt: FieldRef<"FinancialAid", 'DateTime'>
+    readonly programId: FieldRef<"FinancialAid", 'String'>
   }
     
 
@@ -24731,6 +24796,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
     /**
      * Filter, which FinancialAid to fetch.
      */
@@ -24750,6 +24819,10 @@ export namespace Prisma {
      */
     omit?: FinancialAidOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
+    /**
      * Filter, which FinancialAid to fetch.
      */
     where: FinancialAidWhereUniqueInput
@@ -24767,6 +24840,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
     /**
      * Filter, which FinancialAid to fetch.
      */
@@ -24816,6 +24893,10 @@ export namespace Prisma {
      */
     omit?: FinancialAidOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
+    /**
      * Filter, which FinancialAid to fetch.
      */
     where?: FinancialAidWhereInput
@@ -24864,6 +24945,10 @@ export namespace Prisma {
      */
     omit?: FinancialAidOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
+    /**
      * Filter, which FinancialAids to fetch.
      */
     where?: FinancialAidWhereInput
@@ -24907,6 +24992,10 @@ export namespace Prisma {
      */
     omit?: FinancialAidOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
+    /**
      * The data needed to create a FinancialAid.
      */
     data: XOR<FinancialAidCreateInput, FinancialAidUncheckedCreateInput>
@@ -24940,6 +25029,10 @@ export namespace Prisma {
      */
     data: FinancialAidCreateManyInput | FinancialAidCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -24954,6 +25047,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
     /**
      * The data needed to update a FinancialAid.
      */
@@ -25006,6 +25103,10 @@ export namespace Prisma {
      * Limit how many FinancialAids to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -25020,6 +25121,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
     /**
      * The filter to search for the FinancialAid to update in case it exists.
      */
@@ -25046,6 +25151,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
     /**
      * Filter which FinancialAid to delete.
      */
@@ -25078,6 +25187,10 @@ export namespace Prisma {
      * Omit specific fields from the FinancialAid
      */
     omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FinancialAidInclude<ExtArgs> | null
   }
 
 
@@ -25417,7 +25530,8 @@ export namespace Prisma {
     bankStatement: 'bankStatement',
     immigrationDocument: 'immigrationDocument',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    programId: 'programId'
   };
 
   export type FinancialAidScalarFieldEnum = (typeof FinancialAidScalarFieldEnum)[keyof typeof FinancialAidScalarFieldEnum]
@@ -25657,7 +25771,8 @@ export namespace Prisma {
     loanType: 'loanType',
     livingExpensesCoverage: 'livingExpensesCoverage',
     programStarted: 'programStarted',
-    partner: 'partner'
+    partner: 'partner',
+    programId: 'programId'
   };
 
   export type FinancialAidOrderByRelevanceFieldEnum = (typeof FinancialAidOrderByRelevanceFieldEnum)[keyof typeof FinancialAidOrderByRelevanceFieldEnum]
@@ -26917,6 +27032,7 @@ export namespace Prisma {
     intakes?: IntakeListRelationFilter
     proficiencies?: EnglishProficiencyListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    financialAidApplications?: FinancialAidListRelationFilter
   }
 
   export type ProgramOrderByWithRelationInput = {
@@ -26950,6 +27066,7 @@ export namespace Prisma {
     intakes?: IntakeOrderByRelationAggregateInput
     proficiencies?: EnglishProficiencyOrderByRelationAggregateInput
     createdBy?: AdminOrderByWithRelationInput
+    financialAidApplications?: FinancialAidOrderByRelationAggregateInput
     _relevance?: ProgramOrderByRelevanceInput
   }
 
@@ -26988,6 +27105,7 @@ export namespace Prisma {
     intakes?: IntakeListRelationFilter
     proficiencies?: EnglishProficiencyListRelationFilter
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+    financialAidApplications?: FinancialAidListRelationFilter
   }, "programId" | "id" | "schoolId_slug">
 
   export type ProgramOrderByWithAggregationInput = {
@@ -27555,6 +27673,8 @@ export namespace Prisma {
     immigrationDocument?: JsonFilter<"FinancialAid">
     createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    programId?: StringFilter<"FinancialAid"> | string
+    program?: XOR<ProgramScalarRelationFilter, ProgramWhereInput>
   }
 
   export type FinancialAidOrderByWithRelationInput = {
@@ -27585,6 +27705,8 @@ export namespace Prisma {
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    programId?: SortOrder
+    program?: ProgramOrderByWithRelationInput
     _relevance?: FinancialAidOrderByRelevanceInput
   }
 
@@ -27619,6 +27741,8 @@ export namespace Prisma {
     immigrationDocument?: JsonFilter<"FinancialAid">
     createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    programId?: StringFilter<"FinancialAid"> | string
+    program?: XOR<ProgramScalarRelationFilter, ProgramWhereInput>
   }, "id" | "financialAidId">
 
   export type FinancialAidOrderByWithAggregationInput = {
@@ -27649,6 +27773,7 @@ export namespace Prisma {
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    programId?: SortOrder
     _count?: FinancialAidCountOrderByAggregateInput
     _avg?: FinancialAidAvgOrderByAggregateInput
     _max?: FinancialAidMaxOrderByAggregateInput
@@ -27687,6 +27812,7 @@ export namespace Prisma {
     immigrationDocument?: JsonWithAggregatesFilter<"FinancialAid">
     createdAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
+    programId?: StringWithAggregatesFilter<"FinancialAid"> | string
   }
 
   export type DailyStatsCreateInput = {
@@ -28803,6 +28929,7 @@ export namespace Prisma {
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+    financialAidApplications?: FinancialAidCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateInput = {
@@ -28834,6 +28961,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
+    financialAidApplications?: FinancialAidUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUpdateInput = {
@@ -28864,6 +28992,7 @@ export namespace Prisma {
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+    financialAidApplications?: FinancialAidUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateInput = {
@@ -28895,6 +29024,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
+    financialAidApplications?: FinancialAidUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramCreateManyInput = {
@@ -29482,6 +29612,7 @@ export namespace Prisma {
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    program: ProgramCreateNestedOneWithoutFinancialAidApplicationsInput
   }
 
   export type FinancialAidUncheckedCreateInput = {
@@ -29512,6 +29643,7 @@ export namespace Prisma {
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    programId: string
   }
 
   export type FinancialAidUpdateInput = {
@@ -29541,6 +29673,7 @@ export namespace Prisma {
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    program?: ProgramUpdateOneRequiredWithoutFinancialAidApplicationsNestedInput
   }
 
   export type FinancialAidUncheckedUpdateInput = {
@@ -29571,6 +29704,7 @@ export namespace Prisma {
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programId?: StringFieldUpdateOperationsInput | string
   }
 
   export type FinancialAidCreateManyInput = {
@@ -29601,6 +29735,7 @@ export namespace Prisma {
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    programId: string
   }
 
   export type FinancialAidUpdateManyMutationInput = {
@@ -29660,6 +29795,7 @@ export namespace Prisma {
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    programId?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -30859,7 +30995,17 @@ export namespace Prisma {
     none?: EnglishProficiencyWhereInput
   }
 
+  export type FinancialAidListRelationFilter = {
+    every?: FinancialAidWhereInput
+    some?: FinancialAidWhereInput
+    none?: FinancialAidWhereInput
+  }
+
   export type EnglishProficiencyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FinancialAidOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31404,6 +31550,7 @@ export namespace Prisma {
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    programId?: SortOrder
   }
 
   export type FinancialAidAvgOrderByAggregateInput = {
@@ -31432,6 +31579,7 @@ export namespace Prisma {
     partner?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    programId?: SortOrder
   }
 
   export type FinancialAidMinOrderByAggregateInput = {
@@ -31455,6 +31603,7 @@ export namespace Prisma {
     partner?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    programId?: SortOrder
   }
 
   export type FinancialAidSumOrderByAggregateInput = {
@@ -32615,6 +32764,13 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
+  export type FinancialAidCreateNestedManyWithoutProgramInput = {
+    create?: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput> | FinancialAidCreateWithoutProgramInput[] | FinancialAidUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: FinancialAidCreateOrConnectWithoutProgramInput | FinancialAidCreateOrConnectWithoutProgramInput[]
+    createMany?: FinancialAidCreateManyProgramInputEnvelope
+    connect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+  }
+
   export type IntakeUncheckedCreateNestedManyWithoutProgramsInput = {
     create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
     connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
@@ -32626,6 +32782,13 @@ export namespace Prisma {
     connectOrCreate?: EnglishProficiencyCreateOrConnectWithoutProgramInput | EnglishProficiencyCreateOrConnectWithoutProgramInput[]
     createMany?: EnglishProficiencyCreateManyProgramInputEnvelope
     connect?: EnglishProficiencyWhereUniqueInput | EnglishProficiencyWhereUniqueInput[]
+  }
+
+  export type FinancialAidUncheckedCreateNestedManyWithoutProgramInput = {
+    create?: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput> | FinancialAidCreateWithoutProgramInput[] | FinancialAidUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: FinancialAidCreateOrConnectWithoutProgramInput | FinancialAidCreateOrConnectWithoutProgramInput[]
+    createMany?: FinancialAidCreateManyProgramInputEnvelope
+    connect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
   }
 
   export type ProgramUpdatefinancialAidsInput = {
@@ -32684,6 +32847,20 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutProgramsCreatedInput, AdminUpdateWithoutProgramsCreatedInput>, AdminUncheckedUpdateWithoutProgramsCreatedInput>
   }
 
+  export type FinancialAidUpdateManyWithoutProgramNestedInput = {
+    create?: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput> | FinancialAidCreateWithoutProgramInput[] | FinancialAidUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: FinancialAidCreateOrConnectWithoutProgramInput | FinancialAidCreateOrConnectWithoutProgramInput[]
+    upsert?: FinancialAidUpsertWithWhereUniqueWithoutProgramInput | FinancialAidUpsertWithWhereUniqueWithoutProgramInput[]
+    createMany?: FinancialAidCreateManyProgramInputEnvelope
+    set?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    disconnect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    delete?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    connect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    update?: FinancialAidUpdateWithWhereUniqueWithoutProgramInput | FinancialAidUpdateWithWhereUniqueWithoutProgramInput[]
+    updateMany?: FinancialAidUpdateManyWithWhereWithoutProgramInput | FinancialAidUpdateManyWithWhereWithoutProgramInput[]
+    deleteMany?: FinancialAidScalarWhereInput | FinancialAidScalarWhereInput[]
+  }
+
   export type IntakeUncheckedUpdateManyWithoutProgramsNestedInput = {
     create?: XOR<IntakeCreateWithoutProgramsInput, IntakeUncheckedCreateWithoutProgramsInput> | IntakeCreateWithoutProgramsInput[] | IntakeUncheckedCreateWithoutProgramsInput[]
     connectOrCreate?: IntakeCreateOrConnectWithoutProgramsInput | IntakeCreateOrConnectWithoutProgramsInput[]
@@ -32709,6 +32886,20 @@ export namespace Prisma {
     update?: EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput | EnglishProficiencyUpdateWithWhereUniqueWithoutProgramInput[]
     updateMany?: EnglishProficiencyUpdateManyWithWhereWithoutProgramInput | EnglishProficiencyUpdateManyWithWhereWithoutProgramInput[]
     deleteMany?: EnglishProficiencyScalarWhereInput | EnglishProficiencyScalarWhereInput[]
+  }
+
+  export type FinancialAidUncheckedUpdateManyWithoutProgramNestedInput = {
+    create?: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput> | FinancialAidCreateWithoutProgramInput[] | FinancialAidUncheckedCreateWithoutProgramInput[]
+    connectOrCreate?: FinancialAidCreateOrConnectWithoutProgramInput | FinancialAidCreateOrConnectWithoutProgramInput[]
+    upsert?: FinancialAidUpsertWithWhereUniqueWithoutProgramInput | FinancialAidUpsertWithWhereUniqueWithoutProgramInput[]
+    createMany?: FinancialAidCreateManyProgramInputEnvelope
+    set?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    disconnect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    delete?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    connect?: FinancialAidWhereUniqueInput | FinancialAidWhereUniqueInput[]
+    update?: FinancialAidUpdateWithWhereUniqueWithoutProgramInput | FinancialAidUpdateWithWhereUniqueWithoutProgramInput[]
+    updateMany?: FinancialAidUpdateManyWithWhereWithoutProgramInput | FinancialAidUpdateManyWithWhereWithoutProgramInput[]
+    deleteMany?: FinancialAidScalarWhereInput | FinancialAidScalarWhereInput[]
   }
 
   export type ProgramCreateNestedOneWithoutProficienciesInput = {
@@ -33020,12 +33211,26 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutScholarshipsCreatedInput, AdminUpdateWithoutScholarshipsCreatedInput>, AdminUncheckedUpdateWithoutScholarshipsCreatedInput>
   }
 
+  export type ProgramCreateNestedOneWithoutFinancialAidApplicationsInput = {
+    create?: XOR<ProgramCreateWithoutFinancialAidApplicationsInput, ProgramUncheckedCreateWithoutFinancialAidApplicationsInput>
+    connectOrCreate?: ProgramCreateOrConnectWithoutFinancialAidApplicationsInput
+    connect?: ProgramWhereUniqueInput
+  }
+
   export type NullableDecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string | null
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProgramUpdateOneRequiredWithoutFinancialAidApplicationsNestedInput = {
+    create?: XOR<ProgramCreateWithoutFinancialAidApplicationsInput, ProgramUncheckedCreateWithoutFinancialAidApplicationsInput>
+    connectOrCreate?: ProgramCreateOrConnectWithoutFinancialAidApplicationsInput
+    upsert?: ProgramUpsertWithoutFinancialAidApplicationsInput
+    connect?: ProgramWhereUniqueInput
+    update?: XOR<XOR<ProgramUpdateToOneWithWhereWithoutFinancialAidApplicationsInput, ProgramUpdateWithoutFinancialAidApplicationsInput>, ProgramUncheckedUpdateWithoutFinancialAidApplicationsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -33990,6 +34195,7 @@ export namespace Prisma {
     school: SchoolCreateNestedOneWithoutProgramsInput
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
+    financialAidApplications?: FinancialAidCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateWithoutCreatedByInput = {
@@ -34020,6 +34226,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
+    financialAidApplications?: FinancialAidUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutCreatedByInput = {
@@ -35992,6 +36199,7 @@ export namespace Prisma {
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+    financialAidApplications?: FinancialAidCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateWithoutSchoolInput = {
@@ -36022,6 +36230,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
     proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
+    financialAidApplications?: FinancialAidUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutSchoolInput = {
@@ -36636,6 +36845,75 @@ export namespace Prisma {
     create: XOR<AdminCreateWithoutProgramsCreatedInput, AdminUncheckedCreateWithoutProgramsCreatedInput>
   }
 
+  export type FinancialAidCreateWithoutProgramInput = {
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FinancialAidUncheckedCreateWithoutProgramInput = {
+    id?: number
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FinancialAidCreateOrConnectWithoutProgramInput = {
+    where: FinancialAidWhereUniqueInput
+    create: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput>
+  }
+
+  export type FinancialAidCreateManyProgramInputEnvelope = {
+    data: FinancialAidCreateManyProgramInput | FinancialAidCreateManyProgramInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SchoolUpsertWithoutProgramsInput = {
     update: XOR<SchoolUpdateWithoutProgramsInput, SchoolUncheckedUpdateWithoutProgramsInput>
     create: XOR<SchoolCreateWithoutProgramsInput, SchoolUncheckedCreateWithoutProgramsInput>
@@ -36821,6 +37099,56 @@ export namespace Prisma {
     scholarshipsCreated?: ScholarshipUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
+  export type FinancialAidUpsertWithWhereUniqueWithoutProgramInput = {
+    where: FinancialAidWhereUniqueInput
+    update: XOR<FinancialAidUpdateWithoutProgramInput, FinancialAidUncheckedUpdateWithoutProgramInput>
+    create: XOR<FinancialAidCreateWithoutProgramInput, FinancialAidUncheckedCreateWithoutProgramInput>
+  }
+
+  export type FinancialAidUpdateWithWhereUniqueWithoutProgramInput = {
+    where: FinancialAidWhereUniqueInput
+    data: XOR<FinancialAidUpdateWithoutProgramInput, FinancialAidUncheckedUpdateWithoutProgramInput>
+  }
+
+  export type FinancialAidUpdateManyWithWhereWithoutProgramInput = {
+    where: FinancialAidScalarWhereInput
+    data: XOR<FinancialAidUpdateManyMutationInput, FinancialAidUncheckedUpdateManyWithoutProgramInput>
+  }
+
+  export type FinancialAidScalarWhereInput = {
+    AND?: FinancialAidScalarWhereInput | FinancialAidScalarWhereInput[]
+    OR?: FinancialAidScalarWhereInput[]
+    NOT?: FinancialAidScalarWhereInput | FinancialAidScalarWhereInput[]
+    id?: IntFilter<"FinancialAid"> | number
+    financialAidId?: StringFilter<"FinancialAid"> | string
+    citizenship?: StringFilter<"FinancialAid"> | string
+    canadianResident?: StringFilter<"FinancialAid"> | string
+    firstName?: StringFilter<"FinancialAid"> | string
+    lastName?: StringFilter<"FinancialAid"> | string
+    email?: StringFilter<"FinancialAid"> | string
+    phoneNumber?: JsonFilter<"FinancialAid">
+    schoolSlug?: StringFilter<"FinancialAid"> | string
+    programSlug?: StringFilter<"FinancialAid"> | string
+    studyLevel?: StringFilter<"FinancialAid"> | string
+    pgwp?: StringFilter<"FinancialAid"> | string
+    hasOfferLetter?: StringFilter<"FinancialAid"> | string
+    loanType?: StringFilter<"FinancialAid"> | string
+    livingExpensesCoverage?: StringNullableFilter<"FinancialAid"> | string | null
+    programStarted?: StringFilter<"FinancialAid"> | string
+    gpa?: DecimalNullableFilter<"FinancialAid"> | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFilter<"FinancialAid"> | Date | string
+    partner?: StringFilter<"FinancialAid"> | string
+    proofOfAddress?: JsonFilter<"FinancialAid">
+    identification?: JsonFilter<"FinancialAid">
+    resume?: JsonFilter<"FinancialAid">
+    transcript?: JsonFilter<"FinancialAid">
+    bankStatement?: JsonNullableFilter<"FinancialAid">
+    immigrationDocument?: JsonFilter<"FinancialAid">
+    createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    programId?: StringFilter<"FinancialAid"> | string
+  }
+
   export type ProgramCreateWithoutProficienciesInput = {
     id?: number
     programId?: string
@@ -36849,6 +37177,7 @@ export namespace Prisma {
     school: SchoolCreateNestedOneWithoutProgramsInput
     intakes?: IntakeCreateNestedManyWithoutProgramsInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+    financialAidApplications?: FinancialAidCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateWithoutProficienciesInput = {
@@ -36879,6 +37208,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+    financialAidApplications?: FinancialAidUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutProficienciesInput = {
@@ -36924,6 +37254,7 @@ export namespace Prisma {
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+    financialAidApplications?: FinancialAidUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateWithoutProficienciesInput = {
@@ -36954,6 +37285,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+    financialAidApplications?: FinancialAidUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type SchoolCreateWithoutIntakesInput = {
@@ -37039,6 +37371,7 @@ export namespace Prisma {
     school: SchoolCreateNestedOneWithoutProgramsInput
     proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
     createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+    financialAidApplications?: FinancialAidCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramUncheckedCreateWithoutIntakesInput = {
@@ -37069,6 +37402,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
+    financialAidApplications?: FinancialAidUncheckedCreateNestedManyWithoutProgramInput
   }
 
   export type ProgramCreateOrConnectWithoutIntakesInput = {
@@ -38147,6 +38481,145 @@ export namespace Prisma {
     categoriesCreated?: CategoryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
+  export type ProgramCreateWithoutFinancialAidApplicationsInput = {
+    id?: number
+    programId?: string
+    randomKey?: number
+    name: string
+    slug: string
+    faculty?: string | null
+    degreeType: string
+    overview: string
+    description: string
+    requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutProgramsInput
+    intakes?: IntakeCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyCreateNestedManyWithoutProgramInput
+    createdBy: AdminCreateNestedOneWithoutProgramsCreatedInput
+  }
+
+  export type ProgramUncheckedCreateWithoutFinancialAidApplicationsInput = {
+    id?: number
+    programId?: string
+    schoolId: string
+    randomKey?: number
+    name: string
+    slug: string
+    faculty?: string | null
+    degreeType: string
+    overview: string
+    description: string
+    requirements?: string | null
+    financialAids?: ProgramCreatefinancialAidsInput | string[]
+    applicationFee: Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: Decimal | DecimalJsLike | number | string
+    tuitionFee: Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: $Enums.TuitionFeeType
+    timeframe?: $Enums.Timeframe
+    duration: Decimal | DecimalJsLike | number | string
+    minimumEducationLevel: string
+    minimumEducationDegree: number
+    minimumEligibilityGpa: Decimal | DecimalJsLike | number | string
+    pgwp?: boolean
+    active?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: IntakeUncheckedCreateNestedManyWithoutProgramsInput
+    proficiencies?: EnglishProficiencyUncheckedCreateNestedManyWithoutProgramInput
+  }
+
+  export type ProgramCreateOrConnectWithoutFinancialAidApplicationsInput = {
+    where: ProgramWhereUniqueInput
+    create: XOR<ProgramCreateWithoutFinancialAidApplicationsInput, ProgramUncheckedCreateWithoutFinancialAidApplicationsInput>
+  }
+
+  export type ProgramUpsertWithoutFinancialAidApplicationsInput = {
+    update: XOR<ProgramUpdateWithoutFinancialAidApplicationsInput, ProgramUncheckedUpdateWithoutFinancialAidApplicationsInput>
+    create: XOR<ProgramCreateWithoutFinancialAidApplicationsInput, ProgramUncheckedCreateWithoutFinancialAidApplicationsInput>
+    where?: ProgramWhereInput
+  }
+
+  export type ProgramUpdateToOneWithWhereWithoutFinancialAidApplicationsInput = {
+    where?: ProgramWhereInput
+    data: XOR<ProgramUpdateWithoutFinancialAidApplicationsInput, ProgramUncheckedUpdateWithoutFinancialAidApplicationsInput>
+  }
+
+  export type ProgramUpdateWithoutFinancialAidApplicationsInput = {
+    programId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
+    intakes?: IntakeUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
+    createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+  }
+
+  export type ProgramUncheckedUpdateWithoutFinancialAidApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    programId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    randomKey?: FloatFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    faculty?: NullableStringFieldUpdateOperationsInput | string | null
+    degreeType?: StringFieldUpdateOperationsInput | string
+    overview?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    requirements?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAids?: ProgramUpdatefinancialAidsInput | string[]
+    applicationFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    applicationFeeDiscount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tuitionFeeType?: EnumTuitionFeeTypeFieldUpdateOperationsInput | $Enums.TuitionFeeType
+    timeframe?: EnumTimeframeFieldUpdateOperationsInput | $Enums.Timeframe
+    duration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    minimumEducationLevel?: StringFieldUpdateOperationsInput | string
+    minimumEducationDegree?: IntFieldUpdateOperationsInput | number
+    minimumEligibilityGpa?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    pgwp?: BoolFieldUpdateOperationsInput | boolean
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
+    proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
+  }
+
   export type AdminCreateManyCreatedByInput = {
     id?: number
     adminId: string
@@ -38769,6 +39242,7 @@ export namespace Prisma {
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
+    financialAidApplications?: FinancialAidUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateWithoutCreatedByInput = {
@@ -38799,6 +39273,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
+    financialAidApplications?: FinancialAidUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutCreatedByInput = {
@@ -39298,6 +39773,7 @@ export namespace Prisma {
     intakes?: IntakeUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+    financialAidApplications?: FinancialAidUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateWithoutSchoolInput = {
@@ -39328,6 +39804,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     intakes?: IntakeUncheckedUpdateManyWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
+    financialAidApplications?: FinancialAidUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutSchoolInput = {
@@ -39361,6 +39838,36 @@ export namespace Prisma {
   export type EnglishProficiencyCreateManyProgramInput = {
     test: string
     score: Decimal | DecimalJsLike | number | string
+  }
+
+  export type FinancialAidCreateManyProgramInput = {
+    id?: number
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type IntakeUpdateWithoutProgramsInput = {
@@ -39413,6 +39920,95 @@ export namespace Prisma {
     score?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
+  export type FinancialAidUpdateWithoutProgramInput = {
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAidUncheckedUpdateWithoutProgramInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAidUncheckedUpdateManyWithoutProgramInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProgramUpdateWithoutIntakesInput = {
     programId?: StringFieldUpdateOperationsInput | string
     randomKey?: FloatFieldUpdateOperationsInput | number
@@ -39440,6 +40036,7 @@ export namespace Prisma {
     school?: SchoolUpdateOneRequiredWithoutProgramsNestedInput
     proficiencies?: EnglishProficiencyUpdateManyWithoutProgramNestedInput
     createdBy?: AdminUpdateOneRequiredWithoutProgramsCreatedNestedInput
+    financialAidApplications?: FinancialAidUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateWithoutIntakesInput = {
@@ -39470,6 +40067,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proficiencies?: EnglishProficiencyUncheckedUpdateManyWithoutProgramNestedInput
+    financialAidApplications?: FinancialAidUncheckedUpdateManyWithoutProgramNestedInput
   }
 
   export type ProgramUncheckedUpdateManyWithoutIntakesInput = {

@@ -2,6 +2,11 @@
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   images: {
+    experimental: {
+      serverActions: {
+        bodySizeLimit: "4mb",
+      },
+    },
     remotePatterns: [
       {
         protocol: "https",

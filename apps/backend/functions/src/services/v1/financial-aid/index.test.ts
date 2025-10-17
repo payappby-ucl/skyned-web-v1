@@ -1,8 +1,12 @@
 /* eslint-disable max-len */
 import { FinancialAidService, financialAidService } from ".";
-import { financialAidData } from "../../../data";
+import { financialAidData, programData, schoolData } from "../../../data";
 import { phoneNumberService } from "../phone-number";
 import { idGeneratorService } from "../id-generator";
+import { signInUser } from "../../../../__tests__/helpers/utils";
+import { repository } from "../../../infrastructure";
+import { intakeService } from "../intake";
+import { programService } from "../program";
 
 describe("financialAidService", () => {
   describe("instance", () => {
@@ -53,8 +57,37 @@ describe("financialAidService", () => {
 
     describe("create", () => {
       test("should create data", async () => {
+        const userAuth = await signInUser();
+
+        const school = await repository.school.create({
+          data: {
+            ...schoolData,
+            schoolId: "financial-aids-service-test",
+            slug: "financial-aids-service-test",
+            createdById: userAuth.user.uid,
+          },
+        });
+
+        const intake = await intakeService.createIntake(
+          userAuth.user.uid,
+          school.schoolId,
+          {
+            intake: "MAY 2030",
+            status: "open",
+            startDate: Date.now(),
+            deadline: Date.now(),
+          },
+        );
+
+        const program = await programService.createSingleProgram(
+          userAuth.user.uid,
+          school.schoolId,
+          { ...programData, intakes: [intake.id] },
+        );
+
         const data = await financialAidService.create({
           ...testData,
+          programId: program.programId,
         });
         expect(data).toEqual(expect.objectContaining(testData));
       });

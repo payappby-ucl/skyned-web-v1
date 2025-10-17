@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   Award,
   CircleHelp,
+  Coins,
   LayoutDashboard,
   LucideIcon,
   MessageCircleQuestion,
@@ -94,6 +95,13 @@ export function AppSidebar({
           url: "/blog",
           icon: NotebookText,
           resource: "blogs",
+        },
+
+        {
+          title: "Financial Aid",
+          url: "/financial-aids",
+          icon: Coins,
+          resource: "loans",
         },
 
         {

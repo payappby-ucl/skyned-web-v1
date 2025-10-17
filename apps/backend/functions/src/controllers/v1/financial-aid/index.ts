@@ -163,6 +163,7 @@ export class FinancialAidController
         nextSchoolTerm: new Date(nextSchoolTerm),
         phoneNumber: this.phoneNumberService.formatPhoneNumber(phoneNumber),
         ...images,
+        programId: program.programId,
       });
 
       // * Emit Send mail

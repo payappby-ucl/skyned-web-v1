@@ -391,7 +391,8 @@ exports.Prisma.FinancialAidScalarFieldEnum = {
   bankStatement: 'bankStatement',
   immigrationDocument: 'immigrationDocument',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  programId: 'programId'
 };
 
 exports.Prisma.SortOrder = {
@@ -562,7 +563,8 @@ exports.Prisma.FinancialAidOrderByRelevanceFieldEnum = {
   loanType: 'loanType',
   livingExpensesCoverage: 'livingExpensesCoverage',
   programStarted: 'programStarted',
-  partner: 'partner'
+  partner: 'partner',
+  programId: 'programId'
 };
 exports.TokenType = exports.$Enums.TokenType = {
   verify: 'verify',

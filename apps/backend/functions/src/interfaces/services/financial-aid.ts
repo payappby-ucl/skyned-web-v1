@@ -29,6 +29,7 @@ export interface IFinancialAidService {
       nextSchoolTerm: Date;
       financialAidId: string;
       phoneNumber: IPhoneNumber;
+      programId: string;
     },
   ): Promise<IFinancialAid>;
 

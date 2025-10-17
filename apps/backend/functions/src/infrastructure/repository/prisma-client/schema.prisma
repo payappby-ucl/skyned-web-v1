@@ -435,8 +435,9 @@ model Program {
   createdById String @map("created_by_id") @db.VarChar(256)
   createdBy   Admin  @relation(fields: [createdById], references: [adminId])
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt                DateTime       @default(now()) @map("created_at")
+  updatedAt                DateTime       @updatedAt @map("updated_at")
+  financialAidApplications FinancialAid[]
 
   @@unique([schoolId, slug])
   @@index([name])
@@ -627,6 +628,10 @@ model FinancialAid {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  // * Relationships
+  programId String  @map("program_id")
+  program   Program @relation(fields: [programId], references: [programId])
 
   @@index([firstName])
   @@index([lastName])
