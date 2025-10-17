@@ -19,6 +19,7 @@ __exportStar(require("./constants"), exports);
 __exportStar(require("./education-level"), exports);
 __exportStar(require("./degree-types"), exports);
 __exportStar(require("./english-proficiency"), exports);
+__exportStar(require("./financial-aid"), exports);
 const isInDepartment = (admin, departments) => {
     return (admin.departments?.some((department) => departments.includes(department.name)) || false);
 };

@@ -1,3 +1,4 @@
+"use client";
 import { IStorage } from "./interface";
 import { LocalStorage } from "./local-storage";
 

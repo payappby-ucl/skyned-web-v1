@@ -22,6 +22,7 @@ export const ProgramQuerySchema = z.object({
     .transform((val) => val && val.split(",")),
 
   schoolId: z.string().optional(),
+  schoolSlug: z.string().optional(),
   term: z.string().trim().optional(),
 
   institutionType: z

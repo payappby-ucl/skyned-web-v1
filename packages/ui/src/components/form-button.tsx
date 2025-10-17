@@ -12,13 +12,14 @@ const FormButton: React.FC<Props> = ({
   isLoading,
   children,
   className,
+  disabled,
   ...props
 }) => {
   return (
     <Button
       className={`flex items-center gap-2 ${className}`}
       {...props}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading ? <Loader2 className="animate-spin" /> : null}
       {children}

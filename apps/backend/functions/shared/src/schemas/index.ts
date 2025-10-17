@@ -11,3 +11,4 @@ export * from "./english-proficiency";
 export * from "./blog-post";
 export * from "./apply";
 export * from "./scholarship";
+export * from "./financial-aid";

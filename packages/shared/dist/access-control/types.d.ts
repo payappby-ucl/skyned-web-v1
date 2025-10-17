@@ -1,5 +1,5 @@
-import { BlogPostSchema, ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateScholarshipSchema, CreateSchoolSchema, ProgramSchema, UpdateAdminSchema, UpdateBlogPostSchema, UpdateBulkProgramSchema, UpdateScholarshipSchema, UpdateSchoolSchema } from "../schemas";
-import { IAccommodation, IAdmin, IBlogPost, ICategory, IDepartment, IFaq, IInquiry, IIntake, ILoan, IProgram, ISchool, ITag, ITeam } from "../interfaces";
+import { BlogPostSchema, ContactUsSchema, CreateAccommodationSchema, CreateAdminSchema, CreateFaqSchema, CreateIntakeSchema, CreateProgramSchema, CreateScholarshipSchema, CreateSchoolSchema, FinancialAidSchema, ProgramSchema, UpdateAdminSchema, UpdateBlogPostSchema, UpdateBulkProgramSchema, UpdateScholarshipSchema, UpdateSchoolSchema } from "../schemas";
+import { IAccommodation, IAdmin, IBlogPost, ICategory, IDepartment, IFaq, IInquiry, IIntake, IFinancialAid, IProgram, ISchool, ITag, ITeam } from "../interfaces";
 import { AdminClaim, StudentClaim } from "./interfaces";
 import { IScholarship } from "interfaces/scholarship";
 export type AuthClaim = AdminClaim | StudentClaim;
@@ -92,9 +92,9 @@ export type PermissionType = {
         action: "list" | "create" | "read" | "update" | "delete" | "activate" | "deactivate";
     };
     loans: {
-        dataType: ILoan;
-        createDataType: "";
-        updateDataType: "";
+        dataType: IFinancialAid;
+        createDataType: FinancialAidSchema;
+        updateDataType: FinancialAidSchema;
         action: "list" | "create" | "read" | "update" | "delete";
     };
 };

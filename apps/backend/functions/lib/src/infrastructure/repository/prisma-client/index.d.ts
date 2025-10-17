@@ -98,6 +98,11 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  * 
  */
 export type Scholarship = $Result.DefaultSelection<Prisma.$ScholarshipPayload>
+/**
+ * Model FinancialAid
+ * 
+ */
+export type FinancialAid = $Result.DefaultSelection<Prisma.$FinancialAidPayload>
 
 /**
  * Enums
@@ -527,6 +532,16 @@ export class PrismaClient<
     * ```
     */
   get scholarship(): Prisma.ScholarshipDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.financialAid`: Exposes CRUD operations for the **FinancialAid** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FinancialAids
+    * const financialAids = await prisma.financialAid.findMany()
+    * ```
+    */
+  get financialAid(): Prisma.FinancialAidDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -585,8 +600,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.16.2
-   * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+   * Prisma Client JS version: 6.17.1
+   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
    */
   export type PrismaVersion = {
     client: string
@@ -983,7 +998,8 @@ export namespace Prisma {
     BlogPost: 'BlogPost',
     Tag: 'Tag',
     Category: 'Category',
-    Scholarship: 'Scholarship'
+    Scholarship: 'Scholarship',
+    FinancialAid: 'FinancialAid'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1002,7 +1018,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "dailyStats" | "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "englishProficiency" | "intake" | "blogPost" | "tag" | "category" | "scholarship"
+      modelProps: "dailyStats" | "token" | "admin" | "department" | "team" | "faq" | "inquiry" | "activityLog" | "school" | "accommodation" | "program" | "englishProficiency" | "intake" | "blogPost" | "tag" | "category" | "scholarship" | "financialAid"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2264,6 +2280,80 @@ export namespace Prisma {
           }
         }
       }
+      FinancialAid: {
+        payload: Prisma.$FinancialAidPayload<ExtArgs>
+        fields: Prisma.FinancialAidFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FinancialAidFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FinancialAidFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          findFirst: {
+            args: Prisma.FinancialAidFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FinancialAidFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          findMany: {
+            args: Prisma.FinancialAidFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>[]
+          }
+          create: {
+            args: Prisma.FinancialAidCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          createMany: {
+            args: Prisma.FinancialAidCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FinancialAidCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>[]
+          }
+          delete: {
+            args: Prisma.FinancialAidDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          update: {
+            args: Prisma.FinancialAidUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          deleteMany: {
+            args: Prisma.FinancialAidDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FinancialAidUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FinancialAidUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>[]
+          }
+          upsert: {
+            args: Prisma.FinancialAidUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FinancialAidPayload>
+          }
+          aggregate: {
+            args: Prisma.FinancialAidAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFinancialAid>
+          }
+          groupBy: {
+            args: Prisma.FinancialAidGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FinancialAidGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FinancialAidCountArgs<ExtArgs>
+            result: $Utils.Optional<FinancialAidCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2377,6 +2467,7 @@ export namespace Prisma {
     tag?: TagOmit
     category?: CategoryOmit
     scholarship?: ScholarshipOmit
+    financialAid?: FinancialAidOmit
   }
 
   /* Types for Logging */
@@ -23700,6 +23791,1297 @@ export namespace Prisma {
 
 
   /**
+   * Model FinancialAid
+   */
+
+  export type AggregateFinancialAid = {
+    _count: FinancialAidCountAggregateOutputType | null
+    _avg: FinancialAidAvgAggregateOutputType | null
+    _sum: FinancialAidSumAggregateOutputType | null
+    _min: FinancialAidMinAggregateOutputType | null
+    _max: FinancialAidMaxAggregateOutputType | null
+  }
+
+  export type FinancialAidAvgAggregateOutputType = {
+    id: number | null
+    gpa: Decimal | null
+  }
+
+  export type FinancialAidSumAggregateOutputType = {
+    id: number | null
+    gpa: Decimal | null
+  }
+
+  export type FinancialAidMinAggregateOutputType = {
+    id: number | null
+    financialAidId: string | null
+    citizenship: string | null
+    canadianResident: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    schoolSlug: string | null
+    programSlug: string | null
+    studyLevel: string | null
+    pgwp: string | null
+    hasOfferLetter: string | null
+    loanType: string | null
+    livingExpensesCoverage: string | null
+    programStarted: string | null
+    gpa: Decimal | null
+    nextSchoolTerm: Date | null
+    partner: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FinancialAidMaxAggregateOutputType = {
+    id: number | null
+    financialAidId: string | null
+    citizenship: string | null
+    canadianResident: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    schoolSlug: string | null
+    programSlug: string | null
+    studyLevel: string | null
+    pgwp: string | null
+    hasOfferLetter: string | null
+    loanType: string | null
+    livingExpensesCoverage: string | null
+    programStarted: string | null
+    gpa: Decimal | null
+    nextSchoolTerm: Date | null
+    partner: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FinancialAidCountAggregateOutputType = {
+    id: number
+    financialAidId: number
+    citizenship: number
+    canadianResident: number
+    firstName: number
+    lastName: number
+    email: number
+    phoneNumber: number
+    schoolSlug: number
+    programSlug: number
+    studyLevel: number
+    pgwp: number
+    hasOfferLetter: number
+    loanType: number
+    livingExpensesCoverage: number
+    programStarted: number
+    gpa: number
+    nextSchoolTerm: number
+    partner: number
+    proofOfAddress: number
+    identification: number
+    resume: number
+    transcript: number
+    bankStatement: number
+    immigrationDocument: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FinancialAidAvgAggregateInputType = {
+    id?: true
+    gpa?: true
+  }
+
+  export type FinancialAidSumAggregateInputType = {
+    id?: true
+    gpa?: true
+  }
+
+  export type FinancialAidMinAggregateInputType = {
+    id?: true
+    financialAidId?: true
+    citizenship?: true
+    canadianResident?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    schoolSlug?: true
+    programSlug?: true
+    studyLevel?: true
+    pgwp?: true
+    hasOfferLetter?: true
+    loanType?: true
+    livingExpensesCoverage?: true
+    programStarted?: true
+    gpa?: true
+    nextSchoolTerm?: true
+    partner?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FinancialAidMaxAggregateInputType = {
+    id?: true
+    financialAidId?: true
+    citizenship?: true
+    canadianResident?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    schoolSlug?: true
+    programSlug?: true
+    studyLevel?: true
+    pgwp?: true
+    hasOfferLetter?: true
+    loanType?: true
+    livingExpensesCoverage?: true
+    programStarted?: true
+    gpa?: true
+    nextSchoolTerm?: true
+    partner?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FinancialAidCountAggregateInputType = {
+    id?: true
+    financialAidId?: true
+    citizenship?: true
+    canadianResident?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phoneNumber?: true
+    schoolSlug?: true
+    programSlug?: true
+    studyLevel?: true
+    pgwp?: true
+    hasOfferLetter?: true
+    loanType?: true
+    livingExpensesCoverage?: true
+    programStarted?: true
+    gpa?: true
+    nextSchoolTerm?: true
+    partner?: true
+    proofOfAddress?: true
+    identification?: true
+    resume?: true
+    transcript?: true
+    bankStatement?: true
+    immigrationDocument?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FinancialAidAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialAid to aggregate.
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAids to fetch.
+     */
+    orderBy?: FinancialAidOrderByWithRelationInput | FinancialAidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FinancialAidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FinancialAids
+    **/
+    _count?: true | FinancialAidCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FinancialAidAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FinancialAidSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FinancialAidMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FinancialAidMaxAggregateInputType
+  }
+
+  export type GetFinancialAidAggregateType<T extends FinancialAidAggregateArgs> = {
+        [P in keyof T & keyof AggregateFinancialAid]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFinancialAid[P]>
+      : GetScalarType<T[P], AggregateFinancialAid[P]>
+  }
+
+
+
+
+  export type FinancialAidGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FinancialAidWhereInput
+    orderBy?: FinancialAidOrderByWithAggregationInput | FinancialAidOrderByWithAggregationInput[]
+    by: FinancialAidScalarFieldEnum[] | FinancialAidScalarFieldEnum
+    having?: FinancialAidScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FinancialAidCountAggregateInputType | true
+    _avg?: FinancialAidAvgAggregateInputType
+    _sum?: FinancialAidSumAggregateInputType
+    _min?: FinancialAidMinAggregateInputType
+    _max?: FinancialAidMaxAggregateInputType
+  }
+
+  export type FinancialAidGroupByOutputType = {
+    id: number
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage: string | null
+    programStarted: string
+    gpa: Decimal | null
+    nextSchoolTerm: Date
+    partner: string
+    proofOfAddress: JsonValue
+    identification: JsonValue
+    resume: JsonValue
+    transcript: JsonValue
+    bankStatement: JsonValue | null
+    immigrationDocument: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: FinancialAidCountAggregateOutputType | null
+    _avg: FinancialAidAvgAggregateOutputType | null
+    _sum: FinancialAidSumAggregateOutputType | null
+    _min: FinancialAidMinAggregateOutputType | null
+    _max: FinancialAidMaxAggregateOutputType | null
+  }
+
+  type GetFinancialAidGroupByPayload<T extends FinancialAidGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FinancialAidGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FinancialAidGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FinancialAidGroupByOutputType[P]>
+            : GetScalarType<T[P], FinancialAidGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FinancialAidSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    financialAidId?: boolean
+    citizenship?: boolean
+    canadianResident?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    schoolSlug?: boolean
+    programSlug?: boolean
+    studyLevel?: boolean
+    pgwp?: boolean
+    hasOfferLetter?: boolean
+    loanType?: boolean
+    livingExpensesCoverage?: boolean
+    programStarted?: boolean
+    gpa?: boolean
+    nextSchoolTerm?: boolean
+    partner?: boolean
+    proofOfAddress?: boolean
+    identification?: boolean
+    resume?: boolean
+    transcript?: boolean
+    bankStatement?: boolean
+    immigrationDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["financialAid"]>
+
+  export type FinancialAidSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    financialAidId?: boolean
+    citizenship?: boolean
+    canadianResident?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    schoolSlug?: boolean
+    programSlug?: boolean
+    studyLevel?: boolean
+    pgwp?: boolean
+    hasOfferLetter?: boolean
+    loanType?: boolean
+    livingExpensesCoverage?: boolean
+    programStarted?: boolean
+    gpa?: boolean
+    nextSchoolTerm?: boolean
+    partner?: boolean
+    proofOfAddress?: boolean
+    identification?: boolean
+    resume?: boolean
+    transcript?: boolean
+    bankStatement?: boolean
+    immigrationDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["financialAid"]>
+
+  export type FinancialAidSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    financialAidId?: boolean
+    citizenship?: boolean
+    canadianResident?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    schoolSlug?: boolean
+    programSlug?: boolean
+    studyLevel?: boolean
+    pgwp?: boolean
+    hasOfferLetter?: boolean
+    loanType?: boolean
+    livingExpensesCoverage?: boolean
+    programStarted?: boolean
+    gpa?: boolean
+    nextSchoolTerm?: boolean
+    partner?: boolean
+    proofOfAddress?: boolean
+    identification?: boolean
+    resume?: boolean
+    transcript?: boolean
+    bankStatement?: boolean
+    immigrationDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["financialAid"]>
+
+  export type FinancialAidSelectScalar = {
+    id?: boolean
+    financialAidId?: boolean
+    citizenship?: boolean
+    canadianResident?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phoneNumber?: boolean
+    schoolSlug?: boolean
+    programSlug?: boolean
+    studyLevel?: boolean
+    pgwp?: boolean
+    hasOfferLetter?: boolean
+    loanType?: boolean
+    livingExpensesCoverage?: boolean
+    programStarted?: boolean
+    gpa?: boolean
+    nextSchoolTerm?: boolean
+    partner?: boolean
+    proofOfAddress?: boolean
+    identification?: boolean
+    resume?: boolean
+    transcript?: boolean
+    bankStatement?: boolean
+    immigrationDocument?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FinancialAidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "financialAidId" | "citizenship" | "canadianResident" | "firstName" | "lastName" | "email" | "phoneNumber" | "schoolSlug" | "programSlug" | "studyLevel" | "pgwp" | "hasOfferLetter" | "loanType" | "livingExpensesCoverage" | "programStarted" | "gpa" | "nextSchoolTerm" | "partner" | "proofOfAddress" | "identification" | "resume" | "transcript" | "bankStatement" | "immigrationDocument" | "createdAt" | "updatedAt", ExtArgs["result"]["financialAid"]>
+
+  export type $FinancialAidPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FinancialAid"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      financialAidId: string
+      citizenship: string
+      canadianResident: string
+      firstName: string
+      lastName: string
+      email: string
+      phoneNumber: Prisma.JsonValue
+      schoolSlug: string
+      programSlug: string
+      studyLevel: string
+      pgwp: string
+      hasOfferLetter: string
+      loanType: string
+      livingExpensesCoverage: string | null
+      programStarted: string
+      gpa: Prisma.Decimal | null
+      nextSchoolTerm: Date
+      partner: string
+      proofOfAddress: Prisma.JsonValue
+      identification: Prisma.JsonValue
+      resume: Prisma.JsonValue
+      transcript: Prisma.JsonValue
+      bankStatement: Prisma.JsonValue | null
+      immigrationDocument: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["financialAid"]>
+    composites: {}
+  }
+
+  type FinancialAidGetPayload<S extends boolean | null | undefined | FinancialAidDefaultArgs> = $Result.GetResult<Prisma.$FinancialAidPayload, S>
+
+  type FinancialAidCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FinancialAidFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FinancialAidCountAggregateInputType | true
+    }
+
+  export interface FinancialAidDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FinancialAid'], meta: { name: 'FinancialAid' } }
+    /**
+     * Find zero or one FinancialAid that matches the filter.
+     * @param {FinancialAidFindUniqueArgs} args - Arguments to find a FinancialAid
+     * @example
+     * // Get one FinancialAid
+     * const financialAid = await prisma.financialAid.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FinancialAidFindUniqueArgs>(args: SelectSubset<T, FinancialAidFindUniqueArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FinancialAid that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FinancialAidFindUniqueOrThrowArgs} args - Arguments to find a FinancialAid
+     * @example
+     * // Get one FinancialAid
+     * const financialAid = await prisma.financialAid.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FinancialAidFindUniqueOrThrowArgs>(args: SelectSubset<T, FinancialAidFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinancialAid that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidFindFirstArgs} args - Arguments to find a FinancialAid
+     * @example
+     * // Get one FinancialAid
+     * const financialAid = await prisma.financialAid.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FinancialAidFindFirstArgs>(args?: SelectSubset<T, FinancialAidFindFirstArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FinancialAid that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidFindFirstOrThrowArgs} args - Arguments to find a FinancialAid
+     * @example
+     * // Get one FinancialAid
+     * const financialAid = await prisma.financialAid.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FinancialAidFindFirstOrThrowArgs>(args?: SelectSubset<T, FinancialAidFindFirstOrThrowArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FinancialAids that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FinancialAids
+     * const financialAids = await prisma.financialAid.findMany()
+     * 
+     * // Get first 10 FinancialAids
+     * const financialAids = await prisma.financialAid.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const financialAidWithIdOnly = await prisma.financialAid.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FinancialAidFindManyArgs>(args?: SelectSubset<T, FinancialAidFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FinancialAid.
+     * @param {FinancialAidCreateArgs} args - Arguments to create a FinancialAid.
+     * @example
+     * // Create one FinancialAid
+     * const FinancialAid = await prisma.financialAid.create({
+     *   data: {
+     *     // ... data to create a FinancialAid
+     *   }
+     * })
+     * 
+     */
+    create<T extends FinancialAidCreateArgs>(args: SelectSubset<T, FinancialAidCreateArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FinancialAids.
+     * @param {FinancialAidCreateManyArgs} args - Arguments to create many FinancialAids.
+     * @example
+     * // Create many FinancialAids
+     * const financialAid = await prisma.financialAid.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FinancialAidCreateManyArgs>(args?: SelectSubset<T, FinancialAidCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FinancialAids and returns the data saved in the database.
+     * @param {FinancialAidCreateManyAndReturnArgs} args - Arguments to create many FinancialAids.
+     * @example
+     * // Create many FinancialAids
+     * const financialAid = await prisma.financialAid.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FinancialAids and only return the `id`
+     * const financialAidWithIdOnly = await prisma.financialAid.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FinancialAidCreateManyAndReturnArgs>(args?: SelectSubset<T, FinancialAidCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FinancialAid.
+     * @param {FinancialAidDeleteArgs} args - Arguments to delete one FinancialAid.
+     * @example
+     * // Delete one FinancialAid
+     * const FinancialAid = await prisma.financialAid.delete({
+     *   where: {
+     *     // ... filter to delete one FinancialAid
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FinancialAidDeleteArgs>(args: SelectSubset<T, FinancialAidDeleteArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FinancialAid.
+     * @param {FinancialAidUpdateArgs} args - Arguments to update one FinancialAid.
+     * @example
+     * // Update one FinancialAid
+     * const financialAid = await prisma.financialAid.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FinancialAidUpdateArgs>(args: SelectSubset<T, FinancialAidUpdateArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FinancialAids.
+     * @param {FinancialAidDeleteManyArgs} args - Arguments to filter FinancialAids to delete.
+     * @example
+     * // Delete a few FinancialAids
+     * const { count } = await prisma.financialAid.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FinancialAidDeleteManyArgs>(args?: SelectSubset<T, FinancialAidDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinancialAids.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FinancialAids
+     * const financialAid = await prisma.financialAid.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FinancialAidUpdateManyArgs>(args: SelectSubset<T, FinancialAidUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FinancialAids and returns the data updated in the database.
+     * @param {FinancialAidUpdateManyAndReturnArgs} args - Arguments to update many FinancialAids.
+     * @example
+     * // Update many FinancialAids
+     * const financialAid = await prisma.financialAid.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FinancialAids and only return the `id`
+     * const financialAidWithIdOnly = await prisma.financialAid.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FinancialAidUpdateManyAndReturnArgs>(args: SelectSubset<T, FinancialAidUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FinancialAid.
+     * @param {FinancialAidUpsertArgs} args - Arguments to update or create a FinancialAid.
+     * @example
+     * // Update or create a FinancialAid
+     * const financialAid = await prisma.financialAid.upsert({
+     *   create: {
+     *     // ... data to create a FinancialAid
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FinancialAid we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FinancialAidUpsertArgs>(args: SelectSubset<T, FinancialAidUpsertArgs<ExtArgs>>): Prisma__FinancialAidClient<$Result.GetResult<Prisma.$FinancialAidPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FinancialAids.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidCountArgs} args - Arguments to filter FinancialAids to count.
+     * @example
+     * // Count the number of FinancialAids
+     * const count = await prisma.financialAid.count({
+     *   where: {
+     *     // ... the filter for the FinancialAids we want to count
+     *   }
+     * })
+    **/
+    count<T extends FinancialAidCountArgs>(
+      args?: Subset<T, FinancialAidCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FinancialAidCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FinancialAid.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FinancialAidAggregateArgs>(args: Subset<T, FinancialAidAggregateArgs>): Prisma.PrismaPromise<GetFinancialAidAggregateType<T>>
+
+    /**
+     * Group by FinancialAid.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FinancialAidGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FinancialAidGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FinancialAidGroupByArgs['orderBy'] }
+        : { orderBy?: FinancialAidGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FinancialAidGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFinancialAidGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FinancialAid model
+   */
+  readonly fields: FinancialAidFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FinancialAid.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FinancialAidClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FinancialAid model
+   */
+  interface FinancialAidFieldRefs {
+    readonly id: FieldRef<"FinancialAid", 'Int'>
+    readonly financialAidId: FieldRef<"FinancialAid", 'String'>
+    readonly citizenship: FieldRef<"FinancialAid", 'String'>
+    readonly canadianResident: FieldRef<"FinancialAid", 'String'>
+    readonly firstName: FieldRef<"FinancialAid", 'String'>
+    readonly lastName: FieldRef<"FinancialAid", 'String'>
+    readonly email: FieldRef<"FinancialAid", 'String'>
+    readonly phoneNumber: FieldRef<"FinancialAid", 'Json'>
+    readonly schoolSlug: FieldRef<"FinancialAid", 'String'>
+    readonly programSlug: FieldRef<"FinancialAid", 'String'>
+    readonly studyLevel: FieldRef<"FinancialAid", 'String'>
+    readonly pgwp: FieldRef<"FinancialAid", 'String'>
+    readonly hasOfferLetter: FieldRef<"FinancialAid", 'String'>
+    readonly loanType: FieldRef<"FinancialAid", 'String'>
+    readonly livingExpensesCoverage: FieldRef<"FinancialAid", 'String'>
+    readonly programStarted: FieldRef<"FinancialAid", 'String'>
+    readonly gpa: FieldRef<"FinancialAid", 'Decimal'>
+    readonly nextSchoolTerm: FieldRef<"FinancialAid", 'DateTime'>
+    readonly partner: FieldRef<"FinancialAid", 'String'>
+    readonly proofOfAddress: FieldRef<"FinancialAid", 'Json'>
+    readonly identification: FieldRef<"FinancialAid", 'Json'>
+    readonly resume: FieldRef<"FinancialAid", 'Json'>
+    readonly transcript: FieldRef<"FinancialAid", 'Json'>
+    readonly bankStatement: FieldRef<"FinancialAid", 'Json'>
+    readonly immigrationDocument: FieldRef<"FinancialAid", 'Json'>
+    readonly createdAt: FieldRef<"FinancialAid", 'DateTime'>
+    readonly updatedAt: FieldRef<"FinancialAid", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FinancialAid findUnique
+   */
+  export type FinancialAidFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter, which FinancialAid to fetch.
+     */
+    where: FinancialAidWhereUniqueInput
+  }
+
+  /**
+   * FinancialAid findUniqueOrThrow
+   */
+  export type FinancialAidFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter, which FinancialAid to fetch.
+     */
+    where: FinancialAidWhereUniqueInput
+  }
+
+  /**
+   * FinancialAid findFirst
+   */
+  export type FinancialAidFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter, which FinancialAid to fetch.
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAids to fetch.
+     */
+    orderBy?: FinancialAidOrderByWithRelationInput | FinancialAidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinancialAids.
+     */
+    cursor?: FinancialAidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinancialAids.
+     */
+    distinct?: FinancialAidScalarFieldEnum | FinancialAidScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAid findFirstOrThrow
+   */
+  export type FinancialAidFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter, which FinancialAid to fetch.
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAids to fetch.
+     */
+    orderBy?: FinancialAidOrderByWithRelationInput | FinancialAidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FinancialAids.
+     */
+    cursor?: FinancialAidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAids.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FinancialAids.
+     */
+    distinct?: FinancialAidScalarFieldEnum | FinancialAidScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAid findMany
+   */
+  export type FinancialAidFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter, which FinancialAids to fetch.
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FinancialAids to fetch.
+     */
+    orderBy?: FinancialAidOrderByWithRelationInput | FinancialAidOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FinancialAids.
+     */
+    cursor?: FinancialAidWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FinancialAids from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FinancialAids.
+     */
+    skip?: number
+    distinct?: FinancialAidScalarFieldEnum | FinancialAidScalarFieldEnum[]
+  }
+
+  /**
+   * FinancialAid create
+   */
+  export type FinancialAidCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FinancialAid.
+     */
+    data: XOR<FinancialAidCreateInput, FinancialAidUncheckedCreateInput>
+  }
+
+  /**
+   * FinancialAid createMany
+   */
+  export type FinancialAidCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FinancialAids.
+     */
+    data: FinancialAidCreateManyInput | FinancialAidCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FinancialAid createManyAndReturn
+   */
+  export type FinancialAidCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * The data used to create many FinancialAids.
+     */
+    data: FinancialAidCreateManyInput | FinancialAidCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FinancialAid update
+   */
+  export type FinancialAidUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FinancialAid.
+     */
+    data: XOR<FinancialAidUpdateInput, FinancialAidUncheckedUpdateInput>
+    /**
+     * Choose, which FinancialAid to update.
+     */
+    where: FinancialAidWhereUniqueInput
+  }
+
+  /**
+   * FinancialAid updateMany
+   */
+  export type FinancialAidUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FinancialAids.
+     */
+    data: XOR<FinancialAidUpdateManyMutationInput, FinancialAidUncheckedUpdateManyInput>
+    /**
+     * Filter which FinancialAids to update
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * Limit how many FinancialAids to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinancialAid updateManyAndReturn
+   */
+  export type FinancialAidUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * The data used to update FinancialAids.
+     */
+    data: XOR<FinancialAidUpdateManyMutationInput, FinancialAidUncheckedUpdateManyInput>
+    /**
+     * Filter which FinancialAids to update
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * Limit how many FinancialAids to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinancialAid upsert
+   */
+  export type FinancialAidUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FinancialAid to update in case it exists.
+     */
+    where: FinancialAidWhereUniqueInput
+    /**
+     * In case the FinancialAid found by the `where` argument doesn't exist, create a new FinancialAid with this data.
+     */
+    create: XOR<FinancialAidCreateInput, FinancialAidUncheckedCreateInput>
+    /**
+     * In case the FinancialAid was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FinancialAidUpdateInput, FinancialAidUncheckedUpdateInput>
+  }
+
+  /**
+   * FinancialAid delete
+   */
+  export type FinancialAidDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+    /**
+     * Filter which FinancialAid to delete.
+     */
+    where: FinancialAidWhereUniqueInput
+  }
+
+  /**
+   * FinancialAid deleteMany
+   */
+  export type FinancialAidDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FinancialAids to delete
+     */
+    where?: FinancialAidWhereInput
+    /**
+     * Limit how many FinancialAids to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FinancialAid without action
+   */
+  export type FinancialAidDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FinancialAid
+     */
+    select?: FinancialAidSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FinancialAid
+     */
+    omit?: FinancialAidOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -24008,6 +25390,39 @@ export namespace Prisma {
   export type ScholarshipScalarFieldEnum = (typeof ScholarshipScalarFieldEnum)[keyof typeof ScholarshipScalarFieldEnum]
 
 
+  export const FinancialAidScalarFieldEnum: {
+    id: 'id',
+    financialAidId: 'financialAidId',
+    citizenship: 'citizenship',
+    canadianResident: 'canadianResident',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email',
+    phoneNumber: 'phoneNumber',
+    schoolSlug: 'schoolSlug',
+    programSlug: 'programSlug',
+    studyLevel: 'studyLevel',
+    pgwp: 'pgwp',
+    hasOfferLetter: 'hasOfferLetter',
+    loanType: 'loanType',
+    livingExpensesCoverage: 'livingExpensesCoverage',
+    programStarted: 'programStarted',
+    gpa: 'gpa',
+    nextSchoolTerm: 'nextSchoolTerm',
+    partner: 'partner',
+    proofOfAddress: 'proofOfAddress',
+    identification: 'identification',
+    resume: 'resume',
+    transcript: 'transcript',
+    bankStatement: 'bankStatement',
+    immigrationDocument: 'immigrationDocument',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FinancialAidScalarFieldEnum = (typeof FinancialAidScalarFieldEnum)[keyof typeof FinancialAidScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -24225,6 +25640,27 @@ export namespace Prisma {
   };
 
   export type ScholarshipOrderByRelevanceFieldEnum = (typeof ScholarshipOrderByRelevanceFieldEnum)[keyof typeof ScholarshipOrderByRelevanceFieldEnum]
+
+
+  export const FinancialAidOrderByRelevanceFieldEnum: {
+    financialAidId: 'financialAidId',
+    citizenship: 'citizenship',
+    canadianResident: 'canadianResident',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email',
+    schoolSlug: 'schoolSlug',
+    programSlug: 'programSlug',
+    studyLevel: 'studyLevel',
+    pgwp: 'pgwp',
+    hasOfferLetter: 'hasOfferLetter',
+    loanType: 'loanType',
+    livingExpensesCoverage: 'livingExpensesCoverage',
+    programStarted: 'programStarted',
+    partner: 'partner'
+  };
+
+  export type FinancialAidOrderByRelevanceFieldEnum = (typeof FinancialAidOrderByRelevanceFieldEnum)[keyof typeof FinancialAidOrderByRelevanceFieldEnum]
 
 
   /**
@@ -26024,11 +27460,11 @@ export namespace Prisma {
 
   export type ScholarshipWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    scholarshipId?: string
     slug?: string
     AND?: ScholarshipWhereInput | ScholarshipWhereInput[]
     OR?: ScholarshipWhereInput[]
     NOT?: ScholarshipWhereInput | ScholarshipWhereInput[]
-    scholarshipId?: StringFilter<"Scholarship"> | string
     title?: StringFilter<"Scholarship"> | string
     subtitle?: StringFilter<"Scholarship"> | string
     banner?: JsonFilter<"Scholarship">
@@ -26042,7 +27478,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Scholarship"> | Date | string
     updatedAt?: DateTimeFilter<"Scholarship"> | Date | string
     createdBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
-  }, "id" | "slug">
+  }, "id" | "scholarshipId" | "slug">
 
   export type ScholarshipOrderByWithAggregationInput = {
     id?: SortOrder
@@ -26086,6 +27522,171 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"Scholarship"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Scholarship"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Scholarship"> | Date | string
+  }
+
+  export type FinancialAidWhereInput = {
+    AND?: FinancialAidWhereInput | FinancialAidWhereInput[]
+    OR?: FinancialAidWhereInput[]
+    NOT?: FinancialAidWhereInput | FinancialAidWhereInput[]
+    id?: IntFilter<"FinancialAid"> | number
+    financialAidId?: StringFilter<"FinancialAid"> | string
+    citizenship?: StringFilter<"FinancialAid"> | string
+    canadianResident?: StringFilter<"FinancialAid"> | string
+    firstName?: StringFilter<"FinancialAid"> | string
+    lastName?: StringFilter<"FinancialAid"> | string
+    email?: StringFilter<"FinancialAid"> | string
+    phoneNumber?: JsonFilter<"FinancialAid">
+    schoolSlug?: StringFilter<"FinancialAid"> | string
+    programSlug?: StringFilter<"FinancialAid"> | string
+    studyLevel?: StringFilter<"FinancialAid"> | string
+    pgwp?: StringFilter<"FinancialAid"> | string
+    hasOfferLetter?: StringFilter<"FinancialAid"> | string
+    loanType?: StringFilter<"FinancialAid"> | string
+    livingExpensesCoverage?: StringNullableFilter<"FinancialAid"> | string | null
+    programStarted?: StringFilter<"FinancialAid"> | string
+    gpa?: DecimalNullableFilter<"FinancialAid"> | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFilter<"FinancialAid"> | Date | string
+    partner?: StringFilter<"FinancialAid"> | string
+    proofOfAddress?: JsonFilter<"FinancialAid">
+    identification?: JsonFilter<"FinancialAid">
+    resume?: JsonFilter<"FinancialAid">
+    transcript?: JsonFilter<"FinancialAid">
+    bankStatement?: JsonNullableFilter<"FinancialAid">
+    immigrationDocument?: JsonFilter<"FinancialAid">
+    createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
+  }
+
+  export type FinancialAidOrderByWithRelationInput = {
+    id?: SortOrder
+    financialAidId?: SortOrder
+    citizenship?: SortOrder
+    canadianResident?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    schoolSlug?: SortOrder
+    programSlug?: SortOrder
+    studyLevel?: SortOrder
+    pgwp?: SortOrder
+    hasOfferLetter?: SortOrder
+    loanType?: SortOrder
+    livingExpensesCoverage?: SortOrderInput | SortOrder
+    programStarted?: SortOrder
+    gpa?: SortOrderInput | SortOrder
+    nextSchoolTerm?: SortOrder
+    partner?: SortOrder
+    proofOfAddress?: SortOrder
+    identification?: SortOrder
+    resume?: SortOrder
+    transcript?: SortOrder
+    bankStatement?: SortOrderInput | SortOrder
+    immigrationDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: FinancialAidOrderByRelevanceInput
+  }
+
+  export type FinancialAidWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    financialAidId?: string
+    AND?: FinancialAidWhereInput | FinancialAidWhereInput[]
+    OR?: FinancialAidWhereInput[]
+    NOT?: FinancialAidWhereInput | FinancialAidWhereInput[]
+    citizenship?: StringFilter<"FinancialAid"> | string
+    canadianResident?: StringFilter<"FinancialAid"> | string
+    firstName?: StringFilter<"FinancialAid"> | string
+    lastName?: StringFilter<"FinancialAid"> | string
+    email?: StringFilter<"FinancialAid"> | string
+    phoneNumber?: JsonFilter<"FinancialAid">
+    schoolSlug?: StringFilter<"FinancialAid"> | string
+    programSlug?: StringFilter<"FinancialAid"> | string
+    studyLevel?: StringFilter<"FinancialAid"> | string
+    pgwp?: StringFilter<"FinancialAid"> | string
+    hasOfferLetter?: StringFilter<"FinancialAid"> | string
+    loanType?: StringFilter<"FinancialAid"> | string
+    livingExpensesCoverage?: StringNullableFilter<"FinancialAid"> | string | null
+    programStarted?: StringFilter<"FinancialAid"> | string
+    gpa?: DecimalNullableFilter<"FinancialAid"> | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFilter<"FinancialAid"> | Date | string
+    partner?: StringFilter<"FinancialAid"> | string
+    proofOfAddress?: JsonFilter<"FinancialAid">
+    identification?: JsonFilter<"FinancialAid">
+    resume?: JsonFilter<"FinancialAid">
+    transcript?: JsonFilter<"FinancialAid">
+    bankStatement?: JsonNullableFilter<"FinancialAid">
+    immigrationDocument?: JsonFilter<"FinancialAid">
+    createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
+    updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
+  }, "id" | "financialAidId">
+
+  export type FinancialAidOrderByWithAggregationInput = {
+    id?: SortOrder
+    financialAidId?: SortOrder
+    citizenship?: SortOrder
+    canadianResident?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    schoolSlug?: SortOrder
+    programSlug?: SortOrder
+    studyLevel?: SortOrder
+    pgwp?: SortOrder
+    hasOfferLetter?: SortOrder
+    loanType?: SortOrder
+    livingExpensesCoverage?: SortOrderInput | SortOrder
+    programStarted?: SortOrder
+    gpa?: SortOrderInput | SortOrder
+    nextSchoolTerm?: SortOrder
+    partner?: SortOrder
+    proofOfAddress?: SortOrder
+    identification?: SortOrder
+    resume?: SortOrder
+    transcript?: SortOrder
+    bankStatement?: SortOrderInput | SortOrder
+    immigrationDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FinancialAidCountOrderByAggregateInput
+    _avg?: FinancialAidAvgOrderByAggregateInput
+    _max?: FinancialAidMaxOrderByAggregateInput
+    _min?: FinancialAidMinOrderByAggregateInput
+    _sum?: FinancialAidSumOrderByAggregateInput
+  }
+
+  export type FinancialAidScalarWhereWithAggregatesInput = {
+    AND?: FinancialAidScalarWhereWithAggregatesInput | FinancialAidScalarWhereWithAggregatesInput[]
+    OR?: FinancialAidScalarWhereWithAggregatesInput[]
+    NOT?: FinancialAidScalarWhereWithAggregatesInput | FinancialAidScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FinancialAid"> | number
+    financialAidId?: StringWithAggregatesFilter<"FinancialAid"> | string
+    citizenship?: StringWithAggregatesFilter<"FinancialAid"> | string
+    canadianResident?: StringWithAggregatesFilter<"FinancialAid"> | string
+    firstName?: StringWithAggregatesFilter<"FinancialAid"> | string
+    lastName?: StringWithAggregatesFilter<"FinancialAid"> | string
+    email?: StringWithAggregatesFilter<"FinancialAid"> | string
+    phoneNumber?: JsonWithAggregatesFilter<"FinancialAid">
+    schoolSlug?: StringWithAggregatesFilter<"FinancialAid"> | string
+    programSlug?: StringWithAggregatesFilter<"FinancialAid"> | string
+    studyLevel?: StringWithAggregatesFilter<"FinancialAid"> | string
+    pgwp?: StringWithAggregatesFilter<"FinancialAid"> | string
+    hasOfferLetter?: StringWithAggregatesFilter<"FinancialAid"> | string
+    loanType?: StringWithAggregatesFilter<"FinancialAid"> | string
+    livingExpensesCoverage?: StringNullableWithAggregatesFilter<"FinancialAid"> | string | null
+    programStarted?: StringWithAggregatesFilter<"FinancialAid"> | string
+    gpa?: DecimalNullableWithAggregatesFilter<"FinancialAid"> | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
+    partner?: StringWithAggregatesFilter<"FinancialAid"> | string
+    proofOfAddress?: JsonWithAggregatesFilter<"FinancialAid">
+    identification?: JsonWithAggregatesFilter<"FinancialAid">
+    resume?: JsonWithAggregatesFilter<"FinancialAid">
+    transcript?: JsonWithAggregatesFilter<"FinancialAid">
+    bankStatement?: JsonNullableWithAggregatesFilter<"FinancialAid">
+    immigrationDocument?: JsonWithAggregatesFilter<"FinancialAid">
+    createdAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
   }
 
   export type DailyStatsCreateInput = {
@@ -27854,6 +29455,213 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FinancialAidCreateInput = {
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FinancialAidUncheckedCreateInput = {
+    id?: number
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FinancialAidUpdateInput = {
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAidUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAidCreateManyInput = {
+    id?: number
+    financialAidId: string
+    citizenship: string
+    canadianResident: string
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: JsonNullValueInput | InputJsonValue
+    schoolSlug: string
+    programSlug: string
+    studyLevel: string
+    pgwp: string
+    hasOfferLetter: string
+    loanType: string
+    livingExpensesCoverage?: string | null
+    programStarted: string
+    gpa?: Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm: Date | string
+    partner: string
+    proofOfAddress: JsonNullValueInput | InputJsonValue
+    identification: JsonNullValueInput | InputJsonValue
+    resume: JsonNullValueInput | InputJsonValue
+    transcript: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FinancialAidUpdateManyMutationInput = {
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FinancialAidUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    financialAidId?: StringFieldUpdateOperationsInput | string
+    citizenship?: StringFieldUpdateOperationsInput | string
+    canadianResident?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: JsonNullValueInput | InputJsonValue
+    schoolSlug?: StringFieldUpdateOperationsInput | string
+    programSlug?: StringFieldUpdateOperationsInput | string
+    studyLevel?: StringFieldUpdateOperationsInput | string
+    pgwp?: StringFieldUpdateOperationsInput | string
+    hasOfferLetter?: StringFieldUpdateOperationsInput | string
+    loanType?: StringFieldUpdateOperationsInput | string
+    livingExpensesCoverage?: NullableStringFieldUpdateOperationsInput | string | null
+    programStarted?: StringFieldUpdateOperationsInput | string
+    gpa?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    nextSchoolTerm?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: StringFieldUpdateOperationsInput | string
+    proofOfAddress?: JsonNullValueInput | InputJsonValue
+    identification?: JsonNullValueInput | InputJsonValue
+    resume?: JsonNullValueInput | InputJsonValue
+    transcript?: JsonNullValueInput | InputJsonValue
+    bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    immigrationDocument?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -29551,6 +31359,125 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type FinancialAidOrderByRelevanceInput = {
+    fields: FinancialAidOrderByRelevanceFieldEnum | FinancialAidOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type FinancialAidCountOrderByAggregateInput = {
+    id?: SortOrder
+    financialAidId?: SortOrder
+    citizenship?: SortOrder
+    canadianResident?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phoneNumber?: SortOrder
+    schoolSlug?: SortOrder
+    programSlug?: SortOrder
+    studyLevel?: SortOrder
+    pgwp?: SortOrder
+    hasOfferLetter?: SortOrder
+    loanType?: SortOrder
+    livingExpensesCoverage?: SortOrder
+    programStarted?: SortOrder
+    gpa?: SortOrder
+    nextSchoolTerm?: SortOrder
+    partner?: SortOrder
+    proofOfAddress?: SortOrder
+    identification?: SortOrder
+    resume?: SortOrder
+    transcript?: SortOrder
+    bankStatement?: SortOrder
+    immigrationDocument?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FinancialAidAvgOrderByAggregateInput = {
+    id?: SortOrder
+    gpa?: SortOrder
+  }
+
+  export type FinancialAidMaxOrderByAggregateInput = {
+    id?: SortOrder
+    financialAidId?: SortOrder
+    citizenship?: SortOrder
+    canadianResident?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    schoolSlug?: SortOrder
+    programSlug?: SortOrder
+    studyLevel?: SortOrder
+    pgwp?: SortOrder
+    hasOfferLetter?: SortOrder
+    loanType?: SortOrder
+    livingExpensesCoverage?: SortOrder
+    programStarted?: SortOrder
+    gpa?: SortOrder
+    nextSchoolTerm?: SortOrder
+    partner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FinancialAidMinOrderByAggregateInput = {
+    id?: SortOrder
+    financialAidId?: SortOrder
+    citizenship?: SortOrder
+    canadianResident?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    schoolSlug?: SortOrder
+    programSlug?: SortOrder
+    studyLevel?: SortOrder
+    pgwp?: SortOrder
+    hasOfferLetter?: SortOrder
+    loanType?: SortOrder
+    livingExpensesCoverage?: SortOrder
+    programStarted?: SortOrder
+    gpa?: SortOrder
+    nextSchoolTerm?: SortOrder
+    partner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FinancialAidSumOrderByAggregateInput = {
+    id?: SortOrder
+    gpa?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -31093,6 +33020,14 @@ export namespace Prisma {
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutScholarshipsCreatedInput, AdminUpdateWithoutScholarshipsCreatedInput>, AdminUncheckedUpdateWithoutScholarshipsCreatedInput>
   }
 
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -31528,6 +33463,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBlogStatusFilter<$PrismaModel>
     _max?: NestedEnumBlogStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type AdminCreateWithoutCreatedInput = {

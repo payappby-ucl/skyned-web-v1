@@ -5,11 +5,8 @@ import { WebPage, WithContext } from "schema-dts";
 import { Metadata } from "next";
 import Jumbotron from "../_components/jumbotron";
 import {
-  CheckCircleIcon,
-  DollarSignIcon,
   MoveRightIcon,
   PiggyBankIcon,
-  ShieldIcon,
   CheckCircle,
   DollarSign,
   Shield,
@@ -72,7 +69,7 @@ export default async function Loans() {
         backgroundImage="/assets/images/backgrounds/loan.jpg"
         cta={{
           label: "Start Loan Check",
-          href: "#loan-application",
+          href: "/loans/eligibility",
           icon: MoveRightIcon,
         }}
         badge={{
@@ -136,12 +133,12 @@ export default async function Loans() {
               {/* Second row - two smaller cards */}
               <div className="grid gap-6 md:grid-cols-2">
                 <Card className="group relative overflow-hidden border-0 bg-white p-6 shadow-sm transition-all duration-500 hover:shadow-xl">
-                  <div className="from-[#96d228]/10 absolute right-0 top-0 h-16 w-16 rounded-bl-2xl bg-gradient-to-br to-transparent"></div>
+                  <div className="absolute right-0 top-0 h-16 w-16 rounded-bl-2xl bg-gradient-to-br from-[#96d228]/10 to-transparent"></div>
                   <div className="mb-4">
-                    <div className="bg-[#96d228] mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#96d228] transition-transform duration-300 group-hover:scale-110">
                       <DollarSign className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-foreground group-hover:text-[#96d228] mb-2 text-xl font-bold transition-colors">
+                    <h3 className="text-foreground mb-2 text-xl font-bold transition-colors group-hover:text-[#96d228]">
                       Competitive Rates
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -151,12 +148,12 @@ export default async function Loans() {
                 </Card>
 
                 <Card className="group relative overflow-hidden border-0 bg-white p-6 shadow-sm transition-all duration-500 hover:shadow-xl">
-                  <div className="from-green-600/10 absolute right-0 top-0 h-16 w-16 rounded-bl-2xl bg-gradient-to-br to-transparent"></div>
+                  <div className="absolute right-0 top-0 h-16 w-16 rounded-bl-2xl bg-gradient-to-br from-green-600/10 to-transparent"></div>
                   <div className="mb-4">
-                    <div className="bg-green-600 mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-600 transition-transform duration-300 group-hover:scale-110">
                       <Shield className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-foreground group-hover:text-green-600 mb-2 text-xl font-bold transition-colors">
+                    <h3 className="text-foreground mb-2 text-xl font-bold transition-colors group-hover:text-green-600">
                       Secure & Trusted
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
@@ -189,9 +186,9 @@ export default async function Loans() {
             </p>
           </div>
           <div className="bg-brand-900/10 rounded-lg">
-          <div className="container mx-auto max-w-5xl p-4 lg:p-10">
-            <LoanApplication />
-          </div>
+            <div className="container mx-auto max-w-5xl p-4 lg:p-10">
+              <LoanApplication />
+            </div>
           </div>
         </div>
       </section>

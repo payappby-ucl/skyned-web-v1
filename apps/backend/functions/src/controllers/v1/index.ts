@@ -14,3 +14,4 @@ export * from "./tag";
 export * from "./program";
 export * from "./lead";
 export * from "./scholarship";
+export * from "./financial-aid";

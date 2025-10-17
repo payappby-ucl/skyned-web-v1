@@ -17,6 +17,7 @@ import { tagRouter } from "./tag";
 import { programRouter } from "./program";
 import { leadRouter } from "./lead";
 import { scholarshipRouter } from "./scholarship";
+import { financialAidRouter } from "./financial-aids";
 
 /** Dependencies required to create v1 router */
 export interface V1RouterDependencies {
@@ -50,6 +51,8 @@ export interface V1RouterDependencies {
   leadRouter: IRouter;
   /** Handles scholarships */
   scholarshipRouter: IRouter;
+  /** Handles financial aids */
+  financialAidRouter: IRouter;
 }
 export class V1Router implements IRouter {
   private static instance: IRouter | null = null;
@@ -75,6 +78,7 @@ export class V1Router implements IRouter {
     programRouter: IRouter,
     leadRouter: IRouter,
     scholarshipRouter: IRouter,
+    financialAidRouter: IRouter,
   ) {
     this.router.use("/auth", authRouter.router);
     this.router.use("/admins", adminRouter.router);
@@ -91,6 +95,7 @@ export class V1Router implements IRouter {
     this.router.use("/programs", programRouter.router);
     this.router.use("/leads", leadRouter.router);
     this.router.use("/scholarships", scholarshipRouter.router);
+    this.router.use("/financial-aids", financialAidRouter.router);
   }
 
   /**
@@ -113,6 +118,7 @@ export class V1Router implements IRouter {
     programRouter,
     leadRouter,
     scholarshipRouter,
+    financialAidRouter,
   }: V1RouterDependencies) {
     if (!V1Router.instance) {
       V1Router.instance = new V1Router(
@@ -131,6 +137,7 @@ export class V1Router implements IRouter {
         programRouter,
         leadRouter,
         scholarshipRouter,
+        financialAidRouter,
       );
     }
 
@@ -158,5 +165,6 @@ export const v1Router = SkynedRegistry.getSingleton(
       programRouter,
       leadRouter,
       scholarshipRouter,
+      financialAidRouter,
     }),
 );

@@ -8,6 +8,7 @@ import {
   CreateProgramSchema,
   CreateScholarshipSchema,
   CreateSchoolSchema,
+  FinancialAidSchema,
   ProgramSchema,
   UpdateAdminSchema,
   UpdateBlogPostSchema,
@@ -24,6 +25,7 @@ import {
   IFaq,
   IInquiry,
   IIntake,
+  IFinancialAid,
   IProgram,
   ISchool,
   ITag,
@@ -47,7 +49,8 @@ export type ResourceType =
   | "blogs"
   | "categories"
   | "tags"
-  | "scholarships";
+  | "scholarships"
+  | "loans";
 
 export type PermissionType = {
   admins: {
@@ -167,6 +170,13 @@ export type PermissionType = {
       | "delete"
       | "activate"
       | "deactivate";
+  };
+
+  loans: {
+    dataType: IFinancialAid;
+    createDataType: FinancialAidSchema;
+    updateDataType: FinancialAidSchema;
+    action: "list" | "create" | "read" | "update" | "delete";
   };
 };
 

@@ -151,7 +151,7 @@ export class SchoolController
 
   listSchools: ISchoolController["listSchools"] = async (req, res, next) => {
     try {
-      const { from, to, limit, page } = req.query;
+      const { from, to, limit, page, ...rest } = req.query;
       let authUser = this._validateUser(req);
 
       if (authUser?.claim === "admin") {
@@ -161,13 +161,25 @@ export class SchoolController
 
       const construct = this._constructPaginationData({ limit, page });
 
-      const total = await this.schoolService.count();
+      const total = await this.schoolService.count(
+        {
+          from,
+          to,
+          where: {
+            ...rest,
+          },
+        },
+        authUser,
+      );
 
       const schoolList = await this.schoolService.listSchools(
         {
           ...SkynedUtils.pick(construct, ["skip", "take"]),
           from,
           to,
+          where: {
+            ...rest,
+          },
         },
         authUser,
       );

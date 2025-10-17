@@ -1,6 +1,7 @@
 import {
   AdminAccountCreationEmailProps,
   ContactUsEmailTemplateProps,
+  FinancialAidNotificationEmailProps,
   LeadCollectionNotificationEmailProps,
 } from "../../services";
 import { IEmail } from "../infrastructure";
@@ -37,12 +38,19 @@ export interface ILeadCollectionEmailProps {
   data: LeadCollectionNotificationEmailProps;
 }
 
+/** Interface for financial aid */
+export interface IFinancialAidEmailProps {
+  type: "financial-aid";
+  data: FinancialAidNotificationEmailProps;
+}
+
 /** Represents email template type */
 export type TemplateDataType =
   | IVerifyEmail
   | IAdminAccountCreationEmailProps
   | IContactUsEmailProps
-  | ILeadCollectionEmailProps;
+  | ILeadCollectionEmailProps
+  | IFinancialAidEmailProps;
 
 /**
  * Email Service interface

@@ -1,6 +1,6 @@
-import { AccessControlType } from "../../access-control/types";
+import { AccessControlType } from "../types";
 
-export const loanPolicies: AccessControlType = {
+export const financialAidPolicies: AccessControlType = {
   loans: {
     list(authClaim) {
       if (!authClaim) return false;
@@ -24,19 +24,11 @@ export const loanPolicies: AccessControlType = {
     },
 
     update(authClaim, data, school) {
-      if (!authClaim) return false;
-      const { claim, user } = authClaim;
-      if (claim !== "admin") return false;
-
-      return true;
+      return false;
     },
 
     delete(authClaim, school) {
-      if (!authClaim) return false;
-      const { claim, user } = authClaim;
-      if (claim !== "admin") return false;
-
-      return true;
+      return false;
     },
   },
 };

@@ -19,6 +19,7 @@ import {
   PageQuerySchema,
   ProgramQuerySchema,
   ProgramSlugSchema,
+  SchoolQuerySchema,
   SchoolSlugSchema,
 } from "../../zod-schemas";
 
@@ -37,7 +38,7 @@ export interface ISchoolController {
       IPaginatedResponse<Awaited<ReturnType<ISchoolService["listSchools"]>>[0]>
     >,
     object,
-    Partial<PageQuerySchema>
+    Partial<PageQuerySchema & SchoolQuerySchema>
   >;
 
   /** Finds a school */

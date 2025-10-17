@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loanPolicies = void 0;
-exports.loanPolicies = {
+exports.financialAidPolicies = void 0;
+exports.financialAidPolicies = {
     loans: {
         list(authClaim) {
             if (!authClaim)
@@ -25,20 +25,10 @@ exports.loanPolicies = {
             return true;
         },
         update(authClaim, data, school) {
-            if (!authClaim)
-                return false;
-            const { claim, user } = authClaim;
-            if (claim !== "admin")
-                return false;
-            return true;
+            return false;
         },
         delete(authClaim, school) {
-            if (!authClaim)
-                return false;
-            const { claim, user } = authClaim;
-            if (claim !== "admin")
-                return false;
-            return true;
+            return false;
         },
     },
 };

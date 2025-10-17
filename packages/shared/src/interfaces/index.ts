@@ -13,4 +13,4 @@ export * from "./program";
 export * from "./blog";
 export * from "./analytics";
 export * from "./scholarship";
-export * from "./loan";
+export * from "./financial-aid";

@@ -1,12 +1,13 @@
 /* eslint-disable operator-linebreak */
-import { ISchool } from "@workspace/shared";
+import { AuthClaim, ISchool } from "@workspace/shared";
 import { RegistryKeysEnum } from "../../../enum";
-import { ISchoolService } from "../../../interfaces";
+import { IQueryConstruct, ISchoolService } from "../../../interfaces";
 import SkynedRegistry from "../../../registry";
 import { adminProfileKeys, SkynedUtils } from "../../../utils";
 import { ServiceUtils } from "../utils";
 import { CreateSchoolServiceSchema, UpdateSchoolServiceSchema } from "./schema";
-import { GeneralSchema } from "../../../zod-schemas";
+import { GeneralSchema, SchoolQuerySchema } from "../../../zod-schemas";
+import { Prisma } from "../../../infrastructure/repository/prisma-client";
 
 const generalSchoolData: (keyof ISchool)[] = [
   "name",
@@ -49,6 +50,36 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
     }
 
     return SchoolService.instance;
+  }
+
+  _constructWhereQuery(
+    query: IQueryConstruct<Omit<SchoolQuerySchema, "orderBy">>["where"],
+    authUser?: AuthClaim,
+  ) {
+    const where: Prisma.SchoolWhereInput | undefined = {};
+
+    if (!authUser || authUser.claim !== "admin") {
+      where.active = true;
+    }
+
+    if (query.term) {
+      where.name = {
+        contains: query.term,
+        mode: "insensitive",
+      };
+    }
+
+    if (query.financialAids?.length) {
+      where.programs = {
+        some: {
+          financialAids: {
+            isEmpty: false,
+          },
+        },
+      };
+    }
+
+    return where;
   }
 
   createSchool: ISchoolService["createSchool"] = async (admin, data) => {
@@ -206,8 +237,18 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
     return this.deserialize(school);
   };
 
-  count: ISchoolService["count"] = async () => {
-    const count = await this.repository.school.count();
+  count: ISchoolService["count"] = async ({ where, from, to }, authUser) => {
+    const whereConstruct = this._constructWhereQuery(where || {}, authUser);
+
+    const count = await this.repository.school.count({
+      where: {
+        ...whereConstruct,
+        createdAt: {
+          gte: from,
+          lte: to,
+        },
+      },
+    });
     return count;
   };
 
@@ -215,11 +256,13 @@ export class SchoolService extends ServiceUtils implements ISchoolService {
     { skip, take, from, to, order, where },
     authUser,
   ) => {
+    const whereConstruct = this._constructWhereQuery(where || {}, authUser);
+
     const schools = await this.repository.school.findMany({
       skip,
       take,
       where: {
-        active: !authUser || authUser.claim !== "admin" ? true : undefined,
+        ...whereConstruct,
         createdAt: {
           gte: from,
           lte: to,

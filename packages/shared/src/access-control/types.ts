@@ -8,6 +8,7 @@ import {
   CreateProgramSchema,
   CreateScholarshipSchema,
   CreateSchoolSchema,
+  FinancialAidSchema,
   ProgramSchema,
   UpdateAdminSchema,
   UpdateBlogPostSchema,
@@ -24,7 +25,7 @@ import {
   IFaq,
   IInquiry,
   IIntake,
-  ILoan,
+  IFinancialAid,
   IProgram,
   ISchool,
   ITag,
@@ -172,9 +173,9 @@ export type PermissionType = {
   };
 
   loans: {
-    dataType: ILoan;
-    createDataType: "";
-    updateDataType: "";
+    dataType: IFinancialAid;
+    createDataType: FinancialAidSchema;
+    updateDataType: FinancialAidSchema;
     action: "list" | "create" | "read" | "update" | "delete";
   };
 };

@@ -88,6 +88,10 @@ export class ProgramService extends ServiceUtils implements IProgramService {
       where["schoolId"] = query.schoolId;
     }
 
+    if (query.schoolSlug) {
+      where["slug"] = query.schoolSlug;
+    }
+
     if (
       query.country ||
       query.state ||

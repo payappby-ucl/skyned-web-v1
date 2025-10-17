@@ -21,6 +21,7 @@ const decimalKeys = [
   "inquiryGrowth",
   "adminGrowth",
   "postGrowth",
+  "gpa",
 ];
 
 const skipKeys = [
@@ -195,6 +196,8 @@ export class SkynedUtils {
         return `blogs/${data.blogPostId}`;
       case "banner":
         return `scholarships/${data.slug}/${type}`;
+      case "financial-aid":
+        return `financialAids/${data.financialAidId}/${data.key}`;
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,
@@ -218,6 +221,12 @@ export class SkynedUtils {
             "schoolImage",
             "coverImage",
             "banner",
+            "transcript",
+            "identification",
+            "immigrationDocument",
+            "resume",
+            "bankStatement",
+            "proofOfAddress",
           ].includes(key)
         ) {
           return [key, value as unknown as IObject];

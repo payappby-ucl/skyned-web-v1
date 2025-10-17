@@ -1,5 +1,4 @@
 import { brandServerApi, getErrorResponse } from "@/src/lib/server";
-import { serverCacheTags } from "@/src/utils";
 import { IPaginatedResponse, IProgram } from "@workspace/shared";
 import { type NextRequest } from "next/server";
 

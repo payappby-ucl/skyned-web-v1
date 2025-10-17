@@ -27,3 +27,4 @@ __exportStar(require("./english-proficiency"), exports);
 __exportStar(require("./blog-post"), exports);
 __exportStar(require("./apply"), exports);
 __exportStar(require("./scholarship"), exports);
+__exportStar(require("./financial-aid"), exports);

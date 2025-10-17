@@ -26,8 +26,23 @@ interface ScholarshipBanner {
   };
 }
 
+interface FinancialAid {
+  type: "financial-aid";
+  data: {
+    financialAidId: string;
+    key:
+      | "bankStatement"
+      | "transcript"
+      | "proofOfAddress"
+      | "identification"
+      | "immigrationDocument"
+      | "resume";
+  };
+}
+
 export type ResolveStoragePathType =
   | ProfileImage
   | SchoolImage
   | BlogImage
-  | ScholarshipBanner;
+  | ScholarshipBanner
+  | FinancialAid;

@@ -6,6 +6,7 @@ import {
   ISchool,
 } from "@workspace/shared";
 import { IQueryConstruct } from "..";
+import { SchoolQuerySchema } from "../../zod-schemas";
 
 /** Represents school service */
 export interface ISchoolService {
@@ -29,11 +30,14 @@ export interface ISchoolService {
   ): Promise<ISchool>;
 
   /** Counts a school */
-  count(): Promise<number>;
+  count(
+    query: Partial<IQueryConstruct<SchoolQuerySchema>>,
+    authUser?: AuthClaim,
+  ): Promise<number>;
 
   /** Get schools */
   listSchools(
-    query: Partial<IQueryConstruct<ISchool>>,
+    query: Partial<IQueryConstruct<SchoolQuerySchema>>,
     authUser?: AuthClaim,
   ): Promise<ISchool[]>;
 

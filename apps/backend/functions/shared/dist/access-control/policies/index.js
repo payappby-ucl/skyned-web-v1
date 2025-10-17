@@ -9,6 +9,7 @@ const department_1 = require("./department");
 const faq_1 = require("./faq");
 const inquiry_1 = require("./inquiry");
 const intakes_1 = require("./intakes");
+const financial_aid_1 = require("./financial-aid");
 const programs_1 = require("./programs");
 const scholarship_1 = require("./scholarship");
 const schools_1 = require("./schools");
@@ -26,4 +27,5 @@ exports.policies = {
     ...category_1.categoryPolicies,
     ...tag_1.tagPolicies,
     ...scholarship_1.scholarshipPolicies,
+    ...financial_aid_1.financialAidPolicies,
 };

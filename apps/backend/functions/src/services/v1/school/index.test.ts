@@ -150,7 +150,7 @@ describe("SchoolService", () => {
           .spyOn(repository.school, "count")
           .mockImplementation(() => 1 as any);
 
-        const count = await schoolService.count();
+        const count = await schoolService.count({});
         expect(spy).toHaveBeenCalled();
         expect(count).toBe(1);
       });

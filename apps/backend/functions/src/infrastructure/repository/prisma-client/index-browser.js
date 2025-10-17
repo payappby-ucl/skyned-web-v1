@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.2
- * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+ * Prisma Client JS version: 6.17.1
+ * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
  */
 Prisma.prismaVersion = {
-  client: "6.16.2",
-  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+  client: "6.17.1",
+  engine: "272a37d34178c2894197e17273bf937f25acdeac"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -364,6 +364,36 @@ exports.Prisma.ScholarshipScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FinancialAidScalarFieldEnum = {
+  id: 'id',
+  financialAidId: 'financialAidId',
+  citizenship: 'citizenship',
+  canadianResident: 'canadianResident',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  schoolSlug: 'schoolSlug',
+  programSlug: 'programSlug',
+  studyLevel: 'studyLevel',
+  pgwp: 'pgwp',
+  hasOfferLetter: 'hasOfferLetter',
+  loanType: 'loanType',
+  livingExpensesCoverage: 'livingExpensesCoverage',
+  programStarted: 'programStarted',
+  gpa: 'gpa',
+  nextSchoolTerm: 'nextSchoolTerm',
+  partner: 'partner',
+  proofOfAddress: 'proofOfAddress',
+  identification: 'identification',
+  resume: 'resume',
+  transcript: 'transcript',
+  bankStatement: 'bankStatement',
+  immigrationDocument: 'immigrationDocument',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -516,6 +546,24 @@ exports.Prisma.ScholarshipOrderByRelevanceFieldEnum = {
   eligibilityRequirements: 'eligibilityRequirements',
   createdById: 'createdById'
 };
+
+exports.Prisma.FinancialAidOrderByRelevanceFieldEnum = {
+  financialAidId: 'financialAidId',
+  citizenship: 'citizenship',
+  canadianResident: 'canadianResident',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  schoolSlug: 'schoolSlug',
+  programSlug: 'programSlug',
+  studyLevel: 'studyLevel',
+  pgwp: 'pgwp',
+  hasOfferLetter: 'hasOfferLetter',
+  loanType: 'loanType',
+  livingExpensesCoverage: 'livingExpensesCoverage',
+  programStarted: 'programStarted',
+  partner: 'partner'
+};
 exports.TokenType = exports.$Enums.TokenType = {
   verify: 'verify',
   reset: 'reset'
@@ -599,7 +647,8 @@ exports.Prisma.ModelName = {
   BlogPost: 'BlogPost',
   Tag: 'Tag',
   Category: 'Category',
-  Scholarship: 'Scholarship'
+  Scholarship: 'Scholarship',
+  FinancialAid: 'FinancialAid'
 };
 
 /**

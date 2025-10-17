@@ -6,6 +6,7 @@ import { render } from "@react-email/components";
 import {
   AdminAccountCreation,
   ContactUsEmail,
+  FinancialAidNotificationEmail,
   LeadCollection,
   VerifyEmail,
 } from "./templates";
@@ -60,6 +61,8 @@ export class EmailService implements IEmailService {
         return await render(<ContactUsEmail {...data} />);
       case "lead-collection":
         return await render(<LeadCollection {...data} />);
+      case "financial-aid":
+        return await render(<FinancialAidNotificationEmail {...data} />);
       default:
         throw SkynedUtils.createException(
           StatusCodes.INTERNAL_SERVER_ERROR,

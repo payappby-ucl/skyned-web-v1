@@ -5,3 +5,4 @@ export * from "./intake";
 export * from "./program";
 export * from "./blog-post";
 export * from "./scholarship";
+export * from "./financial-aid";

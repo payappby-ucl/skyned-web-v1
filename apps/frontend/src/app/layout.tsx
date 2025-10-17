@@ -15,7 +15,7 @@ import Analytics from "./_components/analytics";
 import CookieBanner from "./_components/cookie/cookie-banner";
 import TanstackQueryProvider from "../components/providers/tanstack-provider";
 import WhatsAppWidget from "../components/chats/whatsapp";
-// import WhatsAppWidget from "../components/chats/whatsapp";
+import { Navigation } from "../components/navigation";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -81,7 +81,9 @@ export default function RootLayout({
           <TanstackQueryProvider>
             <ThemeProviders>
               <AuthProvider>
-                <Nav />
+                <Navigation>
+                  <Nav />
+                </Navigation>
                 <main>{children}</main>
                 <Footer />
               </AuthProvider>

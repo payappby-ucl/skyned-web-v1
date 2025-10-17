@@ -18,3 +18,4 @@ export * from "./category";
 export * from "./tag";
 export * from "./analytics";
 export * from "./scholarship";
+export * from "./financial-aid";

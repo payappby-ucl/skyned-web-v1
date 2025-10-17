@@ -573,7 +573,7 @@ model Category {
 
 model Scholarship {
   id                      Int      @id @default(autoincrement())
-  scholarshipId           String   @default(cuid()) @map("scholarship_id")
+  scholarshipId           String   @unique @default(cuid()) @map("scholarship_id")
   title                   String
   slug                    String   @unique
   subtitle                String
@@ -596,6 +596,42 @@ model Scholarship {
   @@index([createdAt])
   @@index([updatedAt])
   @@map("scholarships")
+}
+
+model FinancialAid {
+  id                     Int      @id @default(autoincrement())
+  financialAidId         String   @unique @map("financial_aid_id")
+  citizenship            String   @db.VarChar(3)
+  canadianResident       String   @map("canadian_resident")
+  firstName              String   @map("first_name")
+  lastName               String   @map("last_name")
+  email                  String
+  phoneNumber            Json     @map("phone_number")
+  schoolSlug             String   @map("school_slug")
+  programSlug            String   @map("program_slug")
+  studyLevel             String   @map("study_level")
+  pgwp                   String
+  hasOfferLetter         String   @map("has_offer_letter")
+  loanType               String   @map("loan_type")
+  livingExpensesCoverage String?  @map("living_expenses_coverage")
+  programStarted         String   @map("program_started")
+  gpa                    Decimal? @db.Decimal(5, 2)
+  nextSchoolTerm         DateTime @map("next_school_term")
+  partner                String
+  proofOfAddress         Json     @map("proof_of_address")
+  identification         Json
+  resume                 Json
+  transcript             Json
+  bankStatement          Json?    @map("bank_statement")
+  immigrationDocument    Json     @map("immigration_document")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([firstName])
+  @@index([lastName])
+  @@index([email])
+  @@map("financial_aids")
 }
 
 // model Student {

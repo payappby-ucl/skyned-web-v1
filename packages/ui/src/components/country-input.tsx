@@ -6,17 +6,17 @@ import { Country } from "country-state-city";
 import { SelectProps } from "@radix-ui/react-select";
 
 const countries = Country.getAllCountries();
-function CountryInput(props: SelectProps) {
+function CountryInput({ value, onValueChange, ...rest }: SelectProps) {
   const selectedCountry = useMemo(
-    () => Country.getCountryByCode(props.value as string),
-    [props.value],
+    () => Country.getCountryByCode(value as string),
+    [value],
   );
 
   return (
-    <Select {...props}>
+    <Select value={value} onValueChange={onValueChange} {...rest}>
       <SelectTrigger className="w-full">
         <div className="flex items-center gap-2">
-          <p>{selectedCountry?.name}</p>
+          <p>{selectedCountry?.name || "Select Country"}</p>
           <span className="text-lg">{selectedCountry?.flag}</span>
         </div>
       </SelectTrigger>

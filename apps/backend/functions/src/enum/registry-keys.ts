@@ -68,6 +68,8 @@ export enum RegistryKeysEnum {
   LEAD_ROUTER = "LeadRouter",
   /** Scholarship Router */
   SCHOLARSHIP_ROUTER = "ScholarshipRouter",
+  /** Financial Aids */
+  FINANCIAL_AID_ROUTER = "FinancialAidRouter",
 
   // * Controllers
   /** Exception Controller */
@@ -106,6 +108,8 @@ export enum RegistryKeysEnum {
   LEAD_CONTROLLER = "LeadController",
   /** Scholarship Controller */
   SCHOLARSHIP_CONTROLLER = "ScholarshipController",
+  /** Financial Aids Controller */
+  FINANCIAL_AID_CONTROLLER = "FinancialAidController",
 
   // * Services
   /** Email Service */
@@ -150,6 +154,8 @@ export enum RegistryKeysEnum {
   LEAD_SERVICE = "LeadService",
   /** Scholarship Service */
   SCHOLARSHIP_SERVICE = "ScholarshipService",
+  /** Financial Aids Service */
+  FINANCIAL_AID_SERVICE = "FinancialAidService",
 
   // * CRON JOBS
   /** Cron jobs */

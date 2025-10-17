@@ -7,7 +7,7 @@ import { departmentPolicies } from "./department";
 import { faqPolicies } from "./faq";
 import { inquiryPolicies } from "./inquiry";
 import { intakePolicies } from "./intakes";
-import { loanPolicies } from "./loan";
+import { financialAidPolicies } from "./financial-aid";
 import { programPolicies } from "./programs";
 import { scholarshipPolicies } from "./scholarship";
 import { schoolPolicies } from "./schools";
@@ -26,5 +26,5 @@ export const policies: AccessControlType = {
   ...categoryPolicies,
   ...tagPolicies,
   ...scholarshipPolicies,
-  ...loanPolicies,
+  ...financialAidPolicies,
 };

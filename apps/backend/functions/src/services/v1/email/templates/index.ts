@@ -6,3 +6,4 @@ export * from "./admin-account-creation";
 export * from "./verify-email";
 export * from "./contact-us";
 export * from "./lead-submission";
+export * from "./financial-aid";

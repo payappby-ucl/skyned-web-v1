@@ -27,6 +27,7 @@ import {
   PageQuerySchema,
   ProgramQuerySchema,
   ProgramSlugSchema,
+  SchoolQuerySchema,
   SchoolSlugSchema,
 } from "../../../../zod-schemas";
 
@@ -53,7 +54,7 @@ export class SchoolRouter implements IRouter {
       .route("/")
       .get(
         RequestValidationMiddleware.validate({
-          query: PageQuerySchema.partial(),
+          query: PageQuerySchema.merge(SchoolQuerySchema).partial(),
         }),
         authMiddleware.safeAuthenticate,
         schoolController.listSchools,
