@@ -22,7 +22,7 @@ export const FinancialAidSchema = z
     loanType: z.enum(["tuition", "tuition + living expenses"]),
     livingExpensesCoverage: z.enum(["yes", "no"]).optional(),
     programStarted: z.enum(["yes", "no"]),
-    gpa: z.number().positive().optional(),
+    gpa: z.coerce.number().min(0, "Minimum of 0").optional(),
     nextSchoolTerm: z.coerce.number().positive().int(),
     partner: z.enum(financialAids),
     proofOfAddress: CommonSchema.shape.image,

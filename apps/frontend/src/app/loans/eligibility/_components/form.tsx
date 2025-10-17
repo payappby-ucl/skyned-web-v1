@@ -50,6 +50,7 @@ import { DatePicker } from "@workspace/ui/components/date-picker";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FileInput } from "@workspace/ui/components/file-input";
+import { submitFinancialAidApplication } from "../../_actions";
 
 const FinancialAidEligibilityForm: React.FC = () => {
   const router = useRouter();
@@ -254,7 +255,14 @@ const FinancialAidEligibilityForm: React.FC = () => {
 
   const onSubmit = useCallback(async (data: FinancialAidSchema) => {
     try {
-      console.log(data);
+      const res = await submitFinancialAidApplication(data);
+      const resData = brandClientApi.utils.handleServerActionResponse(res);
+      brandClientApi.utils.toast.success(resData.message);
+      brandClientApi.storage.localStorage.deleteItem(
+        "financial-aid-eligibility",
+      );
+      form.reset();
+      setStep(7);
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
@@ -801,14 +809,11 @@ const FinancialAidEligibilityForm: React.FC = () => {
                     <FormLabel>What's your current GPA?</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
                         {...field}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          if (!isNaN(Number(val))) {
-                            field.onChange(Number(val));
-                          }
-                        }}
+                        type="number"
+                        step={0.1}
+                        max={100}
+                        min={1}
                         placeholder="eg 3.5"
                       />
                     </FormControl>
@@ -1407,10 +1412,53 @@ const FinancialAidEligibilityForm: React.FC = () => {
             <FormButton
               type="submit"
               className="!px-5"
+              isLoading={form.formState.isSubmitting}
               onClick={form.handleSubmit(onSubmit)}
             >
               Submit & Continue <ArrowRight />
             </FormButton>
+          </>
+        ) : null}
+
+        {/* Step 7 */}
+        {step === 7 ? (
+          <>
+            <header className="space-y-2">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="text-primary h-5 w-5" />
+                <h1 className="!text-xl">You're Almost There!</h1>
+              </div>
+              <p className="text-muted-foreground text-md">
+                Thank you for submitting your documents. Our team is reviewing
+                them.
+              </p>
+            </header>
+            <div className="space-y-10 text-center">
+              <div className="bg-primary/10 mx-auto flex h-16 w-16 items-center justify-center rounded-full">
+                <CheckCircle className="text-primary h-8 w-8" />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">
+                  Application Submitted Successfully!
+                </h3>
+                <p className="text-muted-foreground">
+                  You'll be notified as soon as your loan offer is ready.
+                </p>
+              </div>
+
+              <div className="grid gap-3">
+                <Button
+                  variant="outline"
+                  type="button"
+                  role="button"
+                  onClick={() => router.replace("/loans")}
+                  className="w-full bg-transparent"
+                >
+                  Return to Dashboard
+                </Button>
+              </div>
+            </div>
           </>
         ) : null}
       </form>
