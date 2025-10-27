@@ -173,7 +173,7 @@ export class FinancialAidController
           from: {
             email: env.emails.info,
           },
-          to: [env.emails.info, "bobslegend795@gmail.com"],
+          to: [env.emails.info],
           subject: "New Financial Aid Submission",
           template: {
             type: "financial-aid",

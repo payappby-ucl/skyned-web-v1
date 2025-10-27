@@ -166,6 +166,12 @@ export class SkynedUtils {
           process.env.FIREBASE_STORAGE_EMULATOR_HOST = "127.0.0.1:9199";
           process.env.PUBSUB_EMULATOR_HOST = "127.0.0.1:8085";
         }
+      } else if (process.env.LOCAL === "remote") {
+        admin.initializeApp({
+          credential: applicationDefault(),
+          projectId: "skyned-prod",
+          storageBucket: "skyned-prod.firebasestorage.app",
+        });
       } else {
         admin.initializeApp();
       }

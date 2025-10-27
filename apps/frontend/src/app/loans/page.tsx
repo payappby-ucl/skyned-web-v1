@@ -61,8 +61,8 @@ export default async function Loans() {
       <Jumbotron
         title={
           <>
-            Find the Best <span className="text-[#7ddf62]">Student</span> <br />{" "}
-            <span className="text-[#7ddf62]">Loan</span> for Your Program
+            Find the Best <span className="text-[#7ddf62]">Student</span>{" "}
+            <span className="text-[#7ddf62]">Loan</span> <br /> for Your Program
           </>
         }
         subtitle="We partner with MPOWER and Passage to connect you with the right loan based on your school, program, and visa status. Start by answering a few quick questions — it only takes 2 minutes."

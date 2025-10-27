@@ -68,11 +68,36 @@ type MenuItem =
     };
 
 const menuItems: MenuItem[] = [
-  { title: "Apply Loan", href: "/loans", description: "Explore flexible study loan options", icon: PiggyBankIcon },
-  { title: "About Us", href: "/about", description: "Learn more about us", icon: InfoIcon },
-  { title: "Information Hub", href: "/information-hub", description: "Access our information hub", icon: NewspaperIcon },
-  { title: "Contact Us", href: "/contact", description: "Get in touch with us", icon: MailIcon },
-  { title: "Schools", href: "/schools", description: "Explore our schools", icon: BuildingIcon },
+  {
+    title: "Loan",
+    href: "/loans",
+    description: "Explore flexible study loan options",
+    icon: PiggyBankIcon,
+  },
+  {
+    title: "About Us",
+    href: "/about",
+    description: "Learn more about us",
+    icon: InfoIcon,
+  },
+  {
+    title: "Information Hub",
+    href: "/information-hub",
+    description: "Access our information hub",
+    icon: NewspaperIcon,
+  },
+  {
+    title: "Contact Us",
+    href: "/contact",
+    description: "Get in touch with us",
+    icon: MailIcon,
+  },
+  {
+    title: "Schools",
+    href: "/schools",
+    description: "Explore our schools",
+    icon: BuildingIcon,
+  },
   {
     title: "Resources",
     image: {
@@ -164,38 +189,37 @@ const MobileNav: React.FC = () => {
           </Link>
         </SheetClose>
 
+        <ScrollArea className="h-[calc(100vh-60px)]">
+          <div className="mb-8 space-y-4 px-3">
+            <div>
+              <strong className="text-muted-foreground mb-1 px-2 text-xs font-medium uppercase tracking-wider">
+                Navigation
+              </strong>
+              <div>
+                {menuItems.map(({ title, href, description, icon: Icon }) => (
+                  <SheetClose key={title} asChild>
+                    {href && (
+                      <Link
+                        href={href}
+                        className="flex flex-col px-2 py-2 transition-colors hover:bg-gray-50"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="bg-muted flex h-8 w-8 shrink-0 items-center justify-center">
+                            <Icon className="text-muted-foreground h-4 w-4" />
+                          </div>
+                          <div className="text-sm font-medium">{title}</div>
+                        </div>
+                        <p className="text-muted-foreground ml-11 mt-0.5 text-xs">
+                          {description}
+                        </p>
+                      </Link>
+                    )}
+                  </SheetClose>
+                ))}
+              </div>
+            </div>
 
-              <ScrollArea className="h-[calc(100vh-60px)]">
-                <div className="px-3 space-y-4 mb-8">
-                  <div>
-                    <strong className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-1 px-2">
-                      Navigation
-                    </strong>
-                    <div>
-                      {menuItems.map(({ title, href, description, icon: Icon }) => (
-                        <SheetClose key={title} asChild>
-                          {href && (
-                            <Link
-                              href={href}
-                              className="flex flex-col py-2 px-2 hover:bg-gray-50 transition-colors"
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-muted">
-                                  <Icon className="h-4 w-4 text-muted-foreground" />
-                                </div>
-                                <div className="font-medium text-sm">{title}</div>
-                              </div>
-                              <p className="text-xs text-muted-foreground mt-0.5 ml-11">
-                                {description}
-                              </p>
-                            </Link>
-                          )}
-                        </SheetClose>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* <div>
+            {/* <div>
                     <strong className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-1 px-2">
                       Resources
                     </strong>
@@ -224,8 +248,8 @@ const MobileNav: React.FC = () => {
                       )}
                     </div>
                   </div> */}
-                </div>
-              </ScrollArea>
+          </div>
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   );

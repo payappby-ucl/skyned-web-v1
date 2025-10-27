@@ -32,7 +32,7 @@ const definition: swaggerJsDoc.Options["swaggerDefinition"] = {
   servers: [
     {
       url: `${env.domains.baseUrl}/api/{version}`,
-      description: `The ${env.environment} API server`,
+      description: `The ${env.environment || "production"} API server`,
       variables: {
         version: {
           description: "Endpoint versions",
