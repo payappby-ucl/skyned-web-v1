@@ -26,6 +26,7 @@ exports.midNightCronJobs = onSchedule(
   {
     schedule: "every day 00:00",
     retryCount: 1,
+    timeoutSeconds: 300,
   },
   cronJobs.midNightCronJobs,
 );
