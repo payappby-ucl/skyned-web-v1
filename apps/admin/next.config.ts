@@ -2,12 +2,11 @@
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
 
-  // experimental: {
-  //   serverActions: {
-  //     bodySizeLimit: "2mb",
-  //   },
-  // },
-
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
   images: {
     remotePatterns: [
       {
