@@ -2,7 +2,7 @@ import BrandAlert from "@/src/components/alert";
 import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
-import { EnglishProficiency, financialAids, IProgram } from "@workspace/shared";
+import { EnglishProficiency, IProgram } from "@workspace/shared";
 import {
   Avatar,
   AvatarFallback,
@@ -190,7 +190,7 @@ export default async function SchoolProgramPage({
                   value="financial-aids"
                   className="flex items-center gap-2"
                 >
-                  {financialAids.map((aid) => (
+                  {program.financialAids.map((aid) => (
                     <div className="rounded-md border px-4 py-2" key={aid}>
                       <FinancialAidPartner name={aid} />
                     </div>

@@ -624,6 +624,7 @@ model FinancialAid {
   resume                 Json
   transcript             Json
   bankStatement          Json?    @map("bank_statement")
+  offerLetter            Json?    @map("offer_letter")
   immigrationDocument    Json     @map("immigration_document")
 
   createdAt DateTime @default(now()) @map("created_at")

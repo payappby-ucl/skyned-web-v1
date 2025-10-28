@@ -54,7 +54,7 @@ exports.CommonSchema = zod_1.z.object({
     image: zod_1.z
         .string()
         .trim()
-        .refine((val) => !!(0, data_urls_1.default)(val), "Image must be of type data-url"),
+        .refine((val) => !!(0, data_urls_1.default)(val), "Must be of type data-url"),
     slug: zod_1.z
         .string()
         .trim()

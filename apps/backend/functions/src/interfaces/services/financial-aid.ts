@@ -18,9 +18,11 @@ export interface IFinancialAidService {
       | "immigrationDocument"
       | "resume"
       | "nextSchoolTerm"
+      | "offerLetter"
       | "phoneNumber"
     > & {
       bankStatement?: IObject;
+      offerLetter?: IObject;
       transcript: IObject;
       proofOfAddress: IObject;
       identification: IObject;

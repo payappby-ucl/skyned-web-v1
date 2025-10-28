@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "version": "0.0.1-253",
+  "version": "0.0.1-265",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "pnpm run cp:local && pnpm i && pnpm run generate && tsc && ./cp-yaml && typedoc",
@@ -22,7 +22,7 @@
     "test": "cat .env.test > .env && pnpm run test:migrate && NODE_OPTIONS='--max_old_space_size=8192' node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
     "deploy:test": "pnpm run rm:lib && pnpm version prerelease && pnpm run test",
     "deploy:dev": "pnpm run deploy:test && cat .env.dev > .env && firebase use dev && pnpm dlx prisma db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/test-service-account.json LOCAL=local pnpm run seed && pnpm run deploy",
-    "deploy:prod": "pnpm run deploy:dev && cat .env.prod > .env && firebase use prod && pnpm dlx prisma db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/prod-service-account.json LOCAL=remote pnpm run seed && pnpm run deploy"
+    "deploy:prod": "pnpm run deploy:test && cat .env.prod > .env && firebase use prod && pnpm dlx prisma db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/prod-service-account.json LOCAL=remote pnpm run seed && pnpm run deploy"
   },
   "engines": {
     "node": "22"

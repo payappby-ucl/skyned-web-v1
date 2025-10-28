@@ -6,5 +6,5 @@ export declare const computeFinancialAidEligibility: (program: IProgram, data: F
 } | {
     isEligible: boolean;
     partners: ("mpower" | "passage")[];
-    recommendation: "mpower" | "passage" | null;
+    recommendation: "passage" | null;
 };

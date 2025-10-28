@@ -9,7 +9,7 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     schoolSlug: z.ZodString;
     programSlug: z.ZodString;
     studyLevel: z.ZodEnum<["undergraduate", "graduate"]>;
-    pgwp: z.ZodEnum<["yes", "no", "not sure"]>;
+    pgwp: z.ZodEnum<["yes", "no"]>;
     hasOfferLetter: z.ZodEnum<["yes", "no"]>;
     loanType: z.ZodEnum<["tuition", "tuition + living expenses"]>;
     livingExpensesCoverage: z.ZodOptional<z.ZodEnum<["yes", "no"]>>;
@@ -22,13 +22,14 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     resume: z.ZodEffects<z.ZodString, string, string>;
     transcript: z.ZodEffects<z.ZodString, string, string>;
     bankStatement: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
+    offerLetter: z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>;
     immigrationDocument: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: string;
-    pgwp: "yes" | "no" | "not sure";
+    pgwp: "yes" | "no";
     schoolSlug: string;
     citizenship: string;
     canadianResident: "yes" | "no";
@@ -47,12 +48,13 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     livingExpensesCoverage?: "yes" | "no" | undefined;
     gpa?: number | undefined;
     bankStatement?: string | undefined;
+    offerLetter?: string | undefined;
 }, {
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: string;
-    pgwp: "yes" | "no" | "not sure";
+    pgwp: "yes" | "no";
     schoolSlug: string;
     citizenship: string;
     canadianResident: "yes" | "no";
@@ -71,12 +73,13 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     livingExpensesCoverage?: "yes" | "no" | undefined;
     gpa?: number | undefined;
     bankStatement?: string | undefined;
+    offerLetter?: string | undefined;
 }>, {
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: string;
-    pgwp: "yes" | "no" | "not sure";
+    pgwp: "yes" | "no";
     schoolSlug: string;
     citizenship: string;
     canadianResident: "yes" | "no";
@@ -95,12 +98,13 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     livingExpensesCoverage?: "yes" | "no" | undefined;
     gpa?: number | undefined;
     bankStatement?: string | undefined;
+    offerLetter?: string | undefined;
 }, {
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: string;
-    pgwp: "yes" | "no" | "not sure";
+    pgwp: "yes" | "no";
     schoolSlug: string;
     citizenship: string;
     canadianResident: "yes" | "no";
@@ -119,5 +123,6 @@ export declare const FinancialAidSchema: z.ZodEffects<z.ZodObject<{
     livingExpensesCoverage?: "yes" | "no" | undefined;
     gpa?: number | undefined;
     bankStatement?: string | undefined;
+    offerLetter?: string | undefined;
 }>;
 export type FinancialAidSchema = z.infer<typeof FinancialAidSchema>;

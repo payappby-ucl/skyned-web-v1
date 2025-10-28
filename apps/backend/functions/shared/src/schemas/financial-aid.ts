@@ -17,7 +17,7 @@ export const FinancialAidSchema = z
     schoolSlug: z.string().trim().nonempty("Required"),
     programSlug: z.string().trim().nonempty("Required"),
     studyLevel: z.enum(["undergraduate", "graduate"]),
-    pgwp: z.enum(["yes", "no", "not sure"]),
+    pgwp: z.enum(["yes", "no"]),
     hasOfferLetter: z.enum(["yes", "no"]),
     loanType: z.enum(["tuition", "tuition + living expenses"]),
     livingExpensesCoverage: z.enum(["yes", "no"]).optional(),
@@ -35,7 +35,15 @@ export const FinancialAidSchema = z
       .optional()
       .refine(
         (val) => (val ? !!parseDataURL(val) : true),
-        "Image must be of type data-url",
+        "Must be of type data-url",
+      ),
+    offerLetter: z
+      .string()
+      .trim()
+      .optional()
+      .refine(
+        (val) => (val ? !!parseDataURL(val) : true),
+        "Must be of type data-url",
       ),
     immigrationDocument: CommonSchema.shape.image,
   })
@@ -45,6 +53,14 @@ export const FinancialAidSchema = z
         code: z.ZodIssueCode.custom,
         message: "Please upload your bank statement or scholarship letter",
         path: ["bankStatement"],
+      });
+    }
+
+    if (args.hasOfferLetter === "yes" && !args.offerLetter) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please upload your offer letter",
+        path: ["offerLetter"],
       });
     }
   });

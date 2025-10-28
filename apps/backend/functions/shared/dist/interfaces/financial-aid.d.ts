@@ -26,6 +26,7 @@ export interface IFinancialAid extends ITimestamps {
     resume: IObject;
     transcript: IObject;
     bankStatement?: IObject;
+    offerLetter?: IObject;
     immigrationDocument: IObject;
     programId: string;
     program: Pick<IProgram, "name" | "slug"> & {

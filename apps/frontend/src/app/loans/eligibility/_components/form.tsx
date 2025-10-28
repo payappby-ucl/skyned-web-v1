@@ -99,6 +99,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
       resume: financialAidEligibility?.resume || "",
       transcript: financialAidEligibility?.transcript || "",
       bankStatement: financialAidEligibility?.bankStatement || "",
+      offerLetter: financialAidEligibility?.offerLetter || "",
       immigrationDocument: financialAidEligibility?.immigrationDocument || "",
     },
   });
@@ -278,6 +279,8 @@ const FinancialAidEligibilityForm: React.FC = () => {
     transcript,
     bankStatement,
     immigrationDocument,
+    hasOfferLetter,
+    offerLetter,
   ] = form.watch([
     "schoolSlug",
     "loanType",
@@ -288,6 +291,8 @@ const FinancialAidEligibilityForm: React.FC = () => {
     "transcript",
     "bankStatement",
     "immigrationDocument",
+    "hasOfferLetter",
+    "offerLetter",
   ]);
 
   return (
@@ -332,7 +337,9 @@ const FinancialAidEligibilityForm: React.FC = () => {
               name="canadianResident"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Are you currently living in Canada? </FormLabel>
+                  <FormLabel>
+                    Are you a Canadian citizen or Permanent resident?
+                  </FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger
@@ -552,7 +559,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {["yes", "no", "not sure"].map((type) => (
+                      {["yes", "no"].map((type) => (
                         <SelectItem
                           key={type}
                           value={type}
@@ -599,6 +606,14 @@ const FinancialAidEligibilityForm: React.FC = () => {
                     </SelectContent>
                   </Select>
                   <FormMessage />
+                  {hasOfferLetter === "no" ? (
+                    <FormDescription>
+                      You'll need an offer letter to be eligible for a tuition
+                      loan. Don't worry — we can help you secure one so you can
+                      proceed with your loan application. Please continue with
+                      the form to get started.
+                    </FormDescription>
+                  ) : null}
                 </FormItem>
               )}
             />
@@ -1070,7 +1085,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={2}
+                          maxSize={1}
                           setError={(message) =>
                             form.setError("identification", {
                               message,
@@ -1133,7 +1148,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={2}
+                          maxSize={1}
                           setError={(message) =>
                             form.setError("proofOfAddress", {
                               message,
@@ -1192,7 +1207,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={2}
+                          maxSize={1}
                           setError={(message) =>
                             form.setError("resume", {
                               message,
@@ -1253,7 +1268,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={2}
+                          maxSize={1}
                           setError={(message) =>
                             form.setError("transcript", {
                               message,
@@ -1315,7 +1330,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                               "application/pdf": [".pdf"],
                             }}
                             extensions={[".pdf"]}
-                            maxSize={2}
+                            maxSize={1}
                             setError={(message) =>
                               form.setError("bankStatement", {
                                 message,
@@ -1341,6 +1356,66 @@ const FinancialAidEligibilityForm: React.FC = () => {
                       <FormDescription>
                         Bank Statement / Scholarship Letter
                       </FormDescription>
+                    </FormItem>
+                  )}
+                />
+              ) : null}
+
+              {/* Offer Letter */}
+              {hasOfferLetter === "yes" ? (
+                <FormField
+                  control={form.control}
+                  name="offerLetter"
+                  render={({ field, fieldState }) => (
+                    <FormItem>
+                      {offerLetter ? (
+                        <div
+                          className={`flex items-center justify-between rounded-lg border px-4`}
+                        >
+                          <p className="text-sm font-semibold">Offer Letter</p>
+                          <Button
+                            type="button"
+                            role="button"
+                            variant="ghost"
+                            size="icon"
+                            className="!p-0"
+                            onClick={() => field.onChange("")}
+                          >
+                            <Trash2 className="text-destructive size-5" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <FormControl>
+                          <FileInput
+                            isInvalid={fieldState.invalid}
+                            accept={{
+                              "application/pdf": [".pdf"],
+                            }}
+                            extensions={[".pdf"]}
+                            maxSize={1}
+                            setError={(message) =>
+                              form.setError("offerLetter", {
+                                message,
+                              })
+                            }
+                            clearError={() => {
+                              form.clearErrors();
+                            }}
+                            handleFile={async (file) => {
+                              if (file) {
+                                const dataUri =
+                                  await brandClientApi.file.getDataUriFromFile(
+                                    file,
+                                  );
+
+                                field.onChange(dataUri);
+                              }
+                            }}
+                          />
+                        </FormControl>
+                      )}
+                      <FormMessage />
+                      <FormDescription>Offer Letter</FormDescription>
                     </FormItem>
                   )}
                 />
@@ -1379,7 +1454,7 @@ const FinancialAidEligibilityForm: React.FC = () => {
                             "application/pdf": [".pdf"],
                           }}
                           extensions={[".pdf"]}
-                          maxSize={2}
+                          maxSize={1}
                           setError={(message) =>
                             form.setError("immigrationDocument", {
                               message,

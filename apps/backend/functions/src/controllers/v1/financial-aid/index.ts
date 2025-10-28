@@ -33,6 +33,7 @@ const imageKeys = [
   "identification",
   "immigrationDocument",
   "resume",
+  "offerLetter",
 ] as const;
 
 /** Required dependencies to create Controller instance */
@@ -157,6 +158,7 @@ export class FinancialAidController
           "resume",
           "proofOfAddress",
           "identification",
+          "offerLetter",
           "nextSchoolTerm",
           "phoneNumber",
         ]),

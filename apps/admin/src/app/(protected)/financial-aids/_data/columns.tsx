@@ -472,6 +472,32 @@ export const columns: ColumnDef<IFinancialAid>[] = [
   },
 
   {
+    accessorFn: (row) => row.offerLetter,
+    id: "offerLetter",
+    header: ({ column }) => (
+      <DataTableColumnHeader title="Offer Letter" column={column} />
+    ),
+    cell: (info) => {
+      const offerLetter = info.getValue<IFinancialAid["offerLetter"]>();
+      const hasOfferLetter = info.row.original.hasOfferLetter;
+      return (
+        <>
+          {hasOfferLetter === "yes" && offerLetter ? (
+            <div className="flex items-center gap-5 rounded-lg border px-4 py-2">
+              <p className="font-semibold">Offer Letter</p>
+              <Link href={offerLetter.url} target="_blank">
+                <Eye size={15} />
+              </Link>
+            </div>
+          ) : (
+            <p> - </p>
+          )}
+        </>
+      );
+    },
+  },
+
+  {
     accessorFn: (row) => row.immigrationDocument,
     id: "immigrationDocument",
     header: ({ column }) => (

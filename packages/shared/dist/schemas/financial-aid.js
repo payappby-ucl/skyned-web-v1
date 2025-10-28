@@ -19,7 +19,7 @@ exports.FinancialAidSchema = zod_1.z
     schoolSlug: zod_1.z.string().trim().nonempty("Required"),
     programSlug: zod_1.z.string().trim().nonempty("Required"),
     studyLevel: zod_1.z.enum(["undergraduate", "graduate"]),
-    pgwp: zod_1.z.enum(["yes", "no", "not sure"]),
+    pgwp: zod_1.z.enum(["yes", "no"]),
     hasOfferLetter: zod_1.z.enum(["yes", "no"]),
     loanType: zod_1.z.enum(["tuition", "tuition + living expenses"]),
     livingExpensesCoverage: zod_1.z.enum(["yes", "no"]).optional(),
@@ -35,7 +35,12 @@ exports.FinancialAidSchema = zod_1.z
         .string()
         .trim()
         .optional()
-        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Image must be of type data-url"),
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Must be of type data-url"),
+    offerLetter: zod_1.z
+        .string()
+        .trim()
+        .optional()
+        .refine((val) => (val ? !!(0, data_urls_1.default)(val) : true), "Must be of type data-url"),
     immigrationDocument: common_1.CommonSchema.shape.image,
 })
     .superRefine((args, ctx) => {
@@ -44,6 +49,13 @@ exports.FinancialAidSchema = zod_1.z
             code: zod_1.z.ZodIssueCode.custom,
             message: "Please upload your bank statement or scholarship letter",
             path: ["bankStatement"],
+        });
+    }
+    if (args.hasOfferLetter === "yes" && !args.offerLetter) {
+        ctx.addIssue({
+            code: zod_1.z.ZodIssueCode.custom,
+            message: "Please upload your offer letter",
+            path: ["offerLetter"],
         });
     }
 });

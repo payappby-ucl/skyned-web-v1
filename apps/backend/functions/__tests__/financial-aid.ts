@@ -88,6 +88,7 @@ describe("Financial Aid API", () => {
             slug: "financial-aid-program-one",
             intakes: intakeRes.body.data.data.map((d: any) => d.id),
             financialAids: ["mpower", "passage"],
+            pgwp: true,
           },
         })
         .set("authorization", `bearer ${token}`);

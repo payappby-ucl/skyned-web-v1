@@ -95,7 +95,9 @@ const computeFinancialAidEligibility = (program, data) => {
     // * Validate by program financial aid support
     if (!program.financialAids?.length ||
         inEligibleCitizenship.has(data.citizenship) ||
-        data.canadianResident === "yes") {
+        data.canadianResident === "yes" ||
+        data.pgwp === "no" ||
+        (data.loanType === "tuition" && data.livingExpensesCoverage === "no")) {
         return inEligibilityResponse;
     }
     supportedPartners = supportedPartners.filter((partner) => program.financialAids.includes(partner));
@@ -119,12 +121,6 @@ const computeFinancialAidEligibility = (program, data) => {
     }
     // * Passage Specific
     if (supportedPartners.includes("passage")) {
-        if (!program.pgwp) {
-            supportedPartners = supportedPartners.filter((partner) => partner !== "passage");
-        }
-        if (data.loanType === "tuition" && data.livingExpensesCoverage === "no") {
-            supportedPartners = supportedPartners.filter((partner) => partner !== "passage");
-        }
     }
     // * Partner check
     if (!supportedPartners.length)
@@ -132,10 +128,7 @@ const computeFinancialAidEligibility = (program, data) => {
     //  * Compute recommendation
     let recommendation = null;
     if (supportedPartners.length > 1) {
-        if (!program.pgwp) {
-            recommendation = "mpower";
-        }
-        else if (data.loanType === "tuition + living expenses") {
+        if (data.loanType === "tuition + living expenses") {
             recommendation = "passage";
         }
         else {

@@ -23923,6 +23923,7 @@ export namespace Prisma {
     resume: number
     transcript: number
     bankStatement: number
+    offerLetter: number
     immigrationDocument: number
     createdAt: number
     updatedAt: number
@@ -24014,6 +24015,7 @@ export namespace Prisma {
     resume?: true
     transcript?: true
     bankStatement?: true
+    offerLetter?: true
     immigrationDocument?: true
     createdAt?: true
     updatedAt?: true
@@ -24132,6 +24134,7 @@ export namespace Prisma {
     resume: JsonValue
     transcript: JsonValue
     bankStatement: JsonValue | null
+    offerLetter: JsonValue | null
     immigrationDocument: JsonValue
     createdAt: Date
     updatedAt: Date
@@ -24182,6 +24185,7 @@ export namespace Prisma {
     resume?: boolean
     transcript?: boolean
     bankStatement?: boolean
+    offerLetter?: boolean
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -24214,6 +24218,7 @@ export namespace Prisma {
     resume?: boolean
     transcript?: boolean
     bankStatement?: boolean
+    offerLetter?: boolean
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -24246,6 +24251,7 @@ export namespace Prisma {
     resume?: boolean
     transcript?: boolean
     bankStatement?: boolean
+    offerLetter?: boolean
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -24278,13 +24284,14 @@ export namespace Prisma {
     resume?: boolean
     transcript?: boolean
     bankStatement?: boolean
+    offerLetter?: boolean
     immigrationDocument?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     programId?: boolean
   }
 
-  export type FinancialAidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "financialAidId" | "citizenship" | "canadianResident" | "firstName" | "lastName" | "email" | "phoneNumber" | "schoolSlug" | "programSlug" | "studyLevel" | "pgwp" | "hasOfferLetter" | "loanType" | "livingExpensesCoverage" | "programStarted" | "gpa" | "nextSchoolTerm" | "partner" | "proofOfAddress" | "identification" | "resume" | "transcript" | "bankStatement" | "immigrationDocument" | "createdAt" | "updatedAt" | "programId", ExtArgs["result"]["financialAid"]>
+  export type FinancialAidOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "financialAidId" | "citizenship" | "canadianResident" | "firstName" | "lastName" | "email" | "phoneNumber" | "schoolSlug" | "programSlug" | "studyLevel" | "pgwp" | "hasOfferLetter" | "loanType" | "livingExpensesCoverage" | "programStarted" | "gpa" | "nextSchoolTerm" | "partner" | "proofOfAddress" | "identification" | "resume" | "transcript" | "bankStatement" | "offerLetter" | "immigrationDocument" | "createdAt" | "updatedAt" | "programId", ExtArgs["result"]["financialAid"]>
   export type FinancialAidInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     program?: boolean | ProgramDefaultArgs<ExtArgs>
   }
@@ -24325,6 +24332,7 @@ export namespace Prisma {
       resume: Prisma.JsonValue
       transcript: Prisma.JsonValue
       bankStatement: Prisma.JsonValue | null
+      offerLetter: Prisma.JsonValue | null
       immigrationDocument: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
@@ -24777,6 +24785,7 @@ export namespace Prisma {
     readonly resume: FieldRef<"FinancialAid", 'Json'>
     readonly transcript: FieldRef<"FinancialAid", 'Json'>
     readonly bankStatement: FieldRef<"FinancialAid", 'Json'>
+    readonly offerLetter: FieldRef<"FinancialAid", 'Json'>
     readonly immigrationDocument: FieldRef<"FinancialAid", 'Json'>
     readonly createdAt: FieldRef<"FinancialAid", 'DateTime'>
     readonly updatedAt: FieldRef<"FinancialAid", 'DateTime'>
@@ -25529,6 +25538,7 @@ export namespace Prisma {
     resume: 'resume',
     transcript: 'transcript',
     bankStatement: 'bankStatement',
+    offerLetter: 'offerLetter',
     immigrationDocument: 'immigrationDocument',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -27671,6 +27681,7 @@ export namespace Prisma {
     resume?: JsonFilter<"FinancialAid">
     transcript?: JsonFilter<"FinancialAid">
     bankStatement?: JsonNullableFilter<"FinancialAid">
+    offerLetter?: JsonNullableFilter<"FinancialAid">
     immigrationDocument?: JsonFilter<"FinancialAid">
     createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
@@ -27703,6 +27714,7 @@ export namespace Prisma {
     resume?: SortOrder
     transcript?: SortOrder
     bankStatement?: SortOrderInput | SortOrder
+    offerLetter?: SortOrderInput | SortOrder
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27739,6 +27751,7 @@ export namespace Prisma {
     resume?: JsonFilter<"FinancialAid">
     transcript?: JsonFilter<"FinancialAid">
     bankStatement?: JsonNullableFilter<"FinancialAid">
+    offerLetter?: JsonNullableFilter<"FinancialAid">
     immigrationDocument?: JsonFilter<"FinancialAid">
     createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
@@ -27771,6 +27784,7 @@ export namespace Prisma {
     resume?: SortOrder
     transcript?: SortOrder
     bankStatement?: SortOrderInput | SortOrder
+    offerLetter?: SortOrderInput | SortOrder
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27810,6 +27824,7 @@ export namespace Prisma {
     resume?: JsonWithAggregatesFilter<"FinancialAid">
     transcript?: JsonWithAggregatesFilter<"FinancialAid">
     bankStatement?: JsonNullableWithAggregatesFilter<"FinancialAid">
+    offerLetter?: JsonNullableWithAggregatesFilter<"FinancialAid">
     immigrationDocument?: JsonWithAggregatesFilter<"FinancialAid">
     createdAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"FinancialAid"> | Date | string
@@ -29610,6 +29625,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29641,6 +29657,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29671,6 +29688,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29702,6 +29720,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29733,6 +29752,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29763,6 +29783,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29793,6 +29814,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31548,6 +31570,7 @@ export namespace Prisma {
     resume?: SortOrder
     transcript?: SortOrder
     bankStatement?: SortOrder
+    offerLetter?: SortOrder
     immigrationDocument?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36870,6 +36893,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36900,6 +36924,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37144,6 +37169,7 @@ export namespace Prisma {
     resume?: JsonFilter<"FinancialAid">
     transcript?: JsonFilter<"FinancialAid">
     bankStatement?: JsonNullableFilter<"FinancialAid">
+    offerLetter?: JsonNullableFilter<"FinancialAid">
     immigrationDocument?: JsonFilter<"FinancialAid">
     createdAt?: DateTimeFilter<"FinancialAid"> | Date | string
     updatedAt?: DateTimeFilter<"FinancialAid"> | Date | string
@@ -39866,6 +39892,7 @@ export namespace Prisma {
     resume: JsonNullValueInput | InputJsonValue
     transcript: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39945,6 +39972,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39975,6 +40003,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40005,6 +40034,7 @@ export namespace Prisma {
     resume?: JsonNullValueInput | InputJsonValue
     transcript?: JsonNullValueInput | InputJsonValue
     bankStatement?: NullableJsonNullValueInput | InputJsonValue
+    offerLetter?: NullableJsonNullValueInput | InputJsonValue
     immigrationDocument?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

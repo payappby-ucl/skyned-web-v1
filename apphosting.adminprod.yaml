@@ -1,0 +1,62 @@
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 25
+  maxInstances: 20
+  minInstances: 0
+
+env:
+  - variable: NEXT_PUBLIC_BASE_URL
+    # TODO: Change this to admin sub domain
+    value: https://skyned-admin--skyned-prod.us-east4.hosted.app
+    availability:
+      - RUNTIME
+      - BUILD
+
+  - variable: API_URL
+    value: https://api-xoowtbzp6a-uc.a.run.app
+    availability:
+      - RUNTIME
+
+  - variable: PROJECT_NAME
+    value: "@skyned/admin"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # * PUBLIC
+  - variable: NEXT_PUBLIC_API_KEY
+    value: AIzaSyCfTVY1ad1AS6NKxSN-9rbHGWZQnwscM9s
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_AUTH_DOMAIN
+    value: skyned-prod.firebaseapp.com
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_PROJECT_ID
+    value: skyned-prod
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_STORAGE_BUCKET
+    value: skyned-prod.firebasestorage.app
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_MESSAGING_SENDER_ID
+    value: "301985941635"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_APP_ID
+    value: 1:301985941635:web:26c553d388a65d89aaf3b6
+    availability:
+      - BUILD
+      - RUNTIME

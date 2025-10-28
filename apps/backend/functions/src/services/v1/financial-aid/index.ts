@@ -100,6 +100,11 @@ export class FinancialAidService
               ...data.bankStatement,
             }
           : undefined,
+        offerLetter: data.offerLetter
+          ? {
+              ...data.offerLetter,
+            }
+          : undefined,
       },
     });
 

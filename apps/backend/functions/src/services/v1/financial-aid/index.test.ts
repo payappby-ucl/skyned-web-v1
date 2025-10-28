@@ -37,6 +37,11 @@ describe("financialAidService", () => {
         url: "https://gogle.com",
         mimeType: "image/png",
       },
+      offerLetter: {
+        path: "/schools",
+        url: "https://gogle.com",
+        mimeType: "image/png",
+      },
       proofOfAddress: {
         path: "/schools",
         url: "https://gogle.com",

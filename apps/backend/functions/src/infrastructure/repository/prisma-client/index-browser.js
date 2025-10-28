@@ -389,6 +389,7 @@ exports.Prisma.FinancialAidScalarFieldEnum = {
   resume: 'resume',
   transcript: 'transcript',
   bankStatement: 'bankStatement',
+  offerLetter: 'offerLetter',
   immigrationDocument: 'immigrationDocument',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

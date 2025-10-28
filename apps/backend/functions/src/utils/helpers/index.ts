@@ -233,6 +233,7 @@ export class SkynedUtils {
             "resume",
             "bankStatement",
             "proofOfAddress",
+            "offerLetter",
           ].includes(key)
         ) {
           return [key, value as unknown as IObject];

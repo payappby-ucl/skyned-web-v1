@@ -55,7 +55,7 @@ export const CommonSchema = z.object({
   image: z
     .string()
     .trim()
-    .refine((val) => !!parseDataURL(val), "Image must be of type data-url"),
+    .refine((val) => !!parseDataURL(val), "Must be of type data-url"),
 
   slug: z
     .string()

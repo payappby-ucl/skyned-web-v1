@@ -59,6 +59,7 @@ export class AdminSeed extends Client {
           },
         });
         console.log("Admin Info Saved");
+        console.log(adminPassword);
 
         console.log(`Updating ${department.Executive} Department lead`);
         await this.db.department.update({
@@ -105,7 +106,7 @@ export class AdminSeed extends Client {
               name: "Admin",
             },
             subject: "Account Creation",
-            to: [admin.email, "bobslegend795@gmail.com"],
+            to: [admin.email],
             template: {
               type: "create-admin-account",
               data: {

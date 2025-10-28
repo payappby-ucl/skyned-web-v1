@@ -36,7 +36,8 @@ interface FinancialAid {
       | "proofOfAddress"
       | "identification"
       | "immigrationDocument"
-      | "resume";
+      | "resume"
+      | "offerLetter";
   };
 }
 
