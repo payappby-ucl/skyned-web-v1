@@ -1,7 +1,7 @@
 import { z } from "zod";
 import parseDataURL from "data-urls";
 import { CommonSchema } from "./common";
-import { department } from "../utils";
+import { department, PROHIBITED_USER_EMAIL_DOMAINS } from "../utils";
 import sanitizeHtml from "sanitize-html";
 
 export const CreateAdminSchema = z.object({
@@ -9,7 +9,10 @@ export const CreateAdminSchema = z.object({
   middleName: z.string().trim().optional(),
   lastName: z.string().trim().nonempty("Required"),
   email: CommonSchema.shape.email.refine(
-    (val) => val.endsWith("skynedconsults.com"),
+    (val) =>
+      PROHIBITED_USER_EMAIL_DOMAINS.some((emailDomain) =>
+        val.endsWith(emailDomain),
+      ),
     "Please use organization email.",
   ),
   gender: CommonSchema.shape.gender,

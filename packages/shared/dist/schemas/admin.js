@@ -13,7 +13,7 @@ exports.CreateAdminSchema = zod_1.z.object({
     firstName: zod_1.z.string().trim().nonempty("Required"),
     middleName: zod_1.z.string().trim().optional(),
     lastName: zod_1.z.string().trim().nonempty("Required"),
-    email: common_1.CommonSchema.shape.email.refine((val) => val.endsWith("skynedconsults.com"), "Please use organization email."),
+    email: common_1.CommonSchema.shape.email.refine((val) => utils_1.PROHIBITED_USER_EMAIL_DOMAINS.some((emailDomain) => val.endsWith(emailDomain)), "Please use organization email."),
     gender: common_1.CommonSchema.shape.gender,
     nationality: common_1.CommonSchema.shape.country,
     countryOfResidence: common_1.CommonSchema.shape.country,

@@ -8,6 +8,7 @@ import {
   gender,
   IAdmin,
   IDepartment,
+  PROHIBITED_USER_EMAIL_DOMAINS,
   socialMedia,
 } from "@workspace/shared";
 import { Editor } from "@workspace/ui/components/editor";
@@ -351,7 +352,8 @@ const AdminForm: React.FC<Props> = ({ admin }) => {
                     <Input id="email" placeholder="Email Address" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Email must end with @skynedconsults.com
+                    Email must end with{" "}
+                    {PROHIBITED_USER_EMAIL_DOMAINS.join(" or ")}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
