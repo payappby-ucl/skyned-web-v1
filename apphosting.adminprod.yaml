@@ -7,8 +7,7 @@ runConfig:
 
 env:
   - variable: NEXT_PUBLIC_BASE_URL
-    # TODO: Change this to admin sub domain
-    value: https://skyned-admin--skyned-prod.us-east4.hosted.app
+    value: https://admin.skynedconsults.com
     availability:
       - RUNTIME
       - BUILD

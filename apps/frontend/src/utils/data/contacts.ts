@@ -24,35 +24,35 @@ export const contacts = [
 
 export const addresses = [
   {
-    location: "Kenya",
+    location: "Nairobi, Kenya",
     streetAddress: "D16 (2nd Floor)",
     addressLocality: "Woodvale Groove",
     addressRegion: "Nairobi",
     consultationLink: "#",
   },
   {
-    location: "Canada",
+    location: "Kitchener, Canada",
     streetAddress: "403 Westwood Drive",
     addressLocality: "ON, N2M 0B5,",
     addressRegion: "Kitchener",
     consultationLink: "#",
   },
   {
-    location: "Nigeria",
+    location: "Lagos, Nigeria",
     streetAddress: "Unit 25, Westbrook Mall, 4th Roundabout, Chisco",
     addressLocality: "Ikate",
     addressRegion: "Lagos",
     consultationLink: "#",
   },
   {
-    location: "Nigeria",
+    location: "Port-Harcourt, Nigeria",
     streetAddress: "Pyale Work Hub - No 21 Bekwere Wosu Street",
     addressLocality: "D-Line",
     addressRegion: "Port-Harcourt",
     consultationLink: "https://calendar.app.google/BUibkA6R86rUyRER9",
   },
   {
-    location: "Nigeria",
+    location: "Abuja, Nigeria",
     streetAddress:
       "Novare Central Mall, 2nd Floor, Plot 502 Dalaba Street, Off Michael Okpara Street",
     addressLocality: "Wuse Zone 5",
