@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter '@workspace/*' run build && cat .env.dev > .env.local && cat .env.dev > .env && next dev --turbopack",
-    "dev:site": "pnpm --filter '@workspace/*' run build && cat .env.dev-site > .env.local && cat .env.dev-site > .env && next dev --turbopack",
+    "dev": "pnpm --filter '@workspace/*' run build && cat .env.dev > .env.local && next dev --turbopack",
+    "dev:site": "pnpm --filter '@workspace/*' run build && cat .env.dev-site > .env.local && next dev --turbopack",
     "build": "pnpm --filter '@workspace/*' run build && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "structure": "tree -I 'node_modules|.next|.env|.env.dev|.env.prod|.env.local|.env.dev-site'"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^12.3.0",
