@@ -1,4 +1,4 @@
-# Skyned Consults Cooperation
+# Skyned Consults Corporation
 
 ![logo](https://skyned-frontend--skyned-test-31a2e.us-central1.hosted.app/assets/images/brand/icon.png "Logo")
 
