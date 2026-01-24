@@ -1,9 +1,0 @@
-components:
-  parameters:
-    AdminId:
-      name: adminId
-      in: path
-      description: Admin identifier
-      required: true
-      schema:
-        type: string
