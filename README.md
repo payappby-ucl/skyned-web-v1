@@ -340,6 +340,7 @@ This project is a website serving as the public facing platform through which Sk
 - [React](https://react.dev) - Javascript frontend framework
 - [Nextjs](https://nextjs.org) - Framework built on top of [React](https://react.dev) with added performance and optimizations
 - [Typescript](https://www.typescriptlang.org/) - Programming language. Type safe code
+- [Tailwindcss](https://tailwindcss.com/) - CSS Library
 
 ---
 
@@ -779,6 +780,7 @@ This project is a website serving as the admin internal platform
 - [React](https://react.dev) - Javascript frontend framework
 - [Nextjs](https://nextjs.org) - Framework built on top of [React](https://react.dev) with added performance and optimizations
 - [Typescript](https://www.typescriptlang.org/) - Programming language. Type safe code
+- [Tailwindcss](https://tailwindcss.com/) - CSS Library
 
 ---
 
@@ -4572,8 +4574,8 @@ Before setting up, ensure you have:
    Start docker desktop
 
    ```bash
-      pnpm run start:test:server
       pnpm run start:emulators
+      pnpm run start:test:server
    ```
 
 ## 🏗️ Deployment for backend environments
