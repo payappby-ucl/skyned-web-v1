@@ -1,0 +1,13 @@
+components:
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 100
+        default: 0

@@ -1,0 +1,97 @@
+paths:
+  /departments:
+    get:
+      summary: Gets departments
+      description: Gets departments needed for navigation
+      tags:
+        - Department
+        - Admin
+      operationId: getDepartmentsForNavigation
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Array of departments
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            leadId:
+                              type: string
+                            lead:
+                              $ref: "#/components/schemas/AdminProfile"
+                            name:
+                              type: string
+                              enum:
+                                - Executive
+                                - Marketing
+                                - Admissions
+                                - Communications
+                                - Technical
+                                - Human_Resource
+                                - Quality_Assurance
+                            _count:
+                              type: object
+                              properties:
+                                members:
+                                  type: integer
+                                teams:
+                                  type: integer
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /departments/create:
+    get:
+      summary: Gets departments
+      description: Gets departments needed for admin creation
+      tags:
+        - Department
+        - Admin
+      operationId: getDepartmentsForAdminCreation
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Array of departments
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                              enum:
+                                - Executive
+                                - Marketing
+                                - Admissions
+                                - Communications
+                                - Technical
+                                - Human_Resource
+                                - Quality_Assurance
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"

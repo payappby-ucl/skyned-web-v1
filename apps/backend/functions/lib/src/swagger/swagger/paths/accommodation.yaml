@@ -1,0 +1,54 @@
+paths:
+  /accommodations:
+    get:
+      summary: Get Accommodations
+      description: Gets a list of accommodations
+      operationId: getAccommodations
+      tags:
+        - Accommodation
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+      responses:
+        "200":
+          description: The accommodations
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    description:
+                                      type: string
+                                    school:
+                                      type: object
+                                      properties:
+                                        logo:
+                                          $ref: "#/components/schemas/Object"
+                                        schoolImage:
+                                          $ref: "#/components/schemas/Object"
+                                        name:
+                                          type: string
+                                        slug:
+                                          type: string
+                                          example: "test-school"
+                                        country:
+                                          type: string
+                                          example: CA
+                                        state:
+                                          type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"

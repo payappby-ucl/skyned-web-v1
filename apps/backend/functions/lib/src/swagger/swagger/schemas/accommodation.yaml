@@ -1,0 +1,26 @@
+components:
+  schemas:
+    Accommodation:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            description:
+              type: string
+            schoolId:
+              type: string
+            createdById:
+              type: string
+            school:
+              $ref: "#/components/schemas/School"
+              nullable: true
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+          required:
+            - id
+            - description
+            - schoolId
+            - createdById

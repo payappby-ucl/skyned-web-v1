@@ -1,0 +1,27 @@
+components:
+  schemas:
+    Inquiry:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            subject:
+              type: string
+            message:
+              type: string
+            phoneNumber:
+              $ref: "#/components/schemas/PhoneNumber"
+          required:
+            - id
+            - name
+            - phoneNumber
+            - subject
+            - message
+            - email

@@ -19,8 +19,8 @@
     "cp:local": "rm -rf shared && pnpm --filter '@workspace/*' run build && bash ./cp-local",
     "start:test:server": "pnpm run test:db:start && pnpm run test:migrate",
     "seed": "pnpm dlx prisma@v6 db seed",
-    "test": "cat .env.test > .env && pnpm run test:migrate && NODE_OPTIONS='--max_old_space_size=8192' node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
-    "deploy:test": "pnpm run rm:lib && pnpm version prerealease && pnpm run test",
+    "test": "cat .env.test > .env && pnpm run test:migrate && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand && pnpm run test:db:stop",
+    "deploy:test": "pnpm run rm:lib && pnpm run test",
     "deploy:dev": "pnpm run deploy:test && cat .env.dev > .env && firebase use dev && pnpm dlx prisma@v6 db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/test-service-account.json LOCAL=local pnpm run seed && pnpm run deploy",
     "deploy:prod": "pnpm run deploy:dev && cat .env.prod > .env && firebase use prod && pnpm dlx prisma@v6 db push && GOOGLE_APPLICATION_CREDENTIALS=./src/utils/prod-service-account.json LOCAL=remote pnpm run seed && pnpm run deploy",
     "structure": "tree -I 'node_modules|.env|.env.dev|.env.prod|.env.test|firestore-debug.log|pubsub-debug.log'"
