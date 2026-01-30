@@ -1,0 +1,338 @@
+/* eslint-disable operator-linebreak */
+import { RegistryKeysEnum } from "../../../enum";
+import { IIntakeService } from "../../../interfaces";
+import SkynedRegistry from "../../../registry";
+import { adminProfileKeys, SkynedUtils } from "../../../utils";
+import { IdSchema } from "../../../zod-schemas";
+import { ServiceUtils } from "../utils";
+import {
+  CreateIntakeServiceSchema,
+  CreateManyIntakeServiceSchema,
+  DeleteIntakeServiceSchema,
+} from "./schema";
+
+/** Concrete implementation */
+
+export class IntakeService extends ServiceUtils implements IIntakeService {
+  private static instance: IIntakeService | null = null;
+  private constructor() {
+    super();
+  }
+
+  /** Factory for instance creation */
+
+  static factory() {
+    if (!IntakeService.instance) {
+      IntakeService.instance = new IntakeService();
+    }
+
+    return IntakeService.instance;
+  }
+
+  createIntake: IIntakeService["createIntake"] = async (
+    adminId,
+    schoolId,
+    data,
+  ) => {
+    const {
+      adminId: aid,
+      schoolId: sid,
+      data: input,
+    } = this.validationUtility.validateInput({
+      schema: CreateIntakeServiceSchema,
+      inputData: {
+        adminId,
+        schoolId,
+        data,
+      },
+    });
+
+    const intake = await this.repository.intake.create({
+      data: {
+        createdById: aid,
+        schoolId: sid,
+        intake: input.intake,
+        status: input.status,
+        startDate: input.startDate ? new Date(input.startDate) : null,
+        deadline: input.deadline ? new Date(input.deadline) : null,
+      },
+    });
+
+    return intake;
+  };
+
+  createManyIntakes: IIntakeService["createManyIntakes"] = async (
+    adminId,
+    schoolId,
+    data,
+  ) => {
+    const {
+      adminId: aid,
+      schoolId: sid,
+      data: input,
+    } = this.validationUtility.validateInput({
+      schema: CreateManyIntakeServiceSchema,
+      inputData: {
+        adminId,
+        schoolId,
+        data,
+      },
+    });
+
+    const res = await this.repository.intake.createMany({
+      data: input.map((input) => ({
+        createdById: aid,
+        schoolId: sid,
+        intake: input.intake,
+        startDate: input.startDate ? new Date(input.startDate) : null,
+        deadline: input.deadline ? new Date(input.deadline) : null,
+      })),
+      skipDuplicates: true,
+    });
+
+    return res.count;
+  };
+
+  findIntake: IIntakeService["findIntake"] = async (id, schoolId) => {
+    const validatedData = this.validationUtility.validateInput({
+      schema: CreateIntakeServiceSchema.pick({
+        schoolId: true,
+      }).merge(IdSchema),
+      inputData: {
+        id,
+        schoolId,
+      },
+    });
+
+    const intake = await this.repository.intake.findUnique({
+      where: {
+        id: validatedData.id,
+        schoolId: validatedData.schoolId,
+      },
+    });
+
+    return intake;
+  };
+
+  count: IIntakeService["count"] = async (query) => {
+    const count = await this.repository.intake.count({
+      where: query?.where
+        ? {
+            ...query.where,
+            status:
+              query.where.status === "active"
+                ? {
+                    in: ["likely_open", "open"],
+                  }
+                : undefined,
+          }
+        : undefined,
+    });
+
+    return count;
+  };
+
+  listIntakes: IIntakeService["listIntakes"] = async (
+    { skip, take, from, to, order, where, status },
+    authUser,
+  ) => {
+    const intakes = await this.repository.intake.findMany({
+      skip,
+      take,
+      where:
+        status === "active"
+          ? {
+              status: {
+                in: ["likely_open", "open"],
+              },
+            }
+          : {
+              createdAt: {
+                gte: from,
+                lte: to,
+              },
+            },
+      orderBy: {
+        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+      },
+
+      include:
+        authUser?.claim === "admin"
+          ? {
+              school: {
+                select: SkynedUtils.select([
+                  "slug",
+                  "name",
+                  "country",
+                  "state",
+                  "logo",
+                  "schoolImage",
+                ]),
+              },
+
+              createdBy: {
+                select: SkynedUtils.select(adminProfileKeys),
+              },
+
+              _count: {
+                select: {
+                  programs: true,
+                },
+              },
+            }
+          : undefined,
+
+      select:
+        authUser?.claim !== "admin"
+          ? {
+              ...SkynedUtils.select([
+                "intake",
+                "deadline",
+                "startDate",
+                "status",
+              ]),
+            }
+          : undefined,
+    });
+
+    return intakes.map((intake) => this.deserialize(intake));
+  };
+
+  listSchoolIntakes: IIntakeService["listSchoolIntakes"] = async (
+    { skip, take, from, to, order, where, status },
+    schoolId,
+    authUser,
+  ) => {
+    const intakes = await this.repository.intake.findMany({
+      skip,
+      take,
+      where:
+        status === "active"
+          ? {
+              schoolId,
+              status: {
+                in: ["likely_open", "open"],
+              },
+            }
+          : {
+              schoolId,
+              createdAt: {
+                gte: from,
+                lte: to,
+              },
+            },
+      orderBy: {
+        [`${order?.orderBy || "createdAt"}`]: order?.order || "desc",
+      },
+
+      include:
+        authUser?.claim === "admin"
+          ? {
+              school: {
+                select: SkynedUtils.select([
+                  "slug",
+                  "name",
+                  "country",
+                  "state",
+                  "logo",
+                  "schoolImage",
+                ]),
+              },
+
+              createdBy: {
+                select: SkynedUtils.select(adminProfileKeys),
+              },
+
+              _count: {
+                select: {
+                  programs: true,
+                },
+              },
+            }
+          : undefined,
+
+      select:
+        authUser?.claim !== "admin"
+          ? {
+              ...SkynedUtils.select([
+                "intake",
+                "deadline",
+                "startDate",
+                "status",
+              ]),
+            }
+          : undefined,
+    });
+
+    return intakes.map((intake) => this.deserialize(intake));
+  };
+
+  updateIntake: IIntakeService["updateIntake"] = async (id, data) => {
+    const { id: iid, data: input } = this.validationUtility.validateInput({
+      schema: CreateIntakeServiceSchema.pick({
+        data: true,
+      }).merge(IdSchema),
+      inputData: {
+        id,
+        data,
+      },
+    });
+
+    const intake = await this.repository.intake.update({
+      where: {
+        id: iid,
+      },
+      data: {
+        intake: input.intake,
+        status: input.status,
+        startDate: input.startDate ? new Date(input.startDate) : undefined,
+        deadline: input.deadline ? new Date(input.deadline) : undefined,
+      },
+    });
+
+    return intake;
+  };
+
+  findAllIntakesDueForClosure: IIntakeService["findAllIntakesDueForClosure"] =
+    async () => {
+      const intakes = await this.repository.db.intake.findMany({
+        where: {
+          status: {
+            in: ["open", "likely_open"],
+          },
+          deadline: {
+            lte: new Date(),
+          },
+        },
+      });
+
+      return intakes;
+    };
+
+  closeIntakes: IIntakeService["closeIntakes"] = async (ids) => {
+    const { data } = this.validationUtility.validateInput({
+      schema: DeleteIntakeServiceSchema,
+      inputData: {
+        data: ids,
+      },
+    });
+
+    await this.repository.db.intake.updateMany({
+      where: {
+        id: {
+          in: data,
+        },
+      },
+
+      data: {
+        status: "closed",
+      },
+    });
+  };
+}
+
+/** Concrete instance of {IntakeService} */
+export const intakeService = SkynedRegistry.getSingleton(
+  RegistryKeysEnum.INTAKE_SERVICE,
+  () => IntakeService.factory(),
+);

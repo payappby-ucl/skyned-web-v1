@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultProject": "$PROJECT_NAME",
+  "targetDefaults": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm build"
+      }
+    }
+  }
+}

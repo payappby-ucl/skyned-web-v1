@@ -1,0 +1,18 @@
+components:
+  parameters:
+    From:
+      name: from
+      in: query
+      description: Created date from which to start from
+      required: false
+      schema:
+        type: string
+        format: date-time
+    To:
+      name: to
+      in: query
+      description: Created date from which to stop
+      required: false
+      schema:
+        type: string
+        format: date-time

@@ -1,0 +1,16 @@
+components:
+  schemas:
+    Proficiency:
+      type: object
+      properties:
+        programId:
+          type: string
+        test:
+          type: string
+          enum:
+            - ielts
+            - toefl
+            - pte
+            - duolingo
+        score:
+          type: number

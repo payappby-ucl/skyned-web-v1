@@ -1,0 +1,98 @@
+components:
+  schemas:
+    Category:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            posts:
+              $ref: "#/components/schemas/Blog"
+              nullable: true
+            _count:
+              type: object
+              properties:
+                posts:
+                  type: integer
+            createdById:
+              type: string
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+    Tag:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            posts:
+              $ref: "#/components/schemas/Blog"
+              nullable: true
+            _count:
+              type: object
+              properties:
+                posts:
+                  type: integer
+            createdById:
+              type: string
+            createdBy:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+    Blog:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            blogPostId:
+              type: string
+            title:
+              type: string
+            slug:
+              type: string
+            excerpt:
+              type: string
+            content:
+              type: string
+            coverImage:
+              $ref: "#/components/schemas/Object"
+            status:
+              type: string
+              enum:
+                - draft
+                - published
+                - unpublished
+                - scheduled
+            publishedAt:
+              type: string
+              format: date-time
+              nullable: true
+
+            tags:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+
+            categories:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+
+            authorId:
+              type: string
+            author:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true

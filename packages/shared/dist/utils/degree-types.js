@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.degreeTypes = void 0;
+exports.degreeTypes = [
+    "Grade 7",
+    "Grade 8",
+    "Grade 9",
+    "Grade 10",
+    "Grade 11",
+    "Grade 12",
+    "A Level",
+    "English as Second Language (ESL)",
+    "1-year Post-Secondary School Certificate",
+    "2-year Undergraduate Diploma",
+    "3-year Undergraduate Advanced Diploma",
+    "3-year Bachelor's Degree",
+    "Top-Up Degree",
+    "4-year Bachelor's Degree",
+    "Integrated Masters",
+    "Postgraduate Certificate",
+    "Postgraduate Diploma",
+    "Master's Degree",
+];
