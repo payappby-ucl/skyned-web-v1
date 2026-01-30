@@ -4,10 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy:test": "pnpm run --filter functions deploy:test",
-    "build:packages": "pnpm run --filter '@skyned/*' build"
+    "build": "pnpm --filter $PROJECT_NAME build",
+    "start": "pnpm --filter $PROJECT_NAME start",
+    "structure": "tree -L 2 -I 'node_modules|README-1.md|.nx|.vscode'"
   },
+  "nx": {},
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "nx": "20.6.4",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "typescript": "5.7.3"
+  },
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=20"
+  }
 }

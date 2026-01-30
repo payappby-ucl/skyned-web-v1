@@ -1,0 +1,336 @@
+paths:
+  /scholarships:
+    post:
+      summary: Handles scholarship creation
+      description: Creates a scholarship on the database
+      operationId: createScholarship
+      tags:
+        - Scholarship
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data needed to create a scholarship
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                banner:
+                  type: string
+                  description: The scholarship banner
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                slug:
+                  type: string
+                  example: "test-scholarship"
+                overview:
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: string
+                  enum:
+                    - accommodation
+                    - tuition
+                    - application fees
+                    - others
+                featured:
+                  type: boolean
+                eligibilityRequirements:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - title
+                - subtitle
+                - banner
+                - overview
+                - description
+                - featured
+                - eligibilityRequirements
+                - slug
+      responses:
+        "201":
+          description: Scholarship created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    get:
+      summary: Get Scholarships
+      description: List of scholarships
+      tags:
+        - Scholarship
+      operationId: listScholarships
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+        - in: query
+          name: featured
+          required: false
+          schema:
+            type: string
+            enum:
+              - true
+        - in: query
+          name: category
+          required: false
+          schema:
+            type: string
+            enum:
+              - accommodation
+              - tuition
+              - application fees
+              - others
+      responses:
+        "200":
+          description: The scholarships
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Scholarship"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /scholarships/summary:
+    get:
+      summary: Get Scholarships Summary
+      description: Get Scholarships Summary
+      tags:
+        - Scholarship
+      operationId: getScholarshipsSummary
+      responses:
+        "200":
+          description: The scholarships summary
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            category:
+                              type: string
+                              enum:
+                                - accommodation
+                                - tuition
+                                - application fees
+                                - others
+                            _count:
+                              type: object
+                              properties:
+                                _all:
+                                  type: integer
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /scholarships/{slug}:
+    summary: Single scholarship resource
+    description: Routes for a single scholarship resource
+
+    get:
+      summary: Get a scholarship
+      description: Get single scholarship details
+      operationId: getScholarship
+      tags:
+        - Scholarship
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: The scholarship
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Scholarship"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Update a scholarship
+      description: Update single scholarship details
+      operationId: updateScholarship
+      tags:
+        - Scholarship
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      requestBody:
+        description: Data needed to create a scholarship
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                banner:
+                  type: string
+                  description: The scholarship banner
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                slug:
+                  type: string
+                  example: "test-scholarship"
+                overview:
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: string
+                  enum:
+                    - accommodation
+                    - tuition
+                    - application fees
+                    - others
+                featured:
+                  type: boolean
+                eligibilityRequirements:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - title
+                - subtitle
+                - overview
+                - description
+                - featured
+                - eligibilityRequirements
+                - slug
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /scholarships/{slug}/activate:
+    patch:
+      summary: Activate/Releases a scholarship
+      description: This ensures the this scholarship are visible for everyone to access
+      operation: activateScholarship
+      security:
+        - bearerAuth: []
+      tags:
+        - Scholarship
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /scholarships/{slug}/deactivate:
+    patch:
+      summary: Deactivate/Suspends a scholarship
+      description: This ensures this scholarship are hidden from everyone other than the admins with access
+      operation: deactivateScholarship
+      security:
+        - bearerAuth: []
+      tags:
+        - Scholarship
+      parameters:
+        - $ref: "#/components/parameters/Slug"
+      responses:
+        "200":
+          description: Success Message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"

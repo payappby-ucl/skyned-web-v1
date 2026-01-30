@@ -1,0 +1,154 @@
+Project Skyned {
+    database_type: 'PostgresQL'
+    Note: 'Educational'
+}
+
+enum Department {
+    Executive
+    Marketing
+    Admissions
+    "Human Resource"
+    Communications
+    Technical
+    "Quality Assurance"
+}
+
+enum Gender {
+    Male
+    Female
+    Others
+}
+
+// * Admin
+Table admins {
+    id integer [increment]
+    admin_id varchar [pk]
+    email varchar(256) [unique]
+    first_name varchar(256)
+    middle_name varchar(256) [null]
+    last_name varchar(256)
+    account_suspended bool [default: false]
+    country_of_residence varchar(3)
+    nationality varchar(3)
+    gender Gender
+
+    created_by_id varchar [ref: - admins.admin_id]
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Department
+Table departments {
+    id integer [increment, pk]
+    name Department [unique]
+    lead_id varchar [ref: - admins.admin_id]
+
+    indexes {
+        name
+    }
+}
+
+// * Team
+Table teams {
+    id integer [pk, increment]
+    name varchar(256)
+    department_id integer [ref: > departments.id]
+    lead_id varchar [ref: - admins.admin_id]
+
+    indexes {
+      name
+    }
+}
+
+
+
+
+
+
+
+
+
+// ----------------- END
+
+// * Student Schema
+Table students {
+    id integer [increment]
+    student_id varchar [pk]
+    first_name varchar(256)
+    middle_name varchar(256) [null]
+    last_name varchar(256)
+    account_suspended bool [default: false]
+    country_of_residence varchar(3)
+    nationality varchar(3)
+    gender Gender
+    date_of_birth timestamp
+
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+Table study_preferences {
+     id integer [pk]
+
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * School Schema
+enum institution_type {
+    university
+    college
+}
+
+enum ownership_type {
+    private
+    public
+}
+
+enum currency {
+    usd
+    cad
+    aud
+    ngn
+    eur
+}
+
+// TODO: Remember to add created_by_id
+Table schools {
+    id integer [increment]
+    school_id varchar [pk]
+    name varchar(255) [not null]
+    institution_type institution_type
+    ownership_type ownership_type
+    city varchar(255) [not null]
+    state varchar(3) [not null]
+    country varchar(3) [not null]
+    currency currency // * Is currency supposed to be on the schools level? - Is there a possibility of a school using more than one currency?
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Facilities
+// TODO: Remember to add created_by_id
+Table school_facilities {
+    id integer [pk, increment]
+    name varchar(255) [not null, unique]
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Activity Logs
+// TODO: Complete this
+Table activity_logs {
+    id integer [pk, increment]
+
+    created_at timestamp [default: `now()`]
+    updated_at timestamp [default: `now()`]
+}
+
+// * Relationship References
+Ref: school_facilities: schools.school_id <> school_facilities.id

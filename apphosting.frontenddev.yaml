@@ -1,0 +1,105 @@
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 5
+  maxInstances: 10
+  minInstances: 0
+
+env:
+  - variable: PROJECT_NAME
+    value: "@skyned/frontend"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_BASE_URL
+    value: https://skyned-frontend--skyned-test-31a2e.us-central1.hosted.app
+    availability:
+      - RUNTIME
+      - BUILD
+
+  - variable: API_URL
+    value: https://api-dxmhb5dscq-uc.a.run.app
+    availability:
+      - RUNTIME
+
+  # * PUBLIC
+  - variable: NEXT_PUBLIC_API_KEY
+    value: AIzaSyD5Ts9NjixrL2ZgaMKO-THqs8MxWjOmUqo
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_AUTH_DOMAIN
+    value: skyned-test-31a2e.firebaseapp.com
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_PROJECT_ID
+    value: skyned-test-31a2e
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_STORAGE_BUCKET
+    value: skyned-test-31a2e.firebasestorage.app
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_MESSAGING_SENDER_ID
+    value: "554146787843"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_APP_ID
+    value: 1:554146787843:web:684df2d0e6902c6198d436
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # * SOCIALS
+  - variable: NEXT_PUBLIC_TWITTER_HANDLE
+    value: https://twitter.com/SkynedC
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_TWITTER_ID
+    value: https://twitter.com/SkynedC
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_INSTAGRAM_HANDLE
+    value: https://www.instagram.com/studyabroad_consults
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_TIKTOK_HANDLE
+    value: https://www.tiktok.com/@skynededu
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FACEBOOK_HANDLE
+    value: https://web.facebook.com/people/Skyned-Consults-Corporation/100086920969875
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_LINKEDIN_HANDLE
+    value: https://www.linkedin.com/company/skyned-educational-consults
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # * TAGS AND VERIFICATION
+  - variable: NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
+    value: GTM-N4TF5DKC
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_GOOGLE_VERIFICATION_SITE_ID
+    value: f3eFETB7xzY3c4d1i1UPqgJgEoBLt5TzlOFzzArSjB8
+    availability:
+      - BUILD
+      - RUNTIME

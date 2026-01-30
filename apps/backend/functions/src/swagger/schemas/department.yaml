@@ -1,0 +1,38 @@
+components:
+  schemas:
+    Department:
+      allOf:
+        - $ref: "#/components/schemas/Timestamp"
+        - type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+              enum:
+                - Executive
+                - Marketing
+                - Admissions
+                - Communications
+                - Technical
+                - Human_Resource
+                - Quality_Assurance
+            leadId:
+              type: string
+            lead:
+              $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+            members:
+              type: array
+              items:
+                $ref: "#/components/schemas/AdminProfile"
+              nullable: true
+            teams:
+              type: array
+              items:
+                $ref: "#/components/schemas/Team"
+              nullable: true
+          required:
+            - id
+            - name
+            - leadId

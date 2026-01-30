@@ -1,0 +1,46 @@
+{
+  "name": "@skyned/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter '@workspace/*' run build && cat .env.dev > .env.local && next dev --turbopack",
+    "dev:site": "pnpm --filter '@workspace/*' run build && cat .env.dev-site > .env.local && next dev --turbopack",
+    "build": "pnpm --filter '@workspace/*' run build && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "structure": "tree -I 'node_modules|.next|.env|.env.dev|.env.prod|.env.local|.env.dev-site'"
+  },
+  "dependencies": {
+    "@icons-pack/react-simple-icons": "^12.3.0",
+    "@tanstack/react-query": "^5.74.4",
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/react-virtual": "^3.13.12",
+    "@workspace/api": "workspace:*",
+    "@workspace/shared": "workspace:*",
+    "@workspace/ui": "workspace:*",
+    "exceljs": "^4.4.0",
+    "firebase": "^11.2.0",
+    "lucide-react": "^0.475.0",
+    "next": "15.5.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "recharts": "2.15.4",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "prettier": "^3.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.1.12",
+      "@types/react-dom": "19.1.9"
+    }
+  }
+}

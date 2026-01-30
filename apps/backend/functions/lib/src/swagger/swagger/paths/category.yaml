@@ -1,0 +1,148 @@
+paths:
+  /categories:
+    summary: Category Resource
+    description: All routes as it concerns categories
+
+    get:
+      summary: Get Categories
+      description: Gets all categories from database
+      operationId: getCategories
+      tags:
+        - Blog
+        - Category
+      responses:
+        "200":
+          description: Categories
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Category"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+    put:
+      summary: Delete Categories
+      description: Deletes many categories from database
+      tags:
+        - Blog
+        - Category
+      operationId: deleteManyCategory
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data needed
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+      responses:
+        "200":
+          description: Categories deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/UnAuthenticated"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /categories{id}:
+    summary: Category Resource
+    description: All routes as it concerns single categories
+
+    delete:
+      summary: Delete Category
+      description: Deletes category by id
+      operationId: deleteCategory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      tags:
+        - Blog
+        - Category
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Message Response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/MessageResponse"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /categories/list:
+    summary: Category Resource
+    description: All routes as it concerns categories
+
+    get:
+      summary: Get Categories
+      description: Gets categories (Paginated)
+      operationId: getCategoriesPaginated
+      tags:
+        - Blog
+        - Category
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/OffsetParam"
+        - $ref: "#/components/parameters/From"
+        - $ref: "#/components/parameters/To"
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The categories
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/SuccessResponse"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/PaginatedResponse"
+                          - type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/Category"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/ServerError"
