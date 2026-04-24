@@ -75,25 +75,28 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <CookieContextProvider>
-        <Analytics />
-        <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
-          <TanstackQueryProvider>
-            <ThemeProviders>
-              <AuthProvider>
-                <Navigation>
-                  <Nav />
-                </Navigation>
-                <main>{children}</main>
-                <Footer />
-              </AuthProvider>
-              <Toaster richColors closeButton />
-              <CookieBanner />
-            </ThemeProviders>
-            <WhatsAppWidget />
-          </TanstackQueryProvider>
+        <body
+          className={`${poppins.variable} ${manrope.variable} antialiased`}
+          suppressHydrationWarning
+        >
+          <CookieContextProvider>
+            <Analytics />
+            <TanstackQueryProvider>
+              <ThemeProviders>
+                <AuthProvider>
+                  <Navigation>
+                    <Nav />
+                  </Navigation>
+                  <main>{children}</main>
+                  <Footer />
+                </AuthProvider>
+                <Toaster richColors closeButton />
+                <CookieBanner />
+              </ThemeProviders>
+              <WhatsAppWidget />
+            </TanstackQueryProvider>
+          </CookieContextProvider>
         </body>
-      </CookieContextProvider>
 
       {/* JSON-LD */}
       <Script
