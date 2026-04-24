@@ -38,6 +38,7 @@ import {
 } from "@workspace/ui/components/sheet";
 import { FringedEdge } from "./svg";
 import { ScrollArea } from "@workspace/ui/components/scroll-area";
+import { HeaderSearch } from "./header-search";
 
 type MenuSubItem = {
   title: string;
@@ -348,24 +349,13 @@ const Nav: React.FC = () => {
           </NavigationMenu>
 
           <div className="hidden items-center gap-4 lg:flex">
-            <search>
-              <Button size="icon" variant="ghost">
-                <SearchIcon />
-              </Button>
-            </search>
-            <Button asChild variant="ghost" className="rounded-full text-sm">
-              <Link href="/signin" aria-label="Link to Sign in page">
-                Log in
-              </Link>
-            </Button>
-            <Button asChild variant="brand" className="rounded-full text-sm">
-              <Link href="/signup" aria-label="Link to Sign up page">
-                Sign up
-              </Link>
-            </Button>
+            <HeaderSearch />
           </div>
 
-          <MobileNav />
+          <div className="flex items-center gap-2 lg:hidden">
+            <HeaderSearch />
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>
