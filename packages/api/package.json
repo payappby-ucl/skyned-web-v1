@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "rm -rf ./dist && tsc"
+    "build": "node -e \"require('fs').rmSync('./dist', { recursive: true, force: true })\" && tsc"
   },
   "keywords": [],
   "author": "",
