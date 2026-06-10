@@ -1,9 +1,9 @@
 runConfig:
-  cpu: 1
-  memoryMiB: 512
-  concurrency: 25
+  cpu: 2
+  memoryMiB: 2048
+  concurrency: 10
   maxInstances: 20
-  minInstances: 0
+  minInstances: 1
 
 env:
   - variable: NEXT_PUBLIC_BASE_URL
