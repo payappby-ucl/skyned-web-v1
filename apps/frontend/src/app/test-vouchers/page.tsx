@@ -151,7 +151,7 @@ export default function TestVouchers() {
           </div>
 
           <div className="flex justify-center pt-4">
-            <PaymentButton label="Browse & Buy Test Vouchers" color="#3477FE" size="large" />
+            <PaymentButton label="Buy Test Vouchers" color="#3477FE" size="large" />
           </div>
         </div>
       </section>

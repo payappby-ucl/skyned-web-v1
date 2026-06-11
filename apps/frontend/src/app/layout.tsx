@@ -123,6 +123,9 @@ export default function RootLayout({
                 name: 'ApplyBoard Payments'
               },
               useIframe: true,
+              styles: {
+                borderRadius: '6px'
+              },
               floatingButton: {
                 text: 'Buy Test Voucher',
                 position: 'left',

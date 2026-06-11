@@ -24,6 +24,7 @@ import {
   ScaleIcon,
   SearchIcon,
   ShieldQuestionIcon,
+  TagIcon,
   TreePineIcon,
 } from "lucide-react";
 import React from "react";
@@ -53,6 +54,7 @@ type MenuItem =
       href: string;
       description: string;
       icon: LucideIcon;
+      highlight?: boolean;
       image?: undefined;
       subMenu?: undefined;
     }
@@ -61,6 +63,7 @@ type MenuItem =
       href?: undefined;
       description?: string;
       icon?: LucideIcon;
+      highlight?: undefined;
       image: {
         src: string;
         alt: string;
@@ -98,6 +101,13 @@ const menuItems: MenuItem[] = [
     href: "/schools",
     description: "Explore our schools",
     icon: BuildingIcon,
+  },
+  {
+    title: "Buy Test Vouchers",
+    href: "/test-vouchers",
+    description: "Purchase GRE, TOEFL, Duolingo and Pearson vouchers",
+    icon: TagIcon,
+    highlight: true,
   },
   {
     title: "Resources",
@@ -288,9 +298,18 @@ const Nav: React.FC = () => {
             aria-label="Main Navigation"
           >
             <NavigationMenuList>
-              {menuItems.map(({ title, href, image, subMenu }) => (
+              {menuItems.map(({ title, href, image, subMenu, highlight }) => (
                 <NavigationMenuItem key={title}>
-                  {!subMenu && href ? (
+                  {!subMenu && href && highlight ? (
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={href}
+                        className="inline-flex items-center justify-center rounded-md bg-[#3477FE] px-4 py-2 text-sm font-semibold text-white shadow transition-all hover:bg-[#2560d4] hover:shadow-md"
+                      >
+                        {title}
+                      </Link>
+                    </NavigationMenuLink>
+                  ) : !subMenu && href ? (
                     <NavigationMenuLink asChild>
                       <Link href={href}>{title}</Link>
                     </NavigationMenuLink>
