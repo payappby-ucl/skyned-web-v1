@@ -190,7 +190,7 @@ const MobileNav: React.FC = () => {
               Skyned Educational Consults
             </SheetTitle>
             <img
-              src={"/logo-white.png"}
+              src={"/assets/images/brand/logo_white.png"}
               alt="Skyned Educational Consults"
               className="h-10 invert dark:invert-0"
             />
