@@ -75,9 +75,12 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <CookieContextProvider>
-        <Analytics />
-        <body className={`${poppins.variable} ${manrope.variable} antialiased`}>
+      <body
+        className={`${poppins.variable} ${manrope.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <CookieContextProvider>
+          <Analytics />
           <TanstackQueryProvider>
             <ThemeProviders>
               <AuthProvider>
@@ -92,13 +95,45 @@ export default function RootLayout({
             </ThemeProviders>
             <WhatsAppWidget />
           </TanstackQueryProvider>
-        </body>
-      </CookieContextProvider>
+        </CookieContextProvider>
+      </body>
 
       {/* JSON-LD */}
       <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(baseJSONLD) }}
+      />
+
+      {/* Payment Widget */}
+      <Script
+        id="payment-widget"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(w,d,s,o,f,js,fjs){
+              w['PaymentWidget']=o;w[o]=w[o]||function(){(w[o].q=w[o].q||[]).push(arguments)};
+              js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
+              js.id=o;js.src=f;js.async=1;fjs.parentNode.insertBefore(js,fjs);
+            }(window,document,'script','paymentWidget','https://cdn.paytring.com/js/quick/embeded.js'));
+
+            paymentWidget('init', {
+              universityId: 'Skyned',
+              globalDefault: {
+                domain: 'quick.paytring.com/ecom/v/applyboard?cc=true&category=660601864373',
+                name: 'ApplyBoard Payments'
+              },
+              useIframe: true,
+              styles: {
+                borderRadius: '6px'
+              },
+              floatingButton: {
+                text: 'Buy Test Voucher',
+                position: 'left',
+                backgroundColor: '#3477FE'
+              }
+            });
+          `,
+        }}
       />
     </html>
   );

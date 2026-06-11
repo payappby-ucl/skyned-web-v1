@@ -1,7 +1,10 @@
 node_modules
+packages/api/dist
+packages/shared/dist
 
 
 
 .nx/cache
 .nx/workspace-data
 key.json
+.claude/

@@ -29,7 +29,11 @@ import { ChevronsUpDown, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { supportedCountries } from "@/src/utils";
 
-const HeroSearch: React.FC = () => {
+interface HeroSearchProps {
+  onSearch?: () => void;
+}
+
+const HeroSearch: React.FC<HeroSearchProps> = ({ onSearch }) => {
   const router = useRouter();
   const countries = useMemo(() => supportedCountries, []);
 
@@ -56,6 +60,7 @@ const HeroSearch: React.FC = () => {
       }
 
       router.push(`/search?${searchParams.toString()}`);
+      onSearch?.();
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
@@ -80,7 +85,7 @@ const HeroSearch: React.FC = () => {
                       onChange={field.onChange}
                       value={field.value}
                       aria-label="What do you want to study?"
-                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent text-center focus:!ring-0 md:text-left"
+                      className="placeholder:text-brand-50/65 w-full border-0 !bg-transparent text-center focus:!ring-0 md:text-left text-brand-50 font-medium"
                     />
                   </FormControl>
                 </FormItem>
@@ -100,7 +105,7 @@ const HeroSearch: React.FC = () => {
                             variant="ghost"
                             role="combobox"
                             className={cn(
-                              "placeholder:text-brand-50/65 w-full justify-between border-0 !bg-transparent text-center text-sm font-medium hover:text-inherit focus:!ring-0 md:text-left",
+                              "placeholder:text-brand-50/65 w-full justify-between border-0 !bg-transparent text-center text-sm font-medium hover:text-brand-50 focus:!ring-0 md:text-left text-brand-50",
                               !field.value && "text-brand-50/65",
                             )}
                           >
