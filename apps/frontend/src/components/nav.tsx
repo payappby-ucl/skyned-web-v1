@@ -24,6 +24,7 @@ import {
   ScaleIcon,
   SearchIcon,
   ShieldQuestionIcon,
+  TagIcon,
   TreePineIcon,
 } from "lucide-react";
 import React from "react";
@@ -156,6 +157,12 @@ const menuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    title: "Buy Test Vouchers",
+    href: "/test-vouchers",
+    description: "Purchase GRE, TOEFL, Duolingo and Pearson vouchers",
+    icon: TagIcon,
+  },
 ];
 
 const MobileNav: React.FC = () => {
@@ -183,7 +190,7 @@ const MobileNav: React.FC = () => {
               Skyned Educational Consults
             </SheetTitle>
             <img
-              src={"/logo-white.png"}
+              src={"/assets/images/brand/logo_white.png"}
               alt="Skyned Educational Consults"
               className="h-10 invert dark:invert-0"
             />

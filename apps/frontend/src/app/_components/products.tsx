@@ -53,7 +53,7 @@ const Products: React.FC = () => {
               <div className="space-y-4" dangerouslySetInnerHTML={{ __html: overview }} />
               {payButton && (
                 <div>
-                  <PaymentButton label="Browse & Buy Test Vouchers" color="#3477FE" size="medium" />
+                  <PaymentButton label="Buy Test Vouchers" color="#3477FE" size="medium" />
                 </div>
               )}
             </div>
