@@ -555,10 +555,19 @@ export async function generateUploadFormData(file: File) {
     return cum;
   }, [] as BulkDataType);
 
-  data = data.map((d) => ({
-    ...d,
-    slug: slugify(d.name, { lower: true, strict: true }),
-  }));
+  // Deduplicate slugs: if two programs produce the same slug (e.g. both
+  // "Bachelor of Science" and "Bachelor of Science (Honours)" become
+  // "bachelor-of-science"), append a numeric suffix so each slug is unique
+  // within the batch. Without this, the backend upsert silently overwrites
+  // the earlier record instead of creating a new one.
+  const slugCounts: Record<string, number> = {};
+  data = data.map((d) => {
+    const base = slugify(d.name, { lower: true, strict: true });
+    const count = slugCounts[base] ?? 0;
+    slugCounts[base] = count + 1;
+    const slug = count === 0 ? base : `${base}-${count}`;
+    return { ...d, slug };
+  });
 
   return data;
 }
