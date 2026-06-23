@@ -3,6 +3,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
 import { IProgram, ISchool } from "@workspace/shared";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { redirect } from "next/navigation";
 import ProgramForm from "../../_components/program-form";
 
@@ -50,6 +51,9 @@ export default async function EditSchoolProgramPage({
       </HasPermission>
     );
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     return <Alert message="Error" />;
   }
 }

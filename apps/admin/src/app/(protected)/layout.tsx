@@ -12,6 +12,7 @@ import CustomBreadCrumb from "@/src/components/custom-bredcrumb";
 import Alert from "@/src/components/alert";
 import { serverCacheTags } from "@/src/utils";
 import { IDepartment } from "@workspace/shared";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 export default async function AuthLayout({
   children,
@@ -50,6 +51,9 @@ export default async function AuthLayout({
       </SidebarProvider>
     );
   } catch (error: any) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     return (
       <section className="flex h-screen items-center justify-center">
         <Alert message={error.message as string} />;

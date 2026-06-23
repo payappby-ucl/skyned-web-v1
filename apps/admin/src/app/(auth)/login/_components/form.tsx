@@ -17,10 +17,8 @@ import { Input } from "@workspace/ui/components/input";
 import { PasswordInput } from "@workspace/ui/components/password-input";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const LoginForm: React.FC = () => {
-  const router = useRouter();
   const form = useForm<AdminLoginSchema>({
     resolver: zodResolver(AdminLoginSchema),
     defaultValues: {
@@ -32,7 +30,6 @@ const LoginForm: React.FC = () => {
   const onSubmit = useCallback(async (data: AdminLoginSchema) => {
     try {
       await brandClientApi.auth.login(data.email, data.password);
-      router.replace("/");
     } catch (error) {
       brandClientApi.utils.alertError(error);
     }
