@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         }
 
         const token = await user.getIdToken();
-        brandClientApi.httpClient.setTokenCookie(token);
+        await brandClientApi.httpClient.setTokenCookie(token);
         // * Get Admin from backend and set auth context
         const { data } = await brandClientApi.httpClient.request<IAdmin>(
           "/admins/me",
@@ -86,6 +86,10 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
           user: data,
           loaded: true,
         });
+
+        if (authPathnames.includes(pathname)) {
+          router.replace("/");
+        }
       } catch (error) {
         brandClientApi.utils.alertError(error);
       }

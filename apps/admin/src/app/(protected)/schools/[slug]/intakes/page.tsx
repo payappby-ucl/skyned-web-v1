@@ -3,6 +3,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
 import { ISchool } from "@workspace/shared";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import SchoolLocation from "../../_components/location";
 import Image from "next/image";
 import {
@@ -70,6 +71,9 @@ export default async function SchoolIntakes({
       </HasPermission>
     );
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     return <Alert message="Error" />;
   }
 }
