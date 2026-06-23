@@ -70,12 +70,12 @@ type MenuItem =
     };
 
 const menuItems: MenuItem[] = [
-  {
-    title: "Loan",
-    href: "/loans",
-    description: "Explore flexible study loan options",
-    icon: PiggyBankIcon,
-  },
+  // {
+  //   title: "Loan",
+  //   href: "/loans",
+  //   description: "Explore flexible study loan options",
+  //   icon: PiggyBankIcon,
+  // },
   {
     title: "About Us",
     href: "/about",
