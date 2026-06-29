@@ -3,6 +3,7 @@ import HasPermission from "@/src/components/has-permission";
 import { brandServerApi } from "@/src/lib/server";
 import { serverCacheTags } from "@/src/utils";
 import { EnglishProficiency, IProgram } from "@workspace/shared";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import {
   Avatar,
   AvatarFallback,
@@ -327,6 +328,9 @@ export default async function SchoolProgramPage({
       </HasPermission>
     );
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.log(error);
     return <BrandAlert message="Error" />;
   }

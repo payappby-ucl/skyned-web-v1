@@ -26,13 +26,13 @@ const products = [
       "Buy GRE, TOEFL, Duolingo, and Pearson test vouchers at the best prices through our ApplyBoard partnership — with revenue share so you keep more.",
     payButton: true,
   },
-  {
-    title: "Study now, pay later",
-    pageLink: "#",
-    imageUrl: "/assets/images/products/4.png",
-    overview:
-      "Access affordable study loans through our trusted partners like Passage and MPOWER",
-  },
+  // {
+  //   title: "Study now, pay later",
+  //   pageLink: "#",
+  //   imageUrl: "/assets/images/products/4.png",
+  //   overview:
+  //     "Access affordable study loans through our trusted partners like Passage and MPOWER",
+  // },
   {
     title: "Get full post-arrival support",
     pageLink: "#",

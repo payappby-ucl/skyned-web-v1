@@ -66,6 +66,7 @@ import { IntakeStatus } from "@workspace/ui/components/intake-status";
 import AddIntakesForm from "../../_components/add-intakes-form";
 import { useRouter } from "next/navigation";
 import { createProgram } from "../../../../_actions";
+import slugify from "slugify";
 import LoadingTemplateModal from "./loading-template";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Badge } from "@workspace/ui/components/badge";
@@ -112,7 +113,10 @@ const ProgramRow: React.FC<{
                     onChange={(e) => {
                       const val = e.target.value;
                       field.onChange(val);
-                      setValue(`data.${idx}.slug`, val);
+                      setValue(
+                        `data.${idx}.slug`,
+                        slugify(val, { lower: true, strict: true }),
+                      );
                     }}
                     placeholder="Program Name"
                   />
